@@ -1,2 +1,3 @@
-# kaggle-contest-design
+# kaggle contest design
+
 Research on Incentives for Contestants
