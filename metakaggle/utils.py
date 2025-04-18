@@ -32,7 +32,7 @@ type TableName = Literal[
 	'Organizations',
 
 	'Competitions',
-	'CompetitionTags'
+	'CompetitionTags',
 
 	'Forums',
 	'ForumTopics',
