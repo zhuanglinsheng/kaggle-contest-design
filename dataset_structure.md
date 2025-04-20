@@ -1,47 +1,63 @@
 # Stucture of the Dataset `meta-kaggle`
 
-Submissions
+## Submissions
+
 - SubmittedUserId --- `Users`
 - TeamId --- `Teams`
 - SourceKernelVersionId --- `Kernels`
 
-Teams
+## Teams
+
+> When you accept the rules and join a Competition, you automatically do so as part of a new team consisting solely of yourself. You can then adjust your team settings in various ways by visiting the “Team” tab on the Competition page.
+>
+> Source: https://www.kaggle.com/docs/competitions.
+>
+> Observation from the data:
+> **Teams are different for different Contests.**
+
 - CompetitionId --- `Competitions`
 - TeamLeaderId --- `Users`
 - PublicLeaderboardSubmissionId --- ?
 - PrivateLeaderboardSubmissionId --- ?
 - WriteUpForumTopicId --- ?
 
-TeamMemberships
+## TeamMemberships
+
 - TeamId --- `Teams`
 - UserId --- `Users`
 
-Kernels
+## Kernels
+
 - AuthorUserId --- `Users`
 - CurrentKernelVersionId --- ?
 - ForkParentKernelVersionId --- ?
 - ForumTopicId --- ?
 - FirstKernelVersionId --- ?
 
-Models
+## Models
+
 - OwnerUserId --- `Users`
 - OwnerOrganizationId --- `Organization`
 - CurrentModelVersionId --- `ModelVersions`
 - ForumId --- `Forum`
 
-ModelVersions
+## ModelVersions
+
 - ModelId --- `Models`
 - CreatorUserId --- `Users`
 
-Competitions
+## Competitions
+
 - ForumId --- `Forums`
 - OrganizationId --- `Organization`
 - CompetitionTypeId --- ?
 
-Forums
+## Forums
+
 - ParentForumId --- `Forums`
 
-Datasets
+## Datasets
+
 - CreatorUserId --- `Users`
 - OwnerUserId --- `Users`
 - OwnerOrganizationId --- `Organization`
@@ -49,13 +65,15 @@ Datasets
 - CurrentDatasourceVersionId --- ?
 - ForumId --- `Forum`
 
-Tags
+## Tags
+
 - ParentTagId --- `Tags`
 
-Episodes
+## Episodes
+
 - CompetitionId --- `Competition`
 
-EpisodeAgents
+## EpisodeAgents
+
 - EpisodeId --- `Episode`
 - SubmissionId --- `Submission`
-

@@ -1,51 +1,71 @@
 """
 Handle csv file of large scale
 """
+import csv
+from io import StringIO
+from collections import defaultdict
+from typing import Iterable
 
-from typing import Literal
-from typing import Iterable, Sequence
+CsvParsedValue = bool | int | float | str | None
 
-
-class FilterCondition:
-	"""Conditions for Filtering
-
-	Attributes:
-		left
-		right
-		cond
+class DataView:
 	"""
-	_left: str
-	_right: str
-	_cond: Literal['<=', '==', '>=', '<', '>']
+	"""
+	data: dict[str, list[CsvParsedValue]]
+	__abbrsize: int = 5
 
 	def __init__(self,
-			left: str,
-			cond: Literal['<=', '==', '>=', '<', '>'],
-			right: str
+			data: dict[str, list[CsvParsedValue]],
 	) -> None:
-		self._left = left
-		self._right = right
-		self._cond = cond
+		self.data = data
 
 	def __repr__(self) -> str:
-		return self._left + ' ' + self._cond + ' ' + self._right
-
+		buffer = StringIO()
+		for key, value in self.data.items():
+			buffer.write(key)
+			buffer.write(': ')
+			if len(value) > self.__abbrsize:
+				head_items = value[:self.__abbrsize - 1]
+				tail_item = value[-1]
+				buffer.write(f"[{', '.join(map(str, head_items))}, ..., {str(tail_item)}]")
+			else:
+				buffer.write(str(value))
+			buffer.write('\n')
+		return buffer.getvalue()
 
 def csv_filter(
-		f: Iterable[str],
-		fieldnames: Sequence[str] | None = None,
-		restkey: str | None = None,
-		restval: str | None = None,
-		dialect: str = "excel",
-		*,
-		delimiter: str = ",",
-		quotechar: str | None = '"',
-		escapechar: str | None = None,
-		doublequote: bool = True,
-		skipinitialspace: bool = False,
-		lineterminator: str = "\r\n",
-		quoting: int = 0,
-		strict: bool = False
-) -> None:
-	pass
-
+		io_input: Iterable[str],
+		fields: list[str],
+		fields_type: list[type],
+		n: int
+) -> DataView:
+	"""
+	Args:
+		- n: `-1` means real all
+	"""
+	reader = csv.DictReader(io_input)
+	idxrow = 0
+	data: defaultdict[str, list[CsvParsedValue]] = defaultdict(list)
+	for idxrow, row in enumerate(reader):
+		if 0 <= n <= idxrow:
+			break
+		for field, field_type in zip(fields, fields_type):
+			row_value: str = row[field]
+			match field_type:
+				case _ if field_type is int:
+					try:
+						value = int(row_value)
+					except:
+						value = None
+					data[field].append(value)
+				case _ if field_type is float:
+					try:
+						value = float(row_value)
+					except:
+						value = None
+					data[field].append(value)
+				case _ if field_type is str:
+					value = str(row_value)
+				case _:
+					ValueError(f'type `{field_type}` is not supported')
+	return DataView(dict(data))
