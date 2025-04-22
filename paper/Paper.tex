@@ -196,22 +196,22 @@ The Nash equilibrium is summarized in the following lemma:
 \begin{lemma}[\citealt{ryvkin2022fight}]
 In the Markov perfect equilibrium, the players’ efforts in state $(\tilde{y}_t, t) \in\mathbb{R}\times[0, T)$ are given by
 \begin{equation*}
-\begin{aligned}
-m_{i}(\tilde{y}_t, t) &= \frac{e^{-z_t^2/2}\sqrt{\lambda\bar{S}}}{2\sqrt{2\pi(T-t)}} \cdot \left[\gamma(\rho_{1}) + \gamma(\rho_{2})\right]\left[1-\rho(z_t)^2\right]\left[1 + \rho(z_t)\right]\\
-m_{j}(\tilde{y}_t, t) &= \frac{e^{-z_t^2/2}\sqrt{\lambda\bar{S}}}{2\sqrt{2\pi(T-t)}} \cdot 
- \left[\gamma(\rho_{1}) + \gamma(\rho_{2})\right]\left[1-\rho(z_t)^2\right]\left[1 - \rho(z_t)\right]
-\end{aligned}
+m_{i}(\tilde{y}_t, t) = \frac{e^{-z_t^2/2}\lambda^{1/4}\sigma^{1/2}}{2\sqrt{2\pi(T-t)}} \cdot \left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z_t)^2\right]\left[1 + \rho(z_t)\right]
 \end{equation*}
-where $z_t = \tilde{y}_t / \sqrt{\lambda\bar{S}(T-t)}$, $\rho(z_t) = \gamma^{-1}\left(\Phi(z_t)\left[\gamma(\rho_{1})+\gamma(\rho_{2})\right]-\gamma(\rho_{2})\right)$ and 
+\begin{equation*}
+m_{j}(\tilde{y}_t, t) = \frac{e^{-z_t^2/2}\lambda^{1/4}\sigma^{1/2}}{2\sqrt{2\pi(T-t)}} \cdot 
+ \left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z_t)^2\right]\left[1 - \rho(z_t)\right]
+\end{equation*}
+where $z_t = \tilde{y}_t / \sqrt{\lambda^{1/2}\sigma(T-t)}$, $\rho(z_t) = \gamma^{-1}\left(\Phi(z_t)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and 
 \begin{equation*}
 \gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},
 \end{equation*}
 \begin{equation*}
-\rho_{1} = \frac{e^{w_{1}}+e^{-w_{2}}-2}{e^{w_{1}}-e^{-w_{2}}},
+\rho_{i} = \frac{e^{w_{i}}+e^{-w_{j}}-2}{e^{w_{i}}-e^{-w_{j}}},
 \quad
-\rho_{2} = \frac{e^{w_{2}}+e^{-w_{1}}-2}{e^{w_{2}}-e^{-w_{1}}},
+\rho_{j} = \frac{e^{w_{j}}+e^{-w_{i}}-2}{e^{w_{j}}-e^{-w_{i}}},
 \quad
-w_{i} = \frac{\theta}{\lambda\bar{S}c_i}. 
+w_{i(j)} = \frac{\theta}{\lambda^{1/2}\sigma c_{i(j)}}.
 \end{equation*}
 \end{lemma}
 
@@ -220,31 +220,31 @@ We include a simplified version of the proof in the appendix.
 ...
 
 
+\section{Model Estimation}
+
+Unknown parameters to be estimated: 
+\begin{itemize}
+	\item $\sigma$ (Total innovation risk): 
+	\item $\rho_i$ and $\rho_j$ (Capacities)
+\end{itemize}
+
+\section{Application}
+
+...
+
+\subsection{Synthetic Data}
+
+Before applying our estimation procedure to real-world contest data, we evaluate its potential on synthetically generated data.
 
 
 
+\subsection{Case Study}
+
+...
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Structural Estimation}
-
-
-
-
-
-
-
+\newpage
+\section{Conclusion}
 
 \newpage
 \bibliography{_Literatures.bib}
