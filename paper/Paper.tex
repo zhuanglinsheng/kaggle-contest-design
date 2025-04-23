@@ -228,6 +228,21 @@ Unknown parameters to be estimated:
 	\item $\rho_i$ and $\rho_j$ (Capacities)
 \end{itemize}
 
+Likelihood: 
+Data are submission times $\{t^i_k\}_{k=1}^{N_i}$ and $\{t^j_k\}_{k=1}^{N_i}$. 
+
+We assume the submission times follow inhomogeneous Poisson process, controlled by the effort functions $\tau_i(t)$ and $\tau_j(t)$. 
+Then, during any time interval of the contest $\mathcal{S}$, the Poisson arrival rate of submissions of the representative player $i$ is given by $\int_{s\in\mathcal{S}}\tau_i(s)ds$. 
+The likelihood function of any realization of this point process $\{t^i_k\}_{k=1}^{N_i}$ is given by 
+\begin{equation*}
+p\left(\{t^i_k\}_{k=1}^{N_i} | \tau_i\right) = \exp\left\{-\int_{s\in\mathcal{D}}\tau_i(s)ds\right\}\prod_{k=1}^{N_i}\tau_i(t^i_k)
+\end{equation*}
+
+
+
+
+
+
 \section{Application}
 
 ...
