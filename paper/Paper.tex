@@ -105,16 +105,15 @@ Closest paper - \cite{ryvkin2022fight}.
 \section{The Model}
 
 % Effort, Output and Gap
-We assume two players, $i$ and $j$, compete for a prize $\theta>0$. 
-Winner gets the prize and loser gets nothing. 
+We assume two players, $i$ and $j$, compete for a prize $\theta>0$ in a contest. 
+Winner gets the prize $\theta>0$ and loser gets nothing. 
 The contest starts at time zero. 
 At every time $t\ge0$, the representative player $i$ chooses an effort level $q_{i,t}$ and burdens a quadratic cost $C_i(q_{i,t}) = c_i q_{i,t}^2/2$, with a lower $c_i$ corresponding to higher ability. 
 The output of player $i$ denoted by $x_{i,t}$ follows 
 \begin{equation}\label{output-process}
 dx_{i,t} = q_{i,t} dt + \sigma_idW_{i,t} 
 \end{equation}
-Here $W_{i,t}$ is a standard Brownian motion and $\sigma_i>0$ measures her production risk. 
-Similar to the discrete time model, we assume the output level $x_{i,t}$ is only known by the game designer but not the two players. 
+Here $W_{i,t}$ is a standard Brownian motion and $\sigma_i>0$ measures the production risk. 
 Denoted by $y_t \equiv x_{i,t} - x_{j,t}$ the output gap of two players at time $t$.
 The dynamic of $y_t$ is given by 
 \begin{equation}
@@ -122,19 +121,25 @@ The dynamic of $y_t$ is given by
 \end{equation}
 where $\sigma^2 = \sigma^2_i + \sigma_j^2$ and $\sigma dW_t = \sigma_idW_{i,t}-\sigma_jdW_{j,t}$. 
 
+We assume that the contest is equipped with a submission system that allows participants to upload their algorithms at any time and receive immediate feedback. 
+For simplicity, we further assume that agents submit their intermediate results whenever they make progress. 
+This setup enables the contest organizers to monitor all players’ progress $x_{i,t}$ and $x_{j,t}$ in real time.
+This true output level, evaluated by the system, is only known by the game designer but not the two players. 
+
 % Signal
-At any time $t$, the game holder emits a \emph{public} signal of the real output gap $y_t$. 
+At any time $t>0$, the contest designer emits a \emph{public} signal of the real output gap $y_t$. 
 The signal is ambiguous and the game holder controls the ambiguity. 
 The dynamic of signal is  
 \begin{equation}\label{signal}
-	dZ_{t} = y_{i,t}dt + \frac{dB_{t}}{\sqrt{\lambda}} 
+	dZ_{t} = y_{t}dt + \frac{dB_{t}}{\sqrt{\lambda}} 
 \end{equation}
 where $B_{t}$ is standard Brownian motion independent with $(W_{i,t})$ and $(W_{j,t})$, and the parameter $\lambda$ is set by the game holder to control the precision of signal. 
 The larger the $\lambda$, the more accurate the signal would be. 
-The information set of both players at time $t \ge 0$ is  $I_{t} \equiv \{Z_{s} : 0\le s \le t\}$. 
+
 % Bayesian Player
+The information set of both players at time $t \ge 0$ is  $I_{t} \equiv \{Z_{s} : 0\le s \le t\}$. 
 Player $i$ estimates the unknown output gap $y_t$ based on the information set $I_t$. 
-Let $\tilde{y}_t \equiv E(y_{i,t}|I_t)$ be the estimated output gap and $S_t \equiv E[(\tilde{y}_{i,t}-y_{i,t})^2|I_t]$ be the estimation variance. 
+Let $\tilde{y}_t \equiv E(y_{t}|I_t)$ be the estimated output gap and $S_t \equiv E[(\tilde{y}_{t}-y_{t})^2|I_t]$ be the estimation variance. 
 According to Chapter 1.2 of \citet{Bensoussan1992Control}, \emph{Kalman-Bucy filter} gives the dynamics of $\tilde{y}_{t}$ and $S_{t}$, 
 \begin{align}
 	d\tilde{y}_{t} &= (q_{i,t}-q_{j,t})dt + \lambda S_{t}(dZ_{t}-\tilde{y}_{t}dt) 
@@ -181,11 +186,12 @@ The corresponding Hamilton-Jacobi-Bellman (HJB) equation for player $i$ is
 \begin{equation*}
 0 = \max_{q_{i,t}\ge0}\left[-\frac{c_iq_i^2}{2} + V^i_{y}\cdot\left(q_{i,t}-q_{j,t}\right)+V^i_t + \frac{V^i_{yy}}{2}\lambda \bar{S}^2\right]
 \end{equation*}
+By definition, we have $\lambda \bar{S}^2 = \sigma^2$. 
 Under the assumption of inner solution, we plug into the first order conditions $q_{i,t} = V^i_y/c_i$ and $q_{j,t} = -V^j_y/c_j$, we have the system of equations
 \begin{equation*}
 \begin{aligned}
-\frac{1}{2c_i}(V^i_y)^2 + \frac{1}{c_j}V^i_yV^j_y + V^i_t + V^i_{yy}\frac{\lambda \bar{S}}{2} = 0\\
-\frac{1}{2c_j}(V^j_y)^2 + \frac{1}{c_i}V^j_yV^i_y + V^j_t + V^j_{yy}\frac{\lambda \bar{S}}{2} = 0
+\frac{1}{2c_i}(V^i_y)^2 + \frac{1}{c_j}V^i_yV^j_y + V^i_t + V^i_{yy}\frac{\sigma^2}{2} = 0\\
+\frac{1}{2c_j}(V^j_y)^2 + \frac{1}{c_i}V^j_yV^i_y + V^j_t + V^j_{yy}\frac{\sigma^2}{2} = 0
 \end{aligned}
 \end{equation*}
 subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$, $V^j(-\infty, t) = \theta$, $V^j(+\infty, t)=0$, $V^i(\tilde{y}_T, T) = \theta \cdot 1_{\tilde{y}_T > 0}$ and $V^j(\tilde{y}_T, T) = \theta \cdot 1_{\tilde{y}_T < 0}$. 
@@ -194,26 +200,31 @@ subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$
 The Nash equilibrium is summarized in the following lemma: 
 
 \begin{lemma}[\citealt{ryvkin2022fight}]
-In the Markov perfect equilibrium, the players’ efforts in state $(\tilde{y}_t, t) \in\mathbb{R}\times[0, T)$ are given by
+In the Markov perfect equilibrium, the players’ efforts in state $(y, t) \in\mathbb{R}\times[0, T)$ are given by
 \begin{equation*}
-m_{i}(\tilde{y}_t, t) = \frac{e^{-z_t^2/2}\lambda^{1/4}\sigma^{1/2}}{2\sqrt{2\pi(T-t)}} \cdot \left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z_t)^2\right]\left[1 + \rho(z_t)\right]
+m_{i}(y, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 + \rho(z)\right]
 \end{equation*}
 \begin{equation*}
-m_{j}(\tilde{y}_t, t) = \frac{e^{-z_t^2/2}\lambda^{1/4}\sigma^{1/2}}{2\sqrt{2\pi(T-t)}} \cdot 
- \left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z_t)^2\right]\left[1 - \rho(z_t)\right]
+m_{j}(y, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}
+ \left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 - \rho(z)\right]
 \end{equation*}
-where $z_t = \tilde{y}_t / \sqrt{\lambda^{1/2}\sigma(T-t)}$, $\rho(z_t) = \gamma^{-1}\left(\Phi(z_t)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and 
+where $z = y / (\sigma\sqrt{T-t})$, $\rho(z) = \gamma^{-1}\left(\Phi(z)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and 
 \begin{equation*}
-\gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},
+\gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},\quad u\in(-1,1)
 \end{equation*}
 \begin{equation*}
 \rho_{i} = \frac{e^{w_{i}}+e^{-w_{j}}-2}{e^{w_{i}}-e^{-w_{j}}},
 \quad
 \rho_{j} = \frac{e^{w_{j}}+e^{-w_{i}}-2}{e^{w_{j}}-e^{-w_{i}}},
 \quad
-w_{i(j)} = \frac{\theta}{\lambda^{1/2}\sigma c_{i(j)}}.
+w_{i(j)} = \frac{\theta}{\sigma^2 c_{i(j)}}.
 \end{equation*}
 \end{lemma}
+
+\begin{remark}
+By definition, it is not hard to see that $\gamma(\cdot)$ is strictly increasing on $(-1,1)$, ranging from $-\infty$ to $\infty$. 
+Moreover, both $\rho_i$ and $\rho_j$ lie in the interval $(-1,1)$. 
+\end{remark}
 
 We include a simplified version of the proof in the appendix.
 
@@ -222,23 +233,29 @@ We include a simplified version of the proof in the appendix.
 
 \section{Model Estimation}
 
+In this section, we ....
+
 Unknown parameters to be estimated: 
 \begin{itemize}
-	\item $\sigma$ (Total innovation risk): 
-	\item $\rho_i$ and $\rho_j$ (Capacities)
+	\item $\sigma$ (Total innovation risk): prior 
+	\item $c_i$ and $c_j$ (Capacities)
 \end{itemize}
 
-Likelihood: 
+Data: 
 Data are submission times $\{t^i_k\}_{k=1}^{N_i}$ and $\{t^j_k\}_{k=1}^{N_i}$. 
 
+Likelihood:
 We assume the submission times follow inhomogeneous Poisson process, controlled by the effort functions $\tau_i(t)$ and $\tau_j(t)$. 
 Then, during any time interval of the contest $\mathcal{S}$, the Poisson arrival rate of submissions of the representative player $i$ is given by $\int_{s\in\mathcal{S}}\tau_i(s)ds$. 
 The likelihood function of any realization of this point process $\{t^i_k\}_{k=1}^{N_i}$ is given by 
 \begin{equation*}
 p\left(\{t^i_k\}_{k=1}^{N_i} | \tau_i\right) = \exp\left\{-\int_{s\in\mathcal{D}}\tau_i(s)ds\right\}\prod_{k=1}^{N_i}\tau_i(t^i_k)
 \end{equation*}
-
-
+We assume the submission intensity $\tau_i(t)$ if proportional to the effort level $m_i(\tilde{y}_t, t)$. 
+More specifically, we assume 
+$$
+\tau_i(t) = \bar{\tau}_i \cdot m_i(\tilde{y}_t, t)
+$$
 
 
 
@@ -250,6 +267,15 @@ p\left(\{t^i_k\}_{k=1}^{N_i} | \tau_i\right) = \exp\left\{-\int_{s\in\mathcal{D}
 \subsection{Synthetic Data}
 
 Before applying our estimation procedure to real-world contest data, we evaluate its potential on synthetically generated data.
+
+Based on the following assumptions, we will next generate the submission data for two players in a data analysis competition: 
+\begin{itemize}
+	\item Total uncertainty: $\sigma = 5$
+	\item Capacities: $c_i = 1.5$ and $c_j = 2$
+	\item Contest duration: from 2025-01-01 to 2025-03-31
+	\item Starting point $\tilde{y}_0=0$
+	\item 
+\end{itemize}
 
 
 
