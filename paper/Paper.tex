@@ -1,85 +1,186 @@
-\documentclass[a4paper, 11pt]{article}
-% English font
-% \usepackage[T1]{fontenc}
-% \usepackage{mathptmx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author template for Management Science (mnsc) for articles with no e-companion (EC)
+%% Mirko Janc, Ph.D., INFORMS, mirko.janc@informs.org
+%% ver. 0.95, December 2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[mnsc]{informs3}
+%\documentclass[mnsc,blindrev]{informs3}
+%\documentclass[mnsc,nonblindrev]{informs3} % current default for manuscript submission
 
-% Geometry
-\usepackage{fullpage}
-%\usepackage[top=3cm,bottom=2.5cm,left=2.6cm,right=2.6cm]{geometry}
-\usepackage{setspace}
+\OneAndAHalfSpacedXI
+%%\OneAndAHalfSpacedXII % Current default line spacing
+%%\DoubleSpacedXII
+%%\DoubleSpacedXI
 
-\onehalfspacing
+% If hyperref is used, dvi-to-ps driver of choice must be declared as
+%   an additional option to the \documentclass. For example
+%\documentclass[dvips,mnsc]{informs3}      % if dvips is used
+%\documentclass[dvipsone,mnsc]{informs3}   % if dvipsone is used, etc.
 
-% Mathttt
-\usepackage{amsmath, amssymb, amsthm, bm, bbm}
-\usepackage{mathtools}
-\theoremstyle{plain} % Theorem ilatics
-% \theoremstyle{definition}
-
-\newtheorem{assumption}{Assumption}
-\newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
-\newtheorem{prop}{Proposition}
-\newtheorem{guess}{Conjecture}
-\newtheorem{lemma}{Lemma}
-\newtheorem{cor}{Corollary}
-\newtheorem{aux}{Auxiliary Result}
-\newtheorem{remark}{Remark}
-
-\DeclareMathOperator*{\argmax}{arg\,max}
-\DeclareMathOperator*{\argmin}{arg\,min}
-
-% Linkage
+% Private macros here (check that there is no clash with the style)
+%%%%%%%% Linkage
+\usepackage{xurl}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,citecolor=blue,urlcolor=blue}
 
-% Footnote
-\usepackage[bottom]{footmisc}
+%%%%%%%% Colored underline
+\usepackage{ulem}
+\usepackage{soul}
+\makeatletter
+    \newcommand{\coloruline}[2]{%
+        \newcommand\temp@reduline{\bgroup\markoverwith
+            {\textcolor{#1}{\rule[-0.5ex]{2pt}{0.4pt}}}\ULon}%
+        \temp@reduline{#2}%
+    }
+    \newcommand{\coloruwave}[2]{%
+        \UL@protected\def\temp@uwave{\leavevmode \bgroup 
+        \ifdim \ULdepth=\maxdimen \ULdepth 3.5\p@
+        \else \advance\ULdepth2\p@ 
+        \fi \markoverwith{\textcolor{#1}{\lower\ULdepth\hbox{\sixly \char58}}}\ULon}
+        \font\sixly=lasy6 % does not re-load if already loaded, so no memory drain.
+        \temp@uwave{#2}%
+    }
+\makeatother
 
-% References
-\usepackage{natbib}
-\bibliographystyle{apalike}
-\renewcommand{\bibname}{References}
+%%%%%%%% Algorithm
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
-% Itemize
-\usepackage{enumitem}
-
-% Diagram Figure
-\usepackage{tikz}
-\usepackage{varwidth}
-
-% Others
-\usepackage{fancyhdr}
-\usepackage{graphicx, graphics, caption, subcaption}
-\usepackage{appendix}
+%%%%%%%% Table, Figure and Diagram
+%%%%%%%%%% Table
+\usepackage{makecell}
 \usepackage{tabularx}
-\usepackage[section]{placeins}
-\usepackage{color,pstricks}
-\usepackage{setspace}
-
-\usepackage{float}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{numprint}
+%%%%%%%%%% Figure
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{caption,}
+\usepackage{subcaption}
+%%%%%%%%%% Diagram Figure
+\usepackage{tikz}
+\usepackage{varwidth}
+%%%%%%%%%% Comments
+\usepackage{comment}
 
 
-\title{Information Disclosure in Dynamic Innovation Contests}
-\author{Jussi Keppo \and Zhuang Linsheng}
-\date{}
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
 
+%% Setup of theorem styles. Outcomment only one.
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+\ECRepeatTheorems
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+
+% For new submissions, leave this number blank.
+% For revisions, input the manuscript number assigned by the on-line
+% system along with a suffix ".Rx" where x is the revision number.
+\MANUSCRIPTNO{MS-0001-1922.65}
+
+
+%%%%%%%%%%%%%%%%
 \begin{document}
+%%%%%%%%%%%%%%%%
+
+% Outcomment only when entries are known. Otherwise leave as is and
+%   default values will be used.
+%\setcounter{page}{1}
+%\VOLUME{00}%
+%\NO{0}%
+%\MONTH{Xxxxx}% (month or a similar seasonal id)
+%\YEAR{0000}% e.g., 2005
+%\FIRSTPAGE{000}%
+%\LASTPAGE{000}%
+%\SHORTYEAR{00}% shortened year (two-digit)
+%\ISSUE{0000} %
+%\LONGFIRSTPAGE{0001} %
+%\DOI{10.1287/xxxx.0000.0000}%
+
+% Author's names for the running heads
+% Sample depending on the number of authors;
+% \RUNAUTHOR{Jones}
+% \RUNAUTHOR{Jones and Wilson}
+% \RUNAUTHOR{Jones, Miller, and Wilson}
+% \RUNAUTHOR{Jones et al.} % for four or more authors
+% Enter authors following the given pattern:
+%\RUNAUTHOR{}
+
+% Title or shortened title suitable for running heads. Sample:
+% \RUNTITLE{Bundling Information Goods of Decreasing Value}
+% Enter the (shortened) title:
+\RUNTITLE{Information Disclosure in Dynamic Innovation Contests}
+
+% Full title. Sample:
+% \TITLE{Bundling Information Goods of Decreasing Value}
+% Enter the full title:
+\TITLE{Information Disclosure in Dynamic Innovation Contests}
+
+% Block of authors and their affiliations starts here:
+% NOTE: Authors with same affiliation, if the order of authors allows,
+%   should be entered in ONE field, separated by a comma.
+%   \EMAIL field can be repeated if more than one author
+\ARTICLEAUTHORS{%
+\AUTHOR{Jussi Keppo}
+\AFF{NUS Business School and Institute of Operations Research and Analytics\\
+	National University of Singapore, Singapore\\
+	\EMAIL{keppo@nus.edu.sg}} %, \URL{}}
+\AUTHOR{Linsheng Zhuang}
+\AFF{Institute of Operations Research and Analytics\\
+	National University of Singapore, Singapore\\
+	\EMAIL{linsheng.z@u.nus.edu}}
+% Enter all authors
+} % end of the block
+
+\ABSTRACT{%
+...
+% Enter your abstract
+}%
+
+% Sample
+%\KEYWORDS{deterministic inventory theory; infinite linear programming duality;
+%  existence of optimal policies; semi-Markov decision process; cyclic schedule}
+
+% Fill in data. If unknown, outcomment the field
+\KEYWORDS{Digital Economy, Data Protection Regulation, Innovation Contest} 
+%\HISTORY{......}
 
 \maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{abstract}
-...
-\end{abstract}
+% Samples of sectioning (and labeling) in MNSC
+% NOTE: (1) \section and \subsection do NOT end with a period
+%       (2) \subsubsection and lower need end punctuation
+%       (3) capitalization is as shown (title style).
+%
+%\section{Introduction.}\label{intro} %%1.
+%\subsection{Duality and the Classical EOQ Problem.}\label{class-EOQ} %% 1.1.
+%\subsection{Outline.}\label{outline1} %% 1.2.
+%\subsubsection{Cyclic Schedules for the General Deterministic SMDP.}
+%  \label{cyclic-schedules} %% 1.2.1
+%\section{Problem Description.}\label{problemdescription} %% 2.
+
+% Text of your paper here
+
 
 \section{Introduction}
 
 \begin{itemize}
 \item Kaggle\footnote{\url{https://www.kaggle.com}} ...
-\item Meta-kaggle \cite{megan_risdal_timo_bozsolik_2022}. 
+\item Meta-kaggle dataset \cite{megan_risdal_timo_bozsolik_2022}. 
 \end{itemize}
 
 \subsection{Literature Review}
@@ -106,20 +207,16 @@ Closest paper - \cite{ryvkin2022fight}.
 
 % Effort, Output and Gap
 We assume two players, $i$ and $j$, compete for a prize $\theta>0$ in a contest. 
-Winner gets the prize $\theta>0$ and loser gets nothing. 
+Winner gets the prize and loser gets nothing. 
 The contest starts at time zero. 
 At every time $t\ge0$, the representative player $i$ chooses an effort level $q_{i,t}$ and burdens a quadratic cost $C_i(q_{i,t}) = c_i q_{i,t}^2/2$, with a lower $c_i$ corresponding to higher ability. 
-The output of player $i$ denoted by $x_{i,t}$ follows 
-\begin{equation}\label{output-process}
-dx_{i,t} = q_{i,t} dt + \sigma_idW_{i,t} 
-\end{equation}
-Here $W_{i,t}$ is a standard Brownian motion and $\sigma_i>0$ measures the production risk. 
-Denoted by $y_t \equiv x_{i,t} - x_{j,t}$ the output gap of two players at time $t$.
-The dynamic of $y_t$ is given by 
+Denoted by $y_t$ the \textit{output gap} of player $i$ and $j$ at time $t$, driven by
 \begin{equation}
 	dy_t = (q_{i,t}-q_{j,t})dt + \sigma dW_t
 \end{equation}
-where $\sigma^2 = \sigma^2_i + \sigma_j^2$ and $\sigma dW_t = \sigma_idW_{i,t}-\sigma_jdW_{j,t}$. 
+where $W_t$ is a Brownian motion and $\sigma>0$ measures the innovation risk.
+
+
 
 We assume that the contest is equipped with a submission system that allows participants to upload their algorithms at any time and receive immediate feedback. 
 For simplicity, we further assume that agents submit their intermediate results whenever they make progress. 
@@ -127,7 +224,7 @@ This setup enables the contest organizers to monitor all players’ progress $x_
 This true output level, evaluated by the system, is only known by the game designer but not the two players. 
 
 % Signal
-At any time $t>0$, the contest designer emits a \emph{public} signal of the real output gap $y_t$. 
+At any time $t>0$, the contest designer emits a \textit{public} signal of the real output gap $y_t$. 
 The signal is ambiguous and the game holder controls the ambiguity. 
 The dynamic of signal is  
 \begin{equation}\label{signal}
@@ -140,7 +237,7 @@ The larger the $\lambda$, the more accurate the signal would be.
 The information set of both players at time $t \ge 0$ is  $I_{t} \equiv \{Z_{s} : 0\le s \le t\}$. 
 Player $i$ estimates the unknown output gap $y_t$ based on the information set $I_t$. 
 Let $\tilde{y}_t \equiv E(y_{t}|I_t)$ be the estimated output gap and $S_t \equiv E[(\tilde{y}_{t}-y_{t})^2|I_t]$ be the estimation variance. 
-According to Chapter 1.2 of \citet{Bensoussan1992Control}, \emph{Kalman-Bucy filter} gives the dynamics of $\tilde{y}_{t}$ and $S_{t}$, 
+According to Chapter 1.2 of \citet{Bensoussan1992Control}, \textit{Kalman-Bucy filter} gives the dynamics of $\tilde{y}_{t}$ and $S_{t}$, 
 \begin{align}
 	d\tilde{y}_{t} &= (q_{i,t}-q_{j,t})dt + \lambda S_{t}(dZ_{t}-\tilde{y}_{t}dt) 
 	\label{filtered-x}\\
@@ -160,7 +257,7 @@ If $\lambda > 0$, the solution of (\ref{filtered-S}) is
 \end{equation}
 Specifically, $\bar{S} = \sigma / \sqrt{\lambda}$ when $\lambda>0$ and $\bar{S} = \infty$ when $\lambda = 0$. 
 Please refer to Appendix~\ref{app-S-equ} for the derivations. 
-Figure~\ref{fig-S-evol} shows the evolution of $S_t$ in time: estimation variance $S_t$ converges to \emph{steady state} $\bar{S}$ as time goes by regardless of the starting estimation variance. 
+Figure~\ref{fig-S-evol} shows the evolution of $S_t$ in time: estimation variance $S_t$ converges to \textit{steady state} $\bar{S}$ as time goes by regardless of the starting estimation variance. 
 For simplicity, we henceforth assume that $S_0 = \bar{S}$, hence $S_t\equiv \bar{S}$. 
 
 \begin{figure}[!ht]
@@ -172,15 +269,15 @@ For simplicity, we henceforth assume that $S_0 = \bar{S}$, hence $S_t\equiv \bar
 
 
 % Contest Deadline
-Following \cite{ryvkin2022fight}, let's consider a dynamic contest with a given fixed deadline. 
+Following \cite{ryvkin2022fight}, let's consider a dynamic contest with a fixed deadline. 
 Suppose the contest is terminated when time $t=T>0$. 
-Since the variance $\bar{S}$ is fixed as assumed above, the state of the game is fully characterized by a tuple $(\tilde{y}_t, t)$. 
+Since the steady state estimation variance $\bar{S}$ is fixed as displayed above, the state of the game is fully characterized by a tuple $(\tilde{y}_t, t)$. 
 At any time $0\le t<T$, player $i$ optimizes her effort level $q_{i,\tau}$ in the remaining contest period $\tau\in[t, T)$ according to the following optimization problem, 
 \begin{equation}\label{v-def}
 	V^i(\tilde{y}_{t}, t ; q_{j,t},\Theta_i) = \max_{\{q_{i,\tau}\}^T_{\tau=t}} 
 	\mathbb{E}\left( \theta\cdot1_{\tilde{y}_T>0} - \int^T_tC_i(q_{i,\tau})d\tau \bigg|I_t\right) 
 \end{equation}
-where $\Theta \equiv\{\theta, \lambda, \sigma, c_i, c_j\}$, subject to constraints (\ref{filtered-x}), (\ref{filtered-S}) and $q_{i,\tau}\ge0$ for all $\tau\in[t,T)$.
+where $\Theta_i \equiv\{\theta, \lambda, \sigma, c_i\}$, subject to constraints (\ref{filtered-x}), (\ref{filtered-S}) and $q_{i,\tau}\ge0$ for all $\tau\in[t,T)$.
 The optimization problem for player $j$ is just symmetric to that of player $i$ as $V^j(\tilde{y}_t, t) = V^i(-\tilde{y}_t, t)$. 
 The corresponding Hamilton-Jacobi-Bellman (HJB) equation for player $i$ is 
 \begin{equation*}
@@ -197,17 +294,14 @@ Under the assumption of inner solution, we plug into the first order conditions 
 subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$, $V^j(-\infty, t) = \theta$, $V^j(+\infty, t)=0$, $V^i(\tilde{y}_T, T) = \theta \cdot 1_{\tilde{y}_T > 0}$ and $V^j(\tilde{y}_T, T) = \theta \cdot 1_{\tilde{y}_T < 0}$. 
 
 
-The Nash equilibrium is summarized in the following lemma: 
+The Nash equilibrium is summarized in the following lemma. 
+We include a simplified version of the proof in the appendix: 
 
 \begin{lemma}[\citealt{ryvkin2022fight}]
 In the Markov perfect equilibrium, the players’ efforts in state $(y, t) \in\mathbb{R}\times[0, T)$ are given by
-\begin{equation*}
-m_{i}(y, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 + \rho(z)\right]
-\end{equation*}
-\begin{equation*}
-m_{j}(y, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}
- \left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 - \rho(z)\right]
-\end{equation*}
+\begin{equation}\label{eq-equilibrium-effort}
+m_{i{j}}(y, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
+\end{equation}
 where $z = y / (\sigma\sqrt{T-t})$, $\rho(z) = \gamma^{-1}\left(\Phi(z)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and 
 \begin{equation*}
 \gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},\quad u\in(-1,1)
@@ -221,19 +315,84 @@ w_{i(j)} = \frac{\theta}{\sigma^2 c_{i(j)}}.
 \end{equation*}
 \end{lemma}
 
-\begin{remark}
-By definition, it is not hard to see that $\gamma(\cdot)$ is strictly increasing on $(-1,1)$, ranging from $-\infty$ to $\infty$. 
-Moreover, both $\rho_i$ and $\rho_j$ lie in the interval $(-1,1)$. 
-\end{remark}
+The variables $w_{i(j)}$ represent the abilities of two players, while $\rho_{i(j)}$ normalizes $w_{i(j)}$ into the interval $(-1, 1)$. 
+It is not hard to see that $\gamma(\cdot)$ is strictly increasing on $(-1,1)$, ranging from $-\infty$ to $+\infty$. 
+Moreover, the equilibrium effort $m_{i(j)}$ can be represented to the product of $\phi(y; 0, \sigma^2(T-t))$, the probability density of normal distribution with mean zero and variance $\sigma^2(T-t)$ at the state $y$ and an amplitude factor that only depends on the composite variable $z$. 
 
-We include a simplified version of the proof in the appendix.
+Figure...
 
-...
+
+
+
+
 
 
 \section{Model Estimation}
 
-In this section, we ....
+In this section, we describe the estimation procedure. 
+We first outline the data generation process, establishing the connection between the empirical data and the theoretical model discussed previously.
+Then, we introduce a structural estimation method using Bayesian framework.
+
+\subsection{Data Generating Process}
+
+For each contest on Kaggle, the observable information can be classified into three primary components: 
+
+%% Data: Contest setting
+The first component consists of essential contest details, including the contest duration, prize structure, information disclosure, and other governing rules.
+Contrary to the assumptions of our model, a typical contest usually involves multiple teams rather than just two.
+We index the participating teams of the contest by $i\in\{1, 2, ..., n\}$. 
+To fully leverage the potential of the data and establish a connection with our theoretical model, let's assume that each participant perceives a competitor they are playing against at every moment, denoted as $j$. 
+This perceived competitor is typically understood as the most prominent individual on the leaderboard, i.e., the person ranked first.
+When team $i$ themselves hold the top position, their perceived competitor is the individual who poses the greatest threat, namely the person ranked second.
+Furthermore, the contests may feature intricate prize structures, such as the provision of multiple awards, rather than adhering to a winner-takes-all format.
+The issue will be discussed in Section~\ref{sec-kaggle-application}. 
+
+%% Data: Submissions
+The second component captures the submission events of each player $i$ to the system, denoted by the sequence $\{\hat{t}^i_k\}_{k=1}^{N_i}$.
+Here, $N_i$ represents for the total number of submissions by player $i$, and $t$ represents for the time of each submission. 
+We understand the submission events of player $i$ and $j$ as two conditional independent inhomogeneous Poisson processes, driven by the intensity functions $\tau_i(t)$ and $\tau_j(t)$.\footnote{That is, given the intensity functions $\tau_i(t)$ and $\tau_j(t)$, the submission events $\{\hat{t}^i_k\}_{k=1}^{N_i}$ and $\{\hat{t}^j_k\}_{k=1}^{N_i}$ are mutually independent.}
+Then, during any time interval $\mathcal{S}$ of the contest duration $\mathcal{T}$, the Poisson arrival rate of submissions of the representative player $i$ is given by $\int_{s\in\mathcal{S}}\tau_i(s)ds$. 
+We assume the submission intensity $\tau_i(t)$ is proportional to the effort level $m_i(\tilde{y}_t, t)$. More specifically, 
+\begin{equation}\label{eq-model-intensity}
+\tau_i(t) = r \cdot m_i(\tilde{y}_t, t)
+\end{equation}
+where $r>0$ is the common ratio of submission intensity and effort. 
+
+%% Data: Leaderboard
+The third component of the observed data is an open leaderboard that records the real-time rankings and scores of each participant, denoted by $\hat{x}^i_t$. 
+We interpret the difference in scores between $i$ and $j$ displayed on the leaderboard as the signal $Z_t$ (defined in (\ref{signal})) released by the contest organizer. 
+Specifically, let's denote $\hat{y}_t = \hat{x}^i_t - \hat{x}^j_t$ the gap between displayed scores and
+\begin{equation}\label{eq-model-signal}
+dZ_t = \hat{y}_tdt
+\end{equation}
+As indicated in (\ref{signal}), we assume that $\hat{y}_t$ represents a noisy signal, with its precision controlled by $\lambda$. 
+
+In practice, the leaderboard signals are inherently noisy, as organizers deliberately disclose only a subset of the full dataset to participants to mitigate the risk of overfitting. 
+The proportion of the released data is generally known to all participants.
+In addition to the public leaderboard, most competitions hosted on Kaggle also maintain a private leaderboard, where organizers evaluate the true predictive performance of participants’ models using the full dataset.
+
+Beyond the uncertainty introduced by partial data disclosure, a second source of signal noise arises from the timing of leaderboard updates: 
+rankings are refreshed only after model submissions, creating a delay relative to the true standings.
+It should be noted that such lag would bias our model estimates only if participants strategically timed their submissions.
+Although such strategic behaviour is theoretically possible, we abstract from it in this study.
+We assume that each submission follows a period of substantive effort, allowing the leaderboard rankings to broadly reflect the relative performance of algorithms based on the publicly available data.
+
+
+
+
+\subsection{Bayesian Framework}
+
+The likelihood function of any realization of this point process $\{t^i_k\}_{k=1}^{N_i}$ is given by 
+\begin{equation}\label{eq-ihpp-prob}
+p\left(\{t^i_k\}_{k=1}^{N_i} | \tau_i\right) = \exp\left\{-\int_{s\in\mathcal{T}}\tau_i(s)ds\right\}\prod_{k=1}^{N_i}\tau_i(t^i_k)
+\end{equation}
+
+
+
+By (\ref{filtered-x}) and (\ref{eq-model-signal}), the estimated gap $\tilde{y}_t$ by the two players follows 
+\begin{equation}\label{eq-fintered-y-update}
+d\tilde{y}_{t} = (q_{i,t}-q_{j,t})dt + \sqrt{\lambda}\sigma(\hat{y}_t-\tilde{y}_{t}) dt
+\end{equation}
 
 Unknown parameters to be estimated: 
 \begin{itemize}
@@ -241,23 +400,13 @@ Unknown parameters to be estimated:
 	\item $c_i$ and $c_j$ (Capacities)
 \end{itemize}
 
-Data: 
-Data are submission times $\{t^i_k\}_{k=1}^{N_i}$ and $\{t^j_k\}_{k=1}^{N_i}$. 
+\subsection{Estimation Procedure}
 
-Likelihood:
-We assume the submission times follow inhomogeneous Poisson process, controlled by the effort functions $\tau_i(t)$ and $\tau_j(t)$. 
-Then, during any time interval of the contest $\mathcal{S}$, the Poisson arrival rate of submissions of the representative player $i$ is given by $\int_{s\in\mathcal{S}}\tau_i(s)ds$. 
-The likelihood function of any realization of this point process $\{t^i_k\}_{k=1}^{N_i}$ is given by 
-\begin{equation*}
-p\left(\{t^i_k\}_{k=1}^{N_i} | \tau_i\right) = \exp\left\{-\int_{s\in\mathcal{D}}\tau_i(s)ds\right\}\prod_{k=1}^{N_i}\tau_i(t^i_k)
-\end{equation*}
-We assume the submission intensity $\tau_i(t)$ if proportional to the effort level $m_i(\tilde{y}_t, t)$. 
-More specifically, we assume 
-$$
-\tau_i(t) = \bar{\tau}_i \cdot m_i(\tilde{y}_t, t)
-$$
+...
 
+\subsubsection{Discrete time.} 
 
+...
 
 
 \section{Application}
@@ -274,12 +423,27 @@ Based on the following assumptions, we will next generate the submission data fo
 	\item Capacities: $c_i = 1.5$ and $c_j = 2$
 	\item Contest duration: from 2025-01-01 to 2025-03-31
 	\item Starting point $\tilde{y}_0=0$
-	\item 
 \end{itemize}
 
+Simulation algorithm:
+
+\begin{algorithm}
+\caption{Synthetic Data Simulation}
+\begin{algorithmic}
+\STATE \textbf{Input:} 
+	$\{\hat{t}^i_k\}_{k=1}^{N_i}$, $c_i$, $c_j$, $\sigma$, $r$.
+\STATE Initialize $\tilde{y}_t = 0$, $\hat{y}_t = 0$
+\FOR{$t =$ 2025-01-01 to 2025-03-31}
+    \STATE $m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t)$  $\gets$ (\ref{eq-equilibrium-effort})
+    \STATE $\tilde{y}_{t+\Delta t}$ $\gets$ (\ref{eq-fintered-y-update})
+\ENDFOR
+\STATE \textbf{Output:} $(\tilde{y}_t)$, $(\hat{y}_t)$
+\end{algorithmic}
+\end{algorithm}
 
 
-\subsection{Case Study}
+
+\subsection{Case Study}\label{sec-kaggle-application}
 
 ...
 
@@ -290,11 +454,24 @@ Based on the following assumptions, we will next generate the submission data fo
 \newpage
 \bibliography{_Literatures.bib}
 
-\newpage
-\appendix
-\small
+% Appendix here
+% Options are (1) APPENDIX (with or without general title) or
+%             (2) APPENDICES (if it has more than one unrelated sections)
+% Outcomment the appropriate case if necessary
+%
+% \begin{APPENDIX}{<Title of the Appendix>}
+% \end{APPENDIX}
+%
+%   or
+%
+% \begin{APPENDICES}
+% \section{<Title of Section A>}
+% \section{<Title of Section B>}
+% etc
+% \end{APPENDICES}
 
-%{\footnotesize
+\newpage
+\begin{APPENDICES}
 
 
 
@@ -343,5 +520,31 @@ Finally, we determine the constants $K_1$, $K_2$ by the initial condition $S_0$ 
 
 
 
+\end{APPENDICES}
 
+
+
+% Acknowledgments here
+%\ACKNOWLEDGMENT{......}
+
+
+% References here (outcomment the appropriate case)
+
+% CASE 1: BiBTeX used to constantly update the references
+%   (while the paper is being written).
+%\bibliographystyle{informs2014} % outcomment this and next line in Case 1
+%\bibliography{<your bib file(s)>} % if more than one, comma separated
+
+% CASE 2: BiBTeX used to generate mypaper.bbl (to be further fine tuned)
+%\input{mypaper.bbl} % outcomment this line in Case 2
+
+%If you don't use BiBTex, you can manually itemize references as shown below.
+
+
+%\bibliographystyle{nonumber}
+\bibliographystyle{informs2014}
+\bibliography{_Literatures.bib}
+
+%%%%%%%%%%%%%%%%%
 \end{document}
+%%%%%%%%%%%%%%%%%
