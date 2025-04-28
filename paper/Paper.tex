@@ -367,6 +367,7 @@ Moreover, according to (\ref{eq-state-dynamics}), the observed real-time gap $\h
 d\hat{y}_t = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sigma dW_{t} + \frac{dB_t}{\sqrt{\lambda}}
 \end{equation}
 where the term $\sigma dW_t$ captures the innovation shock, and $dB_t/\sqrt{\lambda}$ represents the signal noise.
+These two types of uncertainty can be consolidated into a unified source $\sqrt{\sigma^2 + 1/\lambda}d\hat{W}_t$, where $\hat{W}_t$ is a Brownian motion. 
 It is important to recognize that the generation of $\hat{y}_t$ is inherently tied to the players’ strategic interactions, as it depends on their estimates of the underlying state, $\tilde{y}_t$. 
 In turn, $\tilde{y}_t$ evolves dynamically based on $\hat{y}_t$, since players continually update their beliefs in response to observed data. 
 As a result, the generation of $\hat{y}_t$ and $\tilde{y}_t$ proceeds jointly.
@@ -437,6 +438,7 @@ Then, we apply the classical thinning procedure \citep{lewis1979simulation} to d
 	$c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$, $y_0$, $\tilde{y}_0$
 \STATE Sample $\{s_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from homogeneous Poisson process $(\tau^\star_{i(j)})$ on $[0, T)$
 \STATE Sample $\{u_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from uniform distribution on $[0, 1]$
+\STATE Sample $\{.\}$
 \STATE Initialize $\ell^{i(j)}=0$, $\hat{y}_0 = 0$, $\tilde{y}_t=0$
 \FOR{$t = 0$ to $T$}
     \STATE $m_{i(j)}(\tilde{y}_t, t)$  $\gets$ (\ref{eq-equilibrium-effort}), $\tau^{i(j)}(t)$ $\gets$ (\ref{eq-model-intensity})
@@ -480,8 +482,6 @@ regression: $\lambda$ and the proportion of data release
 \newpage
 \section{Conclusion}
 
-\newpage
-\bibliography{_Literatures.bib}
 
 % Appendix here
 % Options are (1) APPENDIX (with or without general title) or
