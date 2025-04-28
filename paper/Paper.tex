@@ -427,6 +427,8 @@ Before applying our estimation procedure to real-world contest data, we evaluate
 
 \subsection{Data Generation}
 
+
+
 A central challenge in generating synthetic data lies in dynamically constructing a point process that conforms to an inhomogeneous Poisson process.
 We first generate candidate submission events according to a homogeneous Poisson process over the whole contest duration, using a fixed high intensity $\tau_i^\star \ge \sup_t \tau_i(t)$, and distribute them uniformly across the interval.
 Then, we apply the classical thinning procedure \citep{lewis1979simulation} to determine whether each candidate event is accepted.
@@ -435,10 +437,10 @@ Then, we apply the classical thinning procedure \citep{lewis1979simulation} to d
 \caption{Synthetic Data Simulation}
 \begin{algorithmic}
 \STATE \textbf{Input:} 
-	$c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$, $y_0$, $\tilde{y}_0$
+	$\Delta t$, $T$, $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$, $y_0$, $\tilde{y}_0$
 \STATE Sample $\{s_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from homogeneous Poisson process $(\tau^\star_{i(j)})$ on $[0, T)$
 \STATE Sample $\{u_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from uniform distribution on $[0, 1]$
-\STATE Sample $\{.\}$
+\STATE Sample a series of Brownian motion $(\hat{W}_t)$
 \STATE Initialize $\ell^{i(j)}=0$, $\hat{y}_0 = 0$, $\tilde{y}_t=0$
 \FOR{$t = 0$ to $T$}
     \STATE $m_{i(j)}(\tilde{y}_t, t)$  $\gets$ (\ref{eq-equilibrium-effort}), $\tau^{i(j)}(t)$ $\gets$ (\ref{eq-model-intensity})

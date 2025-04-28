@@ -55,8 +55,7 @@ def get_equilibrium_efforts(
 		prize: float,
 		c_i: float,
 		c_j: float,
-		innov_uncert: float,
-		#signal_prec: float
+		innov_uncert: float
 ) -> tuple[float, float]:
 	"""Implementing the Equilibrium
 	"""
