@@ -15,11 +15,10 @@ def simulate_poisson_process(
 		start_time: datetime,
 		end_time: datetime,
 		hour_arrival_rate: float,
-		seed: int = 1234
+		rng: np.random.Generator
 ) -> list[datetime]:
 	"""
 	"""
-	rng = np.random.default_rng(seed=seed)
 	events: list[datetime] = []
 	current_t = start_time
 	while True:
@@ -72,25 +71,26 @@ def simulate_inhomogeneous_poisson_process(
 		start_time: datetime,
 		end_time: datetime,
 		intensity: Callable[[datetime], float],
-		max_hour_arrival_rate: float,
+		hour_arrival_ub: float,
 		seed_poisson: int = 1234,
 		seed_uniform: int = 1234,
 ) -> list[datetime]:
 	"""Using thinning method
 	"""
+	rng_poisson = np.random.default_rng(seed_poisson)
+	rng_uniform = np.random.default_rng(seed=seed_uniform)
+
 	# Step 1: simulate homogeneous process
 	events: list[datetime] = simulate_poisson_process( \
-			start_time, end_time, max_hour_arrival_rate, seed_poisson)
+			start_time, end_time, hour_arrival_ub, rng_poisson)
 
 	# Step 2: thinning
 	events_inhomo: list[datetime] = []
 	n_events = len(events)
-	rng = np.random.default_rng(seed=seed_uniform)
-	uniforms = rng.uniform(low=0, high=1, size=n_events)
-
+	uniforms = rng_uniform.uniform(low=0, high=1, size=n_events)
 	for event, u in zip(events, uniforms):
 		event_intensity = intensity(event)
-		if u < event_intensity / max_hour_arrival_rate:
+		if u < event_intensity / hour_arrival_ub:
 			events_inhomo.append(event)
 	return events_inhomo
 

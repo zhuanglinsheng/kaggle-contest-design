@@ -48,7 +48,7 @@ def aux_fn_rho(z: float, rho_i: float, rho_j: float) -> float:
 	return sol.root
 
 def get_equilibrium_efforts(
-		y: float,
+		tilde_y: float,
 		t: SupportsFloat | datetime | np.datetime64,
 		T: SupportsFloat | datetime | np.datetime64,
 		*,
@@ -64,22 +64,22 @@ def get_equilibrium_efforts(
 	if isinstance(T, np.datetime64):
 		T = T.astype(datetime)
 	if isinstance(t, SupportsFloat) and isinstance(T, SupportsFloat):
-		remaining_time = float(T) - float(t)
+		remaining_hour = float(T) - float(t)
 	elif isinstance(t, datetime) and isinstance(T, datetime):
-		remaining_time = (T - t).total_seconds() / 3600
+		remaining_hour = (T - t).total_seconds() / 3600
 	else:
-		remaining_time = 0
+		remaining_hour = 0
 		ValueError("{t} and {T} should be either float or datatime")
 
 	w_i = prize / innov_uncert**2 / c_i
 	w_j = prize / innov_uncert**2 / c_j
 	rho_i = (np.exp(w_i) + np.exp(-w_j) - 2) / (np.exp(w_i) - np.exp(-w_j))
 	rho_j = (np.exp(w_j) + np.exp(-w_i) - 2) / (np.exp(w_j) - np.exp(-w_i))
-	z = y / innov_uncert / remaining_time**0.5
+	z = tilde_y / innov_uncert / remaining_hour**0.5
 	rho_z = aux_fn_rho(z, rho_i, rho_j)
 	gamma_i = aux_fn_gamma(rho_i)
 	gamma_j = aux_fn_gamma(rho_j)
-	density: float = stats.norm.pdf(y, loc=0, scale=innov_uncert * remaining_time)  # type: ignore
+	density: float = stats.norm.pdf(tilde_y, loc=0, scale=innov_uncert * remaining_hour)  # type: ignore
 	emplify = innov_uncert**2 / 2 * (gamma_i + gamma_j) * (1 - rho_z**2)
 	K_i = emplify * (1 + rho_z)
 	K_j = emplify * (1 - rho_z)
