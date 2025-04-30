@@ -1,8 +1,15 @@
-import numpy as np
-import numpy.typing as npt
+"""
+"""
+
+# std library
 from datetime import datetime, timedelta
 
+# third-party
+import numpy as np
+
+# local
 import ryvkin_model
+
 
 def simulate_poisson_process(
 		start_time: datetime,
@@ -36,7 +43,7 @@ def synthetic_data_simulation(
 		time_unit: timedelta = timedelta(hours=1),
 		time_unit_2f: float = 1/24,
 		*,
-		seed_brownian: int = 337,
+		seed_brownian: int = 37,
 		seed_poisson: int = 1234,
 		seed_uniform: int = 5678
 ):
