@@ -1,4 +1,4 @@
-"""
+"""Generate Synthetic Data
 """
 
 # std library
@@ -31,10 +31,10 @@ def simulate_poisson_process(
 	return events
 
 def synthetic_data_simulation(
-		c_i: float,    # hourly unit cost
-		c_j: float,    # hourly unit cost
 		theta: float,
-		sigma: float,  # hourly standard deviation
+		c_i: float,    # daily cost
+		c_j: float,    # daily cost
+		sigma: float,  # daily innovation risk
 		lamb: float,
 		r: float,
 		hour_arrival_ub: float,
@@ -50,37 +50,38 @@ def synthetic_data_simulation(
 	"""
 	"""
 	# Time discretization
-	time_grids = np.arange(start_time, end_time, time_unit, dtype=datetime)
+	time_grids: list[datetime] = np.arange(start_time, end_time, time_unit, dtype=datetime).tolist()
 
-	# Simulation
+	# Simulation (unit = hour)
 	rng_brownian = np.random.default_rng(seed=seed_brownian)
 	rng_poisson = np.random.default_rng(seed=seed_poisson)
 	rng_uniform = np.random.default_rng(seed=seed_uniform)
 	##
-	signal_noises = rng_brownian.normal(size=time_grids.size)
-	innovation_shocks = rng_brownian.normal(size=time_grids.size)
+	signal_noises = rng_brownian.normal(size=len(time_grids))
+	innovation_shocks = rng_brownian.normal(size=len(time_grids))
 	poisson_i = simulate_poisson_process(start_time, end_time, hour_arrival_ub, rng_poisson)
 	poisson_j = simulate_poisson_process(start_time, end_time, hour_arrival_ub, rng_poisson)
 	uniform_i = rng_uniform.uniform(low=0, high=1, size=len(poisson_i))
 	uniform_j = rng_uniform.uniform(low=0, high=1, size=len(poisson_j))
 
-	#
+	# Solve
 	i_effort_dynamic = np.zeros_like(time_grids, dtype=np.float64)
 	j_effort_dynamic = np.zeros_like(time_grids, dtype=np.float64)
 
-	real_gap_dynamic = np.zeros(shape = time_grids.shape, dtype=np.float64)
+	real_gap_dynamic = np.zeros(shape = len(time_grids), dtype=np.float64)
 	real_gap_t = 0
 
-	perceived_gap_dynamic = np.zeros(shape = time_grids.shape, dtype=np.float64)
+	perceived_gap_dynamic = np.zeros(shape = len(time_grids), dtype=np.float64)
 	perceived_gap_t = 0
 
-	observed_gap_dynamic = np.zeros(shape = time_grids.shape, dtype=np.float64)
+	observed_gap_dynamic = np.zeros(shape = len(time_grids), dtype=np.float64)
 	observed_gap_t = 0
 
 	i_submission_events: list[datetime] = []
 	j_submission_events: list[datetime] = []
 
 	for idx_time, (time, shock, noise) in enumerate(zip(time_grids, innovation_shocks, signal_noises)):
+
 		## equation (7)
 		q_i, q_j = ryvkin_model.get_equilibrium_efforts( \
 			tilde_y=perceived_gap_t,
@@ -89,7 +90,7 @@ def synthetic_data_simulation(
 			prize=theta,
 			c_i=c_i,
 			c_j=c_j,
-			innov_uncert=sigma
+			sigma=sigma
 		)
 		i_effort_dynamic[idx_time] = q_i
 		j_effort_dynamic[idx_time] = q_j
@@ -97,10 +98,12 @@ def synthetic_data_simulation(
 		## tau: equation (8)
 		tensity_i = r * q_i
 		tensity_j = r * q_j
+
 		## y: equation (1)
 		expected_d_gap_t = (q_i - q_j) * time_unit_2f
 		real_gap_t += expected_d_gap_t + sigma * shock
 		real_gap_dynamic[idx_time] = real_gap_t
+
 		## tilde_y: equation (11)
 		kalman_gain = lamb**0.5 * sigma * (observed_gap_t - perceived_gap_t)
 		perceived_gap_t += expected_d_gap_t + kalman_gain * time_unit_2f

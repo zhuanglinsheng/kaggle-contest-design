@@ -295,11 +295,11 @@ The Nash equilibrium is summarized in the following lemma.
 We include a simplified version of the proof in the appendix: 
 
 \begin{lemma}[\citealt{ryvkin2022fight}]
-In the Markov perfect equilibrium, the players’ efforts in state $m_{i(j)}(y, t) :\mathbb{R}\times[0, T)\to\mathbb{R}_+$ are given by
+In the Markov perfect equilibrium, the players’ efforts in state $m_{i(j)}(\tilde{y}_t, t) :\mathbb{R}\times[0, T)\to\mathbb{R}_+$ are given by
 \begin{equation}\label{eq-equilibrium-effort}
-m_{i(j)}(y, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
+m_{i(j)}(\tilde{y}_t, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
 \end{equation}
-where $z = y / (\sigma\sqrt{T-t})$, $\rho(z) = \gamma^{-1}\left(\Phi(z)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and 
+where $z = \tilde{y}_t / (\sigma\sqrt{T-t})$, $\rho(z) = \gamma^{-1}\left(\Phi(z)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and 
 \begin{equation*}
 \gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},\quad u\in(-1,1)
 \end{equation*}
@@ -323,7 +323,7 @@ Moreover, the equilibrium effort $m_{i(j)}$ can be represented to the product of
 
 
 
-\section{Model Estimation}
+\section{Estimation}
 
 In this section, we describe the estimation procedure. 
 We first outline the data generation process, establishing the connection between the empirical data and the theoretical model discussed previously.
@@ -334,7 +334,7 @@ Then, we introduce a structural estimation method using Bayesian framework.
 For each contest on Kaggle, the observable information can be classified into three primary components: 
 
 %% Data: Contest setting
-The first component consists of essential contest details, including the contest duration, prize structure, information disclosure, and other governing rules.
+The first component consists of essential contest details, including the contest duration, prize structure, information disclosure policy, and other governing rules.
 Contrary to the assumptions of our model, a typical contest usually involves multiple teams rather than just two.
 We index the participating teams of the contest by $i\in\{1, 2, ..., n\}$. 
 To fully leverage the potential of the data and establish a connection with our theoretical model, let's assume that each participant perceives a competitor they are playing against at every moment, denoted as $j$. 
@@ -398,18 +398,49 @@ p\left(\{\hat{t}^i_k\}_{k=1}^{N_i} | \tau_i\right) = \exp\left\{-\int_{s\in\math
 \end{equation}
 where $\tau_i$ is defined in (\ref{eq-model-intensity}). 
 Similar to the other player $j$. 
-
-Suppose we sample the leaderboard gap $\hat{y}_t$ at time points $(t_1, t_2, ..., t_N)$, obtaining observations $\{\hat{y}_{t_k}\}^N_{k=1}$. 
-Moreover, we assume that the sampling occurs at fixed time intervals $t_{k+1}-t_k$. 
+Next, suppose we sample the leaderboard gap $\hat{y}_t$ at time points $(t_1, t_2, ..., t_N)$, obtaining observations $\{\hat{y}_{t_k}\}^N_{k=1}$. 
 Let $t_0 = 0$ and suppose the initial gap $y_0$ follows $\mathcal{N}(\mu_0, \sigma_0)$. 
 Then, according to the assumed data-generating process of $\hat{y}_t$ in (\ref{eq-leaderboard-gap}), the corresponding likelihood function is
-\begin{equation}
+\begin{equation}\label{eq-obs_gap-prob}
 \begin{aligned}
 p&\left(\{\hat{y}_{t_k}\}_{k=1}^N | m_i, m_j\right) = 
 \phi\left(y_0 | \mu_0, \sigma_0\right) \times\\
 &\quad\prod_{k=0}^{N-1}\phi\left(\hat{y}_{t_{k+1}}-\hat{y}_{t_k}|\int_{t_k}^{t_{k+1}}m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)ds, \left(\sigma^2+\frac{1}{\lambda}\right)(t_{k+1}-t_k)\right)
 \end{aligned}
 \end{equation}
+where $\hat{y}_{t_0} = y_0$. 
+Here, we assume that time is discretized into uniform intervals of length $\Delta$, so that the integrals in the above equations can be approximated by summations.
+
+To evaluate the likelihood functions (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), we must first compute the equilibrium trajectories of both the perceived output gap $(\tilde{y}_t)$ and the effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t))$, as implied by equations (\ref{eq-equilibrium-effort}) and (\ref{eq-fintered-y-update}). 
+Importantly, the construction of $\tilde{y}$ and the effort functions $m_i$ and $m_j$ depends on the underlying (unobserved) parameters $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\mu_0$ and $\sigma_0$, which are themselves subject to estimation.
+We denote these underlying parameters collectively as $\mathcal{P}$. 
+
+Once these parameters are specified, the equilibrium paths of the perceived output gap $(\tilde{y}_t)$ and the corresponding effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}t, t))$ can be deterministically computed. 
+However, evaluating $m_{i(j)}(\tilde{y}_t, t)$ via equation~(\ref{eq-equilibrium-effort}) requires numerically approximating the inverse function $\gamma^{-1}$, which poses challenges for the use of gradient-based Markov Chain Monte Carlo (MCMC) sampling methods, such as Hamiltonian Monte Carlo (HMC) and the No-U-Turn Sampler (NUTS).
+Hence, we approximate this inverse function with an analytical form\footnote{The parameter $a = 0.856$ is obtained by minimizing the infinity norm of the difference between the numerical inverse of $\gamma(\cdot)$ and the approximation $\frac{2}{\pi} \arctan(a x)$.
+The resulting maximum approximation error, measured in the infinity norm, is approximately 0.019.}:
+\begin{equation}\label{eq-invgamma-approx}
+\gamma^{-1}(x) \approx \frac{2}{\pi}\arctan(0.856 \cdot x)
+\end{equation}
+Figure~\ref{fig-approximation} compares the equilibrium effort function $m_i(\tilde{y}_t, t)$ derived from the approximate analytical form of $\gamma^{-1}$ in equation~(\ref{eq-invgamma-approx}) with that obtained from the numerically accurate solution.
+As illustrated, the approximation closely replicates the true function.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{approx_invgamma.pdf}
+        \caption{Auxiliary Function $\gamma^{-1}(x)$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{approx_equi_effort.pdf}
+        \caption{Equilibrium Effort $m_i(\tilde{y}_t, t)$}
+    \end{subfigure}
+    \caption{Comparison of the Accurate and Approximate Forms ($\theta = 1$, $c_i = c_j = 1$, $\sigma=1$, $\Delta=1/24$)}
+    \label{fig-approximation}
+\end{figure}
 
 
 Unknown parameters to be estimated: 
@@ -429,26 +460,29 @@ Before applying our estimation procedure to real-world contest data, we evaluate
 
 
 A central challenge in generating synthetic data lies in dynamically constructing a point process that conforms to an inhomogeneous Poisson process.
-We first generate candidate submission events according to a homogeneous Poisson process over the whole contest duration, using a fixed high intensity $\tau_i^\star \ge \sup_t \tau_i(t)$, and distribute them uniformly across the interval.
+We first generate candidate submission events according to a homogeneous Poisson process over the whole contest duration, using a fixed high intensity $\tau^\star \ge \sup_t \tau_{i(j)}(t)$.
 Then, we apply the classical thinning procedure \citep{lewis1979simulation} to determine whether each candidate event is accepted.
 
 \begin{algorithm}
 \caption{Synthetic Data Simulation}
 \begin{algorithmic}
 \STATE \textbf{Input:} 
-	$\Delta t$, $T$, $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$
+	$\Delta$, $T$, $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$, $y_0$, $\mu_0$
 \STATE Sample $\{s_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from homogeneous Poisson process $(\tau^\star_{i(j)})$ on $[0, T)$
 \STATE Sample $\{u_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from uniform distribution on $[0, 1]$
-\STATE Sample a series of Brownian motion $(\hat{W}_t)$
-\STATE Initialize $\ell^{i(j)}=0$, $y_0 = 0$, $\hat{y}_0 = 0$, $\tilde{y}_t=0$
+\STATE Sample series of Brownian motions $(W_t)$ and $(B_t)$
+\STATE Initialize $\ell^{i(j)}=0$, $\hat{y}_0 = 0$, $\tilde{y}_t=\mu_0$
 \FOR{$t = 0$ to $T$}
     \STATE $m_{i(j)}(\tilde{y}_t, t)$  $\gets$ (\ref{eq-equilibrium-effort}), $\tau^{i(j)}(t)$ $\gets$ (\ref{eq-model-intensity})
-    \STATE $y_{t+\Delta t} \gets$ (\ref{eq-state-dynamics}); $\tilde{y}_{t+\Delta t}$ $\gets$ (\ref{eq-fintered-y-update})
-    \FOR{$s_{k}^{i(j)} \in [t, t+\Delta t)$} 
+    \hfill \COMMENT{Use $\theta$, $c_{i(j)}$, $\sigma$, $r$, $T$}
+    \STATE $y_{t+\Delta} \gets$ (\ref{eq-state-dynamics}); $\tilde{y}_{t+\Delta}$ $\gets$ (\ref{eq-fintered-y-update})
+    \hfill \COMMENT{Use $\sigma$, $\lambda$, $\Delta$, $W_{t+\Delta}$}
+    \FOR{$s_{k}^{i(j)} \in [t, t+\Delta)$} 
         \IF {$u_k^{i(j)} < \tau_{i(j)}(s_{k}^{i(j)}) / \tau^\star_{i(j)}$}
         	    \STATE $\hat{t}^{i(j)}_{\ell} \gets s_{k}^{i(j)}$; $\ell^{i(j)} \gets \ell^{i(j)}+1$
 	    \hfill \COMMENT{Accept the submission event}
-	    \STATE $\hat{y}_{t+\Delta t} \gets $ (\ref{eq-leaderboard-gap})
+	    \STATE $\hat{y}_{t+\Delta} \gets $ (\ref{eq-leaderboard-gap})
+	    \hfill \COMMENT{Use $\sigma$, $\lambda$, $B_{t+\Delta}$}
         \ENDIF
     \ENDFOR
 \ENDFOR

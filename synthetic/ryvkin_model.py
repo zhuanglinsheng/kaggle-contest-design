@@ -19,7 +19,7 @@ def aux_fn_gamma(u: float) -> float:
 	elif u == 1:
 		return math.inf
 	else:
-		return u / (1 - u**2) + math.log((1 + u) / (1 - u)) / 2
+		return u / (1 - u**2) + math.atanh(u)
 
 def aux_fn_invgamma(z: float) -> float:
 	"""
@@ -31,7 +31,10 @@ def aux_fn_invgamma(z: float) -> float:
 		print(sol)
 	return sol.root
 
-def aux_fn_rho(z: float, rho_i: float, rho_j: float) -> float:
+def aux_fn_invgamma_approx(z: float) -> float:
+	return np.arctan(0.856 * z) * 2 / np.pi
+
+def aux_fn_rho(z: float, rho_i: float, rho_j: float, approx: bool) -> float:
 	gamma_i = aux_fn_gamma(rho_i)
 	gamma_j = aux_fn_gamma(rho_j)
 
@@ -56,7 +59,10 @@ def aux_fn_rho(z: float, rho_i: float, rho_j: float) -> float:
 				else:            # gamma_i is finite, gamma_j = -inf
 					return -1
 	loc:float = stats.norm.cdf(z) * (gamma_i + gamma_j) - gamma_j  # type:ignore
-	return aux_fn_invgamma(loc)
+	if not approx:
+		return aux_fn_invgamma(loc)
+	else:
+		return aux_fn_invgamma_approx(loc)
 
 def get_equilibrium_efforts(
 		tilde_y: float,
@@ -64,24 +70,27 @@ def get_equilibrium_efforts(
 		T: datetime,
 		*,
 		prize: float,
-		c_i: float,
-		c_j: float,
-		innov_uncert: float
+		c_i: float,    # daily cost
+		c_j: float,    # daily cost
+		sigma: float,  # daily innovation shock
+		approx: bool = False
 ) -> tuple[float, float]:
 	"""Implementing the Equilibrium
 	"""
 	remaining_hours = (T - t).total_seconds() / 3600
-	w_i = prize / innov_uncert**2 / c_i
-	w_j = prize / innov_uncert**2 / c_j
+	remaining_days = remaining_hours / 24  # days
+	w_i = prize / sigma**2 / c_i
+	w_j = prize / sigma**2 / c_j
 	rho_i = (math.exp(w_i) + math.exp(-w_j) - 2) / (math.exp(w_i) - math.exp(-w_j))
 	rho_j = (math.exp(w_j) + math.exp(-w_i) - 2) / (math.exp(w_j) - math.exp(-w_i))
-	z = tilde_y / innov_uncert / remaining_hours**0.5
-	rho_z = aux_fn_rho(z, rho_i, rho_j)
+	tilde_y_stderr = sigma * remaining_days**0.5
+	z = tilde_y / tilde_y_stderr
+	rho_z = aux_fn_rho(z, rho_i, rho_j, approx)
 	gamma_i = aux_fn_gamma(rho_i)
 	gamma_j = aux_fn_gamma(rho_j)
 	density: float = stats.norm.pdf(
-		tilde_y, loc=0, scale=innov_uncert * remaining_hours)  # type: ignore
-	emplify = innov_uncert**2 / 2 * (gamma_i + gamma_j) * (1 - rho_z**2)
+		tilde_y, loc=0, scale=tilde_y_stderr)  # type: ignore
+	emplify = sigma**2 / 2 * (gamma_i + gamma_j) * (1 - rho_z**2)
 	K_i = emplify * (1 + rho_z)
 	K_j = emplify * (1 - rho_z)
 	q_i = density * K_i
@@ -112,7 +121,7 @@ def solve_equailibrium_path(
 		# calculate q_i, q_j
 		q_i, q_j = get_equilibrium_efforts(
 			tilde_y, time, end_time,
-			prize=prize, c_i=c_i, c_j=c_j, innov_uncert=innov_uncert
+			prize=prize, c_i=c_i, c_j=c_j, sigma=innov_uncert
 		)
 		perceived_gap_dym.append(tilde_y)
 		effort_i_dym.append(q_i)
