@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import numpy as np
 
 # local
-import ryvkin_model
+import ryvkin.ryvkin_model as ryvkin_model
 
 
 def simulate_poisson_process(

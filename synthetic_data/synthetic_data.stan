@@ -65,7 +65,7 @@ model {
 
 	/* likelihood */
 	target += sum(log(intensity_i[hat_t_i_loc])) - sum(intensity_i) * Delta2f;
-	//target += sum(log(intensity_j[hat_t_j_loc])) - sum(intensity_j) * Delta2f;
-	target += normal_lpdf(delta_hat_y |
-			effort_gap * Delta2f, sqrt((pow(sigma, 2) + 1 / lambda) * Delta2f));
+	target += sum(log(intensity_j[hat_t_j_loc])) - sum(intensity_j) * Delta2f;
+	//target += normal_lpdf(delta_hat_y |
+	//		effort_gap * Delta2f, sqrt((pow(sigma, 2) + 1 / lambda) * Delta2f));
 }
