@@ -2,33 +2,21 @@
 """
 
 # std library
+import sys
+import os
 from datetime import datetime, timedelta
 
 # third-party
 import numpy as np
 
 # local
-import ryvkin.ryvkin_model as ryvkin_model
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
 
+from ryvkin import ryvkin_model
+from utils import simulate_poisson_process
 
-def simulate_poisson_process(
-		start_time: datetime,
-		end_time: datetime,
-		hour_arrival_rate: float,
-		rng: np.random.Generator
-) -> list[datetime]:
-	"""
-	"""
-	events: list[datetime] = []
-	current_t = start_time
-	while True:
-		hour_duration = rng.exponential(scale=1 / hour_arrival_rate)
-		current_t += timedelta(hours=hour_duration)
-		if current_t < end_time:
-			events.append(current_t)
-		else:
-			break
-	return events
 
 def synthetic_data_simulation(
 		theta: float,
