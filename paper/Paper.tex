@@ -188,7 +188,7 @@
 This paper focuses on the two players innovation contest with a continuous time  where the players’ relative position is public information throughout the game.
 This is closely related to tug-or-war contest, which, to our knowledge, was first formally given by \citet{Harris1987Race} as a one-dimensional simplification of the multi-stage R\&D race. 
 The output processes are model by Brownian motions drifted with effort inputs, which is followed by \cite{budd1993model} who model the state of a dynamic competition of two innovative duopoly firms by a Brownian motion drifted by the effort gap, and solve the equilibrium approximately. 
-Furthermore, \citet{Moscarini2007Contest} model the tug-of-war state as the gap of the two outputs directly, and draw an analytical equilibrium of the pure strategies. 
+Furthermore, \citet{Moscarini2011Contest} model the tug-of-war state as the gap of the two outputs directly, and draw an analytical equilibrium of the pure strategies. 
 
 ...
 
@@ -416,7 +416,7 @@ Importantly, the construction of $\tilde{y}$ and the effort functions $m_i$ and 
 We denote these underlying parameters collectively as $\mathcal{P}$. 
 
 Once these parameters are specified, the equilibrium paths of the perceived output gap $(\tilde{y}_t)$ and the corresponding effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}t, t))$ can be deterministically computed. 
-However, evaluating $m_{i(j)}(\tilde{y}_t, t)$ via equation~(\ref{eq-equilibrium-effort}) requires numerically approximating the inverse function $\gamma^{-1}$, which poses challenges for the use of gradient-based Markov Chain Monte Carlo (MCMC) sampling methods, such as Hamiltonian Monte Carlo (HMC) and the No-U-Turn Sampler (NUTS).
+However, evaluating $m_{i(j)}(\tilde{y}_t, t)$ via equation~(\ref{eq-equilibrium-effort}) requires numerically approximating the inverse function $\gamma^{-1}$, which poses challenges for the use of gradient-based Markov Chain Monte Carlo (MCMC) sampling methods, such as Hamiltonian Monte Carlo (HMC, \citealt{neal1996bayesian}, \citealt{neal2011mcmc}, \citealt{betancourt2017conceptual}) and the No-U-Turn Sampler (NUTS, \citealt{hoffman2014NUTS}).
 Hence, we approximate this inverse function with an analytical form\footnote{The parameter $a = 0.856$ is obtained by minimizing the infinity norm of the difference between the numerical inverse of $\gamma(\cdot)$ and the approximation $\frac{2}{\pi} \arctan(a x)$.
 The resulting maximum approximation error, measured in the infinity norm, is approximately 0.019.}:
 \begin{equation}\label{eq-invgamma-approx}
