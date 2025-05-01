@@ -20,7 +20,7 @@ functions {
 	}
 
 	real fn_rho(real z, real gamma_rho_i, real gamma_rho_j) {
-		real loc = normal_cdf(z| 0, 1) * (gamma_rho_i + gamma_rho_j) - gamma_rho_j;
+		real loc = normal_cdf(z | 0, 1) * (gamma_rho_i + gamma_rho_j) - gamma_rho_j;
 		return fn_invgamma(loc);
 	}
 

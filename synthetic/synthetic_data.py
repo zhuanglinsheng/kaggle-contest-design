@@ -36,12 +36,12 @@ def synthetic_data_simulation(
 		c_j: float,    # daily cost
 		sigma: float,  # daily innovation risk
 		lamb: float,
-		r: float,
+		intensity_effort_ratio: float,
 		hour_arrival_ub: float,
 		start_time: datetime,
 		end_time: datetime,
 		time_unit: timedelta = timedelta(hours=1),
-		time_unit_2f: float = 1/24,
+		time_unit_2f: float = 1/24,  # transform `time_unit` to daily base
 		*,
 		seed_brownian: int = 37,
 		seed_poisson: int = 1234,
@@ -56,7 +56,7 @@ def synthetic_data_simulation(
 	rng_brownian = np.random.default_rng(seed=seed_brownian)
 	rng_poisson = np.random.default_rng(seed=seed_poisson)
 	rng_uniform = np.random.default_rng(seed=seed_uniform)
-	##
+
 	signal_noises = rng_brownian.normal(size=len(time_grids))
 	innovation_shocks = rng_brownian.normal(size=len(time_grids))
 	poisson_i = simulate_poisson_process(start_time, end_time, hour_arrival_ub, rng_poisson)
@@ -64,7 +64,7 @@ def synthetic_data_simulation(
 	uniform_i = rng_uniform.uniform(low=0, high=1, size=len(poisson_i))
 	uniform_j = rng_uniform.uniform(low=0, high=1, size=len(poisson_j))
 
-	# Solve
+	# Solve equilibrium paths
 	i_effort_dynamic = np.zeros_like(time_grids, dtype=np.float64)
 	j_effort_dynamic = np.zeros_like(time_grids, dtype=np.float64)
 
@@ -92,12 +92,12 @@ def synthetic_data_simulation(
 			c_j=c_j,
 			sigma=sigma
 		)
-		i_effort_dynamic[idx_time] = q_i
-		j_effort_dynamic[idx_time] = q_j
+		i_effort_dynamic[idx_time] = q_i  # realtime daily effort
+		j_effort_dynamic[idx_time] = q_j  # realtime daily effort
 
 		## tau: equation (8)
-		tensity_i = r * q_i
-		tensity_j = r * q_j
+		intensity_i = intensity_effort_ratio * q_i  # realtime daily intensity
+		intensity_j = intensity_effort_ratio * q_j  # realtime daily intensity
 
 		## y: equation (1)
 		expected_d_gap_t = (q_i - q_j) * time_unit_2f
@@ -110,18 +110,16 @@ def synthetic_data_simulation(
 		perceived_gap_dynamic[idx_time] = perceived_gap_t
 
 		## Thinning:
-		poisson_i_select = [(t, u) for t, u in zip(poisson_i, uniform_i) if time <= t <= time + time_unit]
-		poisson_j_select = [(t, u) for t, u in zip(poisson_j, uniform_j) if time <= t <= time + time_unit]
-		for t_i, u_i in poisson_i_select:
-			if u_i < tensity_i / hour_arrival_ub:
-				#print('>>>(i)', u_i, tensity_i, hour_arrival_ub)
+		poisson_i_unthin = [(t, u) for t, u in zip(poisson_i, uniform_i) if time <= t <= time + time_unit]
+		poisson_j_unthin = [(t, u) for t, u in zip(poisson_j, uniform_j) if time <= t <= time + time_unit]
+		for t_i, u_i in poisson_i_unthin:
+			if u_i < intensity_i / 24 / hour_arrival_ub:
 				# submission events
 				i_submission_events.append(t_i)
 				# update public leaderboard: equation (10)
 				observed_gap_t = real_gap_dynamic[idx_time] + noise / lamb**0.5
-		for t_j, u_j in poisson_j_select:
-			if u_j < tensity_j / hour_arrival_ub:
-				#print('>>>(j)', u_j, tensity_j, hour_arrival_ub)
+		for t_j, u_j in poisson_j_unthin:
+			if u_j < intensity_j / 24 / hour_arrival_ub:
 				# submission events
 				j_submission_events.append(t_j)
 				# update public leaderboard: equation (10)

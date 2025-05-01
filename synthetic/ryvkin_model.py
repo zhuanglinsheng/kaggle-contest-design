@@ -1,4 +1,4 @@
-"""
+"""c_i=1e-08, c_j=1e-08, sigma=6.49612e+38, lambda=1e-08, r=4.43168e+100
 """
 
 # std library
@@ -73,7 +73,8 @@ def get_equilibrium_efforts(
 		c_i: float,    # daily cost
 		c_j: float,    # daily cost
 		sigma: float,  # daily innovation shock
-		approx: bool = False
+		approx: bool = False,
+		display: bool = False
 ) -> tuple[float, float]:
 	"""Implementing the Equilibrium
 	"""
@@ -95,6 +96,8 @@ def get_equilibrium_efforts(
 	K_j = emplify * (1 - rho_z)
 	q_i = density * K_i
 	q_j = density * K_j
+	if display:
+		print(w_i, w_j, rho_i, rho_j, gamma_i, gamma_j, z, rho_z, emplify, K_i, K_j)
 	return q_i, q_j
 
 def solve_equailibrium_path(

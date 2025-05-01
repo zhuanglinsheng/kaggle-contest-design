@@ -13,12 +13,22 @@ data {
 	vector[T-1] hat_y;  // t = 2 : T
 }
 
+transformed data {
+	vector[T-1] delta_hat_y;
+	delta_hat_y[1] = hat_y[1];
+	for (t in 2:T-1) {
+		delta_hat_y[t] = hat_y[t] - hat_y[t-1];
+	}
+
+	real<lower=1e-1, upper=5> c_i = 0.15;
+	real<lower=1e-1, upper=5> c_j = 0.15;
+	real<lower=5e-1, upper=10> sigma = 1;
+	real<lower=1e-6, upper=1000> lambda = 1;
+}
+
 parameters {
-	real<lower=1e-8> c_i;
-	real<lower=1e-8> c_j;
-	real<lower=1e-8> sigma;
-	real<lower=1e-8> lambda;
-	real<lower=1e-8> r;
+
+	real<lower=1e-6, upper=1> r;          // 0.0 < r      < 1
 }
 
 transformed parameters {
@@ -40,25 +50,22 @@ transformed parameters {
 	}
 	m_i[T] = 0;
 	m_j[T] = 0;
-
 	vector[T-1] effort_gap = m_i[1:T-1] - m_j[1:T-1];
-	vector[T-1] delta_hat_y;
-	delta_hat_y[1] = hat_y[1];
-	for (t in 2:T-1) {
-		delta_hat_y[t] = hat_y[t] - hat_y[t-1];
-	}
+	vector[T-1] intensity_i = m_i[1:T-1] * r;
+	vector[T-1] intensity_j = m_j[1:T-1] * r;
 }
 
 model {
-	c_i ~ normal(0, 1);
-	c_j ~ normal(0, 1);
-	sigma ~ normal(0, 1);
-	lambda ~ normal(0, 1);
-	r ~ normal(0, 1);
+	/* priors */
+	//c_i ~ normal(0.1, 1);     // truncated normal
+	//c_j ~ normal(0.1, 1);     // truncated normal
+	//sigma ~ normal(0.5, 1);   // truncated normal
+	//lambda ~ normal(0.1, 1);  // truncated normal
+	r ~ normal(0.1, 1);       // truncated normal
 
-	target += sum(log(r * m_i[hat_t_i_loc])) - r * sum(m_i) * Delta2f;
-	target += sum(log(r * m_j[hat_t_j_loc])) - r * sum(m_j) * Delta2f;
+	/* likelihood */
+	target += sum(log(intensity_i[hat_t_i_loc])) - sum(intensity_i) * Delta2f;
+	//target += sum(log(intensity_j[hat_t_j_loc])) - sum(intensity_j) * Delta2f;
 	target += normal_lpdf(delta_hat_y |
-			effort_gap * Delta2f,
-			sqrt((pow(sigma, 2) + 1 / lambda) * Delta2f));
+			effort_gap * Delta2f, sqrt((pow(sigma, 2) + 1 / lambda) * Delta2f));
 }
