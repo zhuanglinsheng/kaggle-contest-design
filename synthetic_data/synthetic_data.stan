@@ -1,71 +1,133 @@
 #include "model_effort.stan"
 
 data {
+	///*
 	real<lower=0> theta;
-	int<lower=0> T;
 	real<lower=0> Delta2f;
-	int<lower=0> Ni;
-	int<lower=0> Nj;
-	array[Ni] int hat_t_i_loc;
-	array[Nj] int hat_t_j_loc;
-	//vector[Ni] hat_t_i;
-	//vector[Nj] hat_t_j;
-	vector[T-1] hat_y;  // t = 2 : T
+	//*/
+	int<lower=0> N_Delta;
+	///*
+	vector[N_Delta] efforts_i;
+	vector[N_Delta] efforts_j;
+	//*/
+
+	// submission times
+	int<lower=0> Ni;  // number of submissions of player i
+	int<lower=0> Nj;  // number of submissions of player j
+	vector<lower=0, upper=N_Delta>[Ni] hat_t_i;  // submission times of player i
+	vector<lower=0, upper=N_Delta>[Nj] hat_t_j;  // submission times of player j
+
+	// real-time leaderboard
+	///*
+	vector[N_Delta + 1] hat_y;  // starts at `t = 0`, ends at `t = deadline`
+	//*/
 }
 
 transformed data {
-	vector[T-1] delta_hat_y;
-	delta_hat_y[1] = hat_y[1];
-	for (t in 2:T-1) {
-		delta_hat_y[t] = hat_y[t] - hat_y[t-1];
+	// for submissions (player i)
+	array[Ni] int<lower=0, upper=N_Delta - 1> hat_t_i_idx;
+	for (ii in 1 : Ni) {
+		hat_t_i_idx[ii] = to_int(hat_t_i[ii]) + 1;
 	}
+	/*
+	array[Ni] int<lower=0, upper=N_Delta - 1> hat_t_i_floor_plus1;
+	array[Ni] int<lower=1, upper=N_Delta    > hat_t_i_ceil_plus1;
+	vector<lower=0, upper=1>[Ni] events_i_ratio;
+	for (ii in 1 : Ni) {
+		hat_t_i_floor_plus1[ii] = to_int(hat_t_i[ii]) + 1;
+		hat_t_i_ceil_plus1[ii] = hat_t_i_floor_plus1[ii] + 1;
+		events_i_ratio[ii] = hat_t_i[ii] + 1 - hat_t_i_floor_plus1[ii];
+	}
+	*/
 
-	real<lower=1e-1, upper=5> c_i = 0.15;
-	real<lower=1e-1, upper=5> c_j = 0.15;
-	real<lower=5e-1, upper=10> sigma = 1;
-	real<lower=1e-6, upper=1000> lambda = 1;
+	// for submissions (player j)
+	array[Nj] int<lower=0, upper=N_Delta - 1> hat_t_j_idx;
+	for (jj in 1 : Nj) {
+		hat_t_j_idx[jj] = to_int(hat_t_j[jj]) + 1;
+	}
+	/*
+	array[Nj] int<lower=0, upper=N_Delta - 1> hat_t_j_floor_plus1;
+	array[Nj] int<lower=1, upper=N_Delta    > hat_t_j_ceil_plus1;
+	vector<lower=0, upper=1>[Nj] events_j_ratio;
+	for (ii in 1 : Nj) {
+		hat_t_j_floor_plus1[ii] = to_int(hat_t_j[ii]) + 1;
+		hat_t_j_ceil_plus1[ii] = hat_t_j_floor_plus1[ii] + 1;
+		events_j_ratio[ii] = hat_t_j[ii] + 1 - hat_t_j_floor_plus1[ii];
+	}
+	*/
+
+	// for leaderboard
+	///*
+	vector[N_Delta] delta_hat_y;  // starts at first Delta, ends at last Delta
+	for (i in 1 : N_Delta) {
+		delta_hat_y[i] = hat_y[i + 1] - hat_y[i];
+	}
+	//*/
+	// for debug
+	//real<lower=5e-1, upper=10> sigma = 5.0;
+	real<lower=1e-6, upper=1000>  r = 50;
 }
 
 parameters {
-
-	real<lower=1e-6, upper=1> r;          // 0.0 < r      < 1
+	real<lower=5e-1, upper=5> c_i;
+	real<lower=5e-1, upper=5> c_j;
+	real<lower=5e-1, upper=10> sigma;
+	real<lower=1e-6, upper=100> lambda;
 }
 
 transformed parameters {
-	vector<lower=0>[T] m_i;
-	vector<lower=0>[T] m_j;
-	vector[T] tilde_y;
+	// calculate m_i, m_j and tilde_y
+	///*
+	vector<lower=0>[N_Delta] m_i;  // starts at t = 0, ends at t = deadline
+	vector<lower=0>[N_Delta] m_j;  // starts at t = 0, ends at t = deadline
+	vector[N_Delta + 1] tilde_y;       // starts at t = 0, ends at t = deadline
 	tilde_y[1] = 0;
-	for (t in 1:T-1) {
-		vector[2] ms = fn_efforts(
-				tilde_y[t],
-				t * Delta2f,  // t is index of hour, transform to day
-				T * Delta2f,  // T is index of hour, transform to day
+
+	for (i in 1 : N_Delta) {
+		vector[2] ms = fn_efforts(  // get `daily` effort rate
+				tilde_y[i],
+				(i - 1) * Delta2f,  // time = i - 1, transform to float
+				N_Delta * Delta2f,  // deadline = T, transform to float
 				theta, sigma, c_i, c_j
 		);
-		m_i[t] = ms[1];
-		m_j[t] = ms[2];
-		real kalman_gain = sqrt(lambda) * sigma * (hat_y[t] - tilde_y[t]);
-		tilde_y[t+1] = tilde_y[t] + (ms[1] - ms[2] + kalman_gain) * Delta2f;
+		m_i[i] = ms[1];
+		m_j[i] = ms[2];
+		real kalman_gain = sqrt(lambda) * sigma * (hat_y[i] - tilde_y[i]);
+		tilde_y[i + 1] = tilde_y[i] + (ms[1] - ms[2] + kalman_gain) * Delta2f;
 	}
-	m_i[T] = 0;
-	m_j[T] = 0;
-	vector[T-1] effort_gap = m_i[1:T-1] - m_j[1:T-1];
-	vector[T-1] intensity_i = m_i[1:T-1] * r;
-	vector[T-1] intensity_j = m_j[1:T-1] * r;
+	//*/
+
+	// intensity (player i)
+	vector<lower=0>[N_Delta] intensity_i = r * m_i / 24.0;
+	vector<lower=0>[Ni] intensity_i_at_events = intensity_i[hat_t_i_idx];
+	/*
+	vector<lower=0>[N_Delta + 1] intensity_i = r * m_i / 24;
+	vector<lower=0>[Ni] intensity_i_at_events_floor = intensity_i[hat_t_i_floor_plus1];
+	vector<lower=0>[Ni] intensity_i_at_events_ceil = intensity_i[hat_t_i_ceil_plus1];
+	vector<lower=0>[Ni] intensity_i_at_events =
+		intensity_i_at_events_floor .* (1 - events_i_ratio) +
+		intensity_i_at_events_ceil  .* events_i_ratio;
+	*/
+	// intensity (player j)
+	vector<lower=0>[N_Delta] intensity_j = r * m_j / 24.0;
+	vector<lower=0>[Nj] intensity_j_at_events = intensity_j[hat_t_j_idx];
 }
 
 model {
 	/* priors */
-	//c_i ~ normal(0.1, 1);     // truncated normal
-	//c_j ~ normal(0.1, 1);     // truncated normal
-	//sigma ~ normal(0.5, 1);   // truncated normal
-	//lambda ~ normal(0.1, 1);  // truncated normal
-	r ~ normal(0.1, 1);       // truncated normal
+	c_i ~ normal(1, 1);     // truncated normal
+	c_j ~ normal(1, 1);     // truncated normal
+	sigma ~ normal(1, 1);   // truncated normal
+	lambda ~ normal(0.5, 1);  // truncated normal
+	r ~ normal(10, 100);       // truncated normal
 
 	/* likelihood */
-	target += sum(log(intensity_i[hat_t_i_loc])) - sum(intensity_i) * Delta2f;
-	target += sum(log(intensity_j[hat_t_j_loc])) - sum(intensity_j) * Delta2f;
-	//target += normal_lpdf(delta_hat_y |
-	//		effort_gap * Delta2f, sqrt((pow(sigma, 2) + 1 / lambda) * Delta2f));
+	if (Ni > 1) {
+		target += sum(log(intensity_i_at_events)) - sum(intensity_i);
+	}
+	if (Nj > 1) {
+		target += sum(log(intensity_j_at_events)) - sum(intensity_j);
+	}
+	target += normal_lpdf(delta_hat_y |
+			(m_i - m_j) * Delta2f, sqrt((pow(sigma, 2) + 1 / lambda) * Delta2f));
 }

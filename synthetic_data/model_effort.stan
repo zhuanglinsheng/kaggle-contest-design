@@ -53,6 +53,6 @@ functions {
 		vector[2] efforts;
 		efforts[1] = m_i;
 		efforts[2] = m_j;
-		return efforts;
+		return efforts;  // daily effort rate
 	}
 }
