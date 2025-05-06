@@ -364,9 +364,9 @@ dZ_t = \hat{y}_tdt
 As indicated in (\ref{signal}), we assume that $\hat{y}_t$ represents a noisy signal, with its precision governed by $\lambda$.
 Moreover, according to (\ref{eq-state-dynamics}), the observed real-time gap $\hat{y}_t$ on leaderboard evolves as 
 \begin{equation}\label{eq-leaderboard-gap}
-d\hat{y}_t = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sigma dW_{t} + \frac{dB_t}{\sqrt{\lambda}}
+\hat{y}_t = \int^t_0\left[m_i(\tilde{y}_t, s) - m_j(\tilde{y}_t, s)\right]ds + \sigma W_{t} + \frac{dB_t}{dt\sqrt{\lambda}}
 \end{equation}
-where the term $\sigma dW_t$ captures the innovation shock, and $dB_t/\sqrt{\lambda}$ represents the signal noise.
+where the term $\sigma W_t$ captures the innovation shock, and $dB_t/(dt\sqrt{\lambda})$ represents the signal noise.
 It is important to recognize that the generation of $\hat{y}_t$ is inherently tied to the players’ strategic interactions, as it depends on their estimates of the underlying state, $\tilde{y}_t$. 
 In turn, $\tilde{y}_t$ evolves dynamically based on $\hat{y}_t$, since players continually update their beliefs in response to observed data. 
 As a result, the generation of $\hat{y}_t$ and $\tilde{y}_t$ proceeds jointly.
@@ -405,7 +405,7 @@ Then, according to the assumed data-generating process of $\hat{y}_t$ in (\ref{e
 \begin{aligned}
 p&\left(\{\hat{y}_{t_k}\}_{k=1}^N | m_i, m_j\right) = 
 \phi\left(y_0 | \mu_0, \sigma_0\right) \times\\
-&\quad\prod_{k=0}^{N-1}\phi\left(\hat{y}_{t_{k+1}}-\hat{y}_{t_k}|\int_{t_k}^{t_{k+1}}m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)ds, \left(\sigma^2+\frac{1}{\lambda}\right)(t_{k+1}-t_k)\right)
+&\quad\prod_{k=0}^{N-1}\phi\left(\hat{y}_{t_{k+1}}-\hat{y}_{t_k}|\int_{t_k}^{t_{k+1}}m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)ds, \sigma^2(t_{k+1}-t_k)+\frac{2}{\Delta\lambda}\right)
 \end{aligned}
 \end{equation}
 where $\hat{y}_{t_0} = y_0$. 
@@ -417,11 +417,11 @@ We denote these underlying parameters collectively as $\mathcal{P}$.
 
 Once these parameters are specified, the equilibrium paths of the perceived output gap $(\tilde{y}_t)$ and the corresponding effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}t, t))$ can be deterministically computed. 
 However, evaluating $m_{i(j)}(\tilde{y}_t, t)$ via equation~(\ref{eq-equilibrium-effort}) requires numerically approximating the inverse function $\gamma^{-1}$, which poses challenges for the use of gradient-based Markov Chain Monte Carlo (MCMC) sampling methods, such as Hamiltonian Monte Carlo (HMC, \citealt{neal1996bayesian}, \citealt{neal2011mcmc}, \citealt{betancourt2017conceptual}) and the No-U-Turn Sampler (NUTS, \citealt{hoffman2014NUTS}).
-Hence, we approximate this inverse function with an analytical form\footnote{The parameter $a = 0.856$ is obtained by minimizing the infinity norm of the difference between the numerical inverse of $\gamma(\cdot)$ and the approximation $\frac{2}{\pi} \arctan(a x)$.
-The resulting maximum approximation error, measured in the infinity norm, is approximately 0.019.}:
+Hence, we approximate this inverse function with an analytical form:
 \begin{equation}\label{eq-invgamma-approx}
-\gamma^{-1}(x) \approx \frac{2}{\pi}\arctan(0.856 \cdot x)
+\gamma^{-1}(x) \approx \frac{2}{\pi}\arctan(a \cdot x)
 \end{equation}
+where $a$ is around 0.947 by minimizing the 1-norm of the difference between the numerical inverse of $\gamma(\cdot)$ and the approximation $\frac{2}{\pi} \arctan(a x).$\footnote{Under infinity norm, the parameter $a = 0.856$; under 2-norm, the parameter $a=0.895$.}
 Figure~\ref{fig-approximation} compares the equilibrium effort function $m_i(\tilde{y}_t, t)$ derived from the approximate analytical form of $\gamma^{-1}$ in equation~(\ref{eq-invgamma-approx}) with that obtained from the numerically accurate solution.
 As illustrated, the approximation closely replicates the true function.
 
