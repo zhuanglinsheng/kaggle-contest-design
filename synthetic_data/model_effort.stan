@@ -2,6 +2,7 @@
 functions {
 
 	/* merge */
+
 	array[] int merge_ascending_arrays(array[] int arr1, array[] int arr2) {
 		int size1 = num_elements(arr1);
 		int size2 = num_elements(arr2);

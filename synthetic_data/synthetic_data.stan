@@ -1,4 +1,3 @@
-//#include "merge_array.stan"
 #include "model_effort.stan"
 
 data {
