@@ -3,6 +3,7 @@
 data {
 	///*
 	real<lower=0> theta;
+	real<lower=0> ratio;
 	real<lower=0> Delta2f;
 	//*/
 	int<lower=0> N_Delta;
@@ -57,11 +58,22 @@ transformed data {
 	// for leaderboard
 	///*
 	// merge submission times
-	array[Ni + Nj] int<lower=1, upper=N_Delta> events_idx = merge_ascending_arrays(hat_t_i_timeidx, hat_t_j_timeidx);
-	vector[Ni + Nj] delta_hat_y;
+	array[Ni + Nj] int<lower=1, upper=N_Delta> full_events_idx =
+					merge_ascending_arrays(hat_t_i_timeidx, hat_t_j_timeidx);
+	array[Ni + Nj] int<lower=1, upper=N_Delta> events_idx;
+	events_idx[1] = full_events_idx[1];
+	int N_events = 1;
+	for (i in 2 : Ni + Nj) {
+		if (full_events_idx[i] > full_events_idx[i-1]) {
+			N_events += 1;
+			events_idx[N_events] = full_events_idx[i];
+		}
+	}
+
+	vector[N_events] delta_hat_y;
 	delta_hat_y[1] = hat_y[1 + events_idx[1]] - hat_y[1];
 	// hat_y[1] = \hat{y}_0 = 0
-	for (ii in 2 : Ni + Nj) {
+	for (ii in 2 : N_events) {
 		delta_hat_y[ii] = hat_y[events_idx[ii]] - hat_y[events_idx[ii] - 1];
 	}
 	//print("events_idx  = ", events_idx);
@@ -69,16 +81,19 @@ transformed data {
 	// */
 
 	// for debug
-	//real<lower=5e-1, upper=10> sigma = 5.0;
-
+	real<lower=5e-1, upper=5>     c_i = 1.2;
+	real<lower=5e-1, upper=5>     c_j = 1.5;
+	real<lower=5e-1, upper=10>    sigma = 2.0;
+	//real<lower=1e-6, upper=10>    lambda = 1.0;
+	//real<lower=1e-6, upper=1000>  r = 15.0;
 }
 
 parameters {
-	real<lower=5e-1, upper=5>     c_i;
-	real<lower=5e-1, upper=5>     c_j;
-	real<lower=5e-1, upper=10>    sigma;
+	//real<lower=5e-1, upper=5>     c_i;
+	//real<lower=5e-1, upper=5>     c_j;
+	//real<lower=5e-1, upper=10>    sigma;
 	real<lower=1e-6, upper=10>    lambda;
-	real<lower=1e-6, upper=1000>  r;
+	//real<lower=1e-6, upper=1000>  r;
 }
 
 transformed parameters {
@@ -104,50 +119,41 @@ transformed parameters {
 	//*/
 
 	// intensity (player i)
-	vector<lower=0>[N_Delta] intensity_i = r * m_i / 24.0;
+	vector<lower=0>[N_Delta] intensity_i = ratio * m_i / 24.0;
 	vector<lower=0>[Ni] intensity_i_at_events = intensity_i[hat_t_i_timeidx];
-	/*
-	vector<lower=0>[N_Delta + 1] intensity_i = r * m_i / 24;
-	vector<lower=0>[Ni] intensity_i_at_events_floor = intensity_i[hat_t_i_floor_plus1];
-	vector<lower=0>[Ni] intensity_i_at_events_ceil = intensity_i[hat_t_i_ceil_plus1];
-	vector<lower=0>[Ni] intensity_i_at_events =
-		intensity_i_at_events_floor .* (1 - events_i_ratio) +
-		intensity_i_at_events_ceil  .* events_i_ratio;
-	*/
+
 	// intensity (player j)
-	vector<lower=0>[N_Delta] intensity_j = r * m_j / 24.0;
+	vector<lower=0>[N_Delta] intensity_j = ratio * m_j / 24.0;
 	vector<lower=0>[Nj] intensity_j_at_events = intensity_j[hat_t_j_timeidx];
 
 	// delta_hat_y: mean and variance
 	vector[N_Delta] effort_gap = m_i - m_j;
-	vector[Ni + Nj] delta_hat_y_mean;
-	vector[Ni + Nj] delta_hat_y_duration;
+	vector[N_events] delta_hat_y_mean;
+	vector[N_events] delta_hat_y_duration;
+	vector[N_events] delta_hat_y_std;
 	delta_hat_y_mean[1] = sum(effort_gap[:events_idx[1]]) * Delta2f;
 	delta_hat_y_duration[1] = events_idx[1] * Delta2f;
 
-	for (i in 2 : Ni + Nj) {
+	for (i in 2 : N_events) {
 		int time1 = events_idx[i - 1];
 		int time2 = events_idx[i];
 		delta_hat_y_mean[i] = sum(effort_gap[time1 : time2]) * Delta2f;
 		delta_hat_y_duration[i] = (time2 - time1) * Delta2f;
-		if (delta_hat_y_duration[i] < 0) {
-			print("Error: Element ", i, "--", delta_hat_y_duration[i], " is negative.");
-			reject("Vector contains negative elements");
-		}
-		else if (delta_hat_y_duration[i] < 1e-6) {
-			delta_hat_y_duration[i] = 1e-6;
+		if (delta_hat_y_duration[i] <= 0) {
+			print("Error: Element ", i, "--", delta_hat_y_duration[i], " is nonpositive.");
+			reject("Vector contains nonpositive elements");
 		}
 	}
-	vector[Ni + Nj] delta_hat_y_std = sqrt(delta_hat_y_duration * pow(sigma, 2) + 2/(Delta2f * lambda));
+	delta_hat_y_std = sqrt(delta_hat_y_duration * pow(sigma, 2) + 2 / (Delta2f * lambda));
 }
 
 model {
 	/* priors */
-	c_i ~ normal(1, 1);        // truncated normal
-	c_j ~ normal(1, 1);        // truncated normal
-	sigma ~ normal(0.5, 1);    // truncated normal
-	lambda ~ normal(0.5, 1);   // truncated normal
-	r ~ normal(10, 200);       // truncated normal
+	//c_i ~ normal(1.2, 5);        // truncated normal
+	//c_j ~ normal(1.5, 5);        // truncated normal
+	//sigma ~ normal(2.0, 5);    // truncated normal
+	lambda ~ normal(1.0, 5);   // truncated normal
+	//r ~ normal(10, 5);
 
 	/* likelihood */
 	if (Ni > 1) {
@@ -156,10 +162,10 @@ model {
 	if (Nj > 1) {
 		target += sum(log(intensity_j_at_events)) - sum(intensity_j);
 	}
-
+	/*
 	print("len = ", num_elements(delta_hat_y), delta_hat_y);
 	print("len = ", num_elements(delta_hat_y_mean), delta_hat_y_mean);
 	print("len = ", num_elements(delta_hat_y_duration), delta_hat_y_duration);
-
+	*/
 	target += normal_lpdf(delta_hat_y | delta_hat_y_mean, delta_hat_y_std);
 }

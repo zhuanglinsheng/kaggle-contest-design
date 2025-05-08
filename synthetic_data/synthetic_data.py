@@ -69,7 +69,7 @@ def synthetic_data_simulation(
 	i_submission_events: list[datetime] = []
 	j_submission_events: list[datetime] = []
 
-	for idx_time, (time, shock, noise) in enumerate( \
+	for idx_time, (time, z_shock, z_noise) in enumerate( \
 							zip(time_grids, innovation_shocks, signal_noises)):
 		## equation (7)
 		q_i, q_j = ryvkin_model.get_equilibrium_efforts( \
@@ -87,7 +87,7 @@ def synthetic_data_simulation(
 
 		## y: equation (1)
 		expected_d_gap_t = (q_i - q_j) * time_unit_2f
-		innovation_shock_t = time_unit_2f**0.5 * sigma * shock
+		innovation_shock_t = time_unit_2f**0.5 * sigma * z_shock
 		real_gap_t += expected_d_gap_t + innovation_shock_t
 		real_gap_dynamic[idx_time + 1] = real_gap_t
 
@@ -114,7 +114,7 @@ def synthetic_data_simulation(
 				j_submitted = True
 		## public leaderboard: equation (10)
 		if i_submitted or j_submitted:
-			observed_gap_t_noise = noise / (time_unit_2f * lamb)**0.5
+			observed_gap_t_noise = z_noise / time_unit_2f**0.5 / lamb**0.5
 			observed_gap_t = real_gap_t + observed_gap_t_noise
 		observed_gap_dynamic[idx_time + 1] = observed_gap_t
 
