@@ -92,7 +92,7 @@ def synthetic_data_simulation(
 		real_gap_dynamic[idx_time + 1] = real_gap_t
 
 		## tilde_y: equation (11)
-		kalman_gain = lamb**0.5 * sigma * (observed_gap_t - perceived_gap_t)
+		kalman_gain = lamb**0.5 * sigma * (observed_gap_t - perceived_gap_t)  # = lambda \bar{S}
 		perceived_gap_t += expected_d_gap_t + kalman_gain * time_unit_2f
 		perceived_gap_dynamic[idx_time + 1] = perceived_gap_t
 
@@ -114,7 +114,7 @@ def synthetic_data_simulation(
 				j_submitted = True
 		## public leaderboard: equation (10)
 		if i_submitted or j_submitted:
-			observed_gap_t_noise = z_noise / time_unit_2f**0.5 / lamb**0.5
+			observed_gap_t_noise = z_noise / (time_unit_2f * lamb)**0.5
 			observed_gap_t = real_gap_t + observed_gap_t_noise
 		observed_gap_dynamic[idx_time + 1] = observed_gap_t
 

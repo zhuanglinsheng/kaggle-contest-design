@@ -402,20 +402,18 @@ where $\tau_i$ is defined in (\ref{eq-model-intensity}).
 Here, the integrals in the left hand size can be approximated by summations.
 Similar to the other player $j$. 
 Next, suppose we sample the leaderboard gap $\hat{y}_t$ at time points $(t_1, t_2, ..., t_N)$, obtaining observations $\{\hat{y}_{t_k}\}^N_{k=1}$. 
-Let $t_0 = 0$ and suppose the initial gap $y_0$ follows $\mathcal{N}(\mu_0, \sigma_0)$. 
+Let $t_0 = 0$ and suppose the initial gap $y_0$ is zero. 
 Then, according to the assumed data-generating process of $\hat{y}_t$ in (\ref{eq-leaderboard-gap}), the corresponding likelihood function is
 \begin{equation}\label{eq-obs_gap-prob}
-\begin{aligned}
-p&\left(\{\hat{y}_{t_k}\}_{k=1}^N | m_i, m_j\right) = 
-\phi\left(y_0 | \mu_0, \sigma_0\right) \times\\
-&\quad\prod_{k=0}^{N-1}\phi\left(\hat{y}_{t_{k+1}}-\hat{y}_{t_k}|\int_{t_k}^{t_{k+1}}m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)ds, \sigma^2(t_{k+1}-t_k)+\frac{1}{\Delta\lambda}\right)
-\end{aligned}
+p\left(\{\hat{y}_{t_k}\}_{k=1}^N | m_i, m_j\right) = 
+\prod_{k=1}^{N}
+\phi\left(\{\hat{y}_{t_k}\}_{k=1}^N | \left\{\mu_k\right\}^N_{k=1}, \Sigma_y+\frac{1}{\Delta\lambda}I_N\right)
 \end{equation}
-where $\hat{y}_{t_0} = y_0$. 
+where $\mu_k = \int_{0}^{t_{k}}m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)ds$ and $\Sigma_y(i, j) = \sigma^2\min(t_i,t_j)$. 
 
 
 To evaluate the likelihood functions (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), we must first compute the equilibrium trajectories of both the perceived output gap $(\tilde{y}_t)$ and the effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t))$, as implied by equations (\ref{eq-equilibrium-effort}) and (\ref{eq-fintered-y-update}). 
-Importantly, the construction of $\tilde{y}$ and the effort functions $m_i$ and $m_j$ depends on the underlying (unobserved) parameters $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\mu_0$ and $\sigma_0$, which are themselves subject to estimation.
+Importantly, the construction of $\tilde{y}$ and the effort functions $m_i$ and $m_j$ depends on the underlying (unobserved) parameters $c_i$, $c_j$, $\sigma$ and $\lambda$, which are themselves subject to estimation.
 We denote these underlying parameters collectively as $\mathcal{P}$. 
 
 Once these parameters are specified, the equilibrium paths of the perceived output gap $(\tilde{y}_t)$ and the corresponding effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t))$ can be deterministically computed. 
@@ -445,12 +443,9 @@ As illustrated, the approximation closely replicates the true function.
     \label{fig-approximation}
 \end{figure}
 
-
-Unknown parameters to be estimated: 
-\begin{itemize}
-	\item $\sigma$ (Total innovation risk): prior - truncated normal
-	\item $c_i$ and $c_j$ (Capacities): prior - truncated normal
-\end{itemize}
+In our Bayesian framework, we specify truncated normal distributions with large variances as priors for the unknown parameters $c_i$, $c_j$, $\sigma$ and $\lambda$.  
+This choice is intended to make the priors as uninformative as possible, thereby minimizing their influence on the posterior distribution. 
+By allowing the parameters to vary broadly within reasonable bounds, these weakly informative priors let the data play a dominant role in shaping the inference, while still ensuring mathematical well-posedness and numerical stability.
 
 
 
@@ -494,7 +489,9 @@ Then, we apply the classical thinning procedure \citep{lewis1979simulation} to d
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Bayesian Inference}
+
+
+\subsection{Asymptotic Convergence}
 
 Based on the following assumptions, we will next generate the submission data for two players in a data analysis competition: 
 \begin{itemize}
