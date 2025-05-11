@@ -410,6 +410,7 @@ p\left(\{\hat{y}_{t_k}\}_{k=1}^N | m_i, m_j\right) =
 \phi\left(\{\hat{y}_{t_k}\}_{k=1}^N | \left\{\mu_k\right\}^N_{k=1}, \Sigma_y+\frac{1}{\Delta\lambda}I_N\right)
 \end{equation}
 where $\mu_k = \int_{0}^{t_{k}}m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)ds$ and $\Sigma_y(i, j) = \sigma^2\min(t_i,t_j)$. 
+Moreover, $N = N_i + N_j$, meaning that the public leaderboard is updated once there is a new submission. 
 
 
 To evaluate the likelihood functions (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), we must first compute the equilibrium trajectories of both the perceived output gap $(\tilde{y}_t)$ and the effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t))$, as implied by equations (\ref{eq-equilibrium-effort}) and (\ref{eq-fintered-y-update}). 
@@ -443,30 +444,34 @@ As illustrated, the approximation closely replicates the true function.
     \label{fig-approximation}
 \end{figure}
 
-In our Bayesian framework, we specify truncated normal distributions with large variances as priors for the unknown parameters $c_i$, $c_j$, $\sigma$ and $\lambda$.  
+In our Bayesian framework, we specify truncated normal distributions with large variances as priors for the unknown parameters $c_i$, $c_j$, $\sigma$ and $\lambda$.\footnote{Specifically, each of these parameters is assigned a truncated normal prior with mean 1, variance 5, and support on either the interval $[0.5, 5]$, $[0.5, 10]$ or $[\text{1e-6}, 10]$, depending on the numerical stability considerations.}
 This choice is intended to make the priors as uninformative as possible, thereby minimizing their influence on the posterior distribution. 
 By allowing the parameters to vary broadly within reasonable bounds, these weakly informative priors let the data play a dominant role in shaping the inference, while still ensuring mathematical well-posedness and numerical stability.
+
+The following lemma establishes the identifiability of the model parameters.
+
+\begin{lemma}\label{lmm-params-identifiability}
+The contest parameters $c_i$, $c_j$, $\sigma$ and $\lambda$ are jointly identifiable. 
+\end{lemma}
+
+
+
+
 
 
 
 \section{Synthetic Data}
 
-Before applying our estimation procedure to real-world contest data, we evaluate its potential on synthetically generated data.
+Before applying our estimation procedure to real-world contest data, we evaluate its potential on synthetically generated data. 
+The use of synthetic data serves not only to validate the effectiveness of Bayesian inference, but also to enhance our understanding of the underlying data-generating process, which is summarized in Algorithm~\ref{algo-dgp}. 
 
-\subsection{Data Generation}
-
-
-
-A central challenge in generating synthetic data lies in dynamically constructing a point process that conforms to an inhomogeneous Poisson process.
-We first generate candidate submission events according to a homogeneous Poisson process over the whole contest duration, using a fixed high intensity $\tau^\star \ge \sup_t \tau_{i(j)}(t)$.
-Then, we apply the classical thinning procedure \citep{lewis1979simulation} to determine whether each candidate event is accepted.
-
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Synthetic Data Simulation}
+\label{algo-dgp}
 \begin{algorithmic}
 \STATE \textbf{Input:} 
 	$\Delta$, $T$, $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$, $y_0$, $\mu_0$
-\STATE Sample $\{s_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from homogeneous Poisson process $(\tau^\star_{i(j)})$ on $[0, T)$
+\STATE Sample $\{s_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from Poisson process $(\tau^\star)$ on $[0, T)$
 \STATE Sample $\{u_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from uniform distribution on $[0, 1]$
 \STATE Sample series of Brownian motions $(W_t)$ and $(B_t)$
 \STATE Initialize $\ell^{i(j)}=0$, $\hat{y}_0 = 0$, $\tilde{y}_t=\mu_0$
@@ -474,7 +479,7 @@ Then, we apply the classical thinning procedure \citep{lewis1979simulation} to d
     \STATE $m_{i(j)}(\tilde{y}_t, t)$  $\gets$ (\ref{eq-equilibrium-effort}), $\tau^{i(j)}(t)$ $\gets$ (\ref{eq-model-intensity})
     \hfill \COMMENT{Use $\theta$, $c_{i(j)}$, $\sigma$, $r$, $T$}
     \STATE $y_{t+\Delta} \gets$ (\ref{eq-state-dynamics}); $\tilde{y}_{t+\Delta}$ $\gets$ (\ref{eq-fintered-y-update})
-    \hfill \COMMENT{Use $\sigma$, $\lambda$, $\Delta$, $W_{t+\Delta}$}
+    \hfill \COMMENT{Use $\sigma$, $\lambda$, $\Delta$, $W_{t+\Delta}$, $y_0$}
     \FOR{$s_{k}^{i(j)} \in [t, t+\Delta)$} 
         \IF {$u_k^{i(j)} < \tau_{i(j)}(s_{k}^{i(j)}) / \tau^\star_{i(j)}$}
         	    \STATE $\hat{t}^{i(j)}_{\ell} \gets s_{k}^{i(j)}$; $\ell^{i(j)} \gets \ell^{i(j)}+1$
@@ -484,26 +489,131 @@ Then, we apply the classical thinning procedure \citep{lewis1979simulation} to d
         \ENDIF
     \ENDFOR
 \ENDFOR
-\STATE Fill in all missing entries in $(\hat{y}_t)$ by propagating the last observed value.
-\STATE \textbf{Output:} $(\tilde{y}_t)$, $(\hat{y}_t)$, $\{\hat{t}_k^{i(j)}\}^{N_{i(j)}}_{k=1}$, $(m_{i(j)}(\tilde{y}_t, t))$
+\STATE \textbf{Output:} $(y_t)$, $(\tilde{y}_t)$, $(m_{i(j)}(\tilde{y}_t, t))$, $\{\hat{t}_k^{i(j)}\}^{N_{i(j)}}_{k=1}$, $(\hat{y}_{t_k})_{k=1}^{N_i + N_j}$
 \end{algorithmic}
 \end{algorithm}
 
-...
+A central challenge in generating synthetic data lies in dynamically constructing a point process that conforms to an inhomogeneous Poisson process.
+We first generate candidate submission events according to a homogeneous Poisson process over the whole contest duration, using a fixed high intensity $\tau^\star \ge \sup_t \tau_{i(j)}(t)$.
+Then, we apply the classical thinning procedure \citep{lewis1979simulation} to determine whether each candidate event is accepted or not.
 
-\subsection{Asymptotic Convergence under Replicated Experiments}
+As a concrete example, we consider an artificial contest that spans a three-month period, from January 1 to April 1, 2025.
+The contest involves two participants, $i$ and $j$, who differ slightly in their effort costs.
+Specifically, the unit costs of effort are set to $c_i = 1.2$ and $c_j = 1.5$, respectively. 
+The innovation risk of the contest is assumed to be $\sigma = 2.0$, and the precision of the signal is set to $\lambda = 1.0$. 
+The prize value $\theta$ is normalized to one. 
+Additionally, we assume the ratio between submission intensity and effort is given by $r = 15$. 
+Under this specification, we simulate the trajectory of the true output gap $(y_t)$, the submission times $\{t^i_k\}_{k=1}^{N_i}$ and $\{t^j_k\}_{k=1}^{N_j}$ for both players, and the corresponding updates to the public leaderboard $(\hat{y}_{t_k})_{k=1}^{N_i + N_j}$. 
+We also compute the perceived output gap $(\tilde{y}_t)$ over time, as well as the equilibrium effort levels $(m_i(\tilde{y}_t, t))$ and $(m_j(\tilde{y}_t, t))$. 
 
-...
+Figure~\ref{fig-synthetic_90} shows a realization of the virtual contest described above.
 
-\subsection{Long Term Asymptotic Convergence}
+\begin{figure}[!ht]
+	\noindent\includegraphics[scale=0.75]{synthetic_data.pdf}
+	\caption{Synthetic Contest Data of Two Players from 2025-01-01 to 2025-04-01\\($\theta = 1.0$, $c_i = 1.2$, $c_j = 1.5$, $\sigma = 2.0$, $\lambda = 1.0$, $r = 15$)}
+	\label{fig-synthetic_90}
+\end{figure}
 
-Based on the following assumptions, we will next generate the submission data for two players in a data analysis competition: 
-\begin{itemize}
-	\item Total uncertainty: $\sigma = 5$
-	\item Capacities: $c_i = 1.5$ and $c_j = 2$
-	\item Contest duration: from 2025-01-01 to 2025-03-31
-	\item Starting point $\tilde{y}_0=0$
-\end{itemize}
+The blue line in Figure~\ref{fig-synthetic_90} represents the underline true output gap $y_t$, which can be interpreted as a \textit{private} leaderboard visible only to the contest designer, who has exclusive access to the full dataset.
+Its drift is determined by the cumulative effort gap between the two players, while its volatility is governed by the contest’s innovation risk parameter $\sigma$. 
+The solid black line depicts the corresponding \textit{public} leaderboard $\hat{y}_t$, which is updated whenever a submission is made by either player $i$ or $j$, as indicated by the short vertical ticks.
+Intuitively, the more information is disclosed, the more closely the public leaderboard $\hat{y}_{t_k}$ approximates the true state $y_{t_k}$; the level of signal noise is controlled by the precision parameter $\lambda$.
+The dashed black line\footnote{
+One might argue that, between two submissions $\hat{t}_{k}$ and $\hat{t}_{k+1}$, the estimate variance of the two players should increase over time rather than remain constant. 
+However, under our modelling assumption where no submission implies no effort, a Bayesian player would infer that inactivity signals low intensity, thereby narrowing the estimation variance. 
+For analytical tractability and to leverage \cite{ryvkin2022fight}'s steady-state equilibrium formulation (\ref{eq-equilibrium-effort}), we abstract from modelling time-varying uncertainty.} shows the players’ perceived output gap $\tilde{y}_t$, as inferred from the public leaderboard and defined in equation~(\ref{eq-fintered-y-update}).
+Submission times $\hat{t}^i_k$ and $\hat{t}^j_k$, marked by the short vertical ticks, are driven by each player’s effort level and are modelled as realizations of an inhomogeneous Poisson process.
+There are 28 submissions from player $i$ and 18 submissions from player $j$. 
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\centering
+\caption{Bayesian Estimates from Synthetic Data}\label{tbl-contest90}
+\begin{tabularx}{\textwidth}{lYYYY}
+\toprule
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} \\
+\addlinespace[0.25ex]
+\cline{2-5}
+\addlinespace[0.25ex]
+(true val.)        & 1.2 & 1.5 & 2.0 & 1.0 \\
+\midrule
+ Posterior Mean    & 1.094 & 1.752 & 2.795 & 1.100 \\
+ Posterior Std.       & 0.257 & 0.496 & 0.503 & 0.299 \\
+ 2.5\% Quantile     & 0.681 & 1.007 & 1.958 & 0.616 \\
+ 97.5\% Quantile   & 1.671 & 2.941 & 3.939 & 1.776 \\
+ RMSE                  & 0.278 & 0.556 & 0.941 & 0.315 \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} By the Bias–Variance decomposition, we have $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$. RMSE is then calculate by the squared root of MSE. 
+}
+\end{minipage}
+\end{table}
+
+Table~\ref{tbl-contest90} presents the Bayesian inference results based on the synthetic data that we display in Figure~\ref{fig-synthetic_90}. 
+Due to the limited data from the short contest duration, the posterior distribution of some parameters (such as $\sigma$ in this example) remains relatively far from the true value.
+Nevertheless, given the limited sample size, the performance of Bayesian estimation is satisfactory. 
+For most parameters (specifically $c_i$, $c_j$, and $\lambda$), the posterior means lie reasonably close to their true values.
+
+We next examine whether Bayesian estimation improves with increasing data quantity.
+
+
+\subsection{Asymptotic Convergence}
+
+With the synthetic contest data in place, it is important to ensure that our Bayesian framework is statistically coherent and implemented correctly. 
+To this end, we numerically examine the asymptotic behaviour of the posterior distribution under two scenarios:
+$i$) repeating the experiment multiple times under a fixed data-generating process, and $ii$) observing a single contest over an long time horizon.
+As the amount of data increases, posterior consistency ensures that the Bayesian posterior concentrates around the true parameter values (\citealt{vaart1998asymptotic}, \citealt{ghosal2000convergence}, \citealt{pokern2013posterior}, \citealt{ramamoorthi2015posterior}).
+While our analysis is simulation-based rather than theoretical, it provides evidence that the proposed likelihood formulation and inference procedure behave as expected in large-sample regimes.
+
+
+\subsubsection{Replicated Experiments.}
+
+To begin, we investigate the asymptotic behavior of the posterior distribution when multiple independent realizations of the contest are observed. 
+Each instance is generated using the same underlying parameters, and the submission paths are treated as independent observations drawn from the same inhomogeneous Poisson-driven process. 
+This setting corresponds to a replicated experimental design and allows us to assess whether Bayesian inference consistently recovers the true parameters as the number of observed contests increases.
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\centering
+\caption{Bayesian Estimates from Pooled Synthetic Data}
+\begin{tabularx}{\textwidth}{lYYYY}
+\toprule
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} \\
+\addlinespace[0.25ex]
+\cline{2-5}
+\addlinespace[0.25ex]
+(true val.)        & 1.2 & 1.5 & 2.0 & 1.0 \\
+\midrule
+\addlinespace
+\multicolumn{5}{l}{\textbf{Pool of 5 Contests}} \\
+Posterior Mean    & 1.215 & 1.647 & 1.969 & 1.079 \\
+Posterior Std.    & 0.120 & 0.178 & 0.143 & 0.130 \\
+RMSE              & 0.121 & 0.231 & 0.146 & 0.152 \\
+\addlinespace
+\multicolumn{5}{l}{\textbf{Pool of 10 Contests}} \\
+Posterior Mean    & 1.255 & 1.690 & 1.911 & 1.053 \\
+Posterior Std.    & 0.090 & 0.129 & 0.096 & 0.090 \\
+RMSE              & 0.105 & 0.230 & 0.131 & 0.105 \\
+\addlinespace
+\multicolumn{5}{l}{\textbf{Pool of 20 Contests}} \\
+Posterior Mean    & 1.206 & 1.639 & 1.981 & 0.990 \\
+Posterior Std.    & 0.059 & 0.090 & 0.069 & 0.059 \\
+RMSE              & 0.060 & 0.165 & 0.071 & 0.060 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+\subsubsection{Long Term Asymptotic Convergence.}
+
+We then turn to an alternative asymptotic regime in which a single contest instance is observed over an extended time horizon. 
+Rather than increasing the number of trajectories, we examine how the accumulation of submissions over a longer period improves inference accuracy. 
+This approach is particularly relevant in settings where contest design is fixed, but richer submission data become available over time. 
+We analyze whether the posterior contracts around the true parameter values as the contest duration grows.
 
 
 
@@ -516,7 +626,6 @@ To Do:
 regression: $\lambda$ and the proportion of data release
 
 
-\newpage
 \section{Conclusion}
 
 
@@ -579,8 +688,13 @@ Finally, we determine the constants $K_1$, $K_2$ by the initial condition $S_0$ 
 
 
 
+\section{Proofs}
 
-
+\proof{Proof of Lemma~\ref{lmm-params-identifiability}}
+Suppose $\Theta = (c_i, c_j, \sigma, \lambda)$ and $\Theta' = (c'_i, c'_j, \sigma', \lambda')$. 
+To show that the model parameters are jointly identifiable, it suffices to show that $\mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta) = \mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta')$ $\Rightarrow$ $\Theta = \Theta'$. 
+\Halmos
+\endproof
 
 
 
