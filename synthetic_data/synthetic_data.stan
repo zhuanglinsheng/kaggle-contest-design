@@ -99,11 +99,11 @@ transformed parameters {
 	vector<lower=0>[N_Delta] intensity_j = ratio * m_j / 24.0;
 	vector<lower=0>[Nj] intensity_j_at_events = intensity_j[hat_t_j_timeidx];
 
-	// delta_hat_y: mean and variance
+	// hat_y: mean and variance
 	vector[N_Delta] effort_gap = m_i - m_j;
 	vector[Ni + Nj] hat_y_mean;
-	for (i in 1 : Ni + Nj) {
-		hat_y_mean[i] = sum(effort_gap[:events_idx[i]]) * Delta2f;
+	for (ii in 1 : Ni + Nj) {
+		hat_y_mean[ii] = sum(effort_gap[:events_idx[ii]]) * Delta2f;
 	}
 
 	matrix[Ni + Nj, Ni + Nj] hat_y_cov;
