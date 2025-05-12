@@ -7,6 +7,7 @@ from typing import Callable
 
 # third-party
 import numpy as np
+from scipy.interpolate import interp1d
 
 
 def simulate_poisson_process(
@@ -53,3 +54,40 @@ def simulate_nhpp(
 		if u < t_intensity / hour_arrivals_ub:
 			events.append(t)
 	return events
+
+def intensity_interp(
+		time_ticks: np.ndarray,
+		intensity_sample: np.ndarray,
+		ratio: float = 1,
+		kind: str = 'linear',
+		fill_value = np.nan
+) -> Callable[[float], float]:
+	"""Using interpolation method to approximate the intensity function.
+	"""
+	t_floats = time_ticks.astype(float)
+	intensity_f = interp1d(t_floats, intensity_sample * ratio, kind=kind, fill_value=fill_value)
+	return intensity_f
+
+def intensity_interp_wrapper(
+		intensity_f: Callable[[float], float]
+) -> Callable[[datetime | np.datetime64], float]:
+	"""A wrapper of in the interpolation function `intensity_f`
+	"""
+	def intensity(x: datetime | np.datetime64) -> float:
+		if isinstance(x, datetime):
+			x = np.datetime64(x)
+		x_float = x.astype(float)
+		return intensity_f(x_float)
+	return intensity
+
+def intensity_interp_d(
+		time_ticks: np.ndarray,
+		intensity_sample: np.ndarray,
+		ratio: float = 1,
+		kind: str = 'linear',
+		fill_value = np.nan
+) -> Callable[[datetime | np.datetime64], float]:
+	"""Using interpolation method to approximate the intensity function.
+	"""
+	intensity_f = intensity_interp(time_ticks, intensity_sample, ratio, kind, fill_value)
+	return intensity_interp_wrapper(intensity_f)
