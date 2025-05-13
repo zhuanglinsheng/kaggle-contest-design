@@ -376,8 +376,8 @@ In practise, we approximately assume that $\xi_t \approx (B_{t+\Delta} - B_t)/\D
 
 % Source of Noise 2
 Beyond the uncertainty introduced by partial data disclosure, a second source of signal noise arises from the timing of leaderboard updates: 
-rankings are refreshed only after model submissions, creating a delay relative to the true standings.
-It should be noted that such lag would bias our model estimates only if participants strategically timed their submissions.
+rankings are refreshed only after model submissions, leaving the leaderboard uninformative during periods without new submissions.
+It should be noted that such lag would significantly bias our model estimates only if participants strategically timed their submissions.
 Although such strategic behaviour is theoretically possible, we abstract from it in this study.
 We assume that each submission follows a period of substantive effort, allowing the leaderboard rankings to broadly reflect the relative performance of algorithms based on the publicly available data.
 
@@ -389,38 +389,39 @@ By (\ref{filtered-x}) and (\ref{eq-model-signal}), the estimated gap $\tilde{y}_
 \begin{equation}\label{eq-fintered-y-update}
 d\tilde{y}_{t} = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sqrt{\lambda}\sigma(\hat{y}_t-\tilde{y}_{t}) dt
 \end{equation}
-
-
-
-
-
-
-
-
-
+Once the parameter set $\Theta := \{c_i, c_j, \sigma, \lambda\}$ is specified, the data-generating processes for $y_t$, $\hat{y}_t$, and $\tilde{y}_t$ are fully defined by equations (\ref{eq-state-dynamics}), (\ref{eq-leaderboard-gap}) and (\ref{eq-fintered-y-update}), though their realized trajectories remain stochastic.
 
 
 \subsection{Bayesian Framework}
 
+Our objective is to develop a Bayesian framework for inferring the parameter set $\Theta := \{c_i, c_j, \sigma, \lambda\}$, using the data introduced above.
+
 First of all, we assume that time is discretized into uniform intervals of length $\Delta$.
 By definition, the likelihood function corresponding to the submission times of player $i$, $\{t^i_k\}_{k=1}^{N_i}$, is given as follows (a symmetric formulation applies to player $j$):
 \begin{equation}\label{eq-ihpp-prob}
-p\left(\{\hat{t}^i_k\}_{k=1}^{N_i} | \tau_i\right) = \exp\left\{-\int_{s\in\mathcal{T}}\tau_i(s)ds\right\}\prod_{k=1}^{N_i}\tau_i(\hat{t}^i_k)
+p\left(\{\hat{t}^i_k\}_{k=1}^{N_i} | \tau_i, \Theta\right) = \exp\left\{-\int_{s\in\mathcal{T}}\tau_i(s)ds\right\}\prod_{k=1}^{N_i}\tau_i(\hat{t}^i_k)
 \end{equation}
-where $\tau_i$ is defined in (\ref{eq-model-intensity}). 
-Here, the integrals in the left hand size can be approximated by summations.
-Next, suppose we sample the leaderboard gap $\hat{y}_t$ at time points $(t_1, t_2, ..., t_N)$, obtaining observations $\{\hat{y}_{t_k}\}^N_{k=1}$. 
-Let $t_0 = 0$ and suppose the initial gap $y_0$ is zero. 
+where $\tau_i$ is defined in (\ref{eq-model-intensity}) with the tuning parameter $r$ exogenously specified. 
+Since time is discretized, the integrals on the left-hand side can be approximated by finite sums.
+
+Next, suppose the public leaderboard gaps $\hat{y}_t$ is sampled at time points $(t_1, t_2, ..., t_N)$, yielding observations $\{\hat{y}_{t_k}\}^N_{k=1}$. 
+Let $t_0 = 0$ and suppose the initial gap satisfies $y_0 = 0$. 
 Then, according to the assumed data-generating process of $\hat{y}_t$ in (\ref{eq-leaderboard-gap}), the corresponding likelihood function is
 \begin{equation}\label{eq-obs_gap-prob}
-p\left(\{\hat{y}_{t_k}\}_{k=1}^N | \{\hat{t}^{i(j)}_k\}_{k=1}^{N_{i(j)}}, m_i, m_j\right) = 
-\prod_{k=1}^{N}
-\phi\left(\{\hat{y}_{t_k}\}_{k=1}^N | \left\{\mu_k\right\}^N_{k=1}, \Sigma_y+\frac{1}{\Delta\lambda}I_N\right)
+p\left(\{\hat{y}_{t_k}\}_{k=1}^N | \{\hat{t}^{i(j)}_k\}_{k=1}^{N_{i(j)}}, m_i, m_j, \Theta\right) = 
+\phi\left(\{\hat{y}_{t_k}\}_{k=1}^N | \left\{\mu_k\right\}^N_{k=1}, \Sigma_y+\frac{I_N}{\Delta\lambda}\right)
 \end{equation}
 where $\mu_k = \int_{0}^{t_{k}}m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)ds$ and $\Sigma_y(i, j) = \sigma^2\min(t_i,t_j)$. 
-Moreover, $N = N_i + N_j$, meaning that the public leaderboard is updated once there is a new submission. 
+Moreover, let $N = N_i + N_j$, indicating that the public leaderboard is updated once a new submission occurs. 
 
+%% Note: exclude y_t in likelihood
+It's worthwhile noting that, although the trajectory of private leaderboard $y_t$ is available ex post from the Meta-Kaggle dataset, we deliberately exclude it from the likelihood function. 
+In our framework, agents form beliefs about $y_t$ based solely on $\hat{y}_t$, and their actions are driven by these beliefs. 
+Conditioning on the realized values of $y_t$ in estimation would effectively bypass the agent’s informational constraints and undermine the role of $\lambda$ in shaping belief formation. 
+More importantly, it would prevent us from evaluating whether the proposed model—when given only the information actually available to agents—can recover the true data-generating process. 
+Treating $y_t$ as latent therefore preserves the integrity of the causal structure and enables meaningful model validation after estimation.
 
+%% Approximation
 To evaluate the likelihood functions (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), we must first compute the equilibrium trajectories of both the perceived output gap $(\tilde{y}_t)$ and the effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t))$, as implied by equations (\ref{eq-equilibrium-effort}) and (\ref{eq-fintered-y-update}). 
 Importantly, the construction of $\tilde{y}$ and the effort functions $m_i$ and $m_j$ depends on the underlying (unobserved) parameters $c_i$, $c_j$, $\sigma$ and $\lambda$, which are themselves subject to estimation.
 We denote these underlying parameters collectively as $\mathcal{P}$. 

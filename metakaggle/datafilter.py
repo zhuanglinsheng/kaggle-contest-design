@@ -7,7 +7,7 @@ import os
 from collections import defaultdict
 
 # local
-from .utils import TableName
+from utils import TableName
 
 # third-party
 import pandas as pd
