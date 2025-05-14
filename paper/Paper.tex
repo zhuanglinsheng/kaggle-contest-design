@@ -183,7 +183,7 @@
 \item Meta-kaggle dataset \cite{megan_risdal_timo_bozsolik_2022}. 
 \end{itemize}
 
-\subsection{Literature Review}
+\subsection{Related Literature}
 
 This paper focuses on the two players innovation contest with a continuous time  where the players’ relative position is public information throughout the game.
 This is closely related to tug-or-war contest, which, to our knowledge, was first formally given by \citet{Harris1987Race} as a one-dimensional simplification of the multi-stage R\&D race. 
@@ -323,13 +323,13 @@ Moreover, the equilibrium effort $m_{i(j)}$ can be represented to the product of
 
 
 
-\section{Estimation}
+\section{Estimation Framework}
 
 In this section, we describe the estimation procedure. 
 We first outline the data generation process, establishing the connection between the empirical data and the theoretical model discussed previously.
 Then, we introduce a structural estimation method using Bayesian framework.
 
-\subsection{Data Generating Process}
+\subsection{Data-Generating Process}
 
 For each contest on Kaggle, the observable data can be classified into three primary components: 
 
@@ -392,7 +392,7 @@ d\tilde{y}_{t} = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sqr
 Once the parameter set $\Theta := \{c_i, c_j, \sigma, \lambda\}$ is specified, the data-generating processes for $y_t$, $\hat{y}_t$, and $\tilde{y}_t$ are fully defined by equations (\ref{eq-state-dynamics}), (\ref{eq-leaderboard-gap}) and (\ref{eq-fintered-y-update}), though their realized trajectories remain stochastic.
 
 
-\subsection{Bayesian Framework}
+\subsection{Bayesian Estimation Framework}
 
 Our objective is to develop a Bayesian framework for inferring the parameter set $\Theta := \{c_i, c_j, \sigma, \lambda\}$, using the data introduced above.
 
@@ -466,10 +466,7 @@ The contest parameters $c_i$, $c_j$, $\sigma$ and $\lambda$ are jointly identifi
 
 
 
-
-
-
-\section{Synthetic Data}
+\section{Synthetic Experiments}
 
 Before applying our estimation procedure to real-world contest data, we evaluate its potential on synthetically generated data. 
 The use of synthetic data serves not only to validate the effectiveness of Bayesian inference, but also to enhance our understanding of the underlying data-generating process, which is summarized in Algorithm~\ref{algo-dgp}. 
@@ -573,7 +570,7 @@ For most parameters (specifically $c_i$, $c_j$, and $\lambda$), the posterior me
 We next examine whether Bayesian estimation improves with increasing data quantity.
 
 
-\subsection{Asymptotic Convergence}
+\subsection{Asymptotic Properties}
 
 With the synthetic contest data in place, it is important to ensure that our Bayesian framework is statistically coherent and implemented correctly. 
 To this end, we numerically examine the asymptotic behaviour of the posterior distribution under two scenarios:
@@ -582,7 +579,7 @@ As the amount of data increases, posterior consistency ensures that the Bayesian
 While our analysis is simulation-based rather than theoretical, it provides evidence that the proposed likelihood formulation and inference procedure behave as expected in large-sample regimes.
 
 
-\subsubsection{Replicated Experiments.}
+\subsubsection{Replications.}
 
 To begin, we investigate the asymptotic behavior of the posterior distribution when multiple independent realizations of the contest are observed. 
 Multiple contests are independently simulated under identical parameters, with their data pooled to form a larger sample for Bayesian inference.
@@ -663,7 +660,7 @@ RMSE                  & 0.021 & 0.047 & 0.226 & 0.102 \\
 
 
 
-\subsubsection{Long Term Contest.}
+\subsubsection{Long-Horizon Contest.}
 
 We then turn to an alternative asymptotic regime in which a single contest instance is observed over a long time horizon. 
 Rather than increasing the number of trajectories, we examine how the accumulation of submissions over a longer period improves inference accuracy. 
@@ -679,18 +676,32 @@ In the 6-month contest, we set the unit effort costs to $c_i = 0.6$ and $c_j = 0
 For the 12-month contest, the effort costs are reduced to $c_i = 0.3$ and $c_j = 0.375$, with players $i$ and $j$ submitting 143 and 182 times, respectively.
 The posterior results show that longer contest durations and more frequent submissions lead to smaller RMSEs in the posterior distribution, indicating improved recovery of the true parameter values.
 
-\subsubsection{Multiple Players.}
+
+\subsection{Staggered Entry of Multiple Players}
 
 ...
 
-
-\section{Case Study}\label{sec-kaggle-application}
+\section{Empirical Application}\label{sec-kaggle-application}
 
 ...
+
+\subsection{Mapping the Model to the Data}
 
 To Do:
 
-regression: $\lambda$ and the proportion of data release
+1. How to select key players? Top $n$ in final private leaderboard
+
+2. How to deal with monetary prize and other forms (knowledge, reputation)? The baseline reward is ``knowledge + reputation"; Later, we can verify the effect of monetary rewards (additional prize). 
+
+3. 
+
+
+\subsection{Structural Validation}
+
+To Do:
+
+relation between $\lambda$ and the proportion of data release?
+
 
 
 \section{Conclusion}
