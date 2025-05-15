@@ -94,15 +94,26 @@ class Leaderboard:
 
 		submitors_hist = self._submitor[:submit_idx + 1]
 		submit_count = []
+		participate_days = []
+		last_submit_days_ago = []
+		current_date = self._datetimes[submit_idx]
 
 		for id in the_ranks:
 			submit_from_id = [1 if id == e else 0 for e in submitors_hist]
+			first_submit_idx = submitors_hist.index(id)
+			first_submit_date = self._datetimes[first_submit_idx]
+			last_submit_idx = len(submitors_hist) - 1 - submitors_hist[::-1].index(id)
+			last_submit_date = self._datetimes[last_submit_idx]
 			submit_count.append(sum(submit_from_id))
+			participate_days.append((current_date - first_submit_date).days)
+			last_submit_days_ago.append((current_date - last_submit_date).days)
 
 		return the_time, pd.DataFrame({
 			'rank': the_ranks,
 			'score': the_scores,
-			'submit_count': submit_count
+			'submit_count': submit_count,
+			'participate_days': participate_days,
+			'last_submit_days_ago': last_submit_days_ago
 		})
 
 	def submission_records_of(self, id: int) -> pd.DataFrame:
@@ -141,3 +152,6 @@ class Leaderboard:
 			data['hat_y'].append(current_x_i - current_x_j)
 			current_time += delta
 		return pd.DataFrame(data)
+
+	def get_final_rank(self) -> list[int]:
+		return self._ranks[-1].copy()

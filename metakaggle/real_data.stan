@@ -19,7 +19,7 @@ data {
 	vector<lower=0, upper=N_Delta>[Nj] hat_t_j;  // submission times of player j
 
 	// real-time leaderboard
-	vector[N_Delta + 1] hat_y;  // starts at `t = 0`, ends at `t = deadline`
+	vector[N_Delta] hat_y;  // starts at `t = 1`, ends at `t = deadline`
 }
 
 transformed data {
@@ -113,7 +113,7 @@ transformed parameters {
 
 model {
 	/* priors */
-	mu_0 ~ normal(0.0, 2);
+	mu_0 ~ normal(0.0, 5);
 	c_i ~ normal(1.0, 5);        // truncated normal
 	c_j ~ normal(1.0, 5);        // truncated normal
 	sigma ~ normal(1.0, 5);      // truncated normal
