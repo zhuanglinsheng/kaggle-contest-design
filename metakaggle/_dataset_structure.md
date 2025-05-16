@@ -1,5 +1,9 @@
 # Stucture of the Dataset `meta-kaggle`
 
+## Users
+
+- RegisterDate
+
 ## Submissions
 
 - SubmittedUserId --- `Users`

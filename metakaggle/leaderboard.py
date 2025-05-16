@@ -21,6 +21,9 @@ class Leaderboard:
 		self._scores = []
 		self._agents = set()
 
+	def get_final_rank(self) -> list[int]:
+		return self._ranks[-1].copy()
+
 	def first_submission_time(self) -> datetime:
 		return self._datetimes[0]
 
@@ -139,19 +142,16 @@ class Leaderboard:
 		current_time = start_time.replace(minute=0, second=0, microsecond=0) + delta
 		data = {
 			'time': [],
-			'hat_x_i': [],
-			'hat_x_j': [],
-			'hat_y': [],
+			'x_i': [],
+			'x_j': [],
+			'y': [],
 		}
 		while current_time < end_time:
 			current_x_i = records_i.loc[records_i['time'] < current_time, ['score']].iloc[-1].values[0]
 			current_x_j = records_j.loc[records_j['time'] < current_time, ['score']].iloc[-1].values[0]
 			data['time'].append(current_time)
-			data['hat_x_i'].append(current_x_i)
-			data['hat_x_j'].append(current_x_j)
-			data['hat_y'].append(current_x_i - current_x_j)
+			data['x_i'].append(current_x_i)
+			data['x_j'].append(current_x_j)
+			data['y'].append(current_x_i - current_x_j)
 			current_time += delta
 		return pd.DataFrame(data)
-
-	def get_final_rank(self) -> list[int]:
-		return self._ranks[-1].copy()
