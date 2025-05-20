@@ -707,8 +707,11 @@ To Do:
 
 relation between $\lambda$ and the proportion of data release?
 
-
-
+By the data generating process (\ref{eq-leaderboard-gap}), we have a simple Maximum Likelihood Estimation (MLE) of the true value of $\lambda$. 
+Since $\hat{y}_t - y_t \sim \mathcal{N}(0, 1/(\lambda\Delta))$, we have 
+\begin{equation*}
+\lambda^{\text{MLE}} = \frac{n}{\Delta\sum^n_{i=1}(y_i - \hat{y}_i)^2}
+\end{equation*}
 
 
 \newpage
