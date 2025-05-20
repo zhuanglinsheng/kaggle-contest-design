@@ -70,7 +70,8 @@ def save_contest_data(
 		tbl_submissions: pd.DataFrame,
 		contest_id: int,
 		team_i_id: int, team_j_id: int,
-		deadline: datetime, prize: float, max_daily_submit: int, percentage: float
+		deadline: datetime, prize: float, max_daily_submit: int, percentage: float,
+		min_submission_times: int = 5
 ) -> None:
 	# json file & utils
 	wd = os.getcwd()
@@ -114,6 +115,13 @@ def save_contest_data(
 	observed_i_commits = observed_i_commits.loc[observed_i_commits > start_time_commit].tolist()
 	observed_j_commits = leaderboard_pub.submission_records_of(team_j_id)['time']
 	observed_j_commits = observed_j_commits.loc[observed_j_commits > start_time_commit].tolist()
+
+	if len(observed_i_commits) < min_submission_times:
+		print(f'Warning: cannot find 2 players in contest {contest_id}; not sufficient submissions')
+		return None
+	if len(observed_j_commits) < min_submission_times:
+		print(f'Warning: cannot find 2 players in contest {contest_id}; not sufficient submissions')
+		return None
 
 	with open(wd_synthetic_data, 'w') as f:
 		json.dump({
