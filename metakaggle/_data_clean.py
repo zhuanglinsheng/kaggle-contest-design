@@ -2,11 +2,14 @@ import os
 import json
 import statistics
 from datetime import datetime, timedelta
+from typing import Literal
 
 import pandas as pd
 import numpy as np
 
 from leaderboard import Leaderboard
+
+type Leaderboard_Type = Literal['Normal', 'Percentage_Big', 'Percentage_Small']
 
 
 def contest_basic_setting(tbl_contests: pd.DataFrame, contest_id: int):
@@ -48,7 +51,10 @@ def randomize_within_day(group: pd.Series, seed: int = 1234):
 	return randomized_times
 
 
-def leaderboard_fulfill(tbl_contest_submissions, deadline: datetime):
+def leaderboard_fulfill(tbl_contest_submissions,
+		deadline: datetime,
+		leaderboard_type: Leaderboard_Type,
+):
 	leaderboard_public = Leaderboard()
 	leaderboard_private = Leaderboard()
 	tbl_contest_submissions_sorted = tbl_contest_submissions.sort_values(by='SubmissionDate')
@@ -59,8 +65,16 @@ def leaderboard_fulfill(tbl_contest_submissions, deadline: datetime):
 		if time > deadline:
 			break
 		team_id = row['TeamId']
-		score_pub = row['PublicScore']
-		score_pri = row['PrivateScore']
+		match leaderboard_type:
+			case 'Normal':
+				score_pub = row['PublicScore']
+				score_pri = row['PrivateScore']
+			case 'Percentage_Big':
+				score_pub = np.tan((row['PublicScore'] / 100) * np.pi / 2)
+				score_pri = np.tan((row['PrivateScore'] / 100) * np.pi / 2)
+			case 'Percentage_Small':
+				score_pub = np.tan(row['PublicScore'] * np.pi / 2)
+				score_pri = np.tan(row['PrivateScore'] * np.pi / 2)
 		leaderboard_public.refresh(time, team_id, score_pub)
 		leaderboard_private.refresh(time, team_id, score_pri)
 	return leaderboard_public, leaderboard_private
@@ -71,6 +85,7 @@ def save_contest_data(
 		contest_id: int,
 		team_i_id: int, team_j_id: int,
 		deadline: datetime, prize: float, max_daily_submit: int, percentage: float,
+		leaderboard_type: Leaderboard_Type,
 		min_submission_times: int = 5
 ) -> None:
 	# json file & utils
@@ -87,7 +102,8 @@ def save_contest_data(
 
 	# observations
 	contest_submissions = tbl_submissions.loc[tbl_submissions['CompetitionId']==contest_id]
-	leaderboard_pub, leaderboard_pri = leaderboard_fulfill(contest_submissions, deadline)
+	leaderboard_pub, leaderboard_pri = leaderboard_fulfill(
+			contest_submissions, deadline, leaderboard_type)
 
 	# \hat{y}_t
 	tbl_hat_y = leaderboard_pub.real_time_gap_between(team_i_id, team_j_id, delta=timedelta(hours=1))
@@ -154,12 +170,13 @@ def player_basic_criterion(player: pd.DataFrame) -> bool:
 
 def select_2_strongest(
 		tbl_submissions: pd.DataFrame,
-		contest_id: int, deadline: datetime
+		contest_id: int, deadline: datetime,
+		leaderboard_type: Leaderboard_Type,
 ) -> tuple[int, int] | None:
 	"""
 	"""
 	tbl = tbl_submissions.loc[tbl_submissions['CompetitionId']==contest_id]
-	_, leaderboard_pri = leaderboard_fulfill(tbl, deadline)
+	_, leaderboard_pri = leaderboard_fulfill(tbl, deadline, leaderboard_type)
 	_, pri_final_rank = leaderboard_pri.display(-1, first_n_candidates)
 	# determine player i
 	player_i_idx = 0
