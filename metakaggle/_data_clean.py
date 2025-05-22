@@ -141,6 +141,7 @@ def save_contest_data(
 
 	with open(wd_synthetic_data, 'w') as f:
 		json.dump({
+			'start_time': start_time_contest.timestamp(),
 			'theta': param_theta,
 			'percentage': float(percentage),
 			'max_daily_submit': int(max_daily_submit),

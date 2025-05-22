@@ -677,13 +677,16 @@ For the 12-month contest, the effort costs are reduced to $c_i = 0.3$ and $c_j =
 The posterior results show that longer contest durations and more frequent submissions lead to smaller RMSEs in the posterior distribution, indicating improved recovery of the true parameter values.
 
 
+\subsection{Out of Sample Performance}
+
+...
 
 
 \section{Empirical Application}\label{sec-kaggle-application}
 
 ...
 
-\subsection{Mapping the Model to the Data}
+\subsection{Mapping the Model to the Real Data}
 
 To Do:
 
@@ -704,15 +707,32 @@ Together, these features enable top teams to identify likely competitors and adj
 
 \subsection{Structural Validation}
 
-To Do:
+...
 
-relation between $\lambda$ and the proportion of data release?
+To Do 1: relation between $\lambda$ and the proportion of data release?
 
-By the data generating process (\ref{eq-leaderboard-gap}), we have a simple Maximum Likelihood Estimation (MLE) of the true value of $\lambda$. 
+By the data generating process (\ref{eq-leaderboard-gap}), we have a simple maximum likelihood estimation (MLE) of the true value of $\lambda$. 
 Since $\hat{y}_t - y_t \sim \mathcal{N}(0, 1/(\lambda\Delta))$, we have 
 \begin{equation*}
 \lambda^{\text{MLE}} = \frac{n}{\Delta\sum^n_{i=1}(y_i - \hat{y}_i)^2}
 \end{equation*}
+
+...
+
+To Do 2: validate the estimation of $\sigma$?
+
+First, we estimate submission intensities $\tau_i(t)$ and $\tau_j(t)$ by kernel density estimation (KDE). 
+Having $\hat{\tau}_i$ and $\hat{\tau}_j$, the effort levels of the two players are simply $m_i(t) = \hat{\tau}_i / r$ and $m_j(t) = \hat{\tau}_j / r$ by (\ref{eq-model-intensity}), where $r$ is the ratio of effort level and submission intensity. 
+Next, with the submission times denoted by $\{t_k\}$, we have $y_{t_{k+1}} - y_{t_k} \sim \mathcal{N}\left(\frac{1}{r}\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds, \sigma^2(t_{k+1}-t_k)\right)$ by the dynamic of private leaderboard (\ref{eq-state-dynamics}). 
+Then, by (\ref{normal-mle-r}) and (\ref{normal-mle-sigma}), we can estimate the parameters $r$ and $\sigma^2$ using MLE, that is  
+\begin{equation*}
+r^{\text{MLE}} = \frac{\sum_k\left[\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right]^2/(t_{k+1}-t_k)}{\sum_k(y_{t_{k+1}}-y_{t_k})\left[\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right] / (t_{k+1}-t_k)}
+\end{equation*}
+\begin{equation*}
+\sigma^{\text{MLE}} = \frac{1}{n}\sum_k\frac{\left[y_{t_{k+1}}-y_{t_k}-\frac{1}{\hat{r}}\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right]^2}{t_{k+1}-t_k}
+\end{equation*}
+
+
 
 
 \newpage
@@ -752,7 +772,9 @@ When team $i$ themselves hold the top position, their perceived competitor is th
 
 
 
-\section{Solve $S_t$ in Equation (\ref{filtered-S})}\label{app-S-equ}
+\section{Auxiliary Results}
+
+\subsection{Solve $S_t$ in Equation (\ref{filtered-S})}\label{app-S-equ}
 
 If $S$ is in steady state $dS/dt = 0$ $\Leftrightarrow$ $S = \bar{S} \equiv \sigma/\sqrt{\lambda}$. 
 If $S$ is not in steady state, i.e. $S\not=\bar{S}$, we first isolate the two variables and get 
@@ -787,6 +809,33 @@ Finally, we determine the constants $K_1$, $K_2$ by the initial condition $S_0$ 
 \end{align*}
 
 
+\subsection{MLE for Normal Distribution}
+
+Suppose we observe independent data points \( X_1, ..., X_n \), where each \( X_k \sim \mathcal{N}(M_k / r, \sigma^2 T_k) \) with known constants \( M_k \) and \( T_k \). 
+The goal is to estimate the parameters \( r \) and \( \sigma \) via maximum likelihood estimation (MLE).
+Ignoring constant terms, the log-likelihood function of the observed data is
+\[
+\ell(r, \sigma^2) = - \frac{n}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \sum_{k=1}^n \frac{\left( X_k - M_k/r \right)^2}{T_k}.
+\]
+To Estimate $r$, we expand the summation of second term and have 
+\[
+Q(r) = \sum_{k=1}^n \left( \frac{X_k^2}{T_k} - \frac{2X_k M_k}{r T_k} + \frac{M_k^2}{r^2 T_k} \right)
+= A - \frac{2B}{r} + \frac{C}{r^2},
+\]
+where \( A = \sum X_k^2/T_k \), \( B = \sum X_k M_k/T_k \), and \( C = \sum M_k^2/T_k \). Taking the derivative with respect to \( r \) and setting it to zero gives:
+\begin{equation}\label{normal-mle-r}
+\frac{dQ}{dr} = \frac{2B}{r^2} - \frac{2C}{r^3} = 0 \quad \Rightarrow \quad \hat{r} = \frac{C}{B} = \frac{\sum M_k^2/T_k}{\sum X_k M_k/T_k}.
+\end{equation}
+Then, substituting \( \hat{r} \) back into the likelihood, the MLE for \( \sigma^2 \) is obtained by maximizing
+\[
+\ell(\sigma^2) = -\frac{n}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \sum_{k=1}^n \frac{\left( X_k - M_k/\hat{r} \right)^2}{T_k},
+\]
+which yields
+\begin{equation}\label{normal-mle-sigma}
+\hat{\sigma}^2 = \frac{1}{n} \sum_{k=1}^n \frac{\left( X_k - M_k/\hat{r}\right)^2}{T_k}.
+\end{equation}
+
+
 
 \section{Proofs}
 
@@ -795,6 +844,8 @@ Suppose $\Theta = (c_i, c_j, \sigma, \lambda)$ and $\Theta' = (c'_i, c'_j, \sigm
 To show that the model parameters are jointly identifiable, it suffices to show that $\mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta) = \mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta')$ $\Rightarrow$ $\Theta = \Theta'$. 
 \Halmos
 \endproof
+
+
 
 
 
