@@ -67,7 +67,7 @@ parameters {
 	real<lower=5e-1, upper=5>     c_j;
 	real<lower=5e-1, upper=10>    sigma;
 	real<lower=1e-6, upper=10>    lambda;
-	//real<lower=1e-6, upper=1000>  r;
+	real<lower=1e-6, upper=1000>  r;
 }
 
 transformed parameters {
@@ -93,11 +93,11 @@ transformed parameters {
 	//*/
 
 	// intensity (player i)
-	vector<lower=0>[N_Delta] intensity_i = ratio * m_i / 24.0;
+	vector<lower=0>[N_Delta] intensity_i = r * m_i / 24.0;
 	vector<lower=0>[Ni] intensity_i_at_events = intensity_i[hat_t_i_timeidx];
 
 	// intensity (player j)
-	vector<lower=0>[N_Delta] intensity_j = ratio * m_j / 24.0;
+	vector<lower=0>[N_Delta] intensity_j = r * m_j / 24.0;
 	vector<lower=0>[Nj] intensity_j_at_events = intensity_j[hat_t_j_timeidx];
 
 	// hat_y: mean and variance
@@ -118,7 +118,7 @@ model {
 	c_j ~ normal(1.0, 5);        // truncated normal
 	sigma ~ normal(1.0, 5);      // truncated normal
 	lambda ~ normal(1.0, 5);     // truncated normal
-	//r ~ normal(10, 5);
+	r ~ normal(10, 5);
 
 	/* likelihood */
 	if (Ni > 1) {

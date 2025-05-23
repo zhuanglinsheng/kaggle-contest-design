@@ -349,7 +349,8 @@ We assume the submission intensity $\tau_i(t)$ is proportional to the effort lev
 \begin{equation}\label{eq-model-intensity}
 \tau_i(t) = r \cdot m_i(\tilde{y}_t, t)
 \end{equation}
-where $r>0$ is a tune parameter for the numerical robustness. 
+where $r>0$ is the ratio of submission intensity and effort level. 
+The contest players are aware of this ratio, but the contest designer must infer it from the data. 
 
 %% Data: Leaderboard
 The third component of the contest data is the \textit{public} and \textit{private} leaderboard that records the real-time rankings and scores of each participant, denoted by $\hat{x}^{i(j)}_t$ and $x^{i(j)}_t$. 
@@ -388,13 +389,13 @@ d\tilde{y}_{t} = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sqr
 \end{equation}
 with initial condition $\tilde{y}_0 = \mu_0$, where $\mu_0$ can be interpreted as the prior mean of the initial true state $y_0$.
 
-We denote the set of unknown parameters by $\Theta := \{c_i, c_j, \sigma, \lambda, \mu_0\}$.
+We denote the set of unknown parameters by $\Theta := \{c_i, c_j, r, \sigma, \lambda, \mu_0\}$.
 Once $\Theta$ is specified, the data-generating processes for $(y_t)$, $(\hat{y}_t)$, and $(\tilde{y}_t)$ are fully defined by equations (\ref{eq-state-dynamics}), (\ref{eq-leaderboard-gap}), and (\ref{eq-fintered-y-update}), although their realized trajectories remain stochastic.
 
 
 \subsection{Bayesian Estimation Framework}
 
-Our objective is to develop a Bayesian framework for inferring the unknown parameter set $\Theta := \{ c_i, c_j, \sigma, \lambda, \mu_0 \}$ using the data introduced above.
+Our objective is to develop a Bayesian framework for inferring the unknown parameter set $\Theta := \{ c_i, c_j, r, \sigma, \lambda, \mu_0 \}$ using the data introduced above.
 
 First of all, we assume that time is discretized into uniform intervals of length $\Delta$.
 By definition, the likelihood function corresponding to the submission times of player $i$, $\{t^i_k\}_{k=1}^{N_i}$, is given as follows (a symmetric formulation applies to player $j$):
@@ -460,7 +461,7 @@ By allowing the parameters to vary broadly within reasonable bounds, these weakl
 The following lemma establishes the identifiability of the model parameters.
 
 \begin{lemma}\label{lmm-params-identifiability}
-The contest parameters $c_i$, $c_j$, $\sigma$, $\lambda$ and $\mu_0$ are jointly identifiable. 
+The contest parameters $c_i$, $c_j$, $r$, $\sigma$, $\lambda$ and $\mu_0$ are jointly identifiable. 
 \end{lemma}
 
 
@@ -535,23 +536,24 @@ For analytical tractability and to leverage the steady-state equilibrium formula
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
 \caption{Bayesian Estimates from Synthetic Data}\label{tbl-contest90}
-\begin{tabularx}{\textwidth}{lYYYYY}
+\begin{tabularx}{\textwidth}{lYYYYYY}
 \toprule
-\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} \\
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$r$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} \\
 \addlinespace[0.25ex]
-\cline{2-6}
+\cline{2-7}
 \addlinespace[0.25ex]
-(true val.)        & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 \\
+(true val.)        & 1.2 & 1.5 & 15.0 & 2.0 & 1.0 & 0.0 \\
 \midrule
- Posterior Mean    & 1.094 & 1.764 & 2.784 & 1.103 & 0.017 \\
- Posterior Std.       & 0.252 & 0.494 & 0.495 & 0.289 & 1.999 \\
- RMSE                  & 0.274 & 0.560 & 0.927 & 0.307 & 1.999 \\
+ Posterior Mean    & 1.078 & 1.711 & 14.645 & 2.777 & 1.103 & -0.010 \\
+ Posterior Std.       & 0.382 & 0.661 & 3.986 & 0.503 & 0.303 & 2.026 \\
+ RMSE                  & 0.401 & 0.694 & 4.002 & 0.925 & 0.320 & 2.026 \\
  95\% Interval        
-		& [0.691, 1.672] 
-		& [1.013, 2.942]
-		& [1.951, 3.878]
-		& [0.618, 1.754] 
-		& [-3.887, 3.886] \\
+		& [0.55, 1.99] 
+		& [0.77, 3.30]
+		& [7.8, 23.0]
+		& [1.94, 3.93]
+		& [0.61, 1.79] 
+		& [-3.97, 4.00] \\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
@@ -565,7 +567,7 @@ For analytical tractability and to leverage the steady-state equilibrium formula
 Table~\ref{tbl-contest90} presents the Bayesian inference results based on the synthetic data that we display in Figure~\ref{fig-synthetic_90}. 
 Due to the limited data from the short contest duration, the posterior distribution of some parameters (such as $\sigma$ in this example) remains relatively far from the true value.
 Nevertheless, given the limited sample size, the performance of Bayesian estimation is satisfactory. 
-For most parameters (specifically $c_i$, $c_j$, $\lambda$ and $\mu_0$), the posterior means lie reasonably close to their true values.
+For most parameters (specifically $c_i$, $c_j$, $r$, $\lambda$ and $\mu_0$), the posterior means lie reasonably close to their true values.
 
 We next examine whether Bayesian estimation improves with increasing data quantity.
 
@@ -593,29 +595,29 @@ As the sample size increases, the RMSE of all parameters decreases, indicating t
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
 \caption{Bayesian Estimates from Pooled Synthetic Data}\label{tbl-pool-synthetic-data}
-\begin{tabularx}{\textwidth}{lYYYYY}
+\begin{tabularx}{\textwidth}{lYYYYYY}
 \toprule
-\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$r$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
 \addlinespace[0.25ex]
-\cline{2-6}
+\cline{2-7}
 \addlinespace[0.25ex]
-(true val.)        & 1.2 & 1.5 & 2.0 & 1.0 & 0.0\\
+(true val.)        & 1.2 & 1.5 & 15.0 & 2.0 & 1.0 & 0.0\\
 \midrule
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 5 Contests}} \\
-Posterior Mean  & 1.215 & 1.647 & 1.969 & 1.079 &\\
-Posterior Std.    & 0.120 & 0.178 & 0.143 & 0.130 &\\
-RMSE               & 0.121 & 0.231 & 0.146 & 0.152 &\\
+Posterior Mean  & 1.215 & 1.647 && 1.969 & 1.079 &\\
+Posterior Std.    & 0.120 & 0.178 && 0.143 & 0.130 &\\
+RMSE               & 0.121 & 0.231 && 0.146 & 0.152 &\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 10 Contests}} \\
-Posterior Mean  & 1.255 & 1.690 & 1.911 & 1.053 &\\
-Posterior Std.    & 0.090 & 0.129 & 0.096 & 0.090 &\\
-RMSE               & 0.105 & 0.230 & 0.131 & 0.105 &\\
+Posterior Mean  & 1.255 & 1.690 && 1.911 & 1.053 &\\
+Posterior Std.    & 0.090 & 0.129 && 0.096 & 0.090 &\\
+RMSE               & 0.105 & 0.230 && 0.131 & 0.105 &\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 20 Contests}} \\
-Posterior Mean  & 1.206 & 1.639 & 1.981 & 0.990 &\\
-Posterior Std.    & 0.059 & 0.090 & 0.069 & 0.059 &\\
-RMSE               & 0.060 & 0.165 & 0.071 & 0.060 &\\
+Posterior Mean  & 1.206 & 1.639 && 1.981 & 0.990 &\\
+Posterior Std.    & 0.059 & 0.090 && 0.069 & 0.059 &\\
+RMSE               & 0.060 & 0.165 && 0.071 & 0.060 &\\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
@@ -632,21 +634,21 @@ RMSE               & 0.060 & 0.165 & 0.071 & 0.060 &\\
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
 \caption{Bayesian Estimates from Long Term Synthetic Data}\label{tbl-longterm-synthetic-data}
-\begin{tabularx}{\textwidth}{lYYYYY}
+\begin{tabularx}{\textwidth}{lYYYYYY}
 \toprule
-\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$r$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
 \midrule
 \multicolumn{5}{l}{\textbf{Contest of 6 Months}} \\
-True Value           & 0.6     & 0.75   & 2.0     & 1.0     & 0.0\\
-Posterior Mean    & 0.840 & 0.835 & 1.944 & 1.142 &\\
-Posterior Std.       & 0.138 & 0.152 & 0.226 & 0.245 &\\
-RMSE                  & 0.276 & 0.174 & 0.233 & 0.283 &\\
+True Value           & 0.6     & 0.75   & 15.0 & 2.0     & 1.0     & 0.0\\
+Posterior Mean    & 0.840 & 0.835 & . & 1.944 & 1.142 &\\
+Posterior Std.       & 0.138 & 0.152 & . & 0.226 & 0.245 &\\
+RMSE                  & 0.276 & 0.174 & . & 0.233 & 0.283 &\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Contest of 12 Months}} \\
-True Value           & 0.3     & 0.375 & 2.0     & 1.0     & 0.0\\
-Posterior Mean    & 0.307 & 0.341 & 2.187 & 1.034 &\\
-Posterior Std.      & 0.020 & 0.033 & 0.127 & 0.098 &\\
-RMSE                  & 0.021 & 0.047 & 0.226 & 0.102 &\\
+True Value           & 0.3     & 0.375 & . & 2.0     & 1.0     & 0.0\\
+Posterior Mean    & 0.307 & 0.341 & . & 2.187 & 1.034 &\\
+Posterior Std.      & 0.020 & 0.033 & . & 0.127 & 0.098 &\\
+RMSE                  & 0.021 & 0.047 & . & 0.226 & 0.102 &\\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
@@ -724,14 +726,11 @@ To Do 2: validate the estimation of $\sigma$?
 First, we estimate submission intensities $\tau_i(t)$ and $\tau_j(t)$ by kernel density estimation (KDE). 
 Having $\hat{\tau}_i$ and $\hat{\tau}_j$, the effort levels of the two players are simply $m_i(t) = \hat{\tau}_i / r$ and $m_j(t) = \hat{\tau}_j / r$ by (\ref{eq-model-intensity}), where $r$ is the ratio of effort level and submission intensity. 
 Next, with the submission times denoted by $\{t_k\}$, we have $y_{t_{k+1}} - y_{t_k} \sim \mathcal{N}\left(\frac{1}{r}\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds, \sigma^2(t_{k+1}-t_k)\right)$ by the dynamic of private leaderboard (\ref{eq-state-dynamics}). 
-Then, by (\ref{normal-mle-r}) and (\ref{normal-mle-sigma}), we can estimate the parameters $r$ and $\sigma^2$ using MLE, that is  
+Then, by (\ref{normal-mle-sigma}), we can estimate the parameters $\sigma$ using MLE: 
 \begin{equation*}
-r^{\text{MLE}} = \frac{\sum_k\left[\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right]^2/(t_{k+1}-t_k)}{\sum_k(y_{t_{k+1}}-y_{t_k})\left[\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right] / (t_{k+1}-t_k)}
+\sigma^{\text{MLE}} = \left(\frac{1}{n}\sum_k\frac{\left[y_{t_{k+1}}-y_{t_k}-\frac{1}{\hat{r}}\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right]^2}{t_{k+1}-t_k}\right)^{1/2}
 \end{equation*}
-\begin{equation*}
-\sigma^{\text{MLE}} = \frac{1}{n}\sum_k\frac{\left[y_{t_{k+1}}-y_{t_k}-\frac{1}{\hat{r}}\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right]^2}{t_{k+1}-t_k}
-\end{equation*}
-
+where $\hat{r}$ is the Bayesian estimate. 
 
 
 
@@ -809,7 +808,7 @@ Finally, we determine the constants $K_1$, $K_2$ by the initial condition $S_0$ 
 \end{align*}
 
 
-\subsection{MLE for Normal Distribution}
+\subsection{MLE for $r$ and $\sigma^2$}
 
 Suppose we observe independent data points \( X_1, ..., X_n \), where each \( X_k \sim \mathcal{N}(M_k / r, \sigma^2 T_k) \) with known constants \( M_k \) and \( T_k \). 
 The goal is to estimate the parameters \( r \) and \( \sigma \) via maximum likelihood estimation (MLE).
@@ -817,7 +816,7 @@ Ignoring constant terms, the log-likelihood function of the observed data is
 \[
 \ell(r, \sigma^2) = - \frac{n}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \sum_{k=1}^n \frac{\left( X_k - M_k/r \right)^2}{T_k}.
 \]
-To Estimate $r$, we expand the summation of second term and have 
+To estimate $r$, we expand the summation of second term and have 
 \[
 Q(r) = \sum_{k=1}^n \left( \frac{X_k^2}{T_k} - \frac{2X_k M_k}{r T_k} + \frac{M_k^2}{r^2 T_k} \right)
 = A - \frac{2B}{r} + \frac{C}{r^2},
