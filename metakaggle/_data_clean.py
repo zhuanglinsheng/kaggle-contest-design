@@ -1,5 +1,6 @@
 import os
 import json
+import math
 import statistics
 from datetime import datetime, timedelta
 from typing import Literal
@@ -51,6 +52,15 @@ def randomize_within_day(group: pd.Series, seed: int = 1234):
 	return randomized_times
 
 
+def my_logit(x):
+	threshold_up = 0.9999
+	threshold_lo = 1e-4
+	if x >= threshold_up:
+		x = threshold_up
+	if x <= threshold_lo:
+		x = threshold_lo
+	return math.log(x / (1 - x))
+
 def leaderboard_fulfill(tbl_contest_submissions,
 		deadline: datetime,
 		leaderboard_type: Leaderboard_Type,
@@ -70,11 +80,11 @@ def leaderboard_fulfill(tbl_contest_submissions,
 				score_pub = row['PublicScore']
 				score_pri = row['PrivateScore']
 			case 'Percentage_Big':
-				score_pub = np.tan((row['PublicScore'] / 100) * np.pi / 2)
-				score_pri = np.tan((row['PrivateScore'] / 100) * np.pi / 2)
+				score_pub = my_logit(row['PublicScore'] / 100)
+				score_pri = my_logit(row['PrivateScore'] / 100)
 			case 'Percentage_Small':
-				score_pub = np.tan(row['PublicScore'] * np.pi / 2)
-				score_pri = np.tan(row['PrivateScore'] * np.pi / 2)
+				score_pub = my_logit(row['PublicScore'])
+				score_pri = my_logit(row['PrivateScore'])
 		leaderboard_public.refresh(time, team_id, score_pub)
 		leaderboard_private.refresh(time, team_id, score_pri)
 	return leaderboard_public, leaderboard_private
@@ -86,7 +96,7 @@ def save_contest_data(
 		team_i_id: int, team_j_id: int,
 		deadline: datetime, prize: float, max_daily_submit: int, percentage: float,
 		leaderboard_type: Leaderboard_Type,
-		min_submission_times: int = 5
+		min_submission_times: int = 5,
 ) -> None:
 	# json file & utils
 	wd = os.getcwd()
@@ -114,7 +124,7 @@ def save_contest_data(
 	observed_gap_dynamic = tbl_hat_y['y'].tolist()
 	# normalze \hat{y}_t
 	observed_gap_dynamic_std = statistics.stdev(observed_gap_dynamic)
-	observed_gap_dynamic = [20 * e / observed_gap_dynamic_std for e in observed_gap_dynamic]
+	observed_gap_dynamic = [e / observed_gap_dynamic_std for e in observed_gap_dynamic]
 	observed_gap_dynamic_init = [observed_gap_dynamic[0]] * 24
 	observed_gap_dynamic = observed_gap_dynamic_init + observed_gap_dynamic
 
@@ -122,7 +132,7 @@ def save_contest_data(
 	tbl_y = leaderboard_pri.real_time_gap_between(team_i_id, team_j_id, delta=timedelta(hours=1))
 	real_gap_dynamic = tbl_y['y'].tolist()
 	# normalze \hat{y}_t
-	real_gap_dynamic = [20 * e / observed_gap_dynamic_std for e in real_gap_dynamic]
+	real_gap_dynamic = [e / observed_gap_dynamic_std for e in real_gap_dynamic]
 	real_gap_dynamic_init = [real_gap_dynamic[0]] * 24
 	real_gap_dynamic = real_gap_dynamic_init + real_gap_dynamic
 

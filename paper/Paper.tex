@@ -725,10 +725,10 @@ To Do 2: validate the estimation of $\sigma$?
 
 First, we estimate submission intensities $\tau_i(t)$ and $\tau_j(t)$ by kernel density estimation (KDE). 
 Having $\hat{\tau}_i$ and $\hat{\tau}_j$, the effort levels of the two players are simply $m_i(t) = \hat{\tau}_i / r$ and $m_j(t) = \hat{\tau}_j / r$ by (\ref{eq-model-intensity}), where $r$ is the ratio of effort level and submission intensity. 
-Next, with the submission times denoted by $\{t_k\}$, we have $y_{t_{k+1}} - y_{t_k} \sim \mathcal{N}\left(\frac{1}{r}\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds, \sigma^2(t_{k+1}-t_k)\right)$ by the dynamic of private leaderboard (\ref{eq-state-dynamics}). 
+Next, with the submission times denoted by $\{t_k\}$, we have $y_{t_{k+1}} - y_{t_k} \sim \mathcal{N}\left(\int^{t_{k+1}}_{t_k}m_i(s) - m_j(s)ds, \sigma^2(t_{k+1}-t_k)\right)$ by the dynamic of private leaderboard (\ref{eq-state-dynamics}). 
 Then, by (\ref{normal-mle-sigma}), we can estimate the parameters $\sigma$ using MLE: 
 \begin{equation*}
-\sigma^{\text{MLE}} = \left(\frac{1}{n}\sum_k\frac{\left[y_{t_{k+1}}-y_{t_k}-\frac{1}{\hat{r}}\int^{t_{k+1}}_{t_k}\hat\tau_i(s) - \hat\tau_j(s)ds\right]^2}{t_{k+1}-t_k}\right)^{1/2}
+\sigma^{\text{MLE}} = \left(\frac{1}{n}\sum_k\frac{\left[y_{t_{k+1}}-y_{t_k}-\int^{t_{k+1}}_{t_k}m_i(s) - m_j(s)ds\right]^2}{t_{k+1}-t_k}\right)^{1/2}
 \end{equation*}
 where $\hat{r}$ is the Bayesian estimate. 
 
