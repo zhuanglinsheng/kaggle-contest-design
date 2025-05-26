@@ -550,7 +550,7 @@ For analytical tractability and to leverage the steady-state equilibrium formula
 (true val.)        & 1.2 & 1.5 & 15.0 & 2.0 & 1.0 & 0.0 \\
 \midrule
  Posterior Mean    & 1.078 & 1.711 & 14.645 & 2.777 & 1.103 & -0.010 \\
- Posterior Std.       & 0.382 & 0.661 & 3.986 & 0.503 & 0.303 & 2.026 \\
+ Posterior Stderr   & 0.382 & 0.661 & 3.986 & 0.503 & 0.303 & 2.026 \\
  RMSE                  & 0.401 & 0.694 & 4.002 & 0.925 & 0.320 & 2.026 \\
  95\% Interval        
 		& [0.55, 1.99] 
@@ -611,18 +611,18 @@ As the sample size increases, the RMSE of all parameters decreases, indicating t
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 5 Contests}} \\
 Posterior Mean  & 1.215 & 1.647 && 1.969 & 1.079 &\\
-Posterior Std.    & 0.120 & 0.178 && 0.143 & 0.130 &\\
+Posterior Stderr & 0.120 & 0.178 && 0.143 & 0.130 &\\
 RMSE               & 0.121 & 0.231 && 0.146 & 0.152 &\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 10 Contests}} \\
 Posterior Mean  & 1.255 & 1.690 && 1.911 & 1.053 &\\
-Posterior Std.    & 0.090 & 0.129 && 0.096 & 0.090 &\\
-RMSE               & 0.105 & 0.230 && 0.131 & 0.105 &\\
+Posterior Stderr & 0.090 & 0.129 && 0.096 & 0.090 &\\
+RMSE                & 0.105 & 0.230 && 0.131 & 0.105 &\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 20 Contests}} \\
 Posterior Mean  & 1.206 & 1.639 && 1.981 & 0.990 &\\
-Posterior Std.    & 0.059 & 0.090 && 0.069 & 0.059 &\\
-RMSE               & 0.060 & 0.165 && 0.071 & 0.060 &\\
+Posterior Stderr & 0.059 & 0.090 && 0.069 & 0.059 &\\
+RMSE                & 0.060 & 0.165 && 0.071 & 0.060 &\\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
@@ -646,13 +646,13 @@ RMSE               & 0.060 & 0.165 && 0.071 & 0.060 &\\
 \multicolumn{5}{l}{\textbf{Contest of 6 Months}} \\
 True Value           & 0.6     & 0.75   & 15.0 & 2.0     & 1.0     & 0.0\\
 Posterior Mean    & 0.840 & 0.835 & . & 1.944 & 1.142 &\\
-Posterior Std.       & 0.138 & 0.152 & . & 0.226 & 0.245 &\\
+Posterior Stderr   & 0.138 & 0.152 & . & 0.226 & 0.245 &\\
 RMSE                  & 0.276 & 0.174 & . & 0.233 & 0.283 &\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Contest of 12 Months}} \\
 True Value           & 0.3     & 0.375 & . & 2.0     & 1.0     & 0.0\\
 Posterior Mean    & 0.307 & 0.341 & . & 2.187 & 1.034 &\\
-Posterior Std.      & 0.020 & 0.033 & . & 0.127 & 0.098 &\\
+Posterior Stderr   & 0.020 & 0.033 & . & 0.127 & 0.098 &\\
 RMSE                  & 0.021 & 0.047 & . & 0.226 & 0.102 &\\
 \bottomrule
 \addlinespace[0.5ex]
@@ -719,44 +719,125 @@ Together, these features enable top teams to identify likely competitors and adj
 To Do 1: relation between $\lambda$ and the proportion of data release?
 
 By the data generating process (\ref{eq-leaderboard-gap}), we have a simple maximum likelihood estimation (MLE) of the true value of $\lambda$. 
-Since $\hat{y}_t - y_t \sim \mathcal{N}(0, 1/(\lambda\Delta))$, we have 
+Let $c = {1, 2, ..., n}$ index the contest.
+Since $\hat{y}_t^c - y_t^c \sim \mathcal{N}(0, 1/(\lambda_c\Delta))$, we have 
 \begin{equation*}
-\lambda^{\text{MLE}} = \frac{n}{\Delta\sum^n_{i=1}(y_i - \hat{y}_i)^2}
+\lambda^{\text{MLE}}_c = \frac{N^c}{\Delta\sum^{N^c}_{k=1}(y_k^c - \hat{y}_k^c)^2}, \quad N^c = T/\Delta
 \end{equation*}
 
-...
+Below is the regression result:
 
-\begin{figure}[!ht]
-    \centering
-    \begin{subfigure}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{validate_lamb.pdf}
-        \caption{Validate $\lambda$}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{validate_sigma.pdf}
-        \caption{Validate $\sigma$}
-    \end{subfigure}
-    \caption{Structure Validation}
-    \label{fig-approximation}
-\end{figure}
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	\includegraphics[width=\linewidth]{validate_lamb.pdf}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+	\centering
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{llYY}
+		\toprule
+		& coef. & stderr & 95\% CI \\
+		\midrule
+		const.
+		& -0.718 & 3.184 & [-7.064, 5.627] \\
+		$\log(1 + \hat{\lambda})$ 
+		& 3.259\textbf{**} & 1.089 & [1.089, 5.429] \\
+		\midrule
+		Obs. & \multicolumn{3}{c}{75} \\
+		R$^2$ & \multicolumn{3}{c}{0.109} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{0.097} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(2) Normality diagnostics: Omnibus = 0.376, Jarque-Bera = 0.070, Skewness = $-0.041$, Kurtosis = 3.125. 
+(3) Other diagnostic statistics: Condition Number = 28.2, Durbin-Watson = 2.244.
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+%%%%%%%%%%%% Captions %%%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\centering
+	\captionof{figure}{...}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\centering
+	\captionof{table}{...}
+\end{minipage}
+\medskip
 
+Result: significantly positively related. 
 
 To Do 2: validate the estimation of $\sigma$?
 
-First, we estimate submission intensities $\tau_i(t)$ and $\tau_j(t)$ by kernel density estimation (KDE). 
-Having $\hat{\tau}_i$ and $\hat{\tau}_j$, the effort levels of the two players are simply $m_i(t) = \hat{\tau}_i / r$ and $m_j(t) = \hat{\tau}_j / r$ by (\ref{eq-model-intensity}), where $r$ is the ratio of effort level and submission intensity. 
-Next, with the submission times denoted by $\{t_k\}$, we have $y_{t_{k+1}} - y_{t_k} \sim \mathcal{N}\left(\int^{t_{k+1}}_{t_k}m_i(s) - m_j(s)ds, \sigma^2(t_{k+1}-t_k)\right)$ by the dynamic of private leaderboard (\ref{eq-state-dynamics}). 
+By the dynamic of private leaderboard (\ref{eq-state-dynamics}), with the submission times of contest $c$ denoted by $\{t^c_k\}^{N^c}_{k=1}$, we have $y^c_{k+1} - y^c_{k} \sim \mathcal{N}\left(\int^{t_{k+1}}_{t_k}m^c_i(s) - m^c_j(s)ds, \sigma^2(t^c_{k+1}-t^c_k)\right)$ . 
 Then, by (\ref{normal-mle-sigma}), we can estimate the parameters $\sigma$ using MLE: 
 \begin{equation*}
-\sigma^{\text{MLE}} = \left(\frac{1}{n}\sum_k\frac{\left[y_{t_{k+1}}-y_{t_k}-\int^{t_{k+1}}_{t_k}m_i(s) - m_j(s)ds\right]^2}{t_{k+1}-t_k}\right)^{1/2}
+\sigma^{\text{MLE}}_c = \left(\frac{1}{N^c}\sum_k\frac{\left[y^c_{t^c_{k+1}}-y^c_{t_k}-\int^{t^c_{k+1}}_{t^c_k}m^c_i(s) - m^c_j(s)ds\right]^2}{t^c_{k+1}-t^c_k}\right)^{1/2}
 \end{equation*}
 where $\hat{r}$ is the Bayesian estimate. 
 
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	\includegraphics[width=\linewidth]{validate_sigma.pdf}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+	\centering
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{llYY}
+		\toprule
+		& coef. & stderr & 95\% CI \\
+		\midrule
+		const.
+		& 0.054 & 0.116 & [-0.178,0.285] \\
+		$\log(1 + \hat{\lambda})$ 
+		& 0.887\textbf{***} & 0.152 & [0.583, 1.190] \\
+		\midrule
+		Obs. & \multicolumn{3}{c}{75} \\
+		R$^2$ & \multicolumn{3}{c}{0.317} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{0.308} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(2) Normality diagnostics: Omnibus = 1.280, Jarque-Bera = 0.774, Skewness = 0.225, Kurtosis = 3.214.
+(3) Other diagnostic statistics: Condition Number = 5.08, Durbin-Watson = 1.618.
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+%%%%%%%%%%%% Captions %%%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\centering
+	\captionof{figure}{...}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\centering
+	\captionof{table}{...}
+\end{minipage}
+\medskip
 
-
+Result: significantly positively related. 
 
 \section{Conclusion}
 
