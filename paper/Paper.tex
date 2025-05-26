@@ -757,15 +757,6 @@ where $\hat{r}$ is the Bayesian estimate.
 
 
 
-\newpage
-
-\section{Extension: Staggered Entry of Multiple Players}
-\label{sect-extension}
-
-We index the participating teams of the contest by $i\in\{1, 2, ..., n\}$. 
-To fully leverage the potential of the data and establish a connection with our theoretical model, let's assume that each participant perceives a competitor they are playing against at every moment, denoted as $j$. 
-This perceived competitor is typically understood as the most prominent individual on the leaderboard, i.e., the person ranked first.
-When team $i$ themselves hold the top position, their perceived competitor is the individual who poses the greatest threat, namely the person ranked second.
 
 \section{Conclusion}
 
@@ -787,9 +778,8 @@ When team $i$ themselves hold the top position, their perceived competitor is th
 % etc
 % \end{APPENDICES}
 
-\newpage
-\begin{APPENDICES}
 
+\begin{APPENDICES}
 
 
 \section{Proofs}
@@ -799,6 +789,57 @@ Suppose $\Theta = (c_i, c_j, \sigma, \lambda)$ and $\Theta' = (c'_i, c'_j, \sigm
 To show that the model parameters are jointly identifiable, it suffices to show that $\mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta) = \mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta')$ $\Rightarrow$ $\Theta = \Theta'$. 
 \Halmos
 \endproof
+
+
+
+\section{Extensions}
+
+\subsection{Staggered Entry of Multiple Players}
+\label{sect-extension}
+
+We index the participating teams of the contest by $i\in\{1, 2, ..., n\}$. 
+To fully leverage the potential of the data and establish a connection with our theoretical model, let's assume that each participant perceives a competitor they are playing against at every moment, denoted as $j$. 
+This perceived competitor is typically understood as the most prominent individual on the leaderboard, i.e., the person ranked first.
+When team $i$ themselves hold the top position, their perceived competitor is the individual who poses the greatest threat, namely the person ranked second.
+
+\subsection{Hybrid Kalman Filter}
+\label{sect-kalman-filter}
+
+% Submission
+Let' suppose the submission events of the representative player $i$ occur at times $(t^i_1, t^i_2, ...)$ following an inhomogeneous Poisson process driven by the intensity function $\tau_i(t)$. 
+
+% Signal
+After each submission, the contest designer emits a \textit{public} signal of the real output $x_{i,t_k}$. 
+The signal is ambiguous and the game holder controls the ambiguity. 
+The dynamic of signal is 
+\begin{equation}\label{signal}
+	\hat{x}_{i,k} = x_{i,t_k} + \frac{v_{i,k}}{\sqrt{\lambda}}, \quad k=1, 2, ...
+\end{equation}
+where $v_{i,k}$ follows standard normal distribution and is independent with $(W_{i,t})$ and $(W_{j,t})$, and the parameter $\lambda$ is set by the game holder to control the precision of signals. 
+The larger the $\lambda$, the more accurate the signal would be. 
+
+% Bayesian Player
+The information set of both players at time $t \ge 0$ is  $I_{t} := \{\hat{x}_{i,k}, \hat{x}_{j,k} : 0\le t_k \le t\}$. 
+Both players estimate the unknown outputs $x_{i,t}$ and $x_{j,t}$ purely based on the information set $I_t$ and hidden actions $q_{i,t}$ and $q_{j,t}$. 
+Let $\tilde{x}_{i,t} \equiv E(x_{i,t}|I_t)$ be the estimated output gap and $S_{i,t} \equiv E[(\tilde{x}_{i,t}-x_{i,t})^2|I_t]$ be the estimation variance. 
+The conditional distribution $y_{t}|I_t\sim\mathcal{N}(\tilde{y}_{t},S_{t}|I_t)$ is fully captured by the mean $\tilde{y}_{t}$ and variance $S_{t}$. 
+
+The evolution of $\tilde{x}_{i,t}$ and $S_{i,t}$ is characterized by a continuous-discrete Kalman Filter (CD-KF, \citealt{barrau2017invariant}, \citealt{frogerais2012various}), with the measurement of each step $k=1, 2, ...$ consisting of two phases: in
+(1) prediction phase during time interval $(t_{k-1}, t_{k})$, equations are derived from those of Kalman-Bucy filter \citep{Bensoussan1992Control} without considering the Kalman gain: 
+\begin{align}
+	d\tilde{x}_{i,t} &= q_{i,t}dt
+	\label{filtered-x}\\
+	dS_{i,t} &= \sigma^2dt
+	\label{filtered-S}
+\end{align} 
+and in (2) updation phase $t=t_k$, equations are 
+\begin{align}
+	\tilde{x}_{i,k}^{+} &= \tilde{x}_{i,k}^{-} + \frac{\lambda S_{i,t_k}^{-}}{\lambda S_{i,t_k}^{-}+1}\left(\hat{x}_{i,k} - \tilde{x}_{i,t_k}^{-}\right)
+	\label{updated-x}\\
+	S_{i,t_k}^{+} &= \frac{S_{i,t_k}^{-}}{\lambda S_{i,t_k}^{-}+1} 
+\end{align}
+If $\lambda = 0$, we have $S_t = S_0+\sigma^2t$, i.e., the estimation variance is increasing in time linearly. 
+If $\lambda > 0$, the estimation error decreases after each update of the public leaderboard, i.e., $S_{i,t_k}^+ < S_{i,t_k}^-$. 
 
 
 
