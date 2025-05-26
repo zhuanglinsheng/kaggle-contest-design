@@ -122,12 +122,12 @@
 % Title or shortened title suitable for running heads. Sample:
 % \RUNTITLE{Bundling Information Goods of Decreasing Value}
 % Enter the (shortened) title:
-\RUNTITLE{Information Disclosure in Dynamic Innovation Contests}
+\RUNTITLE{Bayesian Structural Inference for Dynamic Crowdsourcing Contests}
 
 % Full title. Sample:
 % \TITLE{Bundling Information Goods of Decreasing Value}
 % Enter the full title:
-\TITLE{Information Disclosure in Dynamic Innovation Contests}
+\TITLE{Bayesian Structural Inference for Dynamic Crowdsourcing Contests}
 
 % Block of authors and their affiliations starts here:
 % NOTE: Authors with same affiliation, if the order of authors allows,
@@ -316,6 +316,11 @@ The variables $w_{i(j)}$ represent the abilities of two players, while $\rho_{i(
 It is not hard to see that $\gamma(\cdot)$ is strictly increasing on $(-1,1)$, ranging from $-\infty$ to $+\infty$. 
 Moreover, the equilibrium effort $m_{i(j)}$ can be represented to the product of $\phi(y; 0, \sigma^2(T-t))$, the probability density of normal distribution with mean zero and variance $\sigma^2(T-t)$ at the state $y$ and an amplitude factor that only depends on the composite variable $z$. 
 
+To Do: Contest Design Rules
+
+\begin{proposition}
+...
+\end{proposition}
 
 
 
@@ -721,6 +726,24 @@ Since $\hat{y}_t - y_t \sim \mathcal{N}(0, 1/(\lambda\Delta))$, we have
 
 ...
 
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{validate_lamb.pdf}
+        \caption{Validate $\lambda$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{validate_sigma.pdf}
+        \caption{Validate $\sigma$}
+    \end{subfigure}
+    \caption{Structure Validation}
+    \label{fig-approximation}
+\end{figure}
+
+
 To Do 2: validate the estimation of $\sigma$?
 
 First, we estimate submission intensities $\tau_i(t)$ and $\tau_j(t)$ by kernel density estimation (KDE). 
@@ -768,6 +791,14 @@ When team $i$ themselves hold the top position, their perceived competitor is th
 \begin{APPENDICES}
 
 
+
+\section{Proofs}
+
+\proof{Proof of Lemma~\ref{lmm-params-identifiability}}
+Suppose $\Theta = (c_i, c_j, \sigma, \lambda)$ and $\Theta' = (c'_i, c'_j, \sigma', \lambda')$. 
+To show that the model parameters are jointly identifiable, it suffices to show that $\mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta) = \mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta')$ $\Rightarrow$ $\Theta = \Theta'$. 
+\Halmos
+\endproof
 
 
 
@@ -836,13 +867,7 @@ which yields
 
 
 
-\section{Proofs}
 
-\proof{Proof of Lemma~\ref{lmm-params-identifiability}}
-Suppose $\Theta = (c_i, c_j, \sigma, \lambda)$ and $\Theta' = (c'_i, c'_j, \sigma', \lambda')$. 
-To show that the model parameters are jointly identifiable, it suffices to show that $\mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta) = \mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta')$ $\Rightarrow$ $\Theta = \Theta'$. 
-\Halmos
-\endproof
 
 
 

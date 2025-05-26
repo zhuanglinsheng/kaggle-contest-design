@@ -155,12 +155,12 @@ transformed data {
 }
 
 parameters {
-	real<lower=-20, upper=20>     mu_0;
+	real                          mu_0;
 	real<lower=5e-1, upper=5>     c_i;
 	real<lower=5e-1, upper=5>     c_j;
 	real<lower=5e-1, upper=10>    sigma;
-	real<lower=1e-6, upper=10>    lambda;
-	real<lower=1e-6, upper=1000>  r;
+	real<lower=1e-6>              lambda;
+	real<lower=1e-2, upper=100>   r;
 }
 
 transformed parameters {

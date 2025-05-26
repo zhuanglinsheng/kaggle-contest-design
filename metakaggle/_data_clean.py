@@ -122,9 +122,10 @@ def save_contest_data(
 	start_time_commit = start_time - delta
 	start_time_contest = start_time - 24 * delta
 	observed_gap_dynamic = tbl_hat_y['y'].tolist()
+	#print('>>>>', len(observed_gap_dynamic))
 	# normalze \hat{y}_t
-	observed_gap_dynamic_std = statistics.stdev(observed_gap_dynamic)
-	observed_gap_dynamic = [e / observed_gap_dynamic_std for e in observed_gap_dynamic]
+	#observed_gap_dynamic_std = statistics.stdev(observed_gap_dynamic)
+	#observed_gap_dynamic = [e / observed_gap_dynamic_std for e in observed_gap_dynamic]
 	observed_gap_dynamic_init = [observed_gap_dynamic[0]] * 24
 	observed_gap_dynamic = observed_gap_dynamic_init + observed_gap_dynamic
 
@@ -132,7 +133,7 @@ def save_contest_data(
 	tbl_y = leaderboard_pri.real_time_gap_between(team_i_id, team_j_id, delta=timedelta(hours=1))
 	real_gap_dynamic = tbl_y['y'].tolist()
 	# normalze \hat{y}_t
-	real_gap_dynamic = [e / observed_gap_dynamic_std for e in real_gap_dynamic]
+	#real_gap_dynamic = [e / observed_gap_dynamic_std for e in real_gap_dynamic]
 	real_gap_dynamic_init = [real_gap_dynamic[0]] * 24
 	real_gap_dynamic = real_gap_dynamic_init + real_gap_dynamic
 
