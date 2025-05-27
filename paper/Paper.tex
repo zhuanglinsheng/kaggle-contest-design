@@ -549,22 +549,23 @@ For analytical tractability and to leverage the steady-state equilibrium formula
 \addlinespace[0.25ex]
 (true val.)        & 1.2 & 1.5 & 15.0 & 2.0 & 1.0 & 0.0 \\
 \midrule
- Posterior Mean    & 1.078 & 1.711 & 14.645 & 2.777 & 1.103 & -0.010 \\
- Posterior Stderr   & 0.382 & 0.661 & 3.986 & 0.503 & 0.303 & 2.026 \\
- RMSE                  & 0.401 & 0.694 & 4.002 & 0.925 & 0.320 & 2.026 \\
+ Posterior Mean    & 1.078 & 1.727 & 14.588 & 2.759 & 1.090 & 0.062 \\
+ Posterior Stderr   & 0.381 & 0.655 & 3.894 & 0.494 & 0.297 & 4.981 \\
+ RMSE                  & 0.400 & 0.693 & 3.916 & 0.905 & 0.310 & 4.981 \\
  95\% Interval        
-		& [0.55, 1.99] 
-		& [0.77, 3.30]
-		& [7.8, 23.0]
-		& [1.94, 3.93]
-		& [0.61, 1.79] 
-		& [-3.97, 4.00] \\
+		& [0.54, 2.00] 
+		& [0.76, 3.33]
+		& [7.8, 22.8]
+		& [1.94, 3.86]
+		& [0.59, 1.76] 
+		& [-9.72, 9.78] \\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$ by the bias–variance decomposition. RMSE is then calculate by the squared root of MSE. 
+\textit{Note:} (1) $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$ by the bias–variance decomposition. RMSE is then calculate by the squared root of MSE. 
+(2) Players $i$ and $j$ submit 28 and 18 times respectively.
 }
 \end{minipage}
 \end{table}
@@ -610,9 +611,9 @@ As the sample size increases, the RMSE of all parameters decreases, indicating t
 \midrule
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 5 Contests}} \\
-Posterior Mean  & 1.215 & 1.647 && 1.969 & 1.079 &\\
-Posterior Stderr & 0.120 & 0.178 && 0.143 & 0.130 &\\
-RMSE               & 0.121 & 0.231 && 0.146 & 0.152 &\\
+Posterior Mean  & 1.112 & 1.508 & 13.774 & 1.974 & 1.081 & 0.239 \\
+Posterior Stderr & 0.335 & 0.466 & 3.984 & 0.145 & 0.128 & 5.168 \\
+RMSE               & 0.347 & 0.466 & 4.168 & 0.148 & 0.151 & 5.174 \\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 10 Contests}} \\
 Posterior Mean  & 1.255 & 1.690 && 1.911 & 1.053 &\\
@@ -645,13 +646,13 @@ RMSE                & 0.060 & 0.165 && 0.071 & 0.060 &\\
 \midrule
 \multicolumn{5}{l}{\textbf{Contest of 6 Months}} \\
 True Value           & 0.6     & 0.75   & 15.0 & 2.0     & 1.0     & 0.0\\
-Posterior Mean    & 0.840 & 0.835 & . & 1.944 & 1.142 &\\
-Posterior Stderr   & 0.138 & 0.152 & . & 0.226 & 0.245 &\\
-RMSE                  & 0.276 & 0.174 & . & 0.233 & 0.283 &\\
+Posterior Mean    & 0.736 & 0.914 & 15.606 & 1.944 & 0.959 & 0.173\\
+Posterior Stderr   & 0.177 & 0.240 & 3.358 & 0.205 & 0.152 & 4.948\\
+RMSE                  & 0.223 & 0.291 & 3.412 & 0.213 & 0.158 & 4.951\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Contest of 12 Months}} \\
-True Value           & 0.3     & 0.375 & . & 2.0     & 1.0     & 0.0\\
-Posterior Mean    & 0.307 & 0.341 & . & 2.187 & 1.034 &\\
+True Value           & 0.3     & 0.375 & 15.0 & 2.0     & 1.0     & 0.0\\
+Posterior Mean    & 0.259 & 0.383 & 12.692 & 0.949 & 1.034 &\\
 Posterior Stderr   & 0.020 & 0.033 & . & 0.127 & 0.098 &\\
 RMSE                  & 0.021 & 0.047 & . & 0.226 & 0.102 &\\
 \bottomrule
@@ -660,7 +661,7 @@ RMSE                  & 0.021 & 0.047 & . & 0.226 & 0.102 &\\
 \begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:} (1) $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$ by the bias–variance decomposition. RMSE is then calculate by the squared root of MSE. 
-(2) Players $i$ and $j$ submit 31 and 40 times in the 6-month contest, and 143 and 182 times in the 12-month contest, respectively.
+(2) Players $i$ and $j$ submit 59 and 51 times in the 6-month contest, and 154 and 90 times in the 12-month contest, respectively.
 }
 \end{minipage}
 \end{table}
