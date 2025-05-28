@@ -151,17 +151,17 @@ transformed data {
 	//real<lower=5e-1, upper=5>     c_j = 1.5;
 	//real<lower=5e-1, upper=10>    sigma = 2.0;
 	//real<lower=1e-6, upper=10>    lambda = 0.5;
-	//real<lower=1e-6, upper=1000>  r = ratio;
+	real<lower=1e-6, upper=1000>  r = ratio;
 	//real<lower=-20, upper=20>     mu_0 = 0.0;
 }
 
 parameters {
-	real<lower=-20, upper=20>     mu_0;
-	real<lower=5e-1, upper=5>     c_i;
-	real<lower=5e-1, upper=5>     c_j;
+	real<lower=1e-1, upper=5>     c_i;
+	real<lower=1e-1, upper=5>     c_j;
 	real<lower=5e-1, upper=10>    sigma;
 	real<lower=1e-6, upper=10>    lambda;
-	real<lower=1e-6, upper=1000>  r;
+	real<lower=-20, upper=20>     mu_0;
+	//real<lower=1e-6, upper=1000>  r;
 }
 
 transformed parameters {
@@ -207,12 +207,12 @@ transformed parameters {
 
 model {
 	/* priors */
-	c_i ~ normal(1.0, 5);        // truncated normal
-	c_j ~ normal(1.0, 5);        // truncated normal
+	c_i ~ normal(0.5, 5);        // truncated normal
+	c_j ~ normal(0.5, 5);        // truncated normal
 	sigma ~ normal(1.0, 5);      // truncated normal
 	lambda ~ normal(1.0, 5);     // truncated normal
-	r ~ normal(10, 10);
-	mu_0 ~ normal(0.0, 5);
+	mu_0 ~ normal(0.0, 1);       // mean = hat{y}_0, variance is smaller (informative)
+	r ~ normal(15, 5);
 
 	/* likelihood */
 	if (Ni > 1) {

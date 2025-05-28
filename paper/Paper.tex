@@ -354,8 +354,8 @@ We assume the submission intensity $\tau_i(t)$ is proportional to the effort lev
 \begin{equation}\label{eq-model-intensity}
 \tau_i(t) = r \cdot m_i(\tilde{y}_t, t)
 \end{equation}
-where $r>0$ is the ratio of submission intensity and effort level. 
-The contest players are aware of this ratio, but the contest designer must infer it from the data. 
+where $r>0$ is the ratio of submission intensity to effort level, serving as a tuning parameter for numerical stability. 
+
 
 %% Data: Leaderboard
 The third component of the contest data is the \textit{public} and \textit{private} leaderboard that records the real-time rankings and scores of each participant, denoted by $\hat{x}^{i(j)}_t$ and $x^{i(j)}_t$. 
@@ -541,24 +541,23 @@ For analytical tractability and to leverage the steady-state equilibrium formula
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
 \caption{Bayesian Estimates from Synthetic Data}\label{tbl-contest90}
-\begin{tabularx}{\textwidth}{lYYYYYY}
+\begin{tabularx}{\textwidth}{lYYYYY}
 \toprule
-\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$r$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} \\
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} \\
 \addlinespace[0.25ex]
-\cline{2-7}
+\cline{2-6}
 \addlinespace[0.25ex]
-(true val.)        & 1.2 & 1.5 & 15.0 & 2.0 & 1.0 & 0.0 \\
+(true val.)        & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 \\
 \midrule
- Posterior Mean    & 1.078 & 1.727 & 14.588 & 2.759 & 1.090 & 0.062 \\
- Posterior Stderr   & 0.381 & 0.655 & 3.894 & 0.494 & 0.297 & 4.981 \\
- RMSE                  & 0.400 & 0.693 & 3.916 & 0.905 & 0.310 & 4.981 \\
+ Posterior Mean    & 1.089 & 1.751 & 2.801 & 1.105 & 0.005 \\
+ Posterior Stderr   & 0.258 & 0.476 & 0.503 & 0.299 & 0.990 \\
+ RMSE                  & 0.281 & 0.538 & 0.945 & 0.317 & 0.990 \\
  95\% Interval        
-		& [0.54, 2.00] 
-		& [0.76, 3.33]
-		& [7.8, 22.8]
-		& [1.94, 3.86]
-		& [0.59, 1.76] 
-		& [-9.72, 9.78] \\
+		& [0.68, 1.68] 
+		& [1.01, 2.85]
+		& [1.95, 3.93]
+		& [0.62, 1.78] 
+		& [-1.92, 1.94] \\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
@@ -573,7 +572,7 @@ For analytical tractability and to leverage the steady-state equilibrium formula
 Table~\ref{tbl-contest90} presents the Bayesian inference results based on the synthetic data that we display in Figure~\ref{fig-synthetic_90}. 
 Due to the limited data from the short contest duration, the posterior distribution of some parameters (such as $\sigma$ in this example) remains relatively far from the true value.
 Nevertheless, given the limited sample size, the performance of Bayesian estimation is satisfactory. 
-For most parameters (specifically $c_i$, $c_j$, $r$, $\lambda$ and $\mu_0$), the posterior means lie reasonably close to their true values.
+For most parameters (specifically $c_i$, $c_j$, $\lambda$ and $\mu_0$), the posterior means lie reasonably close to their true values.
 
 We next examine whether Bayesian estimation improves with increasing data quantity.
 
@@ -601,29 +600,29 @@ As the sample size increases, the RMSE of all parameters decreases, indicating t
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
 \caption{Bayesian Estimates from Pooled Synthetic Data}\label{tbl-pool-synthetic-data}
-\begin{tabularx}{\textwidth}{lYYYYYY}
+\begin{tabularx}{\textwidth}{lYYYYY}
 \toprule
-\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$r$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
 \addlinespace[0.25ex]
-\cline{2-7}
+\cline{2-6}
 \addlinespace[0.25ex]
-(true val.)        & 1.2 & 1.5 & 15.0 & 2.0 & 1.0 & 0.0\\
+(true val.)        & 1.2 & 1.5 & 2.0 & 1.0 & 0.0\\
 \midrule
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 5 Contests}} \\
-Posterior Mean  & 1.112 & 1.508 & 13.774 & 1.974 & 1.081 & 0.239 \\
-Posterior Stderr & 0.335 & 0.466 & 3.984 & 0.145 & 0.128 & 5.168 \\
-RMSE               & 0.347 & 0.466 & 4.168 & 0.148 & 0.151 & 5.174 \\
+Posterior Mean  & 1.213 & 1.645 & 1.973 & 1.083 & 0.000 \\
+Posterior Stderr & 0.121 & 0.174 & 0.145 & 0.129 & 0.997 \\
+RMSE               & 0.122 & 0.226 & 0.147 & 0.153 & 0.997 \\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 10 Contests}} \\
-Posterior Mean  & 1.255 & 1.690 && 1.911 & 1.053 &\\
-Posterior Stderr & 0.090 & 0.129 && 0.096 & 0.090 &\\
-RMSE                & 0.105 & 0.230 && 0.131 & 0.105 &\\
+Posterior Mean  & 1.254 & 1.686 & 1.912 & 1.053 & -0.009\\
+Posterior Stderr & 0.087 & 0.128 & 0.095 & 0.090 & 0.975\\
+RMSE                & 0.102 & 0.225 & 0.130 & 0.104 & 0.975\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 20 Contests}} \\
-Posterior Mean  & 1.206 & 1.639 && 1.981 & 0.990 &\\
-Posterior Stderr & 0.059 & 0.090 && 0.069 & 0.059 &\\
-RMSE                & 0.060 & 0.165 && 0.071 & 0.060 &\\
+Posterior Mean  & 1.204 & 1.639 & 1.981 & 0.988 & 0.008\\
+Posterior Stderr & 0.060 & 0.089 & 0.068 & 0.060 & 1.003\\
+RMSE                & 0.060 & 0.165 & 0.071 & 0.062 & 1.003\\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
@@ -640,28 +639,28 @@ RMSE                & 0.060 & 0.165 && 0.071 & 0.060 &\\
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
 \caption{Bayesian Estimates from Long Term Synthetic Data}\label{tbl-longterm-synthetic-data}
-\begin{tabularx}{\textwidth}{lYYYYYY}
+\begin{tabularx}{\textwidth}{lYYYYY}
 \toprule
-\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$r$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$}\\
 \midrule
 \multicolumn{5}{l}{\textbf{Contest of 6 Months}} \\
-True Value           & 0.6     & 0.75   & 15.0 & 2.0     & 1.0     & 0.0\\
-Posterior Mean    & 0.736 & 0.914 & 15.606 & 1.944 & 0.959 & 0.173\\
-Posterior Stderr   & 0.177 & 0.240 & 3.358 & 0.205 & 0.152 & 4.948\\
-RMSE                  & 0.223 & 0.291 & 3.412 & 0.213 & 0.158 & 4.951\\
+True Value           & 0.6     & 0.75   & 2.0     & 1.0     & 0.0\\
+Posterior Mean    & 0.806 & 0.936 & 1.685 & 1.116 & 0.011\\
+Posterior Stderr   & 0.112 & 0.142 & 0.148 & 0.171 & 0.986\\
+RMSE                  & 0.234 & 0.234 & 0.348 & 0.207 & 0.986\\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Contest of 12 Months}} \\
-True Value           & 0.3     & 0.375 & 15.0 & 2.0     & 1.0     & 0.0\\
-Posterior Mean    & 0.259 & 0.383 & 12.692 & 0.949 & 1.034 &\\
-Posterior Stderr   & 0.020 & 0.033 & . & 0.127 & 0.098 &\\
-RMSE                  & 0.021 & 0.047 & . & 0.226 & 0.102 &\\
+True Value           & 0.3     & 0.375 & 2.0     & 1.0     & 0.0\\
+Posterior Mean    & 0.333 & 0.436 & 2.067 & 1.101 & 0.012\\
+Posterior Stderr   & 0.027 & 0.046 & 0.097 & 0.138 & 0.994\\
+RMSE                  & 0.043 & 0.076 & 0.118 & 0.171 & 0.994\\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
 \begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:} (1) $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$ by the bias–variance decomposition. RMSE is then calculate by the squared root of MSE. 
-(2) Players $i$ and $j$ submit 59 and 51 times in the 6-month contest, and 154 and 90 times in the 12-month contest, respectively.
+(2) Players $i$ and $j$ submit 59 and 51 times in the 6-month contest, and 100 and 97 times in the 12-month contest, respectively.
 }
 \end{minipage}
 \end{table}
@@ -861,6 +860,7 @@ Result: significantly positively related.
 % \end{APPENDICES}
 
 
+\newpage
 \begin{APPENDICES}
 
 

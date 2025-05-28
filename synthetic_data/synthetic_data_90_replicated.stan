@@ -155,6 +155,8 @@ transformed data {
 	for (ii in 1 : Ni_max + Nj_max) {
 		unit_cov_obs[ii, ii] = 1.0;
 	}
+	//real<lower=-20, upper=20>     mu_0 = 0.0;
+	real<lower=1e-6, upper=1000>  r = ratio;
 }
 
 parameters {
@@ -162,7 +164,7 @@ parameters {
 	real<lower=5e-1, upper=5>     c_j;
 	real<lower=5e-1, upper=10>    sigma;
 	real<lower=1e-6, upper=10>    lambda;
-	real<lower=1e-6, upper=1000>  r;
+	//real<lower=1e-6, upper=1000>  r;
 	real<lower=-20, upper=20>     mu_0;
 }
 
@@ -239,8 +241,8 @@ model {
 	c_j ~ normal(1.0, 5);        // truncated normal
 	sigma ~ normal(1.0, 5);      // truncated normal
 	lambda ~ normal(1.0, 5);     // truncated normal
-	r ~ normal(10, 10);
-	mu_0 ~ normal(0.0, 5);
+	//r ~ normal(15, 5);
+	mu_0 ~ normal(0.0, 1);       // mean = hat{y}_0, variance is smaller (informative)
 
 	target += my_target;
 }
