@@ -61,6 +61,7 @@
 \usepackage{subcaption}
 %%%%%%%%%% Diagram Figure
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
 \usepackage{varwidth}
 %%%%%%%%%% Comments
 \usepackage{comment}
@@ -203,7 +204,7 @@ Closest paper - \cite{ryvkin2022fight}.
 
 
 
-\section{The Model}
+\section{The Model}\label{contest-theory}
 
 % Effort, Output and Gap
 Two players, $i$ and $j$, compete for a prize $\theta>0$ in a contest. 
@@ -325,7 +326,7 @@ To Do: Contest Design Rules
 
 
 
-\section{Estimation Framework}
+\section{Estimation Framework}\label{sect-bayes-framework}
 
 In this section, we describe the estimation procedure. 
 We first outline the data generation process, establishing the connection between the empirical data and the theoretical model discussed previously.
@@ -394,13 +395,13 @@ d\tilde{y}_{t} = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sqr
 \end{equation}
 with initial condition $\tilde{y}_0 = \mu_0$, where $\mu_0$ can be interpreted as the prior mean of the initial true state $y_0$.
 
-We denote the set of unknown parameters by $\Theta := \{c_i, c_j, r, \sigma, \lambda, \mu_0\}$.
+We denote the set of unknown parameters by $\Theta := \{c_i, c_j, \sigma, \lambda, \mu_0\}$.
 Once $\Theta$ is specified, the data-generating processes for $(y_t)$, $(\hat{y}_t)$, and $(\tilde{y}_t)$ are fully defined by equations (\ref{eq-state-dynamics}), (\ref{eq-leaderboard-gap}), and (\ref{eq-fintered-y-update}), although their realized trajectories remain stochastic.
 
 
 \subsection{Bayesian Estimation Framework}
 
-Our objective is to develop a Bayesian framework for inferring the unknown parameter set $\Theta := \{ c_i, c_j, r, \sigma, \lambda, \mu_0 \}$ using the data introduced above.
+Our objective is to develop a Bayesian framework for inferring the unknown parameter set $\Theta := \{ c_i, c_j, \sigma, \lambda, \mu_0 \}$ using the data introduced above.
 
 First of all, we assume that time is discretized into uniform intervals of length $\Delta$.
 By definition, the likelihood function corresponding to the submission times of player $i$, $\{t^i_k\}_{k=1}^{N_i}$, is given as follows (a symmetric formulation applies to player $j$):
@@ -425,12 +426,11 @@ It's worthwhile noting that, although the trajectory of private leaderboard $y_t
 In our framework, agents form beliefs about $y_t$ based solely on $\hat{y}_t$, and their actions are driven by these beliefs. 
 Conditioning on the realized values of $y_t$ in estimation would effectively bypass the agent’s informational constraints and undermine the role of $\lambda$ in shaping belief formation. 
 More importantly, it would prevent us from evaluating whether the proposed model—when given only the information actually available to agents—can recover the true data-generating process. 
-Treating $y_t$ as latent therefore preserves the integrity of the causal structure and enables meaningful model validation after estimation.
+Treating $y_t$ as latent therefore preserves the integrity of the causal structure and enables meaningful model validation after estimation (see Figure~\ref{kaggledata-diagram}).
 
 %% Approximation
 To evaluate the likelihood functions (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), we must first compute the equilibrium trajectories of both the perceived output gap $(\tilde{y}_t)$ and the effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t))$, as implied by equations (\ref{eq-equilibrium-effort}) and (\ref{eq-fintered-y-update}). 
 Importantly, the construction of $\tilde{y}$ and the effort functions $m_i$ and $m_j$ depends on the underlying (unobserved) parameters $c_i$, $c_j$, $\sigma$ and $\lambda$, which are themselves subject to estimation.
-We denote these underlying parameters collectively as $\mathcal{P}$. 
 
 Once these parameters are specified, the equilibrium paths of the perceived output gap $(\tilde{y}_t)$ and the corresponding effort levels $(m_i(\tilde{y}_t, t), m_j(\tilde{y}_t, t))$ can be deterministically computed. 
 However, evaluating $m_{i(j)}(\tilde{y}_t, t)$ via equation~(\ref{eq-equilibrium-effort}) requires numerically approximating the inverse function $\gamma^{-1}$, which poses challenges for the use of gradient-based Markov Chain Monte Carlo (MCMC) sampling methods, such as Hamiltonian Monte Carlo (HMC, \citealt{neal1996bayesian}, \citealt{neal2011mcmc}, \citealt{betancourt2017conceptual}) and the No-U-Turn Sampler (NUTS, \citealt{hoffman2014NUTS}).
@@ -459,20 +459,21 @@ As illustrated, the approximation closely replicates the true function.
     \label{fig-approximation}
 \end{figure}
 
-In our Bayesian framework, we specify truncated normal distributions with large variances as priors for the unknown parameters $\Theta$.\footnote{Specifically, each of these parameters is assigned a truncated normal prior with mean 1, variance 5, and support on either the interval $[0.5, 5]$, $[0.5, 10]$ or $[\text{1e-6}, 10]$, depending on the numerical stability considerations.}
+In our Bayesian framework, we specify truncated normal distributions with large variances as priors for the unknown parameters $\Theta$.
 This choice is intended to make the priors as uninformative as possible, thereby minimizing their influence on the posterior distribution. 
 By allowing the parameters to vary broadly within reasonable bounds, these weakly informative priors let the data play a dominant role in shaping the inference, while still ensuring mathematical well-posedness and numerical stability.
+
 
 The following lemma establishes the identifiability of the model parameters.
 
 \begin{lemma}\label{lmm-params-identifiability}
-The contest parameters $c_i$, $c_j$, $r$, $\sigma$, $\lambda$ and $\mu_0$ are jointly identifiable. 
+The contest parameters $c_i$, $c_j$, $\sigma$, $\lambda$ and $\mu_0$ are jointly identifiable. 
 \end{lemma}
 
 
 
 
-\section{Synthetic Experiments}
+\section{Synthetic Experiments}\label{sect-synthetic}
 
 Before applying our estimation procedure to real-world contest data, we evaluate its potential on synthetically generated data. 
 The use of synthetic data serves not only to validate the effectiveness of Bayesian inference, but also to enhance our understanding of the underlying data-generating process, which is summarized in Algorithm~\ref{algo-dgp}. 
@@ -536,6 +537,13 @@ There are 28 submissions from player $i$ and 18 submissions from player $j$.
 One might observe that, between two submissions $\hat{t}_{k}$ and $\hat{t}_{k+1}$, the estimate variance of the two players $S_t$ should increase over time rather than remain constant as we have assumed. 
 However, under our modelling assumption where no submission implies low effort, a Bayesian player would infer that inactivity signals low intensity, thereby narrowing the estimation variance. 
 For analytical tractability and to leverage the steady-state equilibrium formulation (\ref{eq-equilibrium-effort}), we abstract from modelling time-varying uncertainty.
+
+Each parameter of $\Theta$ is assigned a truncated normal prior, with the choice of mean, variance, and support tailored to ensure numerical stability and to reflect the amount of prior information available.
+Specifically, the prior distribution for each parameter $c_i$ and $c_j$ is specified as a truncated normal distribution bounded between 0.1 and 5, with a mean of 0.5 and variance of 5.
+The prior for $\sigma$ follows a truncated normal distribution on the interval [0.5, 10], with mean 1 and variance 5.
+Similarly, the prior for $\lambda$ supports on [1e-6, 10], also with mean 1 and variance 5.
+The prior for $\mu_0$, by contrast, is more informative: it follows a truncated normal distribution over [-20, 20], centered at the observed initial value $\hat{y}_0$ with variance 1.
+This reflects a stronger prior belief about the initial latent state and serves to anchor the model, thereby enhancing the stability and identifiability of the inference procedure.
 
 \begin{table}[htbp]
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
@@ -679,31 +687,69 @@ For the 12-month contest, the effort costs are reduced to $c_i = 0.3$ and $c_j =
 The posterior results show that longer contest durations and more frequent submissions lead to smaller RMSEs in the posterior distribution, indicating improved recovery of the true parameter values.
 
 
-\subsection{Out of Sample Performance}
-
-...
 
 
 \section{Empirical Application}\label{sec-kaggle-application}
 
+In this section, we apply our model to multiple real-world Kaggle contests to evaluate the structural validity of the proposed theoretical contest model in Section~\ref{contest-theory} and the Bayesian estimation framework in Section~\ref{sect-bayes-framework}. 
+
+We select a set of representative competitions from the Meta-Kaggle dataset and, for each contest, identify two focal participants $i$ and $j$ based on criteria such as submission frequency, activity duration, and final ranking.\footnote{
 ...
+}
+Using their submission records and public leaderboard trajectories, we construct the observed data $\{t^i_k\}^{N_i}_{k=1}$, $\{t^j_k\}^{N_j}_{k=1}$ and $(\hat{y}_t)$ and perform Bayesian estimation for each of these contests under a unified prior specification.
+
+To validate the model’s structural relevance, we then conduct a cross-contest analysis using information not incorporated in the Bayesian inference—namely, the \textit{private} leaderboard scores $(y_t)$. 
+These scores, which reflect the true performance of each submission but remain hidden from players during the contest, serve as an \textit{ex post} benchmark for evaluating model accuracy.
+Specifically, we implement a cross-validation strategy by deriving alternative estimates of the contest-specific parameters $\lambda$ and $\sigma$ from the private leaderboard data $(y_t)$ and comparing them to the structural estimates from our Bayesian procedure, thereby assessing the empirical explanatory power of the theoretical model.
+Figure~\ref{kaggledata-diagram} provides a schematic representation of the data-model structure and the cross-validation strategy used to assess model validity.
+
+\begin{figure}[!ht]
+	\centering
+	\noindent\includegraphics[scale=1.5]{kaggledata_diagram.pdf}
+	\caption{Meta-kaggle Dataset Structure Diagram}
+	\label{kaggledata-diagram}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:} (1) Rectangles, rounded rectangles and ellipses represent observed data, latent states and parameters, respectively. 
+(2) Solid lines depict relationships among variables of time series data and state variables; dashed arrows show the influence of contest parameters. 
+}
+\end{minipage}
+\end{figure}
+
 
 \subsection{Mapping the Model to the Real Data}
 
-To Do:
+To empirically implement the structural estimation developed in previous sections, we must first establish a clear mapping between the model’s theoretical components and the available real-world data. 
+In particular, we describe how competitions are selected, how key players are identified, and how relevant contest-specific information—such as prize structures—is incorporated to reflect the incentives embedded in our model setup.
 
-1. How to select key players? 
 
-One simple and intuitive approach is to identify the two strongest teams in each contest.
-This approach rests on an implicit assumption: that participants have a basic understanding of each other’s relative strength. 
-In the context of Kaggle competitions, this is a reasonable premise: 
-Team compositions are openly displayed, and individual profiles provide detailed historical records—such as past rankings, medal counts, and shared notebooks—which help participants quickly assess the technical strength of their rivals. 
-Moreover, forum discussions and public notebooks foster a semi-transparent environment where ideas and methods are informally exchanged. 
-Together, these features enable top teams to identify likely competitors and adjust their strategies accordingly.
+First, we restrict attention to Kaggle competitions that offer monetary prizes denominated in USD. 
+Since our theoretical model focuses on winner-take-all contests, we prioritize competitions that award a single prize, i.e., reward number is equal to one. 
+In practice, however, many contests distribute multiple prizes. 
+For those awarding two or three prizes, we focus exclusively on the top two participants and treat the difference between the first- and second-place prize amounts as the effective reward for winning. 
+This approach enables us to approximate a winner-take-all environment while retaining a sufficient number of real-world observations. 
 
-2. How to deal with monetary prize and other forms (knowledge, reputation)? The baseline reward is ``knowledge + reputation"; Later, we can verify the effect of monetary rewards (additional prize). 
+Unlike in our model where the losing player receives nothing, non-winning Kaggle participants often gain symbolic recognition, such as medals. 
+These additional incentives introduce noise that complicates the identification of a pure winner-take-all structure. 
+By concentrating on the prize \emph{gap} between the top two players, we mitigate such confounding factors and better align the data with the competitive setting assumed in our model.
 
-3. How to select contests?
+Next, we describe the procedure for selecting the two focal participants in each contest. 
+We begin by examining the final rankings on the private leaderboard and consider candidates from the top downward. 
+To ensure meaningful competition and sufficient data availability, we impose two selection criteria: (1) each participant must have submitted at least five times, and (2) the overlap in their active periods must exceed a minimum threshold. 
+The first condition ensures that a participant appears frequently enough on the public leaderboard to attract the attention of potential competitors, while the second guarantees that the two players engaged in sustained competition over a sufficiently long time window. These requirements help ensure that the observed data is informative and that the contest dynamics are suitable for reliable Bayesian inference.
+
+The practice of selecting only two participants from a larger pool of contestants may raise several potential concerns. First, it may limit the representativeness of the analysis by omitting the broader range of strategies exhibited by other participants. Second, reducing a multi-agent competition to a two-player setting might oversimplify the strategic complexity inherent in real-world contests. Third, choosing the top two players based on ex post rankings from the private leaderboard may introduce hindsight bias, thereby deviating from the model’s ex ante perspective. Finally, the presence of additional contestants could exert indirect influence on the focal pair’s behavior, complicating causal interpretation.
+
+However, in the context of Kaggle competitions, several platform features help mitigate these concerns. Team compositions and individual profiles are publicly visible, and rich historical information—such as past rankings, medal counts, and shared code—allows participants to form credible beliefs about each other’s technical strength. The public leaderboard is updated frequently during the contest, enabling participants to track top-performing teams in real time. Moreover, Kaggle discussions and public notebooks foster an environment of semi-transparency, in which ideas, methods, and progress are often informally revealed. These factors enable top teams to recognize their closest rivals early and adjust their strategies accordingly. As a result, it is reasonable to assume that intense competition primarily arises among the strongest participants, justifying the empirical focus on the top two teams.
+
+Actually, this approach relies on an implicit assumption: participants have a basic understanding of each other’s relative strength. 
+In the context of Kaggle competitions, this assumption is reasonable. 
+Team compositions are publicly available, and individual profiles include detailed historical records—such as past rankings, medal counts, and shared notebooks—that allow participants to quickly gauge the technical abilities of their competitors. 
+Additionally, forum discussions and public notebooks create a semi-transparent environment where ideas and strategies are informally exchanged. 
+These factors collectively enable top teams to identify potential competitors and adjust their strategies accordingly.
+
+
 
 
 
@@ -714,7 +760,7 @@ Together, these features enable top teams to identify likely competitors and adj
 To Do 1: relation between $\lambda$ and the proportion of data release?
 
 By the data generating process (\ref{eq-leaderboard-gap}), we have a simple maximum likelihood estimation (MLE) of the true value of $\lambda$. 
-Let $c = {1, 2, ..., n}$ index the contest.
+Let $c = {1, 2, ..., N^c}$ index the contest.
 Since $\hat{y}_t^c - y_t^c \sim \mathcal{N}(0, 1/(\lambda_c\Delta))$, we have 
 \begin{equation*}
 \lambda^{\text{MLE}}_c = \frac{N^c}{\Delta\sum^{N^c}_{k=1}(y_k^c - \hat{y}_k^c)^2}, \quad N^c = T/\Delta
