@@ -593,8 +593,8 @@ Multiple contests are independently simulated under identical parameters, with t
 This setting corresponds to a replicated experimental design and allows us to assess whether Bayesian inference consistently recovers the true parameters as the number of observed contests increases.
 
 The experimental results are presented in Table~\ref{tbl-pool-synthetic-data}. 
-We replicate the contest simulation with 5, 10, and 20 independent instances. 
-As the sample size increases, the RMSE of all parameters decreases, indicating that the posterior distributions converge more closely to the true parameter values.
+We replicate the contest simulation with 10 and 20 independent instances. 
+Compared with Table~\ref{tbl-contest90}, we find that as the sample size increases, the RMSE of most parameters decreases, indicating that the posterior distributions converge more closely to the true parameter values.
 
 \begin{table}[htbp]
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
@@ -608,11 +608,6 @@ As the sample size increases, the RMSE of all parameters decreases, indicating t
 \addlinespace[0.25ex]
 (true val.)        & 1.2 & 1.5 & 2.0 & 1.0 & 0.0\\
 \midrule
-\addlinespace
-\multicolumn{5}{l}{\textbf{Pool of 5 Contests}} \\
-Posterior Mean  & 1.213 & 1.645 & 1.973 & 1.083 & 0.000 \\
-Posterior Stderr & 0.121 & 0.174 & 0.145 & 0.129 & 0.997 \\
-RMSE               & 0.122 & 0.226 & 0.147 & 0.153 & 0.997 \\
 \addlinespace
 \multicolumn{5}{l}{\textbf{Pool of 10 Contests}} \\
 Posterior Mean  & 1.254 & 1.686 & 1.912 & 1.053 & -0.009\\
