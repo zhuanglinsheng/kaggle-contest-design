@@ -235,7 +235,7 @@ The larger the $\lambda$, the more accurate the signal would be.
 The information set of both players at time $t \ge 0$ is  $I_{t} \equiv \{Z_{s} : 0\le s \le t\}$. 
 Player $i$ estimates the unknown output gap $y_t$ based on the information set $I_t$. 
 Let $\tilde{y}_t \equiv E(y_{t}|I_t)$ be the estimated output gap and $S_t \equiv E[(\tilde{y}_{t}-y_{t})^2|I_t]$ be the estimation variance. 
-According to Chapter 1.2 of \citet{Bensoussan1992Control}, \textit{Kalman-Bucy filter} gives the dynamics of $\tilde{y}_{t}$ and $S_{t}$, 
+According to Chapter 1.2 of \citet{Bensoussan1992Control}, \textit{Kalman-Bucy filter} (See related discussions in \citealt{frogerais2012various}, \citealt{barrau2017invariant}) gives the dynamics of $\tilde{y}_{t}$ and $S_{t}$, 
 \begin{align}
 	d\tilde{y}_{t} &= (q_{i,t}-q_{j,t})dt + \lambda S_{t}(dZ_{t}-\tilde{y}_{t}dt) 
 	\label{filtered-x}\\
@@ -255,7 +255,7 @@ If $\lambda > 0$, the solution of (\ref{filtered-S}) is
 \end{equation}
 Specifically, $\bar{S} = \sigma / \sqrt{\lambda}$ when $\lambda>0$ and $\bar{S} = \infty$ when $\lambda = 0$. 
 Please refer to Appendix~\ref{app-S-equ} for the derivations. 
-Figure~\ref{fig-S-evol} shows the evolution of $S_t$ in time: estimation variance $S_t$ converges to \textit{steady state} $\bar{S}$ as time goes by regardless of the starting estimation variance. 
+In Figure~\ref{fig-S-evol}, we show the evolution of $S_t$ in time: estimation variance $S_t$ converges to \textit{steady state} $\bar{S}$ as time goes by regardless of the starting estimation variance. 
 For simplicity, we henceforth assume that $S_0 = \bar{S}$, hence $S_t\equiv \bar{S}$. 
 
 \begin{figure}[!ht]
@@ -682,8 +682,8 @@ Moreover, with volatility held constant, a long contest duration increases the l
 These factors may affect the quality of the generated data. 
 
 Table~\ref{tbl-longterm-synthetic-data} presents simulations of contests lasting 6 and 12 months. 
-In the 6-month contest, we set the unit effort costs to $c_i = 0.6$ and $c_j = 0.75$, resulting in 31 submissions from player $i$ and 40 from player $j$.
-For the 12-month contest, the effort costs are reduced to $c_i = 0.3$ and $c_j = 0.375$, with players $i$ and $j$ submitting 143 and 182 times, respectively.
+In the 6-month contest, we set the unit effort costs to $c_i = 0.6$ and $c_j = 0.75$, resulting in 59 submissions from player $i$ and 51 from player $j$.
+For the 12-month contest, the effort costs are reduced to $c_i = 0.3$ and $c_j = 0.375$, with players $i$ and $j$ submitting 100 and 97 times, respectively.
 The posterior results show that longer contest durations and more frequent submissions lead to smaller RMSEs in the posterior distribution, indicating improved recovery of the true parameter values.
 
 
@@ -693,12 +693,11 @@ The posterior results show that longer contest durations and more frequent submi
 
 In this section, we apply our model to multiple real-world Kaggle contests to evaluate the structural validity of the proposed theoretical contest model in Section~\ref{contest-theory} and the Bayesian estimation framework in Section~\ref{sect-bayes-framework}. 
 
-We select a set of representative competitions from the Meta-Kaggle dataset and, for each contest, identify two focal participants $i$ and $j$ based on criteria such as submission frequency, activity duration, and final ranking.\footnote{
-...
-}
-Using their submission records and public leaderboard trajectories, we construct the observed data $\{t^i_k\}^{N_i}_{k=1}$, $\{t^j_k\}^{N_j}_{k=1}$ and $(\hat{y}_t)$ and perform Bayesian estimation for each of these contests under a unified prior specification.
+We select a set of representative competitions from the Meta-Kaggle dataset and, for each contest, identify two focal participants $i$ and $j$ based on criteria such as submission frequency, activity duration, and final ranking.
+Using the submission records and public leaderboard trajectories of the two players $i$ and $j$, we construct the observed data $\{t^i_k\}^{N_i}_{k=1}$, $\{t^j_k\}^{N_j}_{k=1}$ and $\{\hat{y}_{t_k}\}_{k=1}^{N_i+N_j}$.
+Then, we perform Bayesian estimation for each of these contests under a unified prior specification.
 
-To validate the model’s structural relevance, we then conduct a cross-contest analysis using information not incorporated in the Bayesian inference—namely, the \textit{private} leaderboard scores $(y_t)$. 
+To evaluate the structural validity of the model, we then conduct a cross-contest analysis using information not incorporated in the Bayesian inference—namely, the \textit{private} leaderboard scores $(y_t)$. 
 These scores, which reflect the true performance of each submission but remain hidden from players during the contest, serve as an \textit{ex post} benchmark for evaluating model accuracy.
 Specifically, we implement a cross-validation strategy by deriving alternative estimates of the contest-specific parameters $\lambda$ and $\sigma$ from the private leaderboard data $(y_t)$ and comparing them to the structural estimates from our Bayesian procedure, thereby assessing the empirical explanatory power of the theoretical model.
 Figure~\ref{kaggledata-diagram} provides a schematic representation of the data-model structure and the cross-validation strategy used to assess model validity.
@@ -706,7 +705,7 @@ Figure~\ref{kaggledata-diagram} provides a schematic representation of the data-
 \begin{figure}[!ht]
 	\centering
 	\noindent\includegraphics[scale=1.5]{kaggledata_diagram.pdf}
-	\caption{Meta-kaggle Dataset Structure Diagram}
+	\caption{Meta-Kaggle Dataset and the Model Structure}
 	\label{kaggledata-diagram}
 	\begin{minipage}{\textwidth}
 {\footnotesize
@@ -718,55 +717,77 @@ Figure~\ref{kaggledata-diagram} provides a schematic representation of the data-
 \end{figure}
 
 
-\subsection{Mapping the Model to the Real Data}
+\subsection{Preparing Data for Structural Estimation}
 
-To empirically implement the structural estimation developed in previous sections, we must first establish a clear mapping between the model’s theoretical components and the available real-world data. 
-In particular, we describe how competitions are selected, how key players are identified, and how relevant contest-specific information—such as prize structures—is incorporated to reflect the incentives embedded in our model setup.
+To empirically implement the structural estimation framework developed in the previous sections using Kaggle data, the first step is to map the observed data onto the corresponding variables defined by the model.
+This subsection details the procedures for selecting competitions, identifying key participants, and incorporating contest-specific information such as prize structures to make the data compatible with the model’s structural assumptions.
 
+% Reward
+As a first criterion for contest selection, we focus on the structure of monetary rewards.
+Specifically, we restrict our attention to Kaggle competitions that award one, two, or three monetary prizes denominated in U.S. dollars.
+Competitions offering a single prize naturally conform to the winner-take-all incentive structure. 
+For those awarding two or three prizes, we standardize the reward structure to align with our theoretical model by focusing on the additional gain from winning, measured as the prize difference between the top two participants.
 
-First, we restrict attention to Kaggle competitions that offer monetary prizes denominated in USD. 
-Since our theoretical model focuses on winner-take-all contests, we prioritize competitions that award a single prize, i.e., reward number is equal to one. 
-In practice, however, many contests distribute multiple prizes. 
-For those awarding two or three prizes, we focus exclusively on the top two participants and treat the difference between the first- and second-place prize amounts as the effective reward for winning. 
-This approach enables us to approximate a winner-take-all environment while retaining a sufficient number of real-world observations. 
+Unlike in our model, where the losing player receives nothing, non-winning players on Kaggle often gain symbolic recognition such as medals. 
+These additional incentives introduce noise that complicates the identification of a clean winner-take-all setting.
+By concentrating on the prize gap between the top two players, we mitigate such confounding factors and bring the empirical setting closer to the assumptions of our theoretical framework.
 
-Unlike in our model where the losing player receives nothing, non-winning Kaggle participants often gain symbolic recognition, such as medals. 
-These additional incentives introduce noise that complicates the identification of a pure winner-take-all structure. 
-By concentrating on the prize \emph{gap} between the top two players, we mitigate such confounding factors and better align the data with the competitive setting assumed in our model.
-
-Next, we describe the procedure for selecting the two focal participants in each contest. 
+% Players
+The second criterion requires that each contest allow for the identification of two top participants who engage in sustained and sufficiently intense competition throughout the contest period.
 We begin by examining the final rankings on the private leaderboard and consider candidates from the top downward. 
-To ensure meaningful competition and sufficient data availability, we impose two selection criteria: (1) each participant must have submitted at least five times, and (2) the overlap in their active periods must exceed a minimum threshold. 
-The first condition ensures that a participant appears frequently enough on the public leaderboard to attract the attention of potential competitors, while the second guarantees that the two players engaged in sustained competition over a sufficiently long time window. These requirements help ensure that the observed data is informative and that the contest dynamics are suitable for reliable Bayesian inference.
+To ensure rich strategic interaction along with adequate data that supports reliable estimation, we impose two conditions: (1) each participant must have submitted at least five times, and (2) their active periods must exhibit sufficient temporal overlap. 
+The first condition ensures that a participant appears frequently enough on the public leaderboard to attract the attention of potential rivals, while the second guarantees that the two players competed over a shared and extended timeframe. 
+These criteria help ensure that the observed data are informative and that the underlying dynamics are well-suited for reliable structural Bayesian inference.
 
-The practice of selecting only two participants from a larger pool of contestants may raise several potential concerns. First, it may limit the representativeness of the analysis by omitting the broader range of strategies exhibited by other participants. Second, reducing a multi-agent competition to a two-player setting might oversimplify the strategic complexity inherent in real-world contests. Third, choosing the top two players based on ex post rankings from the private leaderboard may introduce hindsight bias, thereby deviating from the model’s ex ante perspective. Finally, the presence of additional contestants could exert indirect influence on the focal pair’s behavior, complicating causal interpretation.
+While analytically convenient, restricting attention to two participants may limit representativeness, oversimplify the contest’s strategic environment, introduce hindsight bias via \textit{ex post} rankings, and overlook potential indirect influences from other contestants.
 
-However, in the context of Kaggle competitions, several platform features help mitigate these concerns. Team compositions and individual profiles are publicly visible, and rich historical information—such as past rankings, medal counts, and shared code—allows participants to form credible beliefs about each other’s technical strength. The public leaderboard is updated frequently during the contest, enabling participants to track top-performing teams in real time. Moreover, Kaggle discussions and public notebooks foster an environment of semi-transparency, in which ideas, methods, and progress are often informally revealed. These factors enable top teams to recognize their closest rivals early and adjust their strategies accordingly. As a result, it is reasonable to assume that intense competition primarily arises among the strongest participants, justifying the empirical focus on the top two teams.
+However, this approach remains feasible in the Kaggle context, where participants typically have access to ample information about their rivals. 
+Team compositions are publicly available, and individual profiles include detailed historical records such as past rankings, medal counts, and shared notebooks that allow players to quickly gauge the technical abilities of their competitors. 
+Additionally, forum discussions and public notebooks foster a semi-transparent environment in which ideas and strategies are informally exchanged. 
+These features collectively enable top teams to identify potential competitors and adjust their strategies accordingly. 
 
-Actually, this approach relies on an implicit assumption: participants have a basic understanding of each other’s relative strength. 
-In the context of Kaggle competitions, this assumption is reasonable. 
-Team compositions are publicly available, and individual profiles include detailed historical records—such as past rankings, medal counts, and shared notebooks—that allow participants to quickly gauge the technical abilities of their competitors. 
-Additionally, forum discussions and public notebooks create a semi-transparent environment where ideas and strategies are informally exchanged. 
-These factors collectively enable top teams to identify potential competitors and adjust their strategies accordingly.
+% Leaderboard Display
+The third criterion for contest selection concerns the format in which leaderboard scores are presented.
+Since Kaggle competitions are based on diverse real-world tasks, the scoring metrics vary accordingly.
+Some are based on raw scores (positive real numbers), while others are based on accuracy measures (expressed as percentages or decimals between 0 and 1).
+Ignoring these differences would lead to inconsistencies in units across contests, complicating any meaningful cross-contest comparison of parameter estimates.
 
-
-
+After careful evaluation, we find that contests reporting accuracy-based scores (i.e., values between 0 and 1 on the leaderboard) tend to yield a higher success rate in identifying two focal players.
+Therefore, all contests used in this study are restricted to those where the leaderboard displays accuracy scores.
+To ensure consistency with the theoretical definition of the performance gap variable $y_t$ and $\hat{y}_t$, we further transform the raw leaderboard accuracy values using the logit (log-odds) function: 
+\begin{equation*}
+y_t = \log\left(\frac{p_t}{1-p_t}\right), \quad p_t\in[0.5, 1)
+\end{equation*}
+where $p_t$ is the leaderboard score. 
+The logit function is S-shaped, with the key property that as the accuracy $p_t$ approaches 1, each marginal improvement in $p_t$ results in a disproportionately large increase in the transformed value $y_t$. 
+This feature aligns with the intuition that it becomes increasingly difficult to improve performance near the upper bound, making such gains more informative in competitive settings.
 
 
 \subsection{Structural Validation}
 
-...
 
-To Do 1: relation between $\lambda$ and the proportion of data release?
+We select 75 contests from the Meta-Kaggle database, encompassing all eligible competitions concluded before April 15, 2025.\footnote{
+The Meta-Kaggle database is updated daily, with new competition data added after the contests conclude.
+}
+For each selected contest, we successfully identify two top participants who meet our criteria.
+Appendix~\ref{appendix-statistics} reports the Bayesian estimation results for each contest individually.
 
-By the data generating process (\ref{eq-leaderboard-gap}), we have a simple maximum likelihood estimation (MLE) of the true value of $\lambda$. 
+We next perform a cross-validation of the contest-specific parameters using data from the private leaderboard.
+
+\subsubsection{Cross-Validation of Parameter $\lambda$.}
+
+The signal precision parameter $\lambda$ is a prototypical contest-specific variable, influenced by factors such as the proportion of public leaderboard data relative to the full dataset, the sampling mechanism, and the distributional characteristics of the data.
+We assume that each participant has a rough understanding of the signal precision, and thus it plays a role in shaping their strategic behavior.
+The parameter $\lambda$ can be inferred in two ways: structurally, through Bayesian estimation based on submissions $\{t^i_k\}_{k=1}^{N_i}$, $\{t^j_k\}_{k=1}^{N_j}$ and public leaderboard trajectories $\{\hat{y}_{k}\}_{k=1}^{N_i+N_j}$; or non-structurally, by directly comparing the discrepancies between the public and private leaderboards.
+
 Let $c = {1, 2, ..., N^c}$ index the contest.
-Since $\hat{y}_t^c - y_t^c \sim \mathcal{N}(0, 1/(\lambda_c\Delta))$, we have 
+Based on the data-generating process described in equation~(\ref{eq-leaderboard-gap}), we can derive a straightforward maximum likelihood estimator (MLE) for the true value of $\lambda_c$.
+Given that the discrepancy between the public and private leaderboard scores satisfies $\hat{y}_t^c - y_t^c \sim \mathcal{N}(0, 1/(\lambda_c\Delta))$, $\forall t \in [0, T]$, we have 
 \begin{equation*}
-\lambda^{\text{MLE}}_c = \frac{N^c}{\Delta\sum^{N^c}_{k=1}(y_k^c - \hat{y}_k^c)^2}, \quad N^c = T/\Delta
+\lambda^{\text{MLE}}_c = \frac{K^c}{\Delta\sum^{K^c}_{k=1}(y_k^c - \hat{y}_k^c)^2}, \quad K^c = T/\Delta
 \end{equation*}
-
-Below is the regression result:
+Next, we regress the non-structural benchmark $\lambda^{\text{MLE}}$ on the Bayesian structural estimates $\hat\lambda$ to examine whether a positive relationship holds between the two.
+The following table reports the results from this regression analysis: 
 
 %%%%%%%%%% Figure & Table %%%%%%%%%%%
 \noindent
@@ -807,28 +828,50 @@ Below is the regression result:
 \end{minipage}
 %%%%%%%%%%%% Captions %%%%%%%%%%%%
 \noindent
-\begin{minipage}[t]{0.43\textwidth}
+\begin{minipage}[t]{\textwidth}
 	\centering
-	\captionof{figure}{...}
+	\captionof{figure}{$\lambda^{\text{MLE}}$ vs. Bayesian Estimate $\hat\lambda$}
+	\label{fig-validate-lambda}
 \end{minipage}
-\hfill
-\begin{minipage}[t]{0.53\textwidth}
-	\centering
-	\captionof{table}{...}
-\end{minipage}
+%\hfill
+%\begin{minipage}[t]{0.53\textwidth}
+%	\centering
+%	\captionof{table}{Regression of $\lambda^{\text{MLE}}$ on Bayesian Estimate $\hat\lambda$}
+%\end{minipage}
 \medskip
 
-Result: significantly positively related. 
+The left panel of Figure~\ref{fig-validate-lambda} reveals a clear positive relationship between the log-transformed estimates of $\hat\lambda$ and $\lambda^{\text{MLE}}$.
+In the accompanying regression table, we observe that the intercept is statistically insignificant, while the slope coefficient is estimated at 3.264 and is statistically significant at the 1\% level.
+The regression residuals exhibit no significant deviation from normality, as indicated by the low Jarque-Bera statistic (0.071), near-zero skewness (-0.042), and kurtosis close to 3 (3.126). 
+The condition number (28.2) suggests no severe multicollinearity, while the Durbin-Watson statistic (2.244) indicates no significant autocorrelation in the residuals. 
+These diagnostics support the validity of the OLS assumptions.
 
-To Do 2: validate the estimation of $\sigma$?
+It is worth noting, however, that the $R^2$ of the regression is relatively low, around 0.10, suggesting that the scatter points are not tightly clustered around the fitted line but instead show substantial dispersion.
+This pattern likely reflects the limited sample size as well as the simplifying assumptions introduced during data processing and structural estimation.
 
-By the dynamic of private leaderboard (\ref{eq-state-dynamics}), with the submission times of contest $c$ denoted by $\{t^c_k\}^{N^c}_{k=1}$, we have $y^c_{k+1} - y^c_{k} \sim \mathcal{N}\left(\int^{t_{k+1}}_{t_k}m^c_i(s) - m^c_j(s)ds, \sigma^2(t^c_{k+1}-t^c_k)\right)$ . 
-Then, by (\ref{normal-mle-sigma}), we can estimate the parameters $\sigma$ using MLE: 
+
+
+
+\subsubsection{Cross-Validation of Parameter $\sigma$.}
+
+Another key contest-specific parameter is $\sigma$, which captures the degree of uncertainty in the data analysis and algorithm innovation process. 
+A larger $\sigma$ implies that chance plays a greater role compared to effort, and that the outcomes of innovation are more unpredictable. 
+From the perspective of contest participants, the overall uncertainty associated with the real-world task is typically anticipated to some extent, and this perception can influence their strategic behavior.
+We estimate $\hat{\sigma}_c$ structurally via Bayesian inference for each contest $c$, using the public submission records of the two participants, denoted jointly as $\{t_k^c\}_{k=1}^{N^i_c + N^j_c}$, together with the corresponding public leaderboard trajectories $\{\hat{y}_{k}\}_{k=1}^{N^i_c + N^j_c}$. 
+Here, $N^i_c$ and $N^j_c$ denotes for the number of submissions of player $i$ and $j$ in contest $c$. 
+In addition, a more direct and model-free estimate of $\sigma$ can be obtained by measuring the volatility of the private leaderboard scores $\{y_k\}_{k=1}^{N^i_c+N^j_c}$.
+
+Since the private leaderboard dynamics (\ref{eq-state-dynamics}) are modelled as a diffusion process drifted by effort gap, it follows that $y^c_{k+1} - y^c_{k} \sim \mathcal{N}\left(\mu^c_k, \sigma^2(t^c_{k+1}-t^c_k)\right)$ where $\mu^c_k = \int^{t^c_{k+1}}_{t^c_k}m^c_i(s) - m^c_j(s)ds$. 
+Given this, we derive the maximum likelihood estimator (MLE) of the contest-specific parameter $\sigma$ (see Appendix~\ref{appexidx-normal-MLE} for the derivation): 
 \begin{equation*}
-\sigma^{\text{MLE}}_c = \left(\frac{1}{N^c}\sum_k\frac{\left[y^c_{t^c_{k+1}}-y^c_{t_k}-\int^{t^c_{k+1}}_{t^c_k}m^c_i(s) - m^c_j(s)ds\right]^2}{t^c_{k+1}-t^c_k}\right)^{1/2}
+\sigma^{\text{MLE}}_c = \left(\frac{1}{N^i_c+N^j_c}\sum_k\frac{\left[y^c_{k+1}-y^c_{k}-\hat\mu^c_k\right]^2}{t^c_{k+1}-t^c_k}\right)^{1/2}
 \end{equation*}
-where $\hat{r}$ is the Bayesian estimate. 
+where $\hat\mu^c_k$ is retrieved from the Bayesian posterior estimates of the effort trajectories for the two players.
 
+As in the analysis above for $\lambda$, we regress $\sigma^{\text{MLE}}$ on the structural estimate $\hat{\sigma}$ to examine whether a significant positive relationship exists between the two. 
+The regression results are presented in the table below:
+
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
 \noindent
 \begin{minipage}[t]{0.43\textwidth}
 	\vspace*{\fill}
@@ -867,18 +910,21 @@ where $\hat{r}$ is the Bayesian estimate.
 \end{minipage}
 %%%%%%%%%%%% Captions %%%%%%%%%%%%
 \noindent
-\begin{minipage}[t]{0.43\textwidth}
+\begin{minipage}[t]{\textwidth}
 	\centering
-	\captionof{figure}{...}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.53\textwidth}
-	\centering
-	\captionof{table}{...}
+	\captionof{figure}{$\sigma^{\text{MLE}}$ vs. Bayesian Estimate $\hat\sigma$}
+	\label{fig-validation-sigma}
 \end{minipage}
 \medskip
 
-Result: significantly positively related. 
+The left panel of Figure~\ref{fig-validation-sigma} reveals a clear positive relationship between the log-transformed estimates of $\hat{\sigma}$ and $\sigma^{\text{MLE}}$. 
+In the accompanying regression results, the intercept is small and statistically insignificant, while the slope coefficient on $\log(1 + \hat{\sigma})$ is estimated at 0.887 and is highly significant at the 0.1\% level. 
+This indicates a strong positive association between the structural and non-structural estimates of the uncertainty parameter $\sigma$.
+The residual diagnostics indicate no major violations of the classical OLS assumptions. 
+Normality appears reasonable, as evidenced by the Omnibus statistic (1.280), Jarque-Bera test (0.774), moderate skewness (0.225), and a kurtosis value close to 3 (3.214). 
+The condition number (5.08) rules out serious multicollinearity, and the Durbin-Watson statistic (1.618) suggests no significant autocorrelation in the residuals.
+Moreover, compared to the earlier analysis of $\lambda$, the model fit here is notably stronger: the regression yields an $R^2$ above 0.3, indicating a moderately good fit. 
+
 
 \section{Conclusion}
 
@@ -914,55 +960,9 @@ To show that the model parameters are jointly identifiable, it suffices to show 
 \endproof
 
 
+\section{Statistics}\label{appendix-statistics}
 
-\section{Extensions}
-
-\subsection{Staggered Entry of Multiple Players}
-\label{sect-extension}
-
-We index the participating teams of the contest by $i\in\{1, 2, ..., n\}$. 
-To fully leverage the potential of the data and establish a connection with our theoretical model, let's assume that each participant perceives a competitor they are playing against at every moment, denoted as $j$. 
-This perceived competitor is typically understood as the most prominent individual on the leaderboard, i.e., the person ranked first.
-When team $i$ themselves hold the top position, their perceived competitor is the individual who poses the greatest threat, namely the person ranked second.
-
-\subsection{Hybrid Kalman Filter}
-\label{sect-kalman-filter}
-
-% Submission
-Let' suppose the submission events of the representative player $i$ occur at times $(t^i_1, t^i_2, ...)$ following an inhomogeneous Poisson process driven by the intensity function $\tau_i(t)$. 
-
-% Signal
-After each submission, the contest designer emits a \textit{public} signal of the real output $x_{i,t_k}$. 
-The signal is ambiguous and the game holder controls the ambiguity. 
-The dynamic of signal is 
-\begin{equation}\label{signal}
-	\hat{x}_{i,k} = x_{i,t_k} + \frac{v_{i,k}}{\sqrt{\lambda}}, \quad k=1, 2, ...
-\end{equation}
-where $v_{i,k}$ follows standard normal distribution and is independent with $(W_{i,t})$ and $(W_{j,t})$, and the parameter $\lambda$ is set by the game holder to control the precision of signals. 
-The larger the $\lambda$, the more accurate the signal would be. 
-
-% Bayesian Player
-The information set of both players at time $t \ge 0$ is  $I_{t} := \{\hat{x}_{i,k}, \hat{x}_{j,k} : 0\le t_k \le t\}$. 
-Both players estimate the unknown outputs $x_{i,t}$ and $x_{j,t}$ purely based on the information set $I_t$ and hidden actions $q_{i,t}$ and $q_{j,t}$. 
-Let $\tilde{x}_{i,t} \equiv E(x_{i,t}|I_t)$ be the estimated output gap and $S_{i,t} \equiv E[(\tilde{x}_{i,t}-x_{i,t})^2|I_t]$ be the estimation variance. 
-The conditional distribution $y_{t}|I_t\sim\mathcal{N}(\tilde{y}_{t},S_{t}|I_t)$ is fully captured by the mean $\tilde{y}_{t}$ and variance $S_{t}$. 
-
-The evolution of $\tilde{x}_{i,t}$ and $S_{i,t}$ is characterized by a continuous-discrete Kalman Filter (CD-KF, \citealt{barrau2017invariant}, \citealt{frogerais2012various}), with the measurement of each step $k=1, 2, ...$ consisting of two phases: in
-(1) prediction phase during time interval $(t_{k-1}, t_{k})$, equations are derived from those of Kalman-Bucy filter \citep{Bensoussan1992Control} without considering the Kalman gain: 
-\begin{align}
-	d\tilde{x}_{i,t} &= q_{i,t}dt
-	\label{filtered-x}\\
-	dS_{i,t} &= \sigma^2dt
-	\label{filtered-S}
-\end{align} 
-and in (2) updation phase $t=t_k$, equations are 
-\begin{align}
-	\tilde{x}_{i,k}^{+} &= \tilde{x}_{i,k}^{-} + \frac{\lambda S_{i,t_k}^{-}}{\lambda S_{i,t_k}^{-}+1}\left(\hat{x}_{i,k} - \tilde{x}_{i,t_k}^{-}\right)
-	\label{updated-x}\\
-	S_{i,t_k}^{+} &= \frac{S_{i,t_k}^{-}}{\lambda S_{i,t_k}^{-}+1} 
-\end{align}
-If $\lambda = 0$, we have $S_t = S_0+\sigma^2t$, i.e., the estimation variance is increasing in time linearly. 
-If $\lambda > 0$, the estimation error decreases after each update of the public leaderboard, i.e., $S_{i,t_k}^+ < S_{i,t_k}^-$. 
+...
 
 
 
@@ -1003,7 +1003,7 @@ Finally, we determine the constants $K_1$, $K_2$ by the initial condition $S_0$ 
 \end{align*}
 
 
-\subsection{MLE for $r$ and $\sigma^2$}
+\subsection{MLE for $r$ and $\sigma^2$}\label{appexidx-normal-MLE}
 
 Suppose we observe independent data points \( X_1, ..., X_n \), where each \( X_k \sim \mathcal{N}(M_k / r, \sigma^2 T_k) \) with known constants \( M_k \) and \( T_k \). 
 The goal is to estimate the parameters \( r \) and \( \sigma \) via maximum likelihood estimation (MLE).
@@ -1017,9 +1017,9 @@ Q(r) = \sum_{k=1}^n \left( \frac{X_k^2}{T_k} - \frac{2X_k M_k}{r T_k} + \frac{M_
 = A - \frac{2B}{r} + \frac{C}{r^2},
 \]
 where \( A = \sum X_k^2/T_k \), \( B = \sum X_k M_k/T_k \), and \( C = \sum M_k^2/T_k \). Taking the derivative with respect to \( r \) and setting it to zero gives:
-\begin{equation}\label{normal-mle-r}
+\begin{equation*}
 \frac{dQ}{dr} = \frac{2B}{r^2} - \frac{2C}{r^3} = 0 \quad \Rightarrow \quad \hat{r} = \frac{C}{B} = \frac{\sum M_k^2/T_k}{\sum X_k M_k/T_k}.
-\end{equation}
+\end{equation*}
 Then, substituting \( \hat{r} \) back into the likelihood, the MLE for \( \sigma^2 \) is obtained by maximizing
 \[
 \ell(\sigma^2) = -\frac{n}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \sum_{k=1}^n \frac{\left( X_k - M_k/\hat{r} \right)^2}{T_k},
