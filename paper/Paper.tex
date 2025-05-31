@@ -158,7 +158,7 @@
 %  existence of optimal policies; semi-Markov decision process; cyclic schedule}
 
 % Fill in data. If unknown, outcomment the field
-\KEYWORDS{Digital Economy, Data Protection Regulation, Innovation Contest} 
+\KEYWORDS{Bayesian Statistics, Structural Estimation, Crowdsourcing Contest, Dynamic Contest} 
 %\HISTORY{......}
 
 \maketitle
@@ -203,7 +203,7 @@ Closest paper - \cite{ryvkin2022fight}.
 
 ...
 
-
+Structural Estimation - \cite{jiang2022role}.
 
 
 \section{The Model}\label{contest-theory}
@@ -281,7 +281,7 @@ where $\Theta_i \equiv\{\theta, \lambda, \sigma, c_i\}$, subject to constraints 
 The optimization problem for player $j$ is just symmetric to that of player $i$ as $V^j(\tilde{y}_t, t) = V^i(-\tilde{y}_t, t)$. 
 The corresponding Hamilton-Jacobi-Bellman (HJB) equation for player $i$ is 
 \begin{equation*}
-0 = \max_{q_{i,t}\ge0}\left[-\frac{c_iq_i^2}{2} + V^i_{y}\cdot\left(q_{i,t}-q_{j,t}\right)+V^i_t + \frac{V^i_{yy}}{2}\lambda \bar{S}^2\right]
+0 = \max_{q_{i,t}\ge0}\left[-\frac{c_iq_i^2}{2} + V^i_{y}\cdot\left(q_{i,t}-q_{j,t}\right)+V^i_t + \frac{V^i_{yy}}{2}\lambda \bar{S}^2\right].
 \end{equation*}
 By definition, we have $\lambda \bar{S}^2 = \sigma^2$. 
 Under the assumption of inner solution, we plug into the first order conditions $q_{i,t} = V^i_y/c_i$ and $q_{j,t} = -V^j_y/c_j$, we have the system of equations
@@ -297,7 +297,7 @@ subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$
 The Nash equilibrium is summarized in the following lemma. 
 We include a simplified version of the proof in the appendix: 
 
-\begin{lemma}[\citealt{ryvkin2022fight}]
+\begin{theorem}[\citealt{ryvkin2022fight}]
 In the Markov perfect equilibrium, the players’ efforts in state $m_{i(j)}(\tilde{y}_t, t) :\mathbb{R}\times[0, T)\to\mathbb{R}_+$ are given by
 \begin{equation}\label{eq-equilibrium-effort}
 m_{i(j)}(\tilde{y}_t, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
@@ -313,11 +313,36 @@ where $z = \tilde{y}_t / (\sigma\sqrt{T-t})$, $\rho(z) = \gamma^{-1}\left(\Phi(z
 \quad
 w_{i(j)} = \frac{\theta}{\sigma^2 c_{i(j)}}.
 \end{equation*}
-\end{lemma}
+Moreover, the total expected effort at time $t$, defined by $M(\tilde{y}_t, t) := \mathbb{E}\left[\int^T_t m_i(\tilde{y}_s, s) + m_j(\tilde{y}_s, s)ds\right]$, is given by $M(\tilde{y}_t, t) = \sigma \sqrt{T-t} q(z)$, where $q(z)$ is determined by the ordanary differential equation 
+\begin{equation}
+\begin{aligned}
+&q''(z) + \left[4A_+(z)e^{-z^2/2}+z\right]q'(z) - q(z) + 4A_-(z)e^{-z^2/2} = 0\\
+&A_-(z) = \frac{\gamma(\rho_1) + \gamma(\rho_2)}{2\sqrt{2\pi}}[1 - \rho(z)^2],
+\quad A_+(z) = A_-(z)\rho(z)
+\end{aligned}
+\end{equation}
+subject to the boundary conditions $q(z)\to0$ as $z\to\pm\infty$. 
+Specifically, when $c_i = c_j$, we have 
+\begin{equation}
+M(\tilde{y}_t, t) = \frac{2w\sigma\sqrt{T-t}}{\sqrt{2\pi}}e^{-z^2/2} + o(w)
+\end{equation}
+\end{theorem}
 
-The variables $w_{i(j)}$ represent the abilities of two players, while $\rho_{i(j)}$ normalizes $w_{i(j)}$ into the interval $(-1, 1)$. 
-It is not hard to see that $\gamma(\cdot)$ is strictly increasing on $(-1,1)$, ranging from $-\infty$ to $+\infty$. 
-Moreover, the equilibrium effort $m_{i(j)}$ can be represented to the product of $\phi(y; 0, \sigma^2(T-t))$, the probability density of normal distribution with mean zero and variance $\sigma^2(T-t)$ at the state $y$ and an amplitude factor that only depends on the composite variable $z$. 
+The variables $w_{i(j)}$ measure the abilities of two players, while $\rho_{i(j)}$ normalizes $w_{i(j)}$ into the interval $(0, 1)$. 
+Specifically, $\rho_{i(k)}$ and $w_{i(j)}$ are in a strictly increasing bijective relationship. 
+It is not hard to see that function $\gamma(\cdot)$ is strictly increasing on $(-1,1)$, ranging from $-\infty$ to $+\infty$. 
+The function $\rho(\cdot)$ is strictly increasing on $\mathbb{R}$, ranging from $-1$ to $1$. 
+%% Forms
+The equilibrium effort $m_{i(j)}$ can be represented to the product of two components:
+the normal density function $\phi(y; 0, \sigma^2(T-t))$, which represents the probability density of a normal distribution with mean zero and variance $\sigma^2(T-t)$ evaluated at state $y$, and an amplitude factor $K_{i(j)}(z; \theta, \sigma, c_i, c_j) := \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]$. 
+The normal density governs the concentration of competitive intensity over state, i.e., perceived output gap $\tilde{y}_t$, while the amplitude term $K_{i(j)}$ modulates the asymmetry (or skewness) of effort allocation between players.
+
+It is also evident that the parameters $\theta$, $c_i$ and $c_j$ influence equilibrium effort exclusively through the amplitude component.
+In contrast, the effect of $\sigma$ is more nuanced, as it enters both the normal density and amplitude terms. 
+By the form of (\ref{eq-equilibrium-effort}), we can do some comparative analysis: 
+
+
+\subsection{Implications on the Contest Design}
 
 To Do: Contest Design Rules
 
@@ -327,6 +352,7 @@ To Do: Contest Design Rules
 
 
 
+\newpage
 
 \section{Estimation Framework}\label{sect-bayes-framework}
 
@@ -342,11 +368,10 @@ For each Kaggle contest, the observable data from the Meta-Kaggle dataset can be
 The first component consists of essential contest details, including the contest duration, prize structure, information disclosure policy, and other governing rules.
 %%%% Prob 1
 Contrary to the assumptions of our model, a typical contest usually involves multiple teams rather than just two.
-In Section~\ref{sec-kaggle-application}, we focus on the two strongest participants in each contest for analysis; further discussion on this choice is provided in Section~\ref{sect-extension}.
+In Section~\ref{sec-kaggle-application}, we focus on the two strongest participants in each contest for analysis.
 %%%% Prob 2
 Furthermore, many contests adopt complex prize structures, offering multiple awards rather than following a winner-takes-all format.
 In Section~\ref{sec-kaggle-application}, we begin by selecting contests that offer a single prize awarded in USD.
-Extensions to more general prize structures are presented in Section~\ref{sect-extension}.
 
 %% Data: Submissions
 The second component captures the submission events of each player $i$ to the system, denoted by the sequence $\{\hat{t}^i_k\}_{k=1}^{N_i}$.
@@ -691,7 +716,8 @@ The posterior results show that longer contest durations and more frequent submi
 
 
 
-\section{Empirical Application}\label{sec-kaggle-application}
+\section{Empirical Application}
+\label{sec-kaggle-application}
 
 In this section, we apply our model to multiple real-world Kaggle contests to evaluate the structural validity of the proposed theoretical contest model in Section~\ref{contest-theory} and the Bayesian estimation framework in Section~\ref{sect-bayes-framework}. 
 
