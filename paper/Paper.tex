@@ -149,7 +149,20 @@
 } % end of the block
 
 \ABSTRACT{%
-...
+% Background
+Online crowdsourcing contests involve dynamic strategic interactions, where participants continuously adjust their efforts in response to evolving feedback and observed competition.
+% Model & estimation
+This paper develops a dynamic game-theoretic model and a corresponding Bayesian estimation framework tailored to such environments, capturing how incentives and information jointly shape participant behaviour over time.
+% relation
+The model admits a tractable Markov Perfect Equilibrium, which serves as the foundation for a Bayesian structural estimation procedure.
+% estimation
+Using only contest-phase information observable to participants, we recover key latent components—including perceived competition, effort dynamics, individual abilities, innovation uncertainty, and signal precision.
+% validation
+To assess the model’s credibility, we introduce a cross-validation strategy based on outcome data revealed only after the contest, which, although excluded from estimation, follows the same underlying process.
+% Result
+Applying the framework to 75 real-world data science competitions, we find strong and significant correlations between structural estimates and independent benchmarks, validating the model’s empirical relevance.
+% Purpose
+Our findings demonstrate the framework’s ability to uncover the strategic and informational structure of online contests, offering tools for empirical analysis and informing the design of digital competition platforms.
 % Enter your abstract
 }%
 
@@ -181,10 +194,101 @@
 
 \section{Introduction}
 
-\begin{itemize}
-\item Kaggle\footnote{\url{https://www.kaggle.com}} ...
-\item Meta-kaggle dataset \cite{megan_risdal_timo_bozsolik_2022}. 
-\end{itemize}
+% Crowdsourcing contests
+Crowdsourcing contests are widely used by firms to source solutions to complex problems from external contributors.
+% platforms
+Platforms such as Kaggle, Topcoder, DrivenData, and AIcrowd host thousands of these contests, attracting data scientists, engineers, and developers to compete by submitting solutions to real-world problems.
+% how kaggle runs
+On Kaggle, for instance, a typical contest spans several weeks, during which participants compete for monetary prizes through repeatedly submitting solutions, viewing their relative ranking on a public leaderboard, and adjusting their strategies based on evolving feedback and the observed actions of competitors.
+
+% Contest structure
+The design of these contests involves significant strategic complexity, as participants make repeated decisions in a dynamic environment shaped by evolving information, shifting incentives, and the actions of competitors. 
+% Importance of understanding structure
+The underlying structure—how incentives and information jointly shape beliefs and behaviour—is often latent, yet essential for understanding strategic decision-making and guiding effective contest design.
+Moreover, it offers insights for broader domains such as real-time monitoring of contest dynamics and supports more responsive platform management.
+
+% Brief Intro of this paper
+% model
+Motivated by these considerations, this paper develops a dynamic game-theoretic model tailored to online crowdsourcing contests, with a focus on capturing the strategic interactions on platforms like Kaggle.
+% model
+The model offers a tractable structure that reflects how participants adjust their efforts over time in response to evolving feedback and shifting competition, and serves as a foundation for the subsequent empirical analysis.
+% empirical
+To empirically ground the model, we propose a Bayesian structural estimation approach and apply it to real contest data from the Meta-Kaggle database \citep{megan_risdal_timo_bozsolik_2022}.
+
+% Objective of the paper
+The objective of this study is to assess whether the proposed model can reliably recover the underlying behavioural and incentive structure embedded in real-world contests.
+
+
+\begin{figure}[!ht]
+	\center
+	\noindent\includegraphics[scale=1.2]{kaggledata_diagram_simplified.pdf}
+	\caption{Structure of a Typical Kaggle Contest}
+	\label{kaggledata-diagram-simplified}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:} (1) Rectangles and rounded rectangles represent observed data and latent states, respectively. 
+(2) The private leaderboard is visible only to the contest organizer during the contest and is revealed to all participants only after it ends.
+During the contest period, contestants can observe only the submission times of each player and the public leaderboard.
+}
+\end{minipage}
+\end{figure}
+
+
+% Framework
+To illustrate the framework in greater detail, Figure~\ref{kaggledata-diagram-simplified} depicts the key components and their interactions in a typical Kaggle contest.
+% leaderboard
+One notable feature is the existence of two leaderboards: a \textit{private} leaderboard, which is hidden until the contest ends and ultimately determines the final ranking and prize allocation, and a \textit{public} leaderboard, which is visible to all participants during the contest.\footnote{
+This design serves two purposes. 
+First, the public leaderboard provides participants with real-time feedback. 
+Second, by keeping the private leaderboard concealed, the platform discourages overfitting to the public metric and preserves uncertainty, thereby sustaining competitive tension throughout the contest.
+}
+% submission
+Both leaderboards are updated upon each submission.
+% bayesian update
+After observing the public leaderboard, contestants update their beliefs and form a perceived state of the competition.
+% effort
+Based on this belief, they choose their effort level, which corresponds to a \textit{Markov Perfect Equilibrium} (MPE).
+% submission
+These effort levels determine the submission intensity, and each submission triggers updates to both leaderboards.
+% uncertainty
+The private leaderboard, in particular, evolves according to the real-time effort level and an innovation shock.
+
+
+% Structural estimation
+We estimate the structural parameters of the model using a Bayesian approach, based on players’ submission times and the observed \textit{public} leaderboard trajectories from the Meta-Kaggle database.
+% data
+The estimation relies solely on information available to participants during the contest and leverages the equilibrium structure implied by the dynamic model.
+% posteriors
+This procedure enables us to recover a range of latent components that are not directly observable in the data, including the perceived state of the competition, the evolution of effort over time, individual ability levels, innovation uncertainty, and the precision of public signals.
+
+
+% Cross-validation
+To assess whether the estimated model captures the underlying structure of real-world contests, we perform a cross-validation exercise using out-of-sample data from the \textit{private} leaderboard.
+As illustrated in Figure~\ref{kaggledata-diagram-simplified}, the volatility of the private leaderboard reflects the level of innovation risk in each contest, while the discrepancy between the private and public leaderboards captures the precision of the observed signal.
+We estimate these contest-specific parameters independently and compare them against the corresponding values inferred from the Bayesian structural model.
+
+
+% Results
+Empirically, we carefully select 75 high-quality contests from the Meta-Kaggle database and preprocess the data to ensure consistency across estimation methods.
+For each contest, we obtain two sets of contest-specific parameters—innovation risk and signal precision—using (i) our Bayesian structural estimation and (ii) a reduced-form approach based on private leaderboard dynamics.
+We then perform regression analysis to compare the results from the two methods.
+The findings reveal a strong and significant positive correlation between the two sets of estimates, validating the model’s ability to recover key latent elements that govern players’ strategic behaviour.
+
+
+% Contributions
+This paper makes two main contributions.
+% 1. model
+First, we develop a dynamic game-theoretic model and a Bayesian structural estimation framework, both tailored to real-world online crowdsourcing contests.
+The model captures participants’ effort adjustments in response to evolving feedback and strategic interactions, and admits a tractable Markov Perfect Equilibrium underlying the structural estimation.
+Together, they offer a parsimonious yet expressive framework for analyzing strategic behaviour in dynamic contest environments.
+% 2. estimation
+Second, we propose a cross-validation strategy that leverages out-of-sample data—specifically, the private leaderboard—which is naturally excluded from estimation yet reflects the same latent process modelled by the structure.
+This design enables a direct and credible evaluation of whether the estimated structure captures key contest dynamics.
+The results affirm the empirical relevance of the model and highlight its potential for mechanism evaluation and platform design.
+Taken together, these contributions advance our understanding of online competitive dynamics and lay the groundwork for future empirical and policy applications.
+
+
 
 \subsection{Related Literature}
 
@@ -732,7 +836,7 @@ Figure~\ref{kaggledata-diagram} provides a schematic representation of the data-
 
 \begin{figure}[!ht]
 	\centering
-	\noindent\includegraphics[scale=1.5]{kaggledata_diagram.pdf}
+	\noindent\includegraphics[scale=1.2]{kaggledata_diagram.pdf}
 	\caption{Meta-Kaggle Dataset and the Model Structure}
 	\label{kaggledata-diagram}
 	\begin{minipage}{\textwidth}
@@ -802,7 +906,7 @@ Appendix~\ref{appendix-statistics} reports the Bayesian estimation results for e
 
 We next perform a cross-validation of the contest-specific parameters using data from the private leaderboard.
 
-\subsubsection{Cross-Validation of Parameter $\lambda$.}
+\subsubsection{Cross-Validation of Signal's Precision $\lambda$.}
 
 The signal precision parameter $\lambda$ is a prototypical contest-specific variable, influenced by factors such as the proportion of public leaderboard data relative to the full dataset, the sampling mechanism, and the distributional characteristics of the data.
 We assume that each participant has a rough understanding of the signal precision, and thus it plays a role in shaping their strategic behavior.
@@ -880,19 +984,19 @@ This pattern likely reflects the limited sample size as well as the simplifying 
 
 
 
-\subsubsection{Cross-Validation of Parameter $\sigma$.}
+\subsubsection{Cross-Validation of Innovation Risk $\sigma$.}
 
 Another key contest-specific parameter is $\sigma$, which captures the degree of uncertainty in the data analysis and algorithm innovation process. 
 A larger $\sigma$ implies that chance plays a greater role compared to effort, and that the outcomes of innovation are more unpredictable. 
 From the perspective of contest participants, the overall uncertainty associated with the real-world task is typically anticipated to some extent, and this perception can influence their strategic behavior.
-We estimate $\hat{\sigma}_c$ structurally via Bayesian inference for each contest $c$, using the public submission records of the two participants, denoted jointly as $\{t_k^c\}_{k=1}^{N^i_c + N^j_c}$, together with the corresponding public leaderboard trajectories $\{\hat{y}_{k}\}_{k=1}^{N^i_c + N^j_c}$. 
-Here, $N^i_c$ and $N^j_c$ denotes for the number of submissions of player $i$ and $j$ in contest $c$. 
-In addition, a more direct and model-free estimate of $\sigma$ can be obtained by measuring the volatility of the private leaderboard scores $\{y_k\}_{k=1}^{N^i_c+N^j_c}$.
+We estimate $\hat{\sigma}_c$ structurally via Bayesian inference for each contest $c$, using the public submission records of the two participants, denoted jointly as $\{t_k^c\}_{k=1}^{N^c_i + N^c_j}$, together with the corresponding public leaderboard trajectories $\{\hat{y}_{k}\}_{k=1}^{N^c_i + N^c_j}$. 
+Here, $N^c_i$ and $N^c_j$ denotes for the number of submissions of player $i$ and $j$ in contest $c$. 
+In addition, a more direct and model-free estimate of $\sigma$ can be obtained by measuring the volatility of the private leaderboard scores $\{y_k\}_{k=1}^{N^c_i+N^c_j}$.
 
 Since the private leaderboard dynamics (\ref{eq-state-dynamics}) are modelled as a diffusion process drifted by effort gap, it follows that $y^c_{k+1} - y^c_{k} \sim \mathcal{N}\left(\mu^c_k, \sigma^2(t^c_{k+1}-t^c_k)\right)$ where $\mu^c_k = \int^{t^c_{k+1}}_{t^c_k}m^c_i(s) - m^c_j(s)ds$. 
 Given this, we derive the maximum likelihood estimator (MLE) of the contest-specific parameter $\sigma$ (see Appendix~\ref{appexidx-normal-MLE} for the derivation): 
 \begin{equation*}
-\sigma^{\text{MLE}}_c = \left(\frac{1}{N^i_c+N^j_c}\sum_k\frac{\left[y^c_{k+1}-y^c_{k}-\hat\mu^c_k\right]^2}{t^c_{k+1}-t^c_k}\right)^{1/2}
+\sigma^{\text{MLE}}_c = \left(\frac{1}{N^c_i+N^c_j}\sum_k\frac{\left[y^c_{k+1}-y^c_{k}-\hat\mu^c_k\right]^2}{t^c_{k+1}-t^c_k}\right)^{1/2}
 \end{equation*}
 where $\hat\mu^c_k$ is retrieved from the Bayesian posterior estimates of the effort trajectories for the two players.
 
@@ -982,8 +1086,38 @@ Moreover, compared to the earlier analysis of $\lambda$, the model fit here is n
 \section{Proofs}
 
 \proof{Proof of Lemma~\ref{lmm-params-identifiability}}
-Suppose $\Theta = (c_i, c_j, \sigma, \lambda)$ and $\Theta' = (c'_i, c'_j, \sigma', \lambda')$. 
-To show that the model parameters are jointly identifiable, it suffices to show that $\mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta) = \mathcal{L}(\hat{t}^i_k, \hat{t}^j_k, \hat{y}_k | \Theta')$ $\Rightarrow$ $\Theta = \Theta'$. 
+Suppose $\Theta = (c_i, c_j, \mu_0, \sigma, \lambda)$ and $\Theta' = (c'_i, c'_j, \mu_0', \sigma', \lambda')$. 
+To show that the model parameters are jointly identifiable, it suffices to show that 
+\begin{equation*}
+\mathcal{L}(\{\hat{t}^i_k\}_{k=1}^{N_i}, \{\hat{t}^j_k\}_{k=1}^{N_j}, \{\hat{y}_k\}_{k=1}^{N} | \Theta) = \mathcal{L}(\{\hat{t}^i_k\}_{k=1}^{N_i}, \{\hat{t}^j_k\}_{k=1}^{N_j}, \{\hat{y}_k\}_{k=1}^{N} | \Theta')
+\Rightarrow
+\Theta = \Theta'
+\end{equation*}
+where $N = N_i+N_j$ and $\mathcal{L}$ is the likelihood of observations given by (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}). 
+First of all, let $\tau$ and $\tau'$ denotes for the intensity under $\Theta$ and $\Theta'$, $\mu_k$ and $\mu_k'$ the two mean term of $\hat{y}_{t_k}$,
+we can write down the difference of the two log likelihoods:
+\begin{equation*}
+\begin{aligned}
+0 &= \int_{s\in\mathcal{T}}\tau_i(s)ds \sum^{N_i}_{k=1}\log\tau_i(\hat{t}^i_k) - \int_{s\in\mathcal{T}}\tau'_i(s)ds \sum^{N_i}_{k=1}\log\tau'_i(\hat{t}^i_k) \\
+&+ \int_{s\in\mathcal{T}}\tau_j(s)ds \sum^{N_j}_{k=1}\log\tau_j(\hat{t}^j_k) - \int_{s\in\mathcal{T}}\tau'_j(s)ds \sum^{N_j}_{k=1}\log\tau'_j(\hat{t}^j_k) \\ 
+&+ \frac{1}{2}\log\left(\frac{\det\left(\Sigma_y+I_N/(\Delta \lambda)\right)}{\det\left(\Sigma_y+I_N/(\Delta\lambda')\right)}\right) \\
+&+ \frac{1}{2}\Bigg\{\left(\left\{\hat{y}_k - \mu_k\right\}^{N}_{k=1}\right)^T\left(\Sigma_y+\frac{I_N}{\Delta\lambda}\right)\left\{\hat{y}_k - \mu_k\right\}^{N}_{k=1}
+- \left(\left\{\hat{y}_k - \mu'_k\right\}^{N}_{k=1}\right)^T\left(\Sigma_y+\frac{I_N}{\Delta\lambda'}\right)\left\{\hat{y}_k - \mu'_k\right\}^{N}_{k=1}\Bigg\}
+\end{aligned}
+\end{equation*}
+The first row of above is a function of $\{\hat{t}^i_k\}_{k=1}^{N_i}$, second row is a function of $\{\hat{t}^j_k\}_{k=1}^{N_j}$, second row is a constant while the forth row is a function of all dataset. 
+
+Now, suppose we have $\{\hat{t}^i_k\}_{k=1}^{N_i}$ and $\{\hat{t}^j_k\}_{k=1}^{N_j}$ such that the summation of first three rows are exactly zero, then, the last two rows form a quadratic function of $\{\hat{y}_k\}_{k=1}^{N}$. 
+The quadratic function is always zero only if all its coefficients are zero. 
+Hence, we conclude that $\mu_k = \mu'_k$ and $\lambda = \lambda'$ and $\sigma = \sigma'$. 
+
+Next, we consider the first row. If the sample size of $\{\hat{t}^i_k\}_{k=1}^{N_i}$ is empty, i.e., $N_i=0$, we conclude that the cumulative intensity of player $i$ is same, i.e., $\int_{s\in\mathcal{T}}\tau_i(s)ds = \int_{s\in\mathcal{T}}\tau'_i(s)ds$. 
+By increasing $N_i$ by one, two, ..., we conclude that the evaluations of $\tau_i$ and $\tau'_i$ at all points are the same. 
+Since the realization of $\hat{t}^i_k$ is random, we conclude that $\tau_i = \tau'_i$. 
+Similarly, we have $\tau_j = \tau'_j$. 
+It suffices to show that the mapping from $\Theta$ to function $\tau$ is an injection. 
+Since $\sigma = \sigma'$ and $\lambda = \lambda'$, by the form of (\ref{eq-equilibrium-effort}), it is easy to show that if $\theta/c_i\not=\theta/c'_i$ or $\theta/c_j\not=\theta/c'_j$, we must have $m_i\not=m'_i$, implying that $\tau_i\not=\tau_j$. 
+Furthermore, by the form of (\ref{eq-fintered-y-update}), we conclude that $\tau_i\not=\tau_j$ if $\mu_0\not=\mu'_0$. 
 \Halmos
 \endproof
 
@@ -1029,7 +1163,7 @@ Finally, we determine the constants $K_1$, $K_2$ by the initial condition $S_0$ 
 \end{align*}
 
 
-\subsection{MLE for $r$ and $\sigma^2$}\label{appexidx-normal-MLE}
+\subsection{MLE for $\sigma^2$}\label{appexidx-normal-MLE}
 
 Suppose we observe independent data points \( X_1, ..., X_n \), where each \( X_k \sim \mathcal{N}(M_k / r, \sigma^2 T_k) \) with known constants \( M_k \) and \( T_k \). 
 The goal is to estimate the parameters \( r \) and \( \sigma \) via maximum likelihood estimation (MLE).
@@ -1067,8 +1201,8 @@ which yields
 \begin{longtable}{cccccccccccrc}
 \toprule
 \multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Contest\\Id}} & 
-\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N^i$}} & 
-\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N^j$}} & 
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N_i$}} & 
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N_j$}} & 
 \multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Prize\\(k, USD)}} & 
 \multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Public\\Data \%}} & 
 \multicolumn{6}{c}{Bayesian Posterior Mean} &
