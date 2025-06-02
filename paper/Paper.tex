@@ -156,7 +156,7 @@ This paper develops a dynamic game-theoretic model and a corresponding Bayesian 
 % relation
 The model admits a tractable Markov Perfect Equilibrium, which serves as the foundation for a Bayesian structural estimation procedure.
 % estimation
-Using only contest-phase information observable to participants, we recover key latent components—including perceived competition, effort dynamics, individual abilities, innovation uncertainty, and signal precision.
+Using only contest-phase information observable to participants, we recover key latent components—including perceived competition state, effort dynamics, individual abilities, innovation uncertainty, and signal precision.
 % validation
 To assess the model’s credibility, we introduce a cross-validation strategy based on outcome data revealed only after the contest, which, although excluded from estimation, follows the same underlying process.
 % Result
@@ -191,18 +191,18 @@ Our findings demonstrate the framework’s ability to uncover the strategic and 
 
 % Text of your paper here
 
-
+\newpage
 \section{Introduction}
 
 % Crowdsourcing contests
 Crowdsourcing contests are widely used by firms to source solutions to complex problems from external contributors.
 % platforms
-Platforms such as Kaggle, Topcoder, DrivenData, and AIcrowd host thousands of these contests, attracting data scientists, engineers, and developers to compete by submitting solutions to real-world problems.
+Platforms such as Kaggle\footnote{Kaggle: \url{https://www.kaggle.com}}, Topcoder\footnote{Topcoder: \url{https://www.topcoder.com}}, DrivenData\footnote{DrivenData: \url{https://www.drivendata.org}}, and AIcrowd\footnote{AIcrowd: \url{https://www.aicrowd.com}} host thousands of these contests, attracting data scientists, engineers, and developers to compete by submitting solutions to real-world problems.
 % how kaggle runs
 On Kaggle, for instance, a typical contest spans several weeks, during which participants compete for monetary prizes through repeatedly submitting solutions, viewing their relative ranking on a public leaderboard, and adjusting their strategies based on evolving feedback and the observed actions of competitors.
 
 % Contest structure
-The design of these contests involves significant strategic complexity, as participants make repeated decisions in a dynamic environment shaped by evolving information, shifting incentives, and the actions of competitors. 
+The design of these online croudsdorcing contests involves significant strategic complexity, as participants make repeated decisions in a dynamic environment shaped by evolving information, shifting incentives, and the actions of competitors. 
 % Importance of understanding structure
 The underlying structure—how incentives and information jointly shape beliefs and behaviour—is often latent, yet essential for understanding strategic decision-making and guiding effective contest design.
 Moreover, it offers insights for broader domains such as real-time monitoring of contest dynamics and supports more responsive platform management.
@@ -307,7 +307,16 @@ Closest paper - \cite{ryvkin2022fight}.
 
 ...
 
-Structural Estimation - \cite{jiang2022role}.
+Structural Estimation: 
+
+- dynamic: \cite{jiang2022role}.
+
+- static: \cite{huang2021structural}, \cite{shakhgildyan2022nonparametric}, 
+\cite{yoganarasimhan2016estimation}
+
+- kaggle: \cite{lemus2021dynamic}
+
+\cite{chen2021attracting}, \cite{zhang2019structural}
 
 
 \section{The Model}\label{contest-theory}
@@ -426,7 +435,7 @@ Moreover, the total expected effort at time $t$, defined by $M(\tilde{y}_t, t) :
 \end{aligned}
 \end{equation}
 subject to the boundary conditions $q(z)\to0$ as $z\to\pm\infty$. 
-Specifically, when $c_i = c_j$, we have 
+Specifically, when $c_i = c_j$, we have $w_i = w_j = w$ and the total expected effort is reduced to 
 \begin{equation}
 M(\tilde{y}_t, t) = \frac{2w\sigma\sqrt{T-t}}{\sqrt{2\pi}}e^{-z^2/2} + o(w)
 \end{equation}
@@ -456,7 +465,7 @@ To Do: Contest Design Rules
 
 
 
-\newpage
+
 
 \section{Estimation Framework}\label{sect-bayes-framework}
 
@@ -1060,7 +1069,34 @@ Moreover, compared to the earlier analysis of $\lambda$, the model fit here is n
 
 \section{Conclusion}
 
-...
+% what we did
+This paper develops a dynamic game-theoretic model and a Bayesian structural estimation framework tailored to online crowdsourcing contests.
+% more...
+The model captures how participants adjust their efforts in response to evolving public feedback and strategic competition, enabling the recovery of key latent components including perceived competition state, effort dynamics, individual abilities, innovation uncertainty, and signal precision based on in-contest data.
+% what we find
+Empirically, we apply the framework to 75 Kaggle contests and validate the structural estimates through a cross-validation strategy that uses outcome data excluded from the estimation stage but governed by the same underlying process.
+We find strong and significant correlations between the estimated parameters and independent benchmarks, supporting the empirical validity of the model.
+
+
+% limitations
+Nonetheless, several limitations deserve mention.
+% 1. DGP
+First, the estimation relies on assumptions about the data-generating process (DGP) that may not fully reflect real-world complexities.
+For example:
+% - prize
+(1) many contests use multi-tier or team-based prizes rather than the winner-take-all format assumed here;
+% - players
+(2) we focus on two-player settings, while actual contests involve broader participation;
+% - leaderboard display
+(3) leaderboard scores vary in format, complicating their integration into a unified signal structure.
+% 2. Kalman-filter
+Second, the estimation method simplifies belief updating by assuming the inference variance quickly converges and remains constant.
+A more realistic approach would allow inference precision to evolve over time, e.g., via hybrid Kalman filtering, but such extensions would increase analytical complexity.
+% Future
+These limitations point to valuable directions for future work, including incorporating richer prize structures, multi-agent dynamics, and more flexible learning mechanisms to enhance realism and applicability.
+
+
+
 
 % Appendix here
 % Options are (1) APPENDIX (with or without general title) or
@@ -1289,20 +1325,13 @@ which yields
 \bottomrule
 \end{longtable}
 
-
-
-
-
-
-
-
-
 \end{APPENDICES}
 
 
 
 % Acknowledgments here
-%\ACKNOWLEDGMENT{......}
+\ACKNOWLEDGMENT{The authors gratefully acknowledge the valuable research assistance provided by Simian Zhang during the course of this study.
+}
 
 
 % References here (outcomment the appropriate case)
