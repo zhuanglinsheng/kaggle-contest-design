@@ -195,17 +195,17 @@ Our findings demonstrate the framework’s ability to uncover the strategic and 
 \section{Introduction}
 
 % Crowdsourcing contests
-Crowdsourcing contests are widely used by firms to source solutions to complex problems from external contributors.
+Crowdsourcing contests are widely used by firms to source solutions to complex problems from external contributors. 
 % platforms
-Platforms such as Kaggle\footnote{Kaggle: \url{https://www.kaggle.com}}, Topcoder\footnote{Topcoder: \url{https://www.topcoder.com}}, DrivenData\footnote{DrivenData: \url{https://www.drivendata.org}}, and AIcrowd\footnote{AIcrowd: \url{https://www.aicrowd.com}} host thousands of these contests, attracting data scientists, engineers, and developers to compete by submitting solutions to real-world problems.
+Platforms such as Kaggle\footnote{Kaggle: \url{https://www.kaggle.com}}, Topcoder\footnote{Topcoder: \url{https://www.topcoder.com}}, DrivenData\footnote{DrivenData: \url{https://www.drivendata.org}}, and AIcrowd\footnote{AIcrowd: \url{https://www.aicrowd.com}} host thousands of these contests, attracting data scientists, engineers, and developers to compete by submitting solutions to real-world problems. 
 % how kaggle runs
-On Kaggle, for instance, a typical contest spans several weeks, during which participants compete for monetary prizes through repeatedly submitting solutions, viewing their relative ranking on a public leaderboard, and adjusting their strategies based on evolving feedback and the observed actions of competitors.
+On Kaggle, for instance, a typical contest spans several weeks, during which participants compete for monetary prizes through repeatedly submitting solutions, viewing their relative ranking on a public leaderboard, and adjusting their strategies based on evolving feedback and the observed actions of competitors. 
 
 % Contest structure
 The design of these online croudsdorcing contests involves significant strategic complexity, as participants make repeated decisions in a dynamic environment shaped by evolving information, shifting incentives, and the actions of competitors. 
 % Importance of understanding structure
-The underlying structure—how incentives and information jointly shape beliefs and behaviour—is often latent, yet essential for understanding strategic decision-making and guiding effective contest design.
-Moreover, it offers insights for broader domains such as real-time monitoring of contest dynamics and supports more responsive platform management.
+The underlying structure—how incentives and information jointly shape beliefs and behaviour—is often latent, yet essential for understanding strategic decision-making and guiding effective contest design. 
+Moreover, it offers insights for broader domains such as real-time monitoring of contest dynamics and supports more responsive platform management. 
 
 % Brief Intro of this paper
 % model
@@ -292,57 +292,103 @@ Taken together, these contributions advance our understanding of online competit
 
 \subsection{Related Literature}
 
-This study is closely related to three strands of literature:
+This study is closely related to the below strands of literature:
 
 \subsubsection{Contest Design.}
 
-%
-A rich literature in contest design \citep{Ales2017Contest} has examined how to structure competitive environments to elicit optimal performance, with a primary focus on static settings. 
-This line of research is motivated by a wide range of real-world applications, including 
-CEO contest \citep{tsoulouhas2006ceo}, 
-beauty contest \citep{morris2002social}, 
-election campaigns \citep{denter2020campaign}, 
-advertising contest \citep{dockner2018Advertising}, 
-litigation \citep{baik2007litigation, park2022litigation} and 
-innovation contest \citep{chen2021DataSharing}. 
-This paper focuses on online crowdsourcing contests, which feature public real-time feedback, fixed deadlines, and repeated submissions, all governed by platform-specified rules and evaluation metrics. 
-These features create a dynamic setting where participants adapt strategically, making such contests amenable to game-theoretic modeling. 
-
-%
+%% Static Contest Design
+% definition
+A rich literature on \textit{static} contest design \citep{Ales2017Contest} investigates how to structure competitive environments to elicit optimal performance. 
+These models typically rely on an explicit contest success function (CSF) that maps individual effort to winning probabilities \citep{skaperdas1996contest}.\footnote{There are exceptions like beauty or barrier contests.} 
+Early contributions include \citet{Tullock1980}, \citet{Lazear1981tournaments}, and \citet{nalebuff1983Competition}. 
+% application
+This line of research is motivated by a wide range of real-world applications, including CEO selection \citep{tsoulouhas2006ceo}, beauty contests \citep{morris2002social}, election campaigns \citep{denter2020campaign}, advertising \citep{dockner2018Advertising}, litigation \citep{baik2007litigation, park2022litigation}, and innovation tournaments \citep{chen2021DataSharing}.
+% design
+Key design dimensions studied in the literature include optimal prize allocation \citep{moldovanu2001optimal, ales2017optimal_award}, participation rules \citep{Ales2021Innovation, stouras2022role}, contest duration\footnote{Static model in the sense that homogeneous participants make a single submission at the contest deadline, with no intermediate feedback provided throughout the process.} \citep{korpeoglu2021duration}, ex-ante handicapping of heterogeneous agents \citep{tsoulouhas2006ceo, kirkegaard2012favoritism, syam2013sales}, mechanisms addressing ex-post outcome imbalances \citep{Imhof2016Ex_post}, and information disclosure in auction-like environments \citep{bergemann2022optimal, antsygina2023optimal}. 
 
 
-%
-Classic studies on static contest design have examined how different design levers affect participant behavior and outcomes. 
-These include the allocation of awards \citep{ales2017optimal_award}, the timing and structure of feedback \citep{mihm2019feedback, Bimpikis2019Contest, jiang2022role}, the information disclosed to players \citep{aoyagi2010information}, the contest’s duration \citep{korpeoglu2021duration}, and participation rules \citep{Ales2021Innovation, stouras2022role}.
+%% Dynamic Contest Design
+% Transition
+While these studies offer valuable insights into incentive design, they largely overlook how participants dynamically adjust their efforts in response to evolving competition.
+% Dynamic Contest
+In contrast, this paper focuses on \textit{dynamic} contests, where strategic decisions unfold over time.
+Two main modeling approaches have been used to capture such dynamic strategic interactions:
 
-While these studies offer valuable insights into optimal incentive design, they largely abstract away from the intertemporal dynamics of strategic interaction. In contrast, our work focuses on dynamic contests in which participants adjust their efforts over time in response to evolving feedback and competition, requiring a different modeling and estimation approach.
+% One Way: Poisson Arrival of Innovation Success
+One strand of the literature models dynamic contests as multistage processes, where participants exert effort over time while facing uncertainty about intermediate progress.
+This structure facilitates the analysis of the mid-contest policy instruments available to the contest designer, such as feedback disclosure, screening mechanisms, etc.
+Specifically, in a typical two-stage setting \citep{aoyagi2010information, mihm2019feedback}, the initial stage captures either feasibility uncertainty or foundational experimentation, with progress revealed through milestone feedback provided by the contest organizer. 
+Participants exert effort in both stages, and the final output reflects the cumulative impact of early performance and subsequent improvement.
+Similarly, \citet{Bimpikis2019Contest} study a two-stage model in which agents exert continuous effort to complete Stage A (potentially infeasible) and Stage B (feasible), with breakthroughs governed by Poisson processes.
+In all these models, the contest designer may strategically disclose interim feedback.
+Another example is \citet{Khorasani2023screening}, who analyze a two-stage contest in which solvers invest exploratory effort to generate viable ideas, with only those passing an imperfect screening mechanism proceeding to execution.
 
-% dynamic contest
-This paper focuses on the two players innovation contest with a continuous time  where the players’ relative position is public information throughout the game.
-This is closely related to tug-or-war contest, which, to our knowledge, was first formally given by \citet{Harris1987Race} as a one-dimensional simplification of the multi-stage R\&D race. 
-The output processes are model by Brownian motions drifted with effort inputs, which is followed by \cite{budd1993model} who model the state of a dynamic competition of two innovative duopoly firms by a Brownian motion drifted by the effort gap, and solve the equilibrium approximately. 
-Furthermore, \citet{Moscarini2011Contest} model the tug-of-war state as the gap of the two outputs directly, and draw an analytical equilibrium of the pure strategies. 
+% Another Way of Modelling
+The second approach, more closely related to our work, treats output as a stochastic process whose drift depends on the participant’s effort.
+This line of research originates from the tug-of-war framework, first formalized by \citet{Harris1987Race} as a one-dimensional simplification of a multi-stage R\&D race.
+Subsequent studies build on this foundation by modeling each player’s progress as a Brownian motion.
+\citet{budd1993model}, for example, analyze a duopoly innovation race where the state evolves as a Brownian motion driven by the difference in effort, and characterize an approximate equilibrium.
+\citet{Moscarini2011Contest} advance this approach by modeling the game state as the output gap between players and derive closed-form equilibrium strategies under pure-strategy play.
+\citet{ryvkin2022fight} adapt their framework to a dynamic contest with a fixed deadline, providing a closed-form solution for the Markov perfect equilibrium.
 
-...
 
-Information disclosure in contest - \cite{Bimpikis2019Contest}. 
+%% Online Crowdsourcing
+% this paper
+This paper studies online crowdsourcing contests, which are typically characterized by 
+$i$) fixed deadlines, 
+$ii$) repeated submissions, and 
+$iii$) public real-time feedback,
+all governed by platform-specific rules and evaluation metrics.
+% our foundation
+Hence, our analysis builds on the model by \citet{ryvkin2022fight}, which, despite its simplifications, offers a closed-form solution that balances realism with analytical tractability. 
+To better reflect the dynamics of online leaderboards, we depart from their full-information setting by introducing a noisy real-time public signal, thereby enhancing the model’s empirical relevance.
 
-...
 
-Closest paper - \cite{ryvkin2022fight}.
 
-...
+\subsubsection{Structural Estimation of Contests.}
 
-Structural Estimation: 
+Beyond theoretical modelling, a growing body of research employs structural estimation techniques to recover key parameters of contest environments using observed data.
 
-- dynamic: \cite{jiang2022role}.
+% Static contests
+In the structural estimation of static contests, when a contest success function (CSF) is explicitly specified, the primary goal is to estimate its functional form or key parameters \citep{hwang2012technology, kang2016policy, huang2021structural}.
+In contrast, for contests without a well-defined or smooth CSF—such as beauty contests—researchers typically rely on equilibrium conditions, most notably the first-order condition.
+For example, \citet{yoganarasimhan2016estimation} proposes a two-step semiparametric estimator, resembling the EM algorithm, to recover both unobserved auction heterogeneity and bidder cost distributions.
+Similarly, in auction-like models \citep{guerre2000optimal, shakhgildyan2022nonparametric}, nonparametric estimation of the underlying valuation structure often serves as a first step, providing the foundation for subsequent structural estimation.
 
-- static: \cite{huang2021structural}, \cite{shakhgildyan2022nonparametric}, 
-\cite{yoganarasimhan2016estimation}
+% Dynamic contests
+Most dynamic structural estimations rely on the Markov Perfect Equilibrium (MPE) of a dynamic game. 
+However, when the model is calibrated to closely fit real-world data, the MPE typically lacks a closed-form solution.
+For example, \citet{jiang2022role} develop a finite-horizon dynamic game with discrete time, state, and action spaces to model creators’ strategic behaviour in response to feedback during online logo design contests.
+Using data from 810 contests, they implement a two-step maximum likelihood estimation (MLE) procedure under the assumption of ex-ante homogeneous contests and players: the first step estimates action-specific state transition probabilities, while the second recovers utility parameters.
 
-- kaggle: \cite{lemus2021dynamic}
+Specific to online crowdsourcing environments, 
+\citet{chen2021attracting} use data from 1,980 contests on TaskCN.com to examine how contest duration affects both the number and quality of participants.
+Through regression analysis, they show that while longer durations attract more contestants, they tend to reduce the quality of top entrants.
+\citet{zhang2019structural} build a dynamic structural model to study how participants in crowdsourcing contests learn and choose contests over time.
+Their model shows that competing against superstars accelerates learning by providing more informative feedback.
+Using Bayesian updating and a hierarchical model, they estimate how individuals trade off monetary rewards, learning opportunities, and participation costs, based on data from Topcoder.
 
-\cite{chen2021attracting}, \cite{zhang2019structural}
+Closely related to our work, \citet{lemus2021dynamic} conduct contest-level structural estimation using Kaggle data.
+They propose a finite-horizon dynamic game in which, after each submission, players decide whether to continue or exit, essentially solving an optimal stopping problem.
+Players can only make this decision immediately after completing a submission, which arrives at random intervals and incurs a privately drawn cost.
+Their estimation proceeds in two stages: the first uses maximum likelihood and the EM algorithm to estimate primitive parameters such as the distribution of player types and scores; the second applies a CCP-based estimator to identify the cost distribution.
+Our model differs in two key respects: 
+(1) we treat submissions as the outcome of accumulative effort rather than discrete costly actions—an assumption that better reflects actual player behaviour; and
+(2) we explicitly model belief updating from signals to identify structural parameters, whereas their CCP-based method relies on a coarser behavioural approximation.
+
+
+
+
+
+
+
+The structure of the paper is as follows: 
+Section~\ref{contest-theory} introduces our theoretical model of online crowdsourcing contests. 
+Section~\ref{sect-bayes-framework} presents the Bayesian estimation framework. 
+In Section~\ref{sect-synthetic}, we describe the data-generating process and apply the Bayesian framework to synthetic data. 
+Section~\ref{sec-kaggle-application} validates the theoretical model using real-world data. 
+All code and implementation details are available on GitHub.
+
 
 
 \section{The Model}\label{contest-theory}
@@ -644,7 +690,7 @@ The contest parameters $c_i$, $c_j$, $\sigma$, $\lambda$ and $\mu_0$ are jointly
 Before applying our estimation procedure to real-world contest data, we evaluate its potential on synthetically generated data. 
 The use of synthetic data serves not only to validate the effectiveness of Bayesian inference, but also to enhance our understanding of the underlying data-generating process, which is summarized in Algorithm~\ref{algo-dgp}. 
 
-\begin{algorithm}[H]
+\begin{algorithm}[!ht]
 \caption{Synthetic Data Simulation}
 \label{algo-dgp}
 \begin{algorithmic}
