@@ -508,12 +508,16 @@ Moreover, the total expected effort at time $t$, defined by $M(\tilde{y}_t, t) :
 \end{equation}
 subject to the boundary conditions $q(z)\to0$ as $z\to\pm\infty$. 
 Specifically, when $c_i = c_j$, we have $w_i = w_j = w$ and the total expected effort is reduced to 
-\begin{equation}
+\begin{equation}\label{eq-totaleffort-reduced}
 M(\tilde{y}_t, t) = \frac{2w\sigma\sqrt{T-t}}{\sqrt{2\pi}}e^{-z^2/2} + o(w)
 \end{equation}
 \end{theorem}
 
-The variables $w_{i(j)}$ measure the abilities of two players, while $\rho_{i(j)}$ normalizes $w_{i(j)}$ into the interval $(0, 1)$. 
+\begin{remark}
+The value of $w$ is sufficiently small when the uncertainty level $\sigma$ is sufficiently large compared to prize-cost ratio $\theta/c_{i(j)}$. 
+\end{remark}
+
+In equation (\ref{eq-equilibrium-effort}), the variables $w_{i(j)}$ measure the abilities of two players, while $\rho_{i(j)}$ normalizes $w_{i(j)}$ into the interval $(0, 1)$. 
 Specifically, $\rho_{i(k)}$ and $w_{i(j)}$ are in a strictly increasing bijective relationship. 
 It is not hard to see that function $\gamma(\cdot)$ is strictly increasing on $(-1,1)$, ranging from $-\infty$ to $+\infty$. 
 The function $\rho(\cdot)$ is strictly increasing on $\mathbb{R}$, ranging from $-1$ to $1$. 
@@ -524,17 +528,31 @@ The normal density governs the concentration of competitive intensity over state
 
 It is also evident that the parameters $\theta$, $c_i$ and $c_j$ influence equilibrium effort exclusively through the amplitude component.
 In contrast, the effect of $\sigma$ is more nuanced, as it enters both the normal density and amplitude terms. 
-By the form of (\ref{eq-equilibrium-effort}), we can do some comparative analysis: 
+Based on the structure of (\ref{eq-equilibrium-effort}), we further conclude that the equilibrium effort level is \textit{not} uniformly increasing in the prize-cost ratio $\theta/c_{i(j)}$ across all states $\tilde{y}$—particularly for laggard states.
+The uncertainty term $\sigma$ and the remaining time $T - t$ make the equilibrium effort more dispersed: under high uncertainty or with ample remaining time, players exert higher effort in extreme states and lower effort in central states.
+As time progresses and the deadline approaches, outcomes become more predictable, and effort becomes increasingly concentrated around the pivot state.
+
+For more properties of the equilibrium, please refer to \citet{ryvkin2022fight}. 
+Here, we only provide a supplementary analysis related to contest design:
 
 
 \subsection{Implications on the Contest Design}
 
-To Do: Contest Design Rules
+In online crowdsourcing contests, designers typically control key decision variables such as the prize amount $\theta$ (we exclude more complex prize structures in this study), the contest duration $T$, and the signal precision $\lambda$. 
+A key concern is that these variables may act as substitutes—implying that the optimal choice of one may alter or offset the optimal choices of the others.
 
-\begin{proposition}
-...
-\end{proposition}
+A first observation is that the signal precision $\lambda$ does not influence the total expected effort $M(\tilde{y}_t, t)$.
+Under the simplifying assumption that $S_t = \bar{S}$ is constant, the incorporation of signals does not reduce overall uncertainty.
+As a result, the evolution of the filtered state $\tilde{y}_t$ in (\ref{filtered-x}) does not lead to an increase in $M(\tilde{y}_t, t)$ compared to the unfiltered state $y_t$ specified in (\ref{eq-state-dynamics}).\footnote{
+However, this result primarily reflects the limitations of our model.
+In a more general setting with fewer restrictions, the signal precision parameter $\lambda$ would clearly affect the structure of $M$,
+although such cases are beyond the scope of this paper.
+}
 
+Next, we turn to the other two design variables.
+When the two contestants are of similar strength, i.e., $c_i = c_j = c$, the total expected effort admits a particularly simple approximation, as shown in equation (\ref{eq-totaleffort-reduced}).
+Suppose the contest designer’s objective takes the form $\beta^{T}M(\tilde{y}_0, 0)^\alpha - \theta$ for some $0 < \alpha < 1$ and $0 < \beta \le 1$,
+it is straightforward to show that this objective function is jointly concave in $(\theta, T)$.
 
 
 
