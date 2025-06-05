@@ -403,6 +403,8 @@ Denoted by $y_t$ the \textit{output gap} of player $i$ and $j$ at time $t$, driv
 	dy_t = (q_{i,t}-q_{j,t})dt + \sigma dW_t
 \end{equation}
 where $W_t$ is a Brownian motion and $\sigma>0$ measures the innovation risk.
+When $\sigma$ is large and the relationship between effort and output is highly uncertain, luck becomes the dominant factor. 
+Conversely, when $\sigma$ is small and output closely reflects effort, the importance of effort is amplified.
 
 The contest is equipped with a submission system that allows participants to upload their algorithms at any time and receive immediate feedback. 
 For simplicity, we further assume that agents submit their intermediate results whenever they make progress. 
@@ -416,7 +418,7 @@ The dynamic of signal is
 	dZ_{t} = y_{t}dt + \frac{dB_{t}}{\sqrt{\lambda}} 
 \end{equation}
 where $B_{t}$ is standard Brownian motion independent with $(W_{i,t})$ and $(W_{j,t})$, and the parameter $\lambda$ is set by the game holder to control the precision of signal. 
-The larger the $\lambda$, the more accurate the signal would be. 
+A larger $\lambda$ implies less noise in the signal, enhancing its reliability; conversely, a smaller $\lambda$ indicates greater noise, making the signal less trustworthy. 
 
 % Bayesian Player
 The information set of both players at time $t \ge 0$ is  $I_{t} \equiv \{Z_{s} : 0\le s \le t\}$. 
@@ -986,10 +988,13 @@ Ignoring these differences would lead to inconsistencies in units across contest
 After careful evaluation, we find that contests reporting accuracy-based scores (i.e., values between 0 and 1 on the leaderboard) tend to yield a higher success rate in identifying two focal players.
 Therefore, all contests used in this study are restricted to those where the leaderboard displays accuracy scores.
 To ensure consistency with the theoretical definition of the performance gap variable $y_t$ and $\hat{y}_t$, we further transform the raw leaderboard accuracy values using the logit (log-odds) function: 
-\begin{equation*}
-y_t = \log\left(\frac{p_t}{1-p_t}\right), \quad p_t\in[0.5, 1)
-\end{equation*}
-where $p_t$ is the leaderboard score. 
+\begin{equation}\label{eq-leaderboard-transform}
+y_t = a \cdot \log\left(\frac{p_t}{1-p_t}\right), \quad p_t\in[0.5, 1)
+\end{equation}
+where $p_t$ is the leaderboard score, and $a$ is a tune parameter for the normality of $y_t$.\footnote{
+For different contest data, parameter $a$ is different. 
+ The goal is to make the transformed data more consistent with the normality assumption in (\ref{eq-state-dynamics}).
+}
 The logit function is S-shaped, with the key property that as the accuracy $p_t$ approaches 1, each marginal improvement in $p_t$ results in a disproportionately large increase in the transformed value $y_t$. 
 This feature aligns with the intuition that it becomes increasingly difficult to improve performance near the upper bound, making such gains more informative in competitive settings.
 
@@ -1011,12 +1016,19 @@ The signal precision parameter $\lambda$ is a prototypical contest-specific vari
 We assume that each participant has a rough understanding of the signal precision, and thus it plays a role in shaping their strategic behavior.
 The parameter $\lambda$ can be inferred in two ways: structurally, through Bayesian estimation based on submissions $\{t^i_k\}_{k=1}^{N_i}$, $\{t^j_k\}_{k=1}^{N_j}$ and public leaderboard trajectories $\{\hat{y}_{k}\}_{k=1}^{N_i+N_j}$; or non-structurally, by directly comparing the discrepancies between the public and private leaderboards.
 
-Let $c = {1, 2, ..., N^c}$ index the contest.
+Let $c = {1, 2, ... }$ index the contest.
 Based on the data-generating process described in equation~(\ref{eq-leaderboard-gap}), we can derive a straightforward maximum likelihood estimator (MLE) for the true value of $\lambda_c$.
-Given that the discrepancy between the public and private leaderboard scores satisfies $\hat{y}_t^c - y_t^c \sim \mathcal{N}(0, 1/(\lambda_c\Delta))$, $\forall t \in [0, T]$, we have 
+Given that the discrepancy between the public and private leaderboard scores satisfies $\hat{y}_k^c - y_k^c \sim \mathcal{N}(0, 1/(\lambda_c\Delta))$, $\forall k = 1, 2, ..., N^c$, we have 
 \begin{equation*}
-\lambda^{\text{MLE}}_c = \frac{K^c}{\Delta\sum^{K^c}_{k=1}(y_k^c - \hat{y}_k^c)^2}, \quad K^c = T/\Delta
+\lambda^{\text{MLE}}_c = \frac{N^c}{\Delta\sum^{N^c}_{k=1}(y_k^c - \hat{y}_k^c)^2}, \quad N^c = N^c_i + N^c_j
 \end{equation*}
+Here, $N^c_i$ and $N^c_j$ denotes for the number of submissions of player $i$ and $j$ in contest $c$. 
+
+{\color{red}
+It is important to note that, since our analysis relies on normality assumptions which heavily relies on the form of data transformation (\ref{eq-leaderboard-transform}). 
+We conduct a series of normality tests on the sample points $(\hat{y}_t^c - y_t^c)$ for each contest $c$.
+}
+
 Next, we regress the non-structural benchmark $\lambda^{\text{MLE}}$ on the Bayesian structural estimates $\hat\lambda$ to examine whether a positive relationship holds between the two.
 The following table reports the results from this regression analysis: 
 
@@ -1089,7 +1101,6 @@ Another key contest-specific parameter is $\sigma$, which captures the degree of
 A larger $\sigma$ implies that chance plays a greater role compared to effort, and that the outcomes of innovation are more unpredictable. 
 From the perspective of contest participants, the overall uncertainty associated with the real-world task is typically anticipated to some extent, and this perception can influence their strategic behavior.
 We estimate $\hat{\sigma}_c$ structurally via Bayesian inference for each contest $c$, using the public submission records of the two participants, denoted jointly as $\{t_k^c\}_{k=1}^{N^c_i + N^c_j}$, together with the corresponding public leaderboard trajectories $\{\hat{y}_{k}\}_{k=1}^{N^c_i + N^c_j}$. 
-Here, $N^c_i$ and $N^c_j$ denotes for the number of submissions of player $i$ and $j$ in contest $c$. 
 In addition, a more direct and model-free estimate of $\sigma$ can be obtained by measuring the volatility of the private leaderboard scores $\{y_k\}_{k=1}^{N^c_i+N^c_j}$.
 
 Since the private leaderboard dynamics (\ref{eq-state-dynamics}) are modelled as a diffusion process drifted by effort gap, it follows that $y^c_{k+1} - y^c_{k} \sim \mathcal{N}\left(\mu^c_k, \sigma^2(t^c_{k+1}-t^c_k)\right)$ where $\mu^c_k = \int^{t^c_{k+1}}_{t^c_k}m^c_i(s) - m^c_j(s)ds$. 
