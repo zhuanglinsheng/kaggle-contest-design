@@ -994,6 +994,7 @@ y_t = a \cdot \log\left(\frac{p_t}{1-p_t}\right), \quad p_t\in[0.5, 1)
 where $p_t$ is the leaderboard score, and $a$ is a tune parameter for the normality of $y_t$.\footnote{
 For different contest data, parameter $a$ is different. 
  The goal is to make the transformed data more consistent with the normality assumption in (\ref{eq-state-dynamics}).
+In practise, we just pick $a = 1$. 
 }
 The logit function is S-shaped, with the key property that as the accuracy $p_t$ approaches 1, each marginal improvement in $p_t$ results in a disproportionately large increase in the transformed value $y_t$. 
 This feature aligns with the intuition that it becomes increasingly difficult to improve performance near the upper bound, making such gains more informative in competitive settings.
@@ -1024,10 +1025,9 @@ Given that the discrepancy between the public and private leaderboard scores sat
 \end{equation*}
 Here, $N^c_i$ and $N^c_j$ denotes for the number of submissions of player $i$ and $j$ in contest $c$. 
 
-{\color{red}
-It is important to note that, since our analysis relies on normality assumptions which heavily relies on the form of data transformation (\ref{eq-leaderboard-transform}). 
-We conduct a series of normality tests on the sample points $(\hat{y}_t^c - y_t^c)$ for each contest $c$.
-}
+It is important to emphasize that the normality assumption in this setting is induced by the transformation defined in equation~(\ref{eq-leaderboard-transform}). 
+However, the current transformation form is adopted for simplicity, and does not guarantee strict normality—especially under extreme contest data—which may reduce the validity of our MLE.\footnote{So far, only half of the contest data can pass the Shapiro-Wilk test. }
+Future work should explore more reliable transformation methods to better approximate the assumed distribution.
 
 Next, we regress the non-structural benchmark $\lambda^{\text{MLE}}$ on the Bayesian structural estimates $\hat\lambda$ to examine whether a positive relationship holds between the two.
 The following table reports the results from this regression analysis: 
