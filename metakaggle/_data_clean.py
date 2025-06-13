@@ -1,12 +1,13 @@
 import os
 import json
 import math
-import statistics
+
 from datetime import datetime, timedelta
 from typing import Literal
 
 import pandas as pd
 import numpy as np
+#from scipy import stats
 
 from leaderboard import Leaderboard
 
@@ -45,6 +46,8 @@ def contest_basic_submission_info(
 
 
 def randomize_within_day(group: pd.Series, seed: int = 1234):
+	"""
+	"""
 	rgn = np.random.default_rng(seed)
 	seconds = rgn.choice(range(86400), size=len(group), replace=False)
 	seconds.sort()
@@ -52,7 +55,9 @@ def randomize_within_day(group: pd.Series, seed: int = 1234):
 	return randomized_times
 
 
-def my_logit(x):
+def state_transformation(x):
+	"""
+	"""
 	threshold_up = 0.9999
 	threshold_lo = 1e-4
 	if x >= threshold_up:
@@ -60,6 +65,8 @@ def my_logit(x):
 	if x <= threshold_lo:
 		x = threshold_lo
 	return math.log(x / (1 - x))
+	#return stats.norm.ppf(x)
+
 
 def leaderboard_fulfill(tbl_contest_submissions,
 		deadline: datetime,
@@ -80,11 +87,11 @@ def leaderboard_fulfill(tbl_contest_submissions,
 				score_pub = row['PublicScore']
 				score_pri = row['PrivateScore']
 			case 'Percentage_Big':
-				score_pub = my_logit(row['PublicScore'] / 100)
-				score_pri = my_logit(row['PrivateScore'] / 100)
+				score_pub = state_transformation(row['PublicScore'] / 100)
+				score_pri = state_transformation(row['PrivateScore'] / 100)
 			case 'Percentage_Small':
-				score_pub = my_logit(row['PublicScore'])
-				score_pri = my_logit(row['PrivateScore'])
+				score_pub = state_transformation(row['PublicScore'])
+				score_pri = state_transformation(row['PrivateScore'])
 		leaderboard_public.refresh(time, team_id, score_pub)
 		leaderboard_private.refresh(time, team_id, score_pri)
 	return leaderboard_public, leaderboard_private
