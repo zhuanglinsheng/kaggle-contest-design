@@ -298,13 +298,13 @@ This study is closely related to the below strands of literature:
 
 %% Static Contest Design
 % definition
-A rich literature on \textit{static} contest design \citep{Ales2017Contest} investigates how to structure competitive environments to elicit optimal performance. 
+A rich literature on \textit{static} contest design \citep{ales2017optimal_award} investigates how to structure competitive environments to elicit optimal performance. 
 These models typically rely on an explicit contest success function (CSF) that maps individual effort to winning probabilities \citep{skaperdas1996contest}.\footnote{There are exceptions like beauty or barrier contests.} 
 Early contributions include \citet{Tullock1980}, \citet{Lazear1981tournaments}, and \citet{nalebuff1983Competition}. 
 % application
 This line of research is motivated by a wide range of real-world applications, including CEO selection \citep{tsoulouhas2006ceo}, beauty contests \citep{morris2002social}, election campaigns \citep{denter2020campaign}, advertising \citep{dockner2018Advertising}, litigation \citep{baik2007litigation, park2022litigation}, and innovation tournaments \citep{chen2021DataSharing}.
 % design
-Key design dimensions studied in the literature include optimal prize allocation \citep{moldovanu2001optimal, ales2017optimal_award}, participation rules \citep{Ales2021Innovation, stouras2022role}, contest duration\footnote{Static model in the sense that homogeneous participants make a single submission at the contest deadline, with no intermediate feedback provided throughout the process.} \citep{korpeoglu2021duration}, ex-ante handicapping of heterogeneous agents \citep{tsoulouhas2006ceo, kirkegaard2012favoritism, syam2013sales}, mechanisms addressing ex-post outcome imbalances \citep{Imhof2016Ex_post}, and information disclosure in auction-like environments \citep{bergemann2022optimal, antsygina2023optimal}. 
+Key design dimensions studied in the literature include optimal prize allocation \citep{moldovanu2001optimal, ales2017optimal_award}, participation rules \citep{ales2021number_of_players, stouras2022role}, contest duration\footnote{Static model in the sense that homogeneous participants make a single submission at the contest deadline, with no intermediate feedback provided throughout the process.} \citep{korpeoglu2021duration}, ex-ante handicapping of heterogeneous agents \citep{tsoulouhas2006ceo, kirkegaard2012favoritism, syam2013sales}, mechanisms addressing ex-post outcome imbalances \citep{Imhof2016Ex_post}, and information disclosure in auction-like environments \citep{bergemann2022optimal, antsygina2023optimal}. 
 
 
 %% Dynamic Contest Design
@@ -319,7 +319,7 @@ One strand of the literature models dynamic contests as multistage processes, wh
 This structure facilitates the analysis of the mid-contest policy instruments available to the contest designer, such as feedback disclosure, screening mechanisms, etc.
 Specifically, in a typical two-stage setting \citep{aoyagi2010information, mihm2019feedback}, the initial stage captures either feasibility uncertainty or foundational experimentation, with progress revealed through milestone feedback provided by the contest organizer. 
 Participants exert effort in both stages, and the final output reflects the cumulative impact of early performance and subsequent improvement.
-Similarly, \citet{Bimpikis2019Contest} study a two-stage model in which agents exert continuous effort to complete Stage A (potentially infeasible) and Stage B (feasible), with breakthroughs governed by Poisson processes.
+Similarly, \citet{bimpikis2019designing} study a two-stage model in which agents exert continuous effort to complete Stage A (potentially infeasible) and Stage B (feasible), with breakthroughs governed by Poisson processes.
 In all these models, the contest designer may strategically disclose interim feedback.
 Another example is \citet{Khorasani2023screening}, who analyze a two-stage contest in which solvers invest exploratory effort to generate viable ideas, with only those passing an imperfect screening mechanism proceeding to execution.
 
@@ -327,9 +327,9 @@ Another example is \citet{Khorasani2023screening}, who analyze a two-stage conte
 The second approach, more closely related to our work, treats output as a stochastic process whose drift depends on the participant’s effort.
 This line of research originates from the tug-of-war framework, first formalized by \citet{Harris1987Race} as a one-dimensional simplification of a multi-stage R\&D race.
 Subsequent studies build on this foundation by modeling each player’s progress as a Brownian motion.
-\citet{budd1993model}, for example, analyze a duopoly innovation race where the state evolves as a Brownian motion driven by the difference in effort, and characterize an approximate equilibrium.
-\citet{Moscarini2011Contest} advance this approach by modeling the game state as the output gap between players and derive closed-form equilibrium strategies under pure-strategy play.
-\citet{ryvkin2022fight} adapt their framework to a dynamic contest with a fixed deadline, providing a closed-form solution for the Markov perfect equilibrium.
+\citet{budd1993Duopoly}, for example, analyze a duopoly innovation race where the state evolves as a Brownian motion driven by the difference in effort, and characterize an approximate equilibrium.
+\citet{Moscarini2007Contest} advance this approach by modeling the game state as the output gap between players and derive closed-form equilibrium strategies under pure-strategy play.
+\citet{Ryvkin2022Fight} adapt their framework to a dynamic contest with a fixed deadline, providing a closed-form solution for the Markov perfect equilibrium.
 
 
 %% Online Crowdsourcing
@@ -340,7 +340,7 @@ $ii$) repeated submissions, and
 $iii$) public real-time feedback,
 all governed by platform-specific rules and evaluation metrics.
 % our foundation
-Hence, our analysis builds on the model by \citet{ryvkin2022fight}, which, despite its simplifications, offers a closed-form solution that balances realism with analytical tractability. 
+Hence, our analysis builds on the model by \citet{Ryvkin2022Fight}, which, despite its simplifications, offers a closed-form solution that balances realism with analytical tractability. 
 To better reflect the dynamics of online leaderboards, we depart from their full-information setting by introducing a noisy real-time public signal, thereby enhancing the model’s empirical relevance.
 
 
@@ -358,7 +358,7 @@ Similarly, in auction-like models \citep{guerre2000optimal, shakhgildyan2022nonp
 % Dynamic contests
 Most dynamic structural estimations rely on the Markov Perfect Equilibrium (MPE) of a dynamic game. 
 However, when the model is calibrated to closely fit real-world data, the MPE typically lacks a closed-form solution.
-For example, \citet{jiang2022role} develop a finite-horizon dynamic game with discrete time, state, and action spaces to model creators’ strategic behaviour in response to feedback during online logo design contests.
+For example, \citet{jiang2022feedback} develop a finite-horizon dynamic game with discrete time, state, and action spaces to model creators’ strategic behaviour in response to feedback during online logo design contests.
 Using data from 810 contests, they implement a two-step maximum likelihood estimation (MLE) procedure under the assumption of ex-ante homogeneous contests and players: the first step estimates action-specific state transition probabilities, while the second recovers utility parameters.
 
 Specific to online crowdsourcing environments, 
@@ -456,7 +456,7 @@ For simplicity, we henceforth assume that $S_0 = \bar{S}$, hence $S_t\equiv \bar
 
 
 % Contest Deadline
-Following \cite{ryvkin2022fight}, let's consider a dynamic contest with a fixed deadline. 
+Following \cite{Ryvkin2022Fight}, let's consider a dynamic contest with a fixed deadline. 
 Suppose the contest is terminated when time $t=T>0$. 
 Since the steady state estimation variance $\bar{S}$ is fixed as displayed above, the state of the game is fully characterized by a tuple $(\tilde{y}_t, t)$. 
 At any time $0\le t<T$, player $i$ optimizes her effort level $q_{i,\tau}$ in the remaining contest period $\tau\in[t, T)$ according to the following optimization problem, 
@@ -484,7 +484,7 @@ subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$
 The Nash equilibrium is summarized in the following lemma. 
 We include a simplified version of the proof in the appendix: 
 
-\begin{theorem}[\citealt{ryvkin2022fight}]
+\begin{theorem}[\citealt{Ryvkin2022Fight}]
 In the Markov perfect equilibrium, the players’ efforts in state $m_{i(j)}(\tilde{y}_t, t) :\mathbb{R}\times[0, T)\to\mathbb{R}_+$ are given by
 \begin{equation}\label{eq-equilibrium-effort}
 m_{i(j)}(\tilde{y}_t, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
@@ -534,7 +534,7 @@ Based on the structure of (\ref{eq-equilibrium-effort}), we further conclude tha
 The uncertainty term $\sigma$ and the remaining time $T - t$ make the equilibrium effort more dispersed: under high uncertainty or with ample remaining time, players exert higher effort in extreme states and lower effort in central states.
 As time progresses and the deadline approaches, outcomes become more predictable, and effort becomes increasingly concentrated around the pivot state.
 
-For more properties of the equilibrium, please refer to \citet{ryvkin2022fight}. 
+For more properties of the equilibrium, please refer to \citet{Ryvkin2022Fight}. 
 Here, we only provide a supplementary analysis related to contest design:
 
 
@@ -910,7 +910,7 @@ Rather than increasing the number of trajectories, we examine how the accumulati
 When generating long-horizon contest data, it is important to appropriately lower the effort costs $c_i$ and $c_j$ to ensure sustained effort from the contestants.
 This is because effort levels are influenced by the remaining time until the deadline:
 according to equation~(\ref{eq-equilibrium-effort}), the further away the deadline, the lower the equilibrium effort. 
-Moreover, with volatility held constant, a long contest duration increases the likelihood that the true output gap undergoes a random walk to an unusually high level, potentially resulting in unexpected early success \citep{ryvkin2022fight}.
+Moreover, with volatility held constant, a long contest duration increases the likelihood that the true output gap undergoes a random walk to an unusually high level, potentially resulting in unexpected early success \citep{Ryvkin2022Fight}.
 These factors may affect the quality of the generated data. 
 
 Table~\ref{tbl-longterm-synthetic-data} presents simulations of contests lasting 6 and 12 months. 
@@ -1050,21 +1050,21 @@ The following table reports the results from this regression analysis:
 		& coef. & stderr & 95\% CI \\
 		\midrule
 		const.
-		& -0.733 & 3.181 & [-7.073, 5.607] \\
+		& -0.8.30 & 3.122 & [-7.051, 5.392] \\
 		$\log(1 + \hat{\lambda})$ 
-		& 3.264\textbf{**} & 1.088 & [1.096, 5.432] \\
+		& 3.288\textbf{**} & 1.067 & [1.161, 5.416] \\
 		\midrule
 		Obs. & \multicolumn{3}{c}{75} \\
-		R$^2$ & \multicolumn{3}{c}{0.110} \\
-		Adj. R$^2$ & \multicolumn{3}{c}{0.098} \\
+		R$^2$ & \multicolumn{3}{c}{0.115} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{0.103} \\
 		\bottomrule
 		\addlinespace[0.5ex]
 	\end{tabularx}
 	\begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
-(2) Normality diagnostics: Omnibus = 0.378, Jarque-Bera = 0.071, Skewness = -0.042, Kurtosis = 3.126. 
-(3) Other diagnostic statistics: Condition Number = 28.2, Durbin-Watson = 2.244.
+(2) Normality diagnostics: Omnibus = 0.449, Jarque-Bera = 0.091, Skewness = 0.016, Kurtosis = 3.168. 
+(3) Other diagnostic statistics: Condition Number = 28.2, Durbin-Watson = 2.212.
 }
 	\end{minipage}
 	\vspace*{\fill}
@@ -1084,12 +1084,12 @@ The following table reports the results from this regression analysis:
 \medskip
 
 The left panel of Figure~\ref{fig-validate-lambda} reveals a clear positive relationship between the log-transformed estimates of $\hat\lambda$ and $\lambda^{\text{MLE}}$.
-In the accompanying regression table, we observe that the intercept is statistically insignificant, while the slope coefficient is estimated at 3.264 and is statistically significant at the 1\% level.
-The regression residuals exhibit no significant deviation from normality, as indicated by the low Jarque-Bera statistic (0.071), near-zero skewness (-0.042), and kurtosis close to 3 (3.126). 
-The condition number (28.2) suggests no severe multicollinearity, while the Durbin-Watson statistic (2.244) indicates no significant autocorrelation in the residuals. 
+In the accompanying regression table, we observe that the intercept is statistically insignificant, while the slope coefficient is estimated at 3.288 and is statistically significant at the 1\% level. 
+The regression residuals exhibit no significant deviation from normality, as indicated by the low Jarque-Bera statistic (0.091), near-zero skewness (0.016), and kurtosis close to 3 (3.168). 
+The condition number (28.2) suggests no severe multicollinearity, while the Durbin-Watson statistic (2.212) indicates no significant autocorrelation in the residuals. 
 These diagnostics support the validity of the OLS assumptions.
 
-It is worth noting, however, that the $R^2$ of the regression is relatively low, around 0.10, suggesting that the scatter points are not tightly clustered around the fitted line but instead show substantial dispersion.
+It is worth noting, however, that the $R^2$ of the regression is relatively low, around 0.1, suggesting that the scatter points are not tightly clustered around the fitted line but instead show substantial dispersion.
 This pattern likely reflects the limited sample size as well as the simplifying assumptions introduced during data processing and structural estimation.
 
 
