@@ -610,13 +610,6 @@ Combining (\ref{signal}) with (\ref{eq-state-dynamics}), the observed real-time 
 where the term $\sigma W_t$ captures the accumulated innovation shock, $\lambda$ governs the signal precision and $\xi_t$ is a white noise with $\mathbb{E}(\xi_t\xi_s) = \delta(t-s)$. 
 In practise, we approximately assume that $\xi_t \approx (B_{t+\Delta} - B_t)/\Delta$ where $\Delta$ is a small time interval. 
 
-% Source of Noise 2
-Beyond the uncertainty introduced by partial data disclosure, a second source of signal noise arises from the timing of leaderboard updates: 
-rankings are refreshed only after model submissions, leaving the leaderboard uninformative during periods without new submissions.
-It should be noted that such lag would significantly bias our model estimates only if participants strategically timed their submissions.
-Although such strategic behaviour is theoretically possible, we abstract from it in this study.
-We assume that each submission follows a period of substantive effort, allowing the leaderboard rankings to broadly reflect the relative performance of algorithms based on the publicly available data.
-
 % tilde{y}_t
 It is important to recognize that the generation of $y_t$ and $\hat{y}_t$ is inherently tied to the players’ strategic interactions, as it depends on their estimates of the underlying state, $\tilde{y}_t$. 
 In turn, $\tilde{y}_t$ evolves dynamically based on $\hat{y}_t$, since players continually update their beliefs in response to observed data. 
@@ -629,6 +622,29 @@ with initial condition $\tilde{y}_0 = \mu_0$, where $\mu_0$ can be interpreted a
 
 We denote the set of unknown parameters by $\Theta := \{c_i, c_j, \sigma, \lambda, \mu_0\}$.
 Once $\Theta$ is specified, the data-generating processes for $(y_t)$, $(\hat{y}_t)$, and $(\tilde{y}_t)$ are fully defined by equations (\ref{eq-state-dynamics}), (\ref{eq-leaderboard-gap}), and (\ref{eq-fintered-y-update}), although their realized trajectories remain stochastic.
+
+
+
+\subsection{Discussions}
+
+\subsubsection{Strategic submission timing.}
+
+Beyond the uncertainty caused by partial data disclosure, an additional source of signal noise stems from the timing of leaderboard updates: rankings are only refreshed upon new submissions, rendering the leaderboard uninformative during periods of inactivity.
+This lag would significantly bias model estimates if participants deliberately timed their submissions. 
+
+
+In our data-generating process, however, we assume that submissions are entirely driven by effort and do not explicitly model strategic timing behaviour, thereby abstracting away from this issue.
+Strategic submission timing is, in fact, a well-known concern in the literature. 
+For example, \citet{lemus2021dynamic} adopt a similar simplification by excluding such behavior from their model.
+As a partial remedy in our empirical design, we require a minimum number of submissions when selecting the two representative players (see Section~\ref{sec-data-clean}).
+This helps reduce the likelihood of manipulation—such as intentionally delaying or withholding submissions to mislead competitors.
+
+
+\subsubsection{Normality.}
+
+An additional assumption underlying the data-generating process pertains to the assumption that leaderboard data follow a normal distribution.
+
+
 
 
 \subsection{Bayesian Estimation Framework}
@@ -951,6 +967,7 @@ Figure~\ref{kaggledata-diagram} provides a schematic representation of the data-
 
 
 \subsection{Preparing Data for Structural Estimation}
+\label{sec-data-clean}
 
 To empirically implement the structural estimation framework developed in the previous sections using Kaggle data, the first step is to map the observed data onto the corresponding variables defined by the model.
 This subsection details the procedures for selecting competitions, identifying key participants, and incorporating contest-specific information such as prize structures to make the data compatible with the model’s structural assumptions.

@@ -64,7 +64,7 @@ def state_transformation(x):
 		x = threshold_up
 	if x <= threshold_lo:
 		x = threshold_lo
-	return math.log(x / (1 - x))
+	return 0.5 * math.log(x / (1 - x))
 	#return stats.norm.ppf(x)
 
 

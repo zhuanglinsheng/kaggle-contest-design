@@ -24,6 +24,7 @@ pip install kaggle
 
 Excute the following notebooks:
 
-- `_data_clean_2.ipynb`
+- `_data_explore.ipynb`
+- `_data_clean.ipynb`
 - `_estimation.ipynb`
 
