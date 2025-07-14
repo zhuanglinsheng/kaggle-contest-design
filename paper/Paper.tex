@@ -640,10 +640,22 @@ As a partial remedy in our empirical design, we require a minimum number of subm
 This helps reduce the likelihood of manipulation—such as intentionally delaying or withholding submissions to mislead competitors.
 
 
+\subsubsection{Two Players.}
+
+An additional concern underlying the data-generating process pertains to the assumption that there are only two contestants participating in the entire competition.
+The implication of this assumption in the context of crowdsourcing platforms like Kaggle is that each team has a clear understanding of the capabilities of all other competitors, allowing the two strongest teams to mutually recognize each other. 
+In reality, however, this assumption considerably oversimplifies the problem.
+In Section~\ref{sect-robust-2players}, we conduct a series of robustness checks. 
+By selecting the top two competitors using alternative criteria, we aim to assess whether the earlier conclusions remain valid.
+
 \subsubsection{Normality.}
 
-An additional assumption underlying the data-generating process pertains to the assumption that leaderboard data follow a normal distribution.
-
+Another aspect of the data-generating assumptions that may be open to question is the assumption of normality. 
+Specifically, we rely on normal distributions in two critical components: the signal noise and the innovation shock. 
+As discussed in Section~\ref{sec-data-clean}, maintaining this assumption depends heavily on our data transformation procedures, such as converting percentage leaderboard data into the state variable $\hat{y}_t$. 
+When applying a uniform transformation across all contests, we find that for many contests, approximately half, the resulting data do not conform well to a normal distribution. 
+This discrepancy has important implications for the credibility of our statistical results.
+In Section~\ref{sect-robust-normality}, we adopt alternative data processing methods to assess the robustness of our results.
 
 
 
@@ -1067,7 +1079,7 @@ The following table reports the results from this regression analysis:
 		& coef. & stderr & 95\% CI \\
 		\midrule
 		const.
-		& -0.8.30 & 3.122 & [-7.051, 5.392] \\
+		& -0.830 & 3.122 & [-7.051, 5.392] \\
 		$\log(1 + \hat{\lambda})$ 
 		& 3.288\textbf{**} & 1.067 & [1.161, 5.416] \\
 		\midrule
@@ -1184,6 +1196,21 @@ Normality appears reasonable, as evidenced by the Omnibus statistic (1.280), Jar
 The condition number (5.08) rules out serious multicollinearity, and the Durbin-Watson statistic (1.618) suggests no significant autocorrelation in the residuals.
 Moreover, compared to the earlier analysis of $\lambda$, the model fit here is notably stronger: the regression yields an $R^2$ above 0.3, indicating a moderately good fit. 
 
+
+\section{Robustness}
+
+...
+
+\subsection{}\label{sect-robust-2players}
+
+So far, we ...
+
+Another plausible conjecture is that each contestant perceives themselves as competing against an imagined strongest opponent. 
+This perceived benchmark is likely shaped by the public leaderboard performances of several genuinely strong teams, while also being influenced by the top-ranked submission, which often exhibits substantial overfitting to the public leaderboard.
+
+\subsection{}\label{sect-robust-normality}
+
+...
 
 \section{Conclusion}
 
