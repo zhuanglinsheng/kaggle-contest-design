@@ -15,9 +15,10 @@ Then, install required packages
 
 ```sh
 pip install numpy scipy matplotlib pandas
+pip install statsmodels
 pip install cmdstanpy
-pip install jupyter
 pip install kaggle
+pip install jupyter
 ```
 
 ## Processing Data

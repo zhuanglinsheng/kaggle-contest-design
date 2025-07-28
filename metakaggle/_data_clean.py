@@ -187,12 +187,41 @@ def player_basic_criterion(player: pd.DataFrame) -> bool:
 	return True
 
 
+def select_next_strongest(
+		pri_final_rank: pd.DataFrame,
+		existing_players_id: list[int],
+		existing_players: list[pd.DataFrame]
+):
+	# determine player j
+	player_j_idx = 0
+	player_j = pri_final_rank.iloc[[player_j_idx]]
+	while True:
+		if player_j_idx in existing_players_id or not player_basic_criterion(player_j):
+			player_j_idx += 1
+			if player_j_idx >= len(pri_final_rank):
+				return None
+			player_j = pri_final_rank.iloc[[player_j_idx]]
+			continue
+		# overlapp
+		for player_i in existing_players:
+			start = min(player_i['participate_days'].values[0], player_j['participate_days'].values[0])
+			end = max(player_i['last_submit_days_ago'].values[0], player_j['last_submit_days_ago'].values[0])
+			if start - end > min_overlapping_days:
+				return player_j_idx, player_j
+			else:
+				player_j_idx += 1
+				player_j = pri_final_rank.iloc[[player_j_idx]]
+				if player_j_idx >= len(pri_final_rank):
+					return None
+
+
 def select_2_strongest(
 		tbl_submissions: pd.DataFrame,
 		contest_id: int, deadline: datetime,
 		leaderboard_type: Leaderboard_Type,
 ) -> tuple[int, int] | None:
 	"""
+	This method is for main estimation.
 	"""
 	tbl = tbl_submissions.loc[tbl_submissions['CompetitionId']==contest_id]
 	_, leaderboard_pri = leaderboard_fulfill(tbl, deadline, leaderboard_type)
@@ -206,23 +235,23 @@ def select_2_strongest(
 			return None
 		player_i = pri_final_rank.iloc[[player_i_idx]]
 	# determine player j
-	player_j_idx = 0
-	player_j = pri_final_rank.iloc[[player_j_idx]]
-	while True:
-		if player_j_idx == player_i_idx or not player_basic_criterion(player_j):
-			player_j_idx += 1
-			if player_j_idx >= len(pri_final_rank):
-				return None
-			player_j = pri_final_rank.iloc[[player_j_idx]]
-			continue
-		# overlapp
-		start = min(player_i['participate_days'].values[0], player_j['participate_days'].values[0])
-		end = max(player_i['last_submit_days_ago'].values[0], player_j['last_submit_days_ago'].values[0])
-		if start - end > min_overlapping_days:
-			break
-		else:
-			player_j_idx += 1
-			if player_j_idx >= len(pri_final_rank):
-				return None
-			player_j = pri_final_rank.iloc[[player_j_idx]]
-	return player_i['rank'].iloc[0], player_j['rank'].iloc[0]
+	next_strongest = select_next_strongest(pri_final_rank, [player_i_idx], [player_i])
+	if next_strongest is None:
+		return None
+	else:
+		_, player_j = next_strongest
+		return player_i['rank'].iloc[0], player_j['rank'].iloc[0]
+
+
+def select_n_strongest(
+		tbl_submissions: pd.DataFrame,
+		contest_id: int, deadline: datetime,
+		leaderboard_type: Leaderboard_Type,
+):
+	"""
+	This method is for robustness checking.
+	"""
+	tbl = tbl_submissions.loc[tbl_submissions['CompetitionId']==contest_id]
+	_, leaderboard_pri = leaderboard_fulfill(tbl, deadline, leaderboard_type)
+	_, pri_final_rank = leaderboard_pri.display(-1, first_n_candidates)
+
