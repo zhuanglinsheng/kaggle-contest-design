@@ -103,11 +103,12 @@ def save_contest_data(
 		team_i_id: int, team_j_id: int,
 		deadline: datetime, prize: float, max_daily_submit: int, percentage: float,
 		leaderboard_type: Leaderboard_Type,
+		folder: str,
 		min_submission_times: int = 5,
 ) -> None:
 	# json file & utils
 	wd = os.getcwd()
-	wd_synthetic_data = os.path.join(wd, f'__jsondata__/contest_{contest_id}.json')
+	wd_synthetic_data = os.path.join(wd, f'{folder}/contest_{contest_id}.json')
 	roundint = lambda x: int(round(x))
 
 	# contest setting
@@ -189,30 +190,34 @@ def player_basic_criterion(player: pd.DataFrame) -> bool:
 
 def select_next_strongest(
 		pri_final_rank: pd.DataFrame,
-		existing_players_id: list[int],
+		existing_players_idx: list[int],
 		existing_players: list[pd.DataFrame]
 ):
 	# determine player j
-	player_j_idx = 0
+	player_j_idx = existing_players_idx[-1] + 1
+	if player_j_idx >= len(pri_final_rank):
+		return None
 	player_j = pri_final_rank.iloc[[player_j_idx]]
 	while True:
-		if player_j_idx in existing_players_id or not player_basic_criterion(player_j):
+		if not player_basic_criterion(player_j):
 			player_j_idx += 1
 			if player_j_idx >= len(pri_final_rank):
 				return None
 			player_j = pri_final_rank.iloc[[player_j_idx]]
 			continue
 		# overlapp
-		for player_i in existing_players:
-			start = min(player_i['participate_days'].values[0], player_j['participate_days'].values[0])
-			end = max(player_i['last_submit_days_ago'].values[0], player_j['last_submit_days_ago'].values[0])
-			if start - end > min_overlapping_days:
-				return player_j_idx, player_j
-			else:
-				player_j_idx += 1
-				player_j = pri_final_rank.iloc[[player_j_idx]]
-				if player_j_idx >= len(pri_final_rank):
-					return None
+		player_i = existing_players[-1]
+		start = min(player_i['participate_days'].values[0], player_j['participate_days'].values[0])
+		end = max(player_i['last_submit_days_ago'].values[0], player_j['last_submit_days_ago'].values[0])
+		if start - end > min_overlapping_days:
+			return player_j_idx, player_j
+		else:
+			player_j_idx += 1
+			if player_j_idx >= len(pri_final_rank):
+				return None
+			player_j = pri_final_rank.iloc[[player_j_idx]]
+			if player_j_idx >= len(pri_final_rank):
+				return None
 
 
 def select_2_strongest(
@@ -226,14 +231,16 @@ def select_2_strongest(
 	tbl = tbl_submissions.loc[tbl_submissions['CompetitionId']==contest_id]
 	_, leaderboard_pri = leaderboard_fulfill(tbl, deadline, leaderboard_type)
 	_, pri_final_rank = leaderboard_pri.display(-1, first_n_candidates)
+
 	# determine player i
 	player_i_idx = 0
 	player_i = pri_final_rank.iloc[[player_i_idx]]
-	while not player_basic_criterion(player_i):
+	while not player_basic_criterion(player_i):  # jump out the loop if criterion satisfied
 		player_i_idx += 1
 		if player_i_idx >= len(pri_final_rank):
 			return None
 		player_i = pri_final_rank.iloc[[player_i_idx]]
+
 	# determine player j
 	next_strongest = select_next_strongest(pri_final_rank, [player_i_idx], [player_i])
 	if next_strongest is None:
@@ -255,3 +262,27 @@ def select_n_strongest(
 	_, leaderboard_pri = leaderboard_fulfill(tbl, deadline, leaderboard_type)
 	_, pri_final_rank = leaderboard_pri.display(-1, first_n_candidates)
 
+	# determine player i
+	player_i_idx = 0
+	player_i = pri_final_rank.iloc[[player_i_idx]]
+	while not player_basic_criterion(player_i):  # jump out the loop if criterion satisfied
+		player_i_idx += 1
+		if player_i_idx >= len(pri_final_rank):
+			return None
+		player_i = pri_final_rank.iloc[[player_i_idx]]
+
+	# recirsively add next strongest players
+	existing_players_idx = [player_i_idx]
+	existing_players = [player_i]
+
+	while True:
+		next_strongest = select_next_strongest(
+			pri_final_rank, existing_players_idx, existing_players)
+		if next_strongest is None:
+			if len(existing_players) < 2:
+				return None
+			else:
+				return [player['rank'].iloc[0] for player in existing_players]
+		next_id, next_player = next_strongest
+		existing_players_idx.append(next_id)
+		existing_players.append(next_player)
