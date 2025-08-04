@@ -191,7 +191,8 @@ def player_basic_criterion(player: pd.DataFrame) -> bool:
 def select_next_strongest(
 		pri_final_rank: pd.DataFrame,
 		existing_players_idx: list[int],
-		existing_players: list[pd.DataFrame]
+		existing_players: list[pd.DataFrame],
+		overlap_type: Literal['last', 'first'] = 'last'
 ):
 	# determine player j
 	player_j_idx = existing_players_idx[-1] + 1
@@ -205,8 +206,12 @@ def select_next_strongest(
 				return None
 			player_j = pri_final_rank.iloc[[player_j_idx]]
 			continue
+
 		# overlapp
-		player_i = existing_players[-1]
+		if overlap_type == 'last':
+			player_i = existing_players[-1]
+		else:
+			player_i = existing_players[0]
 		start = min(player_i['participate_days'].values[0], player_j['participate_days'].values[0])
 		end = max(player_i['last_submit_days_ago'].values[0], player_j['last_submit_days_ago'].values[0])
 		if start - end > min_overlapping_days:
@@ -254,6 +259,7 @@ def select_n_strongest(
 		tbl_submissions: pd.DataFrame,
 		contest_id: int, deadline: datetime,
 		leaderboard_type: Leaderboard_Type,
+		overlap_type: Literal['last', 'first'] = 'last'
 ):
 	"""
 	This method is for robustness checking.
