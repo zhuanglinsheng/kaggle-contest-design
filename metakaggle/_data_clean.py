@@ -283,7 +283,7 @@ def select_n_strongest(
 
 	while True:
 		next_strongest = select_next_strongest(
-			pri_final_rank, existing_players_idx, existing_players)
+			pri_final_rank, existing_players_idx, existing_players, overlap_type)
 		if next_strongest is None:
 			if len(existing_players) < 2:
 				return None
