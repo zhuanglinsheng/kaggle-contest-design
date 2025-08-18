@@ -640,7 +640,7 @@ As a partial remedy in our empirical design, we require a minimum number of subm
 This helps reduce the likelihood of manipulation—such as intentionally delaying or withholding submissions to mislead competitors.
 
 
-\subsubsection{Two Players.}
+\subsubsection{Selection of Two Players.}
 
 An additional concern underlying the data-generating process pertains to the assumption that there are only two contestants participating in the entire competition.
 The implication of this assumption in the context of crowdsourcing platforms like Kaggle is that each team has a clear understanding of the capabilities of all other competitors, allowing the two strongest teams to mutually recognize each other. 
@@ -1079,21 +1079,21 @@ The following table reports the results from this regression analysis:
 		& coef. & stderr & 95\% CI \\
 		\midrule
 		const.
-		& -0.830 & 3.122 & [-7.051, 5.392] \\
+		& -0.733 & 3.182 & [-7.07, 5.61] \\
 		$\log(1 + \hat{\lambda})$ 
-		& 3.288\textbf{**} & 1.067 & [1.161, 5.416] \\
+		& 3.264\textbf{**} & 1.088 & [1.10, 5.43] \\
 		\midrule
 		Obs. & \multicolumn{3}{c}{75} \\
-		R$^2$ & \multicolumn{3}{c}{0.115} \\
-		Adj. R$^2$ & \multicolumn{3}{c}{0.103} \\
+		R$^2$ & \multicolumn{3}{c}{0.110} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{0.098} \\
 		\bottomrule
 		\addlinespace[0.5ex]
 	\end{tabularx}
 	\begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
-(2) Normality diagnostics: Omnibus = 0.449, Jarque-Bera = 0.091, Skewness = 0.016, Kurtosis = 3.168. 
-(3) Other diagnostic statistics: Condition Number = 28.2, Durbin-Watson = 2.212.
+(2) Normality diagnostics: Omnibus = 0.378, Jarque-Bera = 0.071, Skewness = -0.042, Kurtosis = 3.126. 
+(3) Other diagnostic statistics: Condition Number = 28.2, Durbin-Watson = 2.244.
 }
 	\end{minipage}
 	\vspace*{\fill}
@@ -1114,8 +1114,8 @@ The following table reports the results from this regression analysis:
 
 The left panel of Figure~\ref{fig-validate-lambda} reveals a clear positive relationship between the log-transformed estimates of $\hat\lambda$ and $\lambda^{\text{MLE}}$.
 In the accompanying regression table, we observe that the intercept is statistically insignificant, while the slope coefficient is estimated at 3.288 and is statistically significant at the 1\% level. 
-The regression residuals exhibit no significant deviation from normality, as indicated by the low Jarque-Bera statistic (0.091), near-zero skewness (0.016), and kurtosis close to 3 (3.168). 
-The condition number (28.2) suggests no severe multicollinearity, while the Durbin-Watson statistic (2.212) indicates no significant autocorrelation in the residuals. 
+The regression residuals exhibit no significant deviation from normality, as indicated by the low Jarque-Bera statistic (0.071), near-zero skewness (-0.042), and kurtosis close to 3 (3.126). 
+The condition number (28.2) suggests no severe multicollinearity, while the Durbin-Watson statistic (2.244) indicates no significant autocorrelation in the residuals. 
 These diagnostics support the validity of the OLS assumptions.
 
 It is worth noting, however, that the $R^2$ of the regression is relatively low, around 0.1, suggesting that the scatter points are not tightly clustered around the fitted line but instead show substantial dispersion.
@@ -1128,7 +1128,7 @@ This pattern likely reflects the limited sample size as well as the simplifying 
 
 Another key contest-specific parameter is $\sigma$, which captures the degree of uncertainty in the data analysis and algorithm innovation process. 
 A larger $\sigma$ implies that chance plays a greater role compared to effort, and that the outcomes of innovation are more unpredictable. 
-From the perspective of contest participants, the overall uncertainty associated with the real-world task is typically anticipated to some extent, and this perception can influence their strategic behavior.
+From the perspective of contest participants, the overall uncertainty associated with the real-world task is typically anticipated to some extent, and this perception can influence their strategic behaviour.
 We estimate $\hat{\sigma}_c$ structurally via Bayesian inference for each contest $c$, using the public submission records of the two participants, denoted jointly as $\{t_k^c\}_{k=1}^{N^c_i + N^c_j}$, together with the corresponding public leaderboard trajectories $\{\hat{y}_{k}\}_{k=1}^{N^c_i + N^c_j}$. 
 In addition, a more direct and model-free estimate of $\sigma$ can be obtained by measuring the volatility of the private leaderboard scores $\{y_k\}_{k=1}^{N^c_i+N^c_j}$.
 
@@ -1160,9 +1160,9 @@ The regression results are presented in the table below:
 		& coef. & stderr & 95\% CI \\
 		\midrule
 		const.
-		& 0.054 & 0.116 & [-0.178,0.285] \\
+		& 0.054 & 0.116 & [-0.18, 0.29] \\
 		$\log(1 + \hat{\lambda})$ 
-		& 0.887\textbf{***} & 0.152 & [0.583, 1.190] \\
+		& 0.887\textbf{***} & 0.152 & [0.58, 1.19] \\
 		\midrule
 		Obs. & \multicolumn{3}{c}{75} \\
 		R$^2$ & \multicolumn{3}{c}{0.317} \\
@@ -1201,16 +1201,217 @@ Moreover, compared to the earlier analysis of $\lambda$, the model fit here is n
 
 ...
 
-\subsection{}\label{sect-robust-2players}
+\subsection{Selection of Two Players}\label{sect-robust-2players}
 
-So far, we ...
-
-Another plausible conjecture is that each contestant perceives themselves as competing against an imagined strongest opponent. 
+One plausible conjecture is that each contestant perceives themselves as competing against an imagined strongest opponent. 
 This perceived benchmark is likely shaped by the public leaderboard performances of several genuinely strong teams, while also being influenced by the top-ranked submission, which often exhibits substantial overfitting to the public leaderboard.
+
+\subsubsection{1-3.}
+
+...
+
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	\includegraphics[width=\linewidth]{validate_lamb_robust13.pdf}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+	\centering
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{llYY}
+		\toprule
+		& coef. & stderr & 95\% CI \\
+		\midrule
+		const.
+		& 2.259 & 4.567 & [-6.85, 11.37] \\
+		$\log(1 + \hat{\lambda})$ 
+		& 2.551\textbf{***} & 1.490 & [xxx, xxx] \\
+		\midrule
+		Obs. & \multicolumn{3}{c}{75} \\
+		R$^2$ & \multicolumn{3}{c}{xxx} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{xxx} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(2) Normality diagnostics: Omnibus = xxx, Jarque-Bera = xxx, Skewness = xxx, Kurtosis = xxx.
+(3) Other diagnostic statistics: Condition Number = xxx, Durbin-Watson = xxx.
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+%%%%%%%%%%%% Captions %%%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{\textwidth}
+	\centering
+	\captionof{figure}{$\lambda^{\text{MLE}}$ vs. Bayesian Estimate $\hat\lambda$}
+	\label{fig-validation-lambda-robust13}
+\end{minipage}
+\medskip
+
+...
+
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	\includegraphics[width=\linewidth]{validate_sigma_robust13.pdf}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+	\centering
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{llYY}
+		\toprule
+		& coef. & stderr & 95\% CI \\
+		\midrule
+		const.
+		& xxx & xxx & [xxx, xxx] \\
+		$\log(1 + \hat{\lambda})$ 
+		& xxx\textbf{***} & xxx & [xxx, xxx] \\
+		\midrule
+		Obs. & \multicolumn{3}{c}{75} \\
+		R$^2$ & \multicolumn{3}{c}{xxx} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{xxx} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(2) Normality diagnostics: Omnibus = xxx, Jarque-Bera = xxx, Skewness = xxx, Kurtosis = xxx.
+(3) Other diagnostic statistics: Condition Number = xxx, Durbin-Watson = xxx.
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+%%%%%%%%%%%% Captions %%%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{\textwidth}
+	\centering
+	\captionof{figure}{$\sigma^{\text{MLE}}$ vs. Bayesian Estimate $\hat\sigma$}
+	\label{fig-validation-lambda-robust13}
+\end{minipage}
+\medskip
+
+...
+
+\subsubsection{2-3}
+
+...
+
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	\includegraphics[width=\linewidth]{validate_lamb_robust23.pdf}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+	\centering
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{llYY}
+		\toprule
+		& coef. & stderr & 95\% CI \\
+		\midrule
+		const.
+		& 0.290 & 3.819 & [-7.91, 7.32] \\
+		$\log(1 + \hat{\lambda})$ 
+		& 3.421\textbf{***} & 1.244 & [0.94, 5.90] \\
+		\midrule
+		Obs. & \multicolumn{3}{c}{73} \\
+		R$^2$ & \multicolumn{3}{c}{0.096} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{0.084} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(2) Normality diagnostics: Omnibus = 3.192, Jarque-Bera = 2.424, Skewness = -0.411, Kurtosis = 3.350.
+(3) Other diagnostic statistics: Condition Number = 36.9, Durbin-Watson = 2.236.
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+%%%%%%%%%%%% Captions %%%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{\textwidth}
+	\centering
+	\captionof{figure}{$\lambda^{\text{MLE}}$ vs. Bayesian Estimate $\hat\lambda$}
+	\label{fig-validation-lambda-robust23}
+\end{minipage}
+\medskip
+
+...
+
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	\includegraphics[width=\linewidth]{validate_sigma_robust23.pdf}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+	\centering
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{llYY}
+		\toprule
+		& coef. & stderr & 95\% CI \\
+		\midrule
+		const.
+		& 0.117 & 0.130 & [-0.14, 0.38] \\
+		$\log(1 + \hat{\lambda})$ 
+		& 0.501\textbf{***} & 0.212 & [0.08, 0.92] \\
+		\midrule
+		Obs. & \multicolumn{3}{c}{75} \\
+		R$^2$ & \multicolumn{3}{c}{0.071} \\
+		Adj. R$^2$ & \multicolumn{3}{c}{0.059} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(2) Normality diagnostics: Omnibus = 12.72, Jarque-Bera = 13.66, Skewness = 1.02, Kurtosis = 3.50.
+(3) Other diagnostic statistics: Condition Number = 7.84, Durbin-Watson = 1.87.
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+%%%%%%%%%%%% Captions %%%%%%%%%%%%
+\noindent
+\begin{minipage}[t]{\textwidth}
+	\centering
+	\captionof{figure}{$\sigma^{\text{MLE}}$ vs. Bayesian Estimate $\hat\sigma$}
+	\label{fig-validation-lambda-robust23}
+\end{minipage}
+\medskip
+
+
 
 \subsection{}\label{sect-robust-normality}
 
 ...
+
+
+
 
 \section{Conclusion}
 
