@@ -215,8 +215,10 @@ Using Meta-Kaggle data \citep{megan_risdal_timo_bozsolik_2022}, we infer latent 
 	\begin{minipage}{\textwidth}
 {\footnotesize
 \medskip
-\textit{Note:} (1) Rectangles and rounded rectangles represent observed data and latent states, respectively. 
-(2) The private leaderboard is visible only to the contest organizer during the contest and is revealed to all participants only after it ends.
+\textit{Note:} 
+This figure illustrates the structure of a typical Kaggle contest and the information flow available to contestants. 
+Rectangles and rounded rectangles represent observed data and latent states, respectively. 
+The private leaderboard is visible only to the contest organizer during the contest and is revealed to all participants only after it ends.
 During the contest period, contestants can observe only the submission times of each player and the public leaderboard.
 }
 \end{minipage}
@@ -424,6 +426,14 @@ Figure~\ref{fig-S-evol} illustrates convergence of $S_t$ to $\bar S$ from arbitr
 	\centering
 	\includegraphics[scale=0.6]{figure_S_evolve.pdf}
 	\caption{The evolution of $S_t$ in time $t$, given that $\lambda = 1$ and $\sigma = 1$.} \label{fig-S-evol}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:} The plot shows the conditional variance $S_t$ of the filtering error (i.e., the uncertainty about the true performance gap). 
+It converges quickly from any initial value to its steady state $\bar{S} = \sigma / \sqrt{\lambda}$. 
+The figure illustrates the convergence of $S_t$ to its steady state.
+}
+\end{minipage}
 \end{figure}
 
 
@@ -466,9 +476,9 @@ In the Markov perfect equilibrium, the players’ efforts in state $m_{i(j)}(\ti
 m_{i(j)}(\tilde{y}_t, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
 \end{equation}
 where $z = \tilde{y}_t / (\sigma\sqrt{T-t})$, $\rho(z) = \gamma^{-1}\left(\Phi(z)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and 
-\begin{equation*}
+\begin{equation}\label{eq-gamma}
 \gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},\quad u\in(-1,1)
-\end{equation*}
+\end{equation}
 \begin{equation*}
 \rho_{i} = \frac{e^{w_{i}}+e^{-w_{j}}-2}{e^{w_{i}}-e^{-w_{j}}},
 \quad
@@ -587,7 +597,7 @@ Once $\Theta$ is specified, equations (\ref{eq-state-dynamics}), (\ref{eq-leader
 
 
 
-\subsection{Modeling Considerations}
+\subsection{Modeling Considerations}\label{sect-conserns}
 
 This subsection discusses three practical modeling concerns that are first-order for interpretation: strategic submission timing, the two-player approximation, and the normality assumption.
 The goal is to clarify the scope of the baseline framework and connect each concern to the robustness analyses that follow.
@@ -676,8 +686,15 @@ As illustrated, the approximation closely replicates the true function; the appr
         \includegraphics[width=\linewidth]{approx_equi_effort.pdf}
         \caption{Equilibrium Effort $m_i(\tilde{y}_t, t)$}
     \end{subfigure}
-    \caption{Comparison of the Accurate and Approximate Forms ($\theta = 1$, $c_i = c_j = 1$, $\sigma=1$, $\Delta=1/24$)}
+    \caption{Comparison of the Accurate and Approximate Forms}
     \label{fig-approximation}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:} Panel (a) compares the exact inverse function $\gamma^{-1}(x)$ of the equilibrium component in (\ref{eq-gamma}) with its analytical approximation $\frac{2}{\pi}\arctan(ax)$ by (\ref{eq-invgamma-approx}), where $a \approx 0.947$ minimizes the 1‑norm approximation error. 
+Panel (b) compares the resulting equilibrium effort $m_i(\tilde{y}_t, t)$ at $t=0$ (with $T=15$, $\theta=1$, $c_i=c_j=1$, $\sigma=1$) obtained from the analytical approximation versus the exact numerical solution. 
+}
+\end{minipage}
 \end{figure}
 
 We use truncated normal priors with explicit supports:
@@ -741,8 +758,14 @@ Under this specification, we simulate the latent output gap, the public leaderbo
 
 \begin{figure}[!ht]
 	\noindent\includegraphics[scale=0.75]{synthetic_data.pdf}
-	\caption{Synthetic Contest Data over a Three-Month Horizon\\($\theta = 1.0$, $c_i = 1.2$, $c_j = 1.5$, $\sigma = 2.0$, $\lambda = 1.0$, $r = 15$)}
+	\caption{Synthetic Contest Data over a Three-Month Horizon}
 	\label{fig-synthetic_90}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:} The blue line represents the latent output gap $y_t$ (private leaderboard), the solid black line represents the public leaderboard $\hat{y}_t$ (updated only upon submissions), and the dashed black line represents the perceived output gap $\tilde{y}_t$ inferred via Bayesian filtering. Vertical ticks mark submission times: ticks above the axis are player $i$'s submissions; ticks below are player $j$'s. Parameters: $\theta = 1.0$, $c_i = 1.2$, $c_j = 1.5$, $\sigma = 2.0$, $\lambda = 1.0$, $r = 15$, $T = 3$ months.
+}
+\end{minipage}
 \end{figure}
 
 Figure~\ref{fig-synthetic_90} shows one realization of the baseline synthetic contest. 
@@ -786,8 +809,9 @@ This finite-sample pattern is informative and motivates the richer-data exercise
 \end{tabularx}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} (1) $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$ by the bias–variance decomposition. RMSE is the square root of MSE.
-(2) Players $i$ and $j$ submit 28 and 18 times respectively.
+\textit{Note:} 
+This table reports the posterior means, posterior standard errors, RMSE, and 95\% credible intervals from Bayesian estimation using the synthetic contest data shown in Figure~\ref{fig-synthetic_90}. In this single synthetic realization, players $i$ and $j$ submitted 28 and 18 times, respectively. RMSE is the square root of the MSE, where $\text{MSE}(\hat\theta) = \mathbb{E}[(\hat{\theta}-\theta)^2] = [\mathbb{E}(\hat{\theta}) - \theta]^2 + \operatorname{Var}(\hat{\theta})$ by the bias–variance decomposition.
+The 95\% credible interval reports the central posterior interval containing 95\% of the posterior mass.
 }
 \end{minipage}
 \end{table}
@@ -839,7 +863,10 @@ RMSE                & 0.060 & 0.165 & 0.071 & 0.062 & 1.003\\
 \end{tabularx}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$ by the bias–variance decomposition. RMSE is the square root of MSE.
+\textit{Note:} 
+This table reports the posterior means, posterior standard errors, RMSE, and 95\% credible intervals from Bayesian estimation using \textit{pooled} data from multiple independent synthetic contest replications under identical structural parameters. For the pool of 10 contests, the total number of submissions is 280 by player $i$ and 180 by player $j$; for the pool of 20 contests, the totals are 560 and 360, respectively. 
+RMSE is the square root of the MSE, where $\text{MSE}(\hat\theta) = \mathbb{E}[(\hat{\theta}-\theta)^2] = [\mathbb{E}(\hat{\theta}) - \theta]^2 + \operatorname{Var}(\hat{\theta})$ by the bias–variance decomposition.
+The 95\% credible interval reports the central posterior interval containing 95\% of the posterior mass.
 }
 \end{minipage}
 \end{table}
@@ -870,8 +897,10 @@ RMSE                  & 0.043 & 0.076 & 0.118 & 0.171 & 0.994\\
 \end{tabularx}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} (1) $\text{MSE}(\hat\theta) = \mathbb{E}(\hat{\theta}-\theta)^2 = [\mathbb{E}(\hat{\theta}) - \theta]^2 + Var(\hat{\theta})$ by the bias–variance decomposition. RMSE is the square root of MSE.
-(2) Players $i$ and $j$ submit 59 and 51 times in the 6-month contest, and 100 and 97 times in the 12-month contest, respectively.
+\textit{Note:} 
+This table reports the posterior means, posterior standard errors, RMSE, and 95\% credible intervals from Bayesian estimation using synthetic contest data with longer horizons (6 and 12 months). In the 6-month contest, players $i$ and $j$ submitted 59 and 51 times, respectively; in the 12-month contest, they submitted 100 and 97 times, respectively. To sustain active submission behavior over longer horizons, effort costs $c_i$ and $c_j$ are reduced proportionally (true values: $c_i = 0.6$, $c_j = 0.75$ for 6 months; $c_i = 0.3$, $c_j = 0.375$ for 12 months). 
+RMSE is the square root of the MSE, where $\text{MSE}(\hat\theta) = \mathbb{E}[(\hat{\theta}-\theta)^2] = [\mathbb{E}(\hat{\theta}) - \theta]^2 + \operatorname{Var}(\hat{\theta})$ by the bias–variance decomposition.
+The 95\% credible interval reports the central posterior interval containing 95\% of the posterior mass.
 }
 \end{minipage}
 \end{table}
@@ -914,8 +943,11 @@ Figure~\ref{kaggledata-diagram} summarizes the data-model structure and validati
 	\begin{minipage}{\textwidth}
 {\footnotesize
 \medskip
-\textit{Note:} (1) Rectangles, rounded rectangles and ellipses represent observed data, latent states and parameters, respectively. 
-(2) Solid lines depict relationships among variables of time series data and state variables; dashed arrows show the influence of contest parameters. 
+\textit{Note:} 
+This figure shows the structure of a typical Kaggle contest and the information flow available to contestants. 
+Rectangles represent observed data, rounded rectangles represent latent states, and ellipses represent contest parameters. 
+Solid lines depict temporal relationships among time series variables and state variables, while dashed arrows show the influence of contest parameters on the data-generating process. 
+The private leaderboard $y_t$ is not observed by contestants during the contest and is excluded from estimation, serving only for out-of-sample validation.
 }
 \end{minipage}
 \end{figure}
@@ -964,7 +996,7 @@ The logit function is S-shaped, with the key property that as the accuracy $p_t$
 This feature aligns with the intuition that it becomes increasingly difficult to improve performance near the upper bound, making such gains more informative in competitive settings.
 
 
-\subsection{Structural Validation}
+\subsection{Structural Validation}\label{sect-validation}
 
 
 We select 75 contests from the Meta-Kaggle database, encompassing all eligible competitions concluded before April 15, 2025.\footnote{
@@ -1024,7 +1056,7 @@ We then regress the non-structural benchmark $\lambda^{\text{MLE}}$ on the Bayes
 	\end{tabularx}
 	\begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
 (2) Normality diagnostics: Omnibus = 0.378, Jarque-Bera = 0.071, Skewness = -0.042, Kurtosis = 3.126. 
 (3) Other diagnostic statistics: Condition Number = 28.2, Durbin-Watson = 2.244.
 }
@@ -1038,12 +1070,12 @@ We then regress the non-structural benchmark $\lambda^{\text{MLE}}$ on the Bayes
 	\captionof{figure}{$\lambda^{\text{MLE}}$ vs. Bayesian Estimate $\hat\lambda$}
 	\label{fig-validate-lambda}
 \end{minipage}
-%\hfill
-%\begin{minipage}[t]{0.53\textwidth}
-%	\centering
-%	\captionof{table}{Regression of $\lambda^{\text{MLE}}$ on Bayesian Estimate $\hat\lambda$}
-%\end{minipage}
-\medskip
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\lambda^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\lambda}$ for each of the 75 contests. $\lambda^{\mathrm{MLE}}$ is computed from public-private leaderboard discrepancies as $\lambda^{\mathrm{MLE}} = N / (\Delta \sum_{k} (y_k - \hat{y}_k)^2)$, where $N = N_i + N_j$ is the total number of submissions. The dashed line represents the fitted regression line from the model $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$. The positive slope ($\beta_1 = 3.264$, $p < 0.01$) indicates a statistically significant but modest association ($R^2 = 0.110$).
+}
+\end{minipage}
+
 
 Figure~\ref{fig-validate-lambda} indicates a positive and statistically significant association between structural and benchmark estimates of $\lambda$.
 The slope on $\log(1+\hat\lambda)$ is positive (3.264, $p<0.01$), but fit is modest ($R^2\approx0.11$), so this should be interpreted as directional rather than high-precision contest-level recovery.
@@ -1100,7 +1132,7 @@ As in the analysis above for $\lambda$, we regress $\sigma^{\text{MLE}}$ on the 
 	\end{tabularx}
 	\begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
 (2) Normality diagnostics: Omnibus = 1.280, Jarque-Bera = 0.774, Skewness = 0.225, Kurtosis = 3.214.
 (3) Other diagnostic statistics: Condition Number = 5.08, Durbin-Watson = 1.618.
 }
@@ -1114,7 +1146,12 @@ As in the analysis above for $\lambda$, we regress $\sigma^{\text{MLE}}$ on the 
 	\captionof{figure}{$\sigma^{\text{MLE}}$ vs. Bayesian Estimate $\hat\sigma$}
 	\label{fig-validation-sigma}
 \end{minipage}
-\medskip
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\sigma^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\sigma}$ for each of the 75 contests. $\sigma^{\mathrm{MLE}}$ is computed from private leaderboard increments as $\sigma^{\mathrm{MLE}} = \left(\frac{1}{N} \sum_{k} \frac{(y_{k+1} - y_k - \hat{\mu}_k)^2}{t_{k+1} - t_k}\right)^{1/2}$, where $\hat{\mu}_k$ is retrieved from posterior effort trajectories. The dashed line represents the fitted regression line from the model $\log(1 + \sigma^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$. The positive slope ($\beta_1 = 0.887$, $p < 0.001$) and $R^2 = 0.317$ indicate a stronger association than for $\lambda$, suggesting more reliable recovery of innovation risk.
+}
+\end{minipage}
+
 
 Figure~\ref{fig-validation-sigma} reveals a stronger positive association than in the $\lambda$ exercise.
 The intercept is small and insignificant, while the slope on $\log(1+\hat{\sigma})$ is 0.887 ($p<0.001$), with $R^2\approx0.317$.
@@ -1122,7 +1159,32 @@ Thus, innovation risk appears more reliably recovered across contests than signa
 Taken together, the two exercises provide credible partial validation of key contest primitives, with materially stronger support for $\sigma$ than for $\lambda$.
 
 
+\subsection{Counterfactual Policy Simulations}
+
+Having shown that the structural estimates exhibit meaningful alignment with private-leaderboard-based benchmarks, we next use the model for counterfactual analysis. 
+A key advantage of structural estimation is that it permits policy experiments that are not directly observed in the data. 
+In the context of online crowdsourcing contests, platform operators can adjust design levers such as prize size, contest length, and feedback informativeness. 
+Our estimated model provides a disciplined way to examine how such changes would affect equilibrium effort, submission activity, and expected contest outcomes. 
+Accordingly, this subsection turns from validation to counterfactual policy simulations.
+These exercises should be interpreted as model-based comparative statics under the maintained two-player, steady-state filtering specification, rather than as definitive policy prescriptions.
+
+
+\textbf{Winner-Take-All Prize Amount $\theta$.}
+
+
+\textbf{Contest Duration $T$ and Deadline Effects.}
+
+
+\textbf{Information Design: Signal Precision $\lambda$}
+
+
+
+
 \section{Robustness}
+
+This section examines the sensitivity of our main validation results to key modeling choices. 
+We focus on two concerns highlighted in Section~\ref{sect-conserns}: the selection of the two-player focal pair and the normality assumption underlying the leaderboard transformation. For each robustness check, we re-estimate the model and recompute the benchmark validations, then compare the results to the baseline findings reported in Section~\ref{sect-validation}.
+
 \subsection{Selection of Two Players}\label{sect-robust-2players}
 
 The baseline empirical analysis pairs the top two contestants in each contest. 
@@ -1162,7 +1224,7 @@ This specification shifts the focal rivalry away from the winner and tests wheth
 	\end{tabularx}
 	\begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
 (2) Normality diagnostics: Omnibus = 3.192, Jarque-Bera = 2.424, Skewness = -0.411, Kurtosis = 3.350.
 (3) Other diagnostic statistics: Condition Number = 36.9, Durbin-Watson = 2.236.
 }
@@ -1175,6 +1237,11 @@ This specification shifts the focal rivalry away from the winner and tests wheth
 	\centering
 	\captionof{figure}{Robustness Check (2nd--3rd Pair): $\lambda^{\text{MLE}}$ vs. Bayesian Estimate $\hat\lambda$}
 	\label{fig-validation-lambda-robust23}
+\end{minipage}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textbf{Note.} This figure replicates the validation exercise in Figure~\ref{fig-validate-lambda} using an alternative focal pair: the second- and third-ranked participants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$, with $\beta_1 = 3.421$ ($p < 0.01$) and $R^2 = 0.096$. The positive slope remains significant, though the fit is modest, indicating directional robustness of the $\lambda$ validation to the choice of focal pair.
+}
 \end{minipage}
 \medskip
 
@@ -1210,7 +1277,7 @@ For signal precision, the slope remains positive and significant, while fit rema
 	\end{tabularx}
 	\begin{minipage}{\textwidth}
 {\footnotesize
-\textit{Note:} (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
+(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$. 
 (2) Normality diagnostics: Omnibus = 12.72, Jarque-Bera = 13.66, Skewness = 1.02, Kurtosis = 3.50.
 (3) Other diagnostic statistics: Condition Number = 7.84, Durbin-Watson = 1.87.
 }
@@ -1223,6 +1290,11 @@ For signal precision, the slope remains positive and significant, while fit rema
 	\centering
 	\captionof{figure}{Robustness Check (2nd--3rd Pair): $\sigma^{\text{MLE}}$ vs. Bayesian Estimate $\hat\sigma$}
 	\label{fig-validation-sigma-robust23}
+\end{minipage}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textbf{Note.} This figure replicates the validation exercise in Figure~\ref{fig-validation-sigma} using an alternative focal pair: the second- and third-ranked participants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \sigma^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$, with $\beta_1 = 0.501$ ($p < 0.05$) and $R^2 = 0.071$. The positive slope remains significant, though the association is weaker than in the baseline ($\beta_1 = 0.887$, $R^2 = 0.317$), indicating that $\sigma$ recovery is directionally robust but sensitive to the choice of focal pair.
+}
 \end{minipage}
 \medskip
 
