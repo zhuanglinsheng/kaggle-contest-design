@@ -6,8 +6,7 @@ For each contest, the script checks whether there exists a counterfactual pair
 theta is weakly lower than the baseline.  Results are written to the
 counterfactual_results folder by default.
 
-The effort metric is the same deterministic mean-path proxy used in
-contest_2445_joint_optimize.py.
+The effort metric is the deterministic mean‑path proxy described in the paper.
 """
 
 from __future__ import annotations
@@ -17,23 +16,193 @@ import csv
 import json
 import math
 import sys
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Sequence
 
 import numpy as np
-
+from scipy import stats
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
 from metakaggle.contest_parameters import CONTEST_PARAMETERS  # noqa: E402
-from test_counterfactual.contest_2445_joint_optimize import (  # noqa: E402
-    ContestParams,
-    find_min_theta_for_no_loss,
-    max_M_with_theta_cap,
-    total_effort_mean_path,
-)
 
+
+# ---------------------------------------------------------------------------
+# Helper / model functions – deterministic mean‑path proxy
+# ---------------------------------------------------------------------------
+
+
+def _fn_gamma(u: float) -> float:
+    """Gamma function from Ryvkin's model."""
+    if not (-1 <= u <= 1):
+        raise ValueError(f"_fn_gamma: -1 < u < 1, got {u}")
+    if u == -1:
+        return -math.inf
+    if u == 1:
+        return math.inf
+    return u / (1.0 - u * u) + math.atanh(u)
+
+
+def _fn_invgamma_approx(z: float) -> float:
+    """Approximate inverse-gamma."""
+    return np.arctan(0.856 * z) * 2.0 / np.pi
+
+
+def _fn_rho(z: float, rho_i: float, rho_j: float) -> float:
+    """Deterministic rho(z) for the mean‑path proxy."""
+    gamma_i = _fn_gamma(rho_i)
+    gamma_j = _fn_gamma(rho_j)
+
+    # Handle infinite extremes
+    if math.isinf(gamma_i) or math.isinf(gamma_j):
+        if gamma_i > 0 and gamma_j > 0:
+            if z == 0:
+                return 0.0
+            return 1.0 if z > 0 else -1.0
+        if gamma_i > 0:
+            return 1.0
+        if gamma_j > 0:
+            return 1.0
+        return -1.0
+
+    cdf = float(stats.norm.cdf(z))
+    loc = cdf * (gamma_i + gamma_j) - gamma_j
+    return _fn_invgamma_approx(loc)
+
+
+def _effort_one_step(
+    y: float,
+    t_days: float,
+    T_days: float,
+    theta: float,
+    sigma: float,
+    c_i: float,
+    c_j: float,
+) -> tuple[float, float]:
+    """Eq. effort intensities m_i, m_j at the deterministic mean."""
+    remaining = T_days - t_days
+    if remaining <= 0:
+        return 0.0, 0.0
+
+    s2 = sigma * sigma
+    w_i = theta / (s2 * c_i)
+    w_j = theta / (s2 * c_j)
+
+    rho_i = (math.exp(w_i) + math.exp(-w_j) - 2.0) / (math.exp(w_i) - math.exp(-w_j))
+    rho_j = (math.exp(w_j) + math.exp(-w_i) - 2.0) / (math.exp(w_j) - math.exp(-w_i))
+
+    y_stderr = sigma * math.sqrt(remaining)
+    z = y / y_stderr if y_stderr > 0 else 0.0
+    rho_z = _fn_rho(z, rho_i, rho_j)
+
+    density = float(stats.norm.pdf(y, loc=0.0, scale=y_stderr))
+
+    K_factor = s2 / 2.0 * (_fn_gamma(rho_i) + _fn_gamma(rho_j)) * (1.0 - rho_z * rho_z)
+    m_i = density * K_factor * (1.0 + rho_z)
+    m_j = density * K_factor * (1.0 - rho_z)
+    return float(m_i), float(m_j)
+
+
+@dataclass
+class ContestParams:
+    """Minimal parameters for one contest (used by the counterfactual scan)."""
+    contest_id: int
+    theta0: float        # baseline prize  (k USD)
+    T0_days: float       # baseline duration
+    lamb: float
+    sigma: float
+    mu0: float
+    c_i: float
+    c_j: float
+    r: float
+
+
+# ---------------------------------------------------------------------------
+# Core counterfactual functions
+# ---------------------------------------------------------------------------
+
+
+def total_effort_mean_path(
+    theta: float,
+    T_days: float,
+    params: ContestParams,
+    dt_days: float = 0.5,
+) -> float:
+    """Deterministic mean‑path total effort.
+
+    The state y starts at mu0 and evolves as
+        dy/dt = m_i(y, t) – m_j(y, t)
+    (no Kalman‑filter correction because we only use the mean path).
+    Total effort = Σ_t dt · (m_i + m_j).
+    """
+    y = float(params.mu0)
+    total = 0.0
+    t = 0.0
+    while t < T_days:
+        step = min(dt_days, T_days - t)
+        m_i, m_j = _effort_one_step(
+            y, t, T_days, theta,
+            params.sigma, params.c_i, params.c_j,
+        )
+        total += (m_i + m_j) * step
+        # Deterministic update (no Kalman correction)
+        y += (m_i - m_j) * step
+        t += step
+    return total
+
+
+def find_min_theta_for_no_loss(
+    T: float,
+    M0: float,
+    params: ContestParams,
+    theta_min: float,
+    theta0: float,
+    dt_days: float = 0.5,
+) -> float | None:
+    """Smallest theta ∈ [theta_min, theta0] s.t. M(T, theta) >= M0 – eps.
+
+    Returns None when no feasible theta exists.
+    """
+    # quick guard: is theta0 itself feasible?
+    M_theta0 = total_effort_mean_path(theta0, T, params, dt_days=dt_days)
+    if M_theta0 < M0 - 1e-7:
+        return None
+
+    lo, hi = theta_min, theta0
+    for _ in range(60):  # binary‑search refinement
+        mid = 0.5 * (lo + hi)
+        M_mid = total_effort_mean_path(mid, T, params, dt_days=dt_days)
+        if M_mid >= M0 - 1e-7:
+            hi = mid
+        else:
+            lo = mid
+    return hi  # guaranteed ≤ theta0, and M(hi) >= M0 – eps
+
+
+def max_M_with_theta_cap(
+    params: ContestParams,
+    T_min: float,
+    T_max: float,
+    dt_days: float = 0.5,
+) -> dict[str, float]:
+    """Max total effort when theta ≤ theta0 and T ∈ [T_min, T_max].
+
+    Returns {'theta', 'T_days', 'M'} for the maximiser (grid search).
+    """
+    best = {"theta": params.theta0, "T_days": T_max, "M": -math.inf}
+    # coarse‑fine grid to keep runtime low
+    for T in np.linspace(T_min, T_max, 30):
+        M = total_effort_mean_path(params.theta0, float(T), params, dt_days=dt_days)
+        if M > best["M"]:
+            best = {"theta": params.theta0, "T_days": float(T), "M": M}
+    return best
+
+
+# ---------------------------------------------------------------------------
+# Contest‑parameter loading
+# ---------------------------------------------------------------------------
 
 JSON_DIR = REPO_ROOT / "metakaggle" / "__jsondata__"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "counterfactual_results"
@@ -80,6 +249,11 @@ def contest_params_from_row(row: tuple[Any, ...]) -> ContestParams | None:
         c_j=float(c_j),
         r=float(r),
     )
+
+
+# ---------------------------------------------------------------------------
+# Scanning
+# ---------------------------------------------------------------------------
 
 
 def scan_one_contest(
@@ -131,7 +305,12 @@ def scan_one_contest(
     row: dict[str, Any] = {
         "contest_id": params.contest_id,
         "status": "ok",
-        "has_pareto_opportunity": bool(best is not None and best["theta"] <= params.theta0 and best["M"] >= M0 - 1e-7),
+        "has_pareto_opportunity": bool(
+            best is not None
+            and best["theta"] <= params.theta0
+            and best["M"] >= M0 - 1e-7
+            and (best["theta"] < params.theta0 - 1e-6 or best["M"] > M0 + 1e-7)
+        ),
         "strict_theta_reduction": bool(best is not None and best["theta"] < params.theta0 - 1e-6),
         "theta0": params.theta0,
         "T0_days": params.T0_days,
@@ -158,6 +337,11 @@ def scan_one_contest(
         "n_feasible_grid_points": len(feasible_rows),
     }
     return row
+
+
+# ---------------------------------------------------------------------------
+# Output
+# ---------------------------------------------------------------------------
 
 
 def write_results(rows: list[dict[str, Any]], output_dir: Path, config: dict[str, Any]) -> None:
@@ -199,7 +383,7 @@ def write_results(rows: list[dict[str, Any]], output_dir: Path, config: dict[str
 
 
 def write_one_contest_result(row: dict[str, Any], output_dir: Path, config: dict[str, Any]) -> None:
-    """Persist one contest immediately, so long runs leave local per-contest output."""
+    """Persist one contest immediately, so long runs leave local per‑contest output."""
     per_contest_dir = output_dir / "per_contest"
     per_contest_dir.mkdir(parents=True, exist_ok=True)
     contest_id = row["contest_id"]
@@ -226,6 +410,11 @@ def write_one_contest_result(row: dict[str, Any], output_dir: Path, config: dict
             f.write(f"- feasible grid points: {row['n_feasible_grid_points']}\n")
         else:
             f.write(f"- error: {row.get('error', '')}\n")
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

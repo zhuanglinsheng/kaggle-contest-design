@@ -1044,17 +1044,16 @@ The signal precision parameter $\lambda$ is contest-specific and depends on how 
 We compare two estimates: (i) a structural estimate from submissions and public leaderboard paths, and (ii) a benchmark estimate from public-private leaderboard discrepancies.
 This benchmark is informative but not fully independent of the maintained structural setup, because it still relies on the transformed leaderboard scale used in the model.
 
-Let $c = {1, 2, ... }$ index the contest.
-Under the maintained Gaussian discrepancy structure implied by \eqref{eq-leaderboard-gap}, the public-private discrepancy yields the following benchmark maximum likelihood estimator (MLE) for $\lambda_c$.
-Given that the discrepancy between the public and private leaderboard scores satisfies $\hat{y}_k^c - y_k^c \sim \mathcal{N}(0, 1/(\lambda_c\Delta))$, $\forall k = 1, 2, ..., N^c$, we have
+Let $\ell = {1, 2, ... }$ index the contest.
+Under the maintained Gaussian discrepancy structure implied by \eqref{eq-leaderboard-gap}, the public-private discrepancy yields the following benchmark maximum likelihood estimator (MLE) for $\lambda_\ell$.
+Given that the discrepancy between the public and private leaderboard scores satisfies $\hat{y}_k^\ell - y_k^\ell \sim \mathcal{N}(0, 1/(\lambda_\ell\Delta))$, $\forall k = 1, 2, ..., N^\ell$, we have
 \begin{equation*}
-\lambda^{\text{MLE}}_c = \frac{N^c}{\Delta\sum^{N^c}_{k=1}(y_k^c - \hat{y}_k^c)^2}, \quad N^c = N^c_i + N^c_j
+\lambda^{\text{MLE}}_\ell = \frac{N^\ell}{\Delta\sum^{N^\ell}_{k=1}(y_k^\ell - \hat{y}_k^\ell)^2}, \quad N^\ell = N^\ell_i + N^\ell_j
 \end{equation*}
-Here, $N^c_i$ and $N^c_j$ denote the numbers of submissions by players $i$ and $j$ in contest $c$.
+Here, $N^\ell_i$ and $N^\ell_j$ denote the numbers of submissions by players $i$ and $j$ in contest $\ell$.
 
 It is important to emphasize that this benchmark relies on the transformed-score normality approximation in (\ref{eq-leaderboard-transform}).
-The transformation is adopted for tractability and does not guarantee strict normality, especially in extreme contests; empirically, only about half of contests pass the Shapiro-Wilk test.
-Future work should explore more reliable transformation methods to better approximate the assumed distribution.
+The transformation is adopted for tractability and does not guarantee strict normality. While formal tests indicate departures from exact normality in some contests, the validation results that follow are directionally robust to the choice of transformation parameter, suggesting that the benchmark remains informative despite this approximation.
 
 We then regress the non-structural benchmark $\lambda^{\text{MLE}}$ on the Bayesian structural estimate $\hat\lambda$ to examine whether a positive relationship holds between the two.
 
@@ -1104,7 +1103,7 @@ We then regress the non-structural benchmark $\lambda^{\text{MLE}}$ on the Bayes
 \end{minipage}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\lambda^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\lambda}$ for each of the 75 contests. $\lambda^{\mathrm{MLE}}$ is computed from public-private leaderboard discrepancies as $\lambda^{\mathrm{MLE}} = N / (\Delta \sum_{k} (y_k - \hat{y}_k)^2)$, where $N = N_i + N_j$ is the total number of submissions. The dashed line represents the fitted regression line from the model $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$. The positive slope ($\beta_1 = 3.264$, $p < 0.01$) indicates a statistically significant but modest association ($R^2 = 0.110$).
+\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\lambda^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\lambda}$ for each of the 73 contests. $\lambda^{\mathrm{MLE}}$ is computed from public-private leaderboard discrepancies as $\lambda^{\mathrm{MLE}} = N / (\Delta \sum_{k} (y_k - \hat{y}_k)^2)$, where $N = N_i + N_j$ is the total number of submissions. The dashed line represents the fitted regression line from the model $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$. The positive slope ($\beta_1 = 3.264$, $p < 0.01$) indicates a statistically significant but modest association ($R^2 = 0.110$).
 }
 \end{minipage}
 \medskip
@@ -1119,17 +1118,17 @@ This dispersion is consistent with limited sample size and with approximation er
 
 \textbf{Cross-Validation of Innovation Risk $\sigma$.}
 Another key contest-specific parameter is $\sigma$, which captures innovation uncertainty and the extent to which contest outcomes are driven by chance rather than effort.
-For each contest $c$, we estimate $\hat{\sigma}_c$ structurally using the two players’ public submission records $\{t_k^c\}_{k=1}^{N_i^c+N_j^c}$ and public leaderboard trajectories $\{\hat y_k^c\}_{k=1}^{N_i^c+N_j^c}$.
+For each contest $\ell$, we estimate $\hat{\sigma}_\ell$ structurally using the two players’ public submission records $\{t_k^\ell\}_{k=1}^{N_i^\ell+N_j^\ell}$ and public leaderboard trajectories $\{\hat y_k^\ell\}_{k=1}^{N_i^\ell+N_j^\ell}$.
 We then construct a private-leaderboard-based benchmark for $\sigma$ using score increments.
 
 Under the diffusion specification in (\ref{eq-state-dynamics}), the private-leaderboard increment satisfies
-$y^c_{k+1} - y^c_{k} \sim \mathcal{N}\left(\mu^c_k, \sigma^2(t^c_{k+1}-t^c_k)\right)$.
-Here, $\mu^c_k = \int^{t^c_{k+1}}_{t^c_k}\left[m^c_i(s) - m^c_j(s)\right]ds$.
+$y^\ell_{k+1} - y^\ell_{k} \sim \mathcal{N}\left(\mu^\ell_k, \sigma^2(t^\ell_{k+1}-t^\ell_k)\right)$.
+Here, $\mu^\ell_k = \int^{t^\ell_{k+1}}_{t^\ell_k}\left[m^\ell_i(s) - m^\ell_j(s)\right]ds$.
 Given this, we derive the maximum likelihood estimator (MLE) of the contest-specific parameter $\sigma$ (see Appendix~\ref{appexidx-normal-MLE} for the derivation):
 \begin{equation*}
-\sigma^{\text{MLE}}_c = \left(\frac{1}{N^c_i+N^c_j}\sum_k\frac{\left[y^c_{k+1}-y^c_{k}-\hat\mu^c_k\right]^2}{t^c_{k+1}-t^c_k}\right)^{1/2}
+\sigma^{\text{MLE}}_\ell = \left(\frac{1}{N^\ell_i+N^\ell_j}\sum_k\frac{\left[y^\ell_{k+1}-y^\ell_{k}-\hat\mu^\ell_k\right]^2}{t^\ell_{k+1}-t^\ell_k}\right)^{1/2}
 \end{equation*}
-where $\hat\mu^c_k$ is retrieved from Bayesian posterior effort trajectories.
+where $\hat\mu^\ell_k$ is retrieved from Bayesian posterior effort trajectories.
 Hence, this benchmark is not fully model-free: it is less demanding on the signal side but still uses posterior drift adjustment.
 Therefore, this exercise should be interpreted as a consistency check using partial external information, not as a fully independent validation test.
 
@@ -1181,10 +1180,10 @@ As in the analysis above for $\lambda$, we regress $\sigma^{\text{MLE}}$ on the 
 \end{minipage}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\sigma^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\sigma}$ for each of the 75 contests. $\sigma^{\mathrm{MLE}}$ is computed from private leaderboard increments as $\sigma^{\mathrm{MLE}} = \left(\frac{1}{N} \sum_{k} \frac{(y_{k+1} - y_k - \hat{\mu}_k)^2}{t_{k+1} - t_k}\right)^{1/2}$, where $\hat{\mu}_k$ is retrieved from posterior effort trajectories. The dashed line represents the fitted regression line from the model $\log(1 + \sigma^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$. The positive slope ($\beta_1 = 0.887$, $p < 0.001$) and $R^2 = 0.317$ indicate a stronger association than for $\lambda$, suggesting more reliable recovery of innovation risk.
+\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\sigma^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\sigma}$ for each of the 73 contests. $\sigma^{\mathrm{MLE}}$ is computed from private leaderboard increments as $\sigma^{\mathrm{MLE}} = \left(\frac{1}{N} \sum_{k} \frac{(y_{k+1} - y_k - \hat{\mu}_k)^2}{t_{k+1} - t_k}\right)^{1/2}$, where $\hat{\mu}_k$ is retrieved from posterior effort trajectories. The dashed line represents the fitted regression line from the model $\log(1 + \sigma^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$. The positive slope ($\beta_1 = 0.887$, $p < 0.001$) and $R^2 = 0.317$ indicate a stronger association than for $\lambda$, suggesting more reliable recovery of innovation risk.
 }
 \end{minipage}
-\medskip 
+\medskip
 
 
 Figure~\ref{fig-validation-sigma} reveals a stronger positive association than in the $\lambda$ exercise.
@@ -1196,44 +1195,56 @@ Taken together, the two exercises provide credible partial validation of key con
 \subsection{Counterfactual Policy Simulations}
 
 The validation exercise above suggests that the estimated primitives contain
-meaningful information about the contest environment. We use them to revisit the
-design question in Section~\ref{sect-design}, where the designer's objective is
-motivated by $\beta^{T}M(\tilde{y}_0,0)^\alpha-\theta$. Because the designer's
-true cardinal payoff is difficult to calibrate in the empirical application, we
-do not compare objective levels directly. Instead, we ask whether observed
-contest designs leave room for \textit{prize-effort Pareto improvements}\footnote{
+meaningful information about the contest environment. We use these primitives to
+revisit the design question in Section~\ref{sect-design}, where the designer's
+objective is motivated by $\beta^{T}M(\tilde{y}_0,0)^\alpha-\theta$. In the
+empirical application, however, the designer's cardinal payoff is difficult to
+calibrate directly. We therefore use the model as a counterfactual diagnostic:
+rather than compare objective levels, we ask whether observed contest designs
+leave room for \textit{prize-effort Pareto improvements}\footnote{
 We do not emphasize a baseline information-design counterfactual for
 $\lambda$. As shown in Section~\ref{sect-design}, under the maintained
 steady-state filtering restriction $S_t\equiv\bar S$, signal precision does not
 generate an independent comparative-static effect on total expected effort.
 Studying optimal information disclosure would require relaxing the steady-state
 restriction and allowing filtering uncertainty to evolve endogenously over time.
-}: 
-can predicted total effort be increased without raising the prize, or can the prize
-be reduced without lowering predicted total effort?
+}.
 
-For each contest, we hold fixed the estimated structural primitives and search
-for alternative prize-duration designs by jointly optimizing over $(\theta,T)$
-within a bounded redesign region. A counterfactual design generates a
-prize-effort Pareto improvement if, relative to the observed design, it weakly
-lowers prize spending and weakly increases predicted total effort, with at least
-one strict improvement. This comparison is defined in the prize-effort outcome
-space, rather than as a full welfare comparison across all agents in the
-contest. In the implementation, we search over
-$\theta\in[0.01,\theta^{obs}]$ and $T\in[0.25T^{obs},3T^{obs}]$. The analysis is
-based on the 73 contests with complete observed design inputs and structural
-estimates.
+A counterfactual design generates a prize-effort Pareto improvement if, relative
+to the observed design, it weakly lowers prize spending and weakly increases
+predicted total effort, with at least one strict improvement. This is a
+comparison in the prize-effort outcome space, not a full welfare comparison
+across the organizer, participants, and consumers. For each contest, we hold
+fixed the estimated structural primitives and search for alternative
+prize-duration designs. To avoid extrapolating far beyond observed contest
+designs, we restrict the counterfactual search to a bounded redesign region,
+$\theta\in[0.01,\theta^{obs}]$ and
+$T\in[0.25T^{obs},3T^{obs}]$. The analysis is based on the 73 contests with
+complete observed design inputs and structural estimates.
 
-Table~\ref{tab-counterfactual-policy} summarizes the results. The model implies
-substantial room for improvement along both dimensions. For all 73 contests, the
-counterfactual search finds a positive effort-improvement margin: predicted
-total effort can be increased without raising the prize. The average
-effort-improvement margin is $96.31\%$, with a median of $81.53\%$. The
-prize-saving margin is also positive for all 73 contests: the prize can be
-reduced while keeping predicted total effort weakly above its observed-design
-level. The average no-loss prize-saving margin is $59.65\%$, with a median of
-$60.08\%$; in absolute terms, this corresponds to an average prize reduction of
-$3.00$ thousand USD.
+Table~\ref{tab-counterfactual-policy} reports two complementary redesign
+exercises. The first asks how much predicted total effort can be increased
+without raising the prize above its observed level. By
+Proposition~\ref{prop-monotonicity-M}, this prize constraint binds, so the
+exercise fixes $\theta=\theta^{obs}$ and optimizes only over
+$T\in[0.25T^{obs},3T^{obs}]$. The average maximum effort gain is $96.31\%$,
+with a median of $81.53\%$.
+
+The second exercise asks how much prize spending can be reduced while keeping
+predicted total effort weakly above the observed-design baseline. This
+cost-minimization problem jointly searches over $\theta$ and $T$. The average
+no-loss prize saving is $59.65\%$, with a median of $60.08\%$, corresponding to
+an average absolute reduction of $3.00$ thousand USD.
+
+These results suggest that, within the model and the bounded redesign region,
+many observed Kaggle designs are not located on the estimated prize-effort
+frontier. Adjusting prize size and contest duration could either raise predicted
+competitive effort, reduce prize expenditure, or both. Because the effort gains
+in the first exercise may partly come from allowing duration to vary, we next
+conduct a prize-only counterfactual that holds $T$ fixed. This provides a sharper
+test of whether observed prizes are excessive relative to the model-implied
+effort response.
+
 
 \begin{table}[htbp]
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
@@ -1261,20 +1272,16 @@ Mean absolute change & $5.20$ & $3.00$ \\
 \begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:}
-This table reports counterfactual redesign results for the 73 contests with complete observed design inputs and structural estimates. For each contest, the observed design is $(\theta^{obs},T^{obs})$, and predicted total effort under this design serves as the baseline. The counterfactual search holds the estimated structural primitives fixed and jointly varies prize size and contest duration over $\theta\in[0.01,\theta^{obs}]$ and $T\in[0.25T^{obs},3T^{obs}]$. The effort-improvement column reports the maximum percentage increase in predicted total effort that can be achieved without increasing the prize above $\theta^{obs}$. The prize-saving column reports the maximum percentage reduction in prize spending that can be achieved while keeping predicted total effort weakly above the observed-design baseline. Prize is measured in thousand USD. The absolute effort change is in model-implied effort units; the absolute prize change is in thousand USD.
+This table reports counterfactual redesign results for the 73 contests with complete observed design inputs and structural estimates. For each contest, the observed design is $(\theta^{obs},T^{obs})$, and predicted total effort under this design serves as the baseline. The counterfactual search holds the estimated structural primitives fixed and jointly varies prize size and contest duration over $\theta\in[0.01,\theta^{obs}]$ and $T\in[0.25T^{obs},3T^{obs}]$. 
+Prize is measured in thousand USD. The absolute effort change is in model-implied effort units; the absolute prize change is in thousand USD.
+\\
+\textbf{Effort Improvment:} The maximum percentage increase in predicted total effort that can be achieved without increasing the prize above $\theta^{obs}$.
+\\
+\textbf{Prize saving:} The maximum percentage reduction in prize spending that can be achieved while keeping predicted total effort weakly above the observed-design baseline. 
 }
 \end{minipage}
 \end{table}
 
-The main takeaway is that, within the maintained two-player structural model,
-observed contest designs appear widely improvable. They do not seem to lie on
-the model-implied frontier between prize spending and predicted effort. This
-does not mean that the observed platform choices are globally suboptimal in a
-full welfare sense. Real contests may involve operational constraints, entry
-responses, heterogeneous participants, and other objectives outside the model.
-Rather, the counterfactual exercise shows that, along the prize and effort
-margins captured by the model, observed designs leave substantial room for
-improvement.
 
 
 
@@ -1461,7 +1468,7 @@ These limitations point to valuable directions for future work, including incorp
 % \end{APPENDICES}
 
 
-\newpage
+%\newpage
 \begin{APPENDICES}
 
 

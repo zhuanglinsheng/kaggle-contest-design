@@ -29,3 +29,19 @@
 | 4986 | 10.0000 | 45.58 | 2.8079 | 136.75 | 71.92 | 10.0517 | 10.0517 |
 | 3800 | 3.0000 | 30.25 | 0.8672 | 90.75 | 71.09 | 2.3064 | 2.3064 |
 | 4699 | 5.0000 | 68.21 | 1.4602 | 204.62 | 70.80 | 10.2443 | 10.2443 |
+
+## Joint optimisation (theta + T)
+
+| Statistic | Effort improvement | Prize saving |
+|---|---|---|
+| Contests with positive margin | 73/73 | 73/73 |
+| Mean percentage change | 96.08% | 59.52% |
+| Median percentage change | 83.96% | 59.94% |
+| 95% CI for mean | [85.32%, 106.84%] | [56.59%, 62.45%] |
+| One-sided $t$-statistic | 17.80 | 40.47 |
+| One-sided $t$-test $p$-value | 2.26e-28 | 1.43e-51 |
+| Wilcoxon signed-rank $p$-value | 5.66e-14 | 5.66e-14 |
+| Minimum percentage change | 31.65% | 41.62% |
+| Maximum percentage change | 341.16% | 91.15% |
+| Mean absolute change | 5.19 | 2.99 |
+| 95% CI for absolute change | [4.43, 5.96] | [2.16, 3.82] |
