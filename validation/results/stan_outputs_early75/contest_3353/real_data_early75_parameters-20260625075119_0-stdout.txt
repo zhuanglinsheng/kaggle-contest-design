@@ -1,0 +1,94 @@
+method = sample (Default)
+  sample
+    num_samples = 2000
+    num_warmup = 1000 (Default)
+    save_warmup = false (Default)
+    thin = 1 (Default)
+    adapt
+      engaged = true (Default)
+      gamma = 0.05 (Default)
+      delta = 0.8 (Default)
+      kappa = 0.75 (Default)
+      t0 = 10 (Default)
+      init_buffer = 75 (Default)
+      term_buffer = 50 (Default)
+      window = 25 (Default)
+      save_metric = false (Default)
+    algorithm = hmc (Default)
+      hmc
+        engine = nuts (Default)
+          nuts
+            max_depth = 10 (Default)
+        metric = diag_e (Default)
+        metric_file =  (Default)
+        stepsize = 1 (Default)
+        stepsize_jitter = 0 (Default)
+    num_chains = 1 (Default)
+id = 1 (Default)
+data
+  file = /var/folders/qt/1tb_hrd15y1_h0294y4sqsxm0000gn/T/tmpd3qv06r2/pewfx8n3.json
+init = 2 (Default)
+random
+  seed = 20263978
+output
+  file = /Users/linsheng/Documents/GitHub/kaggle-contest-design/validation/results/stan_outputs_early75/contest_3353/real_data_early75_parameters-20260625075119_1.csv
+  diagnostic_file =  (Default)
+  refresh = 200
+  sig_figs = -1 (Default)
+  profile_file = profile.csv (Default)
+  save_cmdstan_config = false (Default)
+num_threads = 1 (Default)
+
+
+Gradient evaluation took 0.000643 seconds
+1000 transitions using 10 leapfrog steps per transition would take 6.43 seconds.
+Adjust your expectations accordingly!
+
+
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: Exception: normal_lpdf: Random variable is nan, but must be not nan! (in 'real_data_early75_parameters.stan', line 64, column 2 to column 53) (in 'real_data_early75_parameters.stan', line 172, column 2 to column 83)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
+Iteration:    1 / 3000 [  0%]  (Warmup)
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: Exception: normal_lpdf: Random variable is nan, but must be not nan! (in 'real_data_early75_parameters.stan', line 64, column 2 to column 53) (in 'real_data_early75_parameters.stan', line 172, column 2 to column 83)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: Exception: normal_lpdf: Random variable is nan, but must be not nan! (in 'real_data_early75_parameters.stan', line 64, column 2 to column 53) (in 'real_data_early75_parameters.stan', line 172, column 2 to column 83)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
+Iteration:  200 / 3000 [  6%]  (Warmup)
+Iteration:  400 / 3000 [ 13%]  (Warmup)
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: Exception: normal_lpdf: Random variable is nan, but must be not nan! (in 'real_data_early75_parameters.stan', line 64, column 2 to column 53) (in 'real_data_early75_parameters.stan', line 172, column 2 to column 83)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
+Iteration:  600 / 3000 [ 20%]  (Warmup)
+Iteration:  800 / 3000 [ 26%]  (Warmup)
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: Exception: normal_lpdf: Random variable is nan, but must be not nan! (in 'real_data_early75_parameters.stan', line 64, column 2 to column 53) (in 'real_data_early75_parameters.stan', line 172, column 2 to column 83)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
+Iteration: 1000 / 3000 [ 33%]  (Warmup)
+Iteration: 1001 / 3000 [ 33%]  (Sampling)
+Iteration: 1200 / 3000 [ 40%]  (Sampling)
+Iteration: 1400 / 3000 [ 46%]  (Sampling)
+Iteration: 1600 / 3000 [ 53%]  (Sampling)
+Iteration: 1800 / 3000 [ 60%]  (Sampling)
+Iteration: 2000 / 3000 [ 66%]  (Sampling)
+Iteration: 2200 / 3000 [ 73%]  (Sampling)
+Iteration: 2400 / 3000 [ 80%]  (Sampling)
+Iteration: 2600 / 3000 [ 86%]  (Sampling)
+Iteration: 2800 / 3000 [ 93%]  (Sampling)
+Iteration: 3000 / 3000 [100%]  (Sampling)
+
+ Elapsed Time: 9.595 seconds (Warm-up)
+               18.354 seconds (Sampling)
+               27.949 seconds (Total)
+
