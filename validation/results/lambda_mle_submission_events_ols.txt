@@ -1,0 +1,30 @@
+Saved contest-level results to validation/results/lambda_mle_submission_events.csv
+Contests used: 73
+Event count mean/min/max: 53.21/12/130
+Path count mean/min/max: 1063.51/314/2134
+
+Submission-event lambda_MLE
+N = 73
+Regression: log(1 + lambda_MLE) = beta0 + beta1 log(1 + lambda_hat) + eps
+const: beta=-0.808284, se=3.156795, t=-0.256, p=0.798656, 95% CI=[-7.102755, 5.486187]
+slope: beta=3.273088, se=1.081204, t=3.027, p=0.00343737, 95% CI=[1.117228, 5.428947]
+R2=0.114319, Adj R2=0.101845
+Pearson r=0.338111, p=0.00343737; Spearman rho=0.368968, p=0.00131721
+OLS residual diagnostics: Omnibus=0.397, JB=0.071, Skew=0.032, Kurtosis=3.139
+
+Hourly-path lambda_MLE (old-style comparison)
+N = 73
+Regression: log(1 + lambda_MLE) = beta0 + beta1 log(1 + lambda_hat) + eps
+const: beta=-0.717969, se=3.222536, t=-0.223, p=0.824334, 95% CI=[-7.143524, 5.707586]
+slope: beta=3.249543, se=1.103720, t=2.944, p=0.00437396, 95% CI=[1.048787, 5.450299]
+R2=0.108803, Adj R2=0.096251
+Pearson r=0.329853, p=0.00437396; Spearman rho=0.356257, p=0.00197809
+OLS residual diagnostics: Omnibus=0.305, JB=0.036, Skew=-0.024, Kurtosis=3.097
+
+First five rows:
+ contest_id  lambda_post_mean  lambda_mle_submission  lambda_mle_hourly_path  event_n  path_n
+       2445         15.376780            2064.401863             1539.379200       26     732
+       2454         15.015851             768.207858              932.836223       32     673
+       2464          9.843920              95.867809               99.555500       23     314
+       2478         13.635859           12004.116545            19406.675117       24    1061
+       2489         16.650026            5663.715814             5759.074767       33    1029

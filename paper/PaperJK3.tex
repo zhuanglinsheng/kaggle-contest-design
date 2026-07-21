@@ -261,7 +261,7 @@ As illustrated in Figure~\ref{kaggledata-diagram-simplified}, the volatility of 
 We use the private leaderboard to evaluate two predictions: higher estimated innovation risk should be associated with more volatile hidden performance paths, and higher estimated signal precision should be associated with smaller public-private leaderboard gaps.
 Both leaderboards are generated from the same submissions and scoring process, but only the public leaderboard is observed during the contest and used in estimation.
 Accordingly, private-leaderboard volatility provides a natural proxy for underlying innovation uncertainty, while public-private divergence provides a diagnostic benchmark for signal informativeness.
-We therefore exclude the private leaderboard from estimation and use it only after estimation to construct validation targets.
+We use final private ranks only to define the focal rivalry represented by the two-player model; the private-leaderboard path itself is excluded from the estimation likelihood and reserved for post-estimation validation targets.
 To check that the validation results are not driven only by correlations within the same contest path, we also run time-split exercises: primitives are estimated from early contest data and evaluated against later withheld leaderboard outcomes.
 
 
@@ -354,7 +354,7 @@ Using Bayesian updating and a hierarchical model, they estimate how individuals 
 Most closely related to our work, \citet{lemus2021dynamic} structurally estimate contest behavior using Kaggle data.
 They propose a finite-horizon dynamic game in which, after each submission, players decide whether to continue or exit, essentially solving an optimal stopping problem.
 Players can only make this decision immediately after completing a submission, which arrives at random intervals and incurs a privately drawn cost.
-Their estimation proceeds in two stages: the first uses maximum likelihood and the EM algorithm to estimate primitive parameters such as the distribution of player types and scores; the second applies a CCP-based estimator to identify the cost distribution.
+Their estimation proceeds in two stages: the first uses maximum likelihood and the EM algorithm to estimate primitive parameters such as the distribution of player types and scores; the second applies a conditional choice probability (CCP)-based estimator to identify the cost distribution.
 Our model differs in two key respects:
 (1) we treat submissions as the outcome of accumulated effort rather than as discrete costly actions; and
 (2) we explicitly model belief updating from noisy signals as a structural channel that shapes both behavior and identification, whereas their CCP-based approach relies on a coarser behavioral approximation.
@@ -443,20 +443,17 @@ The figure illustrates the convergence of $S_t$ to its steady state.
 Following \cite{Ryvkin2022Fight}, we consider a dynamic contest with a fixed deadline.
 Suppose the contest is terminated when time $t=T>0$.
 Under the steady-state restriction $S_t \equiv \bar S$, the payoff-relevant state is fully characterized by $(\tilde y_t,t)$.
-Let $y_T$ denote player 1's latent terminal performance advantage over player 2, so that the true terminal outcome is determined by the sign of $y_T$.
-Because contestants do not directly observe $y_T$ during the contest, they evaluate the terminal outcome through the posterior distribution of $y_T$ conditional on the public information $I_T$.
-Under the Gaussian posterior, if $y_T\mid I_T\sim N(\tilde y_T,\bar S)$, then $\mathbb P(y_T>0\mid I_T)=\Phi\left(\tilde y_T/\sqrt{\bar S}\right)$. 
-Thus a fully Bayesian risk-neutral terminal payoff would be $\theta\Phi\left(\tilde y_T/\sqrt{\bar S}\right)$, which is smooth in the posterior mean.
-In the baseline model, we instead use the threshold payoff $\theta\mathbf 1_{\tilde y_T>0}$.
-This is not an equivalent reformulation when $\bar S>0$; it is a tractable ordinal approximation that preserves the ranking of posterior winning probabilities while retaining the closed-form threshold structure of \citet{Ryvkin2022Fight}.
-The approximation becomes exact in the full-information limit $\bar S=0$.
+Let $\tilde y_T$ denote player $i$'s perceived terminal performance advantage over player $j$.
+To retain the tractable tug-of-war structure of \citet{Ryvkin2022Fight}, we impose a perceived-state terminal payoff: player $i$ receives $\theta\mathbf 1_{\{\tilde y_T>0\}}$ and player $j$ receives $\theta\mathbf 1_{\{\tilde y_T<0\}}$.
+This reduced-form terminal rule treats the filtered state as the strategic performance state relevant for contest incentives.
+It should be interpreted as a tractable perceived-state approximation to a richer specification in which contestants evaluate the terminal prize by integrating over the full posterior distribution of the latent true gap.
 At any time $0\le t<T$, player $i$ optimizes her effort level $q_{i,\tau}$ in the remaining contest period $\tau\in[t, T)$ according to the following optimization problem,
 \begin{equation}\label{v-def}
 	V^i(\tilde{y}_{t}, t ; q_{j,t},\Theta_i) = \max_{\{q_{i,\tau}\}^T_{\tau=t}}
-\mathbb{E}\left( \theta\cdot\mathbf{1}_{\tilde{y}_T>0} - \int^T_tC_i(q_{i,\tau})d\tau \bigg|I_t\right)
+\mathbb{E}\left( \theta\cdot\mathbf{1}_{\tilde y_T>0} - \int^T_tC_i(q_{i,\tau})d\tau \bigg|I_t\right)
 \end{equation}
 where $\Theta_i \equiv\{\theta, \lambda, \sigma, c_i\}$, subject to constraints (\ref{filtered-x}), (\ref{filtered-S}) and $q_{i,\tau}\ge0$ for all $\tau\in[t,T)$.
-The optimization problem for player $j$ is symmetric to that of player $i$ as $V^j(\tilde{y}_t, t) = V^i(-\tilde{y}_t, t)$.
+The optimization problem for player $j$ is symmetric to that of player $i$; with player labels and cost parameters relabeled, we write $V^j(\tilde{y}_t, t) = V^i(-\tilde{y}_t, t)$.
 The corresponding Hamilton-Jacobi-Bellman (HJB) equation for player $i$ is
 \begin{equation*}
 0 = \max_{q_{i,t}\ge0}\left[-\frac{c_iq_{i,t}^2}{2} + V^i_{y}\cdot\left(q_{i,t}-q_{j,t}\right)+V^i_t + \frac{V^i_{yy}}{2}\lambda \bar{S}^2\right].
@@ -469,13 +466,13 @@ Assuming an interior solution, substituting the first-order conditions $q_{i,t} 
 \frac{1}{2c_j}(V^j_y)^2 + \frac{1}{c_i}V^j_yV^i_y + V^j_t + V^j_{yy}\frac{\sigma^2}{2} = 0
 \end{aligned}
 \end{equation*}
-subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$, $V^j(-\infty, t) = \theta$, $V^j(+\infty, t)=0$, $V^i(\tilde{y}_T, T) = \theta \cdot 1_{\tilde{y}_T > 0}$ and $V^j(\tilde{y}_T, T) = \theta \cdot 1_{\tilde{y}_T < 0}$.
+subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$, $V^j(-\infty, t) = \theta$, $V^j(+\infty, t)=0$, $V^i(\tilde{y}_T, T) = \theta \mathbf 1_{\{\tilde y_T>0\}}$ and $V^j(\tilde{y}_T, T) = \theta \mathbf 1_{\{\tilde y_T<0\}}$.
 
 
 The Nash equilibrium is summarized in the following theorem.
-We include a simplified version of the proof in the appendix.
 
 \begin{theorem}[\citealt{Ryvkin2022Fight}]
+Under the perceived-state terminal payoff above, the game reduces to the fixed-deadline tug-of-war contest in the filtered state.
 In the Markov perfect equilibrium, the players’ efforts in state $m_{i(j)}(\tilde{y}_t, t) :\mathbb{R}\times[0, T)\to\mathbb{R}_+$ are given by
 \begin{equation}\label{eq-equilibrium-effort}
 m_{i(j)}(\tilde{y}_t, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
@@ -533,10 +530,10 @@ In online crowdsourcing contests, designers typically control key decision varia
 We abstract from more complex prize structures in this study.
 A key concern is that these variables may act as substitutes, so the optimal choice of one design variable may alter the value of changing another.
 
-Under the maintained steady-state filtering assumption $S_t=\bar S$, signal precision $\lambda$ does not enter total expected effort $M(\tilde{y}_t,t)$.
+Under the maintained perceived-state terminal payoff and steady-state filtering assumption $S_t=\bar S$, signal precision $\lambda$ does not enter total expected effort $M(\tilde{y}_t,t)$.
 This is a property of the simplified specification rather than a general claim about contest design.
-Because uncertainty is fixed at $\bar S$, information improvements do not create an additional uncertainty-reduction channel in equilibrium effort.
-In richer specifications with time-varying filtering uncertainty, $\lambda$ can affect effort dynamics quantitatively and potentially qualitatively.
+Because the terminal reward is a threshold function of the perceived state and the filtering variance is held at its steady state, information improvements affect the perceived-state recursion but do not create an additional payoff-variance channel in the closed-form effort policy.
+In richer specifications with posterior-probability terminal payoffs or time-varying filtering uncertainty, $\lambda$ can affect effort dynamics quantitatively and potentially qualitatively.
 
 Next, we turn to the other two design variables.
 When the two contestants are of similar strength, i.e., $c_i = c_j = c$, the total expected effort admits a particularly simple approximation, as shown in equation~(\ref{eq-totaleffort-reduced}).
@@ -570,6 +567,9 @@ Then the following statements hold:
 Moreover, within this steady-state filtering approximation, both $\bar M(\tilde y_0,0)$ and $\bar\Pi(\theta,T,\lambda)$ are neutral with respect to the signal precision $\lambda$.
 \end{proposition}
 
+Although $\lambda$ is neutral with respect to the total-effort design object above, it remains a structural information primitive that can be identified in the likelihood.
+In the estimation framework below, $\lambda$ governs the Kalman correction in the perceived-state recursion and the signal-noise component of the public leaderboard likelihood.
+
 
 
 
@@ -598,7 +598,11 @@ For tractability, we assume
 \tau_i(t) = r \cdot m_i(\tilde{y}_t, t)
 \end{equation}
 where $r>0$ scales latent effort into observed submission intensity.
-In estimation, $r$ is treated as an auxiliary scale parameter rather than a contest primitive: it absorbs the unit conversion between model effort and submission rates, with its range disciplined by the prior support specified below.
+In estimation, $r$ is treated as an auxiliary scale parameter rather than a contest primitive: it absorbs the unit conversion between model effort and submission rates, with its range disciplined by the prior support specified below.\footnote{
+Because $r$ enters the submission-intensity equation rather than the public-signal variance or Brownian innovation covariance directly, its main identification interaction is expected to be with the absolute effort-cost scale. 
+A synthetic scale-sensitivity check in the replication package re-estimates the baseline synthetic contest while treating $r$ as unknown. 
+The results are consistent with this interpretation, although they do not rule out indirect finite-sample interactions with $\sigma$ or $\lambda$.
+}
 
 
 %% Data: Leaderboard
@@ -611,20 +615,30 @@ We write this empirical readout as
 dZ_t = \hat y_tdt,
 \end{equation}
 which should be interpreted as an observation convention linking the public leaderboard gap to the signal path, not as a second structural definition of $Z_t$.
-In estimation, the public leaderboard is observed only at discrete update times.
-Combining the structural signal equation in (\ref{signal}) with the latent state dynamics in \eqref{eq-state-dynamics} therefore motivates the following discrete readout:
-\begin{equation}\label{eq-leaderboard-gap}
-\hat y_{t_k}
-=
-y_0+\int_0^{t_k}\left[m_i(\tilde{y}_s,s)-m_j(\tilde{y}_s,s)\right]ds
-+\sigma W_{t_k}
-+\varepsilon_k.
+Combining (\ref{signal}) and (\ref{eq-model-signal}) gives the formal white-noise representation
+\begin{equation}\label{eq-white-noise-readout}
+\hat y_t = y_t+\frac{1}{\sqrt{\lambda}}\xi_t,\qquad \xi_t\equiv \frac{dB_t}{dt},
 \end{equation}
-Here, $\sigma W_{t_k}$ captures accumulated innovation noise and $\varepsilon_k\sim N(0,1/(\Delta\lambda))$ captures public-signal noise, so that larger $\lambda$ implies more precise public feedback.
+where $\xi_t$ denotes Gaussian white noise in the generalized-process sense.
+Because white noise is not pointwise observed, equation~(\ref{eq-white-noise-readout}) is not a pointwise sampling equation.
+In the empirical data, the public leaderboard is sampled only at submission-triggered update times.
+At such an update time $t$, averaging (\ref{eq-white-noise-readout}) over a finite readout interval of length $\Delta$ yields a finite-variance noise term $\varepsilon_t\sim\mathcal{N}(0,1/(\Delta\lambda))$.
+Approximating the corresponding readout of the latent gap by its endpoint value and substituting the latent state dynamics in \eqref{eq-state-dynamics} gives
+\begin{equation}\label{eq-leaderboard-gap}
+\hat y_t
+\approx
+y_0+\int_0^t\left[m_i(\tilde{y}_s,s)-m_j(\tilde{y}_s,s)\right]ds
++\sigma W_t
++\varepsilon_t,
+\end{equation}
+for update times $t$.
+Here, $\sigma W_t$ captures accumulated innovation noise, while $\varepsilon_t$ captures the public-signal noise associated with the leaderboard update.
+Thus, larger $\lambda$ implies more precise public feedback.
 In the empirical implementation, we normalize $y_0=0$.
 
 % tilde{y}_t
 The latent state, observed signal, and perceived state are jointly determined.
+We do not model public feedback as a hybrid filtering problem with discrete update arrivals, since doing so would require separate prediction and measurement-update steps and would move the model away from the one-dimensional filtered-state diffusion structure that permits the closed-form equilibrium adapted from \citet{Ryvkin2022Fight}.
 Using the filtering equation in (\ref{filtered-x}), players’ perceived gap evolves as
 \begin{equation}\label{eq-filtered-y-update}
 d\tilde{y}_{t} = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sqrt{\lambda}\sigma(\hat{y}_t-\tilde{y}_{t}) dt
@@ -633,7 +647,7 @@ with initial condition $\tilde{y}_0 = \mu_0$.
 Equation (\ref{eq-filtered-y-update}) highlights the core behavioral channel: beliefs drift with expected relative effort and are corrected toward the observed public leaderboard at a speed governed by signal informativeness.
 
 We denote the set of estimated parameters by $\Theta := \{c_i, c_j, \sigma, \lambda, \mu_0,r\}$.
-Here, $\mu_0$ primarily captures initial latent alignment and is treated as a nuisance initial-condition parameter rather than a structural design primitive.
+Here, $\mu_0$ primarily captures the initial perceived gap and is treated as a nuisance initial-condition parameter rather than a structural design primitive.
 The scale parameter $r$ is estimated as an auxiliary measurement parameter that maps latent effort into submission intensity.
 Once $\Theta$ is specified, equations (\ref{eq-state-dynamics}), (\ref{eq-leaderboard-gap}), and (\ref{eq-filtered-y-update}) define the data-generating system, while realized trajectories remain stochastic.
 
@@ -686,18 +700,20 @@ p\left(\{\hat{t}^i_k\}_{k=1}^{N_i} | \tau_i, \Theta\right) = \exp\left\{-\int_{s
 where $\tau_i$ is defined in (\ref{eq-model-intensity}).
 Under discretization, the integral term is evaluated numerically.
 
-Next, suppose the public leaderboard gap $\hat{y}_t$ is sampled at times $(t_1, t_2, ..., t_N)$, yielding observations $\{\hat{y}_{t_k}\}_{k=1}^N$.
-Let $t_0 = 0$ and suppose the initial gap satisfies $y_0 = 0$.
-Then, using the discretized readout of the signal equation in (\ref{eq-leaderboard-gap}), the corresponding likelihood function is
+Next, the public leaderboard gap $\hat y_t$ enters the likelihood only when either player submits and receives an update.
+We denote these update times by the ordered sequence $(t_1,t_2,\ldots,t_N)$, where $N=N_i+N_j$.
+Each $t_k$ is associated with an observed public gap $\hat{y}_{t_k}$.
+Let $h_k=t_k-t_{k-1}$ denote the finite-resolution readout interval associated with the $k$th leaderboard observation, with $t_0=0$, and suppose the initial gap satisfies $y_0 = 0$.
+Then, using the discrete measurement equation in (\ref{eq-leaderboard-gap}), the corresponding likelihood function is
 \begin{equation}\label{eq-obs_gap-prob}
 p\left(\{\hat{y}_{t_k}\}_{k=1}^N | \{\hat{t}^{i(j)}_k\}_{k=1}^{N_{i(j)}}, m_i, m_j, \Theta\right) =
-\phi\left(\{\hat{y}_{t_k}\}_{k=1}^N | \left\{\mu_k\right\}^N_{k=1}, \Sigma_y+\frac{I_N}{\Delta\lambda}\right)
+\phi\left(\{\hat{y}_{t_k}\}_{k=1}^N | \left\{\mu_k\right\}^N_{k=1}, \Sigma_y+D_\lambda\right)
 \end{equation}
-where $\mu_k = \int_{0}^{t_{k}}\left[m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)\right]ds$ and the $(a,b)$ entry of $\Sigma_y$ is $\Sigma_y(a,b)=\sigma^2\min(t_a,t_b)$.
+where $\mu_k = \int_{0}^{t_{k}}\left[m_i(\tilde{y}_s, s) - m_j(\tilde{y}_s, s)\right]ds$, the $(a,b)$ entry of $\Sigma_y$ is $\Sigma_y(a,b)=\sigma^2\min(t_a,t_b)$, and $D_\lambda$ is diagonal with $D_{\lambda,kk}=1/(\lambda h_k)$.
 More generally, the mean would include the latent initial gap $y_0$; in the empirical implementation we normalize $y_0=0$ by measuring subsequent gaps relative to the initial latent-gap origin.
 This normalization is distinct from $\mu_0$, which is the initial perceived gap $\tilde y_0$.
 Thus, $\mu_0$ enters the likelihood indirectly through the filtering recursion in (\ref{eq-filtered-y-update}), which determines the implied effort paths $m_i$ and $m_j$ used in $\mu_k$.
-Moreover, let $N = N_i + N_j$, indicating that the public leaderboard is updated once a new submission occurs.
+Accordingly, the likelihood uses the public leaderboard values associated with submission updates.
 
 %% Note: exclude y_t in likelihood
 It is worth noting that, although the private leaderboard trajectory $y_t$ is observable ex post in Meta-Kaggle, we deliberately exclude it from the estimation likelihood.
@@ -708,13 +724,13 @@ Treating $y_t$ as latent preserves the model’s behavioral interpretation and e
 
 %% Approximation
 To evaluate (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), we recursively construct $\tilde{y}_t$ and implied efforts $(m_i,m_j)$ from (\ref{eq-equilibrium-effort}) and (\ref{eq-filtered-y-update}).
-More precisely, conditional on a parameter vector and the observed public path, latent perceived states and implied effort paths are computed deterministically, while the data themselves remain stochastic.
+More precisely, conditional on a parameter vector, perceived states and effort paths are constructed by forward filtering, using each public update only for subsequent states.
 However, evaluating $m_{i(j)}(\tilde{y}_t, t)$ via equation~(\ref{eq-equilibrium-effort}) requires numerically approximating the inverse function $\gamma^{-1}$, which poses challenges for the use of gradient-based Markov Chain Monte Carlo (MCMC) sampling methods, such as Hamiltonian Monte Carlo (HMC, \citealt{neal1996bayesian}, \citealt{neal2011mcmc}, \citealt{betancourt2017conceptual}) and the No-U-Turn Sampler (NUTS, \citealt{hoffman2014NUTS}).
 Hence, we approximate this inverse function with an analytical form:
 \begin{equation}\label{eq-invgamma-approx}
 \gamma^{-1}(x) \approx \frac{2}{\pi}\arctan(a \cdot x)
 \end{equation}
-where $a \approx 0.947$ is obtained by minimizing the $L_1$-norm of the difference between the numerical inverse of $\gamma(\cdot)$ and the approximation $\frac{2}{\pi}\arctan(ax)$.\footnote{Under the infinity norm, the parameter $a = 0.856$; under the $L_2$-norm, the parameter $a=0.895$.}
+where $a \approx 0.856$ is obtained by minimizing the infinity norm of the difference between the numerical inverse of $\gamma(\cdot)$ and the approximation $\frac{2}{\pi}\arctan(ax)$.\footnote{Under the $L_1$-norm, the parameter $a = 0.947$; under the $L_2$-norm, the parameter $a=0.895$.}
 Figure~\ref{fig-approximation} compares the equilibrium effort function $m_i(\tilde{y}_t, t)$ derived from the approximate analytical form of $\gamma^{-1}$ in equation~(\ref{eq-invgamma-approx}) with that obtained from the numerically accurate solution.
 As illustrated, the approximation closely replicates the true function; the approximation error appears negligible relative to posterior uncertainty over the calibration range considered.
 
@@ -736,29 +752,29 @@ As illustrated, the approximation closely replicates the true function; the appr
 \begin{minipage}{\textwidth}
 {\footnotesize
 \medskip
-\textit{Note:} Panel (a) compares the exact inverse function $\gamma^{-1}(x)$ of the equilibrium component in (\ref{eq-gamma}) with its analytical approximation $\frac{2}{\pi}\arctan(ax)$ by (\ref{eq-invgamma-approx}), where $a \approx 0.947$ minimizes the 1‑norm approximation error.
+\textit{Note:} Panel (a) compares the exact inverse function $\gamma^{-1}(x)$ of the equilibrium component in (\ref{eq-gamma}) with its analytical approximation $\frac{2}{\pi}\arctan(ax)$ by (\ref{eq-invgamma-approx}), where $a \approx 0.856$ minimizes the infinity-norm approximation error.
 Panel (b) compares the resulting equilibrium effort $m_i(\tilde{y}_t, t)$ at $t=0$ (with $T=15$, $\theta=1$, $c_i=c_j=1$, $\sigma=1$) obtained from the analytical approximation versus the exact numerical solution.
 }
 \end{minipage}
 \end{figure}
 
-We use truncated normal priors with explicit supports:
-$c_i,c_j\sim\mathcal{TN}(0.5,5;[0.1,5])$,
+In the empirical application, we use truncated normal priors with explicit supports:
+$c_i,c_j\sim\mathcal{TN}(1,5;[0.5,5])$,
 $\sigma\sim\mathcal{TN}(1,5;[0.5,10])$,
-$\lambda\sim\mathcal{TN}(1,5;[10^{-6},10])$,
+$\lambda\sim\mathcal{TN}(1,5;[10^{-6},\infty))$,
 $r\sim\mathcal{TN}(10,5;[10^{-2},100])$,
-and $\mu_0\sim\mathcal{TN}(\hat{y}_0,1;[-20,20])$.
+and $\mu_0\sim\mathcal{N}(\hat{y}_0,5^2)$.
 Thus, priors are weakly informative for $(c_i,c_j,\sigma,\lambda)$, while $r$ is an auxiliary scale parameter and $\mu_0$ is intentionally more informative to stabilize initialization.
 
 
-The following lemma formalizes identification of the structural parameters under the maintained specification, conditional on a fixed effort-to-submission scale $r$.
-Identification comes from complementary moments: $(c_i,c_j)$ shape asymmetric effort and submission timing through the point-process likelihood; $\sigma$ loads on the off-diagonal covariance of public-gap observations over time; $\lambda$ loads on the diagonal signal-noise component; and $\mu_0$ anchors early-path perceived-state dynamics.
+The following lemma formalizes local identification of the structural parameters under the maintained specification, conditional on a fixed effort-to-submission scale $r$.
+Identification comes from complementary moments: $(c_i,c_j,\mu_0)$ jointly shape asymmetric effort, submission timing, and early perceived-state dynamics through the point-process likelihood and the public-gap mean path; $\sigma$ loads on the off-diagonal covariance of public-gap observations over time; and $\lambda$ loads on the diagonal signal-noise component.
 In the Bayesian implementation above, $r$ is still estimated as an auxiliary measurement scale, but the structural identification statement below is conditional on that scale.
 The proof is provided in the Appendix.
 
 \begin{lemma}
 \label{lmm-params-identifiability}
-For fixed $r$, under the maintained structural specification in (\ref{eq-equilibrium-effort}), (\ref{eq-filtered-y-update}), (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), the parameter vector $(c_i,c_j,\sigma,\lambda,\mu_0)$ is identified.
+For fixed $r$, under the maintained structural specification in (\ref{eq-equilibrium-effort}), (\ref{eq-filtered-y-update}), (\ref{eq-ihpp-prob}) and (\ref{eq-obs_gap-prob}), the parameter vector $(c_i,c_j,\sigma,\lambda,\mu_0)$ is locally identified, provided that the realized public-history support satisfies the full-rank variation condition stated in the proof.
 \end{lemma}
 
 
@@ -772,22 +788,24 @@ These synthetic exercises serve three purposes: illustrating the data-generating
 \label{algo-dgp}
 \begin{algorithmic}
 \STATE \textbf{Input:}
-	$\Delta$, $T$, $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$, $y_0$, $\mu_0$
+	$\Delta$, $T$, $\theta$, $c_i$, $c_j$, $\sigma$, $\lambda$, $r$, $\tau^\star$, $y_0$, $\mu_0$
 \STATE Sample $\{s_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from Poisson process $(\tau^\star)$ on $[0, T)$
 \STATE Sample $\{u_k^{i(j)}\}^{N_{i(j)}}_{k=1}$ from uniform distribution on $[0, 1]$
 \STATE Sample series of Brownian motions $(W_t)$ and $(B_t)$
 \STATE Initialize $\ell^{i(j)}=0$, $\hat{y}_0 = 0$, $\tilde{y}_t=\mu_0$
-\FOR{$t = 0$ to $T$}
+\FOR{$t = 0, \Delta, \ldots, T-\Delta$}
     \STATE $m_{i(j)}(\tilde{y}_t, t)$  $\gets$ (\ref{eq-equilibrium-effort}), $\tau^{i(j)}(t)$ $\gets$ (\ref{eq-model-intensity})
     \hfill \COMMENT{Use $\theta$, $c_{i(j)}$, $\sigma$, $r$, $T$}
-    \STATE $y_{t+\Delta} \gets$ (\ref{eq-state-dynamics}); $\tilde{y}_{t+\Delta}$ $\gets$ (\ref{eq-filtered-y-update})
-    \hfill \COMMENT{Use $\sigma$, $\lambda$, $\Delta$, $W_{t+\Delta}$, $y_0$}
+    \STATE $y_{t+\Delta} \gets$ (\ref{eq-state-dynamics})
+    \hfill \COMMENT{Use $m_i-m_j$, $\sigma$, $\Delta$, $W_{t+\Delta}$}
+    \STATE $\tilde{y}_{t+\Delta}$ $\gets$ (\ref{eq-filtered-y-update})
+    \hfill \COMMENT{Use $m_i-m_j$, $\lambda$, $\sigma$, $\Delta$, and available $\hat{y}_t$}
     \FOR{$s_{k}^{i(j)} \in [t, t+\Delta)$}
         \IF {$u_k^{i(j)} < \tau_{i(j)}(s_{k}^{i(j)}) / \tau^\star_{i(j)}$}
         	    \STATE $\hat{t}^{i(j)}_{\ell} \gets s_{k}^{i(j)}$; $\ell^{i(j)} \gets \ell^{i(j)}+1$
 	    \hfill \COMMENT{Accept the submission event}
 	    \STATE $\hat{y}_{t+\Delta} \gets $ discretized readout of (\ref{eq-leaderboard-gap})
-	    \hfill \COMMENT{Use $\sigma$, $\lambda$, $B_{t+\Delta}$}
+	    \hfill \COMMENT{Use $\sigma$, $\lambda$, $B_{t+\Delta}$; stored for subsequent filtering}
         \ENDIF
     \ENDFOR
 \ENDFOR
@@ -822,8 +840,7 @@ The short vertical ticks mark submission times generated by the inhomogeneous Po
 In this realization, player $i$ submits 28 times and player $j$ submits 18 times.
 Between submissions, filtering uncertainty would generally evolve over time; for tractability, however, the synthetic design follows the maintained steady-state specification used throughout the model.
 
-We use the same truncated-normal prior specification as in Section~\ref{sect-bayes-framework}.
-The only point worth emphasizing here is that the prior on $\mu_0$ is intentionally more informative, reflecting the weak finite-sample information about the initial latent state and helping stabilize initialization in the synthetic recovery exercises.
+The synthetic recovery exercises use simulation-specific priors, reported in the table notes, and estimate $(c_i,c_j,\sigma,\lambda,\mu_0)$ while fixing the auxiliary effort-to-submission scale $r$ at its simulation value.
 When describing a parameter as weakly pinned down in these Bayesian recovery exercises, we use a simple posterior-concentration diagnostic: the posterior standard deviation remains close to its prior standard deviation, and the credible interval shows little shrinkage relative to the prior support.
 For $\mu_0$, the prior standard deviation is approximately one, so posterior standard deviations near one indicate limited learning from the realized synthetic data.
 
@@ -860,7 +877,49 @@ This finite-sample pattern is informative and motivates the richer-data exercise
 {\footnotesize
 \textit{Note:}
 This table reports the posterior means, posterior standard deviations, posterior root mean squared deviations (Post. RMSD), and 95\% credible intervals from Bayesian estimation using the synthetic contest data shown in Figure~\ref{fig-synthetic_90}. In this single synthetic realization, players $i$ and $j$ submitted 28 and 18 times, respectively. Post. RMSD is defined as $\{(\bar{\theta}-\theta_0)^2+s_\theta^2\}^{1/2}$, where $\theta_0$ is the true simulation value, $\bar{\theta}$ is the posterior mean, and $s_\theta$ is the posterior standard deviation. It is a posterior recovery diagnostic for this realized synthetic sample, not a frequentist repeated-sampling quantity.
+The priors are $c_i,c_j\sim\mathcal{TN}(0.5,5;[0.1,5])$, $\sigma\sim\mathcal{TN}(1,5;[0.5,10])$, $\lambda\sim\mathcal{TN}(1,5;[10^{-6},100])$, and $\mu_0\sim\mathcal{TN}(0,1;[-20,20])$; $r$ is fixed at its simulation value.
 The 95\% credible interval reports the central posterior interval containing 95\% of the posterior mass.
+}
+\end{minipage}
+\end{table}
+
+As an auxiliary scale-sensitivity check, we re-estimate the same baseline synthetic contest while treating the effort-to-submission scale $r$ as an unknown parameter rather than fixing it at its simulation value.
+Table~\ref{tbl-contest90-estimate-r} reports the resulting posterior diagnostic.
+The main effect of estimating $r$ is to widen uncertainty about the absolute cost scale: posterior correlations between $r$ and $(c_i,c_j)$ are 0.709 and 0.656, respectively.
+By contrast, the corresponding posterior correlations with $\sigma$ and $\lambda$ are 0.055 and 0.009.
+Thus, in this synthetic exercise, adding $r$ mainly affects absolute effort-cost scaling, while the innovation-risk and signal-precision primitives remain comparatively stable.
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\centering
+\caption{Synthetic Scale-Sensitivity Check with Estimated $r$}\label{tbl-contest90-estimate-r}
+\begin{tabularx}{\textwidth}{lYYYYYY}
+\toprule
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} & \textbf{$r$} \\
+\addlinespace[0.25ex]
+\cline{2-7}
+\addlinespace[0.25ex]
+(true val.)        & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 & 15.0 \\
+\midrule
+Posterior Mean     & 1.294 & 1.927 & 2.786 & 1.134 & 0.004 & 18.439 \\
+Posterior SD       & 0.402 & 0.595 & 0.483 & 0.307 & 0.994 & 4.569 \\
+Post. RMSD         & 0.413 & 0.732 & 0.922 & 0.335 & 0.994 & 5.719 \\
+95\% Interval
+		& [0.64, 2.19]
+		& [0.90, 3.17]
+		& [1.94, 3.83]
+		& [0.65, 1.84]
+		& [-1.95, 1.95]
+		& [11.09, 28.89] \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:}
+This table repeats the baseline synthetic exercise in Table~\ref{tbl-contest90} but estimates the auxiliary effort-to-submission scale $r$ jointly with $(c_i,c_j,\sigma,\lambda,\mu_0)$.
+The prior for $r$ is centered at its simulation value, $r\sim\mathcal{TN}(15,5;[10^{-6},1000])$.
+The table is intended as a scale-sensitivity diagnostic for the baseline synthetic realization.
 }
 \end{minipage}
 \end{table}
@@ -914,14 +973,23 @@ Post. RMSD          & 0.060 & 0.165 & 0.071 & 0.062 & 1.003\\
 \begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:}
-This table reports the posterior means, posterior standard deviations, posterior root mean squared deviations (Post. RMSD), and 95\% credible intervals from Bayesian estimation using \textit{pooled} synthetic panels under identical structural parameters. The pooled exercise fixes the realized submission counts from the baseline synthetic contest in each panel; hence the totals are exactly proportional to the single-contest counts (28 submissions by player $i$ and 18 by player $j$). This design isolates how posterior recovery changes with the amount of information, rather than the additional sampling variation in total Poisson counts.
+This table reports the posterior means, posterior standard deviations, and posterior root mean squared deviations (Post. RMSD) from Bayesian estimation using \textit{pooled} synthetic panels under identical structural parameters. The pooled exercise fixes the realized submission counts from the baseline synthetic contest in each panel; hence the totals are exactly proportional to the single-contest counts (28 submissions by player $i$ and 18 by player $j$). This design isolates how posterior recovery changes with the amount of information, rather than the additional sampling variation in total Poisson counts.
+The priors are $c_i,c_j\sim\mathcal{TN}(1,5;[0.5,5])$, $\sigma\sim\mathcal{TN}(1,5;[0.5,10])$, $\lambda\sim\mathcal{TN}(1,5;[10^{-6},10])$, and $\mu_0\sim\mathcal{TN}(0,1;[-20,20])$; $r$ is fixed at its simulation value.
 Post. RMSD is defined as $\{(\bar{\theta}-\theta_0)^2+s_\theta^2\}^{1/2}$ and is computed from the posterior distribution conditional on the realized synthetic sample.
-The 95\% credible interval reports the central posterior interval containing 95\% of the posterior mass.
 }
 \end{minipage}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Long-Horizon Contest.}
+We then turn to a single-contest regime with a longer time horizon.
+Rather than increasing the number of trajectories, we examine how the accumulation of submissions over a longer period improves inference accuracy.
+
+When generating long-horizon contest data, it is important to appropriately lower the effort costs $c_i$ and $c_j$ to ensure sustained effort from the contestants.
+This is because effort levels are influenced by the remaining time until the deadline:
+according to equation~(\ref{eq-equilibrium-effort}), the further away the deadline, the lower the equilibrium effort.
+Hence, this exercise is not a pure horizon comparison: we jointly vary horizon and effective submission intensity to keep the synthetic environment informative.
 
 \begin{table}[htbp]
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
@@ -948,23 +1016,13 @@ Post. RMSD            & 0.043 & 0.076 & 0.118 & 0.171 & 0.994\\
 \begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:}
-This table reports the posterior means, posterior standard deviations, posterior root mean squared deviations (Post. RMSD), and 95\% credible intervals from Bayesian estimation using synthetic contest data with longer horizons (6 and 12 months). In the 6-month contest, players $i$ and $j$ submitted 59 and 51 times, respectively; in the 12-month contest, they submitted 100 and 97 times, respectively. To sustain active submission behavior over longer horizons, effort costs $c_i$ and $c_j$ are reduced proportionally (true values: $c_i = 0.6$, $c_j = 0.75$ for 6 months; $c_i = 0.3$, $c_j = 0.375$ for 12 months).
+This table reports the posterior means, posterior standard deviations, and posterior root mean squared deviations (Post. RMSD) from Bayesian estimation using synthetic contest data with longer horizons (6 and 12 months). In the 6-month contest, players $i$ and $j$ submitted 59 and 51 times, respectively; in the 12-month contest, they submitted 100 and 97 times, respectively. To sustain active submission behavior over longer horizons, effort costs $c_i$ and $c_j$ are reduced proportionally (true values: $c_i = 0.6$, $c_j = 0.75$ for 6 months; $c_i = 0.3$, $c_j = 0.375$ for 12 months).
+The priors are the same as in the baseline single-contest exercise: $c_i,c_j\sim\mathcal{TN}(0.5,5;[0.1,5])$, $\sigma\sim\mathcal{TN}(1,5;[0.5,10])$, $\lambda\sim\mathcal{TN}(1,5;[10^{-6},100])$, and $\mu_0\sim\mathcal{TN}(0,1;[-20,20])$; $r$ is fixed at its simulation value.
 Post. RMSD is defined as $\{(\bar{\theta}-\theta_0)^2+s_\theta^2\}^{1/2}$ and is computed from the posterior distribution conditional on the realized synthetic sample.
-The 95\% credible interval reports the central posterior interval containing 95\% of the posterior mass.
 }
 \end{minipage}
 \end{table}
 
-
-
-\textbf{Long-Horizon Contest.}
-We then turn to a single-contest regime with a longer time horizon.
-Rather than increasing the number of trajectories, we examine how the accumulation of submissions over a longer period improves inference accuracy.
-
-When generating long-horizon contest data, it is important to appropriately lower the effort costs $c_i$ and $c_j$ to ensure sustained effort from the contestants.
-This is because effort levels are influenced by the remaining time until the deadline:
-according to equation~(\ref{eq-equilibrium-effort}), the further away the deadline, the lower the equilibrium effort.
-Hence, this exercise is not a pure horizon comparison: we jointly vary horizon and effective submission intensity to keep the synthetic environment informative.
 Table~\ref{tbl-longterm-synthetic-data} shows that posterior recovery improves as within-contest information increases, although this improvement reflects both a longer horizon and the lower effort costs used to maintain active submission behavior.
 
 Taken together, the synthetic exercises indicate a consistent recoverability ranking: $c_i$, $c_j$, and $\lambda$ are comparatively well recovered; $\sigma$ is harder in thinner samples but improves with richer data; and $\mu_0$ remains weakly learned according to the posterior-concentration criterion above.
@@ -1019,6 +1077,9 @@ Because non-winning participants may still receive symbolic recognition such as 
 % Players
 The second criterion requires that each contest allow for the identification of two highly active top-ranked participants who engage in sustained and sufficiently intense competition throughout the contest period.
 We begin by examining the final rankings on the private leaderboard and consider candidates from the top downward.
+This use of the private leaderboard is only for defining the focal rivalry, not for constructing the estimation likelihood.
+It is consistent with the model's data-generating interpretation: the two-player approximation is intended to describe the rivalry among contestants who are strongest under the contest's final evaluation criterion.
+Selecting focal players from the public leaderboard would instead condition the sample on a noisy signal, whereas the private leaderboard identifies the relevant ex post top rivalry whose contest-phase behavior we then estimate using only public leaderboard paths and submission times.
 To ensure rich strategic interaction along with adequate data that supports reliable estimation, we impose two conditions: (1) each participant must have submitted at least five times, and (2) their active periods must exhibit sufficient temporal overlap.
 The first condition ensures that a participant appears frequently enough on the public leaderboard to attract the attention of potential rivals, while the second guarantees that the two players competed over a shared and extended timeframe.
 These criteria help ensure that the observed data are informative and that the underlying dynamics are well-suited for reliable structural Bayesian inference.
@@ -1034,15 +1095,17 @@ Ignoring these differences would lead to inconsistencies in units across contest
 
 Empirically, contests reporting accuracy-based scores (i.e., values between 0 and 1 on the leaderboard) tend to yield a higher success rate in identifying two focal players.
 Therefore, all contests used in this study are restricted to those where the leaderboard displays accuracy scores.
-To ensure consistency with the theoretical definition of the performance gap variable $y_t$ and $\hat{y}_t$, we further transform the raw leaderboard accuracy values using the logit (log-odds) function:
+To map raw leaderboard accuracies into the model's state scale, we first transform each individual leaderboard score using the logit (log-odds) function:
 \begin{equation}\label{eq-leaderboard-transform}
-y_t = a \cdot \log\left(\frac{p_t}{1-p_t}\right), \quad p_t\in[0.5, 1)
+x_t = a \cdot \log\left(\frac{p_t}{1-p_t}\right), \quad p_t\in[0.5, 1)
 \end{equation}
-where $p_t$ is the leaderboard score, and $a$ is a scaling parameter in the transformation.\footnote{
-The scaling $a$ can in principle be contest-specific to improve approximate normality after transformation.
+where $p_t$ is an individual leaderboard score, $x_t$ is the corresponding transformed score, and $a$ is a scaling parameter in the transformation.\footnote{
+Changing $a$ rescales the transformed score and can affect scale-dependent likelihood and validation quantities, but it does not change scale-invariant shape diagnostics of the transformed distribution.
 In this paper, to preserve comparability across contests and avoid extra tuning degrees of freedom, we fix $a=1$ throughout.
 }
-The logit function is S-shaped, with the key property that as the accuracy $p_t$ approaches 1, each marginal improvement in $p_t$ results in a disproportionately large increase in the transformed value $y_t$.
+For the focal pair $(i,j)$, we then construct the model variables as transformed-score gaps: $\hat y_t=\hat x_t^i-\hat x_t^j$ for the public leaderboard and $y_t=x_t^i-x_t^j$ for the private leaderboard.
+Hourly leaderboard paths are constructed by carrying forward each player's most recent transformed score between submissions.
+On the domain used here, the log-odds transformation is increasing and convex, so as the accuracy $p_t$ approaches 1, each marginal improvement in $p_t$ results in a disproportionately large increase in the transformed score $x_t$.
 This feature aligns with the intuition that it becomes increasingly difficult to improve performance near the upper bound, making such gains more informative in competitive settings.
 
 
@@ -1064,14 +1127,20 @@ This benchmark is informative but not fully independent of the maintained struct
 
 Let $\ell\in\{1,\ldots,L\}$ index contests.
 Under the maintained Gaussian discrepancy structure induced by the discretized signal readout, the public-private discrepancy yields the following benchmark maximum likelihood estimator (MLE) for $\lambda_\ell$.
-Given that the discrepancy between the public and private leaderboard scores satisfies $\hat{y}_k^\ell - y_k^\ell \sim \mathcal{N}(0, 1/(\lambda_\ell\Delta))$, $\forall k = 1, 2, ..., N^\ell$, we have
+Let $\mathcal E_\ell$ denote the set of submission-triggered leaderboard readouts for the focal pair, and let $N^\ell=|\mathcal E_\ell|$.
+Let $h_k^\ell=t_k^\ell-t_{k-1}^\ell$ denote the elapsed time associated with readout $t_k^\ell$.
+Given that the discrepancy between the public and private leaderboard scores at these readouts satisfies $\hat{y}_{t_k}^\ell - y_{t_k}^\ell \sim \mathcal{N}(0, 1/(\lambda_\ell h_k^\ell))$, $\forall t_k\in\mathcal E_\ell$, we have
 \begin{equation*}
-\lambda^{\text{MLE}}_\ell = \frac{N^\ell}{\Delta\sum^{N^\ell}_{k=1}(y_k^\ell - \hat{y}_k^\ell)^2}, \quad N^\ell = N^\ell_i + N^\ell_j
+\lambda^{\text{MLE}}_\ell =
+\frac{N^\ell}
+{\sum_{t_k\in\mathcal E_\ell}
+h_k^\ell (y_{t_k}^\ell - \hat{y}_{t_k}^\ell)^2}.
 \end{equation*}
-Here, $N^\ell_i$ and $N^\ell_j$ denote the numbers of submissions by contestants $i$ and $j$ in contest $\ell$.
+Thus, the benchmark uses only leaderboard readouts triggered by submissions, rather than repeated hourly carry-forward observations.
 
 It is important to emphasize that this benchmark relies on the transformed-score normality approximation in (\ref{eq-leaderboard-transform}).
-The transformation is adopted for tractability and does not guarantee strict normality. Normality diagnostics indicate departures from exact normality in some contests. Nevertheless, auxiliary checks with alternative choices of the transformation parameter yield qualitatively similar validation patterns, suggesting that the benchmark remains useful as a diagnostic despite this approximation.
+The transformation is adopted for tractability and should be interpreted as an approximation rather than as a claim of exact normality for every contest.
+Nevertheless, auxiliary checks with alternative choices of the transformation parameter yield qualitatively similar validation patterns, suggesting that the benchmark remains useful as a diagnostic despite this approximation.
 
 We then regress the private-leaderboard-based benchmark $\lambda^{\text{MLE}}$ on the Bayesian structural estimate $\hat\lambda$ to examine whether a positive relationship holds between the two.
 
@@ -1089,26 +1158,26 @@ We then regress the private-leaderboard-based benchmark $\lambda^{\text{MLE}}$ o
 	\vspace*{\fill}
 	\centering
 	\newcolumntype{Y}{>{\centering\arraybackslash}X}
-	\begin{tabularx}{\textwidth}{llYY}
-		\toprule
-		& coef. & stderr & 95\% CI \\
-		\midrule
-		const.
-		& -0.733 & 3.182 & [-7.07, 5.61] \\
-		$\log(1 + \hat{\lambda})$
-		& 3.264\textbf{**} & 1.088 & [1.10, 5.43] \\
-		\midrule
-		Obs. & \multicolumn{3}{c}{73} \\
-		R$^2$ & \multicolumn{3}{c}{0.110} \\
-		Adj. R$^2$ & \multicolumn{3}{c}{0.098} \\
+		\begin{tabularx}{\textwidth}{llYY}
+			\toprule
+			& coef. & stderr & 95\% CI \\
+			\midrule
+			const.
+			& -0.808 & 3.157 & [-7.10, 5.49] \\
+			$\log(1 + \hat{\lambda})$
+			& 3.273\textbf{**} & 1.081 & [1.12, 5.43] \\
+			\midrule
+			Obs. & \multicolumn{3}{c}{73} \\
+			R$^2$ & \multicolumn{3}{c}{0.114} \\
+			Adj. R$^2$ & \multicolumn{3}{c}{0.102} \\
 		\bottomrule
 		\addlinespace[0.5ex]
 	\end{tabularx}
 	\begin{minipage}{\textwidth}
-{\footnotesize
-(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
-(2) Normality diagnostics: Omnibus = 0.378, Jarque-Bera = 0.071, Skewness = -0.042, Kurtosis = 3.126.
-(3) Other diagnostic statistics: Condition Number = 28.2, Durbin-Watson = 2.244.
+	{\footnotesize
+	(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
+	(2) OLS residual diagnostics: Omnibus = 0.397, Jarque-Bera = 0.071, Skewness = 0.032, Kurtosis = 3.139.
+	(3) Other diagnostic statistics: Condition Number = 27.9, Durbin-Watson = 1.806.
 }
 	\end{minipage}
 	\vspace*{\fill}
@@ -1117,16 +1186,16 @@ We then regress the private-leaderboard-based benchmark $\lambda^{\text{MLE}}$ o
 \label{fig-validate-lambda}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\lambda^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\lambda}$ for each of the 73 contests. $\lambda^{\mathrm{MLE}}$ is computed from public-private leaderboard discrepancies as $\lambda^{\mathrm{MLE}} = N / (\Delta \sum_{k} (y_k - \hat{y}_k)^2)$, where $N = N_i + N_j$ is the total number of submissions. The dashed line represents the fitted regression line from the model $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$. The positive slope ($\beta_1 = 3.264$, $p < 0.01$) indicates a statistically significant but modest association ($R^2 = 0.110$).
+\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\lambda^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\lambda}$ for each of the 73 contests. $\lambda^{\mathrm{MLE}}$ is computed from public-private leaderboard discrepancies at submission-triggered readouts as $\lambda^{\mathrm{MLE}} = N / \sum_{t_k\in\mathcal E} h_k (y_{t_k} - \hat{y}_{t_k})^2$, where $N=|\mathcal E|$ is the number of readouts used in the benchmark and $h_k=t_k-t_{k-1}$ is the elapsed time associated with readout $t_k$. The dashed line represents the fitted regression line from the model $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$. The positive slope ($\beta_1 = 3.273$, $p < 0.01$) indicates a statistically significant but modest association ($R^2 = 0.114$).
 }
 \end{minipage}
 \end{figure}
 
 
 Figure~\ref{fig-validate-lambda} indicates a positive association between structural and benchmark estimates of $\lambda$.
-The slope on $\log(1+\hat\lambda)$ is positive (3.264, $p<0.01$), but the fit is modest ($R^2\approx0.11$), so this should be interpreted as directional evidence rather than precise contest-level recovery.
+The slope on $\log(1+\hat\lambda)$ is positive (3.273, $p<0.01$), but the fit is modest ($R^2\approx0.11$), so this should be interpreted as directional evidence rather than precise contest-level recovery.
 This dispersion is consistent with limited sample size and with approximation error in benchmark construction, especially the normality-sensitive transformation step.
-Section~\ref{sect-robust-2players} provides a complementary check using an alternative focal-pair definition; the positive pattern for $\lambda$ also appears there, suggesting that the signal-precision result is not entirely tied to the baseline focal-pair choice.
+Section~\ref{sect-robust-2players} provides a complementary, directional check using an alternative focal-pair definition; the positive pattern for $\lambda$ also appears there.
 
 
 \subsubsection{Public-Private Leaderboard Disagreement Diagnostics.}
@@ -1205,12 +1274,13 @@ Another key contest-specific parameter is $\sigma$, which captures innovation un
 For each contest $\ell$, we estimate $\hat{\sigma}_\ell$ structurally using the two players’ public submission records $\{t_k^\ell\}_{k=1}^{N_i^\ell+N_j^\ell}$ and public leaderboard trajectories $\{\hat y_k^\ell\}_{k=1}^{N_i^\ell+N_j^\ell}$.
 We then construct a private-leaderboard-based benchmark for $\sigma$ using score increments.
 
+Let $(t^\ell_k,y^\ell_k)_{k=0}^{n_\ell}$ denote the private-leaderboard gap evaluated at the ordered update times used for this benchmark, including the normalized initial observation.
 Under the diffusion specification in (\ref{eq-state-dynamics}), the private-leaderboard increment satisfies
-$y^\ell_{k+1} - y^\ell_{k} \mid \{m_i^\ell,m_j^\ell\} \sim \mathcal{N}\left(\mu^\ell_k, \sigma^2(t^\ell_{k+1}-t^\ell_k)\right)$.
-Here, $\mu^\ell_k = \int^{t^\ell_{k+1}}_{t^\ell_k}\left[m^\ell_i(s) - m^\ell_j(s)\right]ds$.
+$y^\ell_{k} - y^\ell_{k-1} \mid \{m_i^\ell,m_j^\ell\} \sim \mathcal{N}\left(\mu^\ell_k, \sigma^2(t^\ell_k-t^\ell_{k-1})\right)$ for $k=1,\ldots,n_\ell$.
+Here, $\mu^\ell_k = \int^{t^\ell_k}_{t^\ell_{k-1}}\left[m^\ell_i(s) - m^\ell_j(s)\right]ds$.
 Given this, we use the following maximum likelihood estimator (MLE) of the contest-specific parameter $\sigma$; the derivation is provided in Appendix~\ref{appexidx-normal-MLE}:
 \begin{equation*}
-\sigma^{\text{MLE}}_\ell = \left(\frac{1}{N^\ell_i+N^\ell_j}\sum_k\frac{\left[y^\ell_{k+1}-y^\ell_{k}-\hat\mu^\ell_k\right]^2}{t^\ell_{k+1}-t^\ell_k}\right)^{1/2}
+\sigma^{\text{MLE}}_\ell = \left(\frac{1}{n_\ell}\sum_{k=1}^{n_\ell}\frac{\left[y^\ell_k-y^\ell_{k-1}-\hat\mu^\ell_k\right]^2}{t^\ell_k-t^\ell_{k-1}}\right)^{1/2}
 \end{equation*}
 where $\hat\mu^\ell_k$ is computed from the Bayesian posterior effort trajectories.
 Hence, this benchmark is not fully model-free: it is less demanding on the signal side but still uses posterior drift adjustment.
@@ -1250,7 +1320,7 @@ As in the analysis above for $\lambda$, we regress $\sigma^{\text{MLE}}$ on the 
 	\begin{minipage}{\textwidth}
 {\footnotesize
 (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
-(2) Normality diagnostics: Omnibus = 1.280, Jarque-Bera = 0.774, Skewness = 0.225, Kurtosis = 3.214.
+(2) OLS residual diagnostics: Omnibus = 1.280, Jarque-Bera = 0.774, Skewness = 0.225, Kurtosis = 3.214.
 (3) Other diagnostic statistics: Condition Number = 5.08, Durbin-Watson = 1.618.
 }
 	\end{minipage}
@@ -1260,7 +1330,7 @@ As in the analysis above for $\lambda$, we regress $\sigma^{\text{MLE}}$ on the 
 \label{fig-validation-sigma}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\sigma^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\sigma}$ for each of the 73 contests. $\sigma^{\mathrm{MLE}}$ is computed from private leaderboard increments as $\sigma^{\mathrm{MLE}} = \left(\frac{1}{N} \sum_{k} \frac{(y_{k+1} - y_k - \hat{\mu}_k)^2}{t_{k+1} - t_k}\right)^{1/2}$, where $\hat{\mu}_k$ is computed from posterior effort trajectories. The dashed line represents the fitted regression line from the model $\log(1 + \sigma^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$. The positive slope ($\beta_1 = 0.887$, $p < 0.001$) and $R^2 = 0.317$ provide evidence that the structural estimate contains information about private-leaderboard innovation risk.
+\textbf{Note.} This figure plots the benchmark maximum likelihood estimate $\sigma^{\mathrm{MLE}}$ against the Bayesian structural estimate $\hat{\sigma}$ for each of the 73 contests. $\sigma^{\mathrm{MLE}}$ is computed from private leaderboard increments as $\sigma^{\mathrm{MLE}} = \left(\frac{1}{n} \sum_{k=1}^n \frac{(y_k-y_{k-1}-\hat{\mu}_k)^2}{t_k-t_{k-1}}\right)^{1/2}$, where $n$ is the number of adjacent private-leaderboard increments used in the benchmark and $\hat{\mu}_k$ is computed from posterior effort trajectories. The dashed line represents the fitted regression line from the model $\log(1 + \sigma^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$. The positive slope ($\beta_1 = 0.887$, $p < 0.001$) and $R^2 = 0.317$ provide evidence that the structural estimate contains information about private-leaderboard innovation risk.
 }
 \end{minipage}
 \end{figure}
@@ -1322,88 +1392,81 @@ The time-split slope is smaller but remains positive and significant: 0.220 ($p<
 These results complement the normal-increment MLE benchmark and suggest that the $\sigma$ estimates capture meaningful variation in private-leaderboard volatility.
 
 
-\subsection{Counterfactual Policy Simulations}
+\subsection{Counterfactual Prize-Duration Substitution}
 
 The validation exercises above suggest that the estimated primitives contain
 meaningful information about the contest environment. We use these primitives to
-revisit the design question in Section~\ref{sect-design}, where the designer's
-reduced-form objective is motivated by $\beta^{T}M(\tilde{y}_0,0)^\alpha-\theta$. In the
-empirical application, however, the designer's cardinal payoff is difficult to
-calibrate directly. We therefore use the model as a counterfactual diagnostic:
-rather than compare objective levels, we ask whether observed contest designs
-leave room for \textit{prize-effort improvements}\footnote{
+revisit the design question in Section~\ref{sect-design}, where prize and
+duration are the two design variables that directly affect predicted total
+effort under the maintained approximation.\footnote{
 We do not emphasize a baseline information-design counterfactual for
 $\lambda$. As shown in Section~\ref{sect-design}, under the maintained
 steady-state filtering restriction $S_t\equiv\bar S$, signal precision does not
 generate an independent comparative-static effect on total expected effort.
 Studying optimal information disclosure would require relaxing the steady-state
 restriction and allowing filtering uncertainty to evolve endogenously over time.
-}.
+}
+Because the designer's cardinal payoff and the platform cost of longer contests
+are difficult to calibrate directly, we do not solve for a welfare-optimal
+contest design. Instead, we trace the model-implied substitution between prize
+spending and contest duration while holding predicted total effort fixed.
 
-A counterfactual design generates a prize-effort improvement if, relative to the observed design, it weakly lowers prize spending and weakly increases predicted total effort, with at least one strict improvement.
-This comparison is defined only in the prize-effort outcome space, not as a Pareto welfare comparison across the organizer, participants, and consumers.
+For each contest, let $(\theta^{obs},T^{obs})$ denote the observed prize and
+duration, and let
+$M_0=M(\theta^{obs},T^{obs})$ denote predicted total effort under the observed
+design. For a duration multiplier $a\geq1$, we set
+$T_a=aT^{obs}$ and compute
+\[
+\theta_a=\min\{\theta\leq\theta^{obs}:M(\theta,T_a)\geq M_0\}.
+\]
+The required prize change is
+$100(\theta_a-\theta^{obs})/\theta^{obs}$, so negative values indicate prize
+reductions that keep predicted total effort at least at the observed-design
+baseline. This exercise is not a claim that longer contests are costless or
+welfare improving. Rather, it reports the iso-effort prize-duration frontier:
+how much prize spending can be substituted by a small, externally specified
+increase in duration.
 
-For each contest, we hold fixed the estimated structural primitives and search
-over bounded redesign regions defined separately for the two counterfactual exercises.
-For the effort-improvement exercise, we fix
-$\theta=\theta^{obs}$ and search over $T\in[0.25T^{obs},3T^{obs}]$.
-For the prize-saving exercise, we search over
-$\theta\in[0.01,\theta^{obs}]$ and $T\in[0.25T^{obs},3T^{obs}]$.
-The analysis is based on the 73 contests with complete observed design inputs
-and structural estimates.
-
-Table~\ref{tab-counterfactual-policy} reports two complementary redesign
-exercises. The first asks how much predicted total effort can be increased
-without raising the prize above its observed level. Since predicted effort is
-monotone in the prize in the model, the prize constraint binds in this exercise.
-We therefore fix $\theta=\theta^{obs}$ and optimize only over
-$T\in[0.25T^{obs},3T^{obs}]$. The average maximum effort gain is $96.31\%$,
-with a median of $81.53\%$.
-
-The second exercise asks how much prize spending can be reduced while keeping
-predicted total effort weakly above the observed-design baseline. This
-cost-minimization problem jointly searches over $\theta$ and $T$. The average
-no-loss prize saving is $59.65\%$, with a median of $60.08\%$, corresponding to
-an average absolute reduction of $3.00$ thousand USD.
-
-These results suggest that, within the maintained model and bounded redesign region, observed designs leave room for movement along the model-implied prize-effort frontier.
-The interpretation differs across the two exercises.
-The effort-improvement exercise is a duration-redesign counterfactual: because the prize is fixed at its observed level, predicted effort can increase only through changes in duration.
-The prize-saving exercise is a joint prize-duration redesign: it asks whether prize spending can be reduced while changes in duration preserve predicted effort.
-Holding duration fixed, a prize-only adjustment cannot simultaneously increase predicted effort and reduce prize spending, because predicted effort is monotone in the prize.
+Table~\ref{tab-counterfactual-policy} reports the substitution frontier for
+duration multipliers close to the observed design. When $a=1$, the
+counterfactual coincides with the observed design and no prize reduction is
+possible. For any $a>1$, predicted total effort can be preserved with a lower
+prize in all 73 contests. This direction is a direct implication of monotonicity
+of predicted total effort in both prize and duration; the empirical content is
+the magnitude of the required prize adjustment. A one percent increase in
+duration allows a median prize reduction of $1.23\%$, while a ten percent
+increase allows a median prize reduction of $11.03\%$. The mean reductions are
+larger than the medians, indicating that a small number of contests have
+especially steep local prize-duration substitution rates.
 
 
 \begin{table}[htbp]
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
-\caption{Counterfactual Effort Improvement and Prize Saving}
+\caption{Counterfactual Prize-Duration Substitution}
 \label{tab-counterfactual-policy}
-\begin{tabularx}{\textwidth}{lYY}
+\scriptsize
+\begin{tabularx}{\textwidth}{lYYYYYY}
 \toprule
-\textbf{Statistic} & \textbf{Effort improvement} & \textbf{Prize saving} \\
+\textbf{Duration multiplier} & \textbf{Lower prize} & \textbf{$\geq1\%$ lower} & \textbf{$\geq5\%$ lower} & \textbf{$\geq10\%$ lower} & \textbf{Mean change} & \textbf{Median change} \\
 \midrule
-Contests with positive margin & $73/73$ & $73/73$ \\
-Mean percentage change & $96.31\%$ & $59.65\%$ \\
-Median percentage change & $81.53\%$ & $60.08\%$ \\
-95\% CI for mean & $[85.46\%,107.16\%]$ & $[56.71\%,62.60\%]$ \\
-Mean absolute change & $5.20$ & $3.00$ \\
-95\% CI for mean absolute change & $[4.43,5.97]$ & $[2.17,3.83]$ \\
+$1.00$ & $0/73$ & $0/73$ & $0/73$ & $0/73$ & $0.00\%$ & $0.00\%$ \\
+$1.01$ & $73/73$ & $42/73$ & $25/73$ & $21/73$ & $-11.09\%$ & $-1.23\%$ \\
+$1.02$ & $73/73$ & $69/73$ & $32/73$ & $24/73$ & $-12.50\%$ & $-2.44\%$ \\
+$1.05$ & $73/73$ & $73/73$ & $41/73$ & $31/73$ & $-15.86\%$ & $-5.86\%$ \\
+$1.10$ & $73/73$ & $73/73$ & $68/73$ & $40/73$ & $-20.02\%$ & $-11.03\%$ \\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
 \begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:}
-This table reports counterfactual redesign results for the 73 contests with complete observed design inputs and structural estimates.
-For each contest, the observed design is $(\theta^{obs},T^{obs})$, and predicted total effort under this design serves as the baseline.
-The effort-improvement exercise fixes $\theta=\theta^{obs}$ and varies only duration over $T\in[0.25T^{obs},3T^{obs}]$.
-The prize-saving exercise varies both prize and duration over $\theta\in[0.01,\theta^{obs}]$ and $T\in[0.25T^{obs},3T^{obs}]$.
-Thus, the first column is a duration-redesign margin, while the second column is a joint prize-duration redesign margin.
-Prize is measured in thousand USD. The absolute effort change is in model-implied effort units; the absolute prize change is in thousand USD.
-\\
-\textbf{Effort improvement:} The maximum percentage increase in predicted total effort that can be achieved without increasing the prize above $\theta^{obs}$.
-\\
-\textbf{Prize saving:} The maximum percentage reduction in prize spending that can be achieved while keeping predicted total effort weakly above the observed-design baseline.
+This table reports counterfactual prize-duration substitution results for the 73 contests with complete observed design inputs and structural estimates.
+For duration multiplier $a$, the counterfactual duration is $T_a=aT^{obs}$.
+For each contest, we compute the minimum prize $\theta_a\leq\theta^{obs}$ such that predicted total effort remains weakly above $M(\theta^{obs},T^{obs})$.
+``Lower prize'' counts contests with $\theta_a<\theta^{obs}$.
+The next three columns count contests in which the required prize is at least 1\%, 5\%, or 10\% below the observed prize.
+Mean and median changes report $100(\theta_a-\theta^{obs})/\theta^{obs}$, so negative values denote required prize reductions.
 }
 \end{minipage}
 \end{table}
@@ -1415,7 +1478,7 @@ Prize is measured in thousand USD. The absolute effort change is in model-implie
 \section{Robustness}
 
 This section examines the sensitivity of our main validation results to key modeling choices.
-We focus on two concerns highlighted in Section~\ref{sect-concerns}: the selection of the two-player focal pair and the normality assumption underlying the leaderboard transformation. For each robustness check, we re-estimate the model and recompute the benchmark validations, then compare the results to the baseline findings reported in Section~\ref{sect-validation}.
+We focus on two concerns highlighted in Section~\ref{sect-concerns}: the selection of the two-player focal pair and the normality assumption underlying the leaderboard transformation. For each robustness check, we re-estimate the model and compare the resulting validation patterns to the baseline findings reported in Section~\ref{sect-validation}.
 
 \subsection{Selection of Two Players}\label{sect-robust-2players}
 
@@ -1445,7 +1508,7 @@ This specification shifts the focal rivalry away from the winner and tests wheth
 		& coef. & stderr & 95\% CI \\
 		\midrule
 		const.
-		& 0.290 & 3.819 & [-7.91, 7.32] \\
+		& -0.290 & 3.819 & [-7.91, 7.32] \\
 		$\log(1 + \hat{\lambda})$
 		& 3.421\textbf{**} & 1.244 & [0.94, 5.90] \\
 		\midrule
@@ -1458,7 +1521,7 @@ This specification shifts the focal rivalry away from the winner and tests wheth
 	\begin{minipage}{\textwidth}
 {\footnotesize
 (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
-(2) Normality diagnostics: Omnibus = 3.192, Jarque-Bera = 2.424, Skewness = -0.411, Kurtosis = 3.350.
+(2) OLS residual diagnostics: Omnibus = 3.192, Jarque-Bera = 2.424, Skewness = -0.411, Kurtosis = 3.350.
 (3) Other diagnostic statistics: Condition Number = 36.9, Durbin-Watson = 2.236.
 }
 	\end{minipage}
@@ -1468,14 +1531,14 @@ This specification shifts the focal rivalry away from the winner and tests wheth
 \label{fig-validation-lambda-robust23}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure replicates the validation exercise in Figure~\ref{fig-validate-lambda} using an alternative focal pair: the second- and third-ranked participants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$, with $\beta_1 = 3.421$ ($p < 0.01$) and $R^2 = 0.096$. The positive slope remains significant, though the fit is modest, providing additional directional support for the $\lambda$ interpretation under an alternative focal-pair definition.
+\textbf{Note.} This figure reports the validation comparison under an alternative focal pair: the second- and third-ranked participants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \lambda^{\mathrm{MLE}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}) + \varepsilon$, with $\beta_1 = 3.421$ ($p < 0.01$) and $R^2 = 0.096$. The positive slope remains significant, though the fit is modest, so the result is best interpreted as directional evidence under an alternative focal-pair definition.
 }
 \end{minipage}
 \end{figure}
 
-For signal precision, the alternative focal-pair specification based on the second and third ranked participants again yields a positive and significant relationship, although the explanatory power remains limited ($R^2=0.096$). 
-The persistence of this pattern under a different focal-pair construction suggests that the weaker $\lambda$ evidence in Section~\ref{sect-validation} may partly reflect the two-player approximation used to summarize a multi-contestant leaderboard environment. 
-Viewed in this way, the robustness check provides complementary support for the $\lambda$ validation, while also cautioning that signal precision is harder to recover precisely in this empirical setting.
+For signal precision, the alternative focal-pair specification based on the second and third ranked participants again yields a positive and significant relationship, although the explanatory power remains limited ($R^2=0.096$).
+This check asks whether changing the focal-pair definition overturns the qualitative validation pattern.
+It does not: the sign and significance are preserved, while the low fit reinforces the more cautious interpretation that signal precision is harder to recover precisely at the contest level.
 
 %%%%%%%%%% Figure & Table %%%%%%%%%%%
 \begin{figure}[tbp]
@@ -1509,7 +1572,7 @@ Viewed in this way, the robustness check provides complementary support for the 
 	\begin{minipage}{\textwidth}
 {\footnotesize
 (1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
-(2) Normality diagnostics: Omnibus = 12.72, Jarque-Bera = 13.66, Skewness = 1.02, Kurtosis = 3.50.
+(2) OLS residual diagnostics: Omnibus = 12.72, Jarque-Bera = 13.66, Skewness = 1.02, Kurtosis = 3.50.
 (3) Other diagnostic statistics: Condition Number = 7.84, Durbin-Watson = 1.87.
 }
 	\end{minipage}
@@ -1531,7 +1594,7 @@ Together, these results suggest that the signs and significance patterns of the 
 \subsection{Normality Caveat and Interpretation}\label{sect-robust-normality}
 
 Section~\ref{sec-kaggle-application} already emphasizes that the logit transformation is adopted for tractability and does not guarantee strict normality for every contest.
-Empirically, the degree of approximate normality in the transformed data is affected by the choice of the logit scaling parameter $a$ in equation~(\ref{eq-leaderboard-transform}).
+The scaling parameter $a$ in equation~(\ref{eq-leaderboard-transform}) rescales transformed scores and can affect scale-dependent likelihood and validation quantities.
 This issue is especially relevant for interpreting the $\lambda$ benchmark, which relies more directly on Gaussian assumptions for public-private score discrepancies.
 In auxiliary checks that can be reported in an online appendix, we find qualitatively similar validation patterns across alternative choices of $a$.
 
@@ -1548,7 +1611,7 @@ Using only contest-phase information observable to participants, we recover late
 Across 73 Kaggle contests, these withheld benchmarks provide disciplined diagnostic evidence on the estimated primitives.
 The evidence is strongest for innovation risk, where both benchmark and time-split volatility diagnostics support the structural estimates; for signal precision, the evidence is directionally consistent but more modest.
 In complementary synthetic exercises, the initial-condition parameter $\mu_0$ shows little posterior concentration relative to the main contest-level primitives.
-The counterfactual exercises should be interpreted as model-implied prize-duration redesign diagnostics, rather than as full welfare comparisons of observed and alternative contest designs.
+The counterfactual exercise traces the model-implied prize-duration substitution frontier, rather than providing a full welfare comparison of observed and alternative contest designs.
 
 
 % limitations
@@ -1732,42 +1795,51 @@ The proof proceeds under the maintained structural specification in
 (\ref{eq-equilibrium-effort}), (\ref{eq-filtered-y-update}),
 (\ref{eq-ihpp-prob}), and (\ref{eq-obs_gap-prob}).
 Suppose two parameter vectors $\Theta=(c_i,c_j,\mu_0,\sigma,\lambda)$ and
-$\Theta'=(c_i',c_j',\mu_0',\sigma',\lambda')$ induce the same likelihood for all
-admissible observations.
+$\Theta'=(c_i',c_j',\mu_0',\sigma',\lambda')$ induce the same likelihood in a
+neighborhood of the true parameter value.
 
 First, consider the Gaussian leaderboard component in (\ref{eq-obs_gap-prob}). 
 Equality of Gaussian likelihoods for all sampled paths implies equality of both covariance and mean structures. 
 Hence,
 \begin{equation*}
-\Sigma_y + I_N/(\Delta\lambda)
+\Sigma_y + D_\lambda
 =
-\Sigma_y' + I_N/(\Delta\lambda'),
+\Sigma_y' + D_{\lambda'},
 \qquad
 \mu_k=\mu_k'\ \text{for all } k.
 \end{equation*}
+Here $D_\lambda$ and $D_{\lambda'}$ are diagonal matrices with $D_{\lambda,kk}=1/(\lambda h_k)$ and $D_{\lambda',kk}=1/(\lambda' h_k)$, where the readout intervals $\{h_k\}_{k=1}^N$ are fixed by the observation design.
 With at least two distinct leaderboard observations, the off-diagonal covariance terms equal $\sigma^2\min(t_i,t_j)$ and are unaffected by the independent signal-noise term. 
 Therefore equality of the off-diagonal covariance terms implies $\sigma=\sigma'$. Given $\sigma=\sigma'$, equality of the diagonal terms then implies $\lambda=\lambda'$.
 
-Second, consider the point-process component in (\ref{eq-ihpp-prob}). 
-For inhomogeneous Poisson processes, equality of likelihoods for all event realizations implies equality of intensity functions almost everywhere:
-\begin{equation*}
-\tau_i(t)=\tau_i'(t),
+It remains to identify $(c_i,c_j,\mu_0)$.
+Given $(\sigma,\lambda)$ and fixed $r$, define $\vartheta=(c_i,c_j,\mu_0)$.
+For any candidate $\vartheta$, the filtering recursion and equilibrium effort rule generate a perceived-state path $\tilde y_t(\vartheta)$, effort paths $m_i(t;\vartheta)$ and $m_j(t;\vartheta)$, submission intensities
+\[
+\tau_i(t;\vartheta)=r\,m_i(t;\vartheta),
 \qquad
-\tau_j(t)=\tau_j'(t)
-\quad
-\text{a.e. on } \mathcal T.
-\end{equation*}
-Because $\tau_{i(j)}(t)=r\,m_{i(j)}(\tilde y_t,t)$ and $r$ is fixed, equality of intensities implies equality of the two implied equilibrium effort paths almost everywhere.
+\tau_j(t;\vartheta)=r\,m_j(t;\vartheta),
+\]
+and public-gap mean values $\mu_k(\vartheta)$ at the observed leaderboard update times.
+Let
+\[
+G(\vartheta)
+=
+\left(
+\{\tau_i(t;\vartheta)\}_{t\in\mathcal T_i},
+\{\tau_j(t;\vartheta)\}_{t\in\mathcal T_j},
+\{\mu_k(\vartheta)\}_{k=1}^N
+\right)
+\]
+denote this reduced-form prediction map, evaluated on the support of observed submission and update times.
 
-With $\sigma$ and $\lambda$ identified, equality of the Gaussian mean structures requires the two parameter vectors to generate the same implied mean path for the leaderboard observations. 
-The equality of point-process intensities further restricts the remaining parameters through the two effort paths. 
-Since the effort policies in (\ref{eq-equilibrium-effort}) depend on $c_i$ and $c_j$ through $w_{i(j)}=\theta/(\sigma^2c_{i(j)})$ and the corresponding transformations $\rho_{i(j)}$, equality of the two effort paths over the support of the observed state process identifies $(c_i,c_j)$, provided that the observed state process contains sufficient variation.
+We impose the full-rank variation condition that the Jacobian
+$\partial G(\vartheta_0)/\partial\vartheta$ has full column rank at the true parameter value $\vartheta_0$.
+This condition formalizes the requirement that the realized public-history support contain enough variation to distinguish changes in effort costs from changes in the initial perceived gap.
+Under this condition, equality of the point-process intensity functions and equality of the Gaussian mean structure imply $G(\vartheta)=G(\vartheta_0)$ only locally at $\vartheta=\vartheta_0$.
+Hence $(c_i,c_j,\mu_0)$ is locally identified.
 
-Given $(c_i,c_j,\sigma,\lambda)$, the filtered dynamics in (\ref{eq-filtered-y-update}) are recursively determined by the observed signal path and the initial condition. 
-Given the same observed signal path, recursive uniqueness of this update implies that two distinct initial conditions cannot generate the same filtered path for all admissible observations. 
-Hence $\mu_0=\mu_0'$.
-
-Together, these steps imply $\Theta=\Theta'$, establishing identification within the maintained structural specification.
+Combining this local identification of $(c_i,c_j,\mu_0)$ with the covariance-based identification of $(\sigma,\lambda)$ yields local identification of $(c_i,c_j,\sigma,\lambda,\mu_0)$ conditional on fixed $r$.
 \Halmos
 \endproof
 
@@ -1831,31 +1903,44 @@ Specifically, $\bar{S} = \sigma / \sqrt{\lambda}$ when $\lambda>0$ and $\bar{S} 
 
 \subsection{MLE for $\sigma^2$}\label{appexidx-normal-MLE}
 
-Suppose we observe approximately independent data points \( X_1, ..., X_n \), where each \( X_k \sim \mathcal{N}(M_k / r, \sigma^2 T_k) \) with known constants \( M_k \) and \( T_k \).
-The goal is to estimate the auxiliary parameters \( r \) and \( \sigma \) via maximum likelihood estimation (MLE).
-Ignoring constant terms, the log-likelihood function of the observed data is
+This appendix derives the private-leaderboard benchmark for $\sigma$ used in Section~\ref{sect-validation}.
+For a given contest, let $\Delta y_k=y_k-y_{k-1}$ denote the private-leaderboard gap increment between two adjacent update times, and let $h_k=t_k-t_{k-1}$ be the corresponding elapsed time.
+The posterior effort trajectories provide a plug-in drift adjustment
 \[
-\ell(r, \sigma^2) = - \frac{n}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \sum_{k=1}^n \frac{\left( X_k - M_k/r \right)^2}{T_k}.
+\hat\mu_k=\int_{t_{k-1}}^{t_k}\left[\hat m_i(s)-\hat m_j(s)\right]ds.
 \]
-To estimate $r$, we expand the summation of second term and have
+Under the diffusion approximation, the drift-adjusted increment satisfies
 \[
-Q(r) = \sum_{k=1}^n \left( \frac{X_k^2}{T_k} - \frac{2X_k M_k}{r T_k} + \frac{M_k^2}{r^2 T_k} \right)
-= A - \frac{2B}{r} + \frac{C}{r^2},
+\Delta y_k-\hat\mu_k\sim\mathcal N(0,\sigma^2 h_k),
+\qquad k=1,\ldots,n.
 \]
-where \( A = \sum X_k^2/T_k \), \( B = \sum X_k M_k/T_k \), and \( C = \sum M_k^2/T_k \). Taking the derivative with respect to \( r \) and setting it to zero gives:
-\begin{equation*}
-\frac{dQ}{dr} = \frac{2B}{r^2} - \frac{2C}{r^3} = 0 \quad \Rightarrow \quad \hat{r} = \frac{C}{B} = \frac{\sum M_k^2/T_k}{\sum X_k M_k/T_k}.
-\end{equation*}
-This expression is well-defined when $B\neq 0$; under the model and positive $T_k$, the economically relevant case is $B>0$, which yields $\hat r>0$.
-Then, substituting \( \hat{r} \) back into the likelihood, the MLE for \( \sigma^2 \) is obtained by maximizing
+Treating these increments as approximately independent, the log-likelihood for $\sigma^2$ is, up to constants,
 \[
-\ell(\sigma^2) = -\frac{n}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} \sum_{k=1}^n \frac{\left( X_k - M_k/\hat{r} \right)^2}{T_k},
+\ell(\sigma^2)
+=
+-\frac{n}{2}\log(\sigma^2)
+-\frac{1}{2}\sum_{k=1}^n\log h_k
+-\frac{1}{2\sigma^2}\sum_{k=1}^n
+\frac{(\Delta y_k-\hat\mu_k)^2}{h_k}.
 \]
-which yields
+Differentiating with respect to $\sigma^2$ and setting the derivative equal to zero gives
+\[
+-\frac{n}{2\sigma^2}
++
+\frac{1}{2(\sigma^2)^2}
+\sum_{k=1}^n
+\frac{(\Delta y_k-\hat\mu_k)^2}{h_k}
+=0.
+\]
+Therefore,
 \begin{equation}\label{normal-mle-sigma}
-\hat{\sigma}^2 = \frac{1}{n} \sum_{k=1}^n \frac{\left( X_k - M_k/\hat{r}\right)^2}{T_k}.
+\hat{\sigma}^2
+=
+\frac{1}{n}\sum_{k=1}^n
+\frac{(\Delta y_k-\hat\mu_k)^2}{h_k}.
 \end{equation}
-In the empirical application, this serves as an auxiliary benchmark approximation; dependence across leaderboard increments may weaken its exact finite-sample optimality.
+In the empirical application, $\hat\mu_k$ is computed from the Bayesian posterior effort paths, so this benchmark is a plug-in private-leaderboard consistency check rather than a fully model-free estimator.
+Dependence across leaderboard increments and asynchronous update timing may weaken its exact finite-sample optimality.
 
 
 
@@ -1884,81 +1969,81 @@ Accordingly, cross-contest comparisons of $\lambda^{\text{MLE}}$ are most interp
 \cmidrule(lr){12-13}
  &  &  &  &  & $\lambda$ & $\sigma$ & $\mu_0$ & $c_i$ & $c_j$ & $r$ & \makecell{$\lambda^\text{MLE}$} & $\sigma^\text{MLE}$ \\
 \midrule
-2445 & 7 & 19 & 5.00 & 25 & 15.377 & 0.980 & -0.089 & 4.304 & 3.154 & 2.088 & 1539.379 & 0.394 \\
-2454 & 19 & 13 & 0.15 & 62 & 15.016 & 1.030 & 4.377 & 0.688 & 0.810 & 18.035 & 932.836 & 0.659 \\
-2464 & 11 & 12 & 0.95 & 20 & 9.844 & 2.325 & -0.474 & 1.631 & 1.380 & 14.217 & 99.556 & 3.741 \\
-2478 & 13 & 11 & 0.95 & 30 & 13.636 & 0.673 & -0.444 & 3.171 & 3.811 & 6.333 & 19406.675 & 0.770 \\
-2489 & 12 & 21 & 0.50 & 10 & 16.650 & 0.576 & 0.431 & 3.535 & 2.303 & 11.210 & 5759.075 & 0.843 \\
-2549 & 13 & 15 & 0.50 & 30 & 12.214 & 1.357 & -1.055 & 1.409 & 1.157 & 14.758 & 525.201 & 2.891 \\
-2551 & 48 & 30 & 1.50 & 30 & 26.143 & 0.539 & -0.286 & 3.207 & 4.141 & 6.669 & 140015.172 & 0.512 \\
-2667 & 55 & 67 & 30.00 & 50 & 16.977 & 1.695 & 0.758 & 3.919 & 3.803 & 1.184 & 1.805 & 5.430 \\
-2749 & 22 & 22 & 3.00 & 42 & 20.708 & 0.701 & 0.906 & 4.308 & 4.022 & 4.367 & 37219.066 & 0.340 \\
-2762 & 12 & 21 & 1.00 & 35 & 11.659 & 0.779 & 1.068 & 3.103 & 2.237 & 13.005 & 20.923 & 1.244 \\
-2860 & 9 & 6 & 1.00 & 30 & 12.735 & 0.816 & 0.133 & 3.096 & 3.728 & 6.933 & 33538.355 & 0.034 \\
-3064 & 13 & 5 & 0.20 & 25 & 14.106 & 0.630 & -0.788 & 1.160 & 2.780 & 13.821 & 8206710.757 & 0.263 \\
-3080 & 25 & 27 & 0.09 & 25 & 23.442 & 0.531 & -1.217 & 0.623 & 0.643 & 19.327 & 150384.896 & 0.187 \\
-3288 & 20 & 10 & 1.00 & 0 & 10.864 & 3.729 & -1.169 & 0.822 & 1.750 & 15.448 & 2.179 & 0.616 \\
-3338 & 31 & 29 & 1.50 & 30 & 24.827 & 0.541 & 0.203 & 3.508 & 3.345 & 7.687 & 8200.515 & 0.244 \\
-3353 & 26 & 17 & 10.00 & 30 & 16.307 & 1.232 & -0.249 & 3.749 & 4.305 & 2.066 & 22001.196 & 1.410 \\
-3366 & 16 & 11 & 0.50 & 50 & 15.653 & 0.693 & -1.936 & 2.055 & 3.018 & 13.340 & 4849.451 & 0.499 \\
-3507 & 9 & 13 & 0.50 & 33 & 14.030 & 1.055 & 0.529 & 2.440 & 1.891 & 14.095 & 163.652 & 1.101 \\
-3509 & 8 & 13 & 0.20 & 30 & 12.714 & 0.741 & -0.024 & 2.491 & 1.513 & 13.807 & 3167.382 & 0.884 \\
-3526 & 15 & 13 & 5.00 & 20 & 15.809 & 0.793 & -0.053 & 4.127 & 4.159 & 1.280 & 11651.555 & 0.242 \\
-3641 & 7 & 41 & 1.50 & 43 & 20.406 & 0.579 & 0.615 & 4.292 & 1.875 & 3.434 & 2447.287 & 0.319 \\
-3774 & 29 & 26 & 0.50 & 50 & 23.554 & 0.537 & -0.997 & 2.580 & 2.898 & 13.300 & 29.891 & 0.952 \\
-3800 & 21 & 28 & 3.00 & 15 & 20.046 & 0.820 & 3.384 & 4.322 & 3.599 & 6.632 & 1174.496 & 0.625 \\
-3926 & 25 & 20 & 0.30 & 25 & 22.016 & 0.547 & -0.047 & 1.237 & 1.529 & 13.393 & 4798.921 & 0.332 \\
-3928 & 15 & 21 & 0.68 & 70 & 19.525 & 0.584 & -0.421 & 3.604 & 3.051 & 11.838 & 87393.056 & 0.139 \\
-3929 & 35 & 31 & 8.00 & 50 & 5.865 & 3.653 & 0.062 & 3.165 & 3.520 & 10.320 & 4794.303 & 5.862 \\
-3960 & 47 & 50 & 8.00 & 40 & 28.973 & 0.883 & -0.992 & 4.624 & 4.670 & 3.583 & 624.827 & 0.514 \\
+2445 & 7 & 19 & 5.00 & 25 & 15.377 & 0.980 & -0.089 & 4.304 & 3.154 & 2.088 & 2064.402 & 0.394 \\
+2454 & 19 & 13 & 0.15 & 62 & 15.016 & 1.030 & 4.377 & 0.688 & 0.810 & 18.035 & 768.208 & 0.659 \\
+2464 & 11 & 12 & 0.95 & 20 & 9.844 & 2.325 & -0.474 & 1.631 & 1.380 & 14.217 & 95.868 & 3.741 \\
+2478 & 13 & 11 & 0.95 & 30 & 13.636 & 0.673 & -0.444 & 3.171 & 3.811 & 6.333 & 12004.117 & 0.770 \\
+2489 & 12 & 21 & 0.50 & 10 & 16.650 & 0.576 & 0.431 & 3.535 & 2.303 & 11.210 & 5663.716 & 0.843 \\
+2549 & 13 & 15 & 0.50 & 30 & 12.214 & 1.357 & -1.055 & 1.409 & 1.157 & 14.758 & 520.220 & 2.891 \\
+2551 & 48 & 30 & 1.50 & 30 & 26.143 & 0.539 & -0.286 & 3.207 & 4.141 & 6.669 & 93276.660 & 0.512 \\
+2667 & 55 & 67 & 30.00 & 50 & 16.977 & 1.695 & 0.758 & 3.919 & 3.803 & 1.184 & 3.650 & 5.430 \\
+2749 & 22 & 22 & 3.00 & 42 & 20.708 & 0.701 & 0.906 & 4.308 & 4.022 & 4.367 & 42318.566 & 0.340 \\
+2762 & 12 & 21 & 1.00 & 35 & 11.659 & 0.779 & 1.068 & 3.103 & 2.237 & 13.005 & 45.399 & 1.244 \\
+2860 & 9 & 6 & 1.00 & 30 & 12.735 & 0.816 & 0.133 & 3.096 & 3.728 & 6.933 & 22731.842 & 0.034 \\
+3064 & 13 & 5 & 0.20 & 25 & 14.106 & 0.630 & -0.788 & 1.160 & 2.780 & 13.821 & 8157921.303 & 0.263 \\
+3080 & 25 & 27 & 0.09 & 25 & 23.442 & 0.531 & -1.217 & 0.623 & 0.643 & 19.327 & 149115.198 & 0.187 \\
+3288 & 20 & 10 & 1.00 & 0 & 10.864 & 3.729 & -1.169 & 0.822 & 1.750 & 15.448 & 3.518 & 0.616 \\
+3338 & 31 & 29 & 1.50 & 30 & 24.827 & 0.541 & 0.203 & 3.508 & 3.345 & 7.687 & 9639.132 & 0.244 \\
+3353 & 26 & 17 & 10.00 & 30 & 16.307 & 1.232 & -0.249 & 3.749 & 4.305 & 2.066 & 23439.960 & 1.410 \\
+3366 & 16 & 11 & 0.50 & 50 & 15.653 & 0.693 & -1.936 & 2.055 & 3.018 & 13.340 & 4647.231 & 0.499 \\
+3507 & 9 & 13 & 0.50 & 33 & 14.030 & 1.055 & 0.529 & 2.440 & 1.891 & 14.095 & 159.184 & 1.101 \\
+3509 & 8 & 13 & 0.20 & 30 & 12.714 & 0.741 & -0.024 & 2.491 & 1.513 & 13.807 & 1802.071 & 0.884 \\
+3526 & 15 & 13 & 5.00 & 20 & 15.809 & 0.793 & -0.053 & 4.127 & 4.159 & 1.280 & 6874.479 & 0.242 \\
+3641 & 7 & 41 & 1.50 & 43 & 20.406 & 0.579 & 0.615 & 4.292 & 1.875 & 3.434 & 2372.810 & 0.319 \\
+3774 & 29 & 26 & 0.50 & 50 & 23.554 & 0.537 & -0.997 & 2.580 & 2.898 & 13.300 & 38.059 & 0.952 \\
+3800 & 21 & 28 & 3.00 & 15 & 20.046 & 0.820 & 3.384 & 4.322 & 3.599 & 6.632 & 1094.443 & 0.625 \\
+3926 & 25 & 20 & 0.30 & 25 & 22.016 & 0.547 & -0.047 & 1.237 & 1.529 & 13.393 & 4272.601 & 0.332 \\
+3928 & 15 & 21 & 0.68 & 70 & 19.525 & 0.584 & -0.421 & 3.604 & 3.051 & 11.838 & 81382.464 & 0.139 \\
+3929 & 35 & 31 & 8.00 & 50 & 5.865 & 3.653 & 0.062 & 3.165 & 3.520 & 10.320 & 4021.718 & 5.862 \\
+3960 & 47 & 50 & 8.00 & 40 & 28.973 & 0.883 & -0.992 & 4.624 & 4.670 & 3.583 & 589.028 & 0.514 \\
 %4031 & 6 & 61 & 5.00 & 30 & 19.132 & 0.831 & 0.605 & 4.487 & 1.975 & 3.021 & 125709.402 & 1.214 \\
-4104 & 8 & 6 & 20.00 & 20 & 10.864 & 2.116 & 0.036 & 3.729 & 3.994 & 0.742 & 42409.966 & 0.141 \\
-4366 & 31 & 31 & 8.00 & 2 & 23.414 & 0.913 & -0.434 & 4.367 & 4.554 & 2.979 & 3601.181 & 0.487 \\
-4407 & 44 & 51 & 4.00 & 19 & 14.573 & 1.670 & 0.070 & 3.591 & 3.238 & 12.165 & 56.026 & 2.693 \\
-4453 & 15 & 18 & 2.00 & 30 & 17.165 & 0.617 & 1.204 & 4.110 & 3.071 & 2.607 & 47662.222 & 0.892 \\
-4477 & 7 & 11 & 2.00 & 50 & 11.870 & 1.104 & -3.305 & 3.867 & 3.222 & 5.142 & 2524.322 & 0.325 \\
-4488 & 11 & 8 & 2.00 & 1 & 8.033 & 5.347 & 1.108 & 2.160 & 2.843 & 12.739 & 1903.540 & 1.559 \\
-4493 & 19 & 14 & 10.00 & 40 & 16.683 & 1.161 & -0.191 & 3.883 & 4.306 & 1.567 & 7787.118 & 0.355 \\
-4657 & 66 & 62 & 4.00 & 30 & 34.581 & 0.559 & 0.330 & 4.657 & 4.691 & 3.410 & 1221277.563 & 0.205 \\
-4699 & 13 & 22 & 5.00 & 30 & 18.734 & 0.765 & 0.112 & 4.242 & 3.833 & 1.207 & 223019.351 & 0.211 \\
-4986 & 16 & 5 & 10.00 & 50 & 13.378 & 1.203 & -0.029 & 3.287 & 4.306 & 1.214 & 80756.892 & 0.393 \\
-5056 & 18 & 35 & 5.00 & 33 & 21.957 & 0.720 & -0.780 & 4.484 & 4.094 & 2.763 & 536274.232 & 0.324 \\
-5144 & 11 & 9 & 20.00 & 20 & 7.244 & 3.118 & 10.283 & 3.617 & 3.737 & 1.411 & 3752.980 & 2.695 \\
-5174 & 42 & 47 & 3.00 & 50 & 23.823 & 0.744 & -1.240 & 4.346 & 4.162 & 8.369 & 292993.349 & 1.622 \\
-5229 & 28 & 31 & 15.00 & 10 & 12.332 & 3.417 & 0.320 & 3.961 & 3.564 & 6.028 & 14.707 & 2.880 \\
-5261 & 45 & 43 & 10.00 & 30 & 26.183 & 0.965 & -1.578 & 4.361 & 4.651 & 2.525 & 83664.604 & 0.965 \\
-5357 & 36 & 22 & 5.00 & 30 & 22.768 & 0.774 & 1.093 & 4.028 & 4.506 & 3.022 & 8980.088 & 0.354 \\
-5390 & 22 & 17 & 4.00 & 30 & 17.724 & 0.819 & 0.513 & 3.650 & 4.317 & 4.262 & 1165.060 & 1.086 \\
-5497 & 44 & 24 & 4.00 & 30 & 25.292 & 0.652 & 0.642 & 4.231 & 4.571 & 3.005 & 9784887.950 & 0.233 \\
-6322 & 23 & 26 & 10.00 & 66 & 9.106 & 2.653 & -0.405 & 3.753 & 3.536 & 5.852 & 48.308 & 3.981 \\
-6927 & 19 & 16 & 4.00 & 1 & 18.477 & 0.918 & -0.601 & 3.925 & 4.247 & 4.178 & 8317.660 & 0.272 \\
-7115 & 19 & 39 & 4.00 & 30 & 15.827 & 0.848 & 0.444 & 4.314 & 3.226 & 3.401 & 408806.642 & 1.469 \\
-7162 & 51 & 14 & 1.00 & 50 & 20.424 & 0.808 & -1.269 & 1.209 & 4.010 & 8.932 & 39471.599 & 1.093 \\
-7634 & 52 & 44 & 2.00 & 2 & 23.259 & 0.568 & 0.761 & 3.767 & 4.307 & 8.242 & 7635.257 & 1.509 \\
-7878 & 5 & 7 & 4.00 & 29 & 9.554 & 1.484 & -0.612 & 3.815 & 3.285 & 1.450 & 619.191 & 0.875 \\
-8076 & 34 & 29 & 6.00 & 10 & 22.880 & 0.806 & -1.387 & 4.321 & 4.419 & 2.903 & 8518.348 & 1.134 \\
-8078 & 29 & 32 & 4.00 & 36 & 8.066 & 1.796 & 1.664 & 3.587 & 3.088 & 10.469 & 143.391 & 5.352 \\
-8219 & 16 & 23 & 0.40 & 22 & 15.559 & 0.604 & -0.087 & 2.601 & 1.940 & 14.337 & 674373.206 & 1.542 \\
-8396 & 53 & 59 & 0.50 & 1 & 13.606 & 1.385 & 7.016 & 0.880 & 0.767 & 16.517 & 1158.201 & 2.451 \\
+4104 & 8 & 6 & 20.00 & 20 & 10.864 & 2.116 & 0.036 & 3.729 & 3.994 & 0.742 & 36704.448 & 0.141 \\
+4366 & 31 & 31 & 8.00 & 2 & 23.414 & 0.913 & -0.434 & 4.367 & 4.554 & 2.979 & 3592.689 & 0.487 \\
+4407 & 44 & 51 & 4.00 & 19 & 14.573 & 1.670 & 0.070 & 3.591 & 3.238 & 12.165 & 103.661 & 2.693 \\
+4453 & 15 & 18 & 2.00 & 30 & 17.165 & 0.617 & 1.204 & 4.110 & 3.071 & 2.607 & 44736.399 & 0.892 \\
+4477 & 7 & 11 & 2.00 & 50 & 11.870 & 1.104 & -3.305 & 3.867 & 3.222 & 5.142 & 7249.061 & 0.325 \\
+4488 & 11 & 8 & 2.00 & 1 & 8.033 & 5.347 & 1.108 & 2.160 & 2.843 & 12.739 & 1301.149 & 1.559 \\
+4493 & 19 & 14 & 10.00 & 40 & 16.683 & 1.161 & -0.191 & 3.883 & 4.306 & 1.567 & 7848.309 & 0.355 \\
+4657 & 66 & 62 & 4.00 & 30 & 34.581 & 0.559 & 0.330 & 4.657 & 4.691 & 3.410 & 1143492.186 & 0.205 \\
+4699 & 13 & 22 & 5.00 & 30 & 18.734 & 0.765 & 0.112 & 4.242 & 3.833 & 1.207 & 154786.619 & 0.211 \\
+4986 & 16 & 5 & 10.00 & 50 & 13.378 & 1.203 & -0.029 & 3.287 & 4.306 & 1.214 & 66271.436 & 0.393 \\
+5056 & 18 & 35 & 5.00 & 33 & 21.957 & 0.720 & -0.780 & 4.484 & 4.094 & 2.763 & 564328.562 & 0.324 \\
+5144 & 11 & 9 & 20.00 & 20 & 7.244 & 3.118 & 10.283 & 3.617 & 3.737 & 1.411 & 3589.357 & 2.695 \\
+5174 & 42 & 47 & 3.00 & 50 & 23.823 & 0.744 & -1.240 & 4.346 & 4.162 & 8.369 & 233854.652 & 1.622 \\
+5229 & 28 & 31 & 15.00 & 10 & 12.332 & 3.417 & 0.320 & 3.961 & 3.564 & 6.028 & 12.149 & 2.880 \\
+5261 & 45 & 43 & 10.00 & 30 & 26.183 & 0.965 & -1.578 & 4.361 & 4.651 & 2.525 & 81980.068 & 0.965 \\
+5357 & 36 & 22 & 5.00 & 30 & 22.768 & 0.774 & 1.093 & 4.028 & 4.506 & 3.022 & 12965.328 & 0.354 \\
+5390 & 22 & 17 & 4.00 & 30 & 17.724 & 0.819 & 0.513 & 3.650 & 4.317 & 4.262 & 1225.164 & 1.086 \\
+5497 & 44 & 24 & 4.00 & 30 & 25.292 & 0.652 & 0.642 & 4.231 & 4.571 & 3.005 & 11114241.101 & 0.233 \\
+6322 & 23 & 26 & 10.00 & 66 & 9.106 & 2.653 & -0.405 & 3.753 & 3.536 & 5.852 & 59.531 & 3.981 \\
+6927 & 19 & 16 & 4.00 & 1 & 18.477 & 0.918 & -0.601 & 3.925 & 4.247 & 4.178 & 8619.418 & 0.272 \\
+7115 & 19 & 39 & 4.00 & 30 & 15.827 & 0.848 & 0.444 & 4.314 & 3.226 & 3.401 & 314182.624 & 1.469 \\
+7162 & 51 & 14 & 1.00 & 50 & 20.424 & 0.808 & -1.269 & 1.209 & 4.010 & 8.932 & 42025.044 & 1.093 \\
+7634 & 52 & 44 & 2.00 & 2 & 23.259 & 0.568 & 0.761 & 3.767 & 4.307 & 8.242 & 7551.190 & 1.509 \\
+7878 & 5 & 7 & 4.00 & 29 & 9.554 & 1.484 & -0.612 & 3.815 & 3.285 & 1.450 & 360.702 & 0.875 \\
+8076 & 34 & 29 & 6.00 & 10 & 22.880 & 0.806 & -1.387 & 4.321 & 4.419 & 2.903 & 10417.833 & 1.134 \\
+8078 & 29 & 32 & 4.00 & 36 & 8.066 & 1.796 & 1.664 & 3.587 & 3.088 & 10.469 & 112.042 & 5.352 \\
+8219 & 16 & 23 & 0.40 & 22 & 15.559 & 0.604 & -0.087 & 2.601 & 1.940 & 14.337 & 726441.721 & 1.542 \\
+8396 & 53 & 59 & 0.50 & 1 & 13.606 & 1.385 & 7.016 & 0.880 & 0.767 & 16.517 & 1425.343 & 2.451 \\
 %8540 & 30 & 38 & 5.00 & 18 & 22.939 & 0.840 & -0.117 & 4.326 & 4.212 & 4.251 & 7531.700 & 1.251 \\
-9120 & 52 & 44 & 10.00 & 20 & 28.586 & 0.876 & -0.006 & 4.690 & 4.746 & 1.789 & 49444.336 & 0.219 \\
-9949 & 21 & 35 & 5.00 & 20 & 21.022 & 0.923 & 1.016 & 4.539 & 3.565 & 3.200 & 14679.381 & 0.563 \\
-10200 & 22 & 25 & 4.00 & 9 & 15.905 & 1.513 & -7.127 & 3.619 & 3.583 & 6.466 & 28779.845 & 1.034 \\
-10684 & 16 & 58 & 4.00 & 57 & 18.929 & 0.659 & -7.058 & 4.450 & 3.642 & 4.785 & 32.622 & 1.342 \\
-13333 & 18 & 19 & 2.00 & 25 & 19.948 & 0.638 & 0.168 & 3.975 & 3.913 & 6.246 & 85026.315 & 0.079 \\
-14242 & 68 & 37 & 3.00 & 20 & 31.135 & 0.558 & 0.383 & 4.266 & 4.663 & 5.096 & 2915.546 & 0.372 \\
-14420 & 56 & 20 & 20.00 & 22 & 13.393 & 1.571 & -3.492 & 3.144 & 4.609 & 1.464 & 5.884 & 5.899 \\
-18045 & 40 & 50 & 4.00 & 30 & 26.932 & 0.654 & -3.178 & 4.269 & 4.344 & 3.532 & 187.042 & 0.809 \\
-19018 & 63 & 67 & 8.00 & 30 & 29.425 & 0.835 & 1.891 & 4.634 & 4.360 & 2.918 & 18544.514 & 0.863 \\
-19991 & 22 & 50 & 4.00 & 20 & 24.460 & 0.658 & 0.062 & 4.599 & 3.990 & 3.472 & 925.409 & 1.058 \\
-20270 & 20 & 16 & 4.00 & 30 & 18.848 & 0.815 & -0.255 & 3.707 & 4.250 & 3.938 & 293.230 & 0.531 \\
-21669 & 38 & 37 & 1.00 & 21 & 17.621 & 0.831 & -1.649 & 1.917 & 2.520 & 14.959 & 2382.409 & 2.604 \\
-22962 & 23 & 18 & 4.00 & 24 & 17.168 & 0.879 & -1.295 & 3.760 & 4.158 & 4.583 & 7906.999 & 1.143 \\
-23249 & 21 & 40 & 1.00 & 16 & 24.123 & 0.532 & 0.538 & 2.978 & 2.075 & 7.226 & 1795533.078 & 0.101 \\
-23652 & 24 & 24 & 1.00 & 20 & 20.607 & 0.643 & -0.193 & 2.862 & 3.456 & 14.124 & 87142.434 & 1.056 \\
-37077 & 11 & 46 & 4.00 & 24 & 19.329 & 0.886 & 0.584 & 4.311 & 2.254 & 3.507 & 10417.255 & 1.563 \\
-38128 & 27 & 52 & 8.00 & 42 & 25.657 & 0.808 & -0.562 & 4.687 & 4.444 & 1.655 & 23943.751 & 0.263 \\
-38760 & 10 & 17 & 5.00 & 33 & 12.412 & 1.155 & 0.026 & 4.192 & 3.255 & 2.936 & 6387644.371 & 2.551 \\
+9120 & 52 & 44 & 10.00 & 20 & 28.586 & 0.876 & -0.006 & 4.690 & 4.746 & 1.789 & 47120.478 & 0.219 \\
+9949 & 21 & 35 & 5.00 & 20 & 21.022 & 0.923 & 1.016 & 4.539 & 3.565 & 3.200 & 14751.471 & 0.563 \\
+10200 & 22 & 25 & 4.00 & 9 & 15.905 & 1.513 & -7.127 & 3.619 & 3.583 & 6.466 & 34488.640 & 1.034 \\
+10684 & 16 & 58 & 4.00 & 57 & 18.929 & 0.659 & -7.058 & 4.450 & 3.642 & 4.785 & 35.867 & 1.342 \\
+13333 & 18 & 19 & 2.00 & 25 & 19.948 & 0.638 & 0.168 & 3.975 & 3.913 & 6.246 & 77062.947 & 0.079 \\
+14242 & 68 & 37 & 3.00 & 20 & 31.135 & 0.558 & 0.383 & 4.266 & 4.663 & 5.096 & 2974.188 & 0.372 \\
+14420 & 56 & 20 & 20.00 & 22 & 13.393 & 1.571 & -3.492 & 3.144 & 4.609 & 1.464 & 5.221 & 5.899 \\
+18045 & 40 & 50 & 4.00 & 30 & 26.932 & 0.654 & -3.178 & 4.269 & 4.344 & 3.532 & 101.449 & 0.809 \\
+19018 & 63 & 67 & 8.00 & 30 & 29.425 & 0.835 & 1.891 & 4.634 & 4.360 & 2.918 & 18132.000 & 0.863 \\
+19991 & 22 & 50 & 4.00 & 20 & 24.460 & 0.658 & 0.062 & 4.599 & 3.990 & 3.472 & 934.865 & 1.058 \\
+20270 & 20 & 16 & 4.00 & 30 & 18.848 & 0.815 & -0.255 & 3.707 & 4.250 & 3.938 & 285.531 & 0.531 \\
+21669 & 38 & 37 & 1.00 & 21 & 17.621 & 0.831 & -1.649 & 1.917 & 2.520 & 14.959 & 2068.038 & 2.604 \\
+22962 & 23 & 18 & 4.00 & 24 & 17.168 & 0.879 & -1.295 & 3.760 & 4.158 & 4.583 & 7451.091 & 1.143 \\
+23249 & 21 & 40 & 1.00 & 16 & 24.123 & 0.532 & 0.538 & 2.978 & 2.075 & 7.226 & 1758578.906 & 0.101 \\
+23652 & 24 & 24 & 1.00 & 20 & 20.607 & 0.643 & -0.193 & 2.862 & 3.456 & 14.124 & 76202.298 & 1.056 \\
+37077 & 11 & 46 & 4.00 & 24 & 19.329 & 0.886 & 0.584 & 4.311 & 2.254 & 3.507 & 8747.907 & 1.563 \\
+38128 & 27 & 52 & 8.00 & 42 & 25.657 & 0.808 & -0.562 & 4.687 & 4.444 & 1.655 & 25574.217 & 0.263 \\
+38760 & 10 & 17 & 5.00 & 33 & 12.412 & 1.155 & 0.026 & 4.192 & 3.255 & 2.936 & 5717587.740 & 2.551 \\
 \bottomrule
 \end{longtable}
 
