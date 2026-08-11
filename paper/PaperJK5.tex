@@ -1147,7 +1147,12 @@ we construct
 {\sum_{t_k^\ell\in\mathcal E_\ell}
 h_k^\ell (y_{t_k}^\ell - \hat{y}_{t_k}^\ell)^2}.
 \end{equation*}
-The benchmark therefore uses only submission-triggered leaderboard readouts rather than repeated hourly carry-forward observations. Because asynchronous updates may repeatedly use an opponent's carried-forward score, the discrepancies can be serially dependent; we therefore interpret $\lambda_\ell^{\mathrm{bench}}$ as an approximate signal-precision benchmark.
+The benchmark therefore uses only submission-triggered leaderboard readouts rather than repeated hourly carry-forward observations.
+\footnote{
+As a robustness comparison to the irregular-interval estimator above, we also consider the fixed-grid approximation $\lambda_{\ell,\Delta}^{\mathrm{bench}}=N^\ell/\left\{\Delta\sum_{t_k^\ell\in\mathcal E_\ell}(y_{t_k}^\ell-\hat y_{t_k}^\ell)^2\right\}$. 
+Despite this difference, both constructions yield the same qualitative conclusion of a positive but modest cross-contest association; the fixed-grid construction also underlies the alternative focal-pair validation in Section~\ref{sect-robust-2players}.
+}
+Because asynchronous updates may repeatedly use an opponent's carried-forward score, the discrepancies can be serially dependent; we therefore interpret $\lambda_\ell^{\mathrm{bench}}$ as an approximate signal-precision benchmark.
 
 This benchmark relies on the Gaussian discrepancy approximation applied to the transformed scores in \eqref{eq-leaderboard-transform}.
 The transformation is adopted for tractability and should be interpreted as an approximation rather than as a claim of exact normality for every contest. Auxiliary checks with alternative choices of the scale parameter $a$ assess sensitivity to transformed-score units, not sensitivity to distributional shape. The Gaussian discrepancy structure therefore remains a maintained modeling assumption.
@@ -1196,7 +1201,8 @@ We then examine the cross-contest association between the private-leaderboard be
 \label{fig-validate-lambda}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure plots the approximate contest-specific signal-precision benchmark $\lambda_\ell^{\mathrm{bench}}$ against the Bayesian structural estimate $\hat{\lambda}_\ell$ for each of the 73 contests. The benchmark is computed from public-private leaderboard discrepancies at submission-triggered readouts as $\lambda_\ell^{\mathrm{bench}} = N^\ell / \sum_{t_k\in\mathcal E_\ell} h_k^\ell (y_{t_k}^\ell - \hat{y}_{t_k}^\ell)^2$, where $N^\ell=|\mathcal E_\ell|$ is the number of readouts used in contest $\ell$ and $h_k^\ell=t_k^\ell-t_{k-1}^\ell$ is the elapsed time associated with readout $t_k^\ell$. Because carried-forward scores may induce dependence across successive readouts, the benchmark should be interpreted as an approximate measure of signal precision. The dashed line represents the fitted regression line from $\log(1 + \lambda_\ell^{\mathrm{bench}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}_\ell) + \varepsilon_\ell$. The positive slope ($\beta_1 = 3.273$, $p < 0.01$) indicates a statistically significant but modest association ($R^2 = 0.114$).
+\textbf{Note.} This figure plots the approximate contest-specific signal-precision benchmark $\lambda_\ell^{\mathrm{bench}}$ against the Bayesian structural estimate $\hat{\lambda}_\ell$ for each of the 73 contests. The benchmark is computed from public-private leaderboard discrepancies at submission-triggered readouts as $\lambda_\ell^{\mathrm{bench}} = N^\ell / \sum_{t_k\in\mathcal E_\ell} h_k^\ell (y_{t_k}^\ell - \hat{y}_{t_k}^\ell)^2$, where $N^\ell=|\mathcal E_\ell|$ is the number of readouts used in contest $\ell$ and $h_k^\ell=t_k^\ell-t_{k-1}^\ell$ is the elapsed time associated with readout $t_k^\ell$. Because carried-forward scores may induce dependence across successive readouts, the benchmark should be interpreted as an approximate measure of signal precision. 
+The solid line represents the fitted regression line from $\log(1 + \lambda_\ell^{\mathrm{bench}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}_\ell) + \varepsilon_\ell$. The positive slope ($\beta_1 = 3.273$, $p < 0.01$) indicates a statistically significant but modest association ($R^2 = 0.114$).
 }
 \end{minipage}
 \end{figure}
