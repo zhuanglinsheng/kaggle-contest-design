@@ -54,12 +54,11 @@
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{booktabs}
 %%%%%%%%%% Figure
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{graphics}
-\usepackage{caption,}
+\usepackage{caption}
 \usepackage{subcaption}
 %%%%%%%%%% Diagram Figure
 \usepackage{tikz}
@@ -154,10 +153,10 @@
 
 \ABSTRACT{%
 Online crowdsourcing contests generate rich dynamic behavior, but their core strategic state is latent: contestants react to noisy public leaderboard feedback rather than true relative performance.
-We develop a tractable dynamic game with Bayesian filtering and a corresponding structural estimation framework to recover latent competition state, effort dynamics, participant ability, innovation volatility, and signal precision.
+We develop a tractable dynamic game with Bayesian filtering and a corresponding structural estimation framework to recover the latent competition state, effort dynamics, participant effort-cost heterogeneity, innovation volatility, and signal precision.
 The model admits a closed-form Markov Perfect Equilibrium, enabling Bayesian estimation in a high-frequency dynamic setting.
-For validation, we use a holdout design: private-leaderboard path values are excluded from the estimation likelihood and reserved for diagnostic tests, although final private ranks are used only to define the focal rivalry.
-Contestants do not observe this leaderboard during the contest, but it is generated from the same submissions and scoring rule as the public leaderboard.
+For validation, we use a path-wise holdout design: private-leaderboard path values are excluded from the estimation likelihood and subsequently used for diagnostic tests, although final private ranks are used to define the focal rivalry.
+Contestants do not observe these private-leaderboard path values during the contest, but they are generated from the same submissions and scoring rule as the public leaderboard.
 Using data from 73 Kaggle contests, we find that contests with higher estimated innovation risk have more volatile private-leaderboard paths.
 For signal precision, the evidence is weaker but directionally consistent: higher estimated precision is associated with smaller public-private leaderboard disagreement.
 These results provide diagnostic evidence on the estimated primitives and illustrate how the estimated model can be used to study counterfactual changes in prize levels and contest duration.
@@ -263,8 +262,7 @@ This procedure recovers latent competition states, effort dynamics, participant 
 To assess whether the estimated model captures meaningful contest primitives, we use private-leaderboard paths to evaluate two predictions illustrated in Figure~\ref{kaggledata-diagram-simplified}: 
 higher estimated innovation risk should be associated with greater private-path volatility, 
 whereas higher estimated signal precision should be associated with smaller public-private leaderboard gaps. 
-Although private-leaderboard path values are excluded from estimation, final private ranks are used to select the focal pair of contestants. 
-We therefore interpret the results as diagnostic evidence conditional on the selected pair, rather than as validation based on a fully independent sample. 
+Although private-leaderboard path values are excluded from estimation, final private ranks are used to select the focal pair. We therefore interpret the validation exercises as path-wise holdout diagnostics conditional on ex post pair selection.
 To strengthen the credibility of these diagnostics, we also conduct time-split exercises that relate primitives estimated from early public contest data to private-path outcomes in the later contest period, thereby reducing the concern that the full-path relationships merely reflect common path-level variation.
 
 
@@ -393,7 +391,7 @@ where $W_t$ is a Brownian motion and $\sigma>0$ measures the innovation risk.
 When $\sigma$ is large and the relationship between effort and output is highly uncertain, luck becomes the dominant factor.
 Conversely, when $\sigma$ is small and output closely reflects effort, the importance of effort is amplified.
 
-The actual contest is equipped with a submission system in which participants submit solutions over time, with each submission updating both the hidden private-leaderboard output gap and its noisy public-leaderboard readout.
+The actual contest is equipped with a submission system in which contestants submit solutions asynchronously over time. Each submission generates new public and private scores for the submitting contestant, while the opponent's most recently submitted scores are carried forward when constructing the corresponding leaderboard gaps.
 % Signal
 For tractability, we approximate this irregular sequence of submission-triggered updates by a continuous-time public signal of the latent output gap $y_t$.
 The precision of this signal is governed by $\lambda$.
@@ -608,7 +606,7 @@ The results are consistent with this interpretation, although they do not rule o
 %% Data: Leaderboard
 The third component contains \textit{public} and \textit{private} leaderboard series, denoted by $\hat{x}^{i(j)}_t$ and $x^{i(j)}_t$.
 In Kaggle contests, public scores are computed from a released subset, while private scores are computed from withheld data and revealed only after the contest ends.
-We define the latent contemporaneous gap as $y_t:=x_t^i-x_t^j$ and the displayed public gap as $\hat{y}_t:=\hat{x}_t^i-\hat{x}_t^j$, where each displayed score is carried forward from that contestant's most recent submission.
+We define the latent contemporaneous gap as $y_t:=x_t^i-x_t^j$ and the displayed public gap as $\hat y_t:=\hat x_t^i-\hat x_t^j$, where each displayed score equals the contestant's most recently submitted public score. Because submissions are asynchronous, $\hat y_t$ need not compare contemporaneous submissions by the two contestants.
 The public gap is the empirical counterpart of the noisy signal in (\ref{signal}), observed through discrete leaderboard updates.
 We write this empirical readout as
 \begin{equation}\label{eq-model-signal}
@@ -637,14 +635,14 @@ Thus, larger $\lambda$ implies more precise public feedback.
 In the empirical implementation, we normalize $y_0=0$.
 
 % tilde{y}_t
-The theoretical model uses a continuous public signal and therefore admits the continuous-time filtering equation in \eqref{filtered-x}. The empirical leaderboard, by contrast, is observed only at asynchronous submission times. A fully coherent empirical implementation would therefore require a hybrid filter with continuous prediction between submissions and discrete measurement updates when new scores arrive.
+The theoretical model uses a continuous public signal and therefore admits the continuous-time filtering equation in \eqref{filtered-x}. The empirical leaderboard, however, is observed only at asynchronous submission times. An exact empirical implementation would therefore require a hybrid filter with continuous prediction between submissions and discrete measurement updates.
 
-To retain the tractable one-dimensional state representation used in the equilibrium analysis, we employ a continuous-update approximation in the empirical implementation. Specifically, we interpolate the most recently observed public-gap process and evolve the perceived gap according to
+To preserve the tractable one-dimensional state representation used in the equilibrium analysis, we instead employ a continuous-update approximation. Specifically, we carry forward the most recently observed public gap and evolve the perceived gap according to
 \begin{equation}\label{eq-filtered-y-update}
 d\tilde{y}_{t} = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sqrt{\lambda}\sigma(\hat{y}_t-\tilde{y}_{t}) dt
 \end{equation}
 with initial condition $\tilde{y}_0 = \mu_0$.
-This approximation treats the carried-forward leaderboard gap as a continuous proxy for the unavailable signal path. It may overstate learning during long intervals without submissions, so the resulting estimates should be interpreted as conditional on this continuous-update approximation rather than as estimates from an exact discrete-observation filter.
+This approximation may overstate learning during long intervals without submissions. The resulting estimates should therefore be interpreted as conditional on the continuous-update approximation rather than as estimates from an exact discrete-observation filter.
 
 We denote the set of estimated parameters by $\Theta := \{c_i, c_j, \sigma, \lambda, \mu_0,r\}$.
 Here, $\mu_0$ primarily captures the initial perceived gap and is treated as a nuisance initial-condition parameter rather than a structural design primitive.
@@ -691,7 +689,10 @@ Conditional on the selected focal pair, the estimation likelihood uses only cont
 For numerical integration of the effort and filtering equations, we use a uniform computational grid of length $\Delta_{\mathrm{num}}$. This numerical step size does not determine the observation-noise variance.
 By definition, the likelihood function corresponding to the submission times of contestant $i$, $\{t^i_k\}_{k=1}^{N_i}$, is given as follows (a symmetric formulation applies to contestant $j$):
 \begin{equation}\label{eq-ihpp-prob}
-p\left(\{\hat{t}^i_k\}_{k=1}^{N_i} | \tau_i, \Theta\right) = \exp\left\{-\int_{s\in\mathcal{T}}\tau_i(s)ds\right\}\prod_{k=1}^{N_i}\tau_i(\hat{t}^i_k)
+p\left(\{t^i_k\}_{k=1}^{N_i}\mid\tau_i,\Theta\right)
+=
+\exp\left\{-\int_{s\in\mathcal T}\tau_i(s)ds\right\}
+\prod_{k=1}^{N_i}\tau_i(t^i_k)
 \end{equation}
 where $\tau_i$ is defined in (\ref{eq-model-intensity}).
 The integral term is evaluated on the computational grid.
@@ -707,7 +708,8 @@ To make the conditioning structure explicit, we evaluate the leaderboard likelih
 \sim
 \mathcal N\!\left(\mu_{k\mid k-1},V_{k\mid k-1}\right),
 \]
-where $\mu_{k\mid k-1}$ and $V_{k\mid k-1}$ are obtained from the prediction step over $(t_{k-1},t_k]$ before the update at $t_k$ is incorporated. The leaderboard likelihood is therefore
+Here, $\mu_{k\mid k-1}$ and $V_{k\mid k-1}$ denote the one-step-ahead predictive mean and variance implied by the empirical state and observation equations over $(t_{k-1},t_k]$, conditional only on $\mathcal F_{k-1}$. These moments are computed before incorporating the leaderboard observation at $t_k$.
+The leaderboard likelihood is therefore
 \begin{equation}\label{eq-obs_gap-prob}
 p\left(\{\hat{y}_{t_k}\}_{k=1}^N\mid\Theta\right)
 =
@@ -1078,19 +1080,15 @@ This subsection details the procedures for selecting competitions, identifying k
 As a first selection criterion, we focus on monetary prize structure.
 We restrict attention to Kaggle competitions offering one, two, or three monetary prizes denominated in U.S. dollars.
 Competitions with a single prize naturally conform to the winner-take-all incentive structure.
-For competitions with two or three prize tiers, we align the empirical setting with the model by treating the prize difference between the top two participants as the effective gain from winning.
-Because non-winning participants may still receive symbolic recognition such as medals, focusing on the top-two prize gap helps mitigate confounding incentives and brings the empirical setting closer to the model’s winner-take-all benchmark.
+For competitions with two or three prize tiers, we align the empirical setting with the model by treating the prize difference between the top two contestants as the effective gain from winning.
+Because non-winning contestants may still receive symbolic recognition such as medals, focusing on the top-two prize gap helps mitigate confounding incentives and brings the empirical setting closer to the model's winner-take-all benchmark.
 
 % Players
-The second criterion requires two highly active, top-ranked contestants who engage in sustained competition during the contest. 
-We identify candidate focal contestants using final private leaderboard ranks, beginning from the top of the ranking. 
-This choice aligns the two-player approximation with rivalry among contestants who perform best under the contest's final evaluation criterion. 
-Private path values do not enter the estimation likelihood, but final private ranks determine the focal pair; the validation exercises are therefore path-wise holdout diagnostics conditional on ex post pair selection.
-To ensure sustained overlapping activity and adequate data for estimation, we impose two conditions: each contestant must submit at least five times, and the pair must satisfy the temporal-overlap criterion used in sample construction.
-These criteria help ensure that the focal-pair data contain enough submission activity and temporal overlap for structural estimation.
+The second criterion identifies two highly active, top-ranked contestants whose participation overlaps substantially during the contest. We select candidate focal contestants beginning from the top of the final private leaderboard. This focuses the two-player model on rivalry among high-performing contestants. Private path values do not enter the estimation likelihood, but final private ranks determine the focal pair; hence, the validation exercises are path-wise holdout diagnostics conditional on ex post pair selection.
+To ensure overlapping activity and adequate data for estimation, each contestant must submit at least five times, and the pair must satisfy the temporal-overlap criterion used in sample construction.
 
 While analytically convenient, restricting attention to two participants may limit representativeness, oversimplify the strategic environment, and introduce selection concerns via \textit{ex post} rankings.
-We therefore interpret the two-player model as a structural approximation of the dominant rivalry near the top of contests with concentrated competition, frequent submissions, and overlapping activity windows.
+We therefore interpret the two-player model as a structural approximation of focal rivalry near the top of contests with concentrated competition, frequent submissions, and overlapping activity windows.
 
 % Leaderboard Display
 The third criterion for contest selection concerns the format in which leaderboard scores are presented.
@@ -1113,8 +1111,7 @@ We construct hourly evaluation grids by carrying forward each contestant's most 
 Because submissions are asynchronous, only the submitting contestant’s score is updated, while the opponent’s most recent score is carried forward. 
 The observed public gap may therefore compare scores submitted at different times and only approximates the contemporaneous latent performance gap.
 Our observation equation treats this gap as an approximate readout of the latent competitive state; this approximation is most credible for focal pairs with frequent submissions and substantial overlap in active periods.
-On the domain used here, the log-odds transformation is increasing and convex, so as the accuracy $p_t$ approaches 1, each marginal improvement in $p_t$ results in a disproportionately large increase in the transformed score $x_t$.
-This feature aligns with the intuition that it becomes increasingly difficult to improve performance near the upper bound, making such gains more informative in competitive settings.
+On the domain used here, the log-odds transformation is increasing and convex, so as $p_t$ approaches 1, a given increase in accuracy produces a larger change in the transformed score $x_t$.
 
 
 \subsection{Private-Leaderboard Primitive Validation}\label{sect-validation}
@@ -1123,34 +1120,39 @@ This feature aligns with the intuition that it becomes increasingly difficult to
 We select 73 contests from the Meta-Kaggle database, encompassing all competitions concluded before April 15, 2025 that satisfy our eligibility filters on leaderboard availability, public-private score information, and focal-player activity.\footnote{
 The Meta-Kaggle database is updated daily, with new competition data added after the contests conclude.
 }
-For each selected contest, we identify two highly active top-ranked participants who meet our focal-player selection criteria.
+For each selected contest, we identify two highly active top-ranked contestants who meet our focal-pair selection criteria.
 Appendix~\ref{appendix-statistics} reports the Bayesian estimation results for each contest individually.
 
 We next conduct post-estimation diagnostic validation of the contest-specific primitives using private-leaderboard-based benchmarks.
 
 \subsubsection{Private-Leaderboard Diagnostic for Signal Precision $\lambda$.}
-The signal precision parameter $\lambda$ is contest-specific and depends on how informative public leaderboard feedback is relative to latent performance.
-We compare two estimates: (i) a structural estimate from submissions and public leaderboard paths, and (ii) a benchmark estimate from public-private leaderboard discrepancies.
+The signal precision parameter $\lambda$ is contest-specific and captures the informativeness of public leaderboard feedback relative to latent performance. We compare the structural estimate obtained from submissions and public leaderboard paths with an approximate benchmark constructed from public-private leaderboard discrepancies.
 This benchmark is informative but not fully independent of the maintained structural setup, because it still relies on the transformed leaderboard scale used in the model.
 
 Let $\ell\in\{1,\ldots,L\}$ index contests.
 Under the maintained Gaussian discrepancy approximation induced by the discretized signal readout, we construct the following signal-precision benchmark.
 Let $\mathcal E_\ell$ denote the ordered set of submission-triggered leaderboard readouts for the focal pair, and let $N^\ell=|\mathcal E_\ell|$.
 Let $h_k^\ell=t_k^\ell-t_{k-1}^\ell$ denote the elapsed time associated with readout $t_k^\ell$.
-Under the maintained approximation that the discrepancy at these readouts follows $\hat{y}_{t_k}^\ell-y_{t_k}^\ell\sim\mathcal N(0,1/(\lambda_\ell h_k^\ell))$, $\forall t_k\in\mathcal E_\ell$, we construct
+Under the maintained approximation
+\[
+\hat y_{t_k}^\ell-y_{t_k}^\ell
+\sim
+\mathcal N\!\left(0,\frac{1}{\lambda_\ell h_k^\ell}\right),
+\qquad t_k^\ell\in\mathcal E_\ell,
+\]
+we construct
 \begin{equation*}
 \lambda^{\text{bench}}_\ell =
 \frac{N^\ell}
-{\sum_{t_k\in\mathcal E_\ell}
+{\sum_{t_k^\ell\in\mathcal E_\ell}
 h_k^\ell (y_{t_k}^\ell - \hat{y}_{t_k}^\ell)^2}.
 \end{equation*}
-Thus, the benchmark uses only leaderboard readouts triggered by submissions, rather than repeated hourly carry-forward observations.
-Because asynchronous updates may reuse an opponent’s carried-forward score across successive readouts, the resulting public-private discrepancies can be serially dependent. We therefore interpret the benchmark as an approximate measure of signal precision.
+The benchmark therefore uses only submission-triggered leaderboard readouts rather than repeated hourly carry-forward observations. Because asynchronous updates may repeatedly use an opponent's carried-forward score, the discrepancies can be serially dependent; we therefore interpret $\lambda_\ell^{\mathrm{bench}}$ as an approximate signal-precision benchmark.
 
-It is important to emphasize that this benchmark relies on the Gaussian discrepancy approximation applied to the transformed scores in \eqref{eq-leaderboard-transform}.
+This benchmark relies on the Gaussian discrepancy approximation applied to the transformed scores in \eqref{eq-leaderboard-transform}.
 The transformation is adopted for tractability and should be interpreted as an approximation rather than as a claim of exact normality for every contest. Auxiliary checks with alternative choices of the scale parameter $a$ assess sensitivity to transformed-score units, not sensitivity to distributional shape. The Gaussian discrepancy structure therefore remains a maintained modeling assumption.
 
-We then regress the contest-specific private-leaderboard benchmark $\lambda_\ell^{\text{bench}}$ on the Bayesian structural estimate $\hat\lambda_\ell$ to examine whether a positive relationship holds between the two.
+We then examine the cross-contest association between the private-leaderboard benchmark $\lambda_\ell^{\mathrm{bench}}$ and the Bayesian structural estimate $\hat\lambda_\ell$.
 
 %%%%%%%%%% Figure & Table %%%%%%%%%%%
 \begin{figure}[tbp]
@@ -1342,9 +1344,7 @@ As in the analysis above for $\lambda$, we regress the benchmark $\sigma^{\text{
 \end{figure}
 
 
-Figure~\ref{fig-validation-sigma} reveals a positive association between the structural estimate and the private-leaderboard-based volatility benchmark.
-The intercept is small and insignificant, while the slope on $\log(1+\hat{\sigma})$ is 0.887 ($p<0.001$), with $R^2\approx0.317$.
-Thus, the estimated innovation-risk primitive is positively associated with an approximate private-leaderboard consistency benchmark whose path values are excluded from the likelihood.
+Figure~\ref{fig-validation-sigma} shows a positive association between the structural estimate and the private-leaderboard volatility benchmark. The relationship is statistically significant, although the benchmark remains approximate because of asynchronous observations and the posterior drift adjustment. We therefore interpret this result as supportive diagnostic evidence for the estimated innovation-risk primitive.
 
 \subsubsection{Private-Leaderboard Volatility Diagnostics.}
 The preceding validation of $\sigma$ uses an approximate private-leaderboard consistency benchmark motivated by the normal increment structure of the diffusion model.
@@ -1438,16 +1438,9 @@ $100(\theta_a-\theta^{obs})/\theta^{obs}$, so negative values indicate prize
 reductions that keep predicted total effort at least at the observed-design
 baseline. This exercise is not a claim that longer contests are costless or
 welfare improving. Rather, it reports the iso-effort prize-duration frontier:
-how much prize spending can be substituted by a small, externally specified
-increase in duration.
+how much prize spending can be substituted by a small, externally specified increase in duration.
 
-Table~\ref{tab-counterfactual-policy} reports the substitution frontier for duration multipliers close to the observed design.
-When $a=1$, the counterfactual coincides with the observed design and no prize reduction is possible.
-For each positive duration increase considered in Table~\ref{tab-counterfactual-policy}, predicted total effort can be preserved with a lower prize in all 73 contests.
-For the contest-specific parameter estimates and local duration changes considered here, predicted total effort is numerically increasing in both prize and duration; the empirical content is the magnitude of the required prize adjustment.
-A one percent increase in duration allows a median prize reduction of $0.65\%$, while a ten percent increase allows a median prize reduction of $5.95\%$.
-The corresponding mean percentage changes are more negative than the medians, suggesting that a subset of contests permits especially large prize reductions.
-We therefore emphasize the medians as the more representative summary.
+Table~\ref{tab-counterfactual-policy} reports the substitution frontier for duration changes close to the observed design. For each positive duration increase considered, the numerical search identifies a lower prize that preserves predicted total effort in all 73 contests. A 1\% increase in duration allows a median prize reduction of 0.65\%, while a 10\% increase allows a median reduction of 5.95\%. Because the mean reductions exceed the medians, the distribution is right-skewed; we therefore emphasize the medians as the more representative summary.
 
 
 \begin{table}[htbp]
@@ -1473,7 +1466,7 @@ $1.10$ & $73/73$ & $73/73$ & $51/73$ & $9/73$ & $-7.37\%$ & $-5.95\%$ \\
 \textit{Note:}
 This table reports counterfactual prize-duration substitution results for the 73 contests with complete observed design inputs and structural estimates.
 For duration multiplier $a$, the counterfactual duration is $T_a=aT^{obs}$.
-For each contest, we compute the minimum prize $\theta_a\in[0.01,\theta^{obs}]$ thousand USD such that predicted total effort remains weakly above $M(\theta^{obs},T^{obs})$. At each candidate design, total expected effort is evaluated as $M(\tilde y_0,0)=\sigma\sqrt{T}\,q(\tilde y_0/(\sigma\sqrt{T}))$, where $q$ solves the ordinary differential equation in the equilibrium characterization using the contest-specific estimates of $(c_i,c_j,\sigma,\mu_0)$ and the analytical approximation to $\gamma^{-1}$ used in estimation.
+For each contest, we compute the minimum prize $\theta_a\in[0.01,\theta^{obs}]$ thousand USD such that predicted total effort remains weakly above $M(\theta^{obs},T^{obs})$. At each candidate design, total expected effort is evaluated as $M(\tilde y_0,0)=\sigma\sqrt{T}\,q(\tilde y_0/(\sigma\sqrt{T}))$, where $q$ solves the ordinary differential equation in the equilibrium characterization. We use the contest-specific estimates of $(c_i,c_j,\sigma,\mu_0)$ and the same analytical approximation to $\gamma^{-1}$ used in estimation.
 ``Lower prize'' counts contests with $\theta_a<\theta^{obs}$.
 The next three columns count contests in which the required prize is at least 1\%, 5\%, or 10\% below the observed prize.
 Mean and median changes report $100(\theta_a-\theta^{obs})/\theta^{obs}$, so negative values denote required prize reductions.
@@ -1496,7 +1489,7 @@ The baseline empirical analysis pairs two highly active top-ranked contestants i
 To assess whether the validation results are sensitive to this focal-pair choice, we re-estimate the model under an alternative pairing rule.
 
 %\textbf{Alternative Pairing: Second vs. Third Final Rank.}
-As a robustness check, we estimate the model on the second- and third-ranked participants in each contest, based on final private leaderboard ranks.
+As a robustness check, we estimate the model on the second- and third-ranked contestants in each contest, based on final private leaderboard ranks.
 This specification shifts the focal rivalry away from the winner and tests whether the validation pattern is driven by one specific top-pair definition.
 
 %%%%%%%%%% Figure & Table %%%%%%%%%%%
@@ -1541,12 +1534,12 @@ This specification shifts the focal rivalry away from the winner and tests wheth
 \label{fig-validation-lambda-robust23}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure reports the validation comparison under an alternative focal pair: the second- and third-ranked participants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \lambda_\ell^{\mathrm{bench}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}_\ell) + \varepsilon_\ell$, with $\beta_1 = 3.421$ ($p < 0.01$) and $R^2 = 0.096$. The positive slope remains significant, though the fit is modest, so the result is best interpreted as directional evidence under an alternative focal-pair definition.
+\textbf{Note.} This figure reports the validation comparison under an alternative focal pair: the second- and third-ranked contestants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \lambda_\ell^{\mathrm{bench}}) = \beta_0 + \beta_1 \log(1 + \hat{\lambda}_\ell) + \varepsilon_\ell$, with $\beta_1 = 3.421$ ($p < 0.01$) and $R^2 = 0.096$. The positive slope remains significant, though the fit is modest, so the result is best interpreted as directional evidence under an alternative focal-pair definition.
 }
 \end{minipage}
 \end{figure}
 
-For signal precision, the alternative focal-pair specification based on the second and third ranked participants again yields a positive and significant relationship, although the explanatory power remains limited ($R^2=0.096$).
+For signal precision, the alternative focal-pair specification based on the second- and third-ranked contestants again yields a positive and significant relationship, although the explanatory power remains limited ($R^2=0.096$).
 This check asks whether changing the focal-pair definition overturns the qualitative validation pattern.
 It does not: the sign and significance are preserved, while the low fit reinforces the more cautious interpretation that signal precision is harder to recover precisely at the contest level.
 
@@ -1592,7 +1585,7 @@ It does not: the sign and significance are preserved, while the low fit reinforc
 \label{fig-validation-sigma-robust23}
 \begin{minipage}{\textwidth}
 {\footnotesize
-\textbf{Note.} This figure replicates the validation exercise in Figure~\ref{fig-validation-sigma} using an alternative focal pair: the second- and third-ranked participants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \sigma^{\mathrm{bench}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$, with $\beta_1 = 0.501$ ($p < 0.05$) and $R^2 = 0.071$. The positive slope remains significant, though the association is weaker than in the baseline ($\beta_1 = 0.887$, $R^2 = 0.317$), indicating that $\sigma$ recovery is directionally robust but sensitive to the choice of focal pair.
+\textbf{Note.} This figure replicates the validation exercise in Figure~\ref{fig-validation-sigma} using an alternative focal pair: the second- and third-ranked contestants (based on final private leaderboard ranks) instead of the top two. The dashed line is the fitted regression $\log(1 + \sigma^{\mathrm{bench}}) = \beta_0 + \beta_1 \log(1 + \hat{\sigma}) + \varepsilon$, with $\beta_1 = 0.501$ ($p < 0.05$) and $R^2 = 0.071$. The positive slope remains significant, though the association is weaker than in the baseline ($\beta_1 = 0.887$, $R^2 = 0.317$), indicating that $\sigma$ recovery is directionally robust but sensitive to the choice of focal pair.
 }
 \end{minipage}
 \end{figure}
@@ -1603,43 +1596,20 @@ Together, these results suggest that the signs and significance patterns of the 
 
 \subsection{Normality Caveat and Interpretation}\label{sect-robust-normality}
 
-The multiplicative parameter $a$ in equation~(\ref{eq-leaderboard-transform}) rescales transformed scores and can affect scale-dependent likelihood and validation quantities, but it cannot alter scale-invariant normality diagnostics. Auxiliary checks across alternative values of $a$ should therefore be interpreted as scale-sensitivity checks, not as evidence for the Gaussian approximation. Additional scale-sensitivity results are available from the authors.
+The multiplicative parameter $a$ in \eqref{eq-leaderboard-transform} rescales transformed scores and can affect scale-dependent likelihood and validation quantities, but it cannot alter scale-invariant normality diagnostics. Auxiliary checks across alternative values of $a$ should therefore be interpreted as scale-sensitivity checks, not as evidence for the Gaussian approximation. Additional scale-sensitivity results are available from the authors.
 
 We do not conduct a fully non-Gaussian robustness analysis here, because both the benchmark constructions and the Bayesian estimation procedure rely on the maintained Gaussian structure.
 Extending the analysis beyond this setting would require re-specifying the likelihood and re-deriving the benchmark estimators under alternative distributional assumptions.
 
-Overall, the robustness analyses support the following interpretation: the two-player reduction is a useful empirical summary of focal rivalry rather than a literal description of full contest dynamics, and the private-leaderboard validation results should be interpreted as directional evidence under the maintained transformation and Gaussian approximation.
+Overall, the robustness analyses suggest that the two-player reduction is a useful empirical summary of focal rivalry rather than a literal description of full contest dynamics, and that the private-leaderboard validation results should be interpreted as directional evidence under the maintained transformation and Gaussian approximation.
 
 
 \section{Conclusion}
 
-This paper develops a dynamic game-theoretic model and a Bayesian structural estimation framework for online crowdsourcing contests under noisy public feedback.
-Conditional on focal pairs selected using final private ranks, we recover latent strategic objects using only contest-phase submission timing and public leaderboard trajectories. We then assess the estimated contest-specific primitives with private-leaderboard path benchmarks excluded from the likelihood.
-Across 73 Kaggle contests, these path-wise holdout diagnostics provide evidence on the estimated primitives.
-The evidence is strongest for innovation risk, where both benchmark and time-split volatility diagnostics support the structural estimates; for signal precision, the evidence is directionally consistent but more modest.
-In complementary synthetic exercises, the initial-condition parameter $\mu_0$ shows little posterior concentration relative to the main contest-level primitives.
-The counterfactual exercise traces the model-implied prize-duration substitution frontier, rather than providing a full welfare comparison of observed and alternative contest designs.
+This paper develops a dynamic game-theoretic model and Bayesian structural estimation framework for online crowdsourcing contests under noisy public feedback. Conditional on focal pairs selected using final private ranks, we recover latent competition states, effort dynamics, and contest-specific primitives from contest-phase submission timing and public leaderboard trajectories, and assess the estimated primitives using private-leaderboard path values excluded from the likelihood. Across 73 Kaggle contests, the diagnostic evidence is strongest for innovation risk; for signal precision, it is directionally consistent but more modest. The counterfactual exercise then traces the model-implied prize-duration substitution frontier rather than attempting a full welfare comparison of alternative contest designs.
 
 
-% limitations
-Nonetheless, several limitations deserve mention.
-% 1. DGP
-First, the estimation relies on assumptions about the data-generating process (DGP) that may not fully reflect real-world complexities.
-For example,
-% - prize
-(1) many contests use multi-tier or team-based prizes rather than the winner-take-all format assumed here;
-% - players
-(2) we focus on two-player settings, while actual contests involve broader participation;
-% - leaderboard display
-(3) leaderboard scores vary in format, complicating their integration into a unified signal structure; and
-(4) the focal pair is selected using final private ranks, so the private-path validation is conditional on ex post pair selection rather than fully independent.
-% 2. Kalman-filter
-Second, the empirical filtering implementation involves two additional approximations. The estimation method simplifies belief updating by assuming the inference variance quickly converges and remains constant.
-A more realistic approach would allow inference precision to evolve over time.
-The empirical implementation also approximates asynchronous, submission-triggered leaderboard updates with a continuous-update filtering equation. A fully coherent hybrid filter with discrete measurement updates would better represent stale scores and irregular observation times but would sacrifice much of the tractability of the current framework.
-Third, cross-contest comparisons of innovation risk and private-path volatility may retain a shared transformed-score scale component despite the common logit mapping.
-% Future
-These limitations point to valuable directions for future work, including richer prize structures, multi-agent dynamics, and more flexible learning mechanisms.
+Several limitations deserve mention. First, the empirical setting differs from the baseline model in several respects: many contests use multi-tier or team-based prizes, actual contests involve more than two strategic contestants, leaderboard metrics vary across contests, and the focal pair is selected using final private ranks. Second, the empirical filter assumes that inference variance quickly converges and approximates asynchronous submission-triggered updates with a continuous-update equation. A hybrid filter with discrete measurement updates would represent irregular observation times more faithfully but would substantially reduce tractability. Third, despite the common logit transformation, cross-contest comparisons of innovation risk and private-path volatility may retain a shared transformed-score scale component. These limitations suggest natural extensions involving richer prize structures, multi-agent dynamics, and more flexible learning mechanisms.
 
 
 

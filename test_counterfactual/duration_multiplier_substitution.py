@@ -2,8 +2,8 @@
 """Prize-duration substitution counterfactuals at fixed duration multipliers.
 
 For each contest and duration multiplier a, set T_a = a * T_obs and compute
-the minimum prize theta_a that keeps deterministic mean-path total effort at
-least as large as the observed-design baseline M(theta_obs, T_obs).
+the minimum prize theta_a that keeps the theorem-defined expected total effort
+at least as large as the observed-design baseline M(theta_obs, T_obs).
 """
 
 from __future__ import annotations
@@ -12,7 +12,6 @@ import argparse
 import csv
 import math
 import sys
-import types
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -22,31 +21,11 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parents[0]
 sys.path.insert(0, str(SCRIPT_DIR))
 
-try:
-    import scipy.stats  # noqa: F401
-except ModuleNotFoundError:
-    class _NormFallback:
-        @staticmethod
-        def cdf(x: float) -> float:
-            return 0.5 * (1.0 + math.erf(float(x) / math.sqrt(2.0)))
-
-        @staticmethod
-        def pdf(x: float, loc: float = 0.0, scale: float = 1.0) -> float:
-            z = (float(x) - loc) / scale
-            return math.exp(-0.5 * z * z) / (scale * math.sqrt(2.0 * math.pi))
-
-    scipy_module = types.ModuleType("scipy")
-    stats_module = types.ModuleType("scipy.stats")
-    stats_module.norm = _NormFallback()
-    scipy_module.stats = stats_module
-    sys.modules["scipy"] = scipy_module
-    sys.modules["scipy.stats"] = stats_module
-
 from all_contests_joint_optimize import (  # noqa: E402
     CONTEST_PARAMETERS,
     ContestParams,
     contest_params_from_row,
-    total_effort_mean_path,
+    total_expected_effort,
 )
 
 
@@ -62,18 +41,35 @@ def find_min_theta_fast(
     *,
     theta_min: float,
     theta0: float,
-    dt_days: float,
-    iterations: int = 25,
+    z_boundary: float,
+    dz_target: float,
+    iterations: int = 40,
 ) -> float | None:
-    M_theta0 = total_effort_mean_path(theta0, T, params, dt_days=dt_days)
+    effort_kwargs = {"z_boundary": z_boundary, "dz_target": dz_target}
+    M_theta0 = total_expected_effort(theta0, T, params, **effort_kwargs)
     if M_theta0 < M0 - 1e-7:
         return None
+
+    M_theta_min = total_expected_effort(theta_min, T, params, **effort_kwargs)
+    if M_theta_min >= M0:
+        return theta_min
+
+    theta_check = np.linspace(theta_min, theta0, 9)
+    effort_check = np.array([
+        total_expected_effort(float(value), T, params, **effort_kwargs)
+        for value in theta_check
+    ])
+    tolerance = 1e-7 * max(1.0, float(np.max(np.abs(effort_check))))
+    if np.any(np.diff(effort_check) < -tolerance):
+        raise RuntimeError(
+            f"expected total effort is not monotone in prize for contest {params.contest_id}"
+        )
 
     lo, hi = theta_min, theta0
     for _ in range(iterations):
         mid = 0.5 * (lo + hi)
-        M_mid = total_effort_mean_path(mid, T, params, dt_days=dt_days)
-        if M_mid >= M0 - 1e-7:
+        M_mid = total_expected_effort(mid, T, params, **effort_kwargs)
+        if M_mid >= M0:
             hi = mid
         else:
             lo = mid
@@ -87,7 +83,8 @@ def evaluate_one(
     m0: float,
     theta_min_abs: float,
     theta_min_frac: float,
-    dt_days: float,
+    z_boundary: float,
+    dz_target: float,
 ) -> dict[str, Any]:
     theta_min = max(theta_min_abs, theta_min_frac * params.theta0)
     theta_min = min(theta_min, params.theta0)
@@ -115,7 +112,8 @@ def evaluate_one(
         params,
         theta_min=theta_min,
         theta0=params.theta0,
-        dt_days=dt_days,
+        z_boundary=z_boundary,
+        dz_target=dz_target,
     )
 
     if theta_new is None:
@@ -134,7 +132,13 @@ def evaluate_one(
             "lower_prize": False,
         }
 
-    m_new = total_effort_mean_path(theta_new, t_new, params, dt_days=dt_days)
+    m_new = total_expected_effort(
+        theta_new,
+        t_new,
+        params,
+        z_boundary=z_boundary,
+        dz_target=dz_target,
+    )
     prize_change_abs = theta_new - params.theta0
     prize_change_pct = 100.0 * prize_change_abs / params.theta0
     return {
@@ -196,7 +200,7 @@ def write_outputs(rows: list[dict[str, Any]], output_dir: Path) -> None:
     if rows:
         fieldnames = sorted({key for row in rows for key in row.keys()})
         with detail_csv.open("w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer = csv.DictWriter(f, fieldnames=fieldnames, lineterminator="\n")
             writer.writeheader()
             writer.writerows(rows)
 
@@ -211,7 +215,7 @@ def write_outputs(rows: list[dict[str, Any]], output_dir: Path) -> None:
             "mean_required_prize_change_abs",
             "median_required_prize_change_abs",
         ]
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(summary)
 
@@ -220,7 +224,8 @@ def write_outputs(rows: list[dict[str, Any]], output_dir: Path) -> None:
         f.write(
             "For each duration multiplier a, the counterfactual duration is "
             "T_a = a T_obs. The required prize is the minimum prize that keeps "
-            "predicted total effort at least at the observed-design baseline.\n\n"
+            "the theorem-defined expected total effort at least at the "
+            "observed-design baseline.\n\n"
         )
         f.write(
             "| Duration multiplier | Contests with lower prize | "
@@ -249,7 +254,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--theta-min-abs", type=float, default=0.01)
     parser.add_argument("--theta-min-frac", type=float, default=0.0)
-    parser.add_argument("--dt-hours", type=float, default=4.0)
+    parser.add_argument("--z-boundary", type=float, default=10.0)
+    parser.add_argument("--dz-target", type=float, default=0.01)
     parser.add_argument(
         "--exclude-contests",
         type=int,
@@ -261,8 +267,6 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
-    dt_days = args.dt_hours / 24.0
-
     rows: list[dict[str, Any]] = []
     excluded = set(args.exclude_contests)
     for raw_row in CONTEST_PARAMETERS:
@@ -280,12 +284,30 @@ def main(argv: Sequence[str] | None = None) -> None:
             })
             continue
 
-        m0 = total_effort_mean_path(
+        m0 = total_expected_effort(
             params.theta0,
             params.T0_days,
             params,
-            dt_days=dt_days,
+            z_boundary=args.z_boundary,
+            dz_target=args.dz_target,
         )
+        ordered_multipliers = sorted(set(float(value) for value in args.multipliers))
+        duration_effort = np.array([
+            total_expected_effort(
+                params.theta0,
+                params.T0_days * multiplier,
+                params,
+                z_boundary=args.z_boundary,
+                dz_target=args.dz_target,
+            )
+            for multiplier in ordered_multipliers
+        ])
+        tolerance = 1e-7 * max(1.0, float(np.max(np.abs(duration_effort))))
+        if np.any(np.diff(duration_effort) < -tolerance):
+            raise RuntimeError(
+                f"expected total effort is not monotone over the requested "
+                f"duration multipliers for contest {contest_id}"
+            )
         for multiplier in args.multipliers:
             rows.append(
                 evaluate_one(
@@ -294,7 +316,8 @@ def main(argv: Sequence[str] | None = None) -> None:
                     m0=m0,
                     theta_min_abs=args.theta_min_abs,
                     theta_min_frac=args.theta_min_frac,
-                    dt_days=dt_days,
+                    z_boundary=args.z_boundary,
+                    dz_target=args.dz_target,
                 )
             )
 

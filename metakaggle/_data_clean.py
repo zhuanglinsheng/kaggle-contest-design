@@ -55,16 +55,17 @@ def randomize_within_day(group: pd.Series, seed: int = 1234):
 	return randomized_times
 
 
-def state_transformation(x):
-	"""
-	"""
+def state_transformation(x, a: float = 1.0):
+	"""Transform a bounded score to the model scale using multiplier ``a``."""
+	if a <= 0:
+		raise ValueError("a must be positive")
 	threshold_up = 0.9999
 	threshold_lo = 1e-4
 	if x >= threshold_up:
 		x = threshold_up
 	if x <= threshold_lo:
 		x = threshold_lo
-	return math.log(x / (1 - x))
+	return a * math.log(x / (1 - x))
 	#return stats.norm.ppf(x)
 
 
