@@ -119,7 +119,7 @@
 % \RUNAUTHOR{Jones, Miller, and Wilson}
 % \RUNAUTHOR{Jones et al.} % for four or more authors
 % Enter authors following the given pattern:
-\RUNAUTHOR{Keppo and Zhuang}
+\RUNAUTHOR{Zhuang et al.}
 
 % Title or shortened title suitable for running heads. Sample:
 % \RUNTITLE{Bundling Information Goods of Decreasing Value}
@@ -140,14 +140,20 @@
 %   should be entered in ONE field, separated by a comma.
 %   \EMAIL field can be repeated if more than one author
 \ARTICLEAUTHORS{%
-\AUTHOR{Jussi Keppo}
-\AFF{NUS Business School and Institute of Operations Research and Analytics\\
-	National University of Singapore, Singapore\\
-	\EMAIL{keppo@nus.edu.sg}} %, \URL{}}
 \AUTHOR{Linsheng Zhuang}
 \AFF{Institute of Operations Research and Analytics\\
 	National University of Singapore, Singapore\\
-	\EMAIL{linsheng.z@u.nus.edu}}
+	Center for Intelligent Computing\\
+	Great Bay University, China\\
+	\EMAIL{zhuangls@gbu.edu.cn}}
+\AUTHOR{Jussi Keppo}
+\AFF{NUS Business School \& Institute of Operations Research and Analytics\\
+	National University of Singapore, Singapore\\
+	\EMAIL{keppo@nus.edu.sg}} %, \URL{}}
+\AUTHOR{Zhi Chen}
+\AFF{NUS Business School\\
+	National University of Singapore, Singapore\\
+	\EMAIL{bizczhi@nus.edu.sg}}
 % Enter all authors
 } % end of the block
 
@@ -323,6 +329,10 @@ Subsequent studies build on this foundation by modeling each player’s progress
 \citet{Moscarini2007Contest} advance this approach by modeling the game state as the output gap between players and derive closed-form equilibrium strategies under pure-strategy play.
 \citet{Ryvkin2022Fight} adapt their framework to a dynamic contest with a fixed deadline, providing a closed-form solution for the Markov perfect equilibrium.
 
+{\color{blue}
+\citet{huang_2024_designing} study the training–test split in data-science contests as a design instrument: intermediate splits make ranking statistically more reliable, but also give contestants the strongest incentive to submit high-variance, suboptimal models. Using recent Kaggle contests, they find evidence consistent with this incentive effect, so that the organizer may accurately select among inaccurate solutions.
+}
+
 
 %% Online Crowdsourcing
 % this paper
@@ -379,7 +389,7 @@ A replication package (code and implementation details) will be provided with th
 \section{The Model}\label{contest-theory}
 
 % Effort, Output and Gap
-Two players, $i$ and $j$, compete for a prize $\theta>0$ in a contest.
+Two players, $i$ and $j$, compete for a prize $\theta$ in a contest.
 The winner receives the prize and the loser receives zero.
 The contest starts at time zero.
 At each time $t\ge0$, player $i$ chooses an effort level $q_{i,t}$ and incurs quadratic cost $C_i(q_{i,t}) = c_i q_{i,t}^2/2$, where lower $c_i$ corresponds to higher ability.
@@ -408,6 +418,7 @@ The information set of both players at time $t \ge 0$ is $I_t \equiv \{Z_s : 0 \
 Player $i$ estimates the unknown output gap $y_t$ based on $I_t$.
 Let $\tilde{y}_t \equiv E(y_t \mid I_t)$ denote the filtered mean output gap, and let
 $S_t \equiv E[(\tilde{y}_t-y_t)^2 \mid I_t]$ denote the conditional mean-squared filtering error.
+We normalize the initial perceived gap to $\tilde y_0=0$ throughout the theoretical analysis.
 Under standard linear-Gaussian assumptions, the Kalman-Bucy filter (Chapter 1.2 of \citealt{Bensoussan1992Control}; see also \citealt{frogerais2012various,barrau2017invariant}) implies
 \begin{align}
 	d\tilde{y}_{t} &= (q_{i,t}-q_{j,t})dt + \lambda S_{t}(dZ_{t}-\tilde{y}_{t}dt)
@@ -446,7 +457,7 @@ Under the steady-state restriction $S_t \equiv \bar S$, the payoff-relevant stat
 Let $\tilde y_T$ denote player $i$'s perceived terminal performance advantage over player $j$.
 Although the actual prize is determined by the final private-leaderboard outcome, for tractability we assume that contestants act as if the sign of the filtered mean determines the winner, rather than accounting for the full posterior uncertainty about the private outcome.
 Accordingly, player \(i\)'s terminal utility is represented by \(\theta\mathbf 1_{\{\tilde y_T>0\}}\), while player \(j\)'s is represented symmetrically.
-This approximation preserves the tractable tug-of-war structure of \citet{Ryvkin2022Fight}.
+This approximation preserves the tractable tug-of-war structure.
 At any time $0\le t<T$, player $i$ optimizes her effort level $q_{i,\tau}$ in the remaining contest period $\tau\in[t, T)$ according to the following optimization problem,
 \begin{equation}\label{v-def}
 	V^i(\tilde{y}_{t}, t ; q_{j,t},\Theta_i) = \max_{\{q_{i,\tau}\}^T_{\tau=t}}
@@ -471,17 +482,13 @@ subject to boundary conditions $V^i(-\infty, t) = 0$, $V^i(+\infty, t) = \theta$
 
 The Nash equilibrium is summarized in the following theorem.
 
-\begin{theorem}[\citealt{Ryvkin2022Fight}]
+\begin{theorem}[\citealt{Ryvkin2022Fight}]\label{thm-equilibrium-effort}
 Under the terminal-payoff rule above, the game takes the form of a fixed-deadline tug-of-war contest.
 In the Markov perfect equilibrium, the players’ efforts $m_{i(j)}(\tilde{y}_t, t) :\mathbb{R}\times[0, T)\to\mathbb{R}_+$ are given by
 \begin{equation}\label{eq-equilibrium-effort}
 m_{i(j)}(\tilde{y}_t, t) = \frac{e^{-z^2/2}}{\sqrt{2\pi\sigma^2(T-t)}}\cdot \frac{\sigma^2}{2}\left[\gamma(\rho_{i}) + \gamma(\rho_{j})\right]\left[1-\rho(z)^2\right]\left[1 \pm \rho(z)\right]
 \end{equation}
 where $z = \tilde{y}_t / (\sigma\sqrt{T-t})$, $\rho(z) = \gamma^{-1}\left(\Phi(z)\left[\gamma(\rho_{i})+\gamma(\rho_{j})\right]-\gamma(\rho_{j})\right)$ and
-\begin{equation}\label{eq-gamma}
-\gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},\quad u\in(-1,1)
-\end{equation}
-In the compact notation $m_{i(j)}$, the plus sign in $[1\pm\rho(z)]$ corresponds to player $i$, and the minus sign corresponds to player $j$.
 \begin{equation*}
 \rho_{i} = \frac{e^{w_{i}}+e^{-w_{j}}-2}{e^{w_{i}}-e^{-w_{j}}},
 \quad
@@ -489,25 +496,11 @@ In the compact notation $m_{i(j)}$, the plus sign in $[1\pm\rho(z)]$ corresponds
 \quad
 w_{i(j)} = \frac{\theta}{\sigma^2 c_{i(j)}}.
 \end{equation*}
-Moreover, the total expected effort at time $t$, defined by $M(\tilde{y}_t, t) := \mathbb{E}\left[\int^T_t m_i(\tilde{y}_s, s) + m_j(\tilde{y}_s, s)ds\right]$, is given by $M(\tilde{y}_t, t) = \sigma \sqrt{T-t} q(z)$, where $q(z)$ is determined by the ordinary differential equation
-\begin{equation}
-\begin{aligned}
-&q''(z) + \left[4A_+(z)e^{-z^2/2}+z\right]q'(z) - q(z) + 4A_-(z)e^{-z^2/2} = 0\\
-&A_-(z) = \frac{\gamma(\rho_i) + \gamma(\rho_j)}{2\sqrt{2\pi}}[1 - \rho(z)^2],
-\quad A_+(z) = A_-(z)\rho(z)
-\end{aligned}
+\begin{equation}\label{eq-gamma}
+\gamma(u) = \frac{u}{1-u^2} + \frac{1}{2}\ln\frac{1+u}{1-u},\quad u\in(-1,1)
 \end{equation}
-subject to the boundary conditions $q(z)\to0$ as $z\to\pm\infty$.
-Specifically, when $c_i = c_j$, we have $w_i = w_j = w$ and the total expected effort is reduced to
-\begin{equation}\label{eq-totaleffort-reduced}
-M(\tilde{y}_t, t) = \frac{2w\sigma\sqrt{T-t}}{\sqrt{2\pi}}e^{-z^2/2} + o(w)
-\end{equation}
+In the compact notation $m_{i(j)}$, the plus sign in $[1\pm\rho(z)]$ corresponds to player $i$, and the minus sign corresponds to player $j$.
 \end{theorem}
-
-\begin{remark}
-The approximation is accurate when \(w=\theta/(\sigma^2c)\) is small, or equivalently when the prize-cost ratio \(\theta/c\) is small relative to the innovation variance \(\sigma^2\). 
-In this regime, the first-order expansion in \(w\) is most informative.
-\end{remark}
 
 In equation~\eqref{eq-equilibrium-effort}, $w_i$ and $w_j$ summarize prize incentives relative to innovation risk, and $\rho_i$ and $\rho_j$ are normalized transformations of these indices.
 The equilibrium effort $m_{i(j)}$ can be decomposed into two components: a normal density term $\phi(\tilde{y}_t; 0, \sigma^2(T-t))$ and an amplitude term $K_{i(j)}(z;\theta,\sigma,c_i,c_j)
@@ -523,52 +516,140 @@ The equilibrium characterization is inherited from \citet{Ryvkin2022Fight} after
 Additional properties of the equilibrium are discussed in \citet{Ryvkin2022Fight}.
 Here, we restrict attention to a brief design discussion under the maintained steady-state specification.
 
-
-
 \subsection{Implications for Contest Design}\label{sect-design}
 
-Contest designers can influence contestants’ effort through the prize amount \(\theta\), contest duration \(T\), and the precision of public feedback \(\lambda\). 
-Abstracting from more complex prize structures, we examine whether prize and duration can substitute for each other in eliciting effort and whether more precise feedback changes effort incentives.
+This subsection studies the joint design of the prize $\theta$ and contest duration $T$ when the organizer values the expected best output.
+We first characterize total expected effort and show how it contributes to expected best output, and then derive the jointly optimal prize $\theta^*$ and duration $T^*$.
 
-Under the terminal-payoff rule based on the filtered mean and the steady-state filtering assumption \(S_t=\bar S\), however, signal precision \(\lambda\) drops out of both the closed-form equilibrium effort policy and total expected effort \(M(\tilde y_t,t)\). 
-This neutrality follows from \(\lambda\bar S^2=\sigma^2\). 
-It is specific to the maintained assumptions: 
-\(\lambda\) may affect equilibrium effort if terminal payoffs depend on posterior winning probabilities or if filtering uncertainty varies over time. 
-We therefore focus the following design analysis on the prize amount and contest duration.
+The equilibrium characterization implies the following representation of total expected effort.
 
-Under the symmetric-cost assumption \(c_i=c_j=c\), equation~\eqref{eq-totaleffort-reduced} provides a simple approximation to total expected effort.
-To study the prize-duration trade-off, suppose the contest designer has the stylized objective $\beta^{T}M(\tilde{y}_0,0)^\alpha-\theta$, where $0<\alpha<1$ and $0<\beta\leq 1$.
-The parameter $\beta\in(0,1]$ captures the time cost or discounting associated
-with longer contests.
-The parameter $\alpha\in(0,1)$ captures diminishing returns from aggregate
-contest effort to the designer's value.
-Although higher effort increases the chance of obtaining a better solution, the marginal value of additional effort is likely to decline once the contest has already attracted substantial search
-activity.
-Thus, $M^\alpha$ should be interpreted as a reduced-form mapping from total expected effort to the designer's effective value from the contest.
-This concavity also ensures that the designer's benefit from increasing the prize does not grow without bound relative to the linear prize cost.
+\begin{lemma}[\citealt{Ryvkin2022Fight}]\label{lem-total-effort}
+The total expected effort at time $t$, defined by $M(\tilde{y}_t, t) := \mathbb{E}\left[\int^T_t m_i(\tilde{y}_s, s) + m_j(\tilde{y}_s, s)ds\right]$, is given by $M(\tilde{y}_t, t) = \sigma \sqrt{T-t} q(z)$, where $q(z)$ is determined by the ordinary differential equation
+\begin{equation}
+\begin{aligned}
+&q''(z) + \left[4A_+(z)e^{-z^2/2}+z\right]q'(z) - q(z) + 4A_-(z)e^{-z^2/2} = 0\\
+&A_-(z) = \frac{\gamma(\rho_i) + \gamma(\rho_j)}{2\sqrt{2\pi}}[1 - \rho(z)^2],
+\quad A_+(z) = A_-(z)\rho(z)
+\end{aligned}
+\end{equation}
+subject to $q(z)\to0$ as $z\to\pm\infty$.
+When $c_i=c_j=c$, so that $w_i=w_j=w$, total expected effort has the leading-order representation
+\begin{equation}\label{eq-totaleffort-reduced}
+M(\tilde{y}_t, t)
+=\sigma\sqrt{T-t}\left[
+\frac{2w}{\sqrt{2\pi}}e^{-z^2/2}+o(w)
+\right].
+\end{equation}
+\end{lemma}
 
+Lemma~\ref{lem-total-effort}, established by \citet{Ryvkin2022Fight} and restated here for use in our design analysis, provides an ODE characterization of total expected effort for the general asymmetric case.
+For the design analysis below, we use its leading-order symmetric approximation.
+This approximation is most informative when $w=\theta/(\sigma^2c)$ is small, so that the prize-cost ratio $\theta/c$ is small relative to innovation variance $\sigma^2$.
+Its leading term shows that $w$ governs the overall strength of effort incentives, while the factor $e^{-z^2/2}$ concentrates expected effort in states where the contest remains close.
 
-Let $\bar{M}(\tilde y_0,0)$ denote the leading-order approximation to total effort obtained from equation~(\ref{eq-totaleffort-reduced}) under the small-$w$ approximation, $\bar{M}(\tilde y_0,0) = \frac{2w\sigma\sqrt{T}}{\sqrt{2\pi}}e^{-z^2/2}$, where $w=\theta/(\sigma^2c)$ and $z=\tilde y_0/(\sigma\sqrt{T})$.
-This approximation turns the designer's objective into an explicit function of $(\theta,T)$, making it possible to derive the comparative statics below.
+We next consider the organizer's expected best output.
+Define the contestants' individual output processes as
+\begin{equation}\label{eq-individual-output-levels}
+dx_t^i=m_i(\tilde y_t,t)dt+\frac{\sigma}{\sqrt{2}}dW_t^i,
+\qquad
+dx_t^j=m_j(\tilde y_t,t)dt+\frac{\sigma}{\sqrt{2}}dW_t^j,
+\end{equation}
+where $W^i$ and $W^j$ are independent, individual outputs are measured as improvements from the start of the contest so that $x_0^i=x_0^j=0$, and $y_t=x_t^i-x_t^j$.
+This representation is consistent with equation~\eqref{eq-state-dynamics}, with $W_t=(W_t^i-W_t^j)/\sqrt{2}$.
+Define the organizer's expected best output as
+\begin{equation}\label{eq-expected-best-output}
+B(\theta,T):=\mathbb E\left[\max\{x_T^i,x_T^j\}\right].
+\end{equation}
 
+\begin{lemma}[Expected Best Output]\label{lem-best-output}
+The expected best output defined in equation~\eqref{eq-expected-best-output} satisfies the exact decomposition
+\begin{equation}\label{eq-best-output-decomposition}
+B(\theta,T)
+=\frac{1}{2}M(0,0)+\frac{1}{2}\mathbb E|y_T|.
+\end{equation}
+Moreover, under symmetric costs $c_i=c_j=c$, as $w=\theta/(\sigma^2c)\downarrow0$,
+\begin{equation}\label{eq-terminal-gap-leading}
+\frac12\mathbb E|y_T|
+=\frac{\sigma\sqrt T}{\sqrt{2\pi}}
++O(w^2\sigma\sqrt T).
+\end{equation}
+\end{lemma}
 
-\begin{proposition}\label{prop-monotonicity-M}
-Consider the symmetric benchmark with $c_i=c_j=c$, and fix the initial perceived gap $\tilde y_0$, the innovation risk $\sigma$, and the effort cost parameter $c$.
-Under the leading-order approximation in equation~(\ref{eq-totaleffort-reduced}), let $\bar M(\tilde y_0,0)$ denote the approximated total expected effort.
-Define the corresponding approximated designer objective as $\bar\Pi(\theta,T,\lambda)=\beta^T \bar M(\tilde y_0,0)^\alpha-\theta$, where $0<\alpha<1$ and $0<\beta\leq 1$.
-Then the following statements hold:
-\begin{itemize}
-	\item [(1)] The approximated total effort $\bar{M}(\tilde y_0,0)$ is increasing in the prize amount $\theta$ and increasing in the contest duration $T$.
+Equation~\eqref{eq-best-output-decomposition} has a direct interpretation.
+The term $M(0,0)$ evaluates the total expected effort in equation~\eqref{eq-totaleffort-reduced} at the initial time $t=0$ under the normalization $\tilde y_0=0$, and therefore measures the expected equilibrium effort accumulated by both contestants over the entire contest period $[0,T]$.
+Accordingly, $M(0,0)/2$ is the contribution of aggregate equilibrium effort to expected average terminal output.
+The term $\mathbb E|y_T|/2$ is a \textit{selection} component: because the organizer keeps the larger of $x_T^i$ and $x_T^j$, terminal dispersion raises expected best output relative to average output.
+Equation~\eqref{eq-terminal-gap-leading} clarifies the leading-order source of this selection component.
+When $w=0$, there is no prize-induced effort and the terminal gap is $y_T=\sigma W_T$, where $W_T\sim\mathcal N(0,T)$; hence $\mathbb E|y_T|/2=\sigma\sqrt T/\sqrt{2\pi}$.
+Under symmetric costs, an increase in $w$ changes aggregate effort at order $w$, but changes the cumulative effort difference entering $y_T$ only at order $w^2$.
+Therefore, the innovation-driven expression remains valid to first order, with the effect of strategic effort differences absorbed by the remainder $O(w^2\sigma\sqrt T)$.
+We refer to this leading-order selection gain as the \textit{sampling} component.
 
-	\item [(2)] For any fixed $T>0$, the approximated designer objective $\bar\Pi$ is single-peaked in the prize amount $\theta$. For any fixed $\theta>0$, if $0<\beta<1$, $\bar\Pi$ is single-peaked in the contest duration $T$; if $\beta=1$, $\bar\Pi$ is increasing in $T$.
+Evaluating equation~\eqref{eq-totaleffort-reduced} at the normalized initial state gives $M(0,0)=\bar M(0,0)+o(w\sigma\sqrt T)$, where $\bar M(0,0)=2\theta\sqrt T/(\sigma c\sqrt{2\pi})$ is the leading-order approximation to total expected effort over the entire contest.
+Combining Lemmas~\ref{lem-total-effort} and~\ref{lem-best-output}, define the leading-order approximation to expected best output as
+\begin{equation}\label{eq-best-output-leading-approximation}
+\bar B(\theta,T)
+=\frac{\sqrt T}{\sqrt{2\pi}}
+\left(\sigma+\frac{\theta}{\sigma c}\right).
+\end{equation}
+The first term in equation~\eqref{eq-best-output-leading-approximation} is the \textit{sampling} component, and the second term, equal to $\bar M(0,0)/2$, is the first-order \textit{effort} component.
 
-    \item[(3)] If the designer jointly optimizes over $(\theta,T)$ on $\theta>0$ and $T>0$, then for $0<\beta<1$, $\bar\Pi$ has at most one interior optimum. If $\beta=1$, $\bar\Pi$ is increasing in $T$, so the problem has no finite optimal duration.
-\end{itemize}
-Moreover, within this steady-state filtering approximation, both $\bar M(\tilde y_0,0)$ and $\bar\Pi(\theta,T,\lambda)$ are neutral with respect to the signal precision $\lambda$.
+To study contest design, suppose the organizer chooses the prize $\theta\geq0$ and duration $T>0$ to maximize
+\begin{equation}\label{eq-designer-best-output-objective}
+\Pi(\theta,T)
+=V\!\left(\bar B(\theta,T)\right)-\theta-D(T).
+\end{equation}
+The organizer's value function $V$ is continuous on $[0,\infty)$, twice continuously differentiable on $(0,\infty)$, and bounded above, with $V'>0$, $V''<0$, $V'(0+)=\infty$, and $V'(\infty)=0$.
+The prize enters as a direct monetary cost, while $D(T)$ captures the cost of delaying the contest outcome; $D$ is continuously differentiable on $[0,\infty)$, strictly increasing, and convex.
+
+Contest duration $T$ raises both the sampling and effort components of $\bar B(\theta,T)$: a longer contest allows independent innovations to accumulate and gives contestants more time to exert effort.
+The optimal duration therefore balances the resulting increase in the organizer's value $V(\bar B)$ against the higher duration cost $D(T)$.
+Because equation~\eqref{eq-best-output-leading-approximation} is affine in the prize $\theta$ and $V$ is strictly concave, $\theta$ can be uniquely profiled out of the joint problem.
+This yields the following characterization of the jointly optimal prize $\theta^*$ and duration $T^*$.
+
+\begin{proposition}[Joint Design of Prize and Duration]\label{prop-joint-design}
+The joint design problem admits at least one optimal pair $(\theta^*,T^*)$ with $0<T^*<\infty$.
+Every optimal pair satisfies
+\begin{equation}\label{eq-optimal-prize}
+\theta^*
+=\left[
+\sigma c\sqrt{\frac{2\pi}{T^*}}
+(V')^{-1}\!\left(\sigma c\sqrt{\frac{2\pi}{T^*}}\right)
+-\sigma^2c
+\right]_+,
+\end{equation}
+where $[x]_+=\max\{x,0\}$.
+If $\theta^*>0$, the optimal design satisfies
+\begin{equation}\label{eq-optimal-duration-condition}
+D'(T^*)
+=\frac{\theta^*+\sigma^2c}{2T^*}.
+\end{equation}
 \end{proposition}
 
-Although \(\lambda\) does not affect equilibrium effort under the maintained assumptions, it still affects how contestants update their beliefs from public signals and how much noise enters the observed public leaderboard. 
-It therefore remains an estimable parameter in the structural model developed below.
+\begin{remark}[Leading-Order Design]
+Proposition~\ref{prop-joint-design} characterizes design using the leading-order approximation $\bar B$.
+The resulting design is internally consistent with the approximation when $w^*=\theta^*/(\sigma^2c)$ is sufficiently small.
+\end{remark}
+
+\begin{remark}[Zero-Prize Contests]\label{rem-zero-prize}
+When $\theta^*=0$, the symmetric equilibrium, understood by continuous extension as $\theta\downarrow0$, has no prize-induced effort, so $M(0,0)=0$.
+Nevertheless, equation~\eqref{eq-best-output-leading-approximation} gives $\bar B(0,T)=\sigma\sqrt T/\sqrt{2\pi}$ and $\Pi(0,T)=V(\sigma\sqrt T/\sqrt{2\pi})-D(T)$.
+Thus, a zero-prize contest does not represent the absence of a contest.
+Rather, conditional on participation, it represents a contest in which contestants devote no additional effort in response to monetary incentives but may still generate candidate solutions through low-cost, opportunistic experimentation, for example by querying readily available AI tools, and submit the resulting outputs.
+The organizer's value then comes entirely from sampling across these baseline random attempts and selecting the best realization.
+\end{remark}
+
+\begin{remark}[Comparative Statics]\label{rem-comparative-statics}
+The relative curvature $R(B):=-BV''(B)/V'(B)$ measures how rapidly the organizer's marginal value declines as best output increases.
+This restriction is not needed for the existence and characterization in Proposition~\ref{prop-joint-design}.
+For comparative statics, let $\theta^*(T)$ denote the right-hand side of equation~\eqref{eq-optimal-prize} with $T^*$ replaced by $T$.
+If $1/3<R(B)\leq1$ over the relevant output range, then $\theta^*(T)$ is nondecreasing in $T$, and the marginal gross benefit of duration is strictly decreasing.
+Together with convexity of $D$, the latter property makes the optimal duration unique.
+\end{remark}
+
+Under the terminal-payoff rule and the steady-state restriction $S_t=\bar S$, both performance criteria are neutral with respect to signal precision $\lambda$, because $\lambda\bar S^2=\sigma^2$ and $\lambda$ therefore drops out of the equilibrium effort policy.
+This neutrality is specific to the maintained assumptions and need not hold when filtering uncertainty varies over time or contestants respond to posterior winning probabilities.
+Nevertheless, $\lambda$ affects belief updating and the noise in the observed public leaderboard, and therefore remains an estimable parameter in the structural model developed below.
 
 
 
@@ -642,6 +723,7 @@ To preserve the tractable one-dimensional state representation used in the equil
 d\tilde{y}_{t} = \left[m_i(\tilde{y}_t, t) - m_j(\tilde{y}_t, t)\right]dt + \sqrt{\lambda}\sigma(\hat{y}_t-\tilde{y}_{t}) dt
 \end{equation}
 with initial condition $\tilde{y}_0 = \mu_0$.
+For the empirical implementation only, this initialization relaxes the zero-initial-perceived-gap normalization imposed in the theoretical analysis.
 This approximation may overstate learning during long intervals without submissions. The resulting estimates should therefore be interpreted as conditional on the continuous-update approximation rather than as estimates from an exact discrete-observation filter.
 
 We denote the set of estimated parameters by $\Theta := \{c_i, c_j, \sigma, \lambda, \mu_0,r\}$.
@@ -718,7 +800,7 @@ p\left(\{\hat{y}_{t_k}\}_{k=1}^N\mid\Theta\right)
 \end{equation}
 The observation at $t_k$ is incorporated into the perceived-state recursion only after its conditional density has been evaluated, so it affects subsequent predicted states and effort paths but not its own one-step-ahead predictive mean.
 More generally, the mean would include the latent initial gap $y_0$; in the empirical implementation we normalize $y_0=0$ by measuring subsequent gaps relative to the initial latent-gap origin.
-This normalization is distinct from $\mu_0$, which is the initial perceived gap $\tilde y_0$.
+This normalization is distinct from the empirical initialization $\mu_0$, which relaxes the theoretical restriction $\tilde y_0=0$.
 Thus, $\mu_0$ enters the likelihood indirectly through the filtering recursion in (\ref{eq-filtered-y-update}), which determines the predictive states, effort paths, and conditional moments used in each factor.
 Accordingly, the likelihood uses the public leaderboard values associated with submission updates and preserves the temporal ordering of information.
 
@@ -1123,6 +1205,28 @@ The Meta-Kaggle database is updated daily, with new competition data added after
 For each selected contest, we identify two highly active top-ranked contestants who meet our focal-pair selection criteria.
 Appendix~\ref{appendix-statistics} reports the Bayesian estimation results for each contest individually.
 
+\begin{table}[H]
+\centering
+\caption{Public--Private Leaderboard Agreement}
+\label{tab-leaderboard-agreement}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}Xccc}
+\toprule
+\textbf{Statistic} & \textbf{Mean} & \textbf{Median} & \textbf{95\% CI for Mean} \\
+\midrule
+Public--private rank correlation & $0.937$ & $0.984$ & $[0.903,\ 0.963]$ \\
+Top-2 overlap rate & $65.1\%$ & $50.0\%$ & $[56.2\%,\ 73.3\%]$ \\
+Top-5 overlap rate & $66.6\%$ & $80.0\%$ & $[59.7\%,\ 73.2\%]$ \\
+\bottomrule
+\end{tabularx}
+\par\vspace{1.2ex}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:}
+The sample consists of the same 73 Kaggle contests used in the structural analysis. For each contest, we use the official public and private leaderboard ranks in Meta-Kaggle, excluding benchmark teams and teams missing either rank. Public--private rank correlation is the Spearman correlation across all retained teams within a contest. The top-$k$ overlap rate is $|\mathcal T^{pub}_{k}\cap\mathcal T^{pri}_{k}|/k$, where $\mathcal T^{pub}_{k}$ and $\mathcal T^{pri}_{k}$ are the sets of teams ranked in the public and private top $k$, respectively; the ordering of teams within the top-$k$ sets need not coincide. Each statistic is first calculated separately by contest, and the table reports the equally weighted mean and median across the 73 contests. The 95\% confidence intervals pertain to the across-contest means and are percentile intervals obtained from 10,000 nonparametric bootstrap resamples at the contest level.
+}
+\end{minipage}
+\end{table}
+
 We next conduct post-estimation diagnostic validation of the contest-specific primitives using private-leaderboard-based benchmarks.
 
 \subsubsection{Private-Leaderboard Diagnostic for Signal Precision $\lambda$.}
@@ -1406,53 +1510,55 @@ These results complement the normal-increment consistency benchmark and suggest 
 Because both $\hat\sigma_\ell$ and the private-path volatility measures are expressed in transformed-score units, their cross-contest association may also reflect contest-level scale variation. We therefore interpret these regressions as diagnostics rather than scale-free validation evidence.
 
 
-\subsection{Counterfactual Prize-Duration Substitution}
+\subsection{Counterfactual Best-Output-Preserving Prize-Duration Substitution}
 
 The validation exercises suggest that the estimated primitives contain
 meaningful information about the contest environment. We use these primitives to
 revisit the design question in Section~\ref{sect-design}. Under the maintained
 approximation, prize and duration are the two design variables that directly
-affect predicted total effort.\footnote{
+affect predicted expected best output through the effort and sampling components.\footnote{
 We do not emphasize a baseline information-design counterfactual for
 $\lambda$. As shown in Section~\ref{sect-design}, under the maintained
 steady-state filtering restriction $S_t\equiv\bar S$, signal precision does not
-generate an independent comparative-static effect on total expected effort.
+generate an independent comparative-static effect on predicted expected best output.
 Studying optimal information disclosure would require relaxing the steady-state
 restriction and allowing filtering uncertainty to evolve endogenously over time.
 }
 Because the designer's cardinal payoff and the platform cost of longer contests
 are difficult to calibrate, we do not solve for a welfare-optimal design.
 Instead, we trace the model-implied substitution between prize spending and
-contest duration while holding predicted total effort fixed.
+contest duration while holding predicted expected best output fixed.
 
 For each contest, let $(\theta^{obs},T^{obs})$ denote the observed prize and
 duration, and let
-$M_0=M(\theta^{obs},T^{obs})$ denote predicted total effort under the observed
+$B_0=B(\theta^{obs},T^{obs})$ denote predicted expected best output under the observed
 design. For a duration multiplier $a\geq1$, let $T_a=aT^{obs}$ and define
 \[
-\theta_a
+\theta_a^{\mathrm{BO}}
 =
 \min\left\{
-\theta\in[\underline\theta,\theta^{obs}]
+\theta\in[\theta_{\min},\theta^{obs}]
 :
-M(\theta,T_a)\geq M_0
+B(\theta,T_a)\geq B_0
 \right\},
 \]
-where $\underline\theta=0.01$ thousand USD is the lower prize bound used in the numerical search. For each duration multiplier considered below, direct numerical evaluation confirms that $\theta=\theta^{obs}$ satisfies the effort constraint, so the feasible set is nonempty.
+where $\theta_{\min}=0.01$ thousand USD is the lower prize bound used in the numerical search. For each duration multiplier considered below, direct numerical evaluation confirms that $\theta=\theta^{obs}$ satisfies the best-output constraint, so the feasible set is nonempty.
 The required prize change is
-$100(\theta_a-\theta^{obs})/\theta^{obs}$, so negative values indicate prize
-reductions that keep predicted total effort at least at the observed-design
+$100(\theta_a^{\mathrm{BO}}-\theta^{obs})/\theta^{obs}$, so negative values indicate prize
+reductions that keep predicted expected best output at least at the observed-design
 baseline. This exercise is not a claim that longer contests are costless or
-welfare improving. Rather, it reports the iso-effort prize-duration frontier:
+welfare improving. Rather, it reports the iso-best-output prize-duration frontier:
 how much prize spending can be substituted by a small, externally specified increase in duration.
 
-Table~\ref{tab-counterfactual-policy} reports the substitution frontier for duration changes close to the observed design. For each positive duration increase considered, the numerical search identifies a lower prize that preserves predicted total effort in all 73 contests. A 1\% increase in duration allows a median prize reduction of 0.65\%, while a 10\% increase allows a median reduction of 5.95\%. Because the mean reductions exceed the medians, the distribution is right-skewed; we therefore emphasize the medians as the more representative summary.
+For the counterfactual calculation, we combine the exact decomposition in Lemma~\ref{lem-best-output} with the leading-order selection component in equation~\eqref{eq-terminal-gap-leading} and evaluate predicted expected best output as $B(\theta,T)=M(\tilde y_0,0)/2+\sigma\sqrt T/\sqrt{2\pi}$. At each candidate design $(\theta,T)$, total expected effort $M(\tilde y_0,0)$ is obtained from the general asymmetric ODE in Lemma~\ref{lem-total-effort}, using the contest-specific estimates of $(c_i,c_j,\sigma,\mu_0)$ and setting $\tilde y_0=\mu_0$. Thus, the calculation retains the general asymmetric numerical effort prediction while approximating the selection component at leading order.
+
+Table~\ref{tab-counterfactual-policy} reports the substitution frontier for duration changes close to the observed design. For each positive duration increase considered, the numerical search identifies a lower prize that preserves predicted expected best output in all 73 contests. A 1\% increase in duration allows a median prize reduction of 1.56\%, while a 10\% increase allows a median reduction of 13.56\%. The mean percentage reductions exceed the medians in magnitude, so we emphasize the medians as the more representative summary. At the 10\% duration increase, one contest reaches the numerical prize floor $\theta_{\min}$ and consequently delivers predicted expected best output strictly above the observed-design baseline.
 
 
 \begin{table}[htbp]
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \centering
-\caption{Counterfactual Prize-Duration Substitution}
+\caption{Counterfactual Best-Output-Preserving Prize-Duration Substitution}
 \label{tab-counterfactual-policy}
 \scriptsize
 \begin{tabularx}{\textwidth}{lYYYYYY}
@@ -1460,22 +1566,22 @@ Table~\ref{tab-counterfactual-policy} reports the substitution frontier for dura
 \textbf{Duration multiplier} & \textbf{Lower prize} & \textbf{$\geq1\%$ lower} & \textbf{$\geq5\%$ lower} & \textbf{$\geq10\%$ lower} & \textbf{Mean change} & \textbf{Median change} \\
 \midrule
 $1.00$ & $0/73$ & $0/73$ & $0/73$ & $0/73$ & $0.00\%$ & $0.00\%$ \\
-$1.01$ & $73/73$ & $15/73$ & $1/73$ & $1/73$ & $-1.09\%$ & $-0.65\%$ \\
-$1.02$ & $73/73$ & $66/73$ & $2/73$ & $1/73$ & $-1.92\%$ & $-1.28\%$ \\
-$1.05$ & $73/73$ & $73/73$ & $12/73$ & $2/73$ & $-4.15\%$ & $-3.11\%$ \\
-$1.10$ & $73/73$ & $73/73$ & $51/73$ & $9/73$ & $-7.37\%$ & $-5.95\%$ \\
+$1.01$ & $73/73$ & $73/73$ & $3/73$ & $2/73$ & $-2.44\%$ & $-1.56\%$ \\
+$1.02$ & $73/73$ & $73/73$ & $12/73$ & $3/73$ & $-4.52\%$ & $-3.09\%$ \\
+$1.05$ & $73/73$ & $73/73$ & $73/73$ & $19/73$ & $-10.29\%$ & $-7.37\%$ \\
+$1.10$ & $73/73$ & $73/73$ & $73/73$ & $65/73$ & $-17.92\%$ & $-13.56\%$ \\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
 \begin{minipage}{\textwidth}
 {\footnotesize
 \textit{Note:}
-This table reports counterfactual prize-duration substitution results for the 73 contests with complete observed design inputs and structural estimates.
+This table reports best-output-preserving prize-duration substitution results for the 73 contests with complete observed design inputs and structural estimates.
 For duration multiplier $a$, the counterfactual duration is $T_a=aT^{obs}$.
-For each contest, we compute the minimum prize $\theta_a\in[0.01,\theta^{obs}]$ thousand USD such that predicted total effort remains weakly above $M(\theta^{obs},T^{obs})$. At each candidate design, total expected effort is evaluated as $M(\tilde y_0,0)=\sigma\sqrt{T}\,q(\tilde y_0/(\sigma\sqrt{T}))$, where $q$ solves the ordinary differential equation in the equilibrium characterization. We use the contest-specific estimates of $(c_i,c_j,\sigma,\mu_0)$ and the same analytical approximation to $\gamma^{-1}$ used in estimation.
-``Lower prize'' counts contests with $\theta_a<\theta^{obs}$.
+For each contest, we compute the minimum prize $\theta_a^{\mathrm{BO}}\in[\theta_{\min},\theta^{obs}]$ thousand USD such that $B(\theta_a^{\mathrm{BO}},T_a)\geq B(\theta^{obs},T^{obs})$. At each candidate design, predicted expected best output is evaluated as $B(\theta,T)=M(\tilde y_0,0)/2+\sigma\sqrt T/\sqrt{2\pi}$. Total expected effort is evaluated as $M(\tilde y_0,0)=\sigma\sqrt{T}\,q(\tilde y_0/(\sigma\sqrt{T}))$, where $q$ solves the ordinary differential equation in Lemma~\ref{lem-total-effort}; the sampling term is the leading-order selection component in equation~\eqref{eq-terminal-gap-leading}. We use the contest-specific estimates of $(c_i,c_j,\sigma,\mu_0)$, set $\tilde y_0=\mu_0$, and use the same analytical approximation to $\gamma^{-1}$ as in estimation. The numerical lower bound is $\theta_{\min}=0.01$ thousand USD.
+``Lower prize'' counts contests with $\theta_a^{\mathrm{BO}}<\theta^{obs}$.
 The next three columns count contests in which the required prize is at least 1\%, 5\%, or 10\% below the observed prize.
-Mean and median changes report $100(\theta_a-\theta^{obs})/\theta^{obs}$, so negative values denote required prize reductions.
+Mean and median changes report $100(\theta_a^{\mathrm{BO}}-\theta^{obs})/\theta^{obs}$, so negative values denote required prize reductions.
 }
 \end{minipage}
 \end{table}
@@ -1612,7 +1718,7 @@ Overall, the robustness analyses suggest that the two-player reduction is a usef
 
 \section{Conclusion}
 
-This paper develops a dynamic game-theoretic model and Bayesian structural estimation framework for online crowdsourcing contests under noisy public feedback. Conditional on focal pairs selected using final private ranks, we recover latent competition states, effort dynamics, and contest-specific primitives from contest-phase submission timing and public leaderboard trajectories, and assess the estimated primitives using private-leaderboard path values excluded from the likelihood. Across 73 Kaggle contests, the diagnostic evidence is strongest for innovation risk; for signal precision, it is directionally consistent but more modest. The counterfactual exercise then traces the model-implied prize-duration substitution frontier rather than attempting a full welfare comparison of alternative contest designs.
+This paper develops a dynamic game-theoretic model and Bayesian structural estimation framework for online crowdsourcing contests under noisy public feedback. Conditional on focal pairs selected using final private ranks, we recover latent competition states, effort dynamics, and contest-specific primitives from contest-phase submission timing and public leaderboard trajectories, and assess the estimated primitives using private-leaderboard path values excluded from the likelihood. Across 73 Kaggle contests, the diagnostic evidence is strongest for innovation risk; for signal precision, it is directionally consistent but more modest. The counterfactual exercise then traces the model-implied best-output-preserving prize-duration substitution frontier rather than attempting a full welfare comparison of alternative contest designs.
 
 
 Several limitations deserve mention. First, the empirical setting differs from the baseline model in several respects: many contests use multi-tier or team-based prizes, actual contests involve more than two strategic contestants, leaderboard metrics vary across contests, and the focal pair is selected using final private ranks. Second, the empirical filter assumes that inference variance quickly converges and approximates asynchronous submission-triggered updates with a continuous-update equation. A hybrid filter with discrete measurement updates would represent irregular observation times more faithfully but would substantially reduce tractability. Third, despite the common logit transformation, cross-contest comparisons of innovation risk and private-path volatility may retain a shared transformed-score scale component. These limitations suggest natural extensions involving richer prize structures, multi-agent dynamics, and more flexible learning mechanisms.
@@ -1643,138 +1749,258 @@ Several limitations deserve mention. First, the empirical setting differs from t
 
 \section{Proofs}
 
-\proof{Proof of Proposition~\ref{prop-monotonicity-M}}
-Under the symmetric benchmark $c_i=c_j=c$, equation~(\ref{eq-totaleffort-reduced}) implies that the leading-order approximation to total expected effort at $t=0$ is
-\begin{equation*}
-\bar M(\tilde y_0,0)
-=
-\frac{2\theta\sqrt{T}}{\sigma c\sqrt{2\pi}}
-\exp\left(
--\frac{\tilde y_0^2}{2\sigma^2T}
-\right).
-\end{equation*}
-For notational convenience, define $A=2/(\sigma c\sqrt{2\pi})$ and $B=\tilde y_0^2/(2\sigma^2)$. Then
-\begin{equation*}
-\bar M(\tilde y_0,0)
-=
-A\theta T^{1/2}\exp(-B/T).
-\end{equation*}
-Since $\lambda$ does not enter $\bar M(\tilde y_0,0)$, the approximated total effort is neutral with respect to the signal precision $\lambda$. Moreover, because the designer's objective is given by $\Pi(\theta,T,\lambda)=\beta^T\bar M(\tilde y_0,0)^\alpha-\theta$, it is also neutral with respect to $\lambda$. It remains to establish the dependence on $\theta$ and $T$.
+\proof{Proof of Lemma~\ref{lem-best-output}}
+All expectations below are conditional on the fixed initial information $I_0$; we suppress this conditioning in the notation.
+Integrating equation~\eqref{eq-individual-output-levels} from $0$ to $T$ gives, for $k\in\{i,j\}$,
+\[
+x_T^k=\int_0^T m_k(\tilde y_t,t)dt+\frac{\sigma}{\sqrt2}W_T^k.
+\]
+The equilibrium efforts are integrable by Lemma~\ref{lem-total-effort}, and the Brownian terms have conditional mean zero. Hence,
+\[
+\mathbb E\left[\frac{x_T^i+x_T^j}{2}\right]
+=\frac12\mathbb E\left[\int_0^T
+\bigl(m_i(\tilde y_t,t)+m_j(\tilde y_t,t)\bigr)dt\right]
+=\frac12M(0,0).
+\]
+Because $y_T=x_T^i-x_T^j$, the pathwise identity
+\[
+\max\{x_T^i,x_T^j\}
+=\frac{x_T^i+x_T^j}{2}+\frac{|y_T|}{2}
+\]
+and the preceding expectation establish equation~\eqref{eq-best-output-decomposition}.
 
-We first prove the monotonicity of $\bar M(\tilde y_0,0)$. Differentiating with respect to $\theta$ gives $\partial \bar M(\tilde y_0,0)/\partial \theta=A T^{1/2}\exp(-B/T)>0$, because $A>0$ and $T>0$. Hence, $\bar M(\tilde y_0,0)$ is increasing in the prize amount $\theta$.
-Next, differentiating with respect to $T$ gives
-\begin{equation*}
-\frac{\partial \bar M(\tilde y_0,0)}{\partial T}
-=
-A\theta \exp(-B/T)
-\left(
-\frac{1}{2}T^{-1/2}
-+
-BT^{-3/2}
-\right).
-\end{equation*}
-Since $A>0$, $\theta>0$, $B\geq 0$, and $T>0$, we have $\partial \bar M(\tilde y_0,0)/\partial T>0$. Therefore, $\bar M(\tilde y_0,0)$ is increasing in the contest duration $T$.
+We next establish equation~\eqref{eq-terminal-gap-leading}.
+Under symmetric costs, $w_i=w_j=w$, and the quantities in Theorem~\ref{thm-equilibrium-effort} reduce to
+\[
+r_w:=\rho_i=\rho_j=\tanh(w/2),
+\qquad
+g_w:=\gamma(r_w)=\frac{\sinh w+w}{2}.
+\]
+The function $\gamma$ is odd, and equation~\eqref{eq-gamma} gives
+\[
+\gamma'(u)=\frac{2}{(1-u^2)^2}>0,
+\qquad u\in(-1,1).
+\]
+Thus, $\gamma^{-1}$ is odd and strictly increasing. Since
+\[
+\rho(z)=\gamma^{-1}\!\left(g_w[2\Phi(z)-1]\right)
+\]
+and $|2\Phi(z)-1|\leq1$, it follows that $|\rho(z)|\leq r_w$ for every $z\in\mathbb R$.
+Under symmetry, the definition of $A_+$ in Lemma~\ref{lem-total-effort} therefore implies
+\[
+\left|A_+(z)e^{-z^2/2}\right|
+=\frac{g_w}{\sqrt{2\pi}}
+\bigl(1-\rho(z)^2\bigr)|\rho(z)|e^{-z^2/2}
+\leq\frac{g_wr_w}{\sqrt{2\pi}}.
+\]
+Moreover, as $w\downarrow0$,
+\[
+r_w=\frac{w}{2}+O(w^3),
+\qquad
+g_w=w+O(w^3),
+\]
+so $g_wr_w=O(w^2)$.
 
-We now turn to the contest designer's objective. Using the expression above, we can write
-\begin{equation*}
-\Pi(\theta,T,\lambda)
-=
-A^\alpha \theta^\alpha \beta^T T^{\alpha/2}\exp(-\alpha B/T)-\theta.
-\end{equation*}
+Let $z_t:=\tilde y_t/(\sigma\sqrt{T-t})$ and define the cumulative equilibrium effort difference
+\[
+J_T:=\int_0^T
+\bigl(m_i(\tilde y_t,t)-m_j(\tilde y_t,t)\bigr)dt.
+\]
+Subtracting the two effort expressions in equation~\eqref{eq-equilibrium-effort} yields
+\[
+m_i(\tilde y_t,t)-m_j(\tilde y_t,t)
+=\frac{2\sigma}{\sqrt{T-t}}A_+(z_t)e^{-z_t^2/2}.
+\]
+The preceding uniform bound therefore gives, pathwise,
+\[
+|J_T|
+\leq\frac{2\sigma g_wr_w}{\sqrt{2\pi}}
+\int_0^T\frac{dt}{\sqrt{T-t}}
+=\frac{4\sigma g_wr_w\sqrt T}{\sqrt{2\pi}}
+=O(w^2\sigma\sqrt T).
+\]
 
-First, fix $T>0$. Define $D(T)=A T^{1/2}\exp(-B/T)$. Then $\bar M(\tilde y_0,0)=D(T)\theta$, and the objective becomes
-\begin{equation*}
-\Pi(\theta,T,\lambda)
-=
-\beta^T D(T)^\alpha \theta^\alpha
--
-\theta.
-\end{equation*}
-Differentiating with respect to $\theta$ gives $\partial \Pi(\theta,T,\lambda)/\partial \theta=\alpha\beta^T D(T)^\alpha \theta^{\alpha-1}-1$. The second derivative is
-\begin{equation*}
-\frac{\partial^2 \Pi(\theta,T,\lambda)}{\partial \theta^2}
-=
-\alpha(\alpha-1)\beta^T D(T)^\alpha \theta^{\alpha-2}
-<
-0,
-\end{equation*}
-because $0<\alpha<1$. Hence, for any fixed $T>0$, the objective is strictly concave in $\theta$. Moreover, as $\theta\downarrow 0$, we have $\theta^{\alpha-1}\to+\infty$, so $\partial \Pi/\partial \theta\to+\infty$; as $\theta\to+\infty$, we have $\theta^{\alpha-1}\to 0$, so $\partial \Pi/\partial \theta\to -1$. Therefore, there exists a unique maximizer in $\theta$, and the objective is single-peaked in the prize amount $\theta$.
-
-Next, fix $\theta>0$ and consider the dependence on $T$. Up to the constant term $-\theta$, the objective can be written as
-\begin{equation*}
-\Pi(\theta,T,\lambda)+\theta
-=
-(A\theta)^\alpha
-\beta^T
-T^{\alpha/2}
-\exp(-\alpha B/T).
-\end{equation*}
-Let $G(T)=\log(\Pi(\theta,T,\lambda)+\theta)$. Since $\Pi(\theta,T,\lambda)+\theta>0$, the sign of $\partial \Pi/\partial T$ is the same as the sign of $G'(T)$. We have
-\begin{equation*}
-G(T)
-=
-\alpha\log(A\theta)
-+
-T\log\beta
-+
-(\alpha/2)\log T
--
-\alpha B/T.
-\end{equation*}
-Therefore, $G'(T)=\log\beta+\alpha/(2T)+\alpha B/T^2$.
-
-If $\beta=1$, then $\log\beta=0$, and hence $G'(T)=\alpha/(2T)+\alpha B/T^2>0$. Thus, when $\beta=1$, the objective is increasing in $T$.
-
-If $0<\beta<1$, then $\log\beta<0$. Moreover,
-\begin{equation*}
-G''(T)
-=
--\alpha/(2T^2)-2\alpha B/T^3
-<
-0.
-\end{equation*}
-Thus, $G'(T)$ is strictly decreasing in $T$. As $T\downarrow 0$, $G'(T)\to+\infty$, while as $T\to+\infty$, $G'(T)\to\log\beta<0$. Hence, there exists a unique $T^\star>0$ such that $G'(T^\star)=0$. Since the sign of $\partial \Pi/\partial T$ is the same as the sign of $G'(T)$, the objective increases for $T<T^\star$ and decreases for $T>T^\star$. Therefore, if $0<\beta<1$, the objective is single-peaked in the contest duration $T$.
-
-Finally, consider the joint optimization over $(\theta,T)$. For each fixed $T>0$, the first-order condition with respect to $\theta$ is
-\begin{equation*}
-\alpha A^\alpha \beta^T T^{\alpha/2}\exp(-\alpha B/T)\theta^{\alpha-1}=1.
-\end{equation*}
-Because $0<\alpha<1$, this condition has a unique solution, denoted by $\theta^\star(T)$, given by
-\begin{equation*}
-\theta^\star(T)
-=
-\left[
-\alpha A^\alpha \beta^T T^{\alpha/2}\exp(-\alpha B/T)
-\right]^{1/(1-\alpha)}.
-\end{equation*}
-The strict concavity in $\theta$ established above implies that $\theta^\star(T)$ is the unique optimal prize conditional on $T$.
-
-We can therefore study the profile objective $\Pi(\theta^\star(T),T,\lambda)$. By the first-order condition, $A^\alpha \beta^T T^{\alpha/2}\exp(-\alpha B/T)(\theta^\star(T))^\alpha=\theta^\star(T)/\alpha$. Hence,
-\begin{equation*}
-\Pi(\theta^\star(T),T,\lambda)
-=
-\frac{1-\alpha}{\alpha}\theta^\star(T).
-\end{equation*}
-Since $(1-\alpha)/\alpha>0$, maximizing the profile objective over $T$ is equivalent to maximizing $\theta^\star(T)$. Because the exponent $1/(1-\alpha)$ is positive, this is equivalent to maximizing $\beta^T T^{\alpha/2}\exp(-\alpha B/T)$ over $T>0$.
-
-Let $H(T)=T\log\beta+(\alpha/2)\log T-\alpha B/T$. Then maximizing $\beta^T T^{\alpha/2}\exp(-\alpha B/T)$ is equivalent to maximizing $H(T)$. Differentiating gives $H'(T)=\log\beta+\alpha/(2T)+\alpha B/T^2$, and
-\begin{equation*}
-H''(T)
-=
--\alpha/(2T^2)-2\alpha B/T^3
-<
-0.
-\end{equation*}
-Thus, $H(T)$ is strictly concave on $T>0$.
-
-If $0<\beta<1$, then $\log\beta<0$. Moreover, as $T\downarrow 0$, $H'(T)\to+\infty$, while as $T\to+\infty$, $H'(T)\to\log\beta<0$. Therefore, there exists a unique $T^\star>0$ such that $H'(T^\star)=0$. The corresponding optimal prize is $\theta^\star=\theta^\star(T^\star)$. Hence, when $0<\beta<1$, the joint problem admits a unique interior maximizer $(\theta^\star,T^\star)$.
-
-If $\beta=1$, then $H'(T)=\alpha/(2T)+\alpha B/T^2>0$ for all $T>0$. Therefore, the profile objective is increasing in $T$, and no finite interior maximizer in $T$ exists unless an upper bound on contest duration is imposed. If an upper bound $T\leq \bar T$ is imposed, the optimal duration is $T^\star=\bar T$, and the optimal prize is $\theta^\star(\bar T)$.
+Finally, $x_0^i=x_0^j=0$ implies $y_0=0$. Integrating the gap dynamics and using $W_T=(W_T^i-W_T^j)/\sqrt2$ gives
+\[
+y_T=J_T+\sigma W_T,
+\qquad W_T\sim\mathcal N(0,T).
+\]
+Consequently, $\mathbb E|\sigma W_T|=\sigma\sqrt{2T/\pi}$. The pathwise inequality
+$\bigl||a+b|-|a|\bigr|\leq|b|$, applied with $a=\sigma W_T$ and $b=J_T$, now yields
+\[
+\left|\frac12\mathbb E|y_T|
+-\frac{\sigma\sqrt T}{\sqrt{2\pi}}\right|
+\leq\frac12\mathbb E|J_T|
+=O(w^2\sigma\sqrt T),
+\]
+which proves equation~\eqref{eq-terminal-gap-leading}.
 \Halmos
 \endproof
 
+\proof{Proof of Proposition~\ref{prop-joint-design}}
+For fixed $T>0$, introduce the proof-local functions
+\[
+a(T):=\frac{\sigma\sqrt T}{\sqrt{2\pi}},
+\qquad
+b(T):=\frac{\sqrt T}{\sigma c\sqrt{2\pi}},
+\qquad
+s:=\sigma^2c.
+\]
+Equation~\eqref{eq-best-output-leading-approximation} can be written as
+\[
+\bar B(\theta,T)=a(T)+b(T)\theta=b(T)(\theta+s),
+\qquad a(T)=s b(T).
+\]
+Because $V''<0$, $V'$ is strictly decreasing. The limits $V'(0+)=\infty$ and $V'(\infty)=0$ imply that $V'$ maps $(0,\infty)$ onto $(0,\infty)$, so $(V')^{-1}$ is well defined and continuous.
 
+Holding $T$ fixed and differentiating equation~\eqref{eq-designer-best-output-objective} with respect to $\theta$ gives
+\[
+\frac{\partial\Pi(\theta,T)}{\partial\theta}
+=b(T)V'\!\left(a(T)+b(T)\theta\right)-1,
+\]
+and
+\[
+\frac{\partial^2\Pi(\theta,T)}{\partial\theta^2}
+=b(T)^2V''\!\left(a(T)+b(T)\theta\right)<0.
+\]
+Thus, the conditional prize problem is strictly concave. Since $V$ is bounded above, $\Pi(\theta,T)\to-\infty$ as $\theta\to\infty$, so its conditional maximizer is unique. It is zero when $b(T)V'(a(T))\leq1$ and otherwise satisfies
+\[
+V'\!\left(a(T)+b(T)\theta^*(T)\right)=\frac{1}{b(T)}.
+\]
+The two mutually exclusive cases can be written together as
+\[
+\begin{aligned}
+\theta^*(T)
+&=\left[\frac{(V')^{-1}(1/b(T))-a(T)}{b(T)}\right]_+\\
+&=\left[\frac{1}{b(T)}(V')^{-1}\!\left(\frac{1}{b(T)}\right)-s\right]_+\\
+&=\left[
+\sigma c\sqrt{\frac{2\pi}{T}}
+(V')^{-1}\!\left(\sigma c\sqrt{\frac{2\pi}{T}}\right)
+-\sigma^2c
+\right]_+.
+\end{aligned}
+\]
 
+We next prove existence of a finite positive optimal duration. Define the profile objective
+\[
+\widehat\Pi(T):=\Pi(\theta^*(T),T),
+\qquad T>0.
+\]
+The explicit expression for $\theta^*(T)$ above implies that $\theta^*(T)$, and hence $\widehat\Pi(T)$, is continuous on $(0,\infty)$.
+As $T\downarrow0$, $a(T)\downarrow0$. Concavity of $V$ gives
+\[
+0\leq a(T)V'(a(T))\leq V(a(T))-V(0)\longrightarrow0.
+\]
+Since $b(T)=a(T)/s$, we have $b(T)V'(a(T))\to0$, so $\theta^*(T)=0$ for all sufficiently small $T$. Therefore,
+\[
+\lim_{T\downarrow0}\widehat\Pi(T)=V(0)-D(0).
+\]
+Moreover, $V'(0+)=\infty$ and continuous differentiability of $D$ at zero imply
+\[
+\frac{V(a(T))-V(0)}{a(T)}\longrightarrow\infty,
+\qquad
+\frac{D(T)-D(0)}{a(T)}=O(\sqrt T)\longrightarrow0.
+\]
+Hence, $\widehat\Pi(T)>V(0)-D(0)$ for all sufficiently small positive $T$, which rules out the zero-duration boundary.
+
+To control the other boundary, choose any $T_1>0$ and set $d_1:=[D(T_1)-D(0)]/T_1>0$. Convexity of $D$ implies, for $T\geq T_1$,
+\[
+D(T)\geq D(T_1)+d_1(T-T_1),
+\]
+so $D(T)\to\infty$. Since $V$ is bounded above and $\theta\geq0$,
+\[
+\widehat\Pi(T)
+\leq\sup_{B\geq0}V(B)-D(T)
+\longrightarrow-\infty.
+\]
+The continuity and the two boundary results imply that $\widehat\Pi$ attains a global maximum at some $T^*\in(0,\infty)$. Setting $\theta^*:=\theta^*(T^*)$ proves existence of an optimal pair and, by the conditional-prize formula, equation~\eqref{eq-optimal-prize}.
+
+It remains to establish equation~\eqref{eq-optimal-duration-condition}. Suppose $\theta^*>0$. In a neighborhood of $T^*$, the conditional prize is interior, and its first-order condition is
+\[
+b(T)V'\!\left(\bar B(\theta^*(T),T)\right)=1.
+\]
+Because the derivative of the left-hand side with respect to $\theta^*(T)$ is $b(T)^2V''<0$, the implicit function theorem makes $\theta^*(T)$ continuously differentiable in this neighborhood.
+When $\theta$ is held fixed, $b'(T)=b(T)/(2T)$ and therefore
+\[
+\frac{\partial\bar B(\theta,T)}{\partial T}
+=b'(T)(\theta+s)
+=\frac{\bar B(\theta,T)}{2T}.
+\]
+Applying the chain rule to the profile objective and then using the prize first-order condition gives the envelope relation
+\[
+\begin{aligned}
+\widehat\Pi'(T)
+&=\frac{\partial\Pi}{\partial\theta}
+\frac{d\theta^*(T)}{dT}
++\frac{\partial\Pi}{\partial T}\\
+&=V'\!\left(\bar B(\theta^*(T),T)\right)
+\frac{\bar B(\theta^*(T),T)}{2T}-D'(T).
+\end{aligned}
+\]
+At the interior optimal duration $T^*$, $\widehat\Pi'(T^*)=0$. In addition,
+\[
+V'\!\left(\bar B(\theta^*,T^*)\right)\bar B(\theta^*,T^*)
+=\frac{1}{b(T^*)}b(T^*)(\theta^*+s)
+=\theta^*+s.
+\]
+Substituting this equality into the envelope condition and using $s=\sigma^2c$ gives equation~\eqref{eq-optimal-duration-condition}.
+\Halmos
+\endproof
+
+\proof{Derivation of Remark~\ref{rem-comparative-statics}}
+Retain the proof-local definitions $a(T)=\sigma\sqrt T/\sqrt{2\pi}$, $b(T)=\sqrt T/(\sigma c\sqrt{2\pi})$, and $s=\sigma^2c$. Let
+\[
+B^*(T):=\bar B(\theta^*(T),T)=b(T)(\theta^*(T)+s).
+\]
+On the interior-prize region, $b(T)V'(B^*(T))=1$. Since $d\log b(T)/d\log T=1/2$, log-differentiation gives
+\[
+0=\frac12-R(B^*(T))\frac{d\log B^*(T)}{d\log T},
+\]
+and hence
+\[
+\frac{d\log B^*(T)}{d\log T}
+=\frac{1}{2R(B^*(T))}.
+\]
+Using $\theta^*(T)+s=B^*(T)/b(T)$ then yields
+\[
+\frac{d\log(\theta^*(T)+s)}{d\log T}
+=\frac{1-R(B^*(T))}{2R(B^*(T))}\geq0,
+\]
+where the inequality follows from $R\leq1$. At a prize corner, the marginal return to increasing the prize from zero is $b(T)V'(a(T))$. Its log derivative is
+\[
+\frac{d\log[b(T)V'(a(T))]}{d\log T}
+=\frac{1-R(a(T))}{2}\geq0.
+\]
+Thus, the set on which the prize is interior is an upper interval in $T$, and continuity at its boundary implies that $\theta^*(T)$ is nondecreasing on $(0,\infty)$.
+
+Now define the gross-value profile
+\[
+G(T):=\max_{\theta\geq0}
+\{V(\bar B(\theta,T))-\theta\}.
+\]
+Within either prize region, the envelope theorem gives
+\[
+G'(T)=V'(B^*(T))\frac{B^*(T)}{2T}.
+\]
+At a prize corner, $B^*(T)=a(T)$, so
+\[
+\frac{d\log G'(T)}{d\log T}
+=-1+\frac{1-R(a(T))}{2}
+=-\frac{1+R(a(T))}{2}<0.
+\]
+On the interior-prize region, the prize first-order condition gives
+\[
+G'(T)=\frac{\theta^*(T)+s}{2T},
+\]
+and therefore
+\[
+\frac{d\log G'(T)}{d\log T}
+=\frac{1-R(B^*(T))}{2R(B^*(T))}-1
+=\frac{1-3R(B^*(T))}{2R(B^*(T))}<0,
+\]
+where strict negativity follows from $R>1/3$. At a boundary between the two prize regions, $\theta^*(T)=0$ and $b(T)V'(a(T))=1$, so both expressions for $G'(T)$ equal $s/(2T)$. Hence, $G'(T)$ is continuous and strictly decreasing. Since convexity of $D$ makes $D'(T)$ nondecreasing, the derivative $G'(T)-D'(T)$ crosses zero at most once. Existence from Proposition~\ref{prop-joint-design} then implies that the optimal duration is unique.
+\Halmos
+\endproof
 
 \proof{Proof of Lemma~\ref{lmm-params-identifiability}}
 The proof proceeds under the maintained structural specification in
