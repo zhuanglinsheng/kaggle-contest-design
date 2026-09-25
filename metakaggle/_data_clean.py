@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 #from scipy import stats
 
-from leaderboard import Leaderboard
+from metakaggle.leaderboard import Leaderboard
 
 type Leaderboard_Type = Literal['Normal', 'Percentage_Big', 'Percentage_Small']
 

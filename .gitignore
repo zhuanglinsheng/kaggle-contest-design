@@ -188,12 +188,33 @@ explore_meta_kaggle.ipynb
 *.out
 *.synctex.gz
 *.blg
+*.fdb_latexmk
+*.fls
+*.log
 #*.pdf
 
 # stan
 synthetic_data/synthetic_data
+synthetic_data/synthetic_data_90_replicated
+metakaggle/real_data
+metakaggle/real_data.hpp
 test_stan/test_nhpp
 test_stan/test_poisson
 # stan data
 *.json
 *.pkl
+
+# Local rendering and scratch artifacts
+tmp/
+paper/tmp/
+
+# Raw CmdStan chains are reproducible; keep compact summaries separately.
+results/**/contest_*/
+results/**/*_chain_*.csv
+results/**/*_chain_*.log
+archive/results/**/contest_*/
+archive/results/**/*_chain_*.csv
+archive/results/**/*_chain_*.log
+
+# Large posterior-level draws are reproducible from the retained summaries.
+**/counterfactual_draws.csv

@@ -34,30 +34,7 @@ functions {
 		return merged;
 	}
 
-	/* Ryvkin's model */
-
-	real fn_gamma(real u) {
-		if ((u < -1) || (u > 1)) {
-			reject("fn_gamma(x): -1 < x < 1; found x = ", u);
-		}
-		if (u == -1) {
-			return negative_infinity();
-		} else if (u == 1) {
-			return positive_infinity();
-		} else {
-			return u / (1 - pow(u, 2)) + atanh(u);
-		}
-	}
-
-	real fn_invgamma(real x) {
-		return atan(0.856 * x) * 2 / pi();
-	}
-
-	real fn_rho(real z, real gamma_rho_i, real gamma_rho_j) {
-		real loc = normal_cdf(z | 0, 1) * (gamma_rho_i + gamma_rho_j) - gamma_rho_j;
-		return fn_invgamma(loc);
-	}
-
+	/* Leading-order equilibrium in Theorem 1 */
 	vector fn_efforts(
 			real y,
 			real t,      // current day
@@ -65,28 +42,18 @@ functions {
 			real theta,
 			real sigma,  // daily innovation shock
 			real c_i,    // daily cost
-			real c_j     // daily cost
+			real c_j,    // daily cost
+			real lambda  // signal precision
 	) {
 		if (T <= t) {
 			reject("fn_efforts(...): t < T; found (t, T) = ", T, t);
 		}
-		real sigma_power_2 = pow(sigma, 2);
-		real w_i = theta / (sigma_power_2 * c_i);
-		real w_j = theta / (sigma_power_2 * c_j);
-		real rho_i = (exp(w_i) + exp(-w_j) - 2) / (exp(w_i) - exp(-w_j));
-		real rho_j = (exp(w_j) + exp(-w_i) - 2) / (exp(w_j) - exp(-w_i));
-		real gamma_rho_i = fn_gamma(rho_i);
-		real gamma_rho_j = fn_gamma(rho_j);
-		real y_stderr = sigma * sqrt(T - t);
-		real density_y = exp(normal_lpdf(y | 0, y_stderr));  // normal density
-		real z = y / y_stderr;
-		real rho_z = fn_rho(z, gamma_rho_i, gamma_rho_j);
-		real K = sigma_power_2 / 2 * (gamma_rho_i + gamma_rho_j) * (1 - pow(rho_z, 2));
-		real m_i = density_y * K * (1 + rho_z);
-		real m_j = density_y * K * (1 - rho_z);
+		real bar_S = sigma / sqrt(lambda);
+		real Q_t = square(sigma) * (T - t) + bar_S;
+		real kernel = exp(-square(y) / (2 * Q_t)) / sqrt(2 * pi() * Q_t);
 		vector[2] efforts;
-		efforts[1] = m_i;
-		efforts[2] = m_j;
+		efforts[1] = theta * kernel / c_i;
+		efforts[2] = theta * kernel / c_j;
 		return efforts;  // daily effort rate
 	}
 
@@ -98,6 +65,7 @@ data {
 	real<lower=0> theta;
 	real<lower=0> ratio;
 	real<lower=0> Delta2f;
+	int<lower=0, upper=1> estimate_r;
 	//*/
 	int<lower=0> N_Delta;
 	/*
@@ -118,40 +86,42 @@ data {
 transformed data {
 	// for submissions (player i)
 	array[Ni] int<lower=1, upper=N_Delta> hat_t_i_timeidx;
+	array[Nj] int<lower=1, upper=N_Delta> hat_t_j_timeidx;
+	array[Ni + Nj] int events_idx;
+	int N_obs = 0;
+	array[Ni + Nj] int obs_idx_full = rep_array(1, Ni + Nj);
+	vector[Ni + Nj] obs_h_full = rep_vector(1.0, Ni + Nj);
+	matrix[Ni + Nj, Ni + Nj] unit_cov_y_full = rep_matrix(0, Ni + Nj, Ni + Nj);
 	for (ii in 1 : Ni) {
-		hat_t_i_timeidx[ii] = to_int(ceil(hat_t_i[ii])) + 1;
+		hat_t_i_timeidx[ii] = to_int(ceil(hat_t_i[ii]));
 	}
 	// for submissions (player j)
-	array[Nj] int<lower=1, upper=N_Delta> hat_t_j_timeidx;
 	for (jj in 1 : Nj) {
-		hat_t_j_timeidx[jj] = to_int(ceil(hat_t_j[jj])) + 1;
+		hat_t_j_timeidx[jj] = to_int(ceil(hat_t_j[jj]));
 	}
 
-	// for leaderboard
-	///*
-	// merge submission times
-	array[Ni + Nj] int<lower=1, upper=N_Delta> events_idx =
-					merge_ascending_arrays(hat_t_i_timeidx, hat_t_j_timeidx);
-	matrix [Ni + Nj, Ni + Nj] unit_cov_y = rep_matrix(0, Ni + Nj, Ni + Nj);
-	for (i in 1 : Ni + Nj) {
-		for (j in 1 : Ni + Nj) {
-			real t_i = events_idx[i] - 1;
-			real t_j = events_idx[j] - 1;
-			unit_cov_y[i, j] = fmin(t_i, t_j) * Delta2f;
+	events_idx = merge_ascending_arrays(hat_t_i_timeidx, hat_t_j_timeidx);
+	for (kk in 1 : Ni + Nj) {
+		if (kk == 1 || events_idx[kk] != events_idx[kk - 1]) {
+			int previous_step = N_obs == 0 ? 0 : obs_idx_full[N_obs] - 1;
+			N_obs += 1;
+			obs_idx_full[N_obs] = events_idx[kk] + 1;
+			obs_h_full[N_obs] = (events_idx[kk] - previous_step) * Delta2f;
 		}
 	}
-	matrix [Ni + Nj, Ni + Nj] unit_cov_obs = rep_matrix(0, Ni + Nj, Ni + Nj);
-	for (i in 1 : Ni + Nj) {
-		unit_cov_obs[i, i] = 1.0;
+	for (i in 1 : N_obs) {
+		for (j in 1 : N_obs) {
+			real t_i = obs_idx_full[i] - 1;
+			real t_j = obs_idx_full[j] - 1;
+			unit_cov_y_full[i, j] = fmin(t_i, t_j) * Delta2f;
+		}
 	}
-	// */
 
 	// for debug
 	//real<lower=5e-1, upper=5>     c_i = 1.2;
 	//real<lower=5e-1, upper=5>     c_j = 1.5;
 	//real<lower=5e-1, upper=10>    sigma = 2.0;
 	//real<lower=1e-6, upper=100>   lambda = 0.5;
-	real<lower=1e-6, upper=1000>  r = ratio;
 	//real<lower=-20, upper=20>     mu_0 = 0.0;
 }
 
@@ -161,14 +131,27 @@ parameters {
 	real<lower=5e-1, upper=10>    sigma;
 	real<lower=1e-6, upper=100>   lambda;
 	real<lower=-20, upper=20>     mu_0;
-	//real<lower=1e-6, upper=1000>  r;
+	real log_r;
 }
 
-transformed parameters {
+model {
+	array[N_obs] int obs_idx = obs_idx_full[1 : N_obs];
+	vector[N_obs] obs_h = obs_h_full[1 : N_obs];
+	matrix[N_obs, N_obs] unit_cov_y = unit_cov_y_full[1 : N_obs, 1 : N_obs];
+
+	/* priors */
+	c_i ~ lognormal(log(1.0), 0.75);
+	c_j ~ lognormal(log(1.0), 0.75);
+	sigma ~ lognormal(log(2.0), 0.5);
+	lambda ~ lognormal(log(1.0), 0.75);
+	mu_0 ~ normal(0.0, 1);       // mean = hat{y}_0, variance is smaller (informative)
+	log_r ~ normal(log(ratio), 0.35);
+	real r = estimate_r == 1 ? exp(log_r) : ratio;
+
 	// calculate m_i, m_j and tilde_y
 	///*
-	vector<lower=0>[N_Delta] m_i;  // starts at t = 0, ends at t = deadline
-	vector<lower=0>[N_Delta] m_j;  // starts at t = 0, ends at t = deadline
+	vector[N_Delta] m_i;  // starts at t = 0, ends at t = deadline
+	vector[N_Delta] m_j;  // starts at t = 0, ends at t = deadline
 	vector[N_Delta + 1] tilde_y;   // starts at t = 0, ends at t = deadline
 	tilde_y[1] = mu_0;
 
@@ -177,42 +160,40 @@ transformed parameters {
 				tilde_y[i],
 				(i - 1) * Delta2f,  // time = i - 1, transform to float
 				N_Delta * Delta2f,  // deadline = T, transform to float
-				theta, sigma, c_i, c_j
+				theta, sigma, c_i, c_j, lambda
 		);
 		m_i[i] = ms[1];
 		m_j[i] = ms[2];
-		real kalman_gain = sqrt(lambda) * sigma * (hat_y[i] - tilde_y[i]);
-		tilde_y[i + 1] = tilde_y[i] + (ms[1] - ms[2] + kalman_gain) * Delta2f;
+		real kalman_weight = -expm1(-sqrt(lambda) * sigma * Delta2f);
+		tilde_y[i + 1] = tilde_y[i] + (ms[1] - ms[2]) * Delta2f
+				+ kalman_weight * (hat_y[i] - tilde_y[i]);
 	}
 	//*/
 
 	// intensity (player i)
-	vector<lower=0>[N_Delta] intensity_i = r * m_i / 24.0;
-	vector<lower=0>[Ni] intensity_i_at_events = intensity_i[hat_t_i_timeidx];
+	vector[N_Delta] intensity_i = r * m_i / 24.0;
+	vector[Ni] intensity_i_at_events = intensity_i[hat_t_i_timeidx];
 
 	// intensity (player j)
-	vector<lower=0>[N_Delta] intensity_j = r * m_j / 24.0;
-	vector<lower=0>[Nj] intensity_j_at_events = intensity_j[hat_t_j_timeidx];
+	vector[N_Delta] intensity_j = r * m_j / 24.0;
+	vector[Nj] intensity_j_at_events = intensity_j[hat_t_j_timeidx];
 
 	// hat_y: mean and variance
 	vector[N_Delta] effort_gap = m_i - m_j;
-	vector[Ni + Nj] hat_y_mean;
-	for (ii in 1 : Ni + Nj) {
-		hat_y_mean[ii] = sum(effort_gap[:events_idx[ii]]) * Delta2f;
+	vector[N_obs] hat_y_mean;
+	for (ii in 1 : N_obs) {
+		hat_y_mean[ii] = mu_0 + sum(effort_gap[:obs_idx[ii] - 1]) * Delta2f;
 	}
 
-	matrix[Ni + Nj, Ni + Nj] hat_y_cov;
-	hat_y_cov = pow(sigma, 2) * unit_cov_y + unit_cov_obs / (Delta2f * lambda);
-}
-
-model {
-	/* priors */
-	c_i ~ normal(0.5, 5);        // truncated normal
-	c_j ~ normal(0.5, 5);        // truncated normal
-	sigma ~ normal(1.0, 5);      // truncated normal
-	lambda ~ normal(1.0, 5);     // truncated normal
-	mu_0 ~ normal(0.0, 1);       // mean = hat{y}_0, variance is smaller (informative)
-	//r ~ normal(15, 5);
+	matrix[N_obs, N_obs] hat_y_cov;
+	vector[N_obs] obs_var;
+	for (ii in 1 : N_obs) {
+		obs_var[ii] = 1 / (lambda * obs_h[ii]);
+	}
+	real bar_S = sigma / sqrt(lambda);
+	hat_y_cov = rep_matrix(bar_S, N_obs, N_obs)
+			+ square(sigma) * unit_cov_y
+			+ diag_matrix(obs_var);
 
 	/* likelihood */
 	if (Ni > 1) {
@@ -221,5 +202,5 @@ model {
 	if (Nj > 1) {
 		target += sum(log(intensity_j_at_events)) - sum(intensity_j);
 	}
-	target += multi_normal_lpdf(hat_y[events_idx] | hat_y_mean, hat_y_cov);
+	target += multi_normal_lpdf(hat_y[obs_idx] | hat_y_mean, hat_y_cov);
 }
