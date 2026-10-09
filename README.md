@@ -22,47 +22,40 @@ the current results.
 
 ## Environment
 
-Python 3.11 or later is recommended. Create an isolated environment and
-install the declared dependencies:
-
-```sh
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
-The estimation workflows also require a working CmdStan installation and the
-compiled executables `metakaggle/real_data`, `synthetic_data/synthetic_data`,
-and `synthetic_data/synthetic_data_90_replicated`. Compile all three with
-`make models`.
+The tested environment is Python 3.13.15 with the exact packages in
+[`requirements-lock.txt`](requirements-lock.txt), CmdStan 2.36.0, and TeX Live
+2025. Create or refresh the local environment with `make setup`. Raw-data
+download is optional and requires separate Kaggle API credentials; the
+analysis pipeline itself does not import that downloader.
 
 ## Current workflow
 
-Commands are run from the repository root. The stages are intentionally
-separate because estimation is expensive and resumable.
+Commands are run from the repository root. For an existing release, the normal
+verification path is:
 
 ```sh
 make test
-make figure3
-make synthetic-recovery
-make estimate
-make finalize-estimation
-make counterfactuals
-make validate-main
-make build-robustness-data
-make estimate-robustness
-make finalize-robustness
-make validate-robustness
+make verify-release
 make paper
 ```
 
+To rebuild all paper-facing tables and figures from the already accepted
+posterior chains, run `make reproduce-derived`. Bayesian estimation and
+Chapter 6 fitting remain separate, resumable stages because they are costly.
+After intentionally updating a release, run `make release-manifest` followed
+by `make verify-release`.
+
 See [`pipeline/README.md`](pipeline/README.md) for inputs, outputs, and the
-purpose of each stage. Prize units are defined once in
+purpose of each stage, and [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md)
+for the exact release boundary and commands. Prize units are defined once in
 [`pipeline/config.py`](pipeline/config.py): source JSON files use thousands of
 U.S. dollars, while the current estimation uses units of USD 100,000.
 
 ## Current versus historical outputs
 
-Only `results/` is used by the current pipeline. Outputs from superseded
-estimators, prize-unit experiments, and earlier counterfactual exercises are
-retained under `archive/results/` for provenance.
+Only `results/` is used by the current pipeline. The publication subset is
+listed in [`results/README.md`](results/README.md) and pinned by
+`results/release_manifest.json`. Estimation shards referenced by the accepted
+manifest remain active provenance even when their directory names describe an
+earlier batch. Superseded paper versions, notebooks, and results live under
+`archive/`.

@@ -1,0 +1,41 @@
+{
+  "n_contests": 73,
+  "full_disclosure_policies": 67,
+  "finite_policies": 6,
+  "negative_expected_gains": 0,
+  "groups": [
+    {
+      "group": "All contests",
+      "n_contests": 73,
+      "share_pct": 100.0,
+      "gain_q25_pct": 0.03795405399145135,
+      "gain_median_pct": 0.15634263713164565,
+      "gain_q75_pct": 0.44114541189053114
+    },
+    {
+      "group": "Increase precision",
+      "n_contests": 67,
+      "share_pct": 91.78082191780823,
+      "gain_q25_pct": 0.04177983333336632,
+      "gain_median_pct": 0.1470678221018762,
+      "gain_q75_pct": 0.3987307063200052
+    },
+    {
+      "group": "Decrease precision",
+      "n_contests": 3,
+      "share_pct": 4.109589041095891,
+      "gain_q25_pct": 1.0087564235388924,
+      "gain_median_pct": 1.776193740423282,
+      "gain_q75_pct": 2.9665954965630514
+    },
+    {
+      "group": "Direction uncertain",
+      "n_contests": 3,
+      "share_pct": 4.109589041095891,
+      "gain_q25_pct": 0.014219950655758318,
+      "gain_median_pct": 0.028422387496274126,
+      "gain_q75_pct": 1.7299520141204727
+    }
+  ],
+  "interpretation": "Single policy maximizing posterior mean calibrated output; current output integrates joint posterior including current precision."
+}

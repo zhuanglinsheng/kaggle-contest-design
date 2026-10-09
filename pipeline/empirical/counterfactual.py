@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -15,6 +16,7 @@ from pipeline.config import (
     MAIN_DATA_DIR,
     MAIN_ESTIMATION_DIR,
     PRIZE_DIVISOR_FROM_THOUSANDS,
+    resolve_manifest_path,
 )
 
 FIT_ROOT = MAIN_ESTIMATION_DIR
@@ -92,13 +94,18 @@ def required_prize(
 
 def read_draws(contest_id: int) -> dict[str, np.ndarray]:
     chains: list[dict[str, list[float]]] = []
-    with (FIT_ROOT / "accepted_chain_sources.csv").open() as handle:
+    manifest_path = FIT_ROOT / "accepted_chain_sources.csv"
+    with manifest_path.open() as handle:
         manifest = {
-            (int(row["contest_id"]), row["mode"]): row["accepted_source"]
+            (int(row["contest_id"]), row["mode"]): row
             for row in csv.DictReader(handle)
         }
-    source = manifest[(contest_id, "full")]
-    contest_dir = (
+    entry = manifest[(contest_id, "full")]
+    if entry.get("input_sha256") != hashlib.sha256(
+            (DATA_DIR / f"contest_{contest_id}.json").read_bytes()).hexdigest():
+        raise RuntimeError(f"Unmatched input data for counterfactual contest {contest_id}")
+    source = entry["accepted_source"]
+    contest_dir = resolve_manifest_path(entry["run_dir"], manifest_path) if entry.get("run_dir") else (
         FIT_DIR / f"contest_{contest_id}"
         if source == "initial"
         else FIT_ROOT / source / "full" / f"contest_{contest_id}"
@@ -174,7 +181,7 @@ def write_csv(path: Path, rows: list[dict]) -> None:
     if not rows:
         return
     with path.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -213,8 +220,10 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     precision_rows: list[dict] = []
     detail: list[dict] = []
-    for contest_dir in sorted(FIT_DIR.glob("contest_*")):
-        contest_id = int(contest_dir.name.split("_")[-1])
+    with (FIT_ROOT / "accepted_chain_sources.csv").open() as handle:
+        contest_ids = sorted(int(row["contest_id"]) for row in csv.DictReader(handle)
+                             if row["mode"] == "full")
+    for contest_id in contest_ids:
         row, contest_detail = analyze_contest(contest_id, args.theta_min)
         precision_rows.append(row)
         detail.extend(contest_detail)

@@ -48,6 +48,8 @@ data {
   real<lower=0> theta;
   real<lower=0> Delta2f;
   int<lower=1> N_Delta;
+  int<lower=1, upper=N_Delta> count_start_idx;
+  real<lower=0> T_contest;
   int<lower=0> Ni;
   int<lower=0> Nj;
   vector<lower=0, upper=N_Delta>[Ni] hat_t_i;
@@ -62,13 +64,22 @@ transformed data {
   int N_obs = 0;
   array[Ni + Nj] int obs_idx_full = rep_array(1, Ni + Nj);
   vector[Ni + Nj] obs_h_full = rep_vector(Delta2f, Ni + Nj);
-  matrix[Ni + Nj, Ni + Nj] unit_cov_y_full = rep_matrix(0, Ni + Nj, Ni + Nj);
+
+  if (T_contest < N_Delta * Delta2f) {
+    reject("The observation window must not exceed the contest deadline");
+  }
 
   for (ii in 1 : Ni) {
     hat_t_i_timeidx[ii] = max(1, to_int(ceil(hat_t_i[ii])));
+    if (hat_t_i_timeidx[ii] < count_start_idx) {
+      reject("Submission precedes the count observation window");
+    }
   }
   for (jj in 1 : Nj) {
     hat_t_j_timeidx[jj] = max(1, to_int(ceil(hat_t_j[jj])));
+    if (hat_t_j_timeidx[jj] < count_start_idx) {
+      reject("Submission precedes the count observation window");
+    }
   }
   events_idx = merge_ascending_arrays(hat_t_i_timeidx, hat_t_j_timeidx);
   for (kk in 1 : Ni + Nj) {
@@ -77,11 +88,6 @@ transformed data {
       N_obs += 1;
       obs_idx_full[N_obs] = events_idx[kk];
       obs_h_full[N_obs] = (events_idx[kk] - previous_idx) * Delta2f;
-    }
-  }
-  for (i in 1 : N_obs) {
-    for (j in 1 : N_obs) {
-      unit_cov_y_full[i, j] = fmin(obs_idx_full[i], obs_idx_full[j]) * Delta2f;
     }
   }
 }
@@ -101,20 +107,19 @@ parameters {
 model {
   array[N_obs] int obs_idx = obs_idx_full[1 : N_obs];
   vector[N_obs] obs_h = obs_h_full[1 : N_obs];
-  matrix[N_obs, N_obs] unit_cov_y = unit_cov_y_full[1 : N_obs, 1 : N_obs];
   vector[N_Delta] intensity_i;
   vector[N_Delta] intensity_j;
   vector[Ni] intensity_i_at_events;
   vector[Nj] intensity_j_at_events;
   vector[N_Delta] effort_gap;
-  vector[N_obs] hat_y_mean;
-  vector[N_obs] obs_var;
-  matrix[N_obs, N_obs] hat_y_cov;
+  vector[N_Delta] integrated_drift;
   real bar_S = sigma / sqrt(lambda);
   real r = exp(log_r);
   vector[N_Delta] m_i;
   vector[N_Delta] m_j;
   vector[N_Delta + 1] tilde_y;
+  real residual_mean = 0;
+  real residual_variance = bar_S;
 
   c_i ~ lognormal(log(1.0), 0.75);
   c_j ~ lognormal(log(1.0), 0.75);
@@ -126,7 +131,7 @@ model {
   tilde_y[1] = mu_0;
   for (i in 1 : N_Delta) {
     vector[2] ms = fn_efforts(
-        tilde_y[i], (i - 1) * Delta2f, N_Delta * Delta2f,
+        tilde_y[i], (i - 1) * Delta2f, T_contest,
         theta, sigma, c_i, c_j, lambda);
     real kalman_weight = -expm1(-sqrt(lambda) * sigma * Delta2f);
     m_i[i] = ms[1];
@@ -139,26 +144,32 @@ model {
   intensity_i_at_events = intensity_i[hat_t_i_timeidx];
   intensity_j_at_events = intensity_j[hat_t_j_timeidx];
   effort_gap = m_i - m_j;
+  integrated_drift = cumulative_sum(effort_gap) * Delta2f;
 
+  // Scalar Gaussian innovations are exactly the dense Brownian covariance
+  // likelihood, without allocating/factorizing an N_obs by N_obs matrix.
   for (ii in 1 : N_obs) {
-    hat_y_mean[ii] = mu_0 + sum(effort_gap[1 : obs_idx[ii]]) * Delta2f;
-    obs_var[ii] = 1 / (lambda * obs_h[ii]) + 1e-9;
+    real prediction_variance = residual_variance + square(sigma) * obs_h[ii];
+    real measurement_variance = 1 / (lambda * obs_h[ii]) + 1e-9;
+    real innovation_variance = prediction_variance + measurement_variance;
+    real innovation = hat_y[obs_idx[ii]] - mu_0 - integrated_drift[obs_idx[ii]] - residual_mean;
+    target += normal_lpdf(innovation | 0, sqrt(innovation_variance));
+    residual_mean += prediction_variance / innovation_variance * innovation;
+    residual_variance = prediction_variance * measurement_variance / innovation_variance;
   }
-  hat_y_cov = rep_matrix(bar_S, N_obs, N_obs)
-      + square(sigma) * unit_cov_y
-      + diag_matrix(obs_var);
 
   if (Ni > 0) {
     for (ii in 1 : Ni) {
       target += log(fmax(intensity_i_at_events[ii], 1e-12));
     }
-    target += -sum(intensity_i);
   }
   if (Nj > 0) {
     for (jj in 1 : Nj) {
       target += log(fmax(intensity_j_at_events[jj], 1e-12));
     }
-    target += -sum(intensity_j);
   }
-  target += multi_normal_lpdf(hat_y[obs_idx] | hat_y_mean, hat_y_cov);
+  // Backfilled hours initialize the recursion but are not zero-count data.
+  // The exposure terms also apply to players with no observed submissions.
+  target += -sum(intensity_i[count_start_idx : N_Delta]);
+  target += -sum(intensity_j[count_start_idx : N_Delta]);
 }

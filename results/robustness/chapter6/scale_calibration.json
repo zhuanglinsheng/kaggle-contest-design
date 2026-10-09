@@ -1,0 +1,35 @@
+{
+  "scales": {
+    "L1": 1.4435771943867777,
+    "L2": 0.7810608944733947,
+    "Linf": 0.45059753892316484
+  },
+  "losses": {
+    "baseline": {
+      "L1": 0.5628485255959321,
+      "L2": 0.7323688487695945,
+      "Linf": 7.0041288465479825
+    },
+    "L1": {
+      "L1": 0.5466258657823017,
+      "L2": 0.9262550476306269,
+      "Linf": 11.427285103817308
+    },
+    "L2": {
+      "L1": 0.586410516565018,
+      "L2": 0.7049390819026461,
+      "Linf": 4.820964592782145
+    },
+    "Linf": {
+      "L1": 0.6500577231391788,
+      "L2": 0.7660018709456562,
+      "Linf": 1.5257296767470052
+    }
+  },
+  "n_contests": 73,
+  "n_public_scores": 13311,
+  "quantile_grid": 999,
+  "centering": "contest-specific public-score median, calibration only; gaps unchanged except scaling",
+  "weighting": "equal contest weight; equal submission weight within contest",
+  "input_data": "baseline focal-pair submitted public scores; no private scores used for calibration"
+}

@@ -17,6 +17,17 @@ def steady_state_variance(sigma: float, lamb: float) -> float:
 	return sigma / lamb**0.5
 
 
+def filtering_variance(t: float, sigma: float, lamb: float, S0: float) -> float:
+	"""Solve S' = sigma^2 - lambda S^2, with time measured in days."""
+	steady = steady_state_variance(sigma, lamb)
+	if t < 0 or S0 < 0 or not np.isfinite(S0):
+		raise ValueError("t and S0 must be nonnegative and S0 finite")
+	if S0 == steady:
+		return steady
+	z = np.tanh(sigma * lamb**0.5 * t)
+	return steady * (S0 + steady * z) / (steady + S0 * z)
+
+
 def leading_order_efforts(
 		tilde_y: float,
 		t: datetime,
@@ -27,6 +38,7 @@ def leading_order_efforts(
 		c_j: float,
 		sigma: float,
 		lamb: float,
+		S_t: float | None = None,
 ) -> tuple[float, float]:
 	"""Evaluate the leading-order effort rule in Theorem 1."""
 	remaining_days = (T - t).total_seconds() / (24 * 3600)
@@ -34,7 +46,7 @@ def leading_order_efforts(
 		return 0.0, 0.0
 	if prize < 0 or c_i <= 0 or c_j <= 0:
 		raise ValueError("prize must be nonnegative and costs must be positive")
-	q_t = sigma**2 * remaining_days + steady_state_variance(sigma, lamb)
+	q_t = sigma**2 * remaining_days + (steady_state_variance(sigma, lamb) if S_t is None else S_t)
 	kernel = np.exp(-tilde_y**2 / (2 * q_t)) / np.sqrt(2 * np.pi * q_t)
 	return prize * kernel / c_i, prize * kernel / c_j
 
@@ -53,6 +65,8 @@ def synthetic_data_simulation(
 		time_unit_2f: float = 1 / 24,  # transform `time_unit` to float
 		*,
 		mu_0: float = 0.0,
+		S0: float | None = None,  # None reproduces the original steady-state generator
+		effort_policy=None,  # optional callable (elapsed days, perceived gap) -> (m_i, m_j)
 		approx: bool = True,  # retained for compatibility; PaperJK7 is leading-order
 		seed_brownian: int = 442,
 		seed_poisson: int = 1234,
@@ -84,8 +98,9 @@ def synthetic_data_simulation(
 	j_effort_dynamic = np.zeros_like(time_grids, dtype=np.float64)
 
 	bar_s = steady_state_variance(sigma, lamb)
+	initial_variance = bar_s if S0 is None else filtering_variance(0, sigma, lamb, S0)
 	real_gap_dynamic = np.zeros(shape = 1 + len(time_grids), dtype=np.float64)
-	real_gap_dynamic[0] = rng_initial.normal(loc=mu_0, scale=bar_s**0.5)
+	real_gap_dynamic[0] = rng_initial.normal(loc=mu_0, scale=initial_variance**0.5)
 	real_gap_t = real_gap_dynamic[0]
 	perceived_gap_dynamic = np.zeros(shape = 1 + len(time_grids), dtype=np.float64)
 	perceived_gap_dynamic[0] = mu_0
@@ -100,17 +115,17 @@ def synthetic_data_simulation(
 
 	for idx_time, (time, z_shock, z_noise) in enumerate( \
 							zip(time_grids, innovation_shocks, signal_noises)):
-		## equation (7): leading-order equilibrium effort
-		q_i, q_j = leading_order_efforts( \
-			perceived_gap_t,
-			t=time,
-			T=end_time,
-			prize=theta,
-			c_i=c_i,
-			c_j=c_j,
-			sigma=sigma,
-			lamb=lamb,
-		)
+		## Evaluate the selected effort rule; all state and observation updates below are unchanged.
+		S_t = None if S0 is None else filtering_variance(idx_time * time_unit_2f, sigma, lamb, S0)
+		if effort_policy is None:
+			q_i, q_j = leading_order_efforts(
+				perceived_gap_t, t=time, T=end_time, prize=theta,
+				c_i=c_i, c_j=c_j, sigma=sigma, lamb=lamb, S_t=S_t,
+			)
+		else:
+			q_i, q_j = effort_policy(idx_time * time_unit_2f, perceived_gap_t)
+			if not np.isfinite([q_i, q_j]).all() or min(q_i, q_j) < 0:
+				raise ValueError("effort_policy must return finite nonnegative efforts")
 		i_effort_dynamic[idx_time] = q_i  # real-time daily effort
 		j_effort_dynamic[idx_time] = q_j  # real-time daily effort
 
@@ -121,7 +136,7 @@ def synthetic_data_simulation(
 		real_gap_dynamic[idx_time + 1] = real_gap_t
 
 		## tilde_y: equation (11)
-		kalman_rate = lamb**0.5 * sigma  # = lambda \bar{S}
+		kalman_rate = lamb**0.5 * sigma if S_t is None or S_t == bar_s else lamb * S_t
 		kalman_weight = -np.expm1(-kalman_rate * time_unit_2f)
 		perceived_gap_t += expected_d_gap_t + kalman_weight * (observed_gap_t - perceived_gap_t)
 		perceived_gap_dynamic[idx_time + 1] = perceived_gap_t

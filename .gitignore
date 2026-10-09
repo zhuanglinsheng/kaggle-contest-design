@@ -204,17 +204,75 @@ test_stan/test_poisson
 *.json
 *.pkl
 
+# Portable PaperJK7 release inputs and compact provenance are versioned.
+!results/counterfactual/main/precision_policy_summary.json
+!results/validation/main/*.json
+!results/robustness/chapter6/reports/pair_L1_L2/report.json
+!results/robustness/chapter6/fit_config.json
+!results/robustness/chapter6/scale_calibration.json
+!results/robustness/chapter6/inputs/
+!results/robustness/chapter6/inputs/pair/
+!results/robustness/chapter6/inputs/L1/
+!results/robustness/chapter6/inputs/L2/
+!results/robustness/chapter6/inputs/pair/contest_*.json
+!results/robustness/chapter6/inputs/L1/contest_*.json
+!results/robustness/chapter6/inputs/L2/contest_*.json
+!results/synthetic/optimal_hourly/manifest.json
+!results/theory/numerical_joint_plane_moderate_dense/three_class_comparison/metadata.json
+!results/release_manifest.json
+
 # Local rendering and scratch artifacts
 tmp/
 paper/tmp/
 
+# Nonlinear Chapter 4: retain compact summaries, regenerate policies and draws.
+synthetic_data/nonsteady_recovery
+synthetic_data/nonsteady_recovery.hpp
+results/synthetic/nonsteady_hjb/*.npz
+results/synthetic/nonsteady_hjb/*/*.csv
+results/synthetic/nonsteady_hjb/*/*.txt
+!results/synthetic/nonsteady_hjb/manifest.json
+!results/synthetic/nonsteady_hjb/*_summary.json
+!results/synthetic/nonsteady_hjb/*_run.json
+!results/synthetic/nonsteady_hjb/integration_checks.json
+
+# Data-only hourly experiments: retain manifests; regenerate large HJB grids.
+results/synthetic/optimal_hourly/*/policy_T*.npz
+!results/synthetic/optimal_hourly/manifest.json
+!results/synthetic/variance_only/manifest.json
+synthetic_data/hourly_nonsteady
+synthetic_data/hourly_nonsteady.hpp
+results/synthetic/table1_optimal_hourly/*/*.csv
+results/synthetic/table1_optimal_hourly/*/*stdout.txt
+!results/synthetic/table1_optimal_hourly/*/summary.json
+!results/synthetic/table1_optimal_hourly/*/run.json
+!results/synthetic/table1_optimal_hourly/checks.json
+synthetic_data/hourly_comparison
+synthetic_data/hourly_comparison.hpp
+results/synthetic/initialization_comparison/**/*.csv
+results/synthetic/initialization_comparison/**/*stdout.txt
+!results/synthetic/initialization_comparison/design.json
+!results/synthetic/initialization_comparison/comparison.json
+!results/synthetic/initialization_comparison/*/summary.json
+!results/synthetic/initialization_comparison/*/run.json
+!results/synthetic/initialization_comparison/*/mle.json
+synthetic_data/hourly_steady_pooled
+synthetic_data/hourly_steady_pooled.hpp
+results/synthetic/richer_steady/**/*.csv
+results/synthetic/richer_steady/**/*stdout.txt
+!results/synthetic/richer_steady/*/run.json
+!results/synthetic/richer_steady/*/summary.json
+
 # Raw CmdStan chains are reproducible; keep compact summaries separately.
 results/**/contest_*/
-results/**/*_chain_*.csv
-results/**/*_chain_*.log
+results/**/chain_[0-9]*.csv
+results/**/chain_[0-9]*.log
 archive/results/**/contest_*/
-archive/results/**/*_chain_*.csv
-archive/results/**/*_chain_*.log
+archive/results/**/chain_[0-9]*.csv
+archive/results/**/chain_[0-9]*.log
 
 # Large posterior-level draws are reproducible from the retained summaries.
 **/counterfactual_draws.csv
+
+# Numerical arrays are regenerated from their compact manifests and source.
+results/**/*.npz

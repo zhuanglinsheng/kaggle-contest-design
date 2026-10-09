@@ -32,6 +32,13 @@ EXCLUDED = {4031, 8540}
 PARAMETERS = ("c_i", "c_j", "sigma", "lambda", "mu_0", "log_r")
 
 
+def early_cutoff(raw: dict) -> int:
+    """Keep the initialization prefix and 75% of actual contest-phase hours."""
+    total = int(raw["N_Delta"])
+    prefix = min(int(raw.get("initialization_hours", 24)), total)
+    return max(2, prefix + int(math.floor(0.75 * (total - prefix))))
+
+
 def empirical_files() -> list[Path]:
     paths = []
     for path in DATA_DIR.glob("contest_*.json"):
@@ -49,15 +56,25 @@ def stan_data(
 ) -> dict:
     n_delta = int(raw["N_Delta"])
     if mode == "early":
-        n_delta = max(2, int(math.floor(0.75 * n_delta)))
+        n_delta = early_cutoff(raw)
     times_i = [float(t) for t in raw["hat_t_i"] if 0 < float(t) <= n_delta]
     times_j = [float(t) for t in raw["hat_t_j"] if 0 < float(t) <= n_delta]
+    # Legacy preprocessing retains events from start_time - 1 hour, while
+    # its recursion starts 24 hours earlier: only the first 23 hours are
+    # unobserved for counts. Keep the event-containing 24th interval.
+    count_start_hour = int(raw.get("count_start_hour", 23))
+    if not 0 <= count_start_hour < n_delta:
+        raise ValueError("Invalid count observation window")
+    if any(t <= count_start_hour for t in times_i + times_j):
+        raise ValueError("Submission precedes the count observation window")
     return {
         # The JSON files store prizes in thousands of U.S. dollars. Dividing
         # by 100 expresses every contest prize in units of $100,000.
         "theta": float(raw["theta"]) / prize_divisor,
         "Delta2f": float(raw["Delta2f"]),
         "N_Delta": n_delta,
+        "count_start_idx": count_start_hour + 1,
+        "T_contest": int(raw["N_Delta"]) * float(raw["Delta2f"]),
         "Ni": len(times_i),
         "Nj": len(times_j),
         "hat_t_i": times_i,
@@ -74,7 +91,7 @@ def csv_complete(path: Path, samples: int) -> bool:
     if not path.exists():
         return False
     with path.open(errors="replace") as handle:
-        return sum(1 for line in handle if line and not line.startswith("#")) >= samples + 1
+        return sum(1 for line in handle if line.strip() and not line.startswith("#")) >= samples + 1
 
 
 def run_contest(
@@ -87,10 +104,14 @@ def run_contest(
     seed: int,
     adapt_delta: float = 0.95,
     max_depth: int = 12,
+    init_dir: Path | None = None,
+    metric: str = "diag_e",
 ) -> list[Path]:
     run_dir = OUTPUT_DIR / mode / f"contest_{contest_id}"
     run_dir.mkdir(parents=True, exist_ok=True)
     data_path = run_dir / "data.json"
+    if data_path.exists() and json.loads(data_path.read_text()) != data:
+        raise RuntimeError(f"Saved inputs differ at {run_dir}; use a new output directory")
     data_path.write_text(json.dumps(data))
     paths = chain_paths(run_dir)
     processes: list[tuple[subprocess.Popen, object]] = []
@@ -108,6 +129,7 @@ def run_contest(
             "algorithm=hmc",
             "engine=nuts",
             f"max_depth={max_depth}",
+            f"metric={metric}",
             "random",
             f"seed={seed}",
             f"id={chain}",
@@ -117,6 +139,11 @@ def run_contest(
             f"file={output_path}",
             "refresh=100",
         ]
+        if init_dir is not None:
+            init_path = init_dir / f"contest_{contest_id}_{mode}_chain_{chain}.json"
+            if not init_path.exists():
+                raise FileNotFoundError(f"Missing requested chain initialization: {init_path}")
+            command.append(f"init={init_path.resolve()}")
         process = subprocess.Popen(
             command,
             cwd=run_dir,
@@ -195,14 +222,23 @@ def existing_summary() -> list[dict]:
 
 
 def main() -> None:
+    global OUTPUT_DIR, DATA_DIR
     parser = argparse.ArgumentParser()
+    parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+    parser.add_argument("--data-dir", type=Path, default=DATA_DIR)
+    parser.add_argument("--init-dir", type=Path)
+    parser.add_argument("--metric", choices=("diag_e", "dense_e"), default="diag_e")
     parser.add_argument("--warmup", type=int, default=500)
     parser.add_argument("--samples", type=int, default=500)
     parser.add_argument("--adapt-delta", type=float, default=0.95)
     parser.add_argument("--max-depth", type=int, default=12)
     parser.add_argument("--modes", nargs="+", choices=("full", "early"), default=("full", "early"))
     parser.add_argument("--contest-ids", nargs="*", type=int)
+    parser.add_argument("--accepted-sample", action="store_true",
+                        help="Restrict reruns to the accepted baseline full-sample contests")
     args = parser.parse_args()
+    OUTPUT_DIR = args.output_dir.resolve()
+    DATA_DIR = args.data_dir.resolve()
     if not MODEL.exists():
         raise FileNotFoundError(f"Compile the Stan model first: {MODEL}")
 
@@ -218,12 +254,24 @@ def main() -> None:
         "adapt_delta": args.adapt_delta,
         "max_depth": args.max_depth,
         "modes": args.modes,
+        "deadline_preserved": True,
+        "data_directory": str(DATA_DIR),
+        "initialization_hours": "per-contest input metadata; legacy default 24",
+        "unobserved_count_prefix_hours": "count_start_hour in input; legacy default 23",
+        "early_contest_fraction": 0.75,
+        "initialization_directory": str(args.init_dir.resolve()) if args.init_dir else None,
+        "metric": args.metric,
     }
     (OUTPUT_DIR / "run_config.json").write_text(
         json.dumps(run_config, indent=2) + "\n"
     )
 
     selected = set(args.contest_ids or [])
+    if args.accepted_sample:
+        with (MAIN_ESTIMATION_DIR / "posterior_summary_final.csv").open() as handle:
+            accepted = {int(row["contest_id"]) for row in csv.DictReader(handle)
+                        if row["mode"] == "full"}
+        selected = selected & accepted if selected else accepted
     summary_by_key = {
         (int(row["contest_id"]), row["mode"]): row for row in existing_summary()
     }
@@ -243,6 +291,8 @@ def main() -> None:
                 seed=900000 + contest_id + (100000 if mode == "early" else 0),
                 adapt_delta=args.adapt_delta,
                 max_depth=args.max_depth,
+                init_dir=args.init_dir,
+                metric=args.metric,
             )
             summary_by_key[(contest_id, mode)] = summarize(contest_id, mode, paths)
             rows = [summary_by_key[key] for key in sorted(summary_by_key)]

@@ -1,0 +1,75 @@
+{
+  "accepted_fits": 219,
+  "divergences": 0,
+  "maximum_split_rhat": 1.008719884397374,
+  "scale_results": [
+    {
+      "scenario": "L1",
+      "scale_a": 1.4435771943867777,
+      "lambda_rank_correlation": 0.9949401456250773,
+      "sigma_rank_correlation": 0.9931815377020857,
+      "full_disclosure_policies": 67,
+      "median_relative_output_gain_pct": 0.10927536644675939
+    },
+    {
+      "scenario": "L2",
+      "scale_a": 0.7810608944733947,
+      "lambda_rank_correlation": 0.9976860422065904,
+      "sigma_rank_correlation": 0.9950327039368136,
+      "full_disclosure_policies": 67,
+      "median_relative_output_gain_pct": 0.16608760436245262
+    }
+  ],
+  "pair_results": [
+    {
+      "specification": "pair_lambda_benchmark",
+      "constant": 3.939955003139552,
+      "constant_se": 0.8601797994925104,
+      "constant_p": 4.641198549542263e-06,
+      "constant_ci_low": 2.2540335759053463,
+      "constant_ci_high": 5.625876430373758,
+      "coefficient": 0.6376616618166812,
+      "std_error": 0.15913349734654295,
+      "p_value": 6.147239850705663e-05,
+      "ci_low": 0.3257657382835567,
+      "ci_high": 0.9495575853498056,
+      "r2": 0.14794855088433356,
+      "adj_r2": 0.13594782624890167,
+      "spearman_rho": 0.4271257558928793,
+      "spearman_p": 0.00016414167299871546,
+      "n": 73,
+      "standard_error_type": "HC1",
+      "omnibus": 2.9329501550753116,
+      "jarque_bera": 2.289692614046751,
+      "skewness": 0.4201359618656909,
+      "kurtosis": 3.2161452014779446,
+      "condition_number": 12.82569334542177,
+      "durbin_watson": 1.8543950398424611
+    },
+    {
+      "specification": "pair_sigma_benchmark",
+      "constant": 0.23536365674160462,
+      "constant_se": 0.06758818723148059,
+      "constant_p": 0.0004970903669957874,
+      "constant_ci_low": 0.1028932439875527,
+      "constant_ci_high": 0.36783406949565656,
+      "coefficient": 1.3089947083691915,
+      "std_error": 0.1652021985929855,
+      "p_value": 2.3074713624961943e-15,
+      "ci_low": 0.9852043489601063,
+      "ci_high": 1.6327850677782767,
+      "r2": 0.6006439567412132,
+      "adj_r2": 0.5950192237375683,
+      "spearman_rho": 0.7508638775762064,
+      "spearman_p": 2.0123000271183545e-14,
+      "n": 73,
+      "standard_error_type": "HC1",
+      "omnibus": 5.463278344757924,
+      "jarque_bera": 4.7182423782451925,
+      "skewness": 0.49342806893280544,
+      "kurtosis": 3.759814409462352,
+      "condition_number": 3.934842800335067,
+      "durbin_watson": 1.797360666976571
+    }
+  ]
+}

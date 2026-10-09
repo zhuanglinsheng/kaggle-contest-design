@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import math
 import os
 from pathlib import Path
@@ -11,6 +12,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 from scipy import stats
+from statsmodels.stats.stattools import durbin_watson, jarque_bera, omni_normtest
 
 from pipeline.config import (
     CACHE_DIR,
@@ -21,12 +23,12 @@ from pipeline.config import (
     PAPER_DIR,
     PRIZE_DIVISOR_FROM_THOUSANDS,
 )
+from pipeline.empirical.estimate import early_cutoff
 
 DATA_DIR = MAIN_DATA_DIR
 FIT_PATH = MAIN_ESTIMATION_DIR / "posterior_summary_final.csv"
 RESULTS_DIR = MAIN_VALIDATION_DIR
 PRIZE_DIVISOR = PRIZE_DIVISOR_FROM_THOUSANDS
-SPLIT = 0.75
 os.environ.setdefault("MPLCONFIGDIR", str(MATPLOTLIB_CACHE_DIR))
 os.environ.setdefault("XDG_CACHE_HOME", str(CACHE_DIR))
 
@@ -36,6 +38,13 @@ from matplotlib import pyplot as plt
 def parameter_frame(mode: str) -> pd.DataFrame:
     frame = pd.read_csv(FIT_PATH)
     frame = frame.loc[frame["mode"] == mode].copy()
+    for _, row in frame.iterrows():
+        raw_path = DATA_DIR / f"contest_{int(row['contest_id'])}.json"
+        if row.get("input_sha256") != hashlib.sha256(raw_path.read_bytes()).hexdigest():
+            raise RuntimeError(f"Unmatched contest data for validation: {raw_path.name}")
+    if mode == "early" and ("deadline_preserved" not in frame or
+                            not (frame["deadline_preserved"] == 1).all()):
+        raise RuntimeError("Refusing to validate early fits with an unverified contest deadline")
     keep = ["contest_id"]
     for name in ("c_i", "c_j", "sigma", "lambda", "mu_0", "r"):
         keep.extend([f"{name}_mean", f"{name}_sd", f"{name}_q025", f"{name}_q975"])
@@ -99,12 +108,12 @@ def benchmark_row(data: dict, params: pd.Series) -> dict[str, float]:
 
     _, effort_i, effort_j = implied_paths(data, params)
     sigma_terms = []
-    previous = 0
-    for current in indices:
+    previous = indices[0] if indices else 0
+    for current in indices[1:]:
         if current <= previous:
             continue
         elapsed = (current - previous) * dt
-        drift = float(np.sum(effort_i[previous:current] - effort_j[previous:current]) * dt)
+        drift = float(np.sum(effort_i[previous + 1:current + 1] - effort_j[previous + 1:current + 1]) * dt)
         residual = private[current] - private[previous] - drift
         sigma_terms.append(residual * residual / elapsed)
         previous = current
@@ -112,15 +121,17 @@ def benchmark_row(data: dict, params: pd.Series) -> dict[str, float]:
 
     diff = private - public
     increments = np.diff(private)
-    cutoff = int(math.floor(SPLIT * len(private)))
+    # Artificial backfill initializes the model, not the validation target.
+    prefix = min(int(data.get("path_start_index", 24)), len(private) - 2)
+    cutoff = early_cutoff(data)
     late_diff = diff[cutoff:]
-    late_increments = np.diff(private[cutoff:])
+    late_increments = increments[cutoff - 1:]
     return {
         "lambda_bench": lambda_bench,
         "sigma_bench": sigma_bench,
-        "D_path": float(np.mean(np.abs(diff))),
+        "D_path": float(np.mean(np.abs(diff[prefix:]))),
         "D_late": float(np.mean(np.abs(late_diff))),
-        "V_path": float(np.std(increments, ddof=1)),
+        "V_path": float(np.std(increments[prefix:], ddof=1)),
         "V_late": float(np.std(late_increments, ddof=1)),
     }
 
@@ -130,11 +141,17 @@ def fit_row(frame: pd.DataFrame, x: str, y: str, label: str) -> tuple[dict[str, 
     design = sm.add_constant(work[x])
     fit = sm.OLS(work[y], design).fit(cov_type="HC1")
     ci_low, ci_high = fit.conf_int().loc[x].tolist()
+    constant_ci_low, constant_ci_high = fit.conf_int().loc["const"].tolist()
+    omnibus, _ = omni_normtest(fit.resid)
+    jb, _, skewness, kurtosis = jarque_bera(fit.resid)
     rank = stats.spearmanr(work[x], work[y])
     return {
         "specification": label,
         "constant": float(fit.params["const"]),
         "constant_se": float(fit.bse["const"]),
+        "constant_p": float(fit.pvalues["const"]),
+        "constant_ci_low": float(constant_ci_low),
+        "constant_ci_high": float(constant_ci_high),
         "coefficient": float(fit.params[x]),
         "std_error": float(fit.bse[x]),
         "p_value": float(fit.pvalues[x]),
@@ -145,10 +162,17 @@ def fit_row(frame: pd.DataFrame, x: str, y: str, label: str) -> tuple[dict[str, 
         "spearman_rho": float(rank.statistic),
         "spearman_p": float(rank.pvalue),
         "n": int(fit.nobs),
+        "standard_error_type": "HC1",
+        "omnibus": float(omnibus),
+        "jarque_bera": float(jb),
+        "skewness": float(skewness),
+        "kurtosis": float(kurtosis),
+        "condition_number": float(fit.condition_number),
+        "durbin_watson": float(durbin_watson(fit.resid)),
     }, fit
 
 
-def save_plot(frame: pd.DataFrame, x: str, y: str, fit, path: Path, xlabel: str, ylabel: str) -> None:
+def save_plot(frame: pd.DataFrame, x: str, y: str, fit, path: Path, xlabel: str, ylabel: str, show_statistics: bool = False) -> None:
     work = frame[[x, y]].replace([np.inf, -np.inf], np.nan).dropna().sort_values(x)
     grid = np.linspace(float(work[x].min()), float(work[x].max()), 200)
     prediction = fit.predict(sm.add_constant(pd.Series(grid, name=x)))
@@ -158,6 +182,12 @@ def save_plot(frame: pd.DataFrame, x: str, y: str, fit, path: Path, xlabel: str,
     ax.plot(grid, prediction, color="black", linestyle="--")
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
+    if show_statistics:
+        significance = "$p<0.001$" if fit.pvalues[x] < .001 else f"$p={fit.pvalues[x]:.3f}$"
+        ax.text(.04, .96,
+                f"Slope = {fit.params[x]:.3f}\n{significance}\n$R^2={fit.rsquared:.3f}$",
+                transform=ax.transAxes, va="top", ha="left", fontsize=11,
+                bbox=dict(facecolor="white", edgecolor="none", alpha=.9, pad=3))
     fig.tight_layout()
     fig.savefig(path, bbox_inches="tight")
     plt.close(fig)

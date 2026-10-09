@@ -1,4 +1,4 @@
-"""Compile the three Stan models used by the current pipeline."""
+"""Compile the empirical and synthetic Stan models."""
 
 import subprocess
 from pathlib import Path
@@ -7,6 +7,10 @@ from pipeline.config import METAKAGGLE_DIR, SYNTHETIC_DIR
 
 
 MODEL_FILES = (
+    SYNTHETIC_DIR / "hourly_steady_pooled.stan",
+    SYNTHETIC_DIR / "hourly_comparison.stan",
+    SYNTHETIC_DIR / "hourly_nonsteady.stan",
+    SYNTHETIC_DIR / "nonsteady_recovery.stan",
     METAKAGGLE_DIR / "real_data.stan",
     SYNTHETIC_DIR / "synthetic_data.stan",
     SYNTHETIC_DIR / "synthetic_data_90_replicated.stan",

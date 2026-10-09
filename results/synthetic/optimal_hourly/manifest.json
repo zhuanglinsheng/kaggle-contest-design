@@ -1,0 +1,871 @@
+{
+  "status": "data generation only; no Bayesian estimation",
+  "policy": "numerical nonlinear HJB equilibrium m; not leading-order m^(1)",
+  "observation": "original hourly held-readout approximation",
+  "simulation_dt": 0.041666666666666664,
+  "hjb_dy": 0.2,
+  "hjb_dt": 0.020833333333333332,
+  "refinement_dy": 0.1,
+  "refinement_dt": 0.010416666666666666,
+  "changed_since_variance_only": [
+    "effort policy only"
+  ],
+  "source_sha256": {
+    "synthetic_data/synthetic_data.py": "0bd5b9e6c76a8b4b77cb148f0d1965cd808d17b1fc7e122d47457050a739f936",
+    "pipeline/synthetic/nonlinear.py": "77cd3efaa2c3bc32a0fae33263d2107213e50b7d76fcd283d112ec914318cbc7",
+    "pipeline/synthetic/generate.py": "aa3e034461ccdec0f4ebfb980ab7bada13cfd1f68735011ec95f40784dd3e972",
+    "pipeline/synthetic/optimal_generate.py": "e4d1488ddbbc7cb11acabf68836869b81c76aec220d11cd54e2bb79775a7ad03"
+  },
+  "policies": {
+    "steady_90": {
+      "primitives": {
+        "T": 90.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 2.0,
+        "mu0": 0.0
+      },
+      "diagnostics": {
+        "dy": 0.2,
+        "dt": 0.020833333333333332,
+        "extent": 7.0,
+        "nodes_y": 1333,
+        "nodes_t": 4321,
+        "min_raw_policy": -4.1448326252672506e-15,
+        "max_policy": 0.2342977374792099,
+        "value_min": 0.0,
+        "value_max": 1.0
+      },
+      "refinement": {
+        "max_absolute_error": 0.0010002232918696896,
+        "max_error_over_peak": 0.004258385220782139,
+        "rms_error_over_rms": 0.0028232325225750936
+      }
+    },
+    "nonsteady_90": {
+      "primitives": {
+        "T": 90.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      },
+      "diagnostics": {
+        "dy": 0.2,
+        "dt": 0.020833333333333332,
+        "extent": 7.0,
+        "nodes_y": 1337,
+        "nodes_t": 4321,
+        "min_raw_policy": -4.1448326252672506e-15,
+        "max_policy": 0.2342977374792099,
+        "value_min": 0.0,
+        "value_max": 1.0
+      },
+      "refinement": {
+        "max_absolute_error": 0.0010002232918696896,
+        "max_error_over_peak": 0.004258385220782139,
+        "rms_error_over_rms": 0.0028232859217409015
+      }
+    },
+    "steady_180": {
+      "primitives": {
+        "T": 180.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 2.0,
+        "mu0": 0.0
+      },
+      "diagnostics": {
+        "dy": 0.2,
+        "dt": 0.020833333333333332,
+        "extent": 7.0,
+        "nodes_y": 1883,
+        "nodes_t": 8641,
+        "min_raw_policy": -4.1448326252672506e-15,
+        "max_policy": 0.2342977374792099,
+        "value_min": 0.0,
+        "value_max": 1.0
+      },
+      "refinement": {
+        "max_absolute_error": 0.0010002232918859821,
+        "max_error_over_peak": 0.004258385220851835,
+        "rms_error_over_rms": 0.0028405591192170883
+      }
+    },
+    "nonsteady_180": {
+      "primitives": {
+        "T": 180.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      },
+      "diagnostics": {
+        "dy": 0.2,
+        "dt": 0.020833333333333332,
+        "extent": 7.0,
+        "nodes_y": 1885,
+        "nodes_t": 8641,
+        "min_raw_policy": -4.1448326252672506e-15,
+        "max_policy": 0.2342977374792099,
+        "value_min": 0.0,
+        "value_max": 1.0
+      },
+      "refinement": {
+        "max_absolute_error": 0.0010002232918859821,
+        "max_error_over_peak": 0.004258385220851835,
+        "rms_error_over_rms": 0.002840572795233856
+      }
+    },
+    "steady_360": {
+      "primitives": {
+        "T": 360.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 2.0,
+        "mu0": 0.0
+      },
+      "diagnostics": {
+        "dy": 0.2,
+        "dt": 0.020833333333333332,
+        "extent": 7.0,
+        "nodes_y": 2661,
+        "nodes_t": 17281,
+        "min_raw_policy": -4.1448326252672506e-15,
+        "max_policy": 0.2342977374792099,
+        "value_min": 0.0,
+        "value_max": 1.0
+      },
+      "refinement": {
+        "max_absolute_error": 0.0010002232940900246,
+        "max_error_over_peak": 0.004258385230240679,
+        "rms_error_over_rms": 0.002849373873815916
+      }
+    },
+    "nonsteady_360": {
+      "primitives": {
+        "T": 360.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      },
+      "diagnostics": {
+        "dy": 0.2,
+        "dt": 0.020833333333333332,
+        "extent": 7.0,
+        "nodes_y": 2661,
+        "nodes_t": 17281,
+        "min_raw_policy": -4.1448326252672506e-15,
+        "max_policy": 0.2342977374792099,
+        "value_min": 0.0,
+        "value_max": 1.0
+      },
+      "refinement": {
+        "max_absolute_error": 0.0010002232940916622,
+        "max_error_over_peak": 0.004258385230247657,
+        "rms_error_over_rms": 0.0028493773379947938
+      }
+    }
+  },
+  "experiments": {
+    "baseline": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 1000,
+        "poisson": 1001,
+        "uniform": 1002,
+        "initial": 1003
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 30,
+          "submissions_j": 19,
+          "initial_latent_gap": -1.4449476842004674,
+          "expected_count_per_day": 0.6209312464633987,
+          "finite": true,
+          "max_thinning_acceptance": 0.025135474488395027
+        },
+        "nonsteady": {
+          "submissions_i": 28,
+          "submissions_j": 18,
+          "initial_latent_gap": -2.043464611915897,
+          "expected_count_per_day": 0.6091579660960535,
+          "finite": true,
+          "max_thinning_acceptance": 0.024247040840976525
+        }
+      }
+    },
+    "pool_contest01": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3000,
+        "poisson": 3001,
+        "uniform": 3002,
+        "initial": 3003
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 8,
+          "submissions_j": 6,
+          "initial_latent_gap": -1.3005270613107138,
+          "expected_count_per_day": 0.16425425250729728,
+          "finite": true,
+          "max_thinning_acceptance": 0.011289958579500055
+        },
+        "nonsteady": {
+          "submissions_i": 16,
+          "submissions_j": 14,
+          "initial_latent_gap": -1.8392230083388372,
+          "expected_count_per_day": 0.3330975398874831,
+          "finite": true,
+          "max_thinning_acceptance": 0.019184052631825446
+        }
+      }
+    },
+    "pool_contest02": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3010,
+        "poisson": 3011,
+        "uniform": 3012,
+        "initial": 3013
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 19,
+          "submissions_j": 7,
+          "initial_latent_gap": 1.7374768770781719,
+          "expected_count_per_day": 0.3219218294949411,
+          "finite": true,
+          "max_thinning_acceptance": 0.013236597218018217
+        },
+        "nonsteady": {
+          "submissions_i": 18,
+          "submissions_j": 6,
+          "initial_latent_gap": 2.4571633638736015,
+          "expected_count_per_day": 0.30499687747510085,
+          "finite": true,
+          "max_thinning_acceptance": 0.013234997630230491
+        }
+      }
+    },
+    "pool_contest03": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3020,
+        "poisson": 3021,
+        "uniform": 3022,
+        "initial": 3023
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 14,
+          "submissions_j": 12,
+          "initial_latent_gap": 0.7408997708615179,
+          "expected_count_per_day": 0.26210711664041686,
+          "finite": true,
+          "max_thinning_acceptance": 0.012005505869838748
+        },
+        "nonsteady": {
+          "submissions_i": 14,
+          "submissions_j": 12,
+          "initial_latent_gap": 1.047790504311477,
+          "expected_count_per_day": 0.2655590194838619,
+          "finite": true,
+          "max_thinning_acceptance": 0.012104405879899612
+        }
+      }
+    },
+    "pool_contest04": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3030,
+        "poisson": 3031,
+        "uniform": 3032,
+        "initial": 3033
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 21,
+          "submissions_j": 18,
+          "initial_latent_gap": -1.7485903075359224,
+          "expected_count_per_day": 0.43204250001138267,
+          "finite": true,
+          "max_thinning_acceptance": 0.014489289745770966
+        },
+        "nonsteady": {
+          "submissions_i": 20,
+          "submissions_j": 16,
+          "initial_latent_gap": -2.4728801279514423,
+          "expected_count_per_day": 0.41310872637027074,
+          "finite": true,
+          "max_thinning_acceptance": 0.014269361931723165
+        }
+      }
+    },
+    "pool_contest05": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3040,
+        "poisson": 3041,
+        "uniform": 3042,
+        "initial": 3043
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 31,
+          "submissions_j": 28,
+          "initial_latent_gap": -0.792305982044327,
+          "expected_count_per_day": 0.5818679472025161,
+          "finite": true,
+          "max_thinning_acceptance": 0.05174376113371104
+        },
+        "nonsteady": {
+          "submissions_i": 32,
+          "submissions_j": 28,
+          "initial_latent_gap": -1.120489865356421,
+          "expected_count_per_day": 0.5795816633782739,
+          "finite": true,
+          "max_thinning_acceptance": 0.052806108029414926
+        }
+      }
+    },
+    "pool_contest06": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3050,
+        "poisson": 3051,
+        "uniform": 3052,
+        "initial": 3053
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 15,
+          "submissions_j": 14,
+          "initial_latent_gap": -0.150674839868928,
+          "expected_count_per_day": 0.28959807461796255,
+          "finite": true,
+          "max_thinning_acceptance": 0.019422191206993133
+        },
+        "nonsteady": {
+          "submissions_i": 15,
+          "submissions_j": 14,
+          "initial_latent_gap": -0.21308640205103227,
+          "expected_count_per_day": 0.2874819500742201,
+          "finite": true,
+          "max_thinning_acceptance": 0.019274498897794954
+        }
+      }
+    },
+    "pool_contest07": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3060,
+        "poisson": 3061,
+        "uniform": 3062,
+        "initial": 3063
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 40,
+          "submissions_j": 35,
+          "initial_latent_gap": -0.47588805083771785,
+          "expected_count_per_day": 0.6792172623137519,
+          "finite": true,
+          "max_thinning_acceptance": 0.04407701049044521
+        },
+        "nonsteady": {
+          "submissions_i": 40,
+          "submissions_j": 35,
+          "initial_latent_gap": -0.6730073356659975,
+          "expected_count_per_day": 0.6786839532758971,
+          "finite": true,
+          "max_thinning_acceptance": 0.043982818600913305
+        }
+      }
+    },
+    "pool_contest08": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3070,
+        "poisson": 3071,
+        "uniform": 3072,
+        "initial": 3073
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 25,
+          "submissions_j": 23,
+          "initial_latent_gap": 0.18135991288601697,
+          "expected_count_per_day": 0.6618186455282122,
+          "finite": true,
+          "max_thinning_acceptance": 0.06407570064332391
+        },
+        "nonsteady": {
+          "submissions_i": 25,
+          "submissions_j": 23,
+          "initial_latent_gap": 0.25648164847420823,
+          "expected_count_per_day": 0.6606196272994477,
+          "finite": true,
+          "max_thinning_acceptance": 0.06338857282768624
+        }
+      }
+    },
+    "pool_contest09": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3080,
+        "poisson": 3081,
+        "uniform": 3082,
+        "initial": 3083
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 20,
+          "submissions_j": 27,
+          "initial_latent_gap": 1.434926749969478,
+          "expected_count_per_day": 0.4758766162641444,
+          "finite": true,
+          "max_thinning_acceptance": 0.01751479632122768
+        },
+        "nonsteady": {
+          "submissions_i": 21,
+          "submissions_j": 27,
+          "initial_latent_gap": 2.0292928708187827,
+          "expected_count_per_day": 0.4855849461928866,
+          "finite": true,
+          "max_thinning_acceptance": 0.017836417909769933
+        }
+      }
+    },
+    "pool_contest10": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3090,
+        "poisson": 3091,
+        "uniform": 3092,
+        "initial": 3093
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 27,
+          "submissions_j": 24,
+          "initial_latent_gap": -1.5329577888427377,
+          "expected_count_per_day": 0.5694817100913337,
+          "finite": true,
+          "max_thinning_acceptance": 0.03105043568336141
+        },
+        "nonsteady": {
+          "submissions_i": 26,
+          "submissions_j": 24,
+          "initial_latent_gap": -2.1679296955268708,
+          "expected_count_per_day": 0.5523589734344508,
+          "finite": true,
+          "max_thinning_acceptance": 0.030956205460479547
+        }
+      }
+    },
+    "pool_contest11": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3100,
+        "poisson": 3101,
+        "uniform": 3102,
+        "initial": 3103
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 22,
+          "submissions_j": 27,
+          "initial_latent_gap": 2.9524548420747787,
+          "expected_count_per_day": 0.44552649656109783,
+          "finite": true,
+          "max_thinning_acceptance": 0.01763949875360352
+        },
+        "nonsteady": {
+          "submissions_i": 21,
+          "submissions_j": 27,
+          "initial_latent_gap": 4.175401679956266,
+          "expected_count_per_day": 0.43294005180615697,
+          "finite": true,
+          "max_thinning_acceptance": 0.01759310209230475
+        }
+      }
+    },
+    "pool_contest12": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3110,
+        "poisson": 3111,
+        "uniform": 3112,
+        "initial": 3113
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 23,
+          "submissions_j": 22,
+          "initial_latent_gap": -2.6673948837202213,
+          "expected_count_per_day": 0.4070581011818362,
+          "finite": true,
+          "max_thinning_acceptance": 0.023049054612983056
+        },
+        "nonsteady": {
+          "submissions_i": 20,
+          "submissions_j": 19,
+          "initial_latent_gap": -3.7722660207617413,
+          "expected_count_per_day": 0.36037192855947536,
+          "finite": true,
+          "max_thinning_acceptance": 0.013830803191372094
+        }
+      }
+    },
+    "pool_contest13": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3120,
+        "poisson": 3121,
+        "uniform": 3122,
+        "initial": 3123
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 26,
+          "submissions_j": 18,
+          "initial_latent_gap": 0.6182477420756615,
+          "expected_count_per_day": 0.45706180545194264,
+          "finite": true,
+          "max_thinning_acceptance": 0.01756366266713363
+        },
+        "nonsteady": {
+          "submissions_i": 26,
+          "submissions_j": 18,
+          "initial_latent_gap": 0.8743343417499436,
+          "expected_count_per_day": 0.45350324090199035,
+          "finite": true,
+          "max_thinning_acceptance": 0.017478554948829276
+        }
+      }
+    },
+    "pool_contest14": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3130,
+        "poisson": 3131,
+        "uniform": 3132,
+        "initial": 3133
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 25,
+          "submissions_j": 28,
+          "initial_latent_gap": -0.15611547087908315,
+          "expected_count_per_day": 0.6370088686837495,
+          "finite": true,
+          "max_thinning_acceptance": 0.06323826002748686
+        },
+        "nonsteady": {
+          "submissions_i": 25,
+          "submissions_j": 28,
+          "initial_latent_gap": -0.22078061621346134,
+          "expected_count_per_day": 0.635637807025172,
+          "finite": true,
+          "max_thinning_acceptance": 0.06323421132068843
+        }
+      }
+    },
+    "pool_contest15": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3140,
+        "poisson": 3141,
+        "uniform": 3142,
+        "initial": 3143
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 30,
+          "submissions_j": 34,
+          "initial_latent_gap": -0.09045401374016984,
+          "expected_count_per_day": 0.6220049321212153,
+          "finite": true,
+          "max_thinning_acceptance": 0.029853632251545387
+        },
+        "nonsteady": {
+          "submissions_i": 30,
+          "submissions_j": 34,
+          "initial_latent_gap": -0.12792129300243046,
+          "expected_count_per_day": 0.621744577044711,
+          "finite": true,
+          "max_thinning_acceptance": 0.029843499313375682
+        }
+      }
+    },
+    "pool_contest16": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3150,
+        "poisson": 3151,
+        "uniform": 3152,
+        "initial": 3153
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 19,
+          "submissions_j": 17,
+          "initial_latent_gap": 0.6614955880668534,
+          "expected_count_per_day": 0.34916755809348327,
+          "finite": true,
+          "max_thinning_acceptance": 0.01609188933617706
+        },
+        "nonsteady": {
+          "submissions_i": 19,
+          "submissions_j": 17,
+          "initial_latent_gap": 0.9354960320941101,
+          "expected_count_per_day": 0.3505259746974683,
+          "finite": true,
+          "max_thinning_acceptance": 0.01617489102982025
+        }
+      }
+    },
+    "pool_contest17": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3160,
+        "poisson": 3161,
+        "uniform": 3162,
+        "initial": 3163
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 23,
+          "submissions_j": 9,
+          "initial_latent_gap": 1.7661875997156065,
+          "expected_count_per_day": 0.3142700011011749,
+          "finite": true,
+          "max_thinning_acceptance": 0.014230941818400131
+        },
+        "nonsteady": {
+          "submissions_i": 22,
+          "submissions_j": 9,
+          "initial_latent_gap": 2.4977664572129936,
+          "expected_count_per_day": 0.30343986274635676,
+          "finite": true,
+          "max_thinning_acceptance": 0.013832476759245337
+        }
+      }
+    },
+    "pool_contest18": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3170,
+        "poisson": 3171,
+        "uniform": 3172,
+        "initial": 3173
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 19,
+          "submissions_j": 11,
+          "initial_latent_gap": -1.0418058261275545,
+          "expected_count_per_day": 0.3649572938988001,
+          "finite": true,
+          "max_thinning_acceptance": 0.015228087880940447
+        },
+        "nonsteady": {
+          "submissions_i": 19,
+          "submissions_j": 11,
+          "initial_latent_gap": -1.473335928668894,
+          "expected_count_per_day": 0.3618278639579602,
+          "finite": true,
+          "max_thinning_acceptance": 0.015125608833729228
+        }
+      }
+    },
+    "pool_contest19": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3180,
+        "poisson": 3181,
+        "uniform": 3182,
+        "initial": 3183
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 28,
+          "submissions_j": 24,
+          "initial_latent_gap": 1.2274946263602393,
+          "expected_count_per_day": 0.7724917622208292,
+          "finite": true,
+          "max_thinning_acceptance": 0.10560952860181878
+        },
+        "nonsteady": {
+          "submissions_i": 28,
+          "submissions_j": 23,
+          "initial_latent_gap": 1.7359395483387452,
+          "expected_count_per_day": 0.7706390304353881,
+          "finite": true,
+          "max_thinning_acceptance": 0.0772645358423701
+        }
+      }
+    },
+    "pool_contest20": {
+      "days": 90,
+      "ratio": 15.0,
+      "seeds": {
+        "brownian": 3190,
+        "poisson": 3191,
+        "uniform": 3192,
+        "initial": 3193
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 13,
+          "submissions_j": 13,
+          "initial_latent_gap": -0.10762432054438245,
+          "expected_count_per_day": 0.33349409948771097,
+          "finite": true,
+          "max_thinning_acceptance": 0.013569376822983132
+        },
+        "nonsteady": {
+          "submissions_i": 13,
+          "submissions_j": 13,
+          "initial_latent_gap": -0.15220377375505498,
+          "expected_count_per_day": 0.3328584680738784,
+          "finite": true,
+          "max_thinning_acceptance": 0.013554277003943927
+        }
+      }
+    },
+    "days180": {
+      "days": 180,
+      "ratio": 18.6484375,
+      "seeds": {
+        "brownian": 5180,
+        "poisson": 5181,
+        "uniform": 5182,
+        "initial": 5183
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 61,
+          "submissions_j": 54,
+          "initial_latent_gap": -0.7495041957916776,
+          "expected_count_per_day": 0.6192422478034618,
+          "finite": true,
+          "max_thinning_acceptance": 0.08999335896686927
+        },
+        "nonsteady": {
+          "submissions_i": 59,
+          "submissions_j": 55,
+          "initial_latent_gap": -1.05995899874413,
+          "expected_count_per_day": 0.6177477011410746,
+          "finite": true,
+          "max_thinning_acceptance": 0.09270932947938458
+        }
+      }
+    },
+    "days360": {
+      "days": 360,
+      "ratio": 47.4375,
+      "seeds": {
+        "brownian": 5360,
+        "poisson": 5361,
+        "uniform": 5362,
+        "initial": 5363
+      },
+      "results": {
+        "steady": {
+          "submissions_i": 132,
+          "submissions_j": 99,
+          "initial_latent_gap": -2.0143728621567716,
+          "expected_count_per_day": 0.613761761622755,
+          "finite": true,
+          "max_thinning_acceptance": 0.02368295525401207
+        },
+        "nonsteady": {
+          "submissions_i": 135,
+          "submissions_j": 100,
+          "initial_latent_gap": -2.848753421338415,
+          "expected_count_per_day": 0.6277871011565292,
+          "finite": true,
+          "max_thinning_acceptance": 0.024116260178763903
+        }
+      }
+    }
+  },
+  "pools": {
+    "10": [
+      "pool_contest01",
+      "pool_contest02",
+      "pool_contest03",
+      "pool_contest04",
+      "pool_contest05",
+      "pool_contest06",
+      "pool_contest07",
+      "pool_contest08",
+      "pool_contest09",
+      "pool_contest10"
+    ],
+    "20": [
+      "pool_contest01",
+      "pool_contest02",
+      "pool_contest03",
+      "pool_contest04",
+      "pool_contest05",
+      "pool_contest06",
+      "pool_contest07",
+      "pool_contest08",
+      "pool_contest09",
+      "pool_contest10",
+      "pool_contest11",
+      "pool_contest12",
+      "pool_contest13",
+      "pool_contest14",
+      "pool_contest15",
+      "pool_contest16",
+      "pool_contest17",
+      "pool_contest18",
+      "pool_contest19",
+      "pool_contest20"
+    ]
+  }
+}

@@ -4,6 +4,7 @@ All executable modules import paths from this file. The current workflow writes
 only below ``results/``; historical outputs are stored under ``archive/``.
 """
 
+import os
 from pathlib import Path
 
 
@@ -31,6 +32,17 @@ MATPLOTLIB_CACHE_DIR = CACHE_DIR / "matplotlib"
 EMPIRICAL_MODEL = METAKAGGLE_DIR / "real_data"
 SYNTHETIC_SINGLE_MODEL = SYNTHETIC_DIR / "synthetic_data"
 SYNTHETIC_POOLED_MODEL = SYNTHETIC_DIR / "synthetic_data_90_replicated"
+
+
+def manifest_path(path: Path, manifest: Path) -> str:
+    """Return a portable path relative to the manifest that stores it."""
+    return os.path.relpath(path.resolve(), manifest.resolve().parent)
+
+
+def resolve_manifest_path(value: str, manifest: Path) -> Path:
+    """Resolve both new relative paths and legacy absolute manifest paths."""
+    path = Path(value)
+    return path if path.is_absolute() else (manifest.resolve().parent / path).resolve()
 
 # Source JSON prizes are measured in thousands of U.S. dollars.  The current
 # paper expresses every prize in units of USD 100,000.
