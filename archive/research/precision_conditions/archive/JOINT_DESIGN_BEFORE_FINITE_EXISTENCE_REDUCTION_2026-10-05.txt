@@ -1,0 +1,1668 @@
+\subsection{{\color{blue}Joint Design of Prize, Deadline, and Feedback Precision}}\label{sect-design}
+
+{\color{blue}
+The performance gap is sufficient for the contestants' strategic problem, but the organizer values the best terminal performance. We therefore recover individual private performance scores. Let $x_t^k$ denote contestant $k$'s score, normalized so that $(x_0^i+x_0^j)/2=0$. The initial gap is $y_0:=x_0^i-x_0^j$, with $y_0\mid I_0\sim\mathcal N(\tilde y_0,S_0)$.
+Individual scores evolve according to
+\begin{equation}\label{eq-individual-output-dynamics}
+dx_t^k=q_{k,t}dt+\frac{\sigma}{\sqrt2}dW_t^k,
+\qquad k\in\{i,j\},
+\end{equation}
+where $W^i$ and $W^j$ are independent and $q_{k,t}=m_k(\tilde y_t,t)$ in equilibrium. With $W_t=(W_t^i-W_t^j)/\sqrt2$, the gap obeys equation~\eqref{eq-state-dynamics}. The organizer values the best terminal score,
+\[
+\mathcal B(\tilde y_0,\theta,T,\lambda;S_0)
+:=\mathbb E[\max\{x_T^i,x_T^j\}\mid I_0].
+\]
+The organizer chooses the prize, deadline, and public-signal precision simultaneously.
+Hence
+\[
+\mathcal B(0,0,T,\lambda;S_0)
+=\sqrt{\frac{S_0+\sigma^2T}{2\pi}},
+\qquad
+\mathcal B(0,\theta,0,\lambda;S_0)
+=\sqrt{\frac{S_0}{2\pi}}.
+\]
+
+
+Let $u:[0,\infty)\to\mathbb R$ be a twice continuously differentiable, strictly increasing, and concave utility of expected best output. For the joint-design analysis, take $S_0>0$ and assume
+\[
+-\frac{Bu''(B)}{u'(B)}\geq\gamma_0,
+\qquad B\geq\sqrt{\frac{S_0}{2\pi}},
+\]
+where $\gamma_0$ is a sufficiently large universal constant. This condition requires marginal utility to decline sufficiently rapidly as expected best output increases.
+The delay cost $D:[0,\infty)\to[0,\infty)$ is continuously differentiable, strictly increasing, and convex, with $D(0)=D'(0)=0$. Thus a marginal extension at zero duration has no first-order delay cost. Assume
+\[
+\frac{TD'(T)}{D(T)}\geq3,
+\qquad T>0.
+\]
+For the existence of a full-disclosure region, impose a stronger
+delay-growth condition only at the reference duration $t_\circ$ defined by
+\[
+t_\circ D'(t_\circ)
+=\frac{\sqrt{S_0}u'(\sqrt{S_0/\pi})}{4\sqrt\pi},
+\qquad
+D(t_\circ)\leq\frac{t_\circ D'(t_\circ)}{\gamma_0}.
+\]
+This duration is determined by $(u,D,S_0)$, not chosen by the organizer.
+The last inequality requires marginal delay cost to be high relative
+to average delay cost there, without imposing high growth at every deadline.
+We focus on $\sigma>0$ and the symmetric initial belief $\tilde y_0=0$.
+The joint design problem is
+\begin{equation}\label{eq-designer-best-output-objective}
+\max_{\theta,T\geq0,\ \lambda\in[0,\infty]}
+\left\{u\!\left(\mathcal B(0,\theta,T,\lambda;S_0)\right)
+-\theta-D(T)\right\},
+\end{equation}
+where $S_0$ remains fixed and $\mathcal B(\cdot,\infty;S_0)$ denotes the high-precision limit. Thus, $\lambda=0$ denotes no public signal and $\lambda=\infty$ denotes full disclosure. At $\lambda=0$, we use the no-signal equilibrium obtained as $\lambda\downarrow0$. The result below uses exact equilibrium output throughout.
+
+
+
+\begin{proposition}[Joint Design of Prize, Deadline, and Feedback Precision]\label{prop-joint-design}
+Suppose $c_i=c_j=c>0$, $S_0>0$, and $\tilde y_0=0$.
+Let $T_0(\sigma)>0$ be the unique optimal deadline when $\theta=0$.
+There is a connected open domain in the $(c,\sigma)$ plane where
+joint optima exist and the following three nonempty regions occur.
+\begin{enumerate}
+\item[(i)] No prize: every optimum has $\theta^*=0$ and
+$T^*=T_0(\sigma)$; precision is irrelevant.
+\item[(ii)] Finite feedback: every optimum has $\theta^*>0$,
+$T^*>0$, and $0\leq\lambda^*<\infty$.
+\item[(iii)] Full disclosure: every optimum has $\theta^*>0$,
+$T^*>0$, and $\lambda^*=\infty$.
+\end{enumerate}
+A continuous, finite prize-exit boundary $c_0(\sigma)>0$ separates
+zero prizes for $c>c_0(\sigma)$ from positive prizes for
+$c<c_0(\sigma)$ within this domain. At equality, zero prize is optimal.
+Within the positive-prize domain, a nonempty precision boundary
+separates strict finite-feedback superiority from full-disclosure
+optimality. Full disclosure is optimal on this boundary, possibly
+alongside finite feedback. Neither connected precision regions nor
+a unique precision-switching curve are required.
+\end{proposition}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../results/theory/numerical_joint_plane_strong64/boundary_polish/numerical_regions_detail.pdf}
+\caption{Numerical joint-design regions in the $(c,\sigma)$ plane.
+The nonlinear-equilibrium search jointly varies the prize, deadline,
+and precision, with $S_0=1$,
+$u(B)=3[1-\exp\{-64\sqrt{2\pi}(B-1/\sqrt{2\pi})\}]$,
+and $D(T)=3.25517\times10^{-12}T^{64}$.
+Blue denotes positive prize with finite precision, orange positive
+prize with full disclosure, and green zero prize. Gray cells are
+numerically inconclusive. Colors classify the searched design grid,
+not certified boundaries on the continuous parameter domain.}
+\label{fig-joint-design-regions}
+\end{figure}
+
+The two boundaries answer different design questions. The prize-exit boundary determines whether incentives are worth buying; the precision boundary distinguishes finite feedback from full disclosure when a positive prize is worthwhile. Figure~\ref{fig-joint-design-regions} provides a numerical illustration of the three regimes. Its apparent boundary ordering is not imposed in Proposition~\ref{prop-joint-design}.
+
+Finite feedback can preserve competition when innovation risk is low relative to initial uncertainty, whereas full disclosure improves effort allocation in the weak-incentive region. High effort costs instead make a prize too expensive. These comparisons jointly optimize the prize and deadline, impose no precision cost, and allow $\lambda^*=0$. The appendix gives sufficient parameter conditions and the domain on which joint attainment is established.
+
+}
+
+
+
+
+
+
+
+\proof{Proof of Proposition~\ref{prop-joint-design}}
+The equilibrium estimates used here are established separately in
+Appendix~\ref{app-design-output}. We write $\alpha=\theta/c$,
+$b(T)=\sqrt{(S_0+\sigma^2T)/(2\pi)}$, and $b_0=b(0)$.
+Normalizing the contestants' payoffs shows that output depends on
+$\theta,c$ only through $\alpha$. Hence the organizer's payoff is
+\[
+J=A(\alpha,T,\lambda;\sigma)-c\alpha,\qquad
+A=u(\mathcal B(0,c\alpha,T,\lambda;S_0))-D(T),
+\]
+where $A$ is independent of $c$.
+
+\emph{1. Attainment and prize exit.}
+The no-prize payoff $F_0(T;\sigma)=u(b(T))-D(T)$ is strictly concave,
+tends to $-\infty$, and has derivative
+$\sigma^2u'(b_0)/(2\sqrt{2\pi S_0})>0$ at zero.
+Its unique maximizer $T_0(\sigma)$ is therefore positive and continuous.
+Write $V_0=F_0(T_0;\sigma)$ and
+$c_e=2T_0D'(T_0)/\sigma^2$.
+Equation~\eqref{eq-prize-entry-derivative} shows that a small prize
+improves $V_0$ whenever $c<c_e$.
+
+The utility curvature bound, integrated twice, gives a finite upper
+utility $u_\infty$ and the tail inequality
+\begin{equation}\label{eq-design-tail-scaling}
+u_\infty-u(kb)\leq k^{1-\gamma_0}[u_\infty-u(b)],
+\qquad k\geq1,\quad b\geq b_0.
+\end{equation}
+Set $R(\sigma)=u_\infty-V_0(\sigma)>0$ and define the proof-only curve
+\begin{equation}\label{eq-design-local-attainment-cost}
+c_A(\sigma)=4\max_{0\leq T\leq D^{-1}(R(\sigma))}
+\frac{T[R(\sigma)-D(T)]}{S_0+\sigma^2T}.
+\end{equation}
+It is positive and continuous. Its maximizing deadline $t_A$ is
+unique, since the derivative numerator
+$S_0(R-D(T))-TD'(T)(S_0+\sigma^2T)$ strictly decreases.
+Thus
+\begin{equation}\label{eq-design-attainment-deadline}
+R-D(t_A)=\frac{t_AD'(t_A)(S_0+\sigma^2t_A)}{S_0}.
+\end{equation}
+Any design reaching $V_0$ has $c\alpha+D(T)\leq R$, and consequently
+\begin{equation}\label{eq-design-exposure-budget}
+\frac{\alpha T}{S_0+\sigma^2T}\leq\frac{c_A(\sigma)}{4c}.
+\end{equation}
+For $c>c_A$, the competitive budget is compact and has exposure
+uniformly below $1/4$. Continuity on the precision compactification
+therefore proves attainment, and locally continuous joint and
+full-disclosure values.
+
+A positive prize strictly improves $V_0$ at $c=c_A$.
+To verify this, put $q_0=\sigma^2T_0$ and
+$U=b(T_0)u'(b(T_0))$.
+If $q_0\geq S_0/3$, the tail bound, the no-prize first-order condition,
+and $TD'(T)\geq3D(T)$ imply
+\[
+R\leq\frac{U}{\gamma_0-1}+\frac{Uq_0}{6(S_0+q_0)},
+\qquad c_e\sigma^2=\frac{Uq_0}{S_0+q_0}.
+\]
+Hence
+\[
+\frac{c_A}{c_e}\leq\frac{4R}{c_e\sigma^2}
+\leq\frac{16}{\gamma_0-1}+\frac23\leq\frac{74}{75}<1,
+\]
+so local prize entry is profitable.
+If $q_0\leq S_0/3$, choose $T=t_A$, $\lambda=0$,
+and $\alpha=(S_0+\sigma^2t_A)/(5t_A)$.
+The exact no-signal bound and \eqref{eq-design-attainment-deadline} give
+\[
+\mathcal B\geq6b_0/5,\qquad
+\theta=\frac45[R-D(t_A)],\qquad D(t_A)\leq R/4.
+\]
+Since $b(T_0)\leq2b_0/\sqrt3$, equation~\eqref{eq-design-tail-scaling}
+and $\gamma_0\geq51$ yield
+\[
+u_\infty-u(\mathcal B)\leq(25/27)^{25}R<3R/20,
+\qquad \theta+D(t_A)\leq17R/20.
+\]
+Their sum is strictly below $R$, so this candidate also beats $V_0$.
+
+Define the prize-exit cost by
+\begin{equation}\label{eq-sharp-prize-exit-cost}
+c_0(\sigma)=
+\sup_{\substack{\alpha,T>0,\ \lambda\in[0,\infty]\\
+\alpha T/(S_0+\sigma^2T)<1/4}}
+\frac{A(\alpha,T,\lambda;\sigma)-V_0(\sigma)}{\alpha}.
+\end{equation}
+It satisfies $c_0\geq c_e>0$ and, by the preceding strict improvement,
+$c_0>c_A$.
+It is finite: at any sufficiently large fixed cost, competitive
+designs have bounded $\alpha,T$, deadlines bounded away from zero,
+and exposure strictly below $1/4$ by \eqref{eq-design-exposure-budget}.
+As cost increases, their $\alpha$ tends uniformly to zero.
+The uniform entry expansion \eqref{eq-design-uniform-entry-expansion}
+then gives
+\[
+A-c\alpha-V_0
+\leq \alpha\{\max_T a(T;\sigma)-c+O(\alpha)\}<0,
+\qquad
+a(T;\sigma)=\frac{u'(b(T))T}{\sqrt{2\pi(S_0+\sigma^2T)}}.
+\]
+The maximum is over the fixed positive deadline compact set.
+Thus sufficiently high costs exclude every profitable positive prize.
+
+For $c<c_0$, the defining quotient supplies a positive-prize
+improvement. For $c\geq c_0>c_A$, every competitive design is inside
+the defining domain by \eqref{eq-design-exposure-budget}.
+Zero prize is therefore optimal, strictly so against every positive
+prize if $c>c_0$. At equality, ties are possible.
+A positive-prize optimum cannot have $T=0$, since its payoff would
+be $u(b_0)-\theta<V_0$.
+
+We also need continuity of $c_0$.
+Every strictly interior candidate remains valid at nearby risks,
+which proves lower semicontinuity.
+For upper semicontinuity, take $\sigma_n\to\sigma_*$ and a fixed
+$C>c_0(\sigma_*)$ allegedly below the limiting upper values.
+Candidates with $A-C\alpha>V_0$ have uniformly bounded $\alpha,T$.
+The energy bound, the utility tangent, and $V_0(\sigma_*)>u(b_0)$
+bound their deadlines away from zero.
+Since $C>c_0(\sigma_*)>c_A(\sigma_*)$, their exposure has a uniform
+strict margin. Extract a convergent subsequence, compactifying precision.
+A positive limit of $\alpha$ gives a quotient at least $C$,
+contradicting the definition of $c_0(\sigma_*)$.
+If $\alpha\to0$, the energy bound implies $T\to T_0(\sigma_*)$,
+and \eqref{eq-design-uniform-entry-expansion}, with $F_0\leq V_0$,
+bounds the limiting upper quotient by
+$c_e(\sigma_*)\leq c_0(\sigma_*)<C$, again a contradiction.
+Thus $c_0$ is continuous.
+
+The connected open domain in the proposition can now be taken as
+\[
+\mathcal W=\{(c,\sigma):\sigma>0,\ c>c_A(\sigma)\}.
+\]
+Joint optima exist throughout it. It contains the whole prize-exit
+curve and a neighborhood of each point of that curve.
+Above $c_0$, all optima have $(\theta,T)=(0,T_0)$;
+below it, all optima have positive prize and deadline.
+
+\emph{2. A nonempty finite-feedback region.}
+Put $R_0=u_\infty-u(b_0)$ and
+$C(E)=\min_{t>0}\{E/t+D(t)\}$.
+The minimizer is unique, with $E=t^2D'(t)$.
+Thus $C$ is continuous and strictly increasing from zero to infinity.
+Convexity of $D$ gives $C(rE)\leq\sqrt r\,C(E)$ for $0<r\leq1$,
+by substituting $t=\sqrt r\,s$.
+Define $c_F>0$ by $C(c_FS_0/4)=R_0$.
+For $c_F\leq c\leq2c_F$, let $t$ minimize $C(cS_0/16)$ and
+choose $\theta=cS_0/(16t)$, $\lambda=0$.
+Its exposure is at most $1/16$, so the exact no-signal estimate gives
+$\mathcal B\geq17b_0/16$.
+The utility tail and the cost scaling give the uniform positive margin
+\[
+M(c):=u(17b_0/16)-u(b_0)-C(cS_0/16)
+>\left(\frac34-\frac1{\sqrt2}\right)R_0>0.
+\]
+The candidate payoff is at least $u(b_0)+M(c)$.
+In contrast, the full-disclosure output envelope and the utility tangent give
+\begin{equation}\label{eq-design-full-envelope}
+V_\infty(c,\sigma)\leq u(b_0)+
+\sup_{T\geq0}\left\{
+\frac{11u'(b_0)\sigma^2}{2\sqrt{2\pi S_0}}T-D(T)\right\}.
+\end{equation}
+The supremum tends to zero as $\sigma\downarrow0$:
+for any $\varepsilon>0$, split at $T=\varepsilon$ and use
+$D(T)/T\geq D(\varepsilon)/\varepsilon$ on the upper part.
+Also $V_0(\sigma)\to u(b_0)$, uniformly bounding its relevant
+deadlines by $D^{-1}(R_0)$.
+Thus the candidate strictly beats both $V_0$ and $V_\infty$
+for all sufficiently small positive risks, uniformly over this cost interval.
+Finally $c_A(\sigma)<c_F$: replacing $R(\sigma)$ by $R_0$ and the
+denominator by $S_0$ in \eqref{eq-design-local-attainment-cost}
+gives $c_F$, with strict inequality for $\sigma>0$.
+These points are in $\mathcal W$, so optima are attained and every
+optimum has positive prize, positive deadline, and finite precision.
+Strict inequalities and continuity give a nonempty open region.
+
+\emph{3. A nonempty full-disclosure region.}
+Only here use the reference-duration assumption on $D$.
+In proof notation, set
+$K=\sqrt{S_0}u'(\sqrt{S_0/\pi})/(4\sqrt\pi)$.
+Since $t_\circ D'(t_\circ)=K$ and $D(t_\circ)\leq K/\gamma_0$,
+there is an open interval of $\tau$ just below $t_\circ$ on which
+\[
+3K/4<\tau D'(\tau)<K,\qquad D(\tau)<K/\gamma_0.
+\]
+Take $\sigma^2=S_0/\tau$ and
+\begin{equation}\label{eq-full-disclosure-region}
+K/\sigma^2<c<3K/(2\sigma^2).
+\end{equation}
+The no-prize marginal output return at $\tau$ is $K/\tau$,
+so $T_0\geq\tau$ and
+$c_e\geq2\tau D'(\tau)/\sigma^2>3K/(2\sigma^2)>c$.
+A small prize therefore beats $V_0$.
+Every competitive design satisfies
+\[
+\theta+D(T)\leq R
+\leq u_\infty-u(b(\tau))+D(\tau)
+<\frac{5K}{\gamma_0-1}.
+\]
+Consequently $w=\theta/(c\sigma^2)<5/(\gamma_0-1)$.
+The convex tangent for $D$ at $\tau$ also gives
+\[
+T\leq\tau+\frac{4K}{(\gamma_0-1)D'(\tau)}
+<\left(1+\frac{16}{3(\gamma_0-1)}\right)\tau<4\tau.
+\]
+Choose the universal utility constant so that
+$5/(\gamma_0-1)<\min(w_*,1/4)$, where $w_*$ is the equilibrium
+sorting threshold proved in Appendix~\ref{app-design-output}.
+Then every competitive positive-prize design has
+$S_0/(\sigma^2T)>1/4$ and weak incentives.
+Equation~\eqref{eq-uniform-disclosure-ranking} strictly dominates
+every finite precision at the same prize and deadline.
+Moreover
+$c_A\leq4R/\sigma^2<20K/[(\gamma_0-1)\sigma^2]<c$,
+so these points belong to $\mathcal W$ and the maximum is attained.
+All optima have positive prize and deadline and full disclosure.
+The strict inequalities define a nonempty open parameter region.
+
+The new delay assumptions are compatible.
+For example fix $t_\circ>0$, choose $0<h<t_\circ$, and let
+\[
+D(T)=aT^3+b(T-t_\circ+h)_+^3,\qquad a,b>0.
+\]
+Each term has elasticity at least three.
+Choose $a=K/(12\gamma_0t_\circ^3)$ and
+$b=(K/t_\circ-3at_\circ^2)/(3h^2)$, which is positive.
+Then $t_\circ D'(t_\circ)=K$, and taking $h$ sufficiently small
+makes $D(t_\circ)<K/\gamma_0$.
+This fixed delay function need not have globally high elasticity:
+its elasticity tends to three at long deadlines.
+An exponential utility with sufficiently large rate meets the utility
+condition. With this same fixed pair $(u,D)$, steps 1--3 give all
+three nonempty regions.
+
+\emph{4. The precision boundary.}
+Within the connected positive-prize domain
+$\mathcal U=\{(c,\sigma):c_A(\sigma)<c<c_0(\sigma)\}$,
+let $V$ be the joint value and $V_\infty$ its full-disclosure restriction.
+Both are locally continuous by the common compact budget in step 1.
+The set
+$\mathcal F=\{(c,\sigma)\in\mathcal U:V>V_\infty\}$ is open.
+Every optimum there has finite precision.
+Step 2 makes $\mathcal F$ nonempty, while step 3 gives a nonempty
+open full-disclosure region in its complement.
+Connectedness implies a nonempty relative boundary.
+At every boundary point, continuity gives $V=V_\infty>V_0$;
+the full-disclosure maximum is attained with positive prize and deadline.
+Finite feedback may tie there. No single crossing or monotonicity is
+used. This proves the proposition.
+\Halmos
+\endproof
+
+\subsection{Equilibrium Estimates for Joint Design}\label{app-design-output}
+The following estimates concern the contestants' equilibrium and do
+not impose utility or delay-cost shape assumptions. They are stated
+together so that the economic proof can be read without the PDE estimates.
+With $\alpha=\theta/c$, the exact output obeys
+\eqref{eq-design-basic-output-bound}. On bounded parameter sets with
+exposure $\alpha T/(S_0+\sigma^2T)\leq1/4$, output is continuous,
+including both precision endpoints and the zero-prize and zero-deadline axes.
+The no-signal output satisfies \eqref{eq-design-zero-candidate};
+the full-disclosure output satisfies \eqref{eq-design-exact-upper}.
+There is a universal $w_*>0$ for which the strict precision comparison
+\eqref{eq-uniform-disclosure-ranking} holds. Finally, on positive compact
+risk and deadline sets, uniformly over all precisions,
+\begin{equation}\label{eq-design-uniform-entry-expansion}
+u(\mathcal B)-D(T)=F_0(T;\sigma)
++\alpha\frac{u'(b(T))T}{\sqrt{2\pi(S_0+\sigma^2T)}}+O(\alpha^2).
+\end{equation}
+This last expression uses any $C^2$ utility on the relevant output
+range, not the strong curvature condition.
+
+\proof{Proof of the equilibrium estimates}
+Write $w=\alpha/\sigma^2$ and $U_k=V^k/\theta$.
+We first derive the exact output identity used below. For $q>0$, define
+\[
+\beta(y,q):=\sqrt{\frac{q}{2\pi}}e^{-y^2/(2q)}
++y\left[\Phi(y/\sqrt q)-\frac12\right]
+=\frac12\mathbb E|Y|,
+\qquad Y\sim\mathcal N(y,q).
+\]
+It satisfies
+\[
+\beta_y=\Phi(y/\sqrt q)-\frac12,\qquad
+\beta_{yy}=\frac{e^{-y^2/(2q)}}{\sqrt{2\pi q}},\qquad
+\beta_q=\frac12\beta_{yy}.
+\]
+Because $Q_t'=-\lambda S_t^2$, the function $\beta(y,Q_t)$ solves the backward equation associated with the posterior-state diffusion without strategic drift. Moreover, conditional normality gives
+$\mathbb E[|y_T|/2\mid I_T]=\beta(\tilde y_T,S_T)$.
+Applying It\^o's formula and using
+$\max\{x_T^i,x_T^j\}=(x_T^i+x_T^j)/2+|y_T|/2$
+therefore yields
+\begin{equation}\label{eq-best-output-drift-identity}
+\mathcal B=\beta(\tilde y_0,Q_0)
++\mathbb E\!\int_0^T\left\{
+\frac{m_i+m_j}{2}
++(m_i-m_j)\left[\Phi(\tilde y_t/\sqrt{Q_t})-\frac12\right]
+\right\}dt.
+\end{equation}
+The policies inside the expectation are evaluated at $(\tilde y_t,t)$. The stochastic integrals have zero expectation because $\beta_y$ and the equilibrium policies are bounded on the fixed horizon.
+
+Adding the players' equilibrium payoffs gives, from every state and date,
+\begin{equation}\label{eq-design-energy-budget}
+\mathbb E\!\left[\int_t^T(m_i^2+m_j^2)\,ds\mid I_t\right]
+=2\alpha\left[1-U_i(\tilde y_t,t)-U_j(\tilde y_t,t)\right]
+\leq2\alpha,
+\qquad U_k=V^k/\theta.
+\end{equation}
+In particular $0\leq U_i+U_j\leq1$. Coupling with the same initial scores and innovation paths but zero effort, and applying Cauchy--Schwarz to cumulative efforts, gives
+\begin{equation}\label{eq-design-basic-output-bound}
+0\leq\mathcal B-\sqrt{\frac{S_0+\sigma^2T}{2\pi}}
+\leq\sqrt{2\alpha T}.
+\end{equation}
+
+\emph{A uniform weak-incentive comparison.}
+We next establish the weak-incentive precision comparison. Rescale time by
+$T$, state and output by $\sigma\sqrt T$, and precision by setting
+\[
+w=\frac{\theta}{c\sigma^2},\qquad
+s=\frac{S_0}{\sigma^2T},\qquad
+\ell=\lambda\sigma^2T^2.
+\]
+Write $\widehat{\mathcal B}(w,s,\ell)=
+\mathcal B(0,\theta,T,\lambda;S_0)/(\sigma\sqrt T)$ and let
+$\widehat{\mathcal B}(w,s,\infty)$ be its high-precision limit.
+There is a numerical $w_*>0$ such that, for every
+$s\geq1/4$, every finite $\ell\geq0$, and $0<w<w_*$,
+\begin{equation}
+\widehat{\mathcal B}(w,s,\infty)
+>\widehat{\mathcal B}(w,s,\ell).\label{eq-uniform-disclosure-ranking}
+\end{equation}
+The lower bound on $s$ is part of the scope of the argument below;
+the joint-design conditions will put every relevant deadline in this range.
+
+In normalized time, let
+$\bar S_t$ solve
+\[
+\bar S_t'=1-\ell\bar S_t^2,\qquad \bar S_0=s,
+\]
+and put $q=1+s$, $Q_t=\bar S_t+1-t$, and $A_t=q-Q_t$.
+At full disclosure, $Q_t^\infty=1-t$ and $A_t^\infty=s+t$.
+For each fixed finite $s,\ell$, the analytic constructions below and the
+linear organizer equation give, for sufficiently small $|w|$,
+\begin{equation}\label{eq-uniform-output-series}
+\widehat{\mathcal B}(w,s,\ell)
+=b_0(s)+wb_1(s)+\sum_{n\geq2}w^nb_n(s,\ell),
+\qquad
+b_0(s)=\sqrt{\frac q{2\pi}},\qquad
+b_1(s)=\frac1{\sqrt{2\pi q}}.
+\end{equation}
+We control bounded precisions by their second-order gap and the
+unbounded precision tail by the exact nonlinear terminal layer. We do not
+assume a common relative bound for all higher-order coefficient differences.
+Let $P_{t,r}^{\ell}$ denote the Gaussian semigroup
+with variance $Q_t-Q_r$, and write
+$U_{\ell}^k=\sum_{n\geq0}w^nU_{\ell,n}^k$ for the two normalized player
+values. Their coefficients are defined recursively by
+\begin{align*}
+U_{\ell,0}^i(x,t)&=\Phi(x/\sqrt{Q_t}),
+&U_{\ell,0}^j(x,t)&=\Phi(-x/\sqrt{Q_t}),\\
+U_{\ell,n}^i(t)
+&=\int_t^1P_{t,r}^{\ell}
+\left\{\frac12\sum_{a+b=n-1}U_{\ell,a,x}^iU_{\ell,b,x}^i
++\sum_{a+b=n-1}U_{\ell,a,x}^iU_{\ell,b,x}^j\right\}dr,
+\end{align*}
+for $n\geq1$, with the analogous expression for player $j$.
+To link these coefficients to output, let
+$R_{\ell,n}=U_{\ell,n}^i+U_{\ell,n}^j$,
+$\Delta_{\ell,n}=U_{\ell,n}^i-U_{\ell,n}^j$, and
+$h_t^{\ell}(x)=\Phi(x/\sqrt{Q_t})-1/2$. If
+$Z_{\ell}=\sum_{n\geq1}w^nZ_{\ell,n}$ is the effort-induced part of expected
+best output, equation~\eqref{eq-best-output-drift-identity} and Feynman--Kac
+give
+\begin{align*}
+Z_{\ell,1}(t)
+&=\int_t^1P_{t,r}^{\ell}
+\left\{\frac12\Delta_{\ell,0,x}
++h_r^{\ell}R_{\ell,0,x}\right\}dr,\\
+Z_{\ell,n}(t)
+&=\int_t^1P_{t,r}^{\ell}\left\{
+\frac12\Delta_{\ell,n-1,x}
++h_r^{\ell}R_{\ell,n-1,x}
++\sum_{a+b=n-1}R_{\ell,a,x}Z_{\ell,b,x}
+\right\}dr,
+\qquad n\geq2,
+\end{align*}
+where the last sum has $a\geq0$ and $b\geq1$. Thus
+$b_n(s,\ell)=Z_{\ell,n}(0,0)$ for $n\geq1$.
+
+For the high-precision range $\ell s^2\geq1$, convergence and the individual
+coefficient bound can be verified directly in a Gaussian function space.
+The Riccati equation gives $\ell\bar S_t^2\geq1$, so
+$Q_t-Q_r\geq r-t$ and $Q_r\geq1-r$. For player gradients and organizer
+gradients, respectively, use
+\[
+\|f\|_G:=\sup_{x,t<1}\sqrt{Q_t}e^{x^2/(4Q_t)}|f(x,t)|,
+\qquad
+\|g\|_H:=\sup_{x,t<1}\sqrt{Q_t}e^{x^2/(8Q_t)}|g(x,t)|.
+\]
+Define $\mathscr A f=\int_t^1\partial_xP_{t,r}^{\ell}f_r\,dr$ and
+$\mathscr M(f,g)=\int_t^1\partial_xP_{t,r}^{\ell}(f_rg_r)\,dr$.
+To check the operator bounds, put $v=Q_t-Q_r$. If
+$|F_r(x)|\leq M Q_r^{-1}e^{-x^2/(2kQ_r)}$, conditional Gaussian
+integration, with $W=v+kQ_r$, gives
+\[
+|\partial_xP_vF_r(x)|\leq
+\frac{\sqrt k M}{\sqrt{Q_rW}}e^{-x^2/(2W)}
+\left\{\frac{|x|}{W}+\sqrt{\frac{2kQ_r}{\pi vW}}\right\}.
+\]
+For a product of two $G$-bounded functions take $k=1$; for a product of a
+$G$-bounded and an $H$-bounded function take $k=4/3$. For the linear
+operator take $k=2$ and $M=\sqrt{Q_r}\|f\|_G$.
+Multiplying by the target Gaussian weight and using
+$\int_t^1[(1-r)(1-t)]^{-1/2}dr=2$ and
+$\int_t^1[(r-t)(1-t)]^{-1/2}dr=2$ yields
+\[
+\|\mathscr M(f_1,f_2)\|_G\leq C_G\|f_1\|_G\|f_2\|_G,
+\quad
+\|\mathscr A f\|_H\leq C_G\|f\|_G,
+\quad
+\|\mathscr M(f,g)\|_H\leq C_H\|f\|_G\|g\|_H,
+\]
+where
+\[
+C_G=2\{\sqrt{2/e}+\sqrt{2/\pi}\}<4,
+\qquad
+C_H=2\{\sqrt{8/(3e)}+(4/3)\sqrt{2/\pi}\}<5.
+\]
+\emph{Nonperturbative control of the player gradients.}
+For finite $\ell$ with $\ell s^2\geq1$, the exact equilibrium satisfies
+\begin{equation}\label{eq-exact-gradient-pairing}
+\frac{|p_i-p_j|}{p_i+p_j}\leq\tanh(w/2),\qquad
+\|p_i+p_j\|_G<\frac43,\qquad
+\|p_i-p_j\|_G\leq\frac{2w}{3},
+\quad 0<w\leq\frac12,
+\end{equation}
+where $p_i=U_{i,x}$ and $p_j=-U_{j,x}$. These are bounds on the real
+equilibrium, not on its Taylor coefficients or on differences between
+information regimes.
+
+To prove them, use $Q$ as the increasing backward-time variable, starting
+at $Q_*=\bar S_1>0$. Put $d=U_i-U_j$, $H=p_i+p_j=d_x$,
+$A=p_i-p_j$, and $k=w/(\ell\bar S^2)$. The Riccati equation gives
+\[
+0<k\leq w,\qquad
+k_Q=\frac{2w}{\bar S}\frac1{\ell\bar S^2}
+\left(\frac1{\ell\bar S^2}-1\right)\leq0.
+\]
+The gradient equations are
+\[
+(p_i)_Q=\tfrac12(p_i)_{xx}+k[A(p_i)_x-p_i(p_j)_x],\qquad
+(p_j)_Q=\tfrac12(p_j)_{xx}+k[A(p_j)_x+p_j(p_i)_x].
+\]
+Their gradients are positive by Theorem~\ref{thm-equilibrium-effort},
+and their masses are one by the boundary values. Reflection symmetry
+therefore gives $0<d<1$ on $x>0$ and $p_i(0,Q)=p_j(0,Q)$.
+Write $k_*=k(Q_*)$. For a differentiable function $b(Q)$, put
+$m=\exp(kd+b)$ and $F=p_i-mp_j$. Substitution, retaining
+$m_x=mkH$, gives the scalar equation
+\[
+F_Q=\tfrac12F_{xx}+(kA-mkp_j)F_x
++[k(m-1)(p_j)_x+mp_jk^2H]F
+-mp_j(k_Qd+b_Q).
+\]
+For $b=k_*-k$, the last source is nonpositive on $x>0$;
+$F\leq0$ initially and at $x=0$. For $b=-k_*$ the source is
+nonnegative and these boundary inequalities reverse. The coefficients
+are bounded for each finite precision, and $F\to0$ at spatial infinity,
+so scalar comparison yields
+\[
+kd-k_*\leq\log(p_i/p_j)\leq kd+k_*-k
+\qquad(x>0).
+\]
+Both bounds lie in $[-k_*,k_*]$. Reflection extends this interval to
+all states, giving $|A|/H\leq\tanh(k_*/2)\leq w/2$.
+This argument does not assume that the gradients are unimodal.
+
+The sum of the two mild equations is
+\[
+H=2G_Q+\frac w2\mathscr M(A,H),\qquad
+G_Q(x)=\frac{e^{-x^2/(2Q)}}{\sqrt{2\pi Q}}.
+\]
+On any backward-time subinterval, its Gaussian norm $M$ consequently
+satisfies
+\[
+M\leq\frac2{\sqrt{2\pi}}+\frac{C_Gw^2}{4}M^2
+<\frac45+w^2M^2.
+\]
+Initially $M=2/\sqrt{2\pi}<4/5$. A first crossing of $4/3$ would give
+$M<4/5+(4/3)^2/4=56/45<4/3$, a contradiction.
+The local Gaussian mild construction starts from $G_{Q_*}$; since
+$Q_*>0$, a bounded Gaussian norm permits its continuation on the
+entire finite clock interval. Bounded-gradient uniqueness identifies
+this construction with the equilibrium of
+Theorem~\ref{thm-equilibrium-effort}. This proves
+equation~\eqref{eq-exact-gradient-pairing} uniformly over finite
+high precisions. It does not identify the infinite-precision limit.
+
+The same bounds control the organizer's exact response. The sum equation
+gives $\|H-2G_Q\|_G\leq16w^2/9$, and hence
+\[
+\max_k\|p_k-G_Q\|_G\leq\frac w3+\frac{8w^2}{9}
+\leq\frac{7w}{9}.
+\]
+For the effort-induced output $Z$, write $g=Z_x$ and
+$F=\Phi(x/\sqrt{Q_t})p_i+[1-\Phi(x/\sqrt{Q_t})]p_j$.
+Then $0<F\leq H$, and the exact linear equation is
+$g=w\mathscr A F+w\mathscr M(A,g)$.
+Its second operator has norm at most
+$(2C_H/3)w^2<5/6$ for $w\leq1/2$. Thus its convergent Neumann
+series, identified with the organizer equation by uniqueness at each
+finite precision, yields
+\begin{equation}\label{eq-exact-organizer-gradient-bound}
+\|Z_x\|_H\leq
+\frac{(4C_G/3)w}{1-(2C_H/3)w^2}\leq32w.
+\end{equation}
+Neither estimate uses a small-incentive expansion.
+
+\emph{Analytic bounds for small incentives.}
+Let $a_0=1/\sqrt{2\pi}<2/5$.
+Their mild equations have quadratic terms
+$w\mathscr M(p_i,p_i)/2-w\mathscr M(p_i,p_j)$ and
+$w\mathscr M(p_i,p_j)-w\mathscr M(p_j,p_j)/2$, respectively.
+On the vector $G$-norm ball of radius $2a_0$, these equations are a
+contraction for $|w|\leq1/100$, with Lipschitz constant less than $12/125$.
+The quadratic coefficient recursion and the Catalan bound give
+\[
+\max\{\|p_{i,n}\|_G,\|p_{j,n}\|_G\}\leq a_0(48/5)^n.
+\]
+The organizer source is
+$F=\Phi(x/\sqrt{Q_t})p_i+[1-\Phi(x/\sqrt{Q_t})]p_j$.
+Writing $g=Z_x$, its mild equation is
+$g=w\mathscr A F+w\mathscr M(p_i-p_j,g)$.
+The second term has operator norm less than $2/25$ on the same prize
+range. Its coefficient recursion therefore gives
+$\|g_n\|_H\leq4a_0(68/5)^{n-1}$ for $n\geq1$.
+At the root, Gaussian integration gives bounds
+$\sqrt{2/q}\|f\|_G$ and
+$4\|f\|_G\|g\|_H/\sqrt{3q}$ for the time integrals of a linear source
+and a product source, respectively. Combining these with the preceding
+coefficient recursion proves
+\begin{equation}\label{eq-high-precision-output-majorant}
+|b_n(s,\ell)|\leq\frac{2a_0}{\sqrt q}(68/5)^{n-1},
+\qquad n\geq1,\quad\ell s^2\geq1.
+\end{equation}
+Thus truncation after order $N\geq1$ has output error at most
+\[
+\frac{2a_0}{\sqrt q}
+\frac{(68/5)^N|w|^{N+1}}{1-(68/5)|w|}.
+\]
+For each finite precision, bounded-gradient HJB uniqueness and the linear
+organizer equation identify these convergent series with exact equilibrium
+output. For fixed $0<t<r<1$, $Q_t\to1-t$ and the Gaussian kernels converge.
+The same operator bounds control omitted time intervals by integrals of
+$(r-t)^{-1/2}$ and $(1-r)^{-1/2}$; their Gaussian envelopes control spatial
+tails. Dominated convergence in the coefficient recursions, followed by
+the summable bound in equation~\eqref{eq-high-precision-output-majorant},
+therefore gives the high-precision output limit. At the root, the limiting propagation
+variance is $q-(1-r)=s+r$, not $r$: the initial disclosed gap must still
+be averaged over its prior distribution. This argument proves the
+individual high-precision bounds; the comparison of two precisions requires
+a separate difference estimate.
+
+\emph{Second-order comparison on bounded precision sets.}
+Since $R_{\ell,0,x}=0$ and $\Delta_{\ell,1}=0$, the order-two organizer
+source is $h_t^\ell R_{\ell,1,x}$. Gaussian multiplication gives
+\[
+R_{\ell,1}(t)=-\int_t^1\frac{G_{Q_t-Q_r/2}}{2\sqrt{\pi Q_r}}\,dr.
+\]
+To evaluate the root, put $A=A_t$, $B=A_r$, and $V=Q_t-Q_r/2$.
+The product $G_AG_V$ is a Gaussian density of variance
+$D=AV/(A+V)$ times $[2\pi(A+V)]^{-1/2}$.
+Gaussian integration by parts yields
+$\mathbb E[Yh_t^\ell(Y)]=D/\sqrt{2\pi(Q_t+D)}$ for $Y\sim\mathcal N(0,D)$.
+Consequently,
+\[
+b_2(s,\ell)=\int_0^1\int_t^1K_q(A_t,A_r)\,dr\,dt,\qquad
+K_q(A,B)=\frac{A}{\pi\sqrt{2\pi}\sqrt{q-B}(q+B)
+\sqrt{q^2+qB-2A^2}}.
+\]
+At $A=0$ this expression is understood by continuity.
+The revealed fraction $A_t/(s+t)$ is nondecreasing. Indeed, writing
+$a_t=s+t$ and $H_t=\ell a_t\bar S_t^2-(a_t-\bar S_t)$ gives
+\[
+(A_t/a_t)'=H_t/a_t^2,\qquad H_t'=2\ell a_t\bar S_t\bar S_t'.
+\]
+For $\ell>0$, $H_0>0$; at a first zero one would have
+$\bar S_t'=\bar S_t/a_t>0$ and $H_t'>0$, a contradiction.
+For $\ell=0$, $A_t=0$. The kernel increases strictly with $A$.
+Along a ray $(A,B)=\rho(a,b)$, put $x=\rho b/q$, $z=\rho a/q$.
+Direct differentiation gives
+\[
+2\rho\partial_\rho\log K_q(\rho a,\rho b)
+=\frac{2(1+x^3+xz^2-3x^2z^2)}
+{(1-x^2)(1+x-2z^2)}>0.
+\]
+For $x\le1/3$ the numerator is positive; otherwise its minimum over
+$0\le z\le x$ is $(1-x)(3x^3+x^2+x+1)>0$.
+Taking $a=s+t$, $b=s+r$, $\rho=A_r/b<1$, the revealed-fraction
+inequality gives
+$K_q(A_t,A_r)\le K_q(\rho a,\rho b)<K_q(a,b)$.
+Thus $\Delta_2(s,\ell):=b_2(s,\infty)-b_2(s,\ell)>0$ at every finite precision.
+
+\emph{The exact high-precision terminal layer.}
+We first compare full disclosure with an auxiliary problem of constant
+posterior variance $\eta>0$, innovation variance one, horizon one, and
+initial perceived-gap variance $s-\eta$. This is a proof device, not a
+different data-generating process. Take $0<\eta<s/2$.
+Write $\mathcal L_0=(\partial_{zz}+z\partial_z)/2$ and $G=G_1$.
+The full-disclosure player profiles $R_w,d_w$ are determined by
+\[
+R_w=f_w(d_w),\qquad K_w(d_w)=K_w(1)[2\Phi(z)-1].
+\]
+\[
+f_w(d)=1+\frac2w\log\frac{\cosh(wd/2)}{\cosh(w/2)}.
+\]
+\[
+K_w(d)=\frac{d+\sinh(wd)/w}{2}.
+\]
+The identities $f_w''=(w/2)(1-f_w'^2)$ and $K_w''/K_w'=wf_w'$
+verify their HJB equations
+\[
+\mathcal L_0R_w+w\{3R_w'^2/4-d_w'^2/4\}=0,\qquad
+\mathcal L_0d_w+(w/2)R_w'd_w'=0.
+\]
+They have the required boundary values and positive gradients.
+Small-$w$ uniqueness in the Gaussian fixed point above identifies them
+with its full-disclosure coefficient limit.
+The organizer profile $\beta_w$, with asymptotic slopes $\pm1/2$, solves
+\[
+(\mathcal L_0-1/2)\beta_w+wR_w'\beta_w'+wd_w'/2=0.
+\]
+At zero incentive $\beta_0=\beta$, where
+$\beta(z)=G(z)+z[\Phi(z)-1/2]$.
+The player gradient ODEs are
+$p_i'=(-z+w(2p_j-p_i))p_i$ and
+$p_j'=(-z+w(p_j-2p_i))p_j$.
+Their integrable Gaussian bounds imply, by integration, Gaussian
+$e^{-z^2/2}$ tails for both gradients and their differentiated equations.
+Hence $R_w-1,d_w-(2\Phi-1)$ belong to Gaussian-weighted $H^2$.
+Solving for $\beta_w-\beta$ uses the Gaussian source
+$-w(R_w'\beta'+d_w'/2)$, so it belongs to the same space and is $O(w)$.
+All these quantities are analytic for small complex $w$.
+
+For the auxiliary problem use logarithmic time $v$ and state $z$,
+where remaining variance is $\eta e^v$.
+Its exact player and organizer perturbation is
+$E=(\phi,\psi,\chi)$, initially
+$(1-R_w,2\Phi-1-d_w,\beta-\beta_w)$.
+Addition and subtraction of the original HJB give
+\[
+E_v=\mathcal A_wE+\mathcal N_w(E),\qquad
+\mathcal N_w(E)=w(3\phi'^2/4-\psi'^2/4,\ \phi'\psi'/2,\ \phi'\chi').
+\]
+The player block of $\mathcal A_w$ is
+\[
+\binom{\mathcal L_0\phi+
+w(3R_w'\phi'/2-d_w'\psi'/2)}
+{\mathcal L_0\psi+w(d_w'\phi'+R_w'\psi')/2};
+\]
+the organizer block is
+$(\mathcal L_0-1/2+wR_w'\partial_z)\chi+
+w(\phi'\beta_w'+\psi'/2)$.
+The exact change $e=\phi-f_w'(d_w)\psi$,
+$x=K_w'(d_w)\psi/K_w(1)$ makes the player block triangular:
+\[
+e_v=\mathcal L_{E,w}e,\quad
+x_v=\mathcal L_0x+(w/2)(2\Phi-1)'e',\qquad
+\mathcal L_{E,w}=\mathcal L_0+wR_w'\partial_z.
+\]
+The first component is even and the second odd.
+Conjugating $\mathcal L_{E,w}$ by
+$m_w^{1/2}$, $m_w=\exp(z^2/2+2wR_w)$, gives
+\[
+-\sqrt{m_w}\mathcal L_{E,w}(g/\sqrt{m_w})
+=\left[-\frac12\partial_{zz}+\frac{z^2}{8}+\frac14+
+\frac{w^2}{4}(d_w'^2-R_w'^2)\right]g.
+\]
+The added potential is positive and equals $w^2G^2+O(w^4)$.
+The unperturbed ground state has squared normalized density $G$.
+The simple slow eigenvalue is therefore $\nu(w)=-\kappa(w)$, where
+\[
+\kappa(w)=\frac12+\frac{w^2}{2\pi\sqrt3}+O(w^4),\qquad
+\frac12<\kappa(w)\le\frac12+\frac{w^2K_w(1)^2}{2\pi}<\frac{11}{20}
+\]
+for $0<w\le1/2$. The variational upper bound follows by testing the
+unperturbed ground state and using
+$0<d_w'^2-R_w'^2\le2K_w(1)^2/\pi$;
+$K_w(1)\le21/20$ on this interval follows from the series for $\sinh(w)/w$.
+The remaining even player spectrum is at most $-3/2$, the odd heat
+spectrum at most $-1$, and the organizer spectrum at most $-1$.
+The positive potential, the harmonic-oscillator eigenbasis, and
+bounded first-derivative couplings give these statements without
+assuming stability of the nonlinear solution.
+
+Here are the nonlinear estimates needed to use this spectrum.
+Work in $\mathcal H=L^2(e^{z^2/2}dz)^3$ with the even--odd--even parity,
+and $X=D((-\mathcal A_0)^{7/8})$.
+The preceding weighted $H^2$ bounds place $E(0)$ in $X$, with norm
+$O(|w|)$, uniformly in a small complex disk.
+Conjugation to the harmonic oscillator and one-dimensional Sobolev
+embedding give
+$\|f'\|_\infty+\|f'\|_{\mathcal H}\le C\|f\|_X$.
+Thus $\|\mathcal N_w(E)\|_{\mathcal H}\le C|w|\|E\|_X^2$, with the
+corresponding local Lipschitz bound.
+The common second-order domain is unchanged by the bounded-coefficient
+first-order perturbation. In the Hermite basis, the derivative-resolvent
+bound is controlled by $\sup_{n\ge0}\sqrt{n+1}/|\zeta+(n+1)/2|$.
+Outside a disk of radius $1/8$ about $-1/2$, this bound and a Neumann
+series exclude spectrum in $\operatorname{Re}\zeta\ge-3/4$ for small
+complex $w$. The enclosed eigenvalue remains simple, with
+$9/20<\operatorname{Re}\kappa<3/5$ after reducing the disk.
+Hermite resolvent estimates and spectral projection therefore give,
+uniformly in a small complex $w$ disk,
+\[
+\|e^{v\mathcal A_w}\|_{\mathcal H\to X}
+\le C(1+v^{-7/8})e^{-9v/20},\qquad
+\|e^{v\mathcal A_w}(I-\Pi_w)\|_{\mathcal H\to X}
+\le C(1+v^{-7/8})e^{-7v/10}.
+\]
+The same estimates without the singular factor hold from $X$ to $X$.
+They follow by contour integration of the sectorial resolvent and
+interpolation on the fixed domain; the smoothing and spectral
+decomposition framework is given in \citet[Sections 3.2, 5.2, and 7.1]{Lorenzi2005}.
+The displayed domain, derivative order, and spectral separation verify
+its hypotheses here. The kernel exponent $7/8<1$ makes the Duhamel map
+a contraction on a ball of radius $C|w|$ in
+$\sup_{v\ge0}e^{2v/5}\|E(v)\|_X$.
+Consequently $\|E(v)\|_X\le C|w|e^{-2v/5}$, analytically in $w$.
+
+Normalize the slow right vector by $\int\phi_w=1$ and its left
+functional by $\ell_w(e_w)=1$.
+The exact nonlinear amplitude is
+\[
+A(w)=\ell_wE(0)+\int_0^\infty e^{\kappa(w)r}
+\ell_w\mathcal N_w(E(r))\,dr.
+\]
+The integral is $O(w^3)$ and locally uniformly convergent since
+$2(2/5)>\operatorname{Re}\kappa$.
+The initial projection is $w/\sqrt\pi+O(w^2)$:
+$R_w=1-w\Phi(1-\Phi)+O(w^2)$ and
+$\int\Phi(1-\Phi)=1/\sqrt\pi$.
+Hence $A(w)>0$ for small positive $w$.
+Projection of the Duhamel equation gives
+\[
+\|E(v)-A(w)e^{-\kappa(w)v}e_w\|_X\le C|w|e^{-7v/10}.
+\]
+The slow organizer response satisfies
+\[
+(\nu-\mathcal L_0+1/2-wR_w'\partial_z)\chi_w
+=w(\phi_w'\beta_w'+\psi_w'/2),\qquad
+\chi_w=-wG\beta+O(w^2).
+\]
+The first-order identity follows from
+$\mathcal L_0(G\beta)=G'(\Phi-1/2)$.
+
+The sign of this response can also be established without a Taylor
+remainder: {\color{blue}$\chi_w(z)<0$ for every $z$ when $0<w\le9/20$.}
+Here $e=\phi_w-f_w'(d_w)\psi_w$ is the positive scalar ground state,
+not the full eigenvector. Its equation gives
+$m_we'(z)=-2\kappa\int_0^z m_we<0$ for $z>0$.
+The odd component $x=K_w'(d_w)\psi_w/K_w(1)$ satisfies
+\[
+(-\kappa-\mathcal L_0)x=(w/2)(2\Phi-1)'e'.
+\]
+The positive half-line resolvent applies since $\kappa<1$.
+The comparison function $-(3w/5)(2\Phi-1)e$ gives, for $0<w\le1/2$,
+\[
+|\psi_w|\le(63/100)w(2\Phi-1)e,\qquad
+(737/800)e\le\phi_w\le e\quad(z>0).
+\]
+Indeed, applying $-\kappa-\mathcal L_0$ to this comparison function
+gives $(3w/5)e'\{(2\Phi-1)'-w(2\Phi-1)R_w'\}$, and
+$w(2\Phi-1)R_w'/(2\Phi-1)'\le21/160$.
+Thus $|\psi_w|\le(7/10)w(2\Phi-1)\phi_w$.
+{\color{blue}Since $R_w=f_w(d_w)$, $f_w'(d)\ge0$ for $d\ge0$ and
+$f_w''\le w/2$ imply $0\le R_w(z)-R_w(0)\le w/4$.
+Put $m_\phi=e^{z^2/2+3w[R_w-R_w(0)]}$,
+and $I(z)=\int_0^z m_\phi\phi_w$.}
+Integration of the sum-component equation yields
+\[
+m_\phi\phi_w'=-2\kappa I+wm_\phi d_w'\psi_w
+-2w^2\int_0^z m_\phi R_w'd_w'\psi_w.
+\]
+Since $R_w'd_w'\le(147/400)w$, the positive last term in the first
+equation is at most $(1029/2000)w^4I$. Hence $\phi_w'<0$ and
+$|\phi_w'|\ge[2\kappa-(1029/2000)w^4]I/m_\phi$.
+The negative half-line solution also has $\psi_w'(0)<0$.
+{\color{blue}To retain the favorable derivative of the leading odd
+response, put $g=2\Phi-1$, $k=K_w(1)$, and
+$\epsilon=-x-(w/2)ge$. The product rule gives
+\[
+(-\kappa-\mathcal L_0)\epsilon=-\tfrac12w^2gR_w'e'>0.
+\]
+Both boundary values are zero. Since $R_w'\le wkG$,
+$wgR_w'/g'\le21/160$, and
+$(31/100)(1-21/160)>21/80\ge k/4$, comparison with
+$(31/100)w^3ge$ in the positive half-line resolvent gives
+\[
+0<\epsilon\le(31/100)w^3ge\qquad(0<w\le1/2).
+\]
+To bound its derivative, use its equation rather than differentiate
+this inequality. Put $m_0=e^{z^2/2}$ and
+$m=e^{z^2/2+2w[R_w-R_w(0)]}$. Then
+\[
+(m_0\epsilon')'=-m_0(2\kappa\epsilon+w^2gR_w'|e'|),
+\qquad m|e'|=2\kappa\int_0^z me.
+\]
+The positive half-line solution has $\epsilon'(0)>0$. Discarding
+this initial flux and integrating gives
+\[
+-\epsilon'(z)\le m_0(z)^{-1}
+\left[2\kappa\int_0^z m_0\epsilon
++w^2\int_0^z m_0gR_w'|e'|\right]
+\le\frac{167}{200}e^{w^2/2}w^3g|e'|.
+\]
+For the last bound, the first integral contributes at most
+$(31/100)w^3g e^{2w[R_w-R_w(0)]}|e'|$.
+For the second, use $R_w'\le wkG$ and
+$e(0)-e(z)\le m(z)|e'(z)|\sqrt{\pi/2}\,g(z)$, obtained by
+integrating the ground-state flux; its contribution is at most
+$(k/2)w^3g^2e^{2w[R_w-R_w(0)]}|e'|$.
+
+The reconstruction multiplier also varies with state:
+\[
+\psi_w'=\frac{k}{K_w'(d_w)}(x'-wR_w'x),\qquad
+x'=-(w/2)(g'e+ge')-\epsilon'.
+\]
+From $d_w\le kg$ we have $R_w'\le wk^2gG$. The ground-state flux
+gives $|e'|\ge ze\,e^{-z^2/2-w^2/2}$, hence
+$gGe/|e'|\le e^{w^2/2}/\pi<8/21$.
+Using $e^{w^2/2}\le8/7$ and
+$(167/200)(8/7)+(441/400)(231/400)(8/21)<6/5$, we obtain
+\[
+\psi_w'\le C(w)wg|e'|,\qquad
+C(w)=\frac{21}{20}(1/2+6w^2/5)\le\frac{21}{25}.
+\]
+Finally, $\phi_w=e+f_w'(d_w)\psi_w$, $f_w''\ge0$,
+$\psi_w<0$, and $f_w'\le w/2$ imply
+$|\phi_w'|\ge[1-C(w)w^2/2]|e'|$.
+Consequently
+\[
+\psi_w'\le\frac{168}{179}wg|\phi_w'|
+\le wg|\phi_w'|\qquad(z>0,\ 0<w\le1/2).
+\]}
+
+To bound the output derivative, write $H=\beta_w-\beta$.
+It solves
+$(1/2-\mathcal L_{E,w})H=(w/2)d_w'[1+f_w'(d_w)(2\Phi-1)]$.
+The source $F=d_w'[1+f_w'(d_w)(2\Phi-1)]/2$ is positive and even.
+Since $d_w''=-(z+wR_w')d_w'$,
+$f_w'(d_w)\le wd_w/2$, and
+$\partial_zf_w'(d_w)\le wd_w'/2$, its derivative satisfies
+\[
+F'(z)\le\tfrac12d_w'z[-1+2wK_w(1)/\pi]
+\le-(13/40)zd_w'<0\quad(z>0,\ w\le1/2).
+\]
+The odd-drift diffusion semigroup preserves even decreasing functions,
+as follows from its scalar derivative equation; its bounded source
+and discount therefore give $H\ge0,H'\le0$.
+{\color{blue}A sharper bound retains the effort contribution $H>wG$.
+To verify it, put $d=d_w$
+and $a=f_w'(d)=\tanh(wd/2)$. The equation for $H-wG$ is
+\[
+(1/2-\mathcal L_{E,w})(H-wG)
+=w(F-G)+w^2R_w'G'.
+\]
+For $z\ge0$, its right side divided by $wG$ equals
+\[
+\frac{k-K_w'(d)+ak[g-2wzG]}{K_w'(d)}
+\ge\frac{k-1-\sinh^2(wd/2)+(1-w)d\tanh(wd/2)}{K_w'(d)}>0.
+\]
+Indeed $g\ge2zG$, $kg=K_w(d)\ge d$, and
+$\sinh(wd)\le d\sinh w\le2(1-w)d$ for $0\le d\le1$,
+$w\le1/2$. The same bound holds by symmetry on the negative half-line.
+The bounded-source, positive-discount resolvent therefore gives $H>wG$.
+Since $H'\le0$, the output ODE now yields
+\[
+\beta_w''+2wR_w'\beta_w'
+=G+H-zH'-wd_w'\ge[1-w(2K_w(1)-1)]G.
+\]
+Integration from zero, using $R_w(z)-R_w(0)\le w/4$, gives
+\[
+\beta_w'(z)\ge\tfrac12(1-11w/10)(1-w^2/2)(2\Phi(z)-1)
+\qquad(0<w\le1/2).
+\]
+Consequently the organizer source is pointwise negative:
+\[
+\phi_w'\beta_w'+\psi_w'/2
+\le-\frac1{600}(2\Phi-1)|\phi_w'|<0
+\quad(z>0,\ 0<w\le9/20).
+\]}
+It is even, and at zero equals $\psi_w'(0)/2<0$.
+Finally, on $L^2(m_wdz)$ the operator
+$1/2-\kappa-\mathcal L_{E,w}$ has lowest eigenvalue $1/2$.
+Its convergent positive-semigroup resolvent gives
+\[
+\chi_w=w\int_0^\infty e^{(\kappa-1/2)t}
+e^{t\mathcal L_{E,w}}(\phi_w'\beta_w'+\psi_w'/2)\,dt<0.
+\]
+This argument does not assume that the evolved prior remains unimodal.
+It quantifies the linear response, not the nonlinear remainder or the
+full-precision ranking threshold $w_*$.
+
+For $Y\sim\mathcal N(0,s)$,
+\[
+\mathbb E[G(Y)\beta(Y)]=\frac{\sqrt{1+2s}}{2\pi(1+s)}.
+\]
+Weighted $H^1$ controls both $L^1$ and $L^\infty$; splitting $s\le1$
+and $s\ge1$ gives
+$\sqrt{1+s}|\mathbb Ef(Y)|\le C\|f\|_{H^1}$.
+Thus the negative response is uniform after multiplication by
+$\sqrt{1+s}$.
+
+At $w=0$ the organizer fast component has derivative $-e^{-v}G$.
+Cauchy's estimate in the fixed complex disk consequently sharpens its
+remainder to
+\[
+\|\chi(v)-A(w)e^{-\kappa(w)v}\chi_w+we^{-v}G\|_X
+\le Cw^2e^{-7v/10}.
+\]
+For horizon one, put $h=1+\eta$, $v=\log(h/\eta)$, and average the
+auxiliary profile at $Y\sim\mathcal N(0,(s-\eta)/h)$.
+Differentiating $\sqrt h\,\mathbb E\beta_w(Y)$ in $\eta$ using its profile
+equation gives the background increment
+$w\eta G_q(0)+O(w^2\eta/\sqrt q)$.
+The displayed fast term contributes exactly $-w\eta G_q(0)$.
+The positive amplitude and negative slow response therefore imply
+\[
+\widehat{\mathcal B}(w,s,\infty)
+-\widehat{\mathcal B}_{a}(w,s,\eta)
+\ge\frac{C_-w^2\eta^{\kappa(w)}
+-C_+w^2(\eta^{7/10}+\eta)}{\sqrt q}.
+\]
+Here $C_-,C_+>0$ are numerical constants; subsequent $C$ may vary.
+Since $\kappa(w)<11/20$, this difference is strictly positive for a
+common small $\eta$, provided $\eta<s/2$.
+
+\emph{Returning to the original variance path.}
+This last comparison concerns an auxiliary path, so we must bound its
+difference from the Riccati path. Assume $\eta=\ell^{-1/2}<\min(s/2,1/8)$.
+On the variance clock $Q$, both problems have the same heat propagator.
+Their incentive weights are
+\[
+\gamma_o(Q)=\begin{cases}
+\eta^2/\bar S_{t(Q)}^2,&\bar S_1\le Q\le q,\\
+0,&\eta\le Q<\bar S_1,
+\end{cases}
+\qquad
+\gamma_a(Q)=\mathbf1_{[\eta,1+\eta]}(Q).
+\]
+Both weights lie in $[0,1]$ and integrate to one.
+Extending below $\bar S_1$ with zero weight is pure heat propagation,
+which gives the original Gaussian terminal data.
+The player and organizer equations on this clock are
+\[
+\partial_QU_k=\tfrac12U_{k,yy}+w\gamma(Q)N_k(U_y),\qquad
+\partial_QZ=\tfrac12Z_{yy}
++w\gamma(Q)\{F+(p_i-p_j)Z_y\},
+\]
+with $F=\Phi(y/\sqrt Q)p_i+[1-\Phi(y/\sqrt Q)]p_j$.
+Both outputs are evaluated at the same root $(q,0)$.
+
+If $t_c$ solves $Q_{t_c}=1+\eta$, the explicit Riccati formula gives
+$0<t_c<\eta$, and equal weight masses give
+$\|\gamma_o-\gamma_a\|_{L^1}=2t_c<2\eta$.
+For $Q\le1/2$ one has $t\ge1/2$ and
+$\bar S_t-\eta\le4\eta e^{-1/\eta}$.
+Thus the low-clock difference is exponentially small, including the
+interval $[\eta,\bar S_1]$.
+Put $\delta\gamma=\gamma_o-\gamma_a$, and restrict to real
+$0<w\le1/100$. The Gaussian bounds above give
+$\|p_{b,k}-G_Q\|_G\le5w$ and $\|Z_{b,y}\|_H\le2w$
+on either active path. Pure heat continuation of the auxiliary path
+beyond $1+\eta$ widens these envelopes by factors at most $\sqrt2$
+and 2. On the whole common clock we may therefore use
+\[
+|p_{b,k}-G_Q|\le8wQ^{-1/2}e^{-y^2/(4Q)},\qquad
+|a_b|\le16wQ^{-1/2}e^{-y^2/(4Q)},\qquad
+|g_a|\le4wQ^{-1/2}e^{-y^2/(8Q)},
+\]
+where $a_b=p_{b,i}-p_{b,j}$ and $g_b=Z_{b,y}$ for $b=o,a$.
+These are gradient bounds, not assumptions on the prior.
+
+The derivative kernel can be checked without differentiating its input.
+If $|f(y)|\le M u^{-r}e^{-y^2/(2ku)}$, conditional Gaussian integration
+and maximization of the remaining spatial weight give, for $Q>u$ and $K>k\ge1$,
+\[
+\sqrt Q\sup_y e^{y^2/(2KQ)}|\partial_yP_{Q-u}f(y)|
+\le M\left\{
+\frac{k\sqrt{K/[e(K-k)]}\,u^{1/2-r}}{\sqrt Q}
++\frac{k\sqrt{2/\pi}\,u^{1-r}}{\sqrt{Q(Q-u)}}\right\}.
+\]
+Indeed the convolution envelope has variance $Q+(k-1)u$;
+its derivative is bounded by its conditional absolute first moment.
+No derivative of $\gamma_b$ is used.
+
+First consider $\eta\le Q\le1/2$, and write $E_\eta=e^{-1/\eta}$.
+Apart from the initial interval of length
+$\varepsilon=\bar S_1-\eta\le4\eta E_\eta^2$,
+$|\delta\gamma|\le8E_\eta$.
+Let $D_p,D_g$ be the maximum gradient differences in the original
+$G,H$ norms restricted to this interval.
+For the player quadratic source, the derivative kernel has total
+weight at most 4 and mismatch weight at most $40E_\eta$.
+The latter includes the initial interval through
+$\varepsilon/\eta+2\sqrt{\varepsilon/\eta}\le8E_\eta$.
+Since each player gradient has $G$ norm less than $4/5$, subtraction
+of the two mild equations gives
+\[
+D_p\le w\{(48/5)D_p+(192/5)E_\eta\}\le50wE_\eta.
+\]
+For the organizer linear source the corresponding weights are at most
+6 and $64E_\eta$; for its product source they are at most 6 and
+$60E_\eta$. Using $\|g_a\|_H\le2w$ on this interval gives
+\[
+D_g\le w\{(6+24w)D_p+(48/5)D_g
++(256/5+192w)E_\eta\}\le70wE_\eta.
+\]
+Both absorptions hold for $w\le1/100$.
+
+For $Q\ge1/2$ define only the difference envelopes
+\[
+A_p(Q)=\max_k\sup_y\sqrt Qe^{y^2/(8Q)}|p_{o,k}-p_{a,k}|,
+\qquad
+A_g(Q)=\sup_y\sqrt Qe^{y^2/(16Q)}|g_o-g_a|,
+\]
+and put $I_p=\int_{1/2}^q\gamma_o A_p$,
+$I_g=\int_{1/2}^q\gamma_o A_g$.
+The wider envelopes leave room for the spatial factor in the derivative
+kernel. In particular $A_p(1/2)\le50wE_\eta$ and
+$A_g(1/2)\le70wE_\eta$.
+Writing $k(Q,u)=1+(Q-u)^{-1/2}$, the same kernel gives
+\[
+A_p(Q)\le2A_p(1/2)+24w\int_{1/2}^Q k(Q,u)
+\{\gamma_o(u)A_p(u)+|\delta\gamma(u)|\}\,du,
+\]
+\[
+A_g(Q)\le3A_g(1/2)+w\int_{1/2}^Q k(Q,u)
+\left[\gamma_o(u)\{(6+32w)A_p(u)+64wA_g(u)\}
++(6+256w^2)|\delta\gamma(u)|\right]du.
+\]
+Any weight in $[0,1]$ of total mass at most one satisfies
+$\int_u^q\gamma(Q)k(Q,u)dQ\le3$.
+Multiplying by $\gamma_o(Q)$ and applying Tonelli, then using
+$\|\delta\gamma\|_1<2\eta$, therefore yields
+\[
+I_p\le2A_p(1/2)+72wI_p+144w\eta
+\le8A_p(1/2)+600w\eta\le1000w\eta,
+\]
+\[
+I_g\le3A_g(1/2)+21wI_p+192w^2I_g+42w\eta
+\le4A_g(1/2)+22wI_p+44w\eta\le600w\eta.
+\]
+These estimates apply first on finite clock intervals and extend by
+the same strict absorptions; no small difference is assumed in advance.
+
+Finally, $P_{q-u}G_u(0)=G_q(0)$ and the equal weight masses imply
+$\int_\eta^q\delta\gamma(u)P_{q-u}G_u(0)du=0$ exactly.
+Subtracting the full organizer equations consequently gives
+\[
+Z_o(q,0)-Z_a(q,0)=w\int_\eta^qP_{q-u}
+\left[\gamma_o\{\delta F+a_o\delta g+\delta a\,g_a\}
++\delta\gamma\{F_a-G_u+a_ag_a\}\right](0)du.
+\]
+Here $\delta F=\Phi\delta p_i+(1-\Phi)\delta p_j$;
+$\delta a$ and $\delta g$ are the corresponding path differences.
+The root convolution of $u^{-1/2}e^{-y^2/(2ku)}$ equals
+$\sqrt k/\sqrt{q+(k-1)u}$.
+The low-clock bounds thus give a root contribution at most
+$w^2(127E_\eta+24\eta)/\sqrt q\le200w^2\eta/\sqrt q$.
+For the remaining integral the global envelopes give
+\[
+\sqrt q\,|\delta Z_{\rm high}|
+\le w\{(2+16w)I_p+32wI_g\}
++16w^2\|\delta\gamma\|_{L^1([1/2,q])}.
+\]
+Combining these estimates proves directly
+\begin{equation}\label{eq-real-variance-path-error}
+|Z_o(q,0)-Z_a(q,0)|\le3000w^2\eta/\sqrt q.
+\end{equation}
+The bound is uniform for $s\ge1/4$ and
+$\eta<\min(s/2,1/8)$ and does not require complex-parameter stability.
+Since $\kappa(w)<11/20$, this error is smaller than the slow
+contribution above after choosing a common sufficiently small $\eta$.
+We have therefore proved exact strict sorting on the original path for
+all sufficiently large $\ell$, uniformly when $\eta<s/2$.
+
+\emph{Uniform bounded-precision comparison, including arbitrarily short deadlines.}
+Choose a numerical $L>\max(64,\eta_*^{-2})$, where $\eta_*$ is the
+tail threshold just proved. For $s\ge1/4$, $0\le\ell\le L$,
+the terminal variance is bounded below by
+$m=\bar S_1(1/4,L)>0$.
+The Fourier norm with moving radius $\rho(\tau)=1-\tau/2$ and total
+initial bound $M_0=4e^{1/(2m)}/\sqrt{2\pi m}$ satisfies
+$M'\le(\rho'+2|w|M)N$.
+For $|w|<1/(32M_0)$, the bootstrap $M\le4M_0$ makes the derivative
+coefficient at most $-1/4$.
+A further radius gap controls the flux-Jacobian derivative in the cutoff
+difference equation; its discarded tails tend to zero.
+Gronwall consequently gives a unique symmetric analytic solution and
+analytic parameter dependence, including zero diffusion.
+These bounds are independent of the upper value of $s$:
+a large diffusion coefficient only adds Fourier dissipation.
+The positivity and HJB verification at zero are the same as the
+no-signal construction given below.
+
+To retain the scale $q^{-1/2}$ we also need spatial localization.
+In a smaller analytic strip the original gradient equations have drift
+$w(p_i-p_j)$ and reactions $-wp_{j,y}$, $wp_{i,y}$, all bounded by
+$C|w|$. Their complex Feynman--Kac paths differ from the Gaussian paths
+by at most $C|w|$ and stay in the strip.
+For a terminal Gaussian of variance $v\ge m$,
+$(x+d)^2\ge x^2/2-d^2$ bounds the path integrand by $CG_{2v}$.
+Convolution therefore gives $|p_k(x+iy,t)|\le CG_{2Q_t}(x)$.
+The organizer source has the same envelope.
+At the root its expectation is bounded by
+$CG_{q+3Q_t}(0)\le C/\sqrt q$; thus $|Z(w,s,\ell)|\le C|w|/\sqrt q$.
+Cauchy's estimate and the individual full-disclosure bound give
+\[
+\widehat{\mathcal B}(w,s,\infty)-\widehat{\mathcal B}(w,s,\ell)
+=w^2\Delta_2(s,\ell)+O(|w|^3/\sqrt q)
+\]
+uniformly on $s\ge1/4$, $\ell\le L$.
+
+An explicit lower bound avoids a separate argument at $s=\infty$.
+Take $L\ge16$ and put $m_L=L^{-1/2}\le1/4$.
+Riccati comparison gives $\bar S_t\ge m_L$ for $s\ge1/4$ and
+$\ell\le L$. Restrict the kernel integral to
+$t\in[1/4,3/8]$, $r\in[1/2,5/8]$, and write
+$u=1-t$, $v=1-r$, $a=q-u$, $b=q-v$.
+The finite-precision revealed fraction is at most
+$1-m_L/(q-v)\le1-m_L/q$.
+On the final ray segment $1-m_L/(2q)\le\rho\le1$, put
+$U=q-\rho a$, $V=q-\rho b$. Then $U\le7/8$, $V\le5/8$, and
+\[
+\sqrt q\,K_q(\rho a,\rho b)
+=\frac{1-U/q}{\pi\sqrt{2\pi}\sqrt V(2-V/q)
+\sqrt{4U-V-2U^2/q}}>\frac1{80}.
+\]
+Here $q\ge5/4$, $1-U/q\ge3/10$, and
+$\pi\sqrt{2\pi}<8$. In the ray derivative above, its numerator
+is at least $1-x$, while
+$1+x-2z^2\le4U/q\le7/(2q)$. Hence
+$\partial_\rho\log K_q\ge q/7$ on this segment.
+Integrating along the segment and then over the rectangle of area
+$1/64$ gives
+\begin{equation}\label{eq-bounded-precision-gap-explicit}
+\sqrt q\,\Delta_2(s,\ell)
+>\frac{1}{72000\sqrt L},
+\qquad s\ge1/4,\quad0\le\ell\le L.
+\end{equation}
+The omitted kernel differences are nonnegative by the preceding ordering.
+Choose $w_*$ smaller than this bound divided by twice the uniform Taylor-remainder
+constant, and smaller than the high-precision threshold.
+This proves equation~\eqref{eq-uniform-disclosure-ranking} on exactly its
+stated range, without a uniform relative high-order coefficient bound.
+
+\emph{Value-function control at high precision.}
+The next argument remains within the finite-precision games; it does not assume existence or continuity of a separate full-disclosure equilibrium. Fix $\theta,T>0$ and take $\lambda\geq\sigma^2/S_0^2$, so $a_t=\lambda S_t^2\geq\sigma^2$ and $a_t$ decreases in $t$. Put
+\[
+W=U_i+U_j,\qquad \Delta=U_i-U_j,\qquad
+f(d)=1+\frac2w\log\frac{\cosh(wd/2)}{\cosh(w/2)},\qquad
+K_w(d)=\frac{d+\sinh(wd)/w}{2}.
+\]
+Symmetry and interiority give $\Delta(-y,t)=-\Delta(y,t)$ and $\Delta_y>0$. Direct addition and subtraction of the HJB equations yield
+\[
+W_t+\frac a2W_{yy}+\frac\alpha4(3W_y^2-\Delta_y^2)=0,\qquad
+\Delta_t+\frac a2\Delta_{yy}+\frac\alpha2W_y\Delta_y=0.
+\]
+Define the defect $E=W-f(\Delta)$ and the auxiliary generator
+\[
+\mathcal A=\partial_t+\frac a2\partial_{yy}+b\partial_y,
+\qquad b=\alpha f'(\Delta)\Delta_y.
+\]
+Let $\mathbb E^b_{y,t}$ denote expectation under the auxiliary diffusion generated by $\mathcal A$ and started from $y$ at $t$.
+Because $f''=(w/2)(1-f'^2)$, exact differentiation gives
+\begin{equation}\label{eq-design-defect-equations}
+\mathcal A E=-\frac{3\alpha}{4}E_y^2
+-\frac\alpha4\left(\frac a{\sigma^2}-1\right)(1-f'^2)\Delta_y^2,
+\qquad
+\mathcal A\Delta=-\frac\alpha2E_y\Delta_y+\frac\alpha2f'\Delta_y^2.
+\end{equation}
+At $T$, $E=1-f(2\Phi(y/\sqrt{S_T})-1)\geq0$. Dynkin's formula applied to the first equation in~\eqref{eq-design-defect-equations} gives
+\[
+E(y,t)=\mathbb E^b_{y,t}\!\left[E(Y_T,T)
++\int_t^T\left\{\frac{3\alpha}{4}E_y^2
++\frac\alpha4\left(\frac a{\sigma^2}-1\right)
+(1-f'^2)\Delta_y^2\right\}ds\right]\geq0.
+\]
+The payoff bound $W\leq1$ and $f\geq0$ then imply $0\leq E\leq1$.
+
+Equation~\eqref{eq-design-defect-equations} gives
+\begin{equation}\label{eq-design-defect-energy}
+\mathbb E^b_{y,t}\int_t^T E_y^2\,ds
+\leq\frac{4E(y,t)}{3\alpha},\qquad
+\mathbb E^b_{y,t}\int_t^T\Delta_y^2\,ds
+\leq\frac2{\sigma^2}+\frac{4\alpha}{3\sigma^4}.
+\end{equation}
+For the second inequality, $\Delta f'(\Delta)\geq0$, $|\Delta|\leq1$, and Young's inequality give
+\[
+\mathcal A(\Delta^2)
+=a\Delta_y^2-\alpha\Delta E_y\Delta_y
++\alpha\Delta f'(\Delta)\Delta_y^2
+\geq\frac{\sigma^2}{2}\Delta_y^2
+-\frac{\alpha^2}{2\sigma^2}E_y^2.
+\]
+Dynkin's formula, $\Delta(Y_T,T)^2\leq1$, and the first energy estimate then yield the stated bound.
+The same bounds hold conditionally at stopping times.
+
+Fix $\delta>0$ with $\delta<T$, and let
+$\zeta_\lambda=a_\delta/\sigma^2-1\to0$.
+For $k=2w$ and $A=w^2e^{2w}$, equations~\eqref{eq-design-defect-equations} imply, on $[\delta,T]$,
+\[
+\mathcal A\{e^{kE}+A\zeta_\lambda\Delta^2\}
+\geq\frac{\sigma^2w^2}{2}(1-A\zeta_\lambda)E_y^2\geq0
+\]
+once $A\zeta_\lambda\leq1$. Since $b(y,t)y\geq0$, comparison of the reflected absolute-value process with driftless reflected Brownian motion bounds expectations of nonnegative decreasing functions of $|y|$ by their driftless counterparts. The terminal function $e^{kE(\cdot,T)}-1$ is even, decreasing on the positive half-line, and has integral $C_w\sqrt{S_T}$ for a finite constant $C_w$. With $g_\lambda(y)=e^{kE(y,T)}-1$, Dynkin's formula, $|\Delta|\leq1$, and the maximum density of a centered Gaussian with variance at least $\sigma^2(T-t)$ give
+\[
+e^{kE(y,t)}-1
+\leq \mathbb E^b_{y,t}g_\lambda(Y_T)+A\zeta_\lambda
+\leq\frac{\|g_\lambda\|_{L^1(\mathbb R)}}
+{\sigma\sqrt{2\pi(T-t)}}+A\zeta_\lambda.
+\]
+Since $\|g_\lambda\|_{L^1}=C_w\sqrt{S_T}$ and
+$\log(1+x)\leq x$, this yields
+\begin{equation}\label{eq-design-defect-small}
+0\leq E(y,t)\leq
+\frac1k\left\{\frac{C_w\sqrt{S_T}}{\sigma\sqrt{2\pi(T-t)}}
++A\zeta_\lambda\right\},\qquad \delta\leq t<T.
+\end{equation}
+Thus $E\to0$ uniformly in $y$ on time intervals bounded away from zero and $T$.
+
+We next identify $\Delta$ without assuming convergence of policy derivatives. Let $\mathbb P^b$ be the auxiliary law and define
+\[
+Z_{t,T}:=\mathcal E\!\left(-\int_t^T\frac{b(Y_s,s)}{\sqrt{a_s}}\,dW_s^b\right),
+\qquad
+\frac{d\mathbb P^0}{d\mathbb P^b}\bigg|_{\mathcal F_T}=Z_{t,T}.
+\]
+Under $\mathbb P^0$, $Y$ has zero drift. Since $|f'|\leq1$, $a\geq\sigma^2$, and $b=\alpha f'(\Delta)\Delta_y$, equation~\eqref{eq-design-defect-energy} implies, also conditionally at stopping times,
+\[
+\mathbb E^b_\tau\int_\tau^T\frac{b^2}{a}\,ds
+\leq\frac{\alpha^2}{\sigma^2}
+\left(\frac2{\sigma^2}+\frac{4\alpha}{3\sigma^4}\right).
+\]
+Thus the stochastic integral in $Z_{t,T}$ has a BMO norm bounded independently of $\lambda$. Its stochastic exponential satisfies a reverse H\"older inequality: for some $q>1$,
+\[
+\sup_{\lambda}\sup_{t\leq T}
+\sup_{y\in\mathbb R}\mathbb E^b_{y,t}[Z_{t,T}^{\,q}]<\infty;
+\]
+see \citet[Theorem~3.1]{Kazamaki1994}. The conditional bounds in equation~\eqref{eq-design-defect-energy}, applied successively at stopping times, also give uniform moments of every finite order for
+$\int E_y^2ds$ and $\int\Delta_y^2ds$.
+
+Fix a time interval separated from zero and $T$. Equation~\eqref{eq-design-defect-small} and the first inequality in equation~\eqref{eq-design-defect-energy} give
+\[
+\mathbb E^b_{y,t}\int_t^T E_y^2\,ds=o(1)
+\]
+uniformly on that interval. Interpolating this vanishing first moment with the uniform higher moments and then applying H\"older's inequality with the preceding reverse H\"older bound transfers the estimate to $\mathbb P^0$. The second energy estimate transfers in the same way and remains bounded. Hence
+\[
+\mathbb E^0_{y,t}\int_t^T E_y^2\,ds=o(1),\qquad
+\mathbb E^0_{y,t}\int_t^T\Delta_y^2\,ds=O(1),
+\]
+uniformly for $y\in\mathbb R$ and $t$ in such time intervals.
+
+Since $K_w''/K_w'=wf'$, the driftless generator satisfies
+\[
+\left(\partial_t+\frac a2\partial_{yy}\right)K_w(\Delta)
+=-\frac\alpha2K_w'(\Delta)E_y\Delta_y
++\frac w2(a-\sigma^2)f'(\Delta)K_w'(\Delta)\Delta_y^2.
+\]
+The absolute expected integral of the first term is bounded by a constant times
+\[
+\left(\mathbb E^0_{y,t}\int_t^T E_y^2ds\right)^{1/2}
+\left(\mathbb E^0_{y,t}\int_t^T\Delta_y^2ds\right)^{1/2}=o(1),
+\]
+while that of the second is $O(\zeta_\lambda)$. The difference between the terminal function $K_w(2\Phi(y/\sqrt{S_T})-1)$ and $K_w(1)\operatorname{sign}(y)$ has $L^1(\mathbb R)$ norm $O(\sqrt{S_T})$. Convolution with the driftless Gaussian kernel therefore makes this terminal error uniformly $o(1)$ whenever $t$ stays away from $T$. Since the driftless variance from $t$ to $T$ converges to $\sigma^2(T-t)$, we obtain, uniformly in space and away from the two time endpoints,
+\begin{equation}\label{eq-design-value-limit}
+\Delta(y,t)\longrightarrow d_w(y,t),\qquad
+W(y,t)\longrightarrow f(d_w(y,t)),\qquad
+K_w(d_w(y,t))
+=K_w(1)\left[2\Phi\!\left(\frac y{\sigma\sqrt{T-t}}\right)-1\right].
+\end{equation}
+All estimates are uniform when $\theta,T$ vary over compact subsets of $(0,\infty)$.
+
+\emph{A uniform high-precision output bound.}
+Let $Y_\delta=\tilde y_\delta$. Its martingale part is normal with variance
+$S_0+\sigma^2\delta-S_\delta$, while equation~\eqref{eq-design-energy-budget} bounds the expected absolute drift before $\delta$ by $\sqrt{2\alpha\delta}$. Applying the same budget conditionally at $\delta$ and then conditional Cauchy--Schwarz gives
+\begin{align*}
+\mathcal B(0,\theta,T,\lambda;S_0)
+-\sqrt{\frac{S_0+\sigma^2T}{2\pi}}
+&\leq\sqrt{2\alpha\delta}\\
+&\quad+\sqrt{2\alpha(T-\delta)}\,
+\mathbb E\sqrt{1-W(Y_\delta,\delta)}.
+\end{align*}
+Using equation~\eqref{eq-design-value-limit} and then letting
+$\delta\downarrow0$ replaces the final expectation by
+$\mathbb E\sqrt{1-f(d_w(Y_0,0))}$, where
+$Y_0\sim\mathcal N(0,S_0)$. The passage to the initial distribution follows from the preceding drift bound and the convergence of the Gaussian variance to $S_0$.
+
+For $d>0$, write $x=wd/2$. Then
+\[
+\frac{wf'(d)K_w(d)}{K_w'(d)}
+=1+(x\tanh x-1)\operatorname{sech}^2x<\frac98.
+\]
+For $0\le x\le1$ the added term is nonpositive. For $x\ge1$ it is at
+most $4(x-1)e^{-2x}\le2e^{-3}<1/8$; the last inequality follows from
+$e^3>1+3+9/2+27/6+81/24>16$.
+Integrating from $d$ to one and using equation~\eqref{eq-design-value-limit} gives
+\[
+1-f(d_w(y,0))
+\leq-\frac9{8w}\log\left|2\Phi\!\left(\frac y{\sigma\sqrt T}\right)-1\right|.
+\]
+Define the universal constant
+\[
+C_{\rm G}:=\frac32\int_{\mathbb R}
+\sqrt{-\log|2\Phi(z)-1|}\,dz.
+\]
+The singularity at zero and the Gaussian tails are integrable. Moreover,
+$C_{\rm G}<5$. Jensen's inequality applied to $e^{-x^2/2}$ on
+$[0,z]$ gives $2\Phi(z)-1\ge\sqrt{2/\pi}\,z e^{-z^2/6}$.
+Consequently, Cauchy--Schwarz gives, for $0\le a<b\le1$,
+\[
+\int_a^b\sqrt{-\log(2\Phi(z)-1)}\,dz
+\le\sqrt{(b-a)
+\left[z\left(1+\tfrac12\log(\pi/2)-\log z\right)
++\frac{z^3}{18}\right]_a^b},
+\]
+where $z\log z=0$ at zero. For $z\ge a\ge1$, the inequality
+$-\log(1-x)\le x+x^2/[2(1-x)]$ yields
+\[
+-\log(2\Phi(z)-1)
+\le\frac{2\Phi(a)}{2\Phi(a)-1}[1-\Phi(z)].
+\]
+Since $[z(1-\Phi(z))-\varphi(z)]'=1-\Phi(z)$, another
+Cauchy--Schwarz bound gives
+\[
+\int_a^b\sqrt{-\log(2\Phi(z)-1)}\,dz
+\le\sqrt{(b-a)\frac{2\Phi(a)}{2\Phi(a)-1}
+\left[z(1-\Phi(z))-\varphi(z)\right]_a^b}.
+\]
+On $[3,\infty)$, the Mills bound and
+$\int_3^\infty e^{-z^2/4}dz\le(2/3)e^{-9/4}$ give
+\[
+\int_3^\infty\sqrt{-\log(2\Phi(z)-1)}\,dz
+\le\sqrt{\frac4{27}\frac{2\Phi(3)}{2\Phi(3)-1}\varphi(3)}.
+\]
+These bounds on $[0,1/2]$, $[1/2,1]$, $[1,3/2]$, $[3/2,2]$,
+$[2,3]$, and $[3,\infty)$ are respectively less than
+$0.6952$, $0.3969$, $0.2581$, $0.1498$, $0.1290$, and $0.0363$.
+They can be verified with $3.14159<\pi<3.14160$: the even and odd
+Taylor truncations at orders 60 and 61 bound $e^{-z^2/2}$ and its
+integral, while the first 40 terms of
+$\log x=2\sum_{n\ge0}[(x-1)/(x+1)]^{2n+1}/(2n+1)$ bound the
+logarithms, with the remainder bounded by the corresponding geometric
+tail. Their sum is $1.6653<5/3$, so symmetry gives $C_{\rm G}<5$.
+
+The density of $Y_0/(\sigma\sqrt T)$ is bounded by
+$1/\sqrt{2\pi S_0/(\sigma^2T)}$. Substitution in the conditional bound above therefore yields
+\begin{equation}\label{eq-design-exact-upper}
+\limsup_{\lambda\to\infty}\mathcal B(0,\theta,T,\lambda;S_0)
+\leq\sqrt{\frac{S_0+\sigma^2T}{2\pi}}
++\frac{C_{\rm G}\sigma^2T}{\sqrt{2\pi S_0}}
+<\sqrt{\frac{S_0+\sigma^2T}{2\pi}}
++\frac{5\sigma^2T}{\sqrt{2\pi S_0}}.
+\end{equation}
+The cutoff estimates are uniform when prize and deadline range over positive compact sets. Equation~\eqref{eq-design-basic-output-bound} controls sequences approaching $\theta=0$ or $T=0$.
+
+The same estimates establish the existence of the high-precision output limit. Fix $0<\delta<T/2$. On $[\delta,T-\delta]$, equation~\eqref{eq-design-value-limit} and interior parabolic estimates imply locally uniform convergence of the policy gradients. The state drifts therefore converge there, and coupling the state diffusions gives convergence of the output accumulated on this middle interval. Conditional Cauchy--Schwarz and equation~\eqref{eq-design-energy-budget} bound the expected contribution of either omitted interval of length $\delta$ by $\sqrt{2\alpha\delta}$; the terminal filtering error is $O(\sqrt{S_T})$. Letting first $\lambda\to\infty$ and then $\delta\downarrow0$ proves output convergence.
+
+This convergence is uniform when $(\theta,T)$ ranges over a compact subset of $(0,\infty)^2$, because all constants above are then uniform. To include the axes of any bounded prize--deadline set, observe from equation~\eqref{eq-design-basic-output-bound} that the effort-induced output gain is at most $\sqrt{2\theta T/c}$. It is therefore uniformly small whenever $\theta$ or $T$ is small, under both finite precision and the limiting policy. Covering the remaining parameter set by a positive compact rectangle proves uniform convergence on every bounded prize--deadline set.
+
+\emph{The no-signal boundary and attainment.}
+We first control the degenerate boundary $\lambda=0$ whenever
+$\theta T/[c(S_0+\sigma^2T)]\leq1/4$. In particular, this includes every design with $\theta/(c\sigma^2)\leq1/4$. Fix $T>0$, put $Q_0=S_0+\sigma^2T$, scale state by $\sqrt{Q_0}$ and time by $T$, reverse time, and set $\epsilon=\theta T/(cQ_0)$. For $\lambda TQ_0\leq1/101$, the normalized value gradients
+\[
+p=U_{i,x},\qquad r=-U_{j,x}
+\]
+satisfy
+\[
+p_\tau=\frac{a(\tau)}2p_{xx}
++\epsilon\partial_x(p^2/2-pr),\qquad
+r_\tau=\frac{a(\tau)}2r_{xx}
++\epsilon\partial_x(pr-r^2/2),
+\]
+where $a(\tau)=\lambda S_{T(1-\tau)}^2T/Q_0\geq0$ and $a\equiv0$ without a signal. Since $S_t\leq S_0+\sigma^2t\leq Q_0$, integrating the variance equation gives
+\[
+v:=S_T/Q_0=1-\frac{\lambda}{Q_0}\int_0^T S_t^2dt
+\geq1-\lambda TQ_0\geq100/101.
+\]
+Both reversed-time initial gradients are Gaussian densities with variance $v$. For the Fourier norm
+\[
+\|p\|_\rho=\frac1{2\pi}\int_{\mathbb R}e^{\rho|\xi|}
+|\widehat p(\xi)|\,d\xi,
+\]
+put $M=\|p\|_\rho+\|r\|_\rho$ and
+$N=\|p_x\|_\rho+\|r_x\|_\rho$.
+At radius one their total norm is
+\[
+M(0)=\frac{2e^{1/(2v)}}{\sqrt{2\pi v}}
+\operatorname{erfc}\!\left(-\frac1{\sqrt{2v}}\right)<\frac{23}{10}.
+\]
+For an explicit bound, $1/\sqrt{2v}<5/7$ and the alternating series for $\operatorname{erf}$ give $\operatorname{erfc}(-1/\sqrt{2v})<17/10$. Using $\pi>25/8$ and $e^{101/100}<11/4$, the square of the displayed norm is less than $321079/62500<529/100$.
+Writing $P=\|p\|_\rho$, $R=\|r\|_\rho$, $N_p=\|p_x\|_\rho$, and $N_r=\|r_x\|_\rho$, symmetry gives $r(x,\tau)=p(-x,\tau)$, hence $P=R$ and $N_p=N_r$. The equations and symmetric Fourier cutoffs preserve this reflection, including for complex $\epsilon$. The convolution product inequality therefore bounds the nonlinear terms by
+\[
+(P+2R)N_p+(2P+R)N_r=\frac32MN.
+\]
+Consequently,
+\[
+\frac{dM}{d\tau}\leq(\rho'+3|\epsilon|M/2)N.
+\]
+With $\rho(\tau)=1-9\tau/10$, a bootstrap yields $M(\tau)\leq M(0)<23/10$ and $\rho(\tau)\geq1/10>0$, since $3|\epsilon|M/2<69/80<9/10$. Apply this estimate first to symmetric Fourier-cutoff equations. Let $z^N=(p^N,r^N)$ and $\widetilde z^{\widetilde N}=(\widetilde p^{\widetilde N},\widetilde r^{\widetilde N})$ solve two such systems, with cutoff levels $N,\widetilde N$ and coefficients $(a,\epsilon)$ and $(\widetilde a,\widetilde\epsilon)$. To control the derivative in their difference equation, fix $0<\delta<1/10$ and use the shrinking radius $\rho_d(\tau)=\rho(\tau)-\delta$. Write $M_d=\|z^N-\widetilde z^{\widetilde N}\|_{\rho_d}$ and $N_d=\|\partial_x(z^N-\widetilde z^{\widetilde N})\|_{\rho_d}$, with component norms summed. The flux Jacobian is $\left(\begin{smallmatrix}p-r&-p\\r&p-r\end{smallmatrix}\right)$; at each symmetric intermediate state its column norms are at most $3M/2$. Its spatial derivative and the coefficient-difference terms are bounded using the extra radius $\delta$. Thus
+\[
+M_d'\leq\left\{-\frac9{10}+\frac32\max\{|\epsilon|,|\widetilde\epsilon|\}\max\{M,\widetilde M\}\right\}N_d
++C_\delta M_d
++C_\delta\bigl(|a(\tau)-\widetilde a(\tau)|
++|\epsilon-\widetilde\epsilon|\bigr)
++R_{N,\widetilde N}(\tau),
+\]
+where $C_\delta$ is independent of the cutoffs and
+$\|R_{N,\widetilde N}\|_{L^1(0,1)}\to0$ as
+$N,\widetilde N\to\infty$. The latter follows from the radius gap $\delta$, which makes the discarded Fourier tails exponentially small. The coefficient of $N_d$ is at most $-3/80$ when both exposures are at most $1/4$, so that term can be dropped. For common coefficients, Gronwall's inequality shows that the cutoff solutions are Cauchy; their limit is a smooth analytic solution. For any fixed $0<\rho_*<1/10-\delta$, the same argument gives
+\begin{equation}\label{eq-zero-precision-continuity}
+\sup_{0\leq\tau\leq1}\|z(\tau)-\widetilde z(\tau)\|_{\rho_*}
+\leq C_{\rho_*}
+\left(\|z(0)-\widetilde z(0)\|_{1}
++\|a-\widetilde a\|_{L^1(0,1)}
++|\epsilon-\widetilde\epsilon|\right).
+\end{equation}
+In particular, the solution is unique in this symmetric bounded analytic class.
+
+As $\lambda\downarrow0$, the variance equation gives
+$a\to0$ uniformly and $S_T\to S_0+\sigma^2T$, so the Gaussian initial gradients converge in the radius-one norm. Equation~\eqref{eq-zero-precision-continuity} then gives uniform convergence of the equilibrium gradients and hence of the policies. The state equations are ordinary differential equations at $\lambda=0$; their globally Lipschitz drifts and the policy convergence give convergence of the state paths and expected output. This proves continuity at zero and defines the selected no-signal equilibrium.
+
+Finally, the gradient signs needed for admissibility do not rely on diffusion. The equations for $p,r$ are scalar transport--diffusion equations with respective drifts $\epsilon(p-r)$ and potentials $-\epsilon r_x$ and $\epsilon p_x$. All coefficients and spatial derivatives are bounded by the analytic estimates. The scalar positivity principle for positive Gaussian initial data gives $p,r>0$, including at $a=0$, where the representation is along characteristics. In conservation form their flux coefficients are bounded, so their initial unit masses are preserved. Integrating $p$ from $-\infty$ and $r$ from $+\infty$ reconstructs bounded values with the required Gaussian terminal data and HJB equations. The completion-of-the-square verification in Theorem~\ref{thm-equilibrium-effort} remains valid with $a=0$ (It\^o's formula reduces to the chain rule). For positive precision, bounded-gradient uniqueness identifies this analytic solution with the exact equilibrium.
+
+On positive compact precision intervals, the uniform parabolic estimates and bounded-gradient uniqueness from Theorem~\ref{thm-equilibrium-effort} give continuous dependence on parameters. Together with the analytic estimate near zero and equation~\eqref{eq-design-basic-output-bound} at $\theta=0$ or $T=0$, this proves continuity of $\mathcal B$ on every bounded design box satisfying $\theta T/[c(S_0+\sigma^2T)]\leq1/4$.
+
+We sharpen the output guarantee using the exact no-signal equilibrium.
+Put $Q=S_0+\sigma^2T$ and $\epsilon=\theta T/(cQ)\leq1/4$.
+With state normalized by $\sqrt Q$ and reversed time $\tau=(T-t)/T$,
+its gradients solve
+\[
+p_\tau=\epsilon\{(p-r)p_x-pr_x\},\qquad
+r_\tau=\epsilon\{(p-r)r_x+rp_x\},\qquad p(x,0)=r(x,0)=G_1(x).
+\]
+The preceding Fourier estimates also apply to complex $\epsilon$ with
+$|\epsilon|$ in place of $\epsilon$. At terminal variance one, the initial
+norm $M_0<23/10$ permits the open disk
+$|\epsilon|<3/(5M_0)>1/4$. The cutoff solutions are holomorphic
+there and converge locally uniformly by the difference estimate.
+Thus $p(x,\tau)=\sum_{n\geq0}(\epsilon\tau)^np_n(x)$ converges throughout
+the required exposure range. Symmetry gives $r(x,\tau)=p(-x,\tau)$ and
+\[
+(n+1)p_{n+1}
+=\sum_{a+b=n}\{1-(-1)^a-(-1)^b\}p_ap_b',\qquad p_0=G_1.
+\]
+Each coefficient is an entire Gaussian times a real polynomial of
+parity $n$. To check its sign at zero, define $q_n(y)=p_n(iy)$ for even
+$n$, and $q_n(y)=p_n(iy)/i$ for odd $n$; this evaluates coefficient
+functions, not the full equilibrium outside its analytic strip.
+For even $n$, their recurrence is the sum of $q_aq_b'$ over even pairs
+plus three times that sum over odd pairs, divided by $n+1$.
+For odd $n$, it is the sum over all pairs, divided by $n+1$.
+Starting from $q_0=(2\pi)^{-1/2}e^{y^2/2}$, differentiation and
+multiplication preserve nonnegative Taylor coefficients. Hence
+$p_{2n}(0)\geq0$, $p_{2n+1}(0)=0$, and $p(0,\tau)\geq(2\pi)^{-1/2}$.
+The equilibrium posterior mean stays at zero, and the contestants exert
+equal effort. Their terminal gap has variance $Q$, so
+\begin{equation}\label{eq-design-zero-candidate}
+\mathcal B(0,\theta,T,0;S_0)
+=\sqrt{\frac Q{2\pi}}+
+\frac\theta{c\sqrt Q}\int_0^T p\!\left(0,\frac{T-t}{T}\right)dt
+\geq\sqrt{\frac Q{2\pi}}+
+\frac{\theta T}{c\sqrt{2\pi Q}}.
+\end{equation}
+This bound uses the nonlinear equilibrium, not a leading-order policy.
+
+The marginal return to introducing a prize can be obtained independently
+of the uniform output expansion. Fix any finite precision and let
+$Q_t=S_t+\sigma^2(T-t)$, $Q_0=S_0+\sigma^2T$. At zero prize, the limiting
+normalized value gradients are
+$U_{i,y}=-U_{j,y}=G_{Q_t}$, where $G_v$ is the centered Gaussian density
+with variance $v$. The zero-effort perceived gap has variance $Q_0-Q_t$,
+so Gaussian convolution gives
+$\mathbb E[G_{Q_t}(\tilde y_t)]=G_{Q_0}(0)$.
+The first variation of equation~\eqref{eq-best-output-drift-identity}
+therefore yields
+\begin{equation}\label{eq-prize-entry-derivative}
+\left.\partial_\theta\mathcal B(0,\theta,T,\lambda;S_0)
+\right|_{\theta=0}
+=\frac{T}{c\sqrt{2\pi(S_0+\sigma^2T)}}.
+\end{equation}
+For fixed positive precision, differentiability follows from the local
+mild HJB expansion; at zero precision it follows from the analytic
+construction below. In both cases, the first-order integrand is bounded
+on the fixed horizon because $Q_t\geq S_T>0$.
+\emph{Uniform prize-entry expansion.}
+On positive compact risk and deadline sets, exact equilibrium output
+is analytic in $w=\alpha/\sigma^2$ near zero, uniformly over all precisions.
+For $\lambda\geq\sigma^2/S_0^2$, including full disclosure, this follows
+from equation~\eqref{eq-high-precision-output-majorant}; no difference
+between two precisions is needed. For the remaining compact precision
+interval, terminal posterior variances have a positive lower bound.
+Here is a direct construction that also includes zero precision.
+Normalize time and innovation variance to one, write
+$p_i=U_{i,x}$ and $p_j=-U_{j,x}$, and use reversed time $\tau$.
+The Fourier norm
+\[
+M(\tau)=\sum_{k=i,j}\int_{\mathbb R}
+e^{\rho(\tau)|\xi|}|\widehat p_k(\xi,\tau)|\,d\xi,
+\qquad \rho(\tau)=1-\tau/2,
+\]
+has uniformly bounded Gaussian terminal data, say $M(0)\leq M_0$.
+The gradient equations have conservative quadratic fluxes
+$p_i^2/2-p_ip_j$ and $p_ip_j-p_j^2/2$.
+With $N$ denoting the same norm with the factor $|\xi|$, convolution and
+nonnegative diffusion give
+\[
+M'(\tau)\leq\{-1/2+2|w|M(\tau)\}N(\tau).
+\]
+Choose $|w|$ so that $2|w|M_0<1/4$, with the Fourier transform normalized
+so that convolution is submultiplicative. Frequency truncation then
+bounds $M$ by $M_0$ for the whole horizon. To compare truncations, use
+the smaller radius $\rho_\delta=\rho-\delta(1+\tau)$,
+where $0<\delta<1/8$, and denote the difference norms by $M_d,N_d$.
+The product rule and $|\xi|e^{-\delta|\xi|}\leq1/(e\delta)$ give
+\[
+M_d'\leq-\tfrac14N_d+C_\delta|w|M_0M_d
++C_\delta e^{-\delta n/2},
+\]
+for cutoffs of order at least $n$, after reducing the prize disk if
+necessary. Their initial difference has the same exponentially small
+bound. Gronwall's inequality proves uniform convergence on the smaller
+strip; omitting the cutoff error proves uniqueness there.
+The truncated equations are analytic in complex $w$, so convergence on
+smaller disks preserves analyticity. For real $w$, the
+scalar transport--diffusion equations preserve nonnegative gradients,
+and HJB verification identifies the resulting policies with equilibrium
+policies, also at zero precision.
+
+The organizer's source is
+$F=\Phi(x/\sqrt{Q_t})p_i+[1-\Phi(x/\sqrt{Q_t})]p_j$.
+Both this source and the perceived-gap drift $w(p_i-p_j)$ are bounded
+on a fixed complex strip: $Q_t$ is bounded below in the compact
+parameter range. In the complex drift equation driven by the real
+innovation Brownian motion, a sufficiently small $|w|$ keeps the
+imaginary part of the state inside that strip for the whole horizon.
+Picard iteration thus gives analytic dependence on $w$, and bounded
+Feynman--Kac integrands permit expectation to pass through the analytic
+limit. This proves the asserted uniform analyticity of output without
+requiring positive diffusion at $\lambda=0$.
+
+The first derivative is given by \eqref{eq-prize-entry-derivative}.
+The analytic bounds above make the output remainder $O(\alpha^2)$
+uniform on the stated compact sets, including the precision endpoints.
+Composition with $u$, whose second derivative is bounded on the
+output compact set, proves \eqref{eq-design-uniform-entry-expansion}.
+\Halmos
+\endproof
+}

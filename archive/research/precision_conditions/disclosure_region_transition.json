@@ -1,0 +1,99 @@
+{
+  "qualification": "Two-start local searches, finite precision in [0.03,3000]; no global or tail certification; failed HJB points retained below.",
+  "primitives": {
+    "c": 1,
+    "S0": 1,
+    "utility": "3*(1-exp(-5*(B-sqrt(1/(2*pi)))))",
+    "delay": "T^2/2"
+  },
+  "results": [
+    {
+      "sigma": 0.6,
+      "zero": {
+        "theta": 0,
+        "T": 0.7440378877155742,
+        "score": 0.3898690833603928
+      },
+      "full": {
+        "theta": 0.5807750361924183,
+        "T": 0.9731595003495005,
+        "precision": Infinity,
+        "score": 1.1154648040499937,
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "fine_output": 0.6557657641946895,
+        "fine_score": 1.1150206833368987
+      },
+      "finite": {
+        "theta": 0.7785932744643356,
+        "T": 0.9264231532049518,
+        "precision": 13.472039667566197,
+        "score": 1.1846267523191796,
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "fine_output": 0.7183234304981607,
+        "fine_score": 1.1847101850011597
+      },
+      "evaluations": 355
+    },
+    {
+      "sigma": 0.65,
+      "zero": {
+        "theta": 0,
+        "T": 0.7996298085253326,
+        "score": 0.48539500783890116
+      },
+      "full": {
+        "theta": 0.6133862346822722,
+        "T": 0.956087036066923,
+        "precision": Infinity,
+        "score": 1.1686783002197871,
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "fine_output": 0.6732418862780503,
+        "fine_score": 1.1683828005351344
+      },
+      "finite": {
+        "theta": 0.750725463962298,
+        "T": 0.9242589072619829,
+        "precision": 21.236391063378985,
+        "score": 1.1992078695939934,
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "fine_output": 0.71335187597708,
+        "fine_score": 1.1992886329477328
+      },
+      "evaluations": 316
+    },
+    {
+      "sigma": 0.7,
+      "zero": {
+        "theta": 0,
+        "T": 0.8452983647383651,
+        "score": 0.5858080492473422
+      },
+      "full": {
+        "theta": 0.6325992098455786,
+        "T": 0.9410592578680482,
+        "precision": Infinity,
+        "score": 1.209503996058674,
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "fine_output": 0.6856823837320755,
+        "fine_score": 1.2093295504462307
+      },
+      "finite": {
+        "theta": 0.7165224308498553,
+        "T": 0.9230325538191196,
+        "precision": 49.757205546724435,
+        "score": 1.2167798246118138,
+        "success": true,
+        "message": "Optimization terminated successfully.",
+        "fine_output": 0.7077250100994668,
+        "fine_score": 1.2168518350065165
+      },
+      "evaluations": 353
+    }
+  ],
+  "failures": []
+}

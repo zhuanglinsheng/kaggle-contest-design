@@ -1,0 +1,123 @@
+2026-10-07: A payoff-ratio route to shortening Lemma 3
+
+Status: exact reduction and a conditional short argument, NOT a replacement
+proof. No new assumption has been inserted into the manuscript.
+
+1. Object and independence from effort cost
+
+Fix S0, sigma and the selected symmetric equilibria. Put alpha=theta/c.
+The normalized HJB and effort policies depend on alpha, not separately
+on theta and c. Thus define
+
+  J(alpha,T,lambda)=u(B(0,c alpha,T,lambda;S0))-D(T).
+
+This function is independent of the c used on the right-hand side.
+Let V0=max_T J(0,T,lambda); zero-prize output is precision-independent.
+For alpha>0 write
+
+  Q(alpha,T,lambda)=[J(alpha,T,lambda)-V0]/alpha.
+
+Then the exact net-payoff difference is
+
+  J(alpha,T,lambda)-c alpha-V0=alpha[Q(alpha,T,lambda)-c].   (R1)
+
+All statements concern precisions at which the selected output is defined.
+This reduction does not supply an equilibrium at zero precision.
+
+2. The global prize-exit threshold
+
+Let C_exit=sup Q over positive alpha, positive T and admissible precision.
+The independent high-cost argument in Proposition 1(iii) implies that
+C_exit is finite. The full-disclosure first variation at the zero-prize
+optimal deadline T0 gives
+
+  lim_{alpha down to 0} Q(alpha,T0,infinity)
+    =T0 u'(sqrt((S0+sigma^2 T0)/(2 pi)))
+       /sqrt(2 pi(S0+sigma^2 T0))=:c_e>0.
+
+Hence C_exit>=c_e. By (R1), no positive-prize design beats V0 when
+c>=C_exit, whereas some design beats V0 when c<C_exit.
+This statement is about payoff comparison, not global attainment.
+At c=C_exit a positive-prize design can tie V0.
+
+3. What would actually close a short proof of case (ii)
+
+The needed payoff-level certificate, for a suitable sigma>sigma_F, is
+
+  sup_{alpha>=epsilon,T,lambda<infinity} Q(alpha,T,lambda)<c_e
+  for the fixed positive epsilon needed to apply Lemma 2.              (R2)
+
+It is enough to take the supremum over designs that can compete for
+c in [c_e/2,c_e]. Indeed, bounded utility gives
+theta+D(T)<=u_infinity-V0. Thus alpha and T have uniform upper bounds.
+The energy estimate B<=b(T)+sqrt(2 alpha T), together with
+V0>u(b(0)), excludes T approaching zero on this bounded alpha range.
+Competitive deadlines therefore lie in a fixed positive compact interval.
+
+Choose epsilon small enough that alpha<epsilon implies
+alpha/sigma^2<w_* for Lemma 2 on this deadline interval.
+If the supremum in (R2) is c_e-g with g>0, every competitive
+finite-precision design at c_e-g<c<c_e must have alpha<epsilon,
+by (R1). Lemma 2 strictly improves it by full disclosure.
+Meanwhile the full-disclosure entry derivative is c_e/c-1>0, so the
+attained full-disclosure maximum beats V0. It is then a joint maximum.
+
+This argument needs only one fixed epsilon, not convergence of the
+deadline or a localization statement for every epsilon.
+
+4. Why local derivatives and ordinary energy bounds do not prove (R2)
+
+The energy relaxation gives B<=b(T)+sqrt(2 alpha T). At T=T0 its
+utility gain is O(sqrt(alpha)), too large to establish a finite
+linear prize-entry threshold. It cannot supply the required certificate.
+
+Also, a first variation equal to c_e does not imply C_exit=c_e.
+For illustration only, a smooth scalar gain
+
+  J(alpha)-V0=c_e alpha+a alpha^2-b alpha^3,  a,b>0,
+
+has the same entry slope, but Q is maximized at alpha=a/(2b), with
+value c_e+a^2/(4b)>c_e. This is not a counterexample to the contest
+model; it demonstrates the invalidity of a local-to-global inference.
+
+The existing long output estimate proves the missing global exclusion.
+A genuine shorter proof must establish (R2) independently, using the
+actual Nash output. Merely introducing Q, citing the maximum theorem,
+or assuming organizer-payoff concavity does not close it.
+
+5. Scope correction: (R2) is sufficient, not the minimal target
+
+Proposition 1(ii) requires a single parameter point sigma>sigma_F,c>0,
+not a cost window, arbitrarily small competitive prizes, or deadline
+convergence. Let V_infinity be the attained full-disclosure optimum
+at that point. The entry variation with c<c_e ensures V_infinity>V0.
+
+Only finite-precision designs with payoff >= V_infinity need exclusion.
+Designs whose payoff lies between V0 and V_infinity are irrelevant.
+The manuscript's old global comparison against V0 is thus stronger
+than required. In particular, proving C_exit=c_e is NOT necessary
+for positive-prize full-disclosure joint optimality.
+
+For a short replacement using Lemma 2, first use the payoff budget
+and energy estimate to place potentially beating designs in a
+positive compact deadline interval. Let W be the weak-prize range
+on that interval from Lemma 2. The exact remaining obligation is:
+
+  at ONE sigma>sigma_F and c<c_e, every finite-precision design
+  outside W has payoff STRICTLY LESS than V_infinity.                 (R3)
+
+Inside W, Lemma 2 excludes a design with payoff >= V_infinity:
+switching it to full disclosure would produce payoff > V_infinity.
+Outside W, (R3) excludes it directly. Zero prizes give at most V0,
+and zero deadlines give at most u(b(0)), both below V_infinity.
+
+(R3) is pointwise strict in designs; a uniform positive gap over all
+finite precisions is not required. This matters because lambda may
+approach infinity. A coarse candidate comparison would instead
+require a uniform margin and can unnecessarily strengthen the task.
+
+The manuscript lemma has been narrowed to precisely this comparison
+role at one parameter point. Its current proof still uses the stronger
+V0-based output estimate internally; that estimate has not been
+removed because no independent proof of (R3) has yet been established.
+Next research should target (R3), not re-prove global prize exit.

@@ -1,0 +1,103 @@
+{
+  "specification": {
+    "A": 6.2,
+    "delay": 0.35,
+    "delay_cost": "delay*T^2/2",
+    "mu": 2.0,
+    "sigma": 1,
+    "c": 1,
+    "S0": 1,
+    "theta_bounds": [
+      0.5,
+      2.5
+    ],
+    "T_bounds": [
+      0.5,
+      4
+    ],
+    "lambda_bounds": [
+      0.03,
+      30
+    ]
+  },
+  "finite": {
+    "theta": 2.0133298587410513,
+    "T": 2.8601928578990883,
+    "lambda_": 0.46553205638816475,
+    "score": 0.38743282961490544,
+    "evaluations": 338,
+    "success": true,
+    "message": "Optimization terminated successfully."
+  },
+  "high_precision": {
+    "theta": 1.4082316721366621,
+    "T": 2.643055989176437,
+    "lambda_": 10000.0,
+    "score": 0.28569557457654127,
+    "evaluations": 169,
+    "success": true,
+    "message": "Optimization terminated successfully."
+  },
+  "validation": [
+    {
+      "design": "finite",
+      "dx": 0.05,
+      "steps": 350,
+      "B": 1.8554490331697209,
+      "score": 0.38743282961490544
+    },
+    {
+      "design": "finite",
+      "dx": 0.035,
+      "steps": 600,
+      "B": 1.8553254753189254,
+      "score": 0.3870199461732067
+    },
+    {
+      "design": "finite",
+      "dx": 0.025,
+      "steps": 1000,
+      "B": 1.855289269006398,
+      "score": 0.3868989532094289
+    },
+    {
+      "design": "high",
+      "dx": 0.05,
+      "steps": 350,
+      "B": 1.6006220857357334,
+      "score": 0.28569557457654127
+    },
+    {
+      "design": "high",
+      "dx": 0.035,
+      "steps": 600,
+      "B": 1.6003771635638662,
+      "score": 0.28474679742898457
+    },
+    {
+      "design": "high",
+      "dx": 0.025,
+      "steps": 1000,
+      "B": 1.600287408562622,
+      "score": 0.2843990690148883
+    }
+  ],
+  "high_precision_tail": [
+    {
+      "lambda_": 10000.0,
+      "B": 1.6002400249671056,
+      "score": 0.2842154878406451
+    },
+    {
+      "lambda_": 100000.0,
+      "B": 1.599497794869108,
+      "score": 0.2813391104939795
+    },
+    {
+      "lambda_": 1000000.0,
+      "B": 1.5991595204313243,
+      "score": 0.28002774680894427
+    }
+  ],
+  "refined_score_gap": 0.10249988419454059
+}

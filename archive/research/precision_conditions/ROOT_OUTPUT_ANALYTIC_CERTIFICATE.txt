@@ -1,0 +1,292 @@
+2026-10-07: Coarse root-output certificate
+
+Status: the scalar algebra below is proved; the analytic root-output
+certificate is NOT proved. This is not a replacement of the precision
+estimates, nor a new hypothesis on the organizer's utility.
+
+1. A closed simplification already applied to the manuscript
+
+For U(w)=1+w+12w^2/5, the zero-initial-variance normalized payoff
+upper bound can be maximized exactly over the deadline ratio x:
+
+  max_x [(1-(sqrt(x)U)^(-gamma))/gamma-w-(x^2-1)/4]
+    = (gamma+4)/(4 gamma)
+       [1-U^(-4 gamma/(gamma+4))]-w.
+
+The maximizing x is U^(-2 gamma/(gamma+4)).
+For 0<w<1/4,
+
+  d/dw [-log(1-4w)/4-log U]
+    =w(1+108w)/[5(1-4w)U]>0.
+
+The limiting maximum as gamma increases to infinity is therefore
+strictly negative for w>0. Dividing by w^2 extends continuously to
+w=0, with limit -1/10. Uniform convergence then permits a finite,
+universal sufficiently large gamma.
+
+At x=1,w=0 the finite-gamma Hessian has
+F_xx=-(gamma+4)/4 and determinant gamma/20-19/5.
+For gamma>76 it is negative definite. The initial-variance ratio a
+can consequently be made small by increasing the constructed b:
+the unique zero maximum is preserved locally by the Hessian, and
+on its compact complement by strict payoff separation.
+
+This replaces the manuscript's stationary-point exclusion with an
+exact deadline maximization and a compact perturbation argument.
+It does not replace the preceding equilibrium output estimate.
+
+2. A genuinely weaker possible replacement of that output estimate
+
+Fix a deadline and precision. Let f(w)=B(w)/b(T) denote the normalized
+root output, continued in the complex incentive parameter w.
+Suppose one could establish, UNIFORMLY over the needed deadlines
+and precisions:
+
+  f is analytic on a neighborhood of |w|<=1/2, and |f(w)|<=2 there. (C1)
+
+Continuation means the analytic interior HJB and designer linear PDE,
+not an economic equilibrium with a complex or negative prize.
+The first coefficient is k=sigma^2 T/(S0+sigma^2 T).
+The second coefficient is at most k/2: the exact second-order
+precision kernel is bounded by full disclosure, and the verified
+full-disclosure small-prize bound yields this upper bound.
+
+Cauchy's coefficient bound would then give, for 0<=w<1/2,
+
+  f(w)<=1+k w+(k/2)w^2+16w^3/(1-2w).                       (C2)
+
+This is only a root-output bound, not a uniform bound on gradients
+or their spatial derivatives. Its allowance for third-order terms
+is much looser than a fixed 12/5 coefficient throughout the screen.
+
+3. Exact scalar check of the available slack
+
+At k=1 put U=1+w+w^2/2+16w^3/(1-2w).
+Then
+
+  1-(1-4w)U^4 = w^2 P(w)/(1-2w)^4,
+
+where P has power coefficients
+  [8,-106,991/2,-623,-2274,19743/2,-113697/16,
+   -118989/4,159705/2,-21600,-131625,202500].
+
+All 12 Bernstein coefficients of P on [0,1/4] exceed 1/4.
+Consequently U^4(1-4w)<1 for 0<w<=1/4.
+This yields the same strictly negative limiting payoff comparison
+as in Section 1. Near w=0 the gap divided by w^2 tends to -2.
+A sufficiently large finite gamma and sufficiently small initial
+variance ratio can again be handled by the compact/Hessian argument.
+
+Thus (C1), if proved independently and briefly, would suffice to
+replace the existing precision estimates by Cauchy's formula and
+a short scalar comparison. It is not currently a theorem.
+
+4. Counterexample screening, not certification
+
+A temporary complex-HJB diagnostic at S0/(sigma^2 T)=1e-4,
+|w|=.5, precisions .001,1,100,10000 and four phases
+0,pi/4,pi/2,pi found root-output moduli below 1.52.
+This did not falsify (C1); it does NOT establish analytic continuation,
+uniform boundedness, or reliable behavior between sampled points.
+
+Real-prize existence from Lemma 1 does not imply (C1).
+Existing small-prize analyticity does not establish radius 1/2.
+Any subsequent argument must prove these two missing properties,
+not substitute the diagnostic for them.
+
+5. Exact full-disclosure coefficients: positivity is not a shortcut
+
+This calculation uses the S0/(sigma^2 T) -> 0 limit of the explicit
+full-disclosure equilibrium. Set sigma=T=1 and g=2 Phi(z)-1.
+With R=U_i+U_j and D=U_i-U_j, its expansion is
+
+  D=g+w^2(g-g^3)/12+O(w^4),
+  R=1+w(g^2-1)/4+O(w^3).
+
+The stationary designer profile solves
+
+  (L0-1/2)b+w R' b'+w D'/2=0,
+  L0=(partial_zz+z partial_z)/2.
+
+Writing b=beta+w b1+w^2 b2+w^3 b3+... gives
+
+  b1=G,
+  (L0-1/2)b2=-g^2 G/2,
+  (L0-1/2)b3=z g G^2-(1-3g^2)G/12.
+
+The resolvent is -integral_0^infinity e^(-t/2) P_t dt,
+where P_t is Gaussian convolution with variance e^t-1 at z=0.
+After x=e^(-t), Gaussian integration gives
+
+  b2(0)/G(0)=(1/pi) integral_0^1
+                  asin((1-x)/(2-x)) dx
+             =1/3-(sqrt(3)-1)/pi,
+
+  b3(0)/G(0)=1/12
+       -(1/(2 pi)) integral_0^1 x/[(2-x)sqrt(3-2x)] dx
+       -(1/pi) integral_0^1 (1-x)/[(2-x)sqrt(3-2x)] dx
+             =1/12-(sqrt(3)-1)/(2 pi)<0.
+
+For the second identity, integration by parts changes the asin
+integral into integral x/[(2-x)sqrt(3-2x)] dx.
+The two third-order integrals then combine to
+integral [2 sqrt(3-2x)]^(-1) dx=(sqrt(3)-1)/2.
+
+Thus the third coefficient is analytically negative, not merely
+negative in a numerical approximation. One cannot infer the
+complex-disc maximum from real-prize bounds by assuming positive
+Taylor coefficients. This is not a counterexample to analyticity.
+
+Also b2(0)/G(0)<1/8, since 24(sqrt(3)-1)>5 pi.
+The exact full-disclosure profile implies continuity of this
+coefficient in the initial variance ratio. Together with the
+second-order precision-kernel comparison, f2<1/8 holds at every
+precision when that ratio is sufficiently small. The constructed
+reference point can meet this condition uniformly on its compact
+deadline range.
+
+6. A more permissive centered certificate
+
+The unproved analytic-radius requirement can be reduced from 1/2
+to 27/100 if, instead of bounding the whole output, one bounds its
+centered remainder:
+
+  h(w)=[f(w)-1-k w]/w^2 is analytic through |w|<=27/100,
+  and |h(w)|<=2 on that disc.                               (C3)
+
+The value at w=0 is the removable extension f2.
+Cauchy's coefficient bound and Section 5 then give
+
+  f(w)<=1+k w+w^2/8+2w^3/(27/100-w) for 0<=w<27/100.        (C4)
+
+At k=1 let U denote this right side. Exact rational arithmetic
+verifies U^4(1-4w)<1 on 0<w<=1/4:
+multiply the margin by (27/100-w)^4 and divide by w^2;
+all Bernstein coefficients are positive on each of
+[0,1/16], [1/16,1/8], [1/8,3/16], [3/16,1/4].
+The smallest is 281291929387/442918502400000000.
+For 1/4<=w<=.252 the payoff sign is immediate as before.
+At zero initial variance, the local finite-gamma Hessian satisfies
+F_xx=-(gamma+4)/4 and det(D^2F)=(19 gamma+12)/16>0.
+Hence the same compact perturbation argument applies.
+
+verify_root_output_scalar_certificates.py verifies these scalar
+polynomial identities and coefficient signs with exact fractions.
+It does NOT verify (C3).
+
+Numerical Fourier probing at radius .35 found mixed signs in the
+output coefficients at precisions 100 and 10000, consistent with
+Section 5. At .5 the earlier sampled moduli were below 1.52.
+These checks only screen proposed shortcuts for counterexamples.
+
+(C3) is now a sharper research target than (C1): a smaller complex
+radius and a generous bound on the centered remainder. Its
+uniform validity has not been established by Lemma 1 or by an
+independent estimate. The long manuscript estimate is retained.
+
+7. Further reduction: scalar coefficients rather than complex equilibria
+
+An alternative sufficient obligation is the scalar coefficient bound
+
+  |f_n| <= 2(100/27)^(n-2), n>=2,                         (C5)
+
+uniformly over the relevant prior ratios and precisions.
+This implies convergence of the scalar root-output Taylor series
+at radius 27/100 and the centered remainder estimate in (C4).
+The second coefficient can still use the sharper bound 1/8.
+
+For each fixed positive finite precision, the existing classical
+real-prize solution can be treated locally by parameter-analytic
+semilinear parabolic theory. If this local analyticity is established
+along the real prize interval, the convergent scalar series and
+the actual root output agree initially and then agree throughout
+the interval by analytic continuation. Uniform global existence
+of complex Nash solutions is not needed for this argument.
+
+Zero precision needs the specified analytic branch on the required
+real interval; full disclosure has its explicit analytic profiles.
+Neither of these boundary requirements may be inferred merely
+from positive-precision existence in Lemma 1.
+
+Thus (C5) would be a sufficient, weaker route than (C3). A possible
+proof is a positive majorant for Gaussian heat-kernel coefficient
+trees after root integration, using Q_t>=sigma^2(T-t). Spatial
+derivative norms and finite coefficients alone do not prove (C5).
+No all-order root coefficient majorant has yet been derived.
+
+8. A verified obstruction to the naive no-signal coefficient majorant
+
+One cannot simply apply the no-signal Gaussian majorant at the
+total variance Q_t and declare it uniform in precision.
+The first coefficient of the imbalance A already gives a counterexample.
+Normalize sigma=T=1 and let the initial prior ratio tend to zero.
+With Fourier convention hat(f)(xi)=integral exp(-i xi y) f(y) dy,
+the exact first-variation formula gives
+
+  hat(A1)(xi)=-(i xi)/(2 sqrt(pi))
+       integral_0^1 Q_s^(-1/2)
+         exp[-(1-Q_s/2)xi^2/2] ds.
+
+At zero signal Q_s=1. Thus
+
+  lim_{xi -> 0} |hat(A1)(xi)|/|xi|=1/(2 sqrt(pi)).
+
+At full disclosure Q_s=1-s, and the corresponding limit is
+
+  (1/(2 sqrt(pi))) integral_0^1 (1-s)^(-1/2) ds
+    =1/sqrt(pi).
+
+The full-disclosure coefficient is twice as large near zero
+frequency. The no-signal Fourier majorant therefore fails already
+at first order. Heat smoothing cannot be treated as merely
+decreasing the entire nonlinear coefficient sequence.
+
+This does not disprove (C5). It identifies an input that an
+all-order root-tree estimate must preserve: smoothing broadens
+the spatial Gaussian but increases its low-frequency amplitude
+through the Q_s^(-1/2) time integral. An admissible majorant must
+handle both effects, rather than keeping only the former.
+
+9. A finite real-parameter alternative to all-order analyticity
+
+All-order coefficient control is NOT necessary. A sufficient replacement
+is a real-parameter third-variation bound for the scalar initial output:
+
+  f is C^3 on [0,.252], and f'''(w)<=42 there,              (C6)
+
+uniformly over the reference construction's compact deadline range
+and all finite precisions, including the specified no-signal branch.
+This is an upper bound, not an absolute-value bound. Negative third
+variations help the comparison. Its validity is NOT established here.
+
+With f(0)=1, f'(0)=k<=1 and f''(0)/2<=1/8, the integral Taylor
+formula would imply
+
+  f(w)<=1+k w+w^2/8+7w^3.                                 (C7)
+
+This avoids both complex Nash equilibria and infinite coefficient
+estimates. The algebraic comparison needs no interval computation:
+for 0<w<1/4, the binomial expansion has positive coefficients and
+
+  (1-4w)^(-1/4)
+     >1+w+(5/2)w^2+(15/2)w^3
+     >1+w+w^2/8+7w^3=:U(w).
+
+Therefore (1-4w)U(w)^4<1. At w>=1/4 the limiting optimized payoff
+is automatically negative. Near zero its ratio to w^2 tends to
+1/8-5/2=-19/8. The exact deadline maximization in Section 1,
+followed by the same finite-curvature and small-prior perturbations,
+then yields the strict payoff screen. The local Hessian determinant
+is (19 gamma+12)/16, as in Section 6.
+
+Only the real, third-variation statement (C6) is missing for this
+route. Positive-precision equilibrium existence does not imply a
+UNIFORM bound as precision tends to zero or infinity. Nor does the
+negative full-disclosure third coefficient at zero prize establish
+(C6) throughout a positive prize interval.
+
+Research priority: derive a one-sided third-variation bound for the
+initial designer output directly from the differentiated HJB and
+linear output equations. Do not replace this obligation with a
+pointwise spatial-gradient bound unless that bound is independently
+shorter; do not cite the finite numerical probes as certification.

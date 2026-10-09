@@ -1,0 +1,108 @@
+2026-10-07: Direct Nash-value graph comparison on increasing-diffusion paths
+============================================================================
+
+Status. The comparison below is proved for each fixed positive finite
+precision on a smooth bounded-gradient symmetric equilibrium. It is a
+new candidate route, independent of the analytic jet and differentiated
+Nash estimates. It does NOT yet imply the joint-designer payoff ranking
+and is not a completed substitute for Lemma 3.
+
+1. Exact residual, without a prize expansion
+
+Use forward calendar time. Let U_i=V_i/theta and U_j=V_j/theta denote
+normalized Nash values. Write
+ R=U_i+U_j, d=U_i-U_j, H=d_y>0, A=R_y, alpha=theta/c,
+ a(t)=lambda S_t^2>0, kappa(t)=alpha/a(t).
+Then the two Nash equations give exactly
+ d_t+(a/2)d_yy+(alpha/2)A H=0,
+ R_t+(a/2)R_yy+(alpha/4)(3A^2-H^2)=0.
+For finite precision the terminal values are R_T=1 and
+d_T=2Phi(y/sqrt(S_T))-1. Symmetry makes R even and d odd.
+
+Define the full-disclosure value graph, evaluated at instantaneous kappa,
+ F(d,kappa)=1+(2/kappa)log[cosh(kappa d/2)/cosh(kappa/2)]
+          =1-integral_|d|^1 tanh(kappa z/2) dz.
+The usual full-disclosure identity uses a constant kappa; here kappa(t)
+varies and its derivative must be retained. Put r=R-F(d,kappa(t)).
+The identities
+ F_d=tanh(kappa d/2),
+ F_dd=(kappa/2)(1-F_d^2),
+ F_kappa=-(1/2)integral_|d|^1 z sech(kappa z/2)^2 dz,
+ F_(kappa d)=(d/2)sech(kappa d/2)^2
+give the exact scalar residual equation
+ r_t+(a/2)r_yy+alpha F_d H r_y+(3alpha/4)r_y^2
+                       +F_kappa kappa'=0.                 (G1)
+There is no leftover H^2 term: its coefficient is
+ alpha[(1-F_d^2)/4-F_d^2/2+3F_d^2/4-1/4]=0.
+
+2. A comparison that is global in the prize
+
+Suppose a(t) is nondecreasing, equivalently kappa'<=0. On a Riccati
+path this is lambda S0^2<=sigma^2. For d in [-1,1], F_kappa<=0,
+so the source in (G1) is nonnegative. Its terminal value
+ r_T=1-F(d_T,kappa_T)>=0.
+Treating the bounded actual coefficient
+alpha F_d H+(3alpha/4)r_y as a drift, scalar comparison yields
+ r>=0.                                                     (G2)
+
+Differentiate (G1) only to establish a sign, not a derivative estimate.
+For p=r_y on the half-line y>0,
+ p_t+(a/2)p_yy+[alpha F_d H+(3alpha/2)p]p_y
+   +alpha(F_dd H^2+F_d H_y)p+F_(kappa d)kappa'H=0.           (G3)
+Here d>0 and H>0, so the source is nonpositive. At y=0, p=0 by
+symmetry; at T, p_T=-F_d(d_T,kappa_T)H_T<=0. Comparison for this
+linear equation along the actual solution gives p<=0. The bounded
+zero-order coefficient can be removed by an exponential time factor.
+On the unbounded half-line, localization with a growing quadratic
+barrier, or the stopped Feynman--Kac formula, supplies the same result.
+For fixed lambda>0, a has a positive minimum and the smooth Gaussian
+terminal data give bounded higher derivatives on this finite horizon;
+these are qualitative regularity inputs, not uniform precision bounds.
+Consequently
+ R>=F(d,kappa),
+ A<=tanh(kappa d/2)H, y>=0.                                (G4)
+No positivity assertion for A is being inferred from (G4).
+
+3. A corresponding scalar CDF comparison
+
+Define the normalized full-disclosure coordinate
+ C(d,kappa)=[d+sinh(kappa d)/kappa]/[1+sinh(kappa)/kappa].
+On 0<=d<=1, C_d>0,
+ C_dd=kappa F_d C_d, C(d,kappa)<=d, C_kappa<=0.
+The last sign follows by differentiating the ratio
+ integral_0^d cosh(kappa z/2)^2 dz / integral_0^1 cosh(kappa z/2)^2 dz:
+the logarithmic derivative of its weight is z tanh(kappa z/2),
+an increasing function of z, so increasing kappa shifts its normalized
+mass toward the upper endpoint.
+
+Set C_tilde(y,t)=C(d(y,t),kappa(t)). The exact chain rule gives
+ C_tilde_t+(a/2)C_tilde_yy
+   =(alpha/2)C_d[F_d H-A]H+C_kappa kappa'>=0, y>=0.         (G5)
+At y=0, C_tilde=0, and at T,
+C_tilde(y,T)<=d_T(y). The killed heat semigroup on the positive
+half-line preserves this comparison. The odd Gaussian terminal d_T
+has heat continuation 2Phi(y/sqrt(Q_t))-1, Q_t=S_t+sigma^2(T-t).
+Therefore
+ C(d(y,t),kappa(t))<=2Phi(y/sqrt(Q_t))-1,
+ d(y,t)<=C^{-1}(2Phi(y/sqrt(Q_t))-1,kappa(t)), y>=0.         (G6)
+This proves a statewise comparison without analytic radius bounds.
+
+4. The remaining obligation, stated precisely
+
+The designer output depends on the equilibrium transition law and
+on H/2+beta_y A, not on d alone. An ordering of CDFs in (G6) does
+not imply a pointwise ordering of their densities H, and (G4) does
+not prove A>=0. It is therefore invalid to differentiate (G6) as an
+inequality or replace its state distribution by the driftless law.
+To complete the short global proof, one must turn (G4)-(G6) into an
+integrated output/payoff comparison, or handle the other monotone
+diffusion direction as well. Neither step is supplied here. The
+verified manuscript proof is retained; no completion claim is made.
+
+There is also a useful limitation at the zero-signal boundary: for
+fixed alpha>0, kappa tends to infinity, F(d,kappa) tends to |d|.
+The graph inequalities then reduce to R>=|d| and A<=H on y>0,
+which follow already from nonnegative normalized values and efforts.
+Thus a proof based only on these inequalities loses its quantitative
+content at small precision. A successful continuation needs an averaged
+identity that retains the Gaussian terminal data, not merely (G4).

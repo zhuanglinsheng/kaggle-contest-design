@@ -1,0 +1,5096 @@
+{
+  "status": "coarse search",
+  "normalization": {
+    "sigma": 1,
+    "c": 1,
+    "S0": 1
+  },
+  "grids": {
+    "theta": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0
+    ],
+    "T": [
+      0.25,
+      0.39685026299204984,
+      0.6299605249474366,
+      1.0,
+      1.5874010519681994,
+      2.5198420997897464,
+      4.0
+    ],
+    "lambda_": [
+      0.001,
+      0.0031622776601683794,
+      0.01,
+      0.03162277660168379,
+      0.1,
+      0.31622776601683794,
+      1.0,
+      3.1622776601683795,
+      10.0,
+      31.622776601683793,
+      100.0,
+      316.22776601683796,
+      1000.0,
+      3162.2776601683795,
+      10000.0
+    ],
+    "mu": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ]
+  },
+  "objectives": [
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.15421957698762237,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.8920620580763857
+      },
+      "high_precision_score": -0.15421957698762237,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.8920620580763857
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.12962808965606243,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.9142711489467629
+      },
+      "high_precision_score": -0.12962808965606243,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.9142711489467629
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.060395882762048714,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.9798107063483926
+      },
+      "high_precision_score": -0.060395882762048714,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.9798107063483926
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 0.1644692348518771,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 1.2268737103137126
+      },
+      "high_precision_score": 0.1644692348518771,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.2268737103137126
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.3142195769876224,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.8920620580763857
+      },
+      "high_precision_score": -0.3142195769876224,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.8920620580763857
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.28962808965606246,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.9142711489467629
+      },
+      "high_precision_score": -0.28962808965606246,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.9142711489467629
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.22039588276204872,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.9798107063483926
+      },
+      "high_precision_score": -0.22039588276204872,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.9798107063483926
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 0.004469234851877085,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 1.2268737103137126
+      },
+      "high_precision_score": 0.004469234851877085,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.2268737103137126
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.5142195769876224,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.8920620580763857
+      },
+      "high_precision_score": -0.5142195769876224,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.8920620580763857
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.4896280896560624,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.9142711489467629
+      },
+      "high_precision_score": -0.4896280896560624,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.9142711489467629
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.4117555106390268,
+      "best": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 0.8523386959749911
+      },
+      "high_precision_score": -0.4117555106390268,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.8523386959749911
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.008719409407602085,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.008719409407602085,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.8223649429246999,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 0.5641895835477564
+      },
+      "high_precision_score": -0.8223649429246999,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 0.5641895835477564
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.759157210331465,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.5478974858806862
+      },
+      "high_precision_score": -0.759157210331465,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.5478974858806862
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.5511779457080682,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.6134368551568563
+      },
+      "high_precision_score": -0.5511779457080682,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.6134368551568563
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.04621940940760208,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.04621940940760208,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.9323667575475677,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.44603102903819286
+      },
+      "high_precision_score": -0.9323667575475677,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.44603102903819286
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.838543063321994,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.4899053531741963
+      },
+      "high_precision_score": -0.838543063321994,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.4899053531741963
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.6136779457080682,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.6134368551568563
+      },
+      "high_precision_score": -0.6136779457080682,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.6134368551568563
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.10871940940760208,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.10871940940760208,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -1.0573667575475678,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.44603102903819286
+      },
+      "high_precision_score": -1.0573667575475678,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.44603102903819286
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.963543063321994,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.4899053531741963
+      },
+      "high_precision_score": -0.963543063321994,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.4899053531741963
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.7386779457080682,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.6134368551568563
+      },
+      "high_precision_score": -0.7386779457080682,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.6134368551568563
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.23371940940760208,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.23371940940760208,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.0411797244555527,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "high_precision_score": -0.0411797244555527,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.029308402292238488,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "high_precision_score": -0.029308402292238488,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 0.010206269982287942,
+      "best": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "high_precision_score": 0.010206269982287942,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 0.3689384697037542,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 1.2268737103137126
+      },
+      "high_precision_score": 0.3689384697037542,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.2268737103137126
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.2011797244555527,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "high_precision_score": -0.2011797244555527,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.1893084022922385,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "high_precision_score": -0.1893084022922385,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.14979373001771207,
+      "best": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "high_precision_score": -0.14979373001771207,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 0.20893846970375418,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 1.2268737103137126
+      },
+      "high_precision_score": 0.20893846970375418,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.2268737103137126
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -0.4011797244555527,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "high_precision_score": -0.4011797244555527,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.3893084022922385,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "high_precision_score": -0.3893084022922385,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.3497937300177121,
+      "best": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "high_precision_score": -0.3497937300177121,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 0.00893846970375417,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 1.2268737103137126
+      },
+      "high_precision_score": 0.00893846970375417,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.2268737103137126
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -1.0011797244555527,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "high_precision_score": -1.0011797244555527,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -0.9893084022922385,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "high_precision_score": -0.9893084022922385,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -0.9372953273832988,
+      "best": {
+        "theta": 0.25,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.9717396101355171
+      },
+      "high_precision_score": -0.9372953273832988,
+      "high_precision": {
+        "theta": 0.25,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.9717396101355171
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.029938818815204167,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.029938818815204167,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -1.626624512818681,
+      "best": {
+        "theta": 0.5,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.8466549947870363
+      },
+      "high_precision_score": -1.626624512818681,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.8466549947870363
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -1.51831442066293,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.5478974858806862
+      },
+      "high_precision_score": -1.51831442066293,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.5478974858806862
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -1.1023558914161364,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.6134368551568563
+      },
+      "high_precision_score": -1.1023558914161364,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.6134368551568563
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.09243881881520416,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.09243881881520416,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -1.8647335150951354,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.44603102903819286
+      },
+      "high_precision_score": -1.8647335150951354,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.44603102903819286
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -1.677086126643988,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.4899053531741963
+      },
+      "high_precision_score": -1.677086126643988,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.4899053531741963
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -1.2273558914161364,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.6134368551568563
+      },
+      "high_precision_score": -1.2273558914161364,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.6134368551568563
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.21743881881520416,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.21743881881520416,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 2.6284606766717182,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 2.0435858741834982,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 2.277794003809115,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 2.001093550036492,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 2.1243221779216874,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.9031958518697971,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 1.8533750845891328,
+      "best": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 1.0,
+        "B": 2.0723329816557765
+      },
+      "high_precision_score": 1.785970511292844,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.9448679879711661
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 2.468460676671718,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 1.8835858741834983,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 2.1177940038091148,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 1.841093550036492,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 1.9643221779216875,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.7431958518697972,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 1.6933750845891329,
+      "best": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 1.0,
+        "B": 2.0723329816557765
+      },
+      "high_precision_score": 1.625970511292844,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.9448679879711661
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 2.2684606766717184,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 1.6835858741834984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 1.917794003809115,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 1.641093550036492,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 1.7643221779216876,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.5431958518697972,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 1.493375084589133,
+      "best": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 1.0,
+        "B": 2.0723329816557765
+      },
+      "high_precision_score": 1.425970511292844,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.9448679879711661
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 1.6684606766717183,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 1.0835858741834983,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 1.317794003809115,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 1.041093550036492,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 1.1643221779216875,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 0.9431958518697972,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 0.8933750845891328,
+      "best": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 1.0,
+        "B": 2.0723329816557765
+      },
+      "high_precision_score": 0.8259705112928439,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.9448679879711661
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 0.6684606766717183,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 0.08358587418349828,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 0.31779400380911493,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 0.041093550036491955,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 0.16432217792168746,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": -0.05680414813020285,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.043597047038010414,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.043597047038010414,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": -1.2679485209866308,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 1.9162664119021262
+      },
+      "high_precision_score": -1.6660739929387485,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.7696001575374454
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": -1.4460636200724708,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 1.0,
+        "B": 1.849204776141234
+      },
+      "high_precision_score": -1.7029319728039662,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.6709327866867063
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": -1.5730593769773842,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 1.0,
+        "B": 1.802828002619726
+      },
+      "high_precision_score": -1.766768661439599,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.6497350308775636
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": -0.16859704703801043,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.16859704703801043,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 7.2969213533434365,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 6.1271717483669965,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 6.59558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 6.042187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 6.288644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 5.820784716521789,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 5.736062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 5.325328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 7.136921353343436,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 5.967171748366996,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 6.43558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 5.882187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 6.128644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 5.660784716521789,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 5.576062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 5.165328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 6.936921353343436,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 5.767171748366996,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 6.2355880076182295,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 5.6821871000729836,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 5.928644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 5.460784716521789,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 5.3760626887583856,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 4.965328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 6.3369213533434365,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 5.1671717483669966,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 5.63558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 5.082187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 5.328644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 4.860784716521789,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 4.776062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 4.365328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 5.3369213533434365,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 4.1671717483669966,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 4.63558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 4.082187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 4.328644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 3.8607847165217892,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 3.776062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 3.365328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 3.3369213533434365,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 2.1671717483669966,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 2.63558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 2.082187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 2.328644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.8607847165217892,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 1.776062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 1.365328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 16.633842706686874,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 14.294343496733994,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 15.23117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 14.124374200145969,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 14.61728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 13.68156943304358,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 13.512125377516773,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 12.690657096843113,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 16.473842706686874,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 14.134343496733994,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 15.07117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 13.964374200145969,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 14.45728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 13.52156943304358,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 13.352125377516773,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 12.530657096843113,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 16.273842706686874,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 13.934343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 14.87117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 13.764374200145967,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 14.25728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 13.321569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 13.152125377516771,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 12.330657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 15.673842706686873,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 13.334343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 14.27117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 13.164374200145968,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 13.65728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 12.721569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 12.552125377516772,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 11.730657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 14.673842706686873,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 12.334343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 13.27117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 12.164374200145968,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 12.65728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 11.721569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 11.552125377516772,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 10.730657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.0,
+      "score": 12.673842706686873,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 10.334343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 0.5,
+      "score": 11.27117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 10.164374200145968,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 1.0,
+      "score": 10.65728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 9.721569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 1,
+      "mu": 2.0,
+      "score": 9.552125377516772,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 8.730657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.19421957698762238,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.8920620580763857
+      },
+      "high_precision_score": -0.19421957698762238,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.8920620580763857
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.1696280896560624,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.9142711489467629
+      },
+      "high_precision_score": -0.1696280896560624,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.9142711489467629
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.10039588276204871,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 0.9798107063483926
+      },
+      "high_precision_score": -0.10039588276204871,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 0.9798107063483926
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.1244692348518771,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 1.2268737103137126
+      },
+      "high_precision_score": 0.1244692348518771,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.2268737103137126
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.44847057310670346,
+      "best": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 0.7484652758040914
+      },
+      "high_precision_score": -0.44847057310670346,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.7484652758040914
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.4137752328948307,
+      "best": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 0.7748892774064575
+      },
+      "high_precision_score": -0.4137752328948307,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.7748892774064575
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.3185114058568722,
+      "best": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 0.8523386959749911
+      },
+      "high_precision_score": -0.3185114058568722,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.8523386959749911
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.02403255541888244,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 1.0502545416600122
+      },
+      "high_precision_score": 0.02403255541888244,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 1.0502545416600122
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.5696036796566335,
+      "best": {
+        "theta": 0.0,
+        "T": 1.5874010519681994,
+        "lambda_": 0.001,
+        "B": 0.6417146306434885
+      },
+      "high_precision_score": -0.5696036796566335,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.6417146306434885
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.5227909359648413,
+      "best": {
+        "theta": 0.0,
+        "T": 1.5874010519681994,
+        "lambda_": 0.001,
+        "B": 0.6724692920180774
+      },
+      "high_precision_score": -0.5227909359648413,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.6724692920180774
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.39796168682660604,
+      "best": {
+        "theta": 0.0,
+        "T": 1.5874010519681994,
+        "lambda_": 0.001,
+        "B": 0.7618774356493051
+      },
+      "high_precision_score": -0.39796168682660604,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.7618774356493051
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.013913969130652197,
+      "best": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 0.001,
+        "B": 1.0220275779291026
+      },
+      "high_precision_score": 0.013913969130652197,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 10000.0,
+        "B": 1.0220275779291026
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.6973649429246999,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 0.5641895835477564
+      },
+      "high_precision_score": -0.6973649429246999,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 0.5641895835477564
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.6373456747414761,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 0.5990886622301165
+      },
+      "high_precision_score": -0.6373456747414761,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 0.5990886622301165
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.4680874407824171,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.6580455284294853
+      },
+      "high_precision_score": -0.4680874407824171,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.6580455284294853
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.008468090592397916,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": 0.008468090592397916,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.7738732006018069,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.5093292398734293
+      },
+      "high_precision_score": -0.7738732006018069,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.5093292398734293
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.7008796448426183,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.5478974858806862
+      },
+      "high_precision_score": -0.7008796448426183,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.5478974858806862
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.5000027981872257,
+      "best": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 0.001,
+        "B": 0.6308858946389257
+      },
+      "high_precision_score": -0.5000027981872257,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 10000.0,
+        "B": 0.6308858946389257
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.0006555905923979165,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": 0.0006555905923979165,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.8305736539016099,
+      "best": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 0.001,
+        "B": 0.4715035780504733
+      },
+      "high_precision_score": -0.8305736539016099,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 10000.0,
+        "B": 0.4715035780504733
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.744793063321994,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.4899053531741963
+      },
+      "high_precision_score": -0.744793063321994,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.4899053531741963
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.5199279457080682,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 0.6134368551568563
+      },
+      "high_precision_score": -0.5199279457080682,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 0.6134368551568563
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 1.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": -0.014969409407602084,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": -0.014969409407602084,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.0811797244555527,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "high_precision_score": -0.0811797244555527,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.06930840229223849,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "high_precision_score": -0.06930840229223849,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.02979373001771206,
+      "best": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "high_precision_score": -0.02979373001771206,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.3289384697037542,
+      "best": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 1.2268737103137126
+      },
+      "high_precision_score": 0.3289384697037542,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.2268737103137126
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.4011797244555527,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "high_precision_score": -0.4011797244555527,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.454133423214217
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.3893084022922385,
+      "best": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "high_precision_score": -0.3893084022922385,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.4627903332070673
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.3497937300177121,
+      "best": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "high_precision_score": -0.3497937300177121,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.3166664622492097
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.09914439374160677,
+      "best": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 1.1376244238543225
+      },
+      "high_precision_score": 0.09914439374160677,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.1376244238543225
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.7525735621105292,
+      "best": {
+        "theta": 0.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.1705261213950509
+      },
+      "high_precision_score": -0.7525735621105292,
+      "high_precision": {
+        "theta": 0.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.1705261213950509
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.7308443670541773,
+      "best": {
+        "theta": 0.5,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.0442698380924182
+      },
+      "high_precision_score": -0.7308443670541773,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.0442698380924182
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.6248150128295021,
+      "best": {
+        "theta": 0.25,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.9717396101355171
+      },
+      "high_precision_score": -0.6248150128295021,
+      "high_precision": {
+        "theta": 0.25,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 0.9717396101355171
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.04806511083776488,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 1.0502545416600122
+      },
+      "high_precision_score": 0.04806511083776488,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 1.0502545416600122
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -1.1479042493082996,
+      "best": {
+        "theta": 0.5,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.8466549947870363
+      },
+      "high_precision_score": -1.1479042493082996,
+      "high_precision": {
+        "theta": 0.5,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.8466549947870363
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -1.0911409327043915,
+      "best": {
+        "theta": 0.25,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.7686801428227359
+      },
+      "high_precision_score": -1.0911409327043915,
+      "high_precision": {
+        "theta": 0.25,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 0.7686801428227359
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.839375212443043,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 0.6996412283742457
+      },
+      "high_precision_score": -0.839375212443043,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 0.6996412283742457
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.024748681184795833,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": 0.024748681184795833,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -1.3947298858493997,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 0.5641895835477564
+      },
+      "high_precision_score": -1.3947298858493997,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 0.5641895835477564
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -1.2746913494829522,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 0.5990886622301165
+      },
+      "high_precision_score": -1.2746913494829522,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 0.5990886622301165
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.9361748815648342,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.6580455284294853
+      },
+      "high_precision_score": -0.9361748815648342,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.6580455284294853
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.016936181184795833,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": 0.016936181184795833,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -1.5477464012036137,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.5093292398734293
+      },
+      "high_precision_score": -1.5477464012036137,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.5093292398734293
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -1.4017592896852367,
+      "best": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 0.001,
+        "B": 0.5478974858806862
+      },
+      "high_precision_score": -1.4017592896852367,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.6299605249474366,
+        "lambda_": 10000.0,
+        "B": 0.5478974858806862
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -1.0000055963744514,
+      "best": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 0.001,
+        "B": 0.6308858946389257
+      },
+      "high_precision_score": -1.0000055963744514,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 10000.0,
+        "B": 0.6308858946389257
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 2.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.001311181184795833,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": 0.001311181184795833,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 2.588460676671718,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 2.003585874183498,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 2.237794003809115,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 1.9610935500364919,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 2.0843221779216874,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.863195851869797,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 1.8133750845891328,
+      "best": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 1.0,
+        "B": 2.0723329816557765
+      },
+      "high_precision_score": 1.7459705112928439,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.9448679879711661
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 2.2684606766717184,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 1.6835858741834984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 1.917794003809115,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 1.641093550036492,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 1.7643221779216876,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.5431958518697972,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 1.493375084589133,
+      "best": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 1.0,
+        "B": 2.0723329816557765
+      },
+      "high_precision_score": 1.425970511292844,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.9448679879711661
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 1.8684606766717182,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 1.2835858741834982,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 1.5177940038091149,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 1.241093550036492,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 1.3643221779216874,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.143195851869797,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.093085243158666
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 1.0933750845891328,
+      "best": {
+        "theta": 1.75,
+        "T": 4.0,
+        "lambda_": 1.0,
+        "B": 2.0723329816557765
+      },
+      "high_precision_score": 1.025970511292844,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 1.9448679879711661
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 0.6684606766717183,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 0.08358587418349828,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 0.31779400380911493,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 0.041093550036491955,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 0.16432217792168746,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": -0.0406270876339524,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.6497350308775636
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.1201627770944122,
+      "best": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 0.001,
+        "B": 1.0502545416600122
+      },
+      "high_precision_score": 0.1201627770944122,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 1.0,
+        "lambda_": 10000.0,
+        "B": 1.0502545416600122
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -0.335507473165084,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 1.9162664119021262
+      },
+      "high_precision_score": -0.7336329451172017,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.7696001575374454
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -0.513622572250924,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 1.0,
+        "B": 1.849204776141234
+      },
+      "high_precision_score": -0.7704909249824194,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.6709327866867063
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -0.6406183291558374,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 1.0,
+        "B": 1.802828002619726
+      },
+      "high_precision_score": -0.8343276136180522,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.6497350308775636
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.06956984565326098,
+      "best": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 0.001,
+        "B": 1.0220275779291026
+      },
+      "high_precision_score": 0.06956984565326098,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.39685026299204984,
+        "lambda_": 10000.0,
+        "B": 1.0220275779291026
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": -1.3291999585366978,
+      "best": {
+        "theta": 2.0,
+        "T": 1.5874010519681994,
+        "lambda_": 0.001,
+        "B": 1.471296843402611
+      },
+      "high_precision_score": -1.6089578590750648,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 1.323384722187063
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": -1.4088482112475988,
+      "best": {
+        "theta": 2.0,
+        "T": 1.5874010519681994,
+        "lambda_": 1.0,
+        "B": 1.4480452851211814
+      },
+      "high_precision_score": -1.622050747606052,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 1.3199238696899922
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": -1.483025186941187,
+      "best": {
+        "theta": 2.0,
+        "T": 1.5874010519681994,
+        "lambda_": 3.1622776601683795,
+        "B": 1.4267215254303005
+      },
+      "high_precision_score": -1.6219538671465754,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 1.25557475084603
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 5.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.050152952961989586,
+      "best": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 0.001,
+        "B": 1.0164138415600816
+      },
+      "high_precision_score": 0.050152952961989586,
+      "high_precision": {
+        "theta": 0.0,
+        "T": 0.25,
+        "lambda_": 10000.0,
+        "B": 1.0164138415600816
+      },
+      "finite_beats_high": false
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 7.2569213533434365,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 6.0871717483669965,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 6.55558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 6.002187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 6.248644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 5.780784716521789,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 5.696062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 5.285328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 6.936921353343436,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 5.767171748366996,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 6.2355880076182295,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 5.6821871000729836,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 5.928644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 5.460784716521789,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 5.3760626887583856,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 4.965328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 6.536921353343437,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 5.367171748366997,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 5.83558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 5.282187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 5.528644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 5.060784716521789,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 4.976062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 4.565328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 5.3369213533434365,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 4.1671717483669966,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 4.63558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 4.082187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 4.328644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 3.8607847165217892,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 3.776062688758386,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 3.365328548421556,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 3.3369213533434365,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 2.1671717483669966,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 2.63558800761823,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 2.082187100072984,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 2.328644355843375,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 1.8607847165217892,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 2.0001901668688715,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.31622776601683794,
+        "B": 1.7485014763683036
+      },
+      "high_precision_score": 1.6354795632946793,
+      "high_precision": {
+        "theta": 1.75,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.644256097427917
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 1.328985053669832,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.001,
+        "B": 1.9162664119021262
+      },
+      "high_precision_score": 0.5327341097655967,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.7696001575374454
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 0.972754855498152,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 1.0,
+        "B": 1.849204776141234
+      },
+      "high_precision_score": 0.45051056076762697,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.7551095321826582
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 0.7187633416883252,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 1.0,
+        "B": 1.802828002619726
+      },
+      "high_precision_score": 0.2538522109769743,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.7209310138274803
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 10.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 0.492726170538051,
+      "best": {
+        "theta": 2.0,
+        "T": 1.5874010519681994,
+        "lambda_": 0.001,
+        "B": 1.4553766339042207
+      },
+      "high_precision_score": 0.2855079174978372,
+      "high_precision": {
+        "theta": 1.5,
+        "T": 1.5874010519681994,
+        "lambda_": 10000.0,
+        "B": 1.3560050270010853
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 16.593842706686875,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 14.254343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 15.19117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 14.084374200145968,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 14.57728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 13.641569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.01,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 13.472125377516772,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 12.650657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 16.273842706686874,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 13.934343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 14.87117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 13.764374200145967,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 14.25728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 13.321569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.05,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 13.152125377516771,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 12.330657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 15.873842706686872,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 13.534343496733992,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 14.471176015236459,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 13.364374200145967,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 13.85728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 12.921569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.1,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 12.752125377516771,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 11.930657096843111,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 14.673842706686873,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 12.334343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 13.27117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 12.164374200145968,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 12.65728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 11.721569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.25,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 11.552125377516772,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 10.730657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 12.673842706686873,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 10.334343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 11.27117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 10.164374200145968,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 10.65728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 9.721569433043578,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 0.5,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 9.552125377516772,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.1762566523180165
+      },
+      "high_precision_score": 8.730657096843112,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.0886811849979057
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.0,
+      "score": 8.673842706686873,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.001,
+        "B": 2.5438842248293465
+      },
+      "high_precision_score": 6.334343496733993,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2630584046769884
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 0.5,
+      "score": 7.27117601523646,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.1,
+        "B": 2.371585694340275
+      },
+      "high_precision_score": 6.164374200145968,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.2439073748580154
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 1.0,
+      "score": 6.65728871168675,
+      "best": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 0.31622776601683794,
+        "B": 2.2998972213897058
+      },
+      "high_precision_score": 5.7215694330435785,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 4.0,
+        "lambda_": 10000.0,
+        "B": 2.1947726649227763
+      },
+      "finite_beats_high": true
+    },
+    {
+      "A": 20.0,
+      "delay": 1.0,
+      "delay_power": 2,
+      "mu": 2.0,
+      "score": 6.000380333737743,
+      "best": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 0.31622776601683794,
+        "B": 1.7485014763683036
+      },
+      "high_precision_score": 5.234598084835001,
+      "high_precision": {
+        "theta": 2.0,
+        "T": 2.5198420997897464,
+        "lambda_": 10000.0,
+        "B": 1.682818404386707
+      },
+      "finite_beats_high": true
+    }
+  ],
+  "max_boundary_effort": 4.119726781937061e-11
+}

@@ -1,0 +1,80 @@
+Low precision: direct comparison with the joint budget (2026-10-07)
+================================================================
+
+This replaces the 24-coefficient output calculation, not the whole
+Lemma 3 proof. It uses the already justified analytic Gaussian jet
+comparison and the verified scalar output supersolution.
+
+1. Replace the implicit jet by a rational envelope
+
+Let h0=.3991, eta=7/4, b1=50/157, E=18/35. The initial jet Psi has
+the elementary bound, for 0<=r<1,
+ Psi(r)<=h0+(b1-.075)r+(h0/2)r^2/(1-r^2/4)
+                            +(b1/3)r^3/(1-r^2/5).
+This follows by geometric bounds on the exponential and odd-series
+coefficient ratios. Set H(e)=h0+.18e/(1-1.2e).
+Substitution into this rational bound verifies Psi(eta e H(e))<=H(e)
+for 0<=e<=E, with strict inequality for e>0. The positive implicit
+branch h(e)=Psi(eta e h(e)) starts at h0 and cannot cross H; hence
+h<=H on this interval. verify_low_precision_direct_budget.py checks
+the cleared-denominator polynomial in Bernstein form on [0,E/2]
+and [E/2,E], with all coefficients strictly positive. This is one
+explicit scalar supersolution, not an HJB Taylor expansion.
+
+Nonnegative coefficients make h convex, so the original scalar output
+remainder satisfies
+ g(e)<=[h(e)-h0](1/2+.162e)
+      <=.18e(1/2+.162e)/(1-1.2e).
+
+2. Compare with the limiting competitive joint budget
+
+At a=S0/(sigma^2 T0)=0 and infinitely large tail curvature, the
+competitive budget is w+x^2/4<=1/4, with x=T/T0. For ell<=21,
+e<=w sqrt(1+21x^2), Q0/ST<=sqrt(1+21x^2). The output identity gives
+ B/b <=sqrt(x)[1+w+C(x,w)w^2],
+ C=2.51(1+21x^2)^(3/4)*.18(1/2+.162e)/(1-1.2e).
+This upper bound increases in w. It suffices to use w=(1-x^2)/4.
+Put t=sqrt(x). Then the required strict bound B/b<1 is equivalent to
+ C <4(t^3+2t^2+3t+4)/[t(1+t+t^2+t^3)^2].
+
+Convexity in t^2 and monotonicity of
+ [(1+21t^4)^(3/4)-1]/t^3 give
+ sqrt(1+21t^4)<=1+3.7t^2,
+ (1+21t^4)^(3/4)<=1+9.2t^3.
+The latter monotonicity follows by differentiation: its derivative
+is 3t^-4[1-(1+21t^4)^(-1/4)]>0.
+Use ehat=(1-t^4)(1+3.7t^2)/4. Clearing the positive denominator
+reduces the comparison to the single polynomial
+ 4(t^3+2t^2+3t+4)(1-1.2 ehat)
+ -.4518(1+9.2t^3)(.5+.162 ehat)t(1+t+t^2+t^3)^2 >0.
+Its Bernstein coefficients on [0,1/2], [1/2,3/4], [3/4,1] are all
+positive; the smallest is >.353. The script checks this exactly.
+Thus B/b<1 everywhere in the ideal budget except (x,w)=(1,0).
+
+3. Transfer back to finite curvature and positive prior variance
+
+Near (1,0), the displayed output coefficient tends to
+ 2.51*22^(3/4)*.18/2 <2.4.
+Hence the original 2.4 output envelope holds in a fixed neighborhood,
+uniformly for ell<=21 and small a. The original joint-payoff Hessian
+comparison handles this neighborhood.
+
+On its compact complement, with x>=1/8, the ideal output upper bound
+has a strict margin B/b<=rho<1. For curvature gamma sufficiently large,
+the actual competitive budget is arbitrarily close to the ideal one:
+ w+(d0 T0/D'(T0))x^2/4 <=1/4+q/gamma,
+where q=1+a and d0 T0/D'(T0)->1 as the constructed b grows.
+The explicit rational output envelope is continuous in these quantities
+and in a. Therefore B/b<=rho'<1 holds on the perturbed complement.
+The normalized payoff gain is bounded by
+ [1-(B/b)^(-gamma)]/gamma-[w+(x^2-1)/4]/q.
+The cost term is uniformly bounded there, whereas the first term tends
+uniformly to minus infinity as gamma grows. Such designs cannot compete
+with the zero-prize reference.
+
+Choose gamma first large enough for these comparisons and the original
+local Hessian, then choose b sufficiently large for its tail curvature,
+small a and the delay-cost ratio. No new utility or delay-cost assumption
+is imposed. This removes the need for a 24th-order uniform output
+coefficient on the entire low-precision screen. Other precision ranges
+and mature derivative inputs remain dependencies of Lemma 3.

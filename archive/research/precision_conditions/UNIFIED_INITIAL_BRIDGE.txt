@@ -1,0 +1,113 @@
+Uniform low-diffusion bridge (2026-10-07)
+=======================================
+
+Scope. This replaces the split at w=.12, the sixteen endpoint caps,
+and all mature differentiated-equation estimates. It does not replace
+the entire precision split, and therefore does not complete the
+independent short global-proof goal. The low-precision comparison is
+now separately simplified in LOW_PRECISION_DIRECT_BUDGET.txt.
+
+Normalize sigma=1, alpha=w, Q_t=S_t+T-t, Q'_t=-a_t.
+The remaining layer has a_t>=.72 after delta, w<=.252,
+f=delta/T<10/19, alpha delta/Q_delta<.64w,
+Q0/Q_delta<49/40. The deadline localization is now the direct scalar
+comparison in verify_direct_deadline_buffer.py; the special .68
+Gaussian cap and sixteen time rectangles are no longer dependencies.
+
+1. A broader Gaussian strip removes the derivative inputs
+
+Use E_q(z)=q^(-1/2)exp(-z^2/(4q)) and the norm
+sup |F(y+ih,t)|/|E_Qt(y+ih)| on |h|<=R sqrt(Q_t).
+In T(F,G), shift the source contour to h_s=Q_s h/Q_t. This is
+inside the source strip. Gaussian completion of squares gives
+the phase factor exp(h^2/(4Q_t))<=exp(R^2/4).
+The real part of the derivative kernel has the real norm constant
+2sqrt(2)exp(-1/4)<2.21. For the imaginary part, its coefficient
+(h-h_s)/(Q_t-Q_s)=h/Q_t is independent of s. Integration of
+P(E_Qs^2)/E_Qt over variance gives 2sqrt(Q_t)exp(-y^2/(4Q_t));
+therefore its norm constant is 2R. With K=alpha/a_min,
+ alpha ||T(F,G)|| <=K exp(R^2/4)(2.21+2R)||F||||G||.
+Gaussian domination justifies the contour shifts and variance limits.
+
+The source bound is also explicit. Write u=y/sqrt(Q_t), h=eta sqrt(Q_t),
+v=Q_s/Q_t and V=1-v/2. After taking absolute values and dividing by
+the target E-weight, the derivative source integrand has factor
+ sqrt(u^2+eta^2) exp[-beta u^2+beta eta^2], beta=1/(2V)-1/4.
+For R<sqrt(2/3), maximization over u gives
+ (2beta)^(-1/2)exp(-1/2+2beta eta^2).
+Since 2beta<=3/2, this implies
+ ||A1||<=K exp(3R^2/2) exp(-1/2)atanh(sqrt(2/3))/pi
+        <.222K exp(3R^2/2).
+The elementary remaining integral is
+ integral_0^1 dv/[sqrt(v)(1-v/2)sqrt(1/2+v/4)]
+     =2sqrt(2)atanh(sqrt(2/3)).
+
+At R=.45 and K<=.35, the centered mild map contracts and preserves
+ ||E_H||<=.105(K/.35)^2, ||A||<=.192(K/.35).
+Its real restriction preserves the sharper zeroth-order bounds
+ ||E_H||<=.04(K/.35)^2, ||A||<=.11(K/.35).
+All scalar inequalities are checked in verify_broad_gaussian_strip.py.
+No differentiated Nash equation is used. Uniqueness identifies the
+analytic fixed point with the real symmetric equilibrium.
+
+At delta let z=w/.252. Every Cauchy coefficient is bounded by its
+complex sup norm times (.45)^(-n). The complex sup introduces
+exp(.45^2/4), which must not be omitted. Consequently all positive
+orders of (E_H+eta A)/2 have the rescaled majorant
+ .232 r/(.45-r), since
+ exp(.45^2/4)(.105+eta*.192)/2 <.232.
+Only the real zeroth-order caps .04z^2 and .11z are retained.
+
+2. Convex time envelope, with no split in w
+
+The coefficientwise Gaussian majorant is
+ Gamma(r)/2=.3991 exp(r^2/2)+(50/157)r/(1-r^2/3)-.075r.
+After e=z^2 E, j=z J, v=z zeta, the residual jet equations are
+bounded coefficientwise by their z=1 equations. Put
+ W=(Gamma+E+eta J)/2. Its scalar majorant h satisfies
+ h_zeta=eta h h_r, with initial majorant
+ Psi=Gamma/2+.11625+.232r/(.45-r).
+At r=.26, Psi(r)<M=.92, and
+ eta*.16128*M<.26. Therefore h is analytic up to
+vmax=.16128 with h(vmax,0)<M and h(0,0)=h0=.51535.
+All coefficients are nonnegative, so
+ h(zeta,0)-h0 <= (zeta/vmax)(M-h0).
+The component equations give
+ E-E(0)<=4(h-h0)/eta^2,
+ J-J(0)<=2(1+3/eta^2)(h-h0)/eta.
+Thus, at t=delta s, 0<=s<=1,
+ |E_H|<=z^2[.04+e1(1-s)]/sqrt(q),
+ |A|<=z[.11+j1(1-s)]/sqrt(q), q=Q_delta,
+ e1=4(M-h0)/eta^2, j1=2(1+3/eta^2)(M-h0)/eta.
+
+3. Coupling the early and mature outputs
+
+Set Ebar=.04+e1/2, Jbar=.11+j1/2, Ibar=.11/2+j1/3,
+J(s)=.11+j1(1-s), I(s)=integral_0^s J(v)dv.
+Couple the equilibrium mean Y with the driftless mean Y0 using
+the same Brownian motion. Then
+ |Y_t-Y0_t|<=alpha z delta I(s)/sqrt(q),
+ E|beta_y(Y0_t,Q_t)|<=sqrt(9/40)/pi<.152.
+Also |beta_yy|<=.4/sqrt(q), |G'_Qt|<.243/q and
+E G_Qt(Y0_t)=G_Q0(0). The exact split output identity is
+ B-b=alpha E integral_0^delta [G_Qt+E_H/2+beta_y A]dt
+              +E[K(Y_delta,delta)-beta(Y_delta,q)].
+The mature statewise bound (M6b), rather than a bound only at
+the initial mean, supplies the final term.
+
+Put L=sqrt(2pi Q0/q)<2.8 and g=(alpha delta/q)/w<.64.
+Use integral J I=Jbar^2/2 to obtain an early excess coefficient
+ CE <=2.8[Ebar/(2*.252)+.152 Jbar/.252+.4*.64 Jbar^2/2]
+           +.6804*.64 Ibar.
+The mature excess coefficient satisfies
+ CM <=1.28+.6804*.64 Jbar(1+1.28*.252).
+Consequently
+ B <= b+alpha T G_Q0(0)[1+{f CE+(1-f)CM}w]
+   < b+alpha T G_Q0(0)(1+2.3w).
+The exact rational check gives f CE+(1-f)CM<2.298850 for f<=10/19.
+This is stronger than the coefficient 2.4 required by the payoff
+screen, for every 0<w<=.252, without time rectangles or a small-w
+subcase. The mature derivative estimates and the old terminal-variance
+separation S_T<Q_delta/2 have been removed from the manuscript.
+The full precision split has not yet been replaced by a single global
+comparison.

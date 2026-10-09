@@ -1,0 +1,202 @@
+2026-10-07: A closed centered-output certificate on a diffused subgame
+
+Scope and status
+
+This proves the centered complex-prize output bound on every subgame
+with public diffusion a_t>=.72 sigma^2 throughout. It is independent
+of the manuscript's spatial-derivative and complex-spatial-strip
+estimates. It does NOT yet cover an earlier low-diffusion layer.
+Consequently it does not complete the full Lemma 3 replacement.
+
+Normalize sigma=T=1. The terminal posterior variance is positive,
+Q_t=S_t+1-t, Q_t'=-a_t, and Q0>=1. Set
+
+  mu=18/25, r=27/100, e=9/50, d=43/100, K0=r/mu=3/8.
+
+All complex incentives below refer to the analytic HJB branch,
+not to an economic game with complex prizes.
+
+1. Sharp positive Gaussian convolution identity
+
+For q>0 define
+
+  J_q(y)=integral_0^q integral_R
+                   |G'_(q-v)(y-x)| G_v(x)^2 dx dv.
+
+The exact identity is
+
+  G_q(y)-J_q(y)
+    =(2/pi) integral_0^infinity
+         G_q(sqrt(2)|y|cosh h)/(2cosh(h)^2-1) dh >=0.       (M1)
+
+One verification uses the Laplace variable lambda and
+k=sqrt(2lambda). The transforms are
+
+  Laplace_q G_q(y)=exp(-k|y|)/k,
+  Laplace_q |G'_q(y)|=exp(-k|y|) for y!=0,
+  Laplace_q G_q(x)^2
+       =(1/pi) integral_0^infinity exp(-sqrt(2)k|x|cosh h)dh.
+
+The last formula follows from v=|x|exp(h)/sqrt(lambda)
+in the Gaussian Laplace integral; the isolated x=0 singularity
+is locally integrable in the convolution. Integrating the
+convolution separately at x=y gives
+
+  Laplace_q(G_q-J_q)
+    =(2/(pi k)) integral_0^infinity
+       exp(-sqrt(2)k|y|cosh h)/(2cosh(h)^2-1)dh.
+
+Laplace uniqueness and Tonelli give (M1); all displayed kernels
+are integrable for q>0. The bound is sharp as |y|/sqrt(q) grows.
+
+For T(f,g)=integral_t^1 partial_y P_(Q_t-Q_s)(f_s g_s)ds
+and ||f||_G=sup_(y,t)|f(y,t)|/G_(Q_t)(y), (M1) implies
+
+  ||T(f,g)||_G<=mu^(-1)||f||_G||g||_G.                    (M2)
+
+Indeed, take absolute values inside the convolution, change
+variables v=Q_s using a_s>=mu, and extend the integral from
+[S_1,Q_t] to [0,Q_t]. Unlike the first-coefficient bound in
+GAUSSIAN_FIRST_VARIATION_BOUND.txt, (M2) is an operator bound
+on arbitrary complex-valued functions in this Gaussian norm.
+Its positive diffusion lower bound is essential.
+
+2. Complex-prize Nash contraction, without spatial derivatives
+
+Put E=H-2G_Q. The exact centered mild equations are
+
+  E=(w/2)T(A,2G_Q+E),
+  A=w A_1+(w/4){3T(A,A)-T(E,4G_Q+E)}.                    (M3)
+
+The sharp first-variation comparison already proved gives
+||A_1||_G<=1. For z=|w|/r<=1, (M2) makes the ball
+
+  ||E||_G<=e z^2, ||A||_G<=d z                            (M4)
+
+invariant: the endpoint inequalities are
+
+  (K0/2)d(2+e)<e,
+  r+(K0/4){3d^2+e(4+e)}<d.
+
+The Lipschitz matrix for the unweighted pair norm is bounded by
+
+  [[K0 d/2, K0(2+e)/2],
+   [K0(4+2e)/4, 3K0 d/2]],
+
+whose two row sums are below one. Strict margins preserve the
+contraction on a neighborhood of |w|<=r. The fixed point is
+holomorphic in w and gives the classical gradient solution at
+each fixed positive terminal variance. Integrating the gradients
+recovers the normalized HJB values with their prescribed terminal
+conditions. At real positive w, H>|A| verifies positive efforts;
+uniqueness in Lemma 1 identifies the selected equilibrium.
+
+Let R=U^i+U^j. Its free-heat equation and terminal value one give
+
+  ||R-1||_infinity <= r{3d^2+(2+e)^2}/(16mu)=:M<.1244.    (M5)
+
+Here sup_(y,t) integral_t^1 P_(Q_t-Q_s)G_(Q_s)^2(y)ds
+is at most 1/(4mu): changing variance variables reduces it to
+(2pi mu)^(-1) integral_0^1 [v(2-v)]^(-1/2)dv.
+
+3. Scalar output remainder and its Gaussian source
+
+Let beta(y,Q)=E|N(y,Q)|/2 and let K be the conditional best output.
+Subtract its zero-prize value and first variation:
+
+  Delta=K-beta(y,Q_t)-w(1-t)G_(Q_t)(y).
+
+Its terminal value is zero and
+
+  Delta_t+(a_t/2)Delta_yy+w A Delta_y+F=0,
+  F=w E/2+w A beta_y+w^2(1-t)A G'_Q.
+
+Since |beta_y|<=1/2, (1-t)/Q_t<=1 and
+sup_y |y|G_Q(y)=1/sqrt(2pi euler_e)<.243, (M4) gives
+
+  |F|<=C |w|^2 G_Q,
+  C=d/(2r)+e/(2r)+d/sqrt(2pi euler_e)<1.235.              (M6)
+
+No Nash prize derivatives occur in this source estimate.
+
+For real positive w there is an even shorter, stronger verification.
+The exponential submartingale and Girsanov argument already proved
+in the manuscript gives K_(t,s)g<=cosh(K0/2)^2 P_(Q_t-Q_s)g
+for g>=0. Apply this to the zero-terminal Delta equation and (M6):
+
+  |Delta(y,t)|
+     <= C cosh(K0/2)^2 w^2 (1-t)G_(Q_t)(y)
+     < (32/25)w^2 (1-t)G_(Q_t)(y).                       (M6a)
+
+Thus, at every state in this diffused subgame,
+
+  K(y,t)<=beta(y,Q_t)
+           +w(1-t)G_(Q_t)(y)[1+(32/25)w].               (M6b)
+
+This is a conditional output bound, not merely an initial-state
+bound; it preserves the coefficient of the first-order output
+gain and so remains usable after an earlier phase. It requires
+neither the complex argument below nor a third-variation bound.
+For a general subgame, undoing the normalization replaces
+w(1-t) by alpha(T-t), without changing w=alpha/sigma^2.
+
+4. Heat-potential verification of the remainder bound
+
+Put kappa_t=w/a_t and phi=kappa_t(R-1).
+Substituting Delta=exp(-phi)Z cancels its convection exactly:
+
+  Z_t+(a_t/2)Z_yy+V Z=-exp(phi)F,
+  V=-kappa'_t(R-1)-(w kappa_t/4)(H^2-A^2).                (M7)
+
+The first term has pathwise absolute integral at most K0 M.
+This uses monotonicity of the Riccati path, so kappa has total
+variation at most K0, including complex w of a fixed phase.
+The quadratic term is bounded by a nonnegative Gaussian potential
+v2 whose heat Kato norm is at most
+
+  p=r^2{(2+e)^2+d^2}/(16mu^2)<.0434.
+
+The Markov property and the time-ordered exponential series give
+sup E exp(2 integral v2)<=sum_(n>=0)(2p)^n=(1-2p)^(-1).
+Feynman--Kac for (M7), endpoint gauge bounds, and Cauchy--Schwarz
+therefore imply
+
+  |Delta(0,0)|/(|w|^2 b(1))
+    <= C exp(3K0 M)/sqrt(1-2p)
+          integral_0^1 E[G_(Q_t)(Y_t)^2]^(1/2)/b(1) dt,    (M8)
+
+where Y is the driftless Gaussian process and
+b(1)=sqrt(Q0/(2pi)). At fixed positive terminal variance all
+coefficients and sources are bounded, so the scalar formula
+applies directly. The bounds just obtained are uniform in that
+variance. This is a complex linear PDE representation, not a
+Girsanov probability measure with complex drift.
+
+Gaussian multiplication evaluates the final factor, and Q_t>=1-t
+gives
+
+  integral_0^1 E[G_(Q_t)(Y_t)^2]^(1/2)/b(1)dt
+     <= integral_0^(1/Q0) [v(2-v)]^(-1/4)dv
+     <= integral_0^1 v^(-1/4)dv=4/3.
+
+Also exp(3K0 M)/sqrt(1-2p)<1.205. Hence (M8) is below
+1.235*1.205*4/3<2. In particular,
+
+  f(w)=K(0,0;w)/b(1), k=1/Q0,
+  |[f(w)-1-k w]/w^2|<2 for |w|<=27/100.                 (M9)
+
+The value at w=0 is the removable holomorphic extension.
+Thus the centered-output certificate C3 is CLOSED on this
+diffused subgame. For real prizes it directly implies
+f(w)<=1+k w+2w^2; Cauchy's coefficient formula is unnecessary
+for this real payoff bound.
+
+5. Exact remaining scope
+
+The manuscript can use (M6b) directly when the entire
+contest has a_t>=.72 sigma^2. It also gives a conditional subgame
+comparison at a later date, after the original low-diffusion
+initial layer. It does not establish a complex spatial strip for
+the Nash gradients, or the centered-output bound for that earlier
+layer. Those obligations must still be resolved before deleting
+the manuscript's remaining precision-range estimates.

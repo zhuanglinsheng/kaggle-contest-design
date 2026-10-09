@@ -1,0 +1,117 @@
+\proof{Proof of Theorem~\ref{thm-equilibrium-effort}}
+The innovation process $d\widehat B_t=\sqrt\lambda(dZ_t-\tilde y_tdt)$ is a Brownian motion with respect to the common information. Equation~\eqref{filtered-x} therefore becomes
+\[
+d\tilde y_t=(q_{i,t}-q_{j,t})dt+\sqrt\lambda S_t\,d\widehat B_t.
+\]
+Put $a_t=\lambda S_t^2$ and $a_*:=\min_{0\leq t\leq T}a_t>0$. Positivity follows from $S_0,\sigma,\lambda>0$ and equation~\eqref{filtered-S}. We first construct a solution of the interior HJB system, then verify that its policies are positive and form an equilibrium.
+
+Let $U^k=V^k/\theta$, $g_i(y)=\Phi(y/\sqrt{S_T})$, and $g_j(y)=\Phi(-y/\sqrt{S_T})$. The normalized HJB system is $U_t^k+(a_t/2)U_{yy}^k+F_k(U)=0$, with $U^k(\cdot,T)=g_k$, where
+\[
+F_i(U)=\sigma^2\left[\frac{w_i}{2}(U_y^i)^2+w_jU_y^iU_y^j\right],
+\qquad
+F_j(U)=\sigma^2\left[\frac{w_j}{2}(U_y^j)^2+w_iU_y^iU_y^j\right].
+\]
+We first construct a global classical solution without restricting $w_i+w_j$. Regard $F$ as a function of the gradient vector $z=(z_i,z_j)$. Choose a smooth cutoff $\chi_n(z)$ equal to one for $|z|\leq n$ and zero for $|z|\geq2n$, and put $F^n=\chi_nF$. The cutoff can be chosen so that, with $C$ independent of $n$,
+\[
+|F^n(z)|\leq C|z|^2,\qquad |D_zF^n(z)|\leq C|z|.
+\]
+Each truncated equation has a global bounded classical solution $U^n$, since $F^n$ is smooth and globally Lipschitz in the gradient. Moreover,
+\[
+F_k^n(z)=z_k\ell_k^n(z),\qquad
+\ell_i^n(z)=\chi_n(z)\sigma^2\left(\frac{w_i}{2}z_i+w_jz_j\right),
+\quad
+\ell_j^n(z)=\chi_n(z)\sigma^2\left(\frac{w_j}{2}z_j+w_iz_i\right).
+\]
+For fixed $n$, the coefficients $\ell_k^n$ are bounded. The scalar maximum principle applied to each component therefore gives $0\leq U^{n,k}\leq1$.
+
+The decomposition $F_k^n=z_k\ell_k^n$, with $|\ell_k^n(z)|\leq C|z|$ uniformly in $n$, satisfies the Bensoussan--Frehse condition with only its quadratic-linear term present. Proposition~2.11 and Theorem~2.5 of \citet{XingZitkovic2018} consequently give a uniform local parabolic H\"older bound for $U^n$: the terminal functions are smooth and bounded, the diffusion is uniformly elliptic, the value bound is uniform, and the generators share the quadratic-growth and Lyapunov bounds. All data and bounds are uniform under spatial translation, so the H\"older constants on fixed-radius cylinders are independent of their spatial centers as well as of $n$.
+
+For completeness, a local gradient estimate removes the cutoff. Reverse time, writing $\tau=T-t$, $a=a_{T-\tau}$, and $\mathcal P=\partial_\tau-(a/2)\partial_{yy}$. On a cylinder where $|U^n-u_0|\leq\delta$, set $v=|U^n-u_0|^2$ and $z=|U_y^n|^2$. The preceding growth bounds imply
+\[
+\mathcal P v\leq-(a_*-2C\delta)z,
+\qquad
+\mathcal P z
+=2U_y^n\cdot D_zF^n(U_y^n)U_{yy}^n-a|U_{yy}^n|^2
+\leq C_1z^2,
+\]
+where $C_1$ is independent of $n$. Choose $\delta\leq\varepsilon/2$ so that $2C\delta\leq a_*/2$ and $C_1\varepsilon^2\leq a_*/4$, and put $W=z/(\varepsilon^2-v)$. Direct differentiation, using $(1/(\varepsilon^2-v))''=2/(\varepsilon^2-v)^3$, cancels the squared-$v_y$ terms and yields
+\[
+\mathcal P W+bW_y\leq-\frac{a_*}{4}W^2,
+\qquad
+b=\frac{av_y}{\varepsilon^2-v},\qquad |b|\leq C_2\sqrt W.
+\]
+Take a parabolic cutoff $\eta$ on a cylinder of spatial radius $\rho$, with $|\eta_y|\leq C\sqrt\eta/\rho$ and $|\eta_\tau|+|\eta_{yy}|\leq C/\rho^2$. At a positive interior maximum of $Z=\eta W$, the last inequality gives
+\[
+0\leq-\frac{a_*}{4}Z^2+\frac{C_3}{\rho^2}Z+\frac{C_4}{\rho}Z^{3/2},
+\]
+and hence $Z\leq C_5/\rho^2$. Cylinders touching $\tau=0$ use the bounded derivative of $g$ for their initial boundary; the same argument applies elsewhere. The uniform H\"older bound supplies a common positive radius $\rho$ on which the required oscillation bound holds. Covering the time--space domain therefore gives $\sup_n\|U_y^n\|_\infty<\infty$.
+
+Choose $n$ larger than this gradient bound. Its cutoff is inactive everywhere, so $U^n$ solves the original system. Parabolic regularity with the smooth terminal functions and bounded gradient gives bounded spatial derivatives through order three and the time derivatives required below. The truncated construction preserves the terminal limits at spatial infinity and vanishing spatial derivatives there, so the untruncated solution has the prescribed boundary behavior. Finally, two bounded classical solutions with bounded gradients have a difference $D$ satisfying a linear system with bounded first-order coefficients. Applying the scalar maximum principle to $e^{-C\tau}|D|^2$, after absorbing $|D||D_y|$ by the diffusion term, gives $D=0$. Denote this global solution by $U$.
+
+We next record the small-incentive fixed-point estimate used for the effort expansion.
+For $t\leq s$, let $P_{t,s}$ be Gaussian convolution with variance $A_{t,s}:=\int_t^s a_u\,du$. Thus $P_{t,s}f(y)=\mathbb E[f(y+\sqrt{A_{t,s}}\xi)]$ for a standard normal $\xi$. The corresponding integral equation is
+\begin{equation}\label{eq-equilibrium-fixed-point}
+U^k(\cdot,t)=P_{t,T}g_k+\int_t^T P_{t,s}F_k(U(\cdot,s))\,ds.
+\end{equation}
+
+For $n=2,3$, write $\|f\|_n=\max_{0\leq\ell\leq n}\|\partial_y^\ell f\|_\infty$, and let $BUC^n(\mathbb R)$ denote functions with bounded, uniformly continuous derivatives through order $n$. We solve equation~\eqref{eq-equilibrium-fixed-point} in $X=C([0,T];BUC^3(\mathbb R)^2)$, with $\|U\|_X=\max_k\sup_t\|U^k(\cdot,t)\|_3$. Differentiating the Gaussian kernel once gives
+\[
+\|P_{t,s}f\|_3
+\leq\left(1+\sqrt{\frac{2}{\pi a_*(s-t)}}\right)\|f\|_2,
+\qquad t<s.
+\]
+Indeed, derivatives through order two commute with convolution, and the third derivative is obtained by convolving $f''$ with the derivative of the Gaussian density, whose $L^1$ norm is $\sqrt{2/(\pi A_{t,s})}$. The time integral of this bound is at most
+\[
+K:=T+2\sqrt{\frac{2T}{\pi a_*}}.
+\]
+Set $\varepsilon=w_i+w_j$ and $R=2\max_k\|g_k\|_3$. The product rule gives, whenever $\|U\|_X,\|\widehat U\|_X\leq R$,
+\[
+\max_k\sup_t\|F_k(U)\|_2\leq4\sigma^2\varepsilon R^2,
+\qquad
+\max_k\sup_t\|F_k(U)-F_k(\widehat U)\|_2
+\leq8\sigma^2\varepsilon R\|U-\widehat U\|_X.
+\]
+Consequently, if $0<\varepsilon<(16\sigma^2KR)^{-1}$, the right-hand side of equation~\eqref{eq-equilibrium-fixed-point} maps the closed radius-$R$ ball in $X$ into itself and is a contraction with constant less than $1/2$. Its fixed point is a bounded classical solution with bounded gradients, and thus coincides with the global solution $U$ by the uniqueness argument above.
+
+To verify interiority of the global solution, without a small-incentive restriction, set $p=U_y^i$, $r=-U_y^j$, and $b=\sigma^2(w_ip-w_jr)$. Differentiation of the HJB equations yields
+\[
+p_t+\frac{a_t}{2}p_{yy}+bp_y-\sigma^2w_jr_y p=0,
+\]
+\[
+r_t+\frac{a_t}{2}r_{yy}+br_y+\sigma^2w_ip_y r=0,
+\]
+with $p(y,T)=r(y,T)=h(y):=(2\pi S_T)^{-1/2}\exp[-y^2/(2S_T)]>0$. All coefficients are bounded, and $b$ is globally Lipschitz in $y$. For the diffusion $dX_s=b(X_s,s)ds+\sqrt{a_s}\,d\widehat B_s$, the Feynman--Kac representation gives
+\[
+p(y,t)=\mathbb E_{y,t}\!\left[
+h(X_T)\exp\!\left(-\sigma^2w_j\int_t^T r_y(X_s,s)\,ds\right)
+\right]>0.
+\]
+The same representation for $r$, with potential $\sigma^2w_ip_y$, gives $r(y,t)>0$. Thus the feedback policies $m_i=\sigma^2w_ip$ and $m_j=\sigma^2w_jr$ are positive at every finite state, bounded, and globally Lipschitz. They attain the constrained maxima in the two HJB equations.
+
+It remains to verify optimality against arbitrary admissible deviations. Fix the opponent's feedback and let $q_k$ be any nonnegative, publicly predictable deviation with finite expected integrated squared effort. Denote the induced posterior state by $\tilde y_s$. It\^o's formula and completion of the square give
+\begin{equation}\label{eq-equilibrium-verification}
+\mathbb E_{y,t}\!\left[G_k(\tilde y_T)-\int_t^T\frac{c_kq_{k,s}^2}{2}\,ds\right]
+=V^k(y,t)-\frac{c_k}{2}\mathbb E_{y,t}\!\int_t^T
+\bigl[q_{k,s}-m_k(\tilde y_s,s)\bigr]^2ds.
+\end{equation}
+The stochastic integral has zero expectation because $V_y^k$ and $a_s$ are bounded; the other terms are integrable by admissibility. The right-hand side is at most $V^k(y,t)$, with equality under $q_k=m_k$. Since this holds for either player at every state and time, the constructed policies form an interior Markov-perfect equilibrium.
+
+Finally, the fixed-point equation and its bounds imply
+\[
+\|U-P_{\cdot,T}g\|_X\leq4\sigma^2K\varepsilon R^2=O(\varepsilon).
+\]
+Gaussian convolution gives $P_{t,T}g_i(y)=\Phi(y/\sqrt{S_T+A_{t,T}})$ and $P_{t,T}g_j(y)=\Phi(-y/\sqrt{S_T+A_{t,T}})$. Integrating equation~\eqref{filtered-S} yields
+\[
+S_T+A_{t,T}=S_t+\sigma^2(T-t)=Q_t.
+\]
+Hence, uniformly in state and time,
+\[
+p(y,t)=\frac{e^{-y^2/(2Q_t)}}{\sqrt{2\pi Q_t}}+O(w_i+w_j),
+\qquad
+r(y,t)=\frac{e^{-y^2/(2Q_t)}}{\sqrt{2\pi Q_t}}+O(w_i+w_j).
+\]
+Multiplying by $\sigma^2w_k$ gives the effort expansion. Since $Q_t'=-\lambda S_t^2$, we have $0<S_T\leq Q_t\leq S_0+\sigma^2T$, so factoring out $\sigma^2w_k/\sqrt{Q_t}$ preserves the uniform $O(w_i+w_j)$ remainder inside the braces in equation~\eqref{eq-equilibrium-effort}.
+The existence and regularity bounds hold for each fixed $0<\lambda<\infty$; they are not asserted to be uniform at zero or infinite precision.
+\Halmos
+\endproof
+}

@@ -1,0 +1,49 @@
+Gaussian jet cap: repair of the deadline-localization input
+=========================================================
+
+Status: mathematically valid, but no longer used by the manuscript.
+The direct comparison in DIRECT_DEADLINE_BUFFER.txt supersedes it.
+
+The former test .4 exp[(7eM/4)^2]<M fails at e=.67,M=.68.
+The cap itself can instead be proved using the actual Gaussian jet.
+
+Write G(y)=exp(-y^2/2)/sqrt(2pi), v=|y| and r=4/5.
+The Hermite coefficient formula and the triangle inequality, retaining
+the exact second coefficient |v^2-1|, give
+
+ J(v,r)=sum_n |G^(n)(y)|r^n/n!
+ <= G(0) exp(-v^2/2)[exp(rv+r^2/2)-r^2 min(v^2,1)].
+
+For 0<=v<=1, exp(8/25)<689/500 and
+ exp(4v/5)<=1+4v/5+8v^2/25+32v^3/375
+             +32v^4/1875+128v^5/40625.
+Subtracting this upper bound from (17/10)(1+v^2/2+v^4/8)
+plus 16v^2/25, then using v^3<=(v^2+v^4)/2 and v^5<=v^4,
+leaves at least
+ 161/500 - (689/625)v + (4951/5000)v^2 >0.
+The last inequality follows from its negative discriminant.
+Thus J< (2/5)(17/10)=17/25 on this interval.
+
+For 1<=v<=13/10, the first exponential term is at most exp(31/50)
+and the subtracted term is at least (16/25)exp(-169/200).
+The bounds exp(31/50)<93/50 and exp(-169/200)>21/50 give
+ J<(2/5)[93/50-(16/25)(21/50)]<17/25.
+For v>=13/10, omit the subtracted term and use
+ r^2-(v-r)^2/2<=103/200 and exp(103/200)<42/25.
+Again J<17/25. All scalar constants have rational certificates in
+verify_gaussian_jet_cap.py.
+
+Application: the pointwise radial analytic-jet inequality is
+ W_tau <= (a/2)W_yy + (7alpha/4)W W_r.
+After scaling S_T=1, its initial data are J(v,r).
+Backward radius characteristics, the spatial maximum principle and
+continuation give W(t,y,0)<=M provided the radius consumed is below r
+and the initial jet at radius r is strictly below M. Here
+ (7/4)(.67)(17/25)=.7973<.8.
+Consequently M=.68 is valid up to exposure .67. This is a radial
+comparison, not a claim that a constant coefficientwise dominates
+the initial analytic power series.
+
+Scope: this repairs the existing deadline-localization input only.
+It does not certify the alternative short global comparison or close
+the outstanding long-term simplification goal.

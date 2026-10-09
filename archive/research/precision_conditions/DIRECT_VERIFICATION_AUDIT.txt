@@ -1,0 +1,131 @@
+DIRECT VERIFICATION OF THE FULL-DISCLOSURE BENCHMARK
+2026-10-07
+
+Status: an exact comparison identity and an obstruction to pointwise
+verification. This is NOT a closed replacement proof of Proposition 1(ii).
+The manuscript has not been changed on the strength of this calculation.
+
+1. Exact identity using existing equilibria
+
+Fix theta,T,c,sigma, and write alpha=theta/c. For each existing equilibrium,
+write A=(m_i-m_j)/alpha and H=(m_i+m_j)/alpha. Let F_infty(y,t) be the
+conditional remaining best output in the full-disclosure equilibrium, with
+the current average score normalized to zero. It solves the LINEAR equation
+
+  F_t + sigma^2 F_yy/2 + alpha A_infty F_y + alpha H_infty/2 = 0,
+  F(y,T)=|y|/2.
+
+Let P_S be Gaussian convolution with variance S and set
+Fbar=P_{S_t}F_infty. The Riccati identity S_t'+lambda S_t^2=sigma^2 gives
+
+  Fbar_t + lambda S_t^2 Fbar_yy/2
+    = -alpha P_{S_t}(A_infty F_infty,y + H_infty/2).
+
+Consequently define the exact residual
+
+  R_lambda = alpha [ A_lambda Fbar_y + H_lambda/2
+                     -P_{S_t}(A_infty F_infty,y+H_infty/2) ].
+
+Dynkin's formula along the finite-precision equilibrium gives
+
+  B_lambda-B_infty = E_lambda integral_0^T R_lambda(Y_t,t) dt.       (V1)
+
+Here Fbar(0,0)=B_infty, and its terminal value is the conditional best
+terminal gap contribution, E|N(Y_T,S_T)|/2. The accumulated average effort
+accounts for the remaining part of B_lambda. Spatial localization and
+stopping at T-epsilon are justified by finite expected effort energy and
+the at-most-linear growth of F_infty; the final interval contribution
+vanishes by Cauchy--Schwarz. These arguments apply to an existing regular
+equilibrium, not to an arbitrary selection of Nash equilibria.
+
+For joint design, (V1) must be compared at every competitive theta,T.
+Knowing that its integral is nonpositive only at the candidate optimal
+theta,T does not rule out another finite-feedback design at different
+theta,T. No new existence proof is required, but this global design
+comparison is still required.
+
+2. The pointwise supersolution shortcut is false
+
+The tempting sufficient condition R_lambda<=0 at every state/time cannot
+be used: it fails even at arbitrarily small positive prizes. The failure
+can be proved from exact first variations, without a nonlinear PDE solver.
+
+Hold sigma,T,S0 fixed with S0>0. Set Q_t=S_t+sigma^2(T-t). Analytic small
+prize equilibria have, at fixed finite lambda and fixed t<T,
+
+  H_lambda=2G_{Q_t}+O(alpha^2),
+  A_lambda=alpha A_{1,lambda}+O(alpha^2),
+
+where G_q is the centered Gaussian density of variance q. Differentiating
+the HJB at alpha=0 gives the exact first-variation formula
+
+  A_{1,lambda}(y,t)
+    = - integral_t^T P_{Q_t-Q_r} partial_y(G_{Q_r}^2)(y) dr.        (V2)
+
+There is no first-order variation of H. The explicit full-disclosure
+strategy gives, with q=sigma^2(T-t),
+
+  A_{1,infty}(y,t) = [2Phi(y/sqrt(q))-1]G_q(y)/sigma^2.
+
+The zero-prize designer continuation is beta(y,q)=E|N(y,q)|/2, whose
+derivative is Phi(y/sqrt(q))-1/2. Therefore
+
+  R_lambda(y,t)/alpha^2
+    -> A_{1,lambda}(y,t) beta_y(y,Q_t)
+       -P_{S_t}[A_{1,infty} beta_y(.,q)](y)                       (V3)
+
+as alpha decreases to zero, at each fixed finite lambda.
+
+At t=0, Q=S0+sigma^2 T is independent of lambda. For every r>0, the
+Riccati solution satisfies S_r -> 0 as lambda -> infinity, and hence
+Q_r -> sigma^2(T-r). In (V2), Q_r>=sigma^2(T-r) and
+Q-Q_r/2>=Q/2; the integrand has an integrable bound proportional to
+(T-r)^(-1/2), for fixed y. Dominated convergence thus gives
+
+  A_{1,lambda}(y,0) -> P_{S0} A_{1,infty}(y,0).
+
+Put K=sigma^2 T, Q=S0+K, and let
+
+  U ~ N(mu,v),  mu=y sqrt(K)/Q,  v=S0/Q,
+  delta=E[1-Phi(U)]=1-Phi(mu/sqrt(1+v)),
+  epsilon=E[(1-Phi(U))^2],  zeta=1-Phi(y/sqrt(Q)).
+
+Gaussian multiplication now evaluates the limit of the coefficient in
+(V3), divided by G_Q(y), as
+
+  [2delta-2zeta+4zeta delta-4epsilon]/(2sigma^2).                  (V4)
+
+To determine its sign, take y to positive infinity. With independent
+standard normals X,Z independent of U,
+
+  epsilon=P(X>U,Z>U)
+          <=P((X+Z)/2>U)=1-Phi(mu/sqrt(v+1/2)).
+
+Since v+1/2<v+1, normal tail estimates imply epsilon=o(delta).
+Also zeta=o(delta): its normal argument divided by the argument defining
+delta equals sqrt((Q+S0)/K)>1. Thus (V4) is asymptotic to
+delta/sigma^2>0. Choose a large but FIXED y for which it is positive,
+then a sufficiently large but FINITE lambda, then a sufficiently small
+positive alpha. This order of choices proves R_lambda(y,0)>0.
+
+Continuity gives a nearby positive residual at t>0 as well. Positive
+finite precision has a nondegenerate innovation diffusion, so the states
+cannot simply be discarded from a global pointwise verification.
+
+This counterexample does NOT show B_lambda>B_infty. The root comparison
+in (V1) involves the expectation of the entire time integral, and positive
+local residuals may be outweighed by negative residuals elsewhere.
+
+3. What is still required
+
+The valid direct-verification task is to prove the SIGN OF THE EXPECTED
+INTEGRAL in (V1), uniformly over the competitive prize/deadline set and
+every finite precision. Pointwise nonpositivity must not be assumed.
+Existing weak-prize ranking establishes an integrated comparison in its
+stated regime, but using it does not by itself replace the separate
+global competitive-design localization in the current case (ii) proof.
+
+Numerical diagnostic files are not sign certificates. In particular,
+large initial Riccati diffusion is stiff and can invalidate coarse time
+steps. The analytic argument (V2)--(V4), not a finite-difference sign,
+establishes the obstruction above.

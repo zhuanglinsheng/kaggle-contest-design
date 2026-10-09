@@ -1,0 +1,153 @@
+2026-10-07: Minimal-scope global comparison replacing Lemma 3
+================================================================
+
+Current dependency refinement (2026-10-07)
+
+Lemma 2 now states only the fixed prior-ratio interval [99/2,198]
+needed by Lemma 3. No uniform-in-finite-precision or strict-ranking
+property is removed: both remain necessary for Proposition 1(ii).
+The high-precision tail is retained, while repeated uniformity claims,
+the unused general interval endpoints, and the explicit quadratic
+remainder vector are removed from its exposition. The profile equations
+still determine that remainder and its Sobolev bound.
+
+Proposition 1(iii) no longer uses Lemma 2 or deadline-localization
+stability. For bounded deadlines and alpha tending uniformly to zero,
+the existing low-diffusion supersolution gives
+ B-b(T)<=alpha T G_Q0(0)
+       +alpha^2 T^2/(8 S0^(3/2))*(1+.486 alpha T/S0).
+Its analytic hypothesis holds uniformly because S_T>=S0.
+The existing high-diffusion argument requires only w<=.252, not
+Lemma 3's constructed prior ratio; it gives the 1+2.9w bound.
+Together with the full-disclosure bound these imply
+ B-b(T)<=2 alpha Tbar/sqrt(2pi S0)
+for all precisions and all T<=Tbar when alpha is sufficiently small.
+Concavity then excludes all positive prizes for sufficiently large c.
+This proof does not enlarge Lemma 3's statement: it reuses only its
+explicit verifications under the stated, checked small-alpha conditions.
+
+1. Problem and resolved scope
+
+The old Lemma 3 proved a stronger assertion than Proposition 1(ii)
+needs: arbitrary fixed S0 and arbitrarily high sigma. Its normalization
+forced S0/(sigma^2 T0) near zero and introduced a difficult low-diffusion
+initial layer. Proposition 1 already assumes S0 sufficiently large and
+only asks for one parameter point above the finite-feedback risk interval.
+
+The replacement uses exactly that existing assumption. It proves, for
+every sufficiently large S0, a point sigma>1,c<c_e where every finite
+feedback design is strictly below the attained full-disclosure maximum.
+The part-(i) threshold is chosen <=1, without changing that result.
+No new utility or delay-cost assumption, numerical optimum, or conditional
+attainment assertion has been introduced. The unnecessary stronger
+Lemma 3 statement, not the Proposition, has been removed.
+
+2. Proof dependency chain
+
+Fix the innovation share k=.01 in the proof, not in the model:
+ b=sqrt(S0/[2pi(1-k)]), M=b u'(b),
+ T0 D'(T0)=Mk/2, sigma^2 T0=k S0/(1-k).
+This is the exact zero-prize optimum. As S0 grows, T0 decreases to zero
+and sigma grows without bound. Its prize-entry threshold satisfies
+c_e sigma^2=Mk.
+
+The bounded utility tail and local quadratic delay cost restrict every
+competitive design near c=c_e to w+x^2/4<.252, x=T/T0<2. Concavity alone
+gives output>.99b. A coarse uniform output bound then suffices:
+ B<=b(T)+alpha T G_(S0+sigma^2T)(0)(1+2.9w).
+
+There are only two elementary diffusion checks:
+ - If lambda S0^2<.72 sigma^2, S_T>=S0 throughout the contest and
+   alpha T/S_T<=2w/99<.01. A simple Gaussian analytic supersolution
+   gives an excess coefficient below .01, including no signal.
+ - Otherwise a_t>=.72 sigma^2 for the whole contest. A single positive
+   Gaussian convolution identity gives the centered-gradient contraction;
+   direct verification of the designer linear equation gives coefficient
+   below 2.6. The simpler ball E<=6w^2, A<=3w replaces the normalized
+   z-dependent bounds. No spatial strip or differentiated Nash estimates.
+
+The joint payoff screen, not the output ranking, excludes strong prizes.
+With h=1+k(x-1), r=sqrt(h)+kx(w+2.9w^2)/sqrt(h), its upper bound is
+ F_gamma=(1-r^(-gamma))/(gamma k)-w-(x^2-1)/4.
+On the zero-relative-cost sublevel, r<1 except at (1,0), by one
+explicit polynomial factorization. At a fixed sufficiently large gamma0
+(e.g. 10000), the local Hessian is negative definite. F_gamma decreases
+pointwise as gamma increases; an increasing open cover of the compact
+complement then makes F_gamma strictly negative elsewhere for
+some fixed large gamma. The utility-tail assumption supplies this fixed
+curvature for all sufficiently large S0; it is not an extra assumption.
+
+Taking c just below c_e preserves exclusion on x<=1/2 and w>=w0.
+Every remaining competitive design has prior ratio in [99/2,198] and
+w<w_*, so the existing Lemma 2 strictly improves it by full disclosure.
+All other designs already lie below the zero-prize reference. Therefore
+the comparison is global over prizes, deadlines and finite precisions.
+
+Finally the full-disclosure objective attains its maximum on a compact
+competitive set. Its positive entry derivative c_e/c-1>0 puts that
+maximum strictly above the zero-prize reference, so its prize and
+deadline are positive. Lemma 3 excludes every finite-precision rival;
+zero prize and zero deadline cannot tie. This proves Proposition 1(ii).
+
+3. Forward and backward checks
+
+The explicit source in the high-diffusion branch is bounded by
+alpha/min(a_t), not by the sharper precision-specific first-variation
+estimate used in the superseded proof. The simple bounds E<=6w^2,A<=3w
+are sufficient; no old initial-layer certificate is silently invoked.
+The designer source, kernel, polynomial factorization and Hessian
+constants are checked exactly in verify_prior_dominated_comparison.py.
+The compact argument is proved in the manuscript, not inferred from
+these scalar tests. No grid comparison is part of this proof.
+
+The local neighborhood is fixed using F_gamma0. Pointwise monotonicity
+in gamma preserves this neighborhood before choosing gamma large for
+the compact complement. This avoids a circular neighborhood/curvature
+choice. Gamma is fixed before S0, then c is selected near c_e.
+
+The weak-ranking threshold comes from Lemma 2 on a fixed prior-ratio
+interval, independent of the constructed sigma,T0. It excludes every
+finite precision, including its prescribed analytic no-signal branch.
+Only that competitive no-signal range is used; arbitrary strong-prize
+zero-signal existence is not claimed.
+
+4. Assumptions and discarded work
+
+The proof uses exactly the manuscript's u,D assumptions, sufficiently
+large S0, the symmetric equilibrium, Lemma 1, and the existing Lemma 2.
+No extra author choice or assumption is required. The previous accumulated
+precision split, terminal-variance normalization, early-layer bridge,
+spatial-strip bounds, differentiated equilibrium bounds, and high-order
+coefficient certificates are no longer manuscript dependencies for Lemma 3.
+Research notes about those methods remain historical results, not active
+proof obligations. VALUE_GRAPH_COMPARISON.txt is an alternative partial
+route and is not needed by the completed replacement.
+
+5. Completion audit
+
+ - Independent global exclusion: the constructed prior-dominated point
+   and the F_gamma compact argument cover every competitive prize and
+   deadline, not merely a local maximum or a numerical candidate.
+ - All finite precisions: whole-contest diffusion is either below the
+   initial threshold (the terminal variance stays above S0) or bounded
+   below throughout. The two direct scalar checks are exhaustive; the
+   superseded accumulated-precision/initial-layer estimates are absent.
+ - Exact designer output: the bounds verify the actual linear designer
+   equation along the selected nonlinear Nash equilibrium; no leading-
+   order DGP substitutes for exact B.
+ - Existing hypotheses: S0 sufficiently large was already in Proposition
+   1. k=.01 selects a design-independent research parameter point and is
+   not a new model restriction. No additional property of u or D is used.
+ - Necessary weak ranking: Lemma 2 is applied on the fixed compact prior
+   interval only after every other competitive design is excluded.
+ - Joint optimum: the existing explicit full-disclosure policy gives
+   continuity and compact attainment; its entry derivative is positive.
+   The attained maximum strictly dominates all finite precisions and
+   both zero-prize/zero-deadline alternatives.
+ - Manuscript replacement: the old 488-line Lemma 3 block has been
+   replaced, not moved. The redundant zero-prize calculation in case(ii)
+   has also been removed; Proposition 1's statement is unchanged.
+ - Verification: exact scalar checks pass. Local pdflatex syntax and
+   cross-reference checks pass without undefined references or overfull
+   formulas. The app compiler is separately limited by its inability to
+   load informs3.cls; this is not reported as successful app compilation.

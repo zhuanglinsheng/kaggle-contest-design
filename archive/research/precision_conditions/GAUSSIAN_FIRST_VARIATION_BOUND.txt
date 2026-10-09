@@ -1,0 +1,163 @@
+2026-10-07: A precision-uniform first-variation estimate
+
+Status: the first-variation and second-output-coefficient bounds below
+are proved directly. They do not control finite-prize higher variations
+and do not replace the manuscript's global output estimate.
+
+1. Exact imbalance coefficient
+
+Keep sigma,T,S0 and precision fixed; write alpha=theta/c.
+At alpha=0, H=2G_Q and A=0. The first imbalance coefficient is
+
+  A_1(y,t)=-integral_t^T partial_y P_(Q_t-Q_s)(G_(Q_s)^2)(y) ds,
+  Q_t=S_t+sigma^2(T-t).
+
+Gaussian multiplication gives, with q=Q_t and v_s=q-Q_s/2,
+
+  A_1(y,t)= y/(2 sqrt(pi)) integral_t^T
+                  Q_s^(-1/2) G_(v_s)(y)/v_s ds.           (G1)
+
+Thus A_1 has the sign of y. The estimate below only uses
+0<Q_s<=q and Q_s>=sigma^2(T-s), valid at every precision.
+
+2. A sharp Gaussian-relative bound from the Riccati clock
+
+Set z=|y|/sqrt(q), u=sigma^2(T-s)/q, r=Q_s/q, and
+
+  K(r,z)=r^(-1/2)(1-r/2)^(-3/2)
+             exp[-z^2 r/(4(1-r/2))].
+
+Since u<=r<=1 and u_t=sigma^2(T-t)/q<=1, (G1) becomes
+
+  |A_1(y,t)|/G_q(y)
+     = z/(2 sqrt(pi) sigma^2) integral_0^(u_t) K(r(u),z)du. (G2)
+
+The sign of partial_r log K is the sign of
+
+  N(r)=-2+5r-2r^2-rz^2.
+
+If z>=1, N(r)<=-2(1-r)^2<=0. If 0<z<1, N increases
+strictly on [0,1], from a negative to a positive value. Thus K
+is either decreasing or decreases and then increases; it has
+no interior maximum on any interval [r0,1].
+
+Along a Riccati path, a_s=lambda S_s^2 is either everywhere
+at least sigma^2 or everywhere at most sigma^2: S never
+crosses its stationary value. Also r'(u)=a_s/sigma^2,
+r(0)=r0=S_T/q>0 and r(u_t)=1.
+
+If r'>=1, positivity gives
+
+  integral_0^(u_t) K(r(u),z)du
+       <= integral_(r0)^1 K(r,z)dr <= integral_0^1 K(r,z)dr.
+
+If r'<=1, split du=r'du+(1-r')du. Since u_t<=1,
+
+  integral_0^(u_t) K(r(u),z)du
+       <= integral_(r0)^1 K(r,z)dr
+          +r0 max{K(r0,z),K(1,z)}.                       (G2a)
+
+If K(r0,z)>K(1,z), the no-interior-maximum property implies
+K is decreasing on [0,r0], so r0 K(r0,z)<=integral_0^(r0) K.
+If K(r0,z)<=K(1,z), then K<=K(1,z) throughout [r0,1], and
+the right side of (G2a) is at most K(1,z). The substitution
+v=sqrt(u/(2-u)) evaluates the full integral exactly:
+
+  z/(2 sqrt(pi)) integral_0^1 K(u,z)du
+     =z sqrt(2/pi) integral_0^1 exp(-z^2 v^2/2)dv
+     =2Phi(z)-1 <=1.
+
+This full integral is at least K(1,z), after multiplying by
+z/(2 sqrt(pi)): the inequality is
+2Phi(z)-1>=sqrt(2/pi) z exp(-z^2/2), obtained by integrating
+the decreasing Gaussian density on [0,z]. Hence (G2a) is
+also bounded by the full integral. This argument includes
+the constant r=1 path at zero precision.
+
+At z=0 both sides of (G1) vanish. Therefore, at every precision,
+
+  |A_1(y,t)| <= [|2Phi(y/sqrt(Q_t))-1|/sigma^2]
+                         G_(Q_t)(y).                    (G3)
+
+This includes no signal. In the full-disclosure conditional game,
+Q_t=sigma^2(T-t) and the exact expression is
+A_1=g(y/sqrt(Q_t))G_Q/sigma^2, attaining the Gaussian-relative
+bound in (G3).
+Full-disclosure initial output additionally averages the initial
+prior; the conditional Q_0 must not be confused with S0+sigma^2T.
+
+3. A single-integral second-output comparison
+
+Let f(w)=B(w)/b(T), w=alpha/sigma^2 and
+k=sigma^2T/(S0+sigma^2T). Its first two Taylor coefficients obey
+
+  f_1=k,
+  0<=f_2<=(1/pi) integral_0^k
+                      asin((1-v)/(2-v))dv <=k/6.         (G4)
+
+Indeed, the first H variation vanishes, and the alpha^2 output
+coefficient is integral_0^T P_(Q_0-Q_t)(A_1 beta_y)(0)dt.
+Here beta_y=g_Q/2, so the integrand is nonnegative by (G1)
+and bounded above by g_Q^2 G_Q/(2sigma^2), by (G3).
+Gaussian multiplication and the two-normal sign formula give
+
+  P_(Q0-Q)(g_Q^2 G_Q)(0)
+    =(2/pi) G_(Q0)(0) asin((Q0-Q)/(2Q0-Q)).
+
+As Q_t>=sigma^2(T-t), this arcsine is bounded above by
+the same expression with Q_t replaced by sigma^2(T-t).
+Substituting v=sigma^2(T-t)/Q0 gives (G4). Full disclosure
+attains the single-integral upper bound, after initial-prior
+averaging. At finite precision S_t>0 makes the arcsine
+comparison strict; its integral is strictly below that bound.
+
+At k=1 the integral is
+1/3-(sqrt(3)-1)/pi<1/8. Continuity gives f_2<1/8 uniformly
+over all precisions when k is sufficiently close to one.
+
+This directly verifies the second-order full-disclosure ranking,
+without the double kernel or the stationary-profile calculation.
+It does not supply a precision-uniform small-positive-prize
+ranking: as lambda tends to infinity, the strict second-order
+gap tends to zero, so the higher-order remainder still needs
+relative control. The manuscript's high-precision tail argument
+cannot be deleted on the strength of (G4) alone.
+
+4. Why (G3) is not a nonlinear Gaussian-norm contraction
+
+It is tempting to infer a finite Gaussian-norm bound for
+T(f,g)=integral_t^T partial_y P_(Q_t-Q_s)(f_s g_s)ds
+from |f_s|,|g_s|<=G_(Q_s). That inference is false: differentiation
+of a positive Gaussian envelope does not preserve its ordering.
+
+At zero precision Q_s=q is constant. Take
+f(y)=G_q(y)sin(Ny), g(y)=G_q(y). Both have Gaussian-weighted
+supremum norm at most one, but
+
+  |T(f,g)(0)|/G_q(0)=(T-t)N G_q(0) -> infinity.
+
+Even the odd/even symmetry of A,H does not prevent this example.
+Thus (G3) is an exact first-coefficient result, not a bilinear
+operator bound on arbitrary Gaussian-weighted functions.
+
+5. A simpler finite real-variation research target
+
+Using the coarse f_2<=k/6 in (G4), it would suffice to establish,
+uniformly on 0<=w<=.252,
+
+  f is C^3 and f'''(w)<=45.                               (G5)
+
+Taylor's integral formula would then give
+
+  f(w)<=1+k w+(1/6)k w^2+(15/2)w^3.
+
+For 0<w<1/4 this is strictly below (1-4w)^(-1/4), whose
+first coefficients are 1,1,5/2,15/2 and whose remaining
+coefficients are positive. The scalar payoff comparison would
+follow as in ROOT_OUTPUT_ANALYTIC_CERTIFICATE.txt, Section 9.
+
+The third-variation bound (G5) is NOT proved by (G3) or (G4).
+The exact expected-source hierarchy in REAL_OUTPUT_VARIATION_AUDIT.txt
+remains the appropriate place to try to establish it. Do not
+turn (G5) into a manuscript assumption or claim global exclusion
+on the basis of finitely many prize derivatives at zero.

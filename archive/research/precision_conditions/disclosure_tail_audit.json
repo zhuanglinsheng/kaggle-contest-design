@@ -1,0 +1,121 @@
+{
+  "sigma": 0.73,
+  "rows": [
+    {
+      "kind": "full",
+      "theta": 0.637727695011289,
+      "T": 0.9334994710706206,
+      "precision": Infinity,
+      "refinement": 1,
+      "output": 0.6909165336925929,
+      "score": 1.2297631539853675,
+      "diagnostics": {}
+    },
+    {
+      "kind": "full",
+      "theta": 0.637727695011289,
+      "T": 0.9334994710706206,
+      "precision": Infinity,
+      "refinement": 2,
+      "output": 0.6909143556397719,
+      "score": 1.2297555656241397,
+      "diagnostics": {}
+    },
+    {
+      "kind": "full",
+      "theta": 0.637727695011289,
+      "T": 0.9334994710706206,
+      "precision": 3000,
+      "refinement": 1,
+      "output": 0.6905464857063901,
+      "score": 1.2284727160985243,
+      "diagnostics": {
+        "dx": 0.013094568900396708,
+        "requested_steps": 2400,
+        "steps": 4799,
+        "nodes": 1857,
+        "width": 12.151759939568144,
+        "min_effort": -1.5305667216174655e-13,
+        "max_effort": 2.9136364084259037,
+        "boundary_effort": 1.499105072339773e-11
+      }
+    },
+    {
+      "kind": "full",
+      "theta": 0.637727695011289,
+      "T": 0.9334994710706206,
+      "precision": 10000.0,
+      "refinement": 1,
+      "output": 0.6906053570670635,
+      "score": 1.228678173092247,
+      "diagnostics": {
+        "dx": 0.009691065275423056,
+        "requested_steps": 2400,
+        "steps": 4799,
+        "nodes": 2509,
+        "width": 12.152595855380513,
+        "min_effort": -1.0203778144116437e-13,
+        "max_effort": 3.9369059661165333,
+        "boundary_effort": 1.53736924038021e-11
+      }
+    },
+    {
+      "kind": "full",
+      "theta": 0.637727695011289,
+      "T": 0.9334994710706206,
+      "precision": 100000.0,
+      "refinement": 1,
+      "output": 0.6906998458496147,
+      "score": 1.2290078060312737,
+      "diagnostics": {
+        "dx": 0.005449686489487577,
+        "requested_steps": 2400,
+        "steps": 4799,
+        "nodes": 4459,
+        "width": 12.147351185067809,
+        "min_effort": -3.401259381372146e-13,
+        "max_effort": 7.000918818805308,
+        "boundary_effort": 1.6734196156350958e-11
+      }
+    },
+    {
+      "kind": "full",
+      "theta": 0.637727695011289,
+      "T": 0.9334994710706206,
+      "precision": 1000000.0,
+      "refinement": 1,
+      "output": 0.6907782927704792,
+      "score": 1.229281357144956,
+      "diagnostics": {
+        "dx": 0.0030645839223703854,
+        "requested_steps": 2400,
+        "steps": 4799,
+        "nodes": 7929,
+        "width": 12.148010668276207,
+        "min_effort": -1.9509259357119445e-13,
+        "max_effort": 12.449589786833826,
+        "boundary_effort": 2.2720412667565934e-11
+      }
+    },
+    {
+      "kind": "finite",
+      "theta": 0.6848244545715851,
+      "T": 0.9242784421178954,
+      "precision": 239.95885418686044,
+      "refinement": 1,
+      "output": 0.7021921529099185,
+      "score": 1.2294290175053304,
+      "diagnostics": {
+        "dx": 0.013926111428158932,
+        "requested_steps": 2400,
+        "steps": 4799,
+        "nodes": 1751,
+        "width": 12.185347499639064,
+        "min_effort": -1.0957336268719369e-13,
+        "max_effort": 1.6568910153625773,
+        "boundary_effort": 1.5796826454070425e-11
+      }
+    }
+  ],
+  "qualification": "Fixed-design refinement and tail samples; not a uniform all-precision bound."
+}

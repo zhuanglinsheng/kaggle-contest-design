@@ -1,0 +1,122 @@
+2026-10-07: Exact limits of a Cole--Hopf verification shortcut
+
+Status: the identities and the restricted no-go statements below are
+proved algebraically. They do not establish or refute Proposition 1(ii).
+No manuscript assumption or proof has been changed on their basis.
+
+1. Existing Nash equations and the actual equilibrium generator
+
+Fix a positive incentive alpha=theta/c. In reverse time tau=T-t,
+put U=(V_i/theta,V_j/theta), z=U_y, and a=lambda S^2. The equations are
+
+  U^i_tau=(a/2)U^i_yy+alpha(z_i^2/2+z_i z_j),
+  U^j_tau=(a/2)U^j_yy+alpha(z_j^2/2+z_i z_j).             (T1)
+
+The perceived-gap drift is alpha(z_i+z_j), not the drift of
+either component's differentiated linearized equation. Thus
+
+  M=(a/2)partial_yy+alpha(z_i+z_j)partial_y
+
+satisfies
+
+  (partial_tau-M)U^k=-alpha (z_k)^2/2.                     (T2)
+
+2. A constant-diffusion scalar identity
+
+If a>0 is constant and kappa=alpha/a, (T2) gives
+
+  (partial_tau-M)exp(-kappa U^k)=0.                        (T3)
+
+This is a scalar equation along the already selected equilibrium;
+its drift still contains both Nash policies. It does not linearize
+the entire Nash system into an independent heat equation.
+
+For full disclosure a=sigma^2 and the terminal normalized values
+are the two complementary winner indicators. Their exponentials
+therefore sum to the constant 1+exp(-kappa). Bounded scalar
+uniqueness gives
+
+  exp(-kappa U^i)+exp(-kappa U^j)=1+exp(-kappa).
+
+Writing R=U^i+U^j and d=U^i-U^j yields
+
+  R=1+(2/kappa)log[cosh(kappa d/2)/cosh(kappa/2)].          (T4)
+
+This verifies the existing full-disclosure value relation directly.
+With a smooth finite-precision terminal winning probability, the
+terminal sum is not constant, even if a happens to be constant.
+Hence the same conclusion (T4) cannot be inferred in that game.
+
+3. The precise extra term at variable precision-induced diffusion
+
+If a=a(t)>0 and kappa(t)=alpha/a(t), use forward calendar time.
+For E_k=exp(-kappa(t)U^k), the HJB and the chain rule give
+
+  (partial_t+M)E_k=-kappa'(t)U^k E_k.                      (T5)
+
+All gradient-square terms cancel, but this time-derivative term
+remains. Along the Riccati path S'=sigma^2-lambda S^2,
+
+  kappa'(t)=-2kappa(t) S'(t)/S(t).
+
+It is positive when S decreases and negative when S increases.
+It vanishes only on a stationary posterior path. A martingale
+argument omitting (T5) is therefore invalid for general S0.
+
+4. Classification of universal smooth point transforms
+
+This classification concerns transforms that cancel the quadratic
+gradient terms FOR EVERY z, not a special identity on an unknown
+particular equilibrium trajectory. Assume sufficient smoothness
+for the mixed derivatives below and fix alpha,a>0.
+
+First ask whether E=psi(U^i,U^j) can satisfy the heat equation
+without the equilibrium drift. Coefficient comparison in (T1)
+requires, with kappa=alpha/a,
+
+  psi_ii=kappa psi_i,
+  psi_jj=kappa psi_j,
+  psi_ij=kappa(psi_i+psi_j).                               (T6)
+
+Differentiate the first identity in j and the last in i:
+
+  psi_iij=kappa^2(psi_i+psi_j),
+  psi_iji=kappa^2(2psi_i+psi_j).
+
+Equality implies psi_i=0. Interchanging i and j gives psi_j=0.
+Thus only constant smooth point transforms produce an independent
+heat equation by this universal coefficient-cancellation method.
+
+If the scalar equation retains the actual equilibrium drift M,
+the required conditions instead become
+
+  psi_ii=-kappa psi_i, psi_jj=-kappa psi_j, psi_ij=0.
+
+Their general solution is
+
+  psi=C0+Ci exp(-kappa U^i)+Cj exp(-kappa U^j).             (T7)
+
+At variable a(t), allowing these coefficients to depend on time
+does not cancel (T5) as a universal identity: differentiation
+introduces the independent functions U^i exp(-kappa U^i) and
+U^j exp(-kappa U^j). If kappa' is nonzero, their coefficients
+force Ci=Cj=0. Time-dependent coefficient multiples alone
+therefore do not repair the varying-diffusion problem.
+
+At a=0 and alpha>0, direct comparison of the z_i^2,z_j^2
+coefficients likewise forces psi_i=psi_j=0 in either version.
+
+5. Consequence for the compression task
+
+The full-disclosure relation is directly verifiable by (T3)-(T4).
+That verification provides a candidate, not a comparison with
+every other prize, deadline and finite precision. Equations
+(T5)-(T7) rule out this particular universal point-transform
+shortcut to that global comparison. They do NOT rule out
+nonlocal transforms, averaged inequalities, or transforms valid
+only on a specially proved invariant manifold.
+
+The next admissible short-proof route must handle the averaged
+output (for example REAL_OUTPUT_VARIATION_AUDIT.txt), or directly
+control the payoff of competitive finite-feedback designs.
+Do not cite (T4) alone as proof of their strict exclusion.

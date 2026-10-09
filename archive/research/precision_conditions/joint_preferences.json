@@ -1,0 +1,135 @@
+{
+  "results": [
+    {
+      "A": 5.5,
+      "zero": {
+        "theta": 0,
+        "T": 0.7213178157052247,
+        "score": 0.10538502029943367
+      },
+      "finite": {
+        "theta": 1.5266873142217456,
+        "T": 2.5009047226893584,
+        "lambda_": 1.4405881015460058,
+        "score": -0.001558339260655739,
+        "success": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "at_upper_bound": false
+      },
+      "high": {
+        "theta": 0.0,
+        "T": 0.7212226432948581,
+        "lambda_": 100000.0,
+        "score": 0.1053850191379654,
+        "success": true,
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "at_upper_bound": false
+      }
+    },
+    {
+      "A": 5.8,
+      "zero": {
+        "theta": 0,
+        "T": 0.7736033096821895,
+        "score": 0.11646136360625281
+      },
+      "finite": {
+        "theta": 1.7800231827761734,
+        "T": 2.680275961341984,
+        "lambda_": 0.7355137783268245,
+        "score": 0.15310316913002353,
+        "success": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "at_upper_bound": false
+      },
+      "high": {
+        "theta": 1.2497430034555936,
+        "T": 2.4595884540556257,
+        "lambda_": 100000.0,
+        "score": 0.10629456329395381,
+        "success": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "at_upper_bound": false
+      }
+    },
+    {
+      "A": 6.2,
+      "zero": {
+        "theta": 0,
+        "T": 0.8438516925801329,
+        "score": 0.13237570744458313
+      },
+      "finite": {
+        "theta": 2.0116347135280233,
+        "T": 2.8573497788853497,
+        "lambda_": 0.4671598381742416,
+        "score": 0.3872053433899949,
+        "success": false,
+        "message": "ABNORMAL: ",
+        "at_upper_bound": false
+      },
+      "high": {
+        "theta": 1.3883879238676966,
+        "T": 2.6381388636140786,
+        "lambda_": 100000.0,
+        "score": 0.2825178175664007,
+        "success": true,
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "at_upper_bound": false
+      },
+      "powell": {
+        "theta": 2.0117832875105437,
+        "T": 2.857456859142041,
+        "lambda_": 0.46711395134674494,
+        "score": 0.3872053501885593,
+        "success": true,
+        "message": "Optimization terminated successfully."
+      }
+    },
+    {
+      "A": 6.5,
+      "zero": {
+        "theta": 0,
+        "T": 0.8967765629466536,
+        "score": 0.14519051394208057
+      },
+      "finite": {
+        "theta": 2.146413450599417,
+        "T": 2.9567308199067126,
+        "lambda_": 0.36748833021763655,
+        "score": 0.5781522817684044,
+        "success": false,
+        "message": "ABNORMAL: ",
+        "at_upper_bound": false
+      },
+      "high": {
+        "theta": 1.4658911443851401,
+        "T": 2.7396867896366968,
+        "lambda_": 100000.0,
+        "score": 0.4265078715431443,
+        "success": true,
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "at_upper_bound": false
+      },
+      "powell": {
+        "theta": 2.1464978565997206,
+        "T": 2.9568014382298853,
+        "lambda_": 0.3672635835088282,
+        "score": 0.578152287222311,
+        "success": true,
+        "message": "Optimization terminated successfully."
+      }
+    }
+  ],
+  "failures": [],
+  "evaluations": 961,
+  "qualification": "Multiple-start local optimization on theta in [0,2.5], T in [.1,4]; not certified global optimization.",
+  "fixed": {
+    "mu": 2,
+    "S0": 1,
+    "sigma": 1,
+    "c": 1,
+    "delay": 0.35
+  },
+  "polished_qualification": "Powell results are additional local searches; original line-search diagnostics retained."
+}

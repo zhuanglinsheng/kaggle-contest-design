@@ -1,0 +1,133 @@
+{
+  "endpoints": [
+    {
+      "s0": 0.1,
+      "R_infinity": 0.041453510475733535,
+      "C_infinity": -0.016300747151014355,
+      "C_zero": 0.008338678583812447,
+      "alpha_lower": 1.682405707091652,
+      "alpha_upper": 0.7779005524861877,
+      "R_derivative_zero": 0.0026683771468199832,
+      "C_derivative_zero": -0.0034302291447046657,
+      "C_infinity_quadrature": -0.016300747151014323,
+      "C_zero_quadrature": 0.00833867858381238,
+      "C_derivative_check": -0.0034302038143946274
+    },
+    {
+      "s0": 0.5,
+      "R_infinity": 0.04187318784908243,
+      "C_infinity": -0.020253039212541568,
+      "C_zero": 0.0038401730852575967,
+      "alpha_lower": 1.7379661678782206,
+      "alpha_upper": 1.1900826446280992,
+      "R_derivative_zero": 0.004608207702309116,
+      "C_derivative_zero": -0.003872174527634743,
+      "C_infinity_quadrature": -0.02025303921254159,
+      "C_zero_quadrature": 0.0038401730852575676,
+      "C_derivative_check": -0.0038721232438303217
+    },
+    {
+      "s0": 1.0,
+      "R_infinity": 0.039438219505852454,
+      "C_infinity": -0.020289421910155023,
+      "C_zero": 0.0018706991888038185,
+      "alpha_lower": 1.7796933207059682,
+      "alpha_upper": 1.6623376623376622,
+      "R_derivative_zero": 0.005986237404172218,
+      "C_derivative_zero": -0.0036010959384473505,
+      "C_infinity_quadrature": -0.020289421910155047,
+      "C_zero_quadrature": 0.0018706991888038035,
+      "C_derivative_check": -0.003601018378558869
+    },
+    {
+      "s0": 2.0,
+      "R_infinity": 0.03449023397648345,
+      "C_infinity": -0.018383830313724144,
+      "C_zero": 0.0006788531073789281,
+      "alpha_lower": 1.809306340276392,
+      "alpha_upper": 2.571428571428571,
+      "R_derivative_zero": 0.006924301695265067,
+      "C_derivative_zero": -0.0026927839926030816,
+      "C_infinity_quadrature": -0.01838383031372417,
+      "C_zero_quadrature": 0.000678853107378923,
+      "C_derivative_check": -0.0026926784202742702
+    },
+    {
+      "s0": 4.0,
+      "R_infinity": 0.027997998869604496,
+      "C_infinity": -0.015190064203169385,
+      "C_zero": 0.0001893014481167816,
+      "alpha_lower": 1.8204911375693211,
+      "alpha_upper": 4.361445783132529,
+      "R_derivative_zero": 0.006852712421827493,
+      "C_derivative_zero": -0.001571202019369287,
+      "C_infinity_quadrature": -0.015190064203169396,
+      "C_zero_quadrature": 0.00018930144811678005,
+      "C_derivative_check": -0.0015710829901361548
+    },
+    {
+      "s0": 10.0,
+      "R_infinity": 0.01953209717493596,
+      "C_infinity": -0.010703289073874198,
+      "C_zero": 2.6369217000914607e-05,
+      "alpha_lower": 1.820383897178418,
+      "alpha_upper": 9.70289550986152,
+      "R_derivative_zero": 0.00554280941359225,
+      "C_derivative_zero": -0.0005712531283016319,
+      "C_infinity_quadrature": -0.010703289073874205,
+      "C_zero_quadrature": 2.63692170009144e-05,
+      "C_derivative_check": -0.0005711462498257045
+    }
+  ],
+  "effort_checks": [
+    {
+      "ell": 1.0,
+      "w": 0.15,
+      "half_effort": 0.034548712296261136,
+      "cubic_prediction": 0.03454885722421511,
+      "rescaled_coefficient": -0.00020819285108643597,
+      "C": -0.00016525123509442087
+    },
+    {
+      "ell": 1.0,
+      "w": 0.25,
+      "half_effort": 0.05757952966030271,
+      "cubic_prediction": 0.057579776194674234,
+      "rescaled_coefficient": -0.00018102943487185996,
+      "C": -0.00016525123509442087
+    },
+    {
+      "ell": 1.0,
+      "w": 0.4,
+      "half_effort": 0.09212074925823373,
+      "cubic_prediction": 0.0921211971133101,
+      "rescaled_coefficient": -0.0001722489706627687,
+      "C": -0.00016525123509442087
+    },
+    {
+      "ell": 30.0,
+      "w": 0.15,
+      "half_effort": 0.03453096062510557,
+      "cubic_prediction": 0.03453105018336905,
+      "rescaled_coefficient": -0.0054679472675501495,
+      "C": -0.005441411485778301
+    },
+    {
+      "ell": 30.0,
+      "w": 0.25,
+      "half_effort": 0.05749707112184565,
+      "cubic_prediction": 0.0574973361907573,
+      "rescaled_coefficient": -0.005458375896123968,
+      "C": -0.005441411485778301
+    },
+    {
+      "ell": 30.0,
+      "w": 0.4,
+      "half_effort": 0.09178184152665485,
+      "cubic_prediction": 0.09178352285726633,
+      "rescaled_coefficient": -0.005467682276582771,
+      "C": -0.005441411485778301
+    }
+  ],
+  "qualification": "Exact coefficient calculations; strong-prize window is for the cubic approximation only."
+}

@@ -8,6 +8,8 @@ used by the current PaperJK7 pipeline.
 - `notebooks/`: notebook implementations from earlier empirical and synthetic workflows;
 - `legacy_code/`: scripts tied to superseded output layouts or prize-unit experiments;
 - `experiments/`: exploratory design calculations.
+- `research/`: self-contained proof and numerical-audit workspaces retained for
+  research provenance;
 - `results/`: outputs produced by superseded estimators and sensitivity runs.
 
 Archived scripts may depend on their original working directories and are not

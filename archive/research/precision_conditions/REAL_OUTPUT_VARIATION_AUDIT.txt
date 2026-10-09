@@ -1,0 +1,134 @@
+2026-10-07: Real-prize variations of the initial organizer output
+
+Status: exact identities for regular parameter-dependent equilibria,
+not a proof of the uniform third-variation bound. No new assumption
+or unproved output estimate has been inserted into the manuscript.
+
+1. Normalization and the two different linear operators
+
+Fix T, sigma, S0 and precision. Rescale scores by sigma sqrt(T)
+and time by T, so sigma=T=1 and the incentive parameter is
+w=theta/(c sigma^2). Hold the normalized prior and precision fixed
+when differentiating w. In reverse time tau, let z=U_y, where
+U=(V_i/theta,V_j/theta). The normalized equations are
+
+  U_tau=(a/2)U_yy+w F(U_y),
+  F_i(z)=z_i^2/2+z_i z_j,
+  F_j(z)=z_j^2/2+z_i z_j.
+
+The terminal normalized values are independent of w.
+Write p=z_i, n=-z_j, A=p-n and H=p+n.
+
+The Jacobian of F is
+
+  DF(z)=[[A,p],[-n,A]].                                    (S1)
+
+For p,n>0 its eigenvalues are A +/- i sqrt(p n). It is NOT
+a cooperative first-order coupling. Therefore scalar comparison
+or a Markov-generator interpretation cannot be applied directly
+to the coupled Nash parameter variations.
+
+This issue is separate from the scalar organizer equation below.
+
+2. Exact finite hierarchy for Nash prize variations
+
+Define the symmetric bilinear map
+
+  C_i(x,y)=x_i y_i/2+(x_i y_j+x_j y_i)/2,
+  C_j(x,y)=x_j y_j/2+(x_i y_j+x_j y_i)/2,
+
+so F(z)=C(z,z). Let U_j=partial_w^j U and z_j=(U_j)_y,
+with U_0=U, z_0=z. (Indices here denote derivatives, not players.)
+The common variational operator is
+
+  L_N U_j=(U_j)_tau-(a/2)(U_j)_yy-w DF(z)(U_j)_y.
+
+For j=1,2,3, direct differentiation gives
+
+  L_N U_1=C(z,z),
+  L_N U_2=4C(z,z_1)+2w C(z_1,z_1),
+  L_N U_3=6C(z,z_2)+6C(z_1,z_1)+6w C(z_1,z_2).            (S2)
+
+All U_j for j>=1 have zero terminal data. No fourth or higher
+parameter derivative occurs. These identities are conditional only
+on the indicated differentiability, not on a complex-prize extension.
+
+3. Exact scalar output hierarchy
+
+Let K(y,t;w) be the conditional remaining best output, with the
+current average score set to zero. Its terminal value is
+beta(y,S_T)=E|N(y,S_T)|/2, independent of w, and
+
+  K_t+(a_t/2)K_yy+w A K_y+w H/2=0.                         (S3)
+
+This equation follows by separating the average-score drift
+w H/2 from the perceived-gap drift w A; the terminal posterior
+accounts for the remaining latent-gap uncertainty. In particular,
+K(0,0;w) is the normalized initial output, not a contestant value.
+
+Set K_j=partial_w^j K, A_j=partial_w^j A and H_j=partial_w^j H.
+Use the forward-time generator L_K=(a_t/2)partial_yy+w A partial_y.
+Every K_j, j>=1, has zero terminal data and solves
+
+  (partial_t+L_K)K_j+R_j=0.
+
+The sources needed through order three are
+
+  R_1=A K_y+H/2+w(A_1 K_y+H_1/2),
+
+  R_2=2A K_1,y+2A_1 K_y+H_1
+      +w(2A_1 K_1,y+A_2 K_y+H_2/2),
+
+  R_3=3A K_2,y+6A_1 K_1,y+3A_2 K_y+3H_2/2
+      +w(3A_1 K_2,y+3A_2 K_1,y+A_3 K_y+H_3/2).            (S4)
+
+For fixed positive finite precision, assuming sufficient regularity
+and integrability, Feynman--Kac gives the exact root identity
+
+  f'''(w)=E_w integral_0^1 R_3(Y_t,t;w) dt / b,
+  b=sqrt((S0+1)/(2 pi)),                                 (S5)
+
+where f=K(0,0;w)/b and dY=w A(Y,t;w)dt+sqrt(a_t)dW_t.
+At zero precision, the same identity is deterministic on a
+regular branch. Endpoint/uniform claims require separate control.
+
+Equation (S5) already includes the change in the equilibrium
+state distribution: the drift-derivative terms in (S4) account
+for it. Differentiating only the integrand of an existing
+expectation while holding its law fixed would be incorrect.
+
+4. What is sufficient and what is still missing
+
+Section 9 of ROOT_OUTPUT_ANALYTIC_CERTIFICATE.txt shows that
+the one-sided estimate f'''<=42 on 0<=w<=.252 would suffice.
+By (S5), it is enough to prove
+
+  E_w integral_0^1 R_3(Y_t,t;w)dt <=42 b                  (S6)
+
+uniformly in the relevant reference deadlines and precisions.
+One does NOT need uniform absolute suprema of every term in (S4),
+or parameter derivatives above order three. Near full disclosure,
+some pointwise source terms may become singular near the deadline;
+their expected time integrals are the quantities that matter.
+
+Neither (S2) nor (S5) establishes (S6). The remaining task is a
+one-sided, averaged bound involving the first three Nash variations,
+not scalar maximum-principle control of the Nash system.
+
+5. Explicit check against a naive elliptic estimate
+
+Freeze p=n=g>0 and a>0 in (S1). The homogeneous variational system
+has Fourier modes with growth exponents
+
+  -a xi^2/2 +/- w g xi.
+
+Their largest exponent is w^2 g^2/(2a), which diverges as a decreases
+to zero. Thus fixed-precision elliptic stability does NOT by itself
+supply the required precision-uniform bound. This is a frozen-
+coefficient operator calculation, not a counterexample to the
+actual contest equilibrium or its Gaussian terminal data.
+
+Gaussian terminal regularity can offset high-frequency growth;
+a valid short proof must preserve that regularity or exploit the
+expectation in (S5), instead of quoting an elliptic bound whose
+constant deteriorates when public diffusion vanishes.

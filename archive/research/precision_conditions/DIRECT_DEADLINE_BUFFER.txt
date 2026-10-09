@@ -1,0 +1,47 @@
+Direct deadline exclusion (2026-10-07)
+=====================================
+
+This supersedes the integrated time-cap check and the special Gaussian
+jet radius-.8 cap in the active manuscript proof. Neither an HJB grid
+nor sixteen time rectangles are needed.
+
+Let delta be the first time a_t=.72 sigma^2 and suppose ell>21,
+lambda<.72 sigma^2. At a competitive design, x=T/T0>1/8 and
+w+x^2/4<.252. If T<=1.9delta, the Riccati formula gives
+ sqrt(ell)(x+1/L)<1.9atanh(sqrt(.72))<2.394,
+ x<.523, Q0/ST<2.45,
+ e=alpha T/ST<2.45(.252-1/256)<.61.
+For the variance ratio use
+ ST/Sstat=tanh(sqrt(ell)x+atanh(sqrt(ell)/L))
+ >=tanh(sqrt(ell)(x+1/L)); then z coth z<2.45 for z<=2.394.
+
+After scaling ST=1, the Hermite coefficient triangle bound gives the
+pointwise Gaussian jet W(0,y,r)<=.4 exp(r^2). Its radial characteristic
+comparison admits M(e)=.4/(1-e^2) when
+ .4 exp[(7eM(e)/4)^2]<=M(e).
+This is equivalent to
+ F(s)=-log(1-s)-.49s/(1-s)^2>=0, s=e^2<=.61^2.
+The numerator of F' is .51-2.49s+s^2, strictly decreasing on this
+interval. Thus F has at most one interior maximum; F(0)=0 and
+F(.61^2)>0 imply positivity throughout. The latter inequality is
+certified by the first nine positive terms of the logarithm series.
+
+The time average has the simple bound
+ integral_0^1 M(ev)dv <=.4[1+e^2/(3(1-e^2))]<.48.
+Indeed, after its constant term, the series for atanh(e)/e has all
+denominators at least three. The best-output drift identity then gives
+ B/b <=sqrt(.001+x)[1+2.51sqrt(2.45)(.252-x^2/4)*.48].
+This bound increases on [1/8,.523]. The endpoint is below .974819,
+contradicting the competitive requirement B/b>.99. Consequently
+ T>1.9delta and f=delta/T<10/19.
+
+Moreover S_delta/(sigma^2delta)>=sqrt(.72)/atanh(sqrt(.72))>2/3.
+It follows that Q_delta>sigma^2 T(1-f/3). Therefore
+ alpha delta/Q_delta < w f/(1-f/3)<.64w,
+ Q0/Q_delta <1.008/(1-f/3)<49/40,
+where S0/(sigma^2T)=a/x<.008. These inequalities supply the new
+unified initial bridge. Exact scalar checks are contained in
+verify_direct_deadline_buffer.py.
+
+Scope: this is one shorter connection in the global proof. It does
+not itself replace the remaining precision split or close the goal.
