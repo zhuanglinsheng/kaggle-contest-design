@@ -1,0 +1,22 @@
+label,evidence,producer,scope
+kaggledata-diagram-simplified,paper/kaggledata_diagram_simplified.pdf,paper/PaperJK7.tex,Conceptual diagram; paper-local original
+fig-S-evol,paper/figure_S_evolve.pdf,paper/PaperJK7.tex,Retained filtering illustration; paper-local original
+fig-joint-design-regions,results/theory/numerical_joint_plane_moderate_dense/three_class_comparison/numerical_regions_bw.pdf,pipeline/theory/joint_design_moderate_plane.py,Nonlinear theoretical joint-design numerical illustration
+fig-synthetic_90,results/synthetic/optimal_hourly/manifest.json,pipeline/synthetic/optimal_generate.py,Nonlinear-policy synthetic DGP; unchanged Chapter 4
+fig-effort-approximation,results/synthetic/effort_comparison/controlled_incentives/summary.json,pipeline/synthetic/effort_comparison.py,"Player i only; six configurations vary prize, feedback precision, or opponent cost; time-state approximation errors and grid refinement"
+tbl-contest90,results/synthetic/initialization_comparison/comparison.json,pipeline/synthetic/model_comparison.py,Retained initialization comparison
+tbl-pool-synthetic-data,results/synthetic/richer_steady/pool10/summary.json,pipeline/synthetic/richer_recovery.py,Pooled synthetic recovery; pool10 and pool20 directories
+tbl-longterm-synthetic-data,results/synthetic/richer_steady/days180/summary.json,pipeline/synthetic/richer_recovery.py,Longer-horizon recovery; days180 and days360 directories
+kaggledata-diagram,paper/kaggledata_diagram.pdf,paper/PaperJK7.tex,Data workflow diagram; paper-local original
+tab-leaderboard-agreement,results/validation/main/chapter5_rank_agreement.csv,pipeline/validation/rank_agreement.py,Data-only agreement; retained baseline data diagnostic
+fig-validate-lambda,results/reestimation/lambda100_sd225/paper_assets/validate_lamb_revised_100k.pdf,pipeline/empirical/unified_prior_outputs.py,Current prior; posterior-median lambda
+tab-signal-disagreement-validation,results/reestimation/lambda100_sd225/validation/chapter5_regressions.csv,pipeline/empirical/unified_prior_outputs.py,Current validation regressions; lambda
+fig-validation-sigma,results/reestimation/lambda100_sd225/paper_assets/validate_sigma_revised_100k.pdf,pipeline/empirical/unified_prior_outputs.py,Current prior; posterior-median sigma
+tab-private-volatility-diagnostics,results/reestimation/lambda100_sd225/validation/chapter5_regressions.csv,pipeline/empirical/unified_prior_outputs.py,Current validation regressions; sigma
+tab-counterfactual-precision,results/reestimation/lambda100_sd225/fixed_initial_design/summary.json,pipeline/empirical/fixed_initial_design.py,Fixed initial distribution; asymmetric first-order output; no-feedback limits explicitly distinguished
+fig-robust-pair-validation,results/reestimation/lambda100_sd225/auxiliary/reports/regressions.csv,pipeline/empirical/unified_prior_aux_summary.py,Current alternative pair; two figures
+tab-fixed-precision,results/reestimation/lambda100_sd225/fixed_initial_design/summary.json,pipeline/empirical/fixed_initial_design.py,Fixed initial distribution; asymmetric first-order output; no-feedback limits explicitly distinguished
+tab-appendix-full-results,results/reestimation/lambda100_sd225/estimation/posterior_summary_final.csv,pipeline/empirical/unified_prior_manuscript.py,146 full/early fits; also paper/appendix_100k_rows.tex
+tab-nonlinear-recovery,results/reestimation/lambda100_sd225/validation/simulation_recovery_reference.csv,pipeline/empirical/unified_prior_interval_report.py,40 fixed-configuration simulated datasets; original credible intervals
+tab-robustness-benchmarks,results/reestimation/lambda100_sd225/auxiliary/reports/regressions.csv,pipeline/empirical/unified_prior_aux_summary.py,Current pair/L1/L2 benchmark regressions
+tab-score-scale-robustness,results/reestimation/lambda100_sd225/auxiliary/reports/report.json,pipeline/empirical/unified_prior_aux_summary.py,Parameter rank correlations only; historical precision recommendations excluded

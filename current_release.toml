@@ -1,0 +1,18 @@
+# The publication entry point. Paths are relative to the repository root.
+release_id = "paperjk7-review-20261016"
+main_tex = "paper/PaperJK7.tex"
+empirical_root = "results/reestimation/lambda100_sd225"
+manifest = "results/releases/paperjk7-review-20261016/manifest.json"
+chain_index = "results/releases/paperjk7-review-20261016/accepted_fits.json"
+evidence_index = "docs/PAPER_EVIDENCE.csv"
+prize_unit_usd = 100000
+point_summary = "posterior median"
+
+[assets]
+"paper/figure3.png" = "results/synthetic/optimal_hourly/nonsteady/figure3.png"
+"paper/effort_policy_comparison.pdf" = "results/synthetic/effort_comparison/controlled_incentives/effort_policy_comparison.pdf"
+"paper/numerical_regions_bw.pdf" = "results/theory/numerical_joint_plane_moderate_dense/three_class_comparison/numerical_regions_bw.pdf"
+"paper/validate_lamb_revised_100k.pdf" = "results/reestimation/lambda100_sd225/paper_assets/validate_lamb_revised_100k.pdf"
+"paper/validate_sigma_revised_100k.pdf" = "results/reestimation/lambda100_sd225/paper_assets/validate_sigma_revised_100k.pdf"
+"paper/validate_lambda_pair.pdf" = "results/reestimation/lambda100_sd225/auxiliary/reports/validate_lambda_pair.pdf"
+"paper/validate_sigma_pair.pdf" = "results/reestimation/lambda100_sd225/auxiliary/reports/validate_sigma_pair.pdf"

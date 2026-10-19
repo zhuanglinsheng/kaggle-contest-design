@@ -1,23 +1,29 @@
 # Results map
 
-The PaperJK7 release uses the following authoritative outputs:
+The active version is selected by `../current_release.toml`. Its file hashes
+and portable fit index are under `releases/paperjk7-review-20261016/`.
 
-| Path | Status |
+| Path | Role |
 | --- | --- |
-| `estimation/main/` | Accepted 73-contest full/early summary and portable chain provenance |
-| `counterfactual/main/` | Current counterfactual and precision-policy outputs |
-| `validation/main/` | Current Chapter 5 diagnostics and sensitivity checks |
-| `robustness/chapter6/reports/pair_L1_L2/` | Current alternative-pair and score-scale robustness results |
-| `synthetic/optimal_hourly/` | Current nonlinear-policy synthetic design |
-| `theory/numerical_joint_plane_moderate_dense/three_class_comparison/` | Current joint-design numerical classification |
-| `release_manifest.json` | Machine-checkable hashes for the compact release |
+| `reestimation/lambda100_sd225/estimation/` | Current 146 full/early posterior summaries |
+| `reestimation/lambda100_sd225/auxiliary/` | Current 251 robustness and time-imputation fits |
+| `reestimation/lambda100_sd225/validation/` | Empirical diagnostics and nonlinear-generated recovery results |
+| `reestimation/lambda100_sd225/counterfactual/` | Precision-only benchmark, with observed prize and duration |
+| `reestimation/lambda100_sd225/fixed_initial_design/` | Current fixed-initial-distribution, asymmetric first-order design tables; no-feedback limits distinguished |
+| `reestimation/lambda100_sd225/design_sensitivity/` | Historical steady-state joint-design scenarios, superseded for the current manuscript |
+| `synthetic/optimal_hourly/`, `synthetic/initialization_comparison/`, `synthetic/richer_steady/` | Retained Chapter 4 evidence |
+| `theory/numerical_joint_plane_moderate_dense/three_class_comparison/` | Retained theoretical regime illustration |
+| `validation/sigma_lambda_trials/` | Recovery development and source simulations; includes active dependencies |
+| `validation/main/chapter5_rank_agreement.*` | Retained data-only leaderboard agreement |
+| `estimation/main/`, `counterfactual/main/`, `robustness/chapter6/` | Previous empirical baseline and retained dependencies |
+| `release_manifest.json` | Historical publication lock; unchanged by current release commands |
+| `manuscript_reviews/` | Dated manuscript checks and snapshots; records describe their own revision |
 
-Other named directories under `estimation/` are resumable shards,
-refinements, or sensitivity fits. Some are still referenced by the accepted
-manifest and therefore must not be moved merely because their names describe
-earlier batches. Outputs explicitly marked `SUPERSEDED.md`, and material under
-`archive/results/`, are not publication inputs.
+A directory's age or name does not establish whether it can be deleted. Check
+`../docs/PAPER_EVIDENCE.csv` and the accepted-fit index first. Original accepted
+run records remain immutable, including absolute paths recorded at run time;
+the new fit index provides relative paths without rewriting those records.
 
-Raw CmdStan chains are large intermediate artifacts. The compact summary and
-accepted-chain manifests identify the exact accepted run and fitted-input hash
-for each contest. See `docs/REPRODUCIBILITY.md` for the release procedure.
+Compact publication metadata is eligible for Git. Large chains, posterior
+arrays, logs and executables remain local or in a separate artifact bundle.
+See `../docs/REPRODUCIBILITY.md` for verification scope and reproduction limits.
