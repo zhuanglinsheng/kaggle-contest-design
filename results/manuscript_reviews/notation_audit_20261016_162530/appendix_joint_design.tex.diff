@@ -1,0 +1,14 @@
+--- appendix_joint_design.tex.before
++++ appendix_joint_design.tex.after
+@@ -32,9 +32,9 @@
+ \end{minipage}
+ \end{table}
+ 
+-\textcolor{blue}{\textit{Quality-constrained joint design.} Write $B_{0\ell}(T)=N_s^{-1}\sum_s\beta(\mu_{0,\ell s},S_{0,\ell s}^{base}+\sigma_{\ell s}^2T)$. At each candidate duration, select the precision maximizing $\overline A_\ell(T,\lambda)$, including endpoint limits, and calculate}
++\textcolor{blue}{\textit{Quality-constrained joint design.} Write $\mathcal B_{0\ell}(T)=N_s^{-1}\sum_s\beta(\mu_{0,\ell s},S_{0,\ell s}^{base}+\sigma_{\ell s}^2T)$. At each candidate duration, select the precision maximizing $\overline A_\ell(T,\lambda)$, including endpoint limits, and calculate}
+ \[
+-\theta_\ell^{req}(T)=\max\left\{0,\frac{\mathcal B_\ell^{obs}-B_{0\ell}(T)}{\overline A_\ell(T,\lambda_\ell^*(T))}\right\}.
++\theta_\ell^{req}(T)=\max\left\{0,\frac{\mathcal B_\ell^{obs}-\mathcal B_{0\ell}(T)}{\overline A_\ell(T,\lambda_\ell^*(T))}\right\}.
+ \]
+ \textcolor{blue}{A positive prize scales the first-order contribution, so its optimal precision at a fixed duration is independent of the prize within this approximation. At zero prize precision is irrelevant. The duration grid remains $T/T_\ell^{obs}\in\{0.1,0.25,0.5,0.75,1,1.25,1.5,2\}$. Compare $\theta_\ell^{req}(T)+\delta\theta_\ell^{obs}(T/T_\ell^{obs})^2$ across this grid and with the observed regime. Improvements smaller than $10^{-10}\theta_\ell^{obs}$ are treated as retention. Full disclosure is evaluated with the same initial distributions and quality target, reoptimizing prize and duration on the same grid. The additional reduction in Table~\ref{tab-counterfactual-precision} uses positive-prize interior or no-feedback limiting choices, relative to this reoptimized full-disclosure cost.}
+ 

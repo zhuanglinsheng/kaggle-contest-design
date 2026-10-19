@@ -1,0 +1,2453 @@
+{
+  "fits": 146,
+  "contests": 73,
+  "prior": {
+    "log_lambda_mean": 4.605170185988092,
+    "log_lambda_sd": 2.25,
+    "other_priors": "unchanged",
+    "selection": "Previous targeted nonlinear-generated simulation research; not an independent 73-contest truth test."
+  },
+  "point_convention": "Posterior medians are primary, matching the prior-selection recovery experiments. Raw posterior means, their MCSEs, and corresponding regressions are separately labeled sensitivity results.",
+  "lambda_mean_method": "Raw NUTS means with explicit Monte Carlo errors; earlier conditional quadrature experiments preserved, but some long-tailed means remain unstable and are not primary point estimates.",
+  "sampler": "Four-chain NUTS, with same-target fixed-mixture Metropolis-Hastings for selected multimodal posteriors",
+  "sampler_counts": {
+    "nuts": 146
+  },
+  "maximum_rank_rhat": 1.008906821144796,
+  "minimum_bulk_ess": 487.1358153191048,
+  "minimum_tail_ess": 1005.1936265670618,
+  "maximum_lambda_relative_mean_mcse": 0.3838260741758226,
+  "lambda_mean_relative_mcse_over_three_percent": 35,
+  "maximum_log_lambda_median_mcse": 0.12367944095782318,
+  "divergences": 0,
+  "saturated_transitions": 0,
+  "minimum_energy_bfmi": 0.8323649230342934,
+  "policy": {
+    "n_contests": 73,
+    "full_disclosure_policies": 70,
+    "finite_policies": 3,
+    "negative_expected_gains": 1,
+    "groups": [
+      {
+        "group": "All contests",
+        "n_contests": 73,
+        "share_pct": 100.0,
+        "gain_q25_pct": 0.014372794457839788,
+        "gain_median_pct": 0.057992589693278696,
+        "gain_q75_pct": 0.17079409531239875
+      },
+      {
+        "group": "Increase precision",
+        "n_contests": 68,
+        "share_pct": 93.15068493150685,
+        "gain_q25_pct": 0.016358863688564762,
+        "gain_median_pct": 0.056569942224171665,
+        "gain_q75_pct": 0.16215713848165003
+      },
+      {
+        "group": "Decrease precision",
+        "n_contests": 2,
+        "share_pct": 2.73972602739726,
+        "gain_q25_pct": 0.584299506740249,
+        "gain_median_pct": 0.8985037742073709,
+        "gain_q75_pct": 1.2127080416744929
+      },
+      {
+        "group": "Direction uncertain",
+        "n_contests": 3,
+        "share_pct": 4.109589041095891,
+        "gain_q25_pct": 0.006262604630369317,
+        "gain_median_pct": 0.0125035387270378,
+        "gain_q75_pct": 1.3300289532415022
+      }
+    ],
+    "interpretation": "Single policy maximizing posterior mean calibrated output; current output integrates joint posterior including current precision."
+  },
+  "changed_policy_contests": [
+    2454,
+    3800,
+    8076
+  ],
+  "approximation_indices": {
+    "median_player_posterior_median_w": 0.9090350690364533,
+    "players_with_posterior_median_w_below_one": 76,
+    "contests_with_posterior_median_max_w_below_one": 34
+  },
+  "parameters": {
+    "c_i": {
+      "new_mean_cross_contest_median": 0.2237753621327901,
+      "new_median_cross_contest_median": 0.2050912772746486,
+      "median_absolute_relative_median_change": 0.0459164982471087,
+      "median_absolute_relative_mean_change": 0.0460861282783908
+    },
+    "c_j": {
+      "new_mean_cross_contest_median": 0.2321057145964787,
+      "new_median_cross_contest_median": 0.2156119783989425,
+      "median_absolute_relative_median_change": 0.0445289932643526,
+      "median_absolute_relative_mean_change": 0.0480307405103586
+    },
+    "sigma": {
+      "new_mean_cross_contest_median": 0.4837362615939781,
+      "new_median_cross_contest_median": 0.4811221589925175,
+      "median_absolute_relative_median_change": 0.0973285150151608,
+      "median_absolute_relative_mean_change": 0.0992269656728226
+    },
+    "lambda": {
+      "new_mean_cross_contest_median": 371.3829342532854,
+      "new_median_cross_contest_median": 296.06927229876044,
+      "median_absolute_relative_median_change": 1.1781158527063544,
+      "median_absolute_relative_mean_change": 1.5260216924951622
+    },
+    "mu_0": {
+      "new_mean_cross_contest_median": -0.0257173836492573,
+      "new_median_cross_contest_median": -0.0259900952213474,
+      "median_absolute_relative_median_change": null,
+      "median_absolute_relative_mean_change": null
+    },
+    "r": {
+      "new_mean_cross_contest_median": 46.98909243652431,
+      "new_median_cross_contest_median": 43.884237016879766,
+      "median_absolute_relative_median_change": 0.0317215897601954,
+      "median_absolute_relative_mean_change": 0.0342843955390996
+    }
+  },
+  "interpretation": "Prior sensitivity and computation are checked here. Real-data truth is unobserved; parameter change is not approximation error or improved truth recovery. No automatic guarantee for a nonlinear equilibrium counterfactual.",
+  "chain_checksums": [
+    {
+      "path": "estimation/early/contest_2445/attempt3/chain_1.csv",
+      "sha256": "be8051fc131f8ee6f8af2261b4fac70a2c09824ea0e7d04bbbbabd2a5fb425dc"
+    },
+    {
+      "path": "estimation/early/contest_2445/attempt3/chain_2.csv",
+      "sha256": "866563b06d8fc7f93bfdeb8e4ee598b8c715b5fc0b683dff6b57eab0399c1b10"
+    },
+    {
+      "path": "estimation/early/contest_2445/attempt3/chain_3.csv",
+      "sha256": "1cfdc70008324e7fb60bed3ad00825757f329d64475e940120083507c39f2fc6"
+    },
+    {
+      "path": "estimation/early/contest_2445/attempt3/chain_4.csv",
+      "sha256": "db069582eed70e46ca96c2d41ef48577302c90598b1e6ab255bd28429c0543ea"
+    },
+    {
+      "path": "estimation/full/contest_2445/attempt1/chain_1.csv",
+      "sha256": "cdbfa7fb059054045102ab01e8e682db283c25fede8f14d6665333c0185ec90d"
+    },
+    {
+      "path": "estimation/full/contest_2445/attempt1/chain_2.csv",
+      "sha256": "40a34b20727b7448989a69fb56718b632db75c39f2a3c39e4f5528c60f83316a"
+    },
+    {
+      "path": "estimation/full/contest_2445/attempt1/chain_3.csv",
+      "sha256": "d4ff88f8869cb30473bee041525d9f1ab177bd06c2b58017cc389454eb6c771e"
+    },
+    {
+      "path": "estimation/full/contest_2445/attempt1/chain_4.csv",
+      "sha256": "1014380c314747bf2bc1d39db239cbf004bc72d481f3534a6b83759bd3e07ec5"
+    },
+    {
+      "path": "estimation/early/contest_2454/attempt1/chain_1.csv",
+      "sha256": "38b1904dd2da7bc54095c7efda7b1c884a8003c0230b54d617b678b51fba9f27"
+    },
+    {
+      "path": "estimation/early/contest_2454/attempt1/chain_2.csv",
+      "sha256": "a131141c4a910f19e206d6592db2e3049fb2dab72f6cefa2bfc07a19383a09cb"
+    },
+    {
+      "path": "estimation/early/contest_2454/attempt1/chain_3.csv",
+      "sha256": "4162b05d1ec2007fefcab31af990fd766ea72db8f00779f839bd0aa8678a8c59"
+    },
+    {
+      "path": "estimation/early/contest_2454/attempt1/chain_4.csv",
+      "sha256": "3c9431c501d13ad49b44c1dbd562acf05f1d9b33138fb72a9e02da9795ab8ec1"
+    },
+    {
+      "path": "estimation/full/contest_2454/attempt1/chain_1.csv",
+      "sha256": "8becefd733d4b1b88e488d119bac490cb088183f1566fd61c1097656744bb426"
+    },
+    {
+      "path": "estimation/full/contest_2454/attempt1/chain_2.csv",
+      "sha256": "3be041a0181d93d6292ba241994f4a677b2629406e8297e978352cedc4d880e0"
+    },
+    {
+      "path": "estimation/full/contest_2454/attempt1/chain_3.csv",
+      "sha256": "2127ea2b670e8fd807befd0b43cc140d354544b3c80be91a7c0a5673f71e68dd"
+    },
+    {
+      "path": "estimation/full/contest_2454/attempt1/chain_4.csv",
+      "sha256": "c720b443dcb843abac52d767897572a8c8953f00b2d28a690a8a4ff2d55637ef"
+    },
+    {
+      "path": "estimation/early/contest_2464/attempt1/chain_1.csv",
+      "sha256": "87a0b3f70a7d8485d0bfb6fb713290a58d7aa0a87efbe5dc62f43b2e48a48bcd"
+    },
+    {
+      "path": "estimation/early/contest_2464/attempt1/chain_2.csv",
+      "sha256": "da95d9b5a9cdcdee4e0abc7268adbe271930c5095f2af5d52024c358d24ff42f"
+    },
+    {
+      "path": "estimation/early/contest_2464/attempt1/chain_3.csv",
+      "sha256": "aeccd3416e8aa7406f4f83cedc7f3deba15ed7bf42211e9d09b4f0b5809b3755"
+    },
+    {
+      "path": "estimation/early/contest_2464/attempt1/chain_4.csv",
+      "sha256": "ec4b68ea6c989d06724be0c4c5964d74b8ab64cf50b7103b34249bd3505471b5"
+    },
+    {
+      "path": "estimation/full/contest_2464/attempt1/chain_1.csv",
+      "sha256": "893a7656dce8498133bd14112cd24b6996f7d1ce9a3f29a330bc5b05917a7697"
+    },
+    {
+      "path": "estimation/full/contest_2464/attempt1/chain_2.csv",
+      "sha256": "9d9a674fbbc0cfab50a5bfeac6eba4be43bfbb3acc614e4e32d1f4d47062c60d"
+    },
+    {
+      "path": "estimation/full/contest_2464/attempt1/chain_3.csv",
+      "sha256": "7de67d58d4647aab2b3b33615bab36b41f6489528c776092b9cd0c560c177157"
+    },
+    {
+      "path": "estimation/full/contest_2464/attempt1/chain_4.csv",
+      "sha256": "66b0b6d6c552d9be6177449ec2cb93a883c053cbe74d3b9d851bfcf5607e96a3"
+    },
+    {
+      "path": "estimation/early/contest_2478/attempt1/chain_1.csv",
+      "sha256": "3efb19e0d29baeaeb5cb636b1f3876aa8002bc7e6a721164a90768ba88a0ff45"
+    },
+    {
+      "path": "estimation/early/contest_2478/attempt1/chain_2.csv",
+      "sha256": "b1c6edd61d4e661396dcbdc9e6880b0b0a2887e797af127dae394f9cab4eb0fd"
+    },
+    {
+      "path": "estimation/early/contest_2478/attempt1/chain_3.csv",
+      "sha256": "8f8f6ea34cbb80f06d740bc28a887e0b730d5c7a14987c85239bb477f571a01d"
+    },
+    {
+      "path": "estimation/early/contest_2478/attempt1/chain_4.csv",
+      "sha256": "5f178a6b5619a3118fa9379da63f137dc3b72d20bce3be4faa00260975e144c3"
+    },
+    {
+      "path": "estimation/full/contest_2478/attempt1/chain_1.csv",
+      "sha256": "8477fd9fc0017fff749b1692261084203766e6b0adb0384497fe4169f04dfd47"
+    },
+    {
+      "path": "estimation/full/contest_2478/attempt1/chain_2.csv",
+      "sha256": "8ef237c79f133305ba9725fb9b73e1b16bdfbeec0aa89703224c764b8c4fae88"
+    },
+    {
+      "path": "estimation/full/contest_2478/attempt1/chain_3.csv",
+      "sha256": "d1d942c1de725c578105e1dedb08eb8155fc3ecfb6123b6e846c405e51db108a"
+    },
+    {
+      "path": "estimation/full/contest_2478/attempt1/chain_4.csv",
+      "sha256": "ccbef470f8051510d4c40aff54cd1a4650051e2789b99dfe3667606cbe5218cc"
+    },
+    {
+      "path": "estimation/early/contest_2489/attempt1/chain_1.csv",
+      "sha256": "acd2aaf87e93f2c3c9978b8db450ffe91aedc7f78abb637c8728c6f87b462118"
+    },
+    {
+      "path": "estimation/early/contest_2489/attempt1/chain_2.csv",
+      "sha256": "9860c8f4d3eca87130f16d70ac192554b162266a824480eff5e62b278034ac12"
+    },
+    {
+      "path": "estimation/early/contest_2489/attempt1/chain_3.csv",
+      "sha256": "86aa4bca85cda05aa27af6a6dcafc626fea86e4de347d99fff1428f28cedd6e3"
+    },
+    {
+      "path": "estimation/early/contest_2489/attempt1/chain_4.csv",
+      "sha256": "2f352fb9331d9ed008f485cfde3d0a5e593f8ba5fba56e8516fbd82f4b368190"
+    },
+    {
+      "path": "estimation/full/contest_2489/attempt1/chain_1.csv",
+      "sha256": "9006242ff9b266766affef360d234d155ac7c527fa176214e6d97edf23ca4fae"
+    },
+    {
+      "path": "estimation/full/contest_2489/attempt1/chain_2.csv",
+      "sha256": "4c651caa0872be3ac1d06079c2be696958dda6914ec7434c6dd5b863e2c82142"
+    },
+    {
+      "path": "estimation/full/contest_2489/attempt1/chain_3.csv",
+      "sha256": "bd86eb82373bfab1b431c5f0ddf3e4c06704b156280608682b8d378c25273b6f"
+    },
+    {
+      "path": "estimation/full/contest_2489/attempt1/chain_4.csv",
+      "sha256": "9eea31c1d01db43a67645d698a52c5b940a868099a190cae35363365d46e11d0"
+    },
+    {
+      "path": "estimation/early/contest_2549/attempt1/chain_1.csv",
+      "sha256": "ce509810e9cddff0eaaf4b84f5e8a6e82af66d0b7c47a8975c71f8bfd02eedda"
+    },
+    {
+      "path": "estimation/early/contest_2549/attempt1/chain_2.csv",
+      "sha256": "d556ecd46f13eba15c68f6f344cf163ca79d547a2302f7e343ff61a7d08d61e3"
+    },
+    {
+      "path": "estimation/early/contest_2549/attempt1/chain_3.csv",
+      "sha256": "5def60c07c3078fd76b4a040b6cb6f4df7bc35217cf2bf480feb39eaaac8b9a7"
+    },
+    {
+      "path": "estimation/early/contest_2549/attempt1/chain_4.csv",
+      "sha256": "471be2cb061f5aa017b2df65a008d9e41b2b214c780796773ea27ab491e7e818"
+    },
+    {
+      "path": "estimation/full/contest_2549/attempt1/chain_1.csv",
+      "sha256": "9f4fc0ac972169a2cd446f894748241cc2d7ed46768c3d276c0eb52b16d3961f"
+    },
+    {
+      "path": "estimation/full/contest_2549/attempt1/chain_2.csv",
+      "sha256": "0873fe83756cc53ab78325cf9a5a8e62b348e4de449707b9e5279de1b696e7dc"
+    },
+    {
+      "path": "estimation/full/contest_2549/attempt1/chain_3.csv",
+      "sha256": "3c3311be9f554f2121a96a00473346b9eade66d075767a06de286a4e2f91024e"
+    },
+    {
+      "path": "estimation/full/contest_2549/attempt1/chain_4.csv",
+      "sha256": "941f208b8ed7ccf28715f91f5790f1f176e55cabcb4ae8f5d7d453c7d8a9d463"
+    },
+    {
+      "path": "estimation/early/contest_2551/attempt1/chain_1.csv",
+      "sha256": "88dfe499151c58ed8beb5fec74113371bcb7d6b49c671be0c96c48a4732e8e8c"
+    },
+    {
+      "path": "estimation/early/contest_2551/attempt1/chain_2.csv",
+      "sha256": "ffbad876701d8ea7c2802457785cc67cef49409c1b4d7fff85ca102dc9f1aaf1"
+    },
+    {
+      "path": "estimation/early/contest_2551/attempt1/chain_3.csv",
+      "sha256": "7085ccfe1862787f3027305610f4d7c5315d9c84fb36fa66e838bedd07371c64"
+    },
+    {
+      "path": "estimation/early/contest_2551/attempt1/chain_4.csv",
+      "sha256": "6446ca6fe52703d3bf40d5a542533bb67d400b48df455ba23d81a561eafe5565"
+    },
+    {
+      "path": "estimation/full/contest_2551/attempt1/chain_1.csv",
+      "sha256": "8fc1d846533d67d1f88eea1ca0212b4fc9ab777d7cc7bf65695707b5e9dea7e9"
+    },
+    {
+      "path": "estimation/full/contest_2551/attempt1/chain_2.csv",
+      "sha256": "d0bda4d493635ea88f52465d6235919ce273a6be705a3f4775842e30d8071a7a"
+    },
+    {
+      "path": "estimation/full/contest_2551/attempt1/chain_3.csv",
+      "sha256": "7c49166ef0774eca1e0055afb293c6811d3b2a0af37e123b82ced2dbdedfdb5b"
+    },
+    {
+      "path": "estimation/full/contest_2551/attempt1/chain_4.csv",
+      "sha256": "cdca8e0b25fa6ab58aab73c57c108dce7a00bcae42ff75cb20705d212338bfbd"
+    },
+    {
+      "path": "estimation/early/contest_2667/attempt1/chain_1.csv",
+      "sha256": "54163c6a6007dd992a50e2d9cd34657e97ea60f4c5b1fa0a1b91baab07fd1d26"
+    },
+    {
+      "path": "estimation/early/contest_2667/attempt1/chain_2.csv",
+      "sha256": "bfc4c1c1324ff2c10e0400473ac0f07d5465a69bcdbe89df6a3ee57edcc3f4a9"
+    },
+    {
+      "path": "estimation/early/contest_2667/attempt1/chain_3.csv",
+      "sha256": "4ffabe5ead6f651245585d131f426c557d1eafdc811b965cf7d755b136593f7d"
+    },
+    {
+      "path": "estimation/early/contest_2667/attempt1/chain_4.csv",
+      "sha256": "7ddddbfd259aa5d4457eaa51f987c23239d60743910a6c9402087ef0d4ed7004"
+    },
+    {
+      "path": "estimation/full/contest_2667/attempt1/chain_1.csv",
+      "sha256": "19effa46804b3677d07c1e96bef42fd6c1f17be22753f40663f4a83e2a31b67d"
+    },
+    {
+      "path": "estimation/full/contest_2667/attempt1/chain_2.csv",
+      "sha256": "b26fd291af6a617bc6be1f7b2735631dfbd3b5297c4034ab8bef457b9ab24fbc"
+    },
+    {
+      "path": "estimation/full/contest_2667/attempt1/chain_3.csv",
+      "sha256": "5c36b28c8ef3bd1c8f8e220a3c2f62132fb5f33ba424a3b3a38e7566658af739"
+    },
+    {
+      "path": "estimation/full/contest_2667/attempt1/chain_4.csv",
+      "sha256": "722ee630335079ab49becb9f527e35a871859704e4c81d9424dc56b3cea1b4f7"
+    },
+    {
+      "path": "estimation/early/contest_2749/attempt1/chain_1.csv",
+      "sha256": "329c5434d54e848f91331c40ecab43892867bb6c055299a6295072aa3a03fbbc"
+    },
+    {
+      "path": "estimation/early/contest_2749/attempt1/chain_2.csv",
+      "sha256": "76ce6a0618b7c2148d1e34a15e560b43ae9d9a7ccf4fef53530617eb26248986"
+    },
+    {
+      "path": "estimation/early/contest_2749/attempt1/chain_3.csv",
+      "sha256": "797d6545b7de8cfba93750fec35f812d12be84ccc587a79afc68fa319e017bbd"
+    },
+    {
+      "path": "estimation/early/contest_2749/attempt1/chain_4.csv",
+      "sha256": "87beb154f90791e12677920ea9a1f5a5db9ae1cc248368bca4f1cdbbb195ae89"
+    },
+    {
+      "path": "estimation/full/contest_2749/attempt1/chain_1.csv",
+      "sha256": "9050c3271cfc1eb905ad1422e79e9f52ec0b80931917ac9f5b173cfeb794a316"
+    },
+    {
+      "path": "estimation/full/contest_2749/attempt1/chain_2.csv",
+      "sha256": "1bda4e3113e6e9d6bf79e03c4aaefc0e7aa3fb834724b68524d5fee549df1aa1"
+    },
+    {
+      "path": "estimation/full/contest_2749/attempt1/chain_3.csv",
+      "sha256": "05fcd3a10b0eb1c397728655415ad4881bdda7ab3681bae08069a1d341e72ec4"
+    },
+    {
+      "path": "estimation/full/contest_2749/attempt1/chain_4.csv",
+      "sha256": "209e11eb5b472b4e80310d7d15655b914e29b5a050899850d797d5c0de9ba946"
+    },
+    {
+      "path": "estimation/early/contest_2762/attempt1/chain_1.csv",
+      "sha256": "e33c5687d52d9c7cb643a0be649bfd49ae279de975914017da5d49c5f14b1307"
+    },
+    {
+      "path": "estimation/early/contest_2762/attempt1/chain_2.csv",
+      "sha256": "84dfd7fb3732f46876b4ab89674fc3c4eb48915f6e81f1654320abdd938f22ba"
+    },
+    {
+      "path": "estimation/early/contest_2762/attempt1/chain_3.csv",
+      "sha256": "f1463f9f7a3b819c8f35bbc3623055bce1f1cdd3229b9750a5970899d52525f8"
+    },
+    {
+      "path": "estimation/early/contest_2762/attempt1/chain_4.csv",
+      "sha256": "49420c94e37780a799687272898fc188bd8ba83277217ba6b19c7b5104f3a7bc"
+    },
+    {
+      "path": "estimation/full/contest_2762/attempt1/chain_1.csv",
+      "sha256": "590f35299b26f0d2af7fa02f69d517521382c11baa2a785932cb601e6d49f558"
+    },
+    {
+      "path": "estimation/full/contest_2762/attempt1/chain_2.csv",
+      "sha256": "9c41fa19a7e72ce430807dd70a2540615f4e85f7e7d13d37f48e2f0d7595935c"
+    },
+    {
+      "path": "estimation/full/contest_2762/attempt1/chain_3.csv",
+      "sha256": "677a374f6af911b27a6ab00dd0678eeceeee3264df06c4d46ab0a283ab27fa52"
+    },
+    {
+      "path": "estimation/full/contest_2762/attempt1/chain_4.csv",
+      "sha256": "79a59a6587545fffd70ac2c452a08e058cd4a2aec15292ba2341aec0069cdaa1"
+    },
+    {
+      "path": "estimation/early/contest_2860/attempt1/chain_1.csv",
+      "sha256": "ed538e0a56a29a9e65f71181397455473acda0c0e0500605ce5c718ed3447519"
+    },
+    {
+      "path": "estimation/early/contest_2860/attempt1/chain_2.csv",
+      "sha256": "f2d983a15870e3fe481311880603abe8dab72753e8f27e5ba9c493634c4e6e09"
+    },
+    {
+      "path": "estimation/early/contest_2860/attempt1/chain_3.csv",
+      "sha256": "3f1545c8a748200e43c96dbf3b26a8fc76829d4fa46c17d86546ec0820e3f9d3"
+    },
+    {
+      "path": "estimation/early/contest_2860/attempt1/chain_4.csv",
+      "sha256": "cc43355e1ef9300e5947c18557ba26c4f2ac0cb05172fc05d8967d08a02f1e5c"
+    },
+    {
+      "path": "estimation/full/contest_2860/attempt1/chain_1.csv",
+      "sha256": "507ecc1793d2af8c3e6c488961d02157df75d5857236aac8cb40148b172b9709"
+    },
+    {
+      "path": "estimation/full/contest_2860/attempt1/chain_2.csv",
+      "sha256": "26e014845e1b722106778c0f230507786241b9bab3ca46f85dec9ad61a768536"
+    },
+    {
+      "path": "estimation/full/contest_2860/attempt1/chain_3.csv",
+      "sha256": "dca0982bf084405c73833b2c5ab264e1a1a9bf85ce01b9ec32b8db4f8114c314"
+    },
+    {
+      "path": "estimation/full/contest_2860/attempt1/chain_4.csv",
+      "sha256": "0a0b5e3f3eab2ec615b6ab6e8131724ae488629ef276d537e35d41c04fd1c0d7"
+    },
+    {
+      "path": "estimation/early/contest_3064/attempt1/chain_1.csv",
+      "sha256": "68ef604a5170d19e1021ae2c6c0a02940725db5e1576ca8322bd7b9a47ff6f51"
+    },
+    {
+      "path": "estimation/early/contest_3064/attempt1/chain_2.csv",
+      "sha256": "710903f5bee78a53a71f158195819b1399e81ba52924d9bb54f733c1d63d2da5"
+    },
+    {
+      "path": "estimation/early/contest_3064/attempt1/chain_3.csv",
+      "sha256": "046c8e4be0e08aa0ac46c30b0e40e6cbc3e2225f6f3b5754338a919f613cabf1"
+    },
+    {
+      "path": "estimation/early/contest_3064/attempt1/chain_4.csv",
+      "sha256": "4355e10a02eb824013bb5efdd2ca1578df9ddf30b44897271e0e7a9b4121e8ca"
+    },
+    {
+      "path": "estimation/full/contest_3064/attempt1/chain_1.csv",
+      "sha256": "71457fac34c7e7b9f68de9f16563d1ce4fd4a1c2b4ed9363e4145bba34d107d6"
+    },
+    {
+      "path": "estimation/full/contest_3064/attempt1/chain_2.csv",
+      "sha256": "6438e9f2dedc7eb694e7908bcc8162617d8436572d68b84fd9afa1a4208cb02a"
+    },
+    {
+      "path": "estimation/full/contest_3064/attempt1/chain_3.csv",
+      "sha256": "3424e798b6ca35d8700ac34d3f352f4453c1ad7e492af3b4ed03421721082bb9"
+    },
+    {
+      "path": "estimation/full/contest_3064/attempt1/chain_4.csv",
+      "sha256": "c0f4ef4717c3d85a03ecd9b80421ebcbd55eb7b1b9f5c2062aa4a1d55ae89e91"
+    },
+    {
+      "path": "estimation/early/contest_3080/attempt1/chain_1.csv",
+      "sha256": "04cb938ea99917f78dec67e84143151bc96a2d1cc26234c661a1b947d64cb850"
+    },
+    {
+      "path": "estimation/early/contest_3080/attempt1/chain_2.csv",
+      "sha256": "ca5b96cdd7439938b75cb4374c4df7579286f965074dd340f415a653a20022bd"
+    },
+    {
+      "path": "estimation/early/contest_3080/attempt1/chain_3.csv",
+      "sha256": "780e8b2894f490c48af5d1d95475177e2c72184a8a3f5eae791c17187cb679a4"
+    },
+    {
+      "path": "estimation/early/contest_3080/attempt1/chain_4.csv",
+      "sha256": "1e2ee313e9203bb83d9ee5f811ae104a67bfec6942be921a61cb971d9d7590d8"
+    },
+    {
+      "path": "estimation/full/contest_3080/attempt1/chain_1.csv",
+      "sha256": "621bc5aab86c57f48115b9dd8d12843c6eefa3205d178865cabd9e287037faac"
+    },
+    {
+      "path": "estimation/full/contest_3080/attempt1/chain_2.csv",
+      "sha256": "4e606be93ebb2a934731df40d215650f97d36668c463461f0bc519de59dc6d96"
+    },
+    {
+      "path": "estimation/full/contest_3080/attempt1/chain_3.csv",
+      "sha256": "7aa11f01c34e0f5906eb808bc507333604fcb2182cf4acad9139410778de1818"
+    },
+    {
+      "path": "estimation/full/contest_3080/attempt1/chain_4.csv",
+      "sha256": "b50ec8ee97e5c87381b0df31751968c97fb0785016f5324430e7dc6f12903a97"
+    },
+    {
+      "path": "estimation/early/contest_3288/attempt1/chain_1.csv",
+      "sha256": "8321c5246c2e579c938e037afbd459532430272d6d92b39ca083c38d37484470"
+    },
+    {
+      "path": "estimation/early/contest_3288/attempt1/chain_2.csv",
+      "sha256": "69cc1741be7540791c291a43aa57b242abff7f6f97b3c60ee59fe57bfc8f067c"
+    },
+    {
+      "path": "estimation/early/contest_3288/attempt1/chain_3.csv",
+      "sha256": "ab2fb685a5d9e9b098726af739217b6032bce9d1d9cdd3d69fdef02e66af0a7d"
+    },
+    {
+      "path": "estimation/early/contest_3288/attempt1/chain_4.csv",
+      "sha256": "1d4910fcead305f7b9b90a5bb27895e23057cba453c9da0392b967f08ab3b28f"
+    },
+    {
+      "path": "estimation/full/contest_3288/attempt1/chain_1.csv",
+      "sha256": "0a78ceb3287daa9ef2adecd3ff9aed36346c32242e62b173ef0804900651cea5"
+    },
+    {
+      "path": "estimation/full/contest_3288/attempt1/chain_2.csv",
+      "sha256": "16395f94781d271acee1a4fb6a27998faf3205d9701f8f5cc957a2328dababef"
+    },
+    {
+      "path": "estimation/full/contest_3288/attempt1/chain_3.csv",
+      "sha256": "98e92244132ca0211a866399d8421cb948cfb834ecbffb6486b01ad3e247e553"
+    },
+    {
+      "path": "estimation/full/contest_3288/attempt1/chain_4.csv",
+      "sha256": "aa3512bfc4981a3c55fa8cc138fb34e348f935f3523a80c84d5acf133aa07b80"
+    },
+    {
+      "path": "estimation/early/contest_3338/attempt1/chain_1.csv",
+      "sha256": "6507f77b54fcd61bc5088bfa692fb0a874cdf1c89115dd6a401a49572612fe52"
+    },
+    {
+      "path": "estimation/early/contest_3338/attempt1/chain_2.csv",
+      "sha256": "dc7d417ac1ab6eddb03d1974edba83b189cf7a84d71503fce23c4f3faa1d698b"
+    },
+    {
+      "path": "estimation/early/contest_3338/attempt1/chain_3.csv",
+      "sha256": "c70984ce251eeb8ad233d263903ee2175d9af77a7c4f77eb46b537d014cbd4a7"
+    },
+    {
+      "path": "estimation/early/contest_3338/attempt1/chain_4.csv",
+      "sha256": "ca01a1bda6b9222eabf75502dff0d871445862fe14fd5661432e6072abdbf3e8"
+    },
+    {
+      "path": "estimation/full/contest_3338/attempt1/chain_1.csv",
+      "sha256": "669f71a8a23134489c0dd638a555cb41a6396045a2ee3c22ce7245b9f36148b2"
+    },
+    {
+      "path": "estimation/full/contest_3338/attempt1/chain_2.csv",
+      "sha256": "05a84b12e375980721e26b6d8b645d6b97190fc70a6e51bd709e3aeb3ded2d3e"
+    },
+    {
+      "path": "estimation/full/contest_3338/attempt1/chain_3.csv",
+      "sha256": "8a7abe24fa64afad087c028729dcc092c4bcfd8ccc540fd5c58ce77cfc08bc78"
+    },
+    {
+      "path": "estimation/full/contest_3338/attempt1/chain_4.csv",
+      "sha256": "3dd8d0f2c128ff0c143efbaf0839cc0ef85986ff94111a8091cc015df2273343"
+    },
+    {
+      "path": "estimation/early/contest_3353/attempt1/chain_1.csv",
+      "sha256": "c436c758b1e9990d7f0320cca74e6574bb6f577f059007dcc038ad42b384ecf3"
+    },
+    {
+      "path": "estimation/early/contest_3353/attempt1/chain_2.csv",
+      "sha256": "3e7c442b54bfb4722c1b7ed34d54baf0182cb73aa772e260985fbf1483be0db0"
+    },
+    {
+      "path": "estimation/early/contest_3353/attempt1/chain_3.csv",
+      "sha256": "95d0e7f3015dc7ef4491250e800e352d60af49940fcd4b3546f6ee4ef2f25ed0"
+    },
+    {
+      "path": "estimation/early/contest_3353/attempt1/chain_4.csv",
+      "sha256": "c8468ce9d8913d8c7be40368265b24d934fae7991c05b556b4bab3478f46b7e5"
+    },
+    {
+      "path": "estimation/full/contest_3353/attempt1/chain_1.csv",
+      "sha256": "dd20d50e4d9554f22fd0c9bda67f3d6e17b3d90da03c022d1bea4c1569a47c04"
+    },
+    {
+      "path": "estimation/full/contest_3353/attempt1/chain_2.csv",
+      "sha256": "9a8dee526ecdddec914edcddd6b93d0e85416050ef3d62322a7bb75c705fd0ad"
+    },
+    {
+      "path": "estimation/full/contest_3353/attempt1/chain_3.csv",
+      "sha256": "d6e732901a95bc4c1c3eeacbf9e32cb9cfcc6981dee808db0447e7d0bfc0e66d"
+    },
+    {
+      "path": "estimation/full/contest_3353/attempt1/chain_4.csv",
+      "sha256": "b96a650734da6ddd0de464af0dc58cf08431721e5d4088ae98b72011e8abd35e"
+    },
+    {
+      "path": "estimation/early/contest_3366/attempt1/chain_1.csv",
+      "sha256": "1505eb73becabb10873d4ae3ce0fa5bef42212c25adf00545ec198df3d964136"
+    },
+    {
+      "path": "estimation/early/contest_3366/attempt1/chain_2.csv",
+      "sha256": "2ab08b60c5161db4d84dd68a9fb6a80f439683575fc6f61e8046f0f23600f9a0"
+    },
+    {
+      "path": "estimation/early/contest_3366/attempt1/chain_3.csv",
+      "sha256": "c7c9629c87e869c3d0e67a6ca1afdaa21af57affafa6cab2cb264dcb5f3a5d8e"
+    },
+    {
+      "path": "estimation/early/contest_3366/attempt1/chain_4.csv",
+      "sha256": "98fa48c7590729aacea668627d7c3cb734bc8145d74e759117b4db689d38aae0"
+    },
+    {
+      "path": "estimation/full/contest_3366/long_refinement1/chain_1.csv",
+      "sha256": "a7df67fc440b0aa5af9157221b5c7e57d8f377681586af7fb9683f4ef4870a9b"
+    },
+    {
+      "path": "estimation/full/contest_3366/long_refinement1/chain_2.csv",
+      "sha256": "b3eabd7be226ed93e912b76204e4eb31179e72f0a1b0af336fd792baf6fddee5"
+    },
+    {
+      "path": "estimation/full/contest_3366/long_refinement1/chain_3.csv",
+      "sha256": "de078800ad4f3e1b0a2a73f11956a290e7a57363d70ad1f5c0d7843ab6850d20"
+    },
+    {
+      "path": "estimation/full/contest_3366/long_refinement1/chain_4.csv",
+      "sha256": "ff43621d5511f396fe24fe9033a20dc1cc8df759b12498fe7709f5b8bf13a7d0"
+    },
+    {
+      "path": "estimation/early/contest_3507/attempt1/chain_1.csv",
+      "sha256": "07cb66eeca8f64098346261ca4861d4e6c0eb3a13af56948b16e18578b1d691e"
+    },
+    {
+      "path": "estimation/early/contest_3507/attempt1/chain_2.csv",
+      "sha256": "a34b509d4745eff8d7a4250173c6038ab78b62b06b49614dd31395f0613a75b9"
+    },
+    {
+      "path": "estimation/early/contest_3507/attempt1/chain_3.csv",
+      "sha256": "792f74a9923aa651b0880632d85b88f5237118911dd0bc9a584d5c7df326e893"
+    },
+    {
+      "path": "estimation/early/contest_3507/attempt1/chain_4.csv",
+      "sha256": "fe4576410f21797e693b313fe1e8b673a14255e79eb2dd91711cc6927f02f3ec"
+    },
+    {
+      "path": "estimation/full/contest_3507/attempt1/chain_1.csv",
+      "sha256": "618ef0df8bbf76998dd23a4fa4896369546068e06ecf11fbf3a670a0513a2e78"
+    },
+    {
+      "path": "estimation/full/contest_3507/attempt1/chain_2.csv",
+      "sha256": "a95352f1ec595ef43441f7e9634560c901be85c909a5cd10ce20a535947e3480"
+    },
+    {
+      "path": "estimation/full/contest_3507/attempt1/chain_3.csv",
+      "sha256": "e1e69f53b37ce5ce698b18bd1f912ad3277e7cf4dd00717f8e3f37e4926daba9"
+    },
+    {
+      "path": "estimation/full/contest_3507/attempt1/chain_4.csv",
+      "sha256": "2cbfc38e4693296668f9d2843c9f211e18eae7dc5f9b64f5e727b917edd190e0"
+    },
+    {
+      "path": "estimation/early/contest_3509/attempt1/chain_1.csv",
+      "sha256": "3ab0ebe7292987dc8f37485cccd4bdc2b25dc011cb214e3fe43ae7af12a16e4e"
+    },
+    {
+      "path": "estimation/early/contest_3509/attempt1/chain_2.csv",
+      "sha256": "8e6e15fecfa8b20ddf81a1fd488bdd007b96171e2a633f8c0d2d2d984a758c9f"
+    },
+    {
+      "path": "estimation/early/contest_3509/attempt1/chain_3.csv",
+      "sha256": "10e7e3788fc6adf3d42cbd4f89075ac84ba0940417c4b2be7606d4b306890ed9"
+    },
+    {
+      "path": "estimation/early/contest_3509/attempt1/chain_4.csv",
+      "sha256": "ec06a50f5e1d7cbff46f12851d6e1b0ab9228a8c79fb4f5367000bd0b2e5c1e1"
+    },
+    {
+      "path": "estimation/full/contest_3509/attempt1/chain_1.csv",
+      "sha256": "aab319732607a32bf50c64f2cf13fc2f839acdfb8f7807a25d5623479d73a446"
+    },
+    {
+      "path": "estimation/full/contest_3509/attempt1/chain_2.csv",
+      "sha256": "0db7389f9b2761bc524c65aeff9682e7ccfb6e9a843c2e739c3c0652301ccd7b"
+    },
+    {
+      "path": "estimation/full/contest_3509/attempt1/chain_3.csv",
+      "sha256": "1e6cad5e4177131b5b61efeafdb581b03ebf2aa79c4fea54ba4d2f82157076bc"
+    },
+    {
+      "path": "estimation/full/contest_3509/attempt1/chain_4.csv",
+      "sha256": "0579e33856fbf06778f74de4141da9b5ca53b2b5bd7b4bde60fe0cb29a1398c7"
+    },
+    {
+      "path": "estimation/early/contest_3526/attempt1/chain_1.csv",
+      "sha256": "af440cc33dfa73a05ab2d224cf10a8a6d747a97f34b11208e5a9e1b262f099eb"
+    },
+    {
+      "path": "estimation/early/contest_3526/attempt1/chain_2.csv",
+      "sha256": "af272ca23a224d862bcebaf2fbafa44403a9a329068b9aa58177692cc7f45ea3"
+    },
+    {
+      "path": "estimation/early/contest_3526/attempt1/chain_3.csv",
+      "sha256": "0d7373941aba4e3b885a1f108d1bb4c5778a8d77164899dbc25b09f14ac8b37c"
+    },
+    {
+      "path": "estimation/early/contest_3526/attempt1/chain_4.csv",
+      "sha256": "469892d3fd0f57352861f8e06488201cc2961876362bec1d2dc82ea6daf64040"
+    },
+    {
+      "path": "estimation/full/contest_3526/attempt1/chain_1.csv",
+      "sha256": "5a197771e0a3897a6b73848798037fe06d1ee03e60ddac34e44f1086177a8080"
+    },
+    {
+      "path": "estimation/full/contest_3526/attempt1/chain_2.csv",
+      "sha256": "fb82fbfe5b793a4d8cf48c482a72a1407acfc673b8c5ffcc47a04ea7b10f9487"
+    },
+    {
+      "path": "estimation/full/contest_3526/attempt1/chain_3.csv",
+      "sha256": "c81c7d8ca901aa032136b9423af0e0044c04d88a79a699b39369ea8ce2211e00"
+    },
+    {
+      "path": "estimation/full/contest_3526/attempt1/chain_4.csv",
+      "sha256": "a7eaf19b8be53b47a28532468e0fcfa6af9730aaa6ad7d9c5efe81b36231e864"
+    },
+    {
+      "path": "estimation/early/contest_3641/attempt1/chain_1.csv",
+      "sha256": "60a76ae2fdda9d7d7ef1e62006473ee411c18a21f95c71533b2ac6f7dbd52cf8"
+    },
+    {
+      "path": "estimation/early/contest_3641/attempt1/chain_2.csv",
+      "sha256": "01b01f8641b285d0c69ff190dea19c5f35068b7abffcfe34634f87991e521bed"
+    },
+    {
+      "path": "estimation/early/contest_3641/attempt1/chain_3.csv",
+      "sha256": "07f5fb7e4799a0928733ddb32be470e90f68b6e8297d31bc88a5178c9ed6d914"
+    },
+    {
+      "path": "estimation/early/contest_3641/attempt1/chain_4.csv",
+      "sha256": "b1cf59c49df76ab0151806dbaa41e7dfd398dddc219036477ff5ddad95aa52c2"
+    },
+    {
+      "path": "estimation/full/contest_3641/attempt1/chain_1.csv",
+      "sha256": "a7a06148e43fd23fdf33c9d7e5d626205cfb1554681943a4b4b039c27c8c5eff"
+    },
+    {
+      "path": "estimation/full/contest_3641/attempt1/chain_2.csv",
+      "sha256": "264a8f2e01ec2d54025d552476711b8cb4912b3e182d3096c0742c924fecb32c"
+    },
+    {
+      "path": "estimation/full/contest_3641/attempt1/chain_3.csv",
+      "sha256": "2362b3cd9f57bbbb80ab6679d80bceb5e308e8ab47dedf9e28ef7a5893da52fe"
+    },
+    {
+      "path": "estimation/full/contest_3641/attempt1/chain_4.csv",
+      "sha256": "e61b5e441d5e654ba1e072392dab79f921e73edd79ce34e003ba7f7ea2531285"
+    },
+    {
+      "path": "estimation/early/contest_3774/attempt1/chain_1.csv",
+      "sha256": "e21a324e80dbb891df3f153c1d3e2ae99748a7546014d4f2f7d3f38df2fc041e"
+    },
+    {
+      "path": "estimation/early/contest_3774/attempt1/chain_2.csv",
+      "sha256": "5e27fb4ed1d265d5e70c862ab79165b9ac2c4d898f5d30dcb318c918883531c9"
+    },
+    {
+      "path": "estimation/early/contest_3774/attempt1/chain_3.csv",
+      "sha256": "78af68472670aa09f1f7d147c5d83c52c0d0c29749a8cbcd982f323fd4a16cbe"
+    },
+    {
+      "path": "estimation/early/contest_3774/attempt1/chain_4.csv",
+      "sha256": "aa94022b5a60166d37befb2953163fbe9686930ec0a1c0f67d3488fe34db6b39"
+    },
+    {
+      "path": "estimation/full/contest_3774/attempt1/chain_1.csv",
+      "sha256": "3036a03dedbb5bbfc328acbad476e2a1fb082dc9eb6a7e8d4bc1f97178bf489b"
+    },
+    {
+      "path": "estimation/full/contest_3774/attempt1/chain_2.csv",
+      "sha256": "c2dcc001acd4b10c9e4534e201fe6b0ea9749a0e22ea7d0111bfd8083b50acdb"
+    },
+    {
+      "path": "estimation/full/contest_3774/attempt1/chain_3.csv",
+      "sha256": "b23920e954b3ba6b6d5cb1b373071ff610eb5c99f35ab9d2c12a20643f545505"
+    },
+    {
+      "path": "estimation/full/contest_3774/attempt1/chain_4.csv",
+      "sha256": "add2688032bef13a0eb2ce2921f71939c7a826dff416a371f79d64685c994d75"
+    },
+    {
+      "path": "estimation/early/contest_3800/attempt1/chain_1.csv",
+      "sha256": "ef426be6e66049f0e2252bfa940a8dd7fc3cc86161b995c7edfd38a7eb35028b"
+    },
+    {
+      "path": "estimation/early/contest_3800/attempt1/chain_2.csv",
+      "sha256": "1706c4b2166f3f14686c0ec9ae56781030aa3afe8ee47d8f08517be46e863b4f"
+    },
+    {
+      "path": "estimation/early/contest_3800/attempt1/chain_3.csv",
+      "sha256": "2ab5e6c195abc2856d240a4a9d2712c4b4a9123fe4598806aa7fc0181ef418f7"
+    },
+    {
+      "path": "estimation/early/contest_3800/attempt1/chain_4.csv",
+      "sha256": "9bfbc5033d8e4f9453acc763f8160f75cc315a7c623d3169827a01d60e16b500"
+    },
+    {
+      "path": "estimation/full/contest_3800/attempt1/chain_1.csv",
+      "sha256": "0f7d1245cfbbfea43b08249a17af5fe6eef42786292f5dacd65f01fe12a76639"
+    },
+    {
+      "path": "estimation/full/contest_3800/attempt1/chain_2.csv",
+      "sha256": "26757460a612511d6d75762fe0e3de1a072d390cb9d68c2c862742345450ff2f"
+    },
+    {
+      "path": "estimation/full/contest_3800/attempt1/chain_3.csv",
+      "sha256": "530b5b02b9648feb02e2591dd75a2f06e0c959252d72e0152f3fa8e5a497021d"
+    },
+    {
+      "path": "estimation/full/contest_3800/attempt1/chain_4.csv",
+      "sha256": "0ee06886cea12fa94f522a756adc1bb31ccafb975d2f567f3d6d5fdc82247df7"
+    },
+    {
+      "path": "estimation/early/contest_3926/attempt1/chain_1.csv",
+      "sha256": "558fd74fbd9f1160477ddd32c43d2fd92ed60c2277133e9da76f3cd9e44696ac"
+    },
+    {
+      "path": "estimation/early/contest_3926/attempt1/chain_2.csv",
+      "sha256": "d4235e366cf66ece601ace07d7765ea6d92bf5385f246367d27d24edbc81ac27"
+    },
+    {
+      "path": "estimation/early/contest_3926/attempt1/chain_3.csv",
+      "sha256": "fd8a6852c4b050fa6198a2eb816083fb4ed3e0339b1f3be5dcbb61086f102209"
+    },
+    {
+      "path": "estimation/early/contest_3926/attempt1/chain_4.csv",
+      "sha256": "7a5ff350a607f123c679ab8f3a17bea192f2ef292585a33c80a07a454ff07f78"
+    },
+    {
+      "path": "estimation/full/contest_3926/attempt1/chain_1.csv",
+      "sha256": "1ac194fb993e0c3453b30291cc02b4206af3a746fd3418d0d33058202ee6109d"
+    },
+    {
+      "path": "estimation/full/contest_3926/attempt1/chain_2.csv",
+      "sha256": "0f79d7509bab331a87839281df050391d22cc6df6f9bb4bde9d163e71656280e"
+    },
+    {
+      "path": "estimation/full/contest_3926/attempt1/chain_3.csv",
+      "sha256": "05276769e328217fcf1e9ee8229badf0521c70072f61ab4d59734931c2c14a95"
+    },
+    {
+      "path": "estimation/full/contest_3926/attempt1/chain_4.csv",
+      "sha256": "6c435ab07bd75d7c096ddc36796d58415ab36535d4bcd89268b1ccc74c382f70"
+    },
+    {
+      "path": "estimation/early/contest_3928/attempt1/chain_1.csv",
+      "sha256": "2893bf3869e261ce6dfc6b0118f5513cf479342fe93ca1fe477ecfcc65865fa5"
+    },
+    {
+      "path": "estimation/early/contest_3928/attempt1/chain_2.csv",
+      "sha256": "64fa76e5635d0ad4d5019d06583635ce8676f1169a6a4ad96d88381ab4287de1"
+    },
+    {
+      "path": "estimation/early/contest_3928/attempt1/chain_3.csv",
+      "sha256": "1df111610aad1a8747e1d630f2ae14697f80188346f1a59a9bcfd1295b70879b"
+    },
+    {
+      "path": "estimation/early/contest_3928/attempt1/chain_4.csv",
+      "sha256": "724dfd3d28cac86c3d9f807cea2d04f2765a5c2f86bfeb767f96c0d873b74689"
+    },
+    {
+      "path": "estimation/full/contest_3928/attempt1/chain_1.csv",
+      "sha256": "4da4466e6cf856b7053dfd0df36e48c95d989734dd22abb8e0c4c79ab8ac52bd"
+    },
+    {
+      "path": "estimation/full/contest_3928/attempt1/chain_2.csv",
+      "sha256": "4f2cf0f792868671b8a53b47693b3d53975340312b50380a87a0883e95e3b0a3"
+    },
+    {
+      "path": "estimation/full/contest_3928/attempt1/chain_3.csv",
+      "sha256": "e77fa0d3f576d3894d2b9b31908e41040544f7031ea5f887aa49a6037215d1cc"
+    },
+    {
+      "path": "estimation/full/contest_3928/attempt1/chain_4.csv",
+      "sha256": "d9958fe3cc629d8f8ef6f38497bfb14301002783458fc61ad18c37b39f2b3caf"
+    },
+    {
+      "path": "estimation/early/contest_3929/attempt1/chain_1.csv",
+      "sha256": "51dcf894fed47c85e90173977aebeef127180728a3561469b83a90d13e30e1d9"
+    },
+    {
+      "path": "estimation/early/contest_3929/attempt1/chain_2.csv",
+      "sha256": "0e5a13ae63703d2dc038f3beaa4d3a0976a0a272318bd4e1798d8dfaaf80586a"
+    },
+    {
+      "path": "estimation/early/contest_3929/attempt1/chain_3.csv",
+      "sha256": "6006aba21bc0a7d2a8fb057e4837ee5cd1046122817a584888e46d58246ccd48"
+    },
+    {
+      "path": "estimation/early/contest_3929/attempt1/chain_4.csv",
+      "sha256": "59d3f7b726a12c5a5692a39b85809450c355caf03f88374573b58b58b79c710c"
+    },
+    {
+      "path": "estimation/full/contest_3929/attempt1/chain_1.csv",
+      "sha256": "ed2edd1d73c22c657bc503cdabe8d38dcc12f6b324ea7b4132c501d9b7a7dbf5"
+    },
+    {
+      "path": "estimation/full/contest_3929/attempt1/chain_2.csv",
+      "sha256": "67d7402b391b1993a3f8894dab2678be569d9b5e5296c4fc1918f91beb4a3254"
+    },
+    {
+      "path": "estimation/full/contest_3929/attempt1/chain_3.csv",
+      "sha256": "9175a866e8cee51e59ac9d3fe6f301bdbb9d082db063f9b26fe256f4220dbc26"
+    },
+    {
+      "path": "estimation/full/contest_3929/attempt1/chain_4.csv",
+      "sha256": "e78753d12795ea86c7157d7698d51050655cf0fde769693339175929c6d8153f"
+    },
+    {
+      "path": "estimation/early/contest_3960/attempt1/chain_1.csv",
+      "sha256": "b80fcde36cba82b05aa87fb9a2e466f87e2b34f549e8d9862920a0e07e8c3931"
+    },
+    {
+      "path": "estimation/early/contest_3960/attempt1/chain_2.csv",
+      "sha256": "f3f7e3d0130e3f3f5b24da8c9f2898dfad54c88ba29772fe5887c8d4dc9d898b"
+    },
+    {
+      "path": "estimation/early/contest_3960/attempt1/chain_3.csv",
+      "sha256": "ffe7b52f6eacaef95326182cf037bc4c907a4a087eae4a8f077342670bdeaf08"
+    },
+    {
+      "path": "estimation/early/contest_3960/attempt1/chain_4.csv",
+      "sha256": "c613a554eed7cbb56a295b5bbd06f46f289c52963bea62f589e0b615b6fdd8ca"
+    },
+    {
+      "path": "estimation/full/contest_3960/attempt1/chain_1.csv",
+      "sha256": "0674e72d46dc12a49feaee11d94c037eecee852e4a4a12ca0be717bfdb8d14fc"
+    },
+    {
+      "path": "estimation/full/contest_3960/attempt1/chain_2.csv",
+      "sha256": "98b5649ade10173da8a191d0c7e9263fd9a53a9ef8d0c7848a4606b7cde21215"
+    },
+    {
+      "path": "estimation/full/contest_3960/attempt1/chain_3.csv",
+      "sha256": "2566919c1611f9a20d3a2bd47d87cc86d6aa894126e1ce43fff47ff3b899eaa5"
+    },
+    {
+      "path": "estimation/full/contest_3960/attempt1/chain_4.csv",
+      "sha256": "ca1299ed23637f04c2e59fe0761245f7fd94b7c30b46a6b7e68fb0ab56896247"
+    },
+    {
+      "path": "estimation/early/contest_4104/attempt1/chain_1.csv",
+      "sha256": "ca8592810fd2e92ad9c30b2f402cc2c0497854b9f9c2aa06790b28c16bedb3c2"
+    },
+    {
+      "path": "estimation/early/contest_4104/attempt1/chain_2.csv",
+      "sha256": "bf46842e6e4417380faac5d850064c3dd76f643c4fd280ba8557e175c0354887"
+    },
+    {
+      "path": "estimation/early/contest_4104/attempt1/chain_3.csv",
+      "sha256": "704d76b92da17f51bfa1b3be222683e93bc1170bb586419faf8f97cd67ea772f"
+    },
+    {
+      "path": "estimation/early/contest_4104/attempt1/chain_4.csv",
+      "sha256": "95235830f7c29b7360a1fc581e064d6056e259fd59b9be375b9033c621fe010e"
+    },
+    {
+      "path": "estimation/full/contest_4104/attempt1/chain_1.csv",
+      "sha256": "05c0f85e8cfb7975eba3a7eebcb1c7634857b479d36859541cf4f1f624e69ca9"
+    },
+    {
+      "path": "estimation/full/contest_4104/attempt1/chain_2.csv",
+      "sha256": "f95f3784f424e780210863b39260b151ed066bb514b5996415105d81dab868c7"
+    },
+    {
+      "path": "estimation/full/contest_4104/attempt1/chain_3.csv",
+      "sha256": "e2d9b4f3949043ddd874a4e27853e82a5edc8e76f72bd29f1fc1ceba829ccdfc"
+    },
+    {
+      "path": "estimation/full/contest_4104/attempt1/chain_4.csv",
+      "sha256": "9ecdfa5facdb2d07ab804824311c409b739a2d5f23b34a7594b8316adb20e502"
+    },
+    {
+      "path": "estimation/early/contest_4366/attempt1/chain_1.csv",
+      "sha256": "1a231c7319946d65ee13a38304f8ec0f8bcb6374a59c6e2bef6791259bb2e12a"
+    },
+    {
+      "path": "estimation/early/contest_4366/attempt1/chain_2.csv",
+      "sha256": "ca5fe58f24730087295963092eccef17dff77eb46fc8fc5645ab27d401309094"
+    },
+    {
+      "path": "estimation/early/contest_4366/attempt1/chain_3.csv",
+      "sha256": "90d18b3af0f2fd974e303d3babe3aad06aaaa802057640782fcaf8b5a2946fd8"
+    },
+    {
+      "path": "estimation/early/contest_4366/attempt1/chain_4.csv",
+      "sha256": "b49b8d5248ab5b72a133ec422a64b799437b08809921707f2fc70aff16c701bf"
+    },
+    {
+      "path": "estimation/full/contest_4366/attempt1/chain_1.csv",
+      "sha256": "952e375b7eaee59936d775ba9bcd8926059beab65139ee368cb7e8964b1e6486"
+    },
+    {
+      "path": "estimation/full/contest_4366/attempt1/chain_2.csv",
+      "sha256": "6d986a04e1ad3455d20cee3ee554b7b1e2621dd5619026fbd9715a7747e3a4b1"
+    },
+    {
+      "path": "estimation/full/contest_4366/attempt1/chain_3.csv",
+      "sha256": "bec7a6bbb32ccc131578f36b986069afd1cbd96381d874c79abc2987d950d4fa"
+    },
+    {
+      "path": "estimation/full/contest_4366/attempt1/chain_4.csv",
+      "sha256": "5bad08e565489fc51b36dbebc874b98fd278fe2cac7f7cc1d90bda668e7db91a"
+    },
+    {
+      "path": "estimation/early/contest_4407/attempt1/chain_1.csv",
+      "sha256": "98ea7f6e5923093cda6faafe2a52c181245dfb26ce9c73798631d7fc0d012c63"
+    },
+    {
+      "path": "estimation/early/contest_4407/attempt1/chain_2.csv",
+      "sha256": "4e6831eea862df7e2e9936c960b84adb53459fa9703def049477e2e238d33d35"
+    },
+    {
+      "path": "estimation/early/contest_4407/attempt1/chain_3.csv",
+      "sha256": "4f73027b67e3bbe2f9cdacbb2f99cc4b3189fa6159af49d7260f9bc261d34208"
+    },
+    {
+      "path": "estimation/early/contest_4407/attempt1/chain_4.csv",
+      "sha256": "a0a4423e47be86a38140190f1da125659fcd1efd24388db9cf5d2306ade4847f"
+    },
+    {
+      "path": "estimation/full/contest_4407/attempt1/chain_1.csv",
+      "sha256": "4f1eafaf44bdeda52a367d86fcb2f19614868a8b1d25e89a29c98b057c4430a5"
+    },
+    {
+      "path": "estimation/full/contest_4407/attempt1/chain_2.csv",
+      "sha256": "f10acede567dc83c6162f70788d6793f86cc4f988e0aaf7b934c02c7b9622efe"
+    },
+    {
+      "path": "estimation/full/contest_4407/attempt1/chain_3.csv",
+      "sha256": "de69c635e505b4d46b78616af321e60c3c04fedd418e19973226db42be55e944"
+    },
+    {
+      "path": "estimation/full/contest_4407/attempt1/chain_4.csv",
+      "sha256": "5dfc1e61ad53164ba433cfbcdf38689cbba11f8bc5622e81ed204dcf3d20e85f"
+    },
+    {
+      "path": "estimation/early/contest_4453/attempt1/chain_1.csv",
+      "sha256": "5f58b89854de1d225fd3f223fbcb17503cd291b390114a7dd9c43955d4ed84c4"
+    },
+    {
+      "path": "estimation/early/contest_4453/attempt1/chain_2.csv",
+      "sha256": "f5e7927bbe44374dcad8d8bb7ba9a13f6adf93d56df53f2e2bdc94dd1c1bce6b"
+    },
+    {
+      "path": "estimation/early/contest_4453/attempt1/chain_3.csv",
+      "sha256": "c2d1615209adacac59e554829ab8ef98d642ed06b8976a04ef9e33b407230a77"
+    },
+    {
+      "path": "estimation/early/contest_4453/attempt1/chain_4.csv",
+      "sha256": "53d5e54a9c55eaa12fb669d75ae94585ff353e7fb9eeb12514391320ef00437e"
+    },
+    {
+      "path": "estimation/full/contest_4453/attempt1/chain_1.csv",
+      "sha256": "b86a5cb44ca4caba284180b06681a5b38d9c396e26f262b4a59d520cad85ee58"
+    },
+    {
+      "path": "estimation/full/contest_4453/attempt1/chain_2.csv",
+      "sha256": "44573191013958657fb900797d58142c051699ae76a9070961c8cd4c570edfd1"
+    },
+    {
+      "path": "estimation/full/contest_4453/attempt1/chain_3.csv",
+      "sha256": "ded965f908a323f7d33acac3b1928b582b59bec5ad605ced4c3d11b138d4091b"
+    },
+    {
+      "path": "estimation/full/contest_4453/attempt1/chain_4.csv",
+      "sha256": "cd9930f336cef7dd66a0ad72d524eaaf14e06818ed4a8a55bb84e449d2466643"
+    },
+    {
+      "path": "estimation/early/contest_4477/attempt1/chain_1.csv",
+      "sha256": "aba044778158d47ee1318d569affc0091afeebddddf7bf97dfc1e8522f32af5f"
+    },
+    {
+      "path": "estimation/early/contest_4477/attempt1/chain_2.csv",
+      "sha256": "4b8354bef7d353b6b81b78564d2280a710bd3ce889284a9ce095f174389dd512"
+    },
+    {
+      "path": "estimation/early/contest_4477/attempt1/chain_3.csv",
+      "sha256": "d8b3a41db36a7f89d23e4190d0c066f7d5afb9f057e8b231a8abf9c34fc51cf1"
+    },
+    {
+      "path": "estimation/early/contest_4477/attempt1/chain_4.csv",
+      "sha256": "e62c5f1e90b667d4ba0e68a0cf9a45a7de40f80521203c203cb8774c7c12791f"
+    },
+    {
+      "path": "estimation/full/contest_4477/attempt1/chain_1.csv",
+      "sha256": "ac1114e6ef28ffb30de69042b58a11c357ad84e6edbcc79d7f55b4060b266be2"
+    },
+    {
+      "path": "estimation/full/contest_4477/attempt1/chain_2.csv",
+      "sha256": "1afd88051a46b3ff9bba02ba42838105fba6b265c2023e1e9325840d38973e1e"
+    },
+    {
+      "path": "estimation/full/contest_4477/attempt1/chain_3.csv",
+      "sha256": "0a73f82be6567577437d9eb57eacc4ecddf422b651824145827af99e9feaeeb5"
+    },
+    {
+      "path": "estimation/full/contest_4477/attempt1/chain_4.csv",
+      "sha256": "7ecb825e4d15a6dd85e6b72e3e0c07899ad1afe4833830b6e667f82ff414d8eb"
+    },
+    {
+      "path": "estimation/early/contest_4488/attempt1/chain_1.csv",
+      "sha256": "4557ad9090338a324c75f927fe2cbfe0ed5bfb0c7a7c8b05ce2f5c9ca271ed02"
+    },
+    {
+      "path": "estimation/early/contest_4488/attempt1/chain_2.csv",
+      "sha256": "8d65170fa0916f74512f1c1484a8fd8841b51aeaf88237ab76dd9d206a5cd155"
+    },
+    {
+      "path": "estimation/early/contest_4488/attempt1/chain_3.csv",
+      "sha256": "ce92e4776d69ab075d70ab496402284741a3af366742dfd9f9843afb32d95588"
+    },
+    {
+      "path": "estimation/early/contest_4488/attempt1/chain_4.csv",
+      "sha256": "b58a9e537aeee059edabae7bd9bd66c70fa3d7bd6a1596314a5cce0f8b51b248"
+    },
+    {
+      "path": "estimation/full/contest_4488/attempt1/chain_1.csv",
+      "sha256": "1b025b0e2e652b3a8a8ceebeb9a1aca896565f190637077f76824285c0b63ae2"
+    },
+    {
+      "path": "estimation/full/contest_4488/attempt1/chain_2.csv",
+      "sha256": "9e2f3afc77b1a8a8931dee3b58091915e7f254d14e66f44f353ce1d84db1886a"
+    },
+    {
+      "path": "estimation/full/contest_4488/attempt1/chain_3.csv",
+      "sha256": "c2648ce937ba140389bec2a7fddf9ff7b7f9897c5110611651a835961ba32e53"
+    },
+    {
+      "path": "estimation/full/contest_4488/attempt1/chain_4.csv",
+      "sha256": "74974271f108b43b65a038405d3a150f6cb419a9071708a0d3de7fadddb3e8f1"
+    },
+    {
+      "path": "estimation/early/contest_4493/attempt1/chain_1.csv",
+      "sha256": "dc0ab04d63d7b51ccbe752493a43f4a43391026e6f6003d344bf853fdecbf168"
+    },
+    {
+      "path": "estimation/early/contest_4493/attempt1/chain_2.csv",
+      "sha256": "6890b195d2b633878c21bd1f9d762b61f8b7ca20ff69eb44f3a2073af0aeca6a"
+    },
+    {
+      "path": "estimation/early/contest_4493/attempt1/chain_3.csv",
+      "sha256": "845124a5f459c41cba6963339a9dd9e1ce92ad2eba188f45b973b99e012f58b0"
+    },
+    {
+      "path": "estimation/early/contest_4493/attempt1/chain_4.csv",
+      "sha256": "69a4be609f4c3e8b654770036546ebf0829966d0ba635561c3c5e587ddb2b888"
+    },
+    {
+      "path": "estimation/full/contest_4493/attempt1/chain_1.csv",
+      "sha256": "160185ef2c260ab5feedf34cd0ab8404a0803ac69d3fdd196d2629f3be6de911"
+    },
+    {
+      "path": "estimation/full/contest_4493/attempt1/chain_2.csv",
+      "sha256": "8c932e76fd57011aae0bf615ef8bcd8c7d88ca780cbf624436820070146465bc"
+    },
+    {
+      "path": "estimation/full/contest_4493/attempt1/chain_3.csv",
+      "sha256": "466f49cba3f097e6640fdcb9c5b740036fac3eebdb3d69e7ac385e4523187ea3"
+    },
+    {
+      "path": "estimation/full/contest_4493/attempt1/chain_4.csv",
+      "sha256": "6468d9dd97e633a05d85d0527858d1b30aa46a5e4953bbbaf36020fe2c788f0f"
+    },
+    {
+      "path": "estimation/early/contest_4657/attempt1/chain_1.csv",
+      "sha256": "d37699a3976a9c758938c3416dc2958d0f134fa630255f45301101db54f7a412"
+    },
+    {
+      "path": "estimation/early/contest_4657/attempt1/chain_2.csv",
+      "sha256": "bf7a21ce4726683c6f3564ac9334901904bce1f458b999e18ac5542ca36bcee5"
+    },
+    {
+      "path": "estimation/early/contest_4657/attempt1/chain_3.csv",
+      "sha256": "e0802c1855252e25c48e01e821b8eae89bbbaacd2b205713499380ac7211b100"
+    },
+    {
+      "path": "estimation/early/contest_4657/attempt1/chain_4.csv",
+      "sha256": "7849ca22ca6052523e31cee6aa7fabb74f665c79a71c8946592dca4d7b6db084"
+    },
+    {
+      "path": "estimation/full/contest_4657/attempt1/chain_1.csv",
+      "sha256": "c9151a29a6b78c12fa90b02d10312f65e557981b9a9fa736a5d2217523433f5b"
+    },
+    {
+      "path": "estimation/full/contest_4657/attempt1/chain_2.csv",
+      "sha256": "eb4fafd1a8ff44279c1bc945066992a2ec4b596102d8887878bf2a1dd61523dc"
+    },
+    {
+      "path": "estimation/full/contest_4657/attempt1/chain_3.csv",
+      "sha256": "ea325587d40fafdae29b0db8e0023f0a72b4cd3726a15fa757d0b05b90fa563f"
+    },
+    {
+      "path": "estimation/full/contest_4657/attempt1/chain_4.csv",
+      "sha256": "0c47fd63737a138c5297fa31cdbf008312ec7faf1817c76cf2cabf03b4a14d64"
+    },
+    {
+      "path": "estimation/early/contest_4699/attempt2/chain_1.csv",
+      "sha256": "f22b5801b9db912c1bdd51ca8872ba04b1a0b75c98f2ec11555595c0e831df49"
+    },
+    {
+      "path": "estimation/early/contest_4699/attempt2/chain_2.csv",
+      "sha256": "8fccf5c87bc1784b87079030549d936b213d3cfb9280d8c6a360fe6b262b314b"
+    },
+    {
+      "path": "estimation/early/contest_4699/attempt2/chain_3.csv",
+      "sha256": "9fcfeed909a6287d2302b72885b0aa4e8b6ba9ae0a3d05caf58b778f8110a9a3"
+    },
+    {
+      "path": "estimation/early/contest_4699/attempt2/chain_4.csv",
+      "sha256": "35fe44966a839223d026abc6eebaa1e704a4433050d7944b3021204cacceb0c0"
+    },
+    {
+      "path": "estimation/full/contest_4699/attempt1/chain_1.csv",
+      "sha256": "e41518c7b46c426670ec862906cd654f12649df707c62d6dcce6ce1884ca3fc2"
+    },
+    {
+      "path": "estimation/full/contest_4699/attempt1/chain_2.csv",
+      "sha256": "a69418c6d76fedfd6ac37ee6a0769fe8f175fbf9dc16fa7c222b5ca4a0abdf12"
+    },
+    {
+      "path": "estimation/full/contest_4699/attempt1/chain_3.csv",
+      "sha256": "8c8c22207d46e01edca7b2e0caec803eaa15771c66d400045310be519bc7b787"
+    },
+    {
+      "path": "estimation/full/contest_4699/attempt1/chain_4.csv",
+      "sha256": "9793c524c644d34fd5e104c3a9a1c7ed2c45982b93801b5664fe9940e110240a"
+    },
+    {
+      "path": "estimation/early/contest_4986/attempt1/chain_1.csv",
+      "sha256": "514c7df732b3dcac54ce91853a7b2958a8f14367afb25b9c8273872c2fa9a29e"
+    },
+    {
+      "path": "estimation/early/contest_4986/attempt1/chain_2.csv",
+      "sha256": "441ea77cdc0f0f5da99cf7aabc67efc4cb177071338f4896cd88622f4393a602"
+    },
+    {
+      "path": "estimation/early/contest_4986/attempt1/chain_3.csv",
+      "sha256": "bb11c4968a4890ee22e5db6cbeee8ce8cb4787bfe22fb511136128ad47d4009f"
+    },
+    {
+      "path": "estimation/early/contest_4986/attempt1/chain_4.csv",
+      "sha256": "d8849ce52d2447843c06ec20138a389bbea4d2ac288fc9139f45318c24c41ad5"
+    },
+    {
+      "path": "estimation/full/contest_4986/attempt1/chain_1.csv",
+      "sha256": "314049fbe1e80fad2fe2f0a2db50ebd7dfc9ecd1de03626ea3ed32f5a1fc5a1c"
+    },
+    {
+      "path": "estimation/full/contest_4986/attempt1/chain_2.csv",
+      "sha256": "ee01ab952868249ca01aed0f7ecd7c6b2b84e81da42efc962c679eef7c2d04bf"
+    },
+    {
+      "path": "estimation/full/contest_4986/attempt1/chain_3.csv",
+      "sha256": "58b7bd1bd083d4f00284ced175de2dc182d4e1ac1854820dacbd4ce01d3b086c"
+    },
+    {
+      "path": "estimation/full/contest_4986/attempt1/chain_4.csv",
+      "sha256": "6099581ce6043868f05a797e068507973fdf8ed572239e9e05a8ce3441c55ef7"
+    },
+    {
+      "path": "estimation/early/contest_5056/attempt1/chain_1.csv",
+      "sha256": "c4a19ed74e6da78ed480ab4d31b7ba43e3ef5b1989b98c3db492d6c0aa6559d6"
+    },
+    {
+      "path": "estimation/early/contest_5056/attempt1/chain_2.csv",
+      "sha256": "40bdbefb30d6646f19cff0dda08f84942d1a36ec6ace0949a97851621fae15ca"
+    },
+    {
+      "path": "estimation/early/contest_5056/attempt1/chain_3.csv",
+      "sha256": "e922b9f1ec21b997eaba1e3ba917629c9f56792e228093fd2c782ba2b5f56570"
+    },
+    {
+      "path": "estimation/early/contest_5056/attempt1/chain_4.csv",
+      "sha256": "ec8ad87baf7482dd44604391ea85af5a4620513e9ec40d67fcbed9d13fa5491d"
+    },
+    {
+      "path": "estimation/full/contest_5056/attempt1/chain_1.csv",
+      "sha256": "54eb298aaf8f539fadedd025b08047346ca561984cbacd3d9577bd2c56036a9e"
+    },
+    {
+      "path": "estimation/full/contest_5056/attempt1/chain_2.csv",
+      "sha256": "731747089952f845f5e66055a2b8429b053631e837d778c2dbb928fa51d2338e"
+    },
+    {
+      "path": "estimation/full/contest_5056/attempt1/chain_3.csv",
+      "sha256": "87751b97bfef464dc2ab9a43b67b5ce9b750cd26b598b83403a31a1b5afcae3d"
+    },
+    {
+      "path": "estimation/full/contest_5056/attempt1/chain_4.csv",
+      "sha256": "379d0de7c6262761d6a76b5d0899c6e650dc439756531400ddd96e9839c9523f"
+    },
+    {
+      "path": "estimation/early/contest_5144/attempt1/chain_1.csv",
+      "sha256": "3d831d33c2cc0cdfb8d6a7523e5ed41d84d37cc4724a9fd1fb07b19d60c97be0"
+    },
+    {
+      "path": "estimation/early/contest_5144/attempt1/chain_2.csv",
+      "sha256": "5b5ade53a2b98aff9e25bd469d5b1c3552f59a56624095467cd52ad0fe15a8c1"
+    },
+    {
+      "path": "estimation/early/contest_5144/attempt1/chain_3.csv",
+      "sha256": "883c25ffca368977f6c62e4b31b22dfed60e353ce4e39b90a830373626030c8a"
+    },
+    {
+      "path": "estimation/early/contest_5144/attempt1/chain_4.csv",
+      "sha256": "eafa0ccdce0fa97148b21dd7685890ad91c3e053a8b6f04fbd6336411ccce7c4"
+    },
+    {
+      "path": "estimation/full/contest_5144/attempt1/chain_1.csv",
+      "sha256": "8e01400b18f5b79e525be9ae918fda649657c33cb8fc751dc5db9e4aa09944bd"
+    },
+    {
+      "path": "estimation/full/contest_5144/attempt1/chain_2.csv",
+      "sha256": "aa5ce649a49742e257139b1f46b59202b802a9347eb1a1e16df8ef916f2fd997"
+    },
+    {
+      "path": "estimation/full/contest_5144/attempt1/chain_3.csv",
+      "sha256": "507e82be02dfd8aee1d4bc0c2fe17446d5259e5dec56d928744dc123c487a73c"
+    },
+    {
+      "path": "estimation/full/contest_5144/attempt1/chain_4.csv",
+      "sha256": "01d017769490e7b169c87bb412184c4a57ce4741efe93cc3dd794e829d41383a"
+    },
+    {
+      "path": "estimation/early/contest_5174/attempt1/chain_1.csv",
+      "sha256": "d22c0f80e3aab2d55f0624e721681c5d3b5bb588a506d083f3e5df5b4e7e4862"
+    },
+    {
+      "path": "estimation/early/contest_5174/attempt1/chain_2.csv",
+      "sha256": "441603f975e81410d804d71cf520a354aa583f78e57295dcfa237d2433cc93c4"
+    },
+    {
+      "path": "estimation/early/contest_5174/attempt1/chain_3.csv",
+      "sha256": "dbc8882d4d41c62038aa7fbed62d018b7fefbd814c0566b51e0ff88f3cdba28e"
+    },
+    {
+      "path": "estimation/early/contest_5174/attempt1/chain_4.csv",
+      "sha256": "ebb3ef35044f4f0ceee714781b45dcc1ad0e4836158a3f16e383328355b0ecca"
+    },
+    {
+      "path": "estimation/full/contest_5174/attempt1/chain_1.csv",
+      "sha256": "2ddb9ed799e6dcd50f0345f38315b68a02f43274c57e7f92dcd868bc05af8f74"
+    },
+    {
+      "path": "estimation/full/contest_5174/attempt1/chain_2.csv",
+      "sha256": "0ee045caed65be991b0ea18c393bfa56d9778a2bcf046adbf63371ef35d2fc61"
+    },
+    {
+      "path": "estimation/full/contest_5174/attempt1/chain_3.csv",
+      "sha256": "610b4d7894bd0b88c205f50b54c4f22f5aa385765a84a216852fe27aedfa10eb"
+    },
+    {
+      "path": "estimation/full/contest_5174/attempt1/chain_4.csv",
+      "sha256": "b5d75895fbd85b49023929f7f4ce72052db0a4ab6b3754df1594502890e6201c"
+    },
+    {
+      "path": "estimation/early/contest_5229/attempt1/chain_1.csv",
+      "sha256": "747e574965cfbc89b151e7f6b2ff67e1b2d164f55881d116c20747e136580454"
+    },
+    {
+      "path": "estimation/early/contest_5229/attempt1/chain_2.csv",
+      "sha256": "63ccbf002dd168344b7d0babdcbd15f209fcaa0ba15cd2a831983ae234a1b3b9"
+    },
+    {
+      "path": "estimation/early/contest_5229/attempt1/chain_3.csv",
+      "sha256": "534960254e16715a2c3b9ead7a5ec8884aa365ebfd37aa4e55bb662afb5a8497"
+    },
+    {
+      "path": "estimation/early/contest_5229/attempt1/chain_4.csv",
+      "sha256": "b0e7f72dd8c53057243ef25c7ff1f91e67428c602aaa5aaec2be4c429f7dbe75"
+    },
+    {
+      "path": "estimation/full/contest_5229/attempt1/chain_1.csv",
+      "sha256": "ed423b378392a1d75cb10377cbc5c90f563f7415f8d84a69c8d0eb022e2a828a"
+    },
+    {
+      "path": "estimation/full/contest_5229/attempt1/chain_2.csv",
+      "sha256": "896d5035ed000a966c8fb21bbca1757d9310e9a60264e5e63d367a84bd1bfa2f"
+    },
+    {
+      "path": "estimation/full/contest_5229/attempt1/chain_3.csv",
+      "sha256": "f75c28736fe0ddf08759851e615ec71c41f68f926c075612f71b73453af60de9"
+    },
+    {
+      "path": "estimation/full/contest_5229/attempt1/chain_4.csv",
+      "sha256": "c564be93b317cc6d6dece4bc048ff613883032091f4e80629d325ec6c36af65c"
+    },
+    {
+      "path": "estimation/early/contest_5261/attempt1/chain_1.csv",
+      "sha256": "f6e0b50a591715b5c868179b7a64a492381c5661ce230adc78fbe1c4df7f5024"
+    },
+    {
+      "path": "estimation/early/contest_5261/attempt1/chain_2.csv",
+      "sha256": "114d52a933f4bb60c3cfe7bc98118a83b54059dc5efac38f2e61af3a447bb714"
+    },
+    {
+      "path": "estimation/early/contest_5261/attempt1/chain_3.csv",
+      "sha256": "f5b4c52aacf20be9762866a407683adaf7431103b8f62b64e155c42e3fc7085c"
+    },
+    {
+      "path": "estimation/early/contest_5261/attempt1/chain_4.csv",
+      "sha256": "a7c73743903246bf79b83ecea80646fa80e71f9e95d0de21e67352e239aa2118"
+    },
+    {
+      "path": "estimation/full/contest_5261/attempt1/chain_1.csv",
+      "sha256": "fa701ce01a8fdfa75783f5b313da58da0f9fe788e6adef02b7c031f98a34de4b"
+    },
+    {
+      "path": "estimation/full/contest_5261/attempt1/chain_2.csv",
+      "sha256": "660b2c7cce7a81bbf49a53143b93139b6bbf3293dfec047548c9e1a4370504ca"
+    },
+    {
+      "path": "estimation/full/contest_5261/attempt1/chain_3.csv",
+      "sha256": "6f6b28e387849196b8b1b3c1696727e98f943be4671216e26b8074a0b3124551"
+    },
+    {
+      "path": "estimation/full/contest_5261/attempt1/chain_4.csv",
+      "sha256": "378c02840ab3e9c583eb488673844011c21faf6f0251874b61f803d223026a84"
+    },
+    {
+      "path": "estimation/early/contest_5357/attempt1/chain_1.csv",
+      "sha256": "541512b6fe56eebad1a93410502256b3e6f947525c61d0a23995aa916ccb3fc0"
+    },
+    {
+      "path": "estimation/early/contest_5357/attempt1/chain_2.csv",
+      "sha256": "4d661517eabe8141d599ab514d830474ae1af62f3f728965d831eaab7af2515f"
+    },
+    {
+      "path": "estimation/early/contest_5357/attempt1/chain_3.csv",
+      "sha256": "d7e282e6622bd2653191c526235f5e9b127f0f5731be2ae3b9004426dcb9998a"
+    },
+    {
+      "path": "estimation/early/contest_5357/attempt1/chain_4.csv",
+      "sha256": "293acef7bb445ceb02fb99a58a2b5165ab95068e7b0b506464a432cea99da155"
+    },
+    {
+      "path": "estimation/full/contest_5357/attempt1/chain_1.csv",
+      "sha256": "902320edbfdb6e4a24f8dd2114d8dcf85147210a4fba30b18c8d6c1826075e2b"
+    },
+    {
+      "path": "estimation/full/contest_5357/attempt1/chain_2.csv",
+      "sha256": "4a4e3b2c86740fc64c279eb4bd025d63266a40a76c80e2a27d19811b6ea07cd0"
+    },
+    {
+      "path": "estimation/full/contest_5357/attempt1/chain_3.csv",
+      "sha256": "3ea0c10cdfd1cf9309986f00ea5dd769c41d53b408fe99ad8066a7efeeb3d5dd"
+    },
+    {
+      "path": "estimation/full/contest_5357/attempt1/chain_4.csv",
+      "sha256": "55d639e6b8d9bc204273f9576d458be45ab8a481d6bd56c29a34d62b10e1d49f"
+    },
+    {
+      "path": "estimation/early/contest_5390/attempt1/chain_1.csv",
+      "sha256": "ce860a4eec3028c61afa8976018cf3add1de3ce910d85616a704077db40a0bb1"
+    },
+    {
+      "path": "estimation/early/contest_5390/attempt1/chain_2.csv",
+      "sha256": "2513b0689a41cce00705cce4e06a529c4eb24800e86be5e81027542d6dff895d"
+    },
+    {
+      "path": "estimation/early/contest_5390/attempt1/chain_3.csv",
+      "sha256": "0e358fca482588b07f8a63dfb019d4f7911d7fc31bb7f08a41a2d9e4f49aa7f9"
+    },
+    {
+      "path": "estimation/early/contest_5390/attempt1/chain_4.csv",
+      "sha256": "781c6bdabcf71c1953e3c2043db2c449309ce2197b24f7d44d5bf7065e479567"
+    },
+    {
+      "path": "estimation/full/contest_5390/attempt3/chain_1.csv",
+      "sha256": "d62b0ee9a99bf4722029d6aae7641377eb61e0061086b8a823e812e6afca51e8"
+    },
+    {
+      "path": "estimation/full/contest_5390/attempt3/chain_2.csv",
+      "sha256": "aab4989499011056d512a2c238ddb82479b5351fe26e8ccde0f8cf58a81f0ea5"
+    },
+    {
+      "path": "estimation/full/contest_5390/attempt3/chain_3.csv",
+      "sha256": "6d2bc8cd858bc80ee970b38fe78d8f3fe62ec8d643286ed095ea86180e30c8f2"
+    },
+    {
+      "path": "estimation/full/contest_5390/attempt3/chain_4.csv",
+      "sha256": "df3f8e124bf493df5a299c39ad1b8e07160afe0b58397b06f82fb11b1b47af64"
+    },
+    {
+      "path": "estimation/early/contest_5497/attempt1/chain_1.csv",
+      "sha256": "1ba897ba66f2df88dc462af8a2605f02e08839a01afe6ff89428858ae5c449ae"
+    },
+    {
+      "path": "estimation/early/contest_5497/attempt1/chain_2.csv",
+      "sha256": "13a086f45f141f009405bdbd76f8e97b0b1fcab8043e05b2e22a5ad6f93ab3b0"
+    },
+    {
+      "path": "estimation/early/contest_5497/attempt1/chain_3.csv",
+      "sha256": "ced3d4522b080bfd3c27c8ea7e926c63752f45769ec6a161b3321bd7244a4f79"
+    },
+    {
+      "path": "estimation/early/contest_5497/attempt1/chain_4.csv",
+      "sha256": "3b0f8163f08fe65ac5b9ed8ff1341dee46931fb7cbaaa2d8f4e4fd0b4aa5bd2b"
+    },
+    {
+      "path": "estimation/full/contest_5497/attempt1/chain_1.csv",
+      "sha256": "e0b2907caa6dbfaec558412fb7a4f4a1f1926c2fe80c4c8e7bb7f99c992920c5"
+    },
+    {
+      "path": "estimation/full/contest_5497/attempt1/chain_2.csv",
+      "sha256": "5451aa61a09b36b29ffc5a0c7aad8819f55c549d51691da9bec1471b29780598"
+    },
+    {
+      "path": "estimation/full/contest_5497/attempt1/chain_3.csv",
+      "sha256": "cb1b1d8a86defbc32c3c7f00f55824c05750a157d1621b8abf2efff92cbc9205"
+    },
+    {
+      "path": "estimation/full/contest_5497/attempt1/chain_4.csv",
+      "sha256": "87e95d14312c758cb3f75af42d5daac6d6d4b2069026db4235b7129130b8b045"
+    },
+    {
+      "path": "estimation/early/contest_6322/attempt1/chain_1.csv",
+      "sha256": "6fa186f9651013c5fb97d4f8be27dc4a4d13dabeda2c1c5b86a21f610674c820"
+    },
+    {
+      "path": "estimation/early/contest_6322/attempt1/chain_2.csv",
+      "sha256": "ad18f8172fca9564b385b0b880c41887c863b56b4c32d4877ca70fa8114eea62"
+    },
+    {
+      "path": "estimation/early/contest_6322/attempt1/chain_3.csv",
+      "sha256": "a4f2ca95ec579511b54a265c744c6a4d8a64375b1f9990122dd1032696927b56"
+    },
+    {
+      "path": "estimation/early/contest_6322/attempt1/chain_4.csv",
+      "sha256": "d4342a8c0cde37f898d0ff5c275bef40ec96975ca9b59109e00a1629c5794243"
+    },
+    {
+      "path": "estimation/full/contest_6322/attempt1/chain_1.csv",
+      "sha256": "22f13c2758f64ec5949506c115246951fd7a773b273f6f8d68c06ba0324ab869"
+    },
+    {
+      "path": "estimation/full/contest_6322/attempt1/chain_2.csv",
+      "sha256": "6a7fe0e682af9ca50600148a63a5284fb301b316fb445f07ae83504c9d50ea2c"
+    },
+    {
+      "path": "estimation/full/contest_6322/attempt1/chain_3.csv",
+      "sha256": "c411b2aeb30259569a4b2edaad04a8312e9c52d0ac0d6fd46dd3f56c3b740e83"
+    },
+    {
+      "path": "estimation/full/contest_6322/attempt1/chain_4.csv",
+      "sha256": "f4498002312e24f2e264ff3eb052b7ae5f5cf507319586b241b7ff9981e8eade"
+    },
+    {
+      "path": "estimation/early/contest_6927/attempt1/chain_1.csv",
+      "sha256": "f819dadf3b42f966ec332633745d24267be90db08f21cc9cea587cddb2c1267e"
+    },
+    {
+      "path": "estimation/early/contest_6927/attempt1/chain_2.csv",
+      "sha256": "2805d003d65fd98d26f23a40418d50e583e2bd9117f1376a62e03a2e60d5c121"
+    },
+    {
+      "path": "estimation/early/contest_6927/attempt1/chain_3.csv",
+      "sha256": "40ecd6c53a7c54a514015dabf24873c28acf613660360b666183b617782c3043"
+    },
+    {
+      "path": "estimation/early/contest_6927/attempt1/chain_4.csv",
+      "sha256": "40d875f45be13be5e800dcbc64dd049f7d25f35af93e4e0fb84d6d480404e94c"
+    },
+    {
+      "path": "estimation/full/contest_6927/attempt1/chain_1.csv",
+      "sha256": "9da8eb9340a3efb43ab2a820b314236e07eb2a3fb183a73c4f998cd5f49e9e3b"
+    },
+    {
+      "path": "estimation/full/contest_6927/attempt1/chain_2.csv",
+      "sha256": "49962d03a8e60b86cd80602394bdd3b46a72e900181ba8bf314da00b5e10ccfe"
+    },
+    {
+      "path": "estimation/full/contest_6927/attempt1/chain_3.csv",
+      "sha256": "703b9a6516bdd206b9959e166e97cd6a7f527b08f9694ed4af0b2419fac51c6c"
+    },
+    {
+      "path": "estimation/full/contest_6927/attempt1/chain_4.csv",
+      "sha256": "e457d2e6266715bf0712d24c19e084d7e69fae7c800a194a0395a04079f7f4f1"
+    },
+    {
+      "path": "estimation/early/contest_7115/attempt1/chain_1.csv",
+      "sha256": "b3f60797322449508256a044e308a7892413189493034d3b70d39b6d88ac2620"
+    },
+    {
+      "path": "estimation/early/contest_7115/attempt1/chain_2.csv",
+      "sha256": "e1a8f9decccb65ce10277786dedff8c0552072d385ac790838fabb3ebce849b7"
+    },
+    {
+      "path": "estimation/early/contest_7115/attempt1/chain_3.csv",
+      "sha256": "a645d9c44cca2b9f51a8ae6b14c53e8a999fc0aacd703022b89b772ed260a3ea"
+    },
+    {
+      "path": "estimation/early/contest_7115/attempt1/chain_4.csv",
+      "sha256": "f4832aa2b69033ad258033fc2620ef018bb864718c82bfbd36ab7b594cb95e85"
+    },
+    {
+      "path": "estimation/full/contest_7115/attempt1/chain_1.csv",
+      "sha256": "15ac5971910278b30272e7a4be98043754042816b1318ed412fda46f4b53f762"
+    },
+    {
+      "path": "estimation/full/contest_7115/attempt1/chain_2.csv",
+      "sha256": "213a326fdcb8e8f344315bd08fe091e7b2e37da513b9098c2f99a9d528c996c3"
+    },
+    {
+      "path": "estimation/full/contest_7115/attempt1/chain_3.csv",
+      "sha256": "746464ab34228bf3e33885f1f7cbe1e91975df157806f531222b80b4abfd3dbc"
+    },
+    {
+      "path": "estimation/full/contest_7115/attempt1/chain_4.csv",
+      "sha256": "20988d7b3a663c88e3a0054e201908783ea97149de52dfc4f925718f07712131"
+    },
+    {
+      "path": "estimation/early/contest_7162/attempt1/chain_1.csv",
+      "sha256": "1417bd267da80d0373c175607cf6260fb1469bbde9569022aa1eafe431c78191"
+    },
+    {
+      "path": "estimation/early/contest_7162/attempt1/chain_2.csv",
+      "sha256": "b461f304b730c678ca904f0489b3349ef24e2e490a8a58fe1e3cd75fd473ca2d"
+    },
+    {
+      "path": "estimation/early/contest_7162/attempt1/chain_3.csv",
+      "sha256": "4699b9912ea81c4e1c66df4f278d03598e72af5ead7cfa06a01cd4909d75e378"
+    },
+    {
+      "path": "estimation/early/contest_7162/attempt1/chain_4.csv",
+      "sha256": "033206a68a08b083e8a895bcb3abe9cc3ce2a05f40738ed10fb912e93fbb096b"
+    },
+    {
+      "path": "estimation/full/contest_7162/attempt1/chain_1.csv",
+      "sha256": "3a65ada7b6c871e5a66c3eb9c49fb0d42c814154c33662194e68a7ed5f5bcbb2"
+    },
+    {
+      "path": "estimation/full/contest_7162/attempt1/chain_2.csv",
+      "sha256": "448a7c873bb052a077461eb6233683c9440f37e896ca871432e0e1d856fd9362"
+    },
+    {
+      "path": "estimation/full/contest_7162/attempt1/chain_3.csv",
+      "sha256": "32e014a905dc5087c93cfc90865023516dcf2a019afb7a901926be3da4b1d433"
+    },
+    {
+      "path": "estimation/full/contest_7162/attempt1/chain_4.csv",
+      "sha256": "a037ef97b2df505fdc6c505c1e6c58214ffbe7d0e5383d9a646a35a869002471"
+    },
+    {
+      "path": "estimation/early/contest_7634/attempt1/chain_1.csv",
+      "sha256": "ba306119200307ea2e949510cd57085c7896dc366182c04fb00aa5f09de67faf"
+    },
+    {
+      "path": "estimation/early/contest_7634/attempt1/chain_2.csv",
+      "sha256": "83c880bfa8e9ea1423b712c66e1d998a30f83e057f67406af8645fb574b86ba5"
+    },
+    {
+      "path": "estimation/early/contest_7634/attempt1/chain_3.csv",
+      "sha256": "888579240aab15129f6bbdda4f5908c3ff46706cb8f8b511344cf7b24feeabc2"
+    },
+    {
+      "path": "estimation/early/contest_7634/attempt1/chain_4.csv",
+      "sha256": "02a183dd04597430094d08ac7c2c5bebe4440f28e0bc4e1f3c0eddbe88d42a2c"
+    },
+    {
+      "path": "estimation/full/contest_7634/attempt1/chain_1.csv",
+      "sha256": "9ca7f073234f4a60047dc2ba321a8f26cc55e772029314beebcfb359bcbf7b5e"
+    },
+    {
+      "path": "estimation/full/contest_7634/attempt1/chain_2.csv",
+      "sha256": "a2dc6e7b4f789a3c069fb6d4eac7674eaa9a54cbd6e0dc9134c1e035f6353844"
+    },
+    {
+      "path": "estimation/full/contest_7634/attempt1/chain_3.csv",
+      "sha256": "b2d916b6abf868684be23b5fcc748ab10717cd9f849f8005ad361bfc8ab1f756"
+    },
+    {
+      "path": "estimation/full/contest_7634/attempt1/chain_4.csv",
+      "sha256": "2f6c993d5132bedec63e533ada7b7a15f12dd1e2a388632eac109e880df10639"
+    },
+    {
+      "path": "estimation/early/contest_7878/attempt1/chain_1.csv",
+      "sha256": "212414875d3f1366bd17442883b65d88a3ea90a61a43b12c49d9070507006aaf"
+    },
+    {
+      "path": "estimation/early/contest_7878/attempt1/chain_2.csv",
+      "sha256": "5ff7522f5f8213d4e0b23e65c2ac38da8290294685bd5f74d5e17465478494a1"
+    },
+    {
+      "path": "estimation/early/contest_7878/attempt1/chain_3.csv",
+      "sha256": "a2e87ed041cce5d641c37050e1d3b3ce77ecb04306059543f5897604be551852"
+    },
+    {
+      "path": "estimation/early/contest_7878/attempt1/chain_4.csv",
+      "sha256": "8bb8a91381e6ebf57edff4b65f31b49c06d28c281fe5ab84e3328a67439d2cb3"
+    },
+    {
+      "path": "estimation/full/contest_7878/attempt1/chain_1.csv",
+      "sha256": "359d3a1beb18092c744522ff35271bede442ea80310d1250738aefe56f961b02"
+    },
+    {
+      "path": "estimation/full/contest_7878/attempt1/chain_2.csv",
+      "sha256": "6fa76b7568f121fbc5f0c955bb179c8dc6de77fde883a6544f967b1a1df4082a"
+    },
+    {
+      "path": "estimation/full/contest_7878/attempt1/chain_3.csv",
+      "sha256": "9516a740b29bfe082819a30173d9a8db2889d39c7a9ea91cd527e2b86c3cfee4"
+    },
+    {
+      "path": "estimation/full/contest_7878/attempt1/chain_4.csv",
+      "sha256": "a1a5b86088b56ca261ff433a105bbe8651bd502c18c908abbb9d9911440dc2d8"
+    },
+    {
+      "path": "estimation/early/contest_8076/attempt1/chain_1.csv",
+      "sha256": "b8babd29b62f42596870eda752a1ceeae6fa9f553d65c803e6d557f7a07790c3"
+    },
+    {
+      "path": "estimation/early/contest_8076/attempt1/chain_2.csv",
+      "sha256": "d53e914b69487347b17e327178a440fb416434728bc8cca113e1b9ed3f9a894f"
+    },
+    {
+      "path": "estimation/early/contest_8076/attempt1/chain_3.csv",
+      "sha256": "4fb40cdd99dc6d96a64d62f1ce0779a694a8decc644ae423a763601621ce93c7"
+    },
+    {
+      "path": "estimation/early/contest_8076/attempt1/chain_4.csv",
+      "sha256": "ec9598b6d2a2c613a3180fa2912ca1fe540c639701243c58528d81c10610fa2a"
+    },
+    {
+      "path": "estimation/full/contest_8076/attempt2/chain_1.csv",
+      "sha256": "74c279e708ed6c890594400fa6532a312a89c18890ce5b1d529f1d3c6e80ef87"
+    },
+    {
+      "path": "estimation/full/contest_8076/attempt2/chain_2.csv",
+      "sha256": "ad4a3acfd8e9223b7547c1e119770e8b66297554b6e5392a7588fd4142b0e555"
+    },
+    {
+      "path": "estimation/full/contest_8076/attempt2/chain_3.csv",
+      "sha256": "091eb5186b4e23f0a93f8d9de709025197d090541648ae980d5161e3e74da30d"
+    },
+    {
+      "path": "estimation/full/contest_8076/attempt2/chain_4.csv",
+      "sha256": "9fc0a4149bf7c03ec15879d8040e9f6b9277109b4e47f4e379ea2ac4a659cc1d"
+    },
+    {
+      "path": "estimation/early/contest_8078/attempt1/chain_1.csv",
+      "sha256": "af3a30779e30617a1481193e8aee356689e9cb16aa86e9ef36789d720fa31340"
+    },
+    {
+      "path": "estimation/early/contest_8078/attempt1/chain_2.csv",
+      "sha256": "c1c06e4149730f687f68f70a62d40167e67ba1a4bfe54d9637480c783cee5605"
+    },
+    {
+      "path": "estimation/early/contest_8078/attempt1/chain_3.csv",
+      "sha256": "0710326267f8a2b4f576b679c5afa91f7c39bdc439c41fc50d99c8b35cd1f2d7"
+    },
+    {
+      "path": "estimation/early/contest_8078/attempt1/chain_4.csv",
+      "sha256": "36cceb9b2bd9759290f6367aadeecb928a1097b5246cbf59ec29a6d2cd1e37c4"
+    },
+    {
+      "path": "estimation/full/contest_8078/attempt1/chain_1.csv",
+      "sha256": "5c36817356737a91dafd7d34feded6dfb263e8a9aa25aee89721bb35de99c445"
+    },
+    {
+      "path": "estimation/full/contest_8078/attempt1/chain_2.csv",
+      "sha256": "8ed5b5c966f3b055c084c4aadb7001206b33ac146d46c4004623d79a3f75da3f"
+    },
+    {
+      "path": "estimation/full/contest_8078/attempt1/chain_3.csv",
+      "sha256": "1c5c1ed662969e2c863d8da609b5b68ddd70687e0b89fb8f6c06ddca2d65912c"
+    },
+    {
+      "path": "estimation/full/contest_8078/attempt1/chain_4.csv",
+      "sha256": "6e8d1e91e07b97253c681ba4ebca9a0f2d77a5a84eeebebd6a24c2638a87fe07"
+    },
+    {
+      "path": "estimation/early/contest_8219/attempt3/chain_1.csv",
+      "sha256": "e0816f814821053701b51836ba84b96e8eb2f94733371bafbf7995125da89d35"
+    },
+    {
+      "path": "estimation/early/contest_8219/attempt3/chain_2.csv",
+      "sha256": "965617a56930990312c022b4f6344bbce87488ac2a60c68717ea00d4c1c1cf21"
+    },
+    {
+      "path": "estimation/early/contest_8219/attempt3/chain_3.csv",
+      "sha256": "d4e7bb736fbcb82375b0b69ac82bde33f9d973a2f8b7b134ab93d7777ef1d8c9"
+    },
+    {
+      "path": "estimation/early/contest_8219/attempt3/chain_4.csv",
+      "sha256": "3e02f7315305768c0253a702ceda2808c6e8acce6fb886cf2b6e6017a75a3141"
+    },
+    {
+      "path": "estimation/full/contest_8219/attempt1/chain_1.csv",
+      "sha256": "9125a7f291795c83b53aae61d9104f6684cf1763338cba2ac74aade603e5f7e4"
+    },
+    {
+      "path": "estimation/full/contest_8219/attempt1/chain_2.csv",
+      "sha256": "4a7e648af13251fe81b43e5aaf6a538e2a1b543d57216f69d6b45c30037f12b5"
+    },
+    {
+      "path": "estimation/full/contest_8219/attempt1/chain_3.csv",
+      "sha256": "1d5f7ef781119c21b00eb471b3dfa76b478ec9f106cba9c713f504708660bb44"
+    },
+    {
+      "path": "estimation/full/contest_8219/attempt1/chain_4.csv",
+      "sha256": "59e9ceb8be6007cf53a633ba9d0a0ff584b0e831e0ca7cbab4c4cb7b672d04cd"
+    },
+    {
+      "path": "estimation/early/contest_8396/attempt1/chain_1.csv",
+      "sha256": "8a7bda8e15eb8a280046fd308b2a28dc87b0614a189fec6a08058c42b2d8c9a3"
+    },
+    {
+      "path": "estimation/early/contest_8396/attempt1/chain_2.csv",
+      "sha256": "25956487ebda4045c364ad58dc62b57e6dc9c150cbc2de39f3d1af1bd257e7f7"
+    },
+    {
+      "path": "estimation/early/contest_8396/attempt1/chain_3.csv",
+      "sha256": "58fb4947b16471e3f6070dc5f8d5b1dc09cc6c5da7f472b9c71a3a42b550dbd0"
+    },
+    {
+      "path": "estimation/early/contest_8396/attempt1/chain_4.csv",
+      "sha256": "4c43dfe1fa8a1d13ad2f7d953b1582dd3b46c033eab764d19dc9430c5799e2c5"
+    },
+    {
+      "path": "estimation/full/contest_8396/attempt1/chain_1.csv",
+      "sha256": "42532ed66ced78dce9fde6b850bd43f8be4aa361201c546a204c915f7c36825f"
+    },
+    {
+      "path": "estimation/full/contest_8396/attempt1/chain_2.csv",
+      "sha256": "18f3d5516b449625c350a895f62f77a97a4f1f9d1a224314c46423e3b5738ae5"
+    },
+    {
+      "path": "estimation/full/contest_8396/attempt1/chain_3.csv",
+      "sha256": "480c4e47e317b19507b6a142b2ea1bbd8274c6e5a3bb14377b34dcbe51bd281c"
+    },
+    {
+      "path": "estimation/full/contest_8396/attempt1/chain_4.csv",
+      "sha256": "46f7e9f20539f7447c357850a9eba4edc09ff724cc783f9250c406e313848aa9"
+    },
+    {
+      "path": "estimation/early/contest_9120/attempt1/chain_1.csv",
+      "sha256": "d6b45dcde10c235cd71e0429d8711409b674ab0b678a175ab51dc171ec871ea0"
+    },
+    {
+      "path": "estimation/early/contest_9120/attempt1/chain_2.csv",
+      "sha256": "dfb2fa4d1c9e6c031b685480006efd84f4e013866bab4f4a908470f576e90b50"
+    },
+    {
+      "path": "estimation/early/contest_9120/attempt1/chain_3.csv",
+      "sha256": "5f37643d4ebaca6877701e8a75c1f2a780afb7fbe0cf8f60fcf5e90c55e735c6"
+    },
+    {
+      "path": "estimation/early/contest_9120/attempt1/chain_4.csv",
+      "sha256": "5fdc15b75872b24da257a6dbd08a062182feca433497f4880bd5499dfe9ba71f"
+    },
+    {
+      "path": "estimation/full/contest_9120/attempt1/chain_1.csv",
+      "sha256": "09a9b04b3f1455117b1c49606595ffce65ab980fb08fd87d24e8fb990f2f0820"
+    },
+    {
+      "path": "estimation/full/contest_9120/attempt1/chain_2.csv",
+      "sha256": "014015c08c0f2829b337e9995929f2b802ecc069dbe8f6021a868dc41866035d"
+    },
+    {
+      "path": "estimation/full/contest_9120/attempt1/chain_3.csv",
+      "sha256": "0d81e5c6f82720cf862452dfbdcdb749770260c592527779b2781297e97ff987"
+    },
+    {
+      "path": "estimation/full/contest_9120/attempt1/chain_4.csv",
+      "sha256": "19600a9ab15566a2dbcbaa3e1de40a58a3ec0ecb62b44fa65a9b5a9c8ded6aa1"
+    },
+    {
+      "path": "estimation/early/contest_9949/attempt1/chain_1.csv",
+      "sha256": "a49b853c56bb049905910f6acf2fe9d41179895a90d8eef61e47d479c3410593"
+    },
+    {
+      "path": "estimation/early/contest_9949/attempt1/chain_2.csv",
+      "sha256": "b06eb6b48d85ae52aba971efcb62dd477c1ee1e3eb8615c0f2d1bd5525844efb"
+    },
+    {
+      "path": "estimation/early/contest_9949/attempt1/chain_3.csv",
+      "sha256": "4147a5af09e34bbe460b92d2c22808985b2e0172387a297d1238051f211a38fb"
+    },
+    {
+      "path": "estimation/early/contest_9949/attempt1/chain_4.csv",
+      "sha256": "a279555ca051a09358fad498bb973a04a0204a67a883e9a3aece7afbb889126c"
+    },
+    {
+      "path": "estimation/full/contest_9949/attempt1/chain_1.csv",
+      "sha256": "07979739af262a2c0df105fdd293e49aa329e21966fd4f9c3bbcb580f9892d1f"
+    },
+    {
+      "path": "estimation/full/contest_9949/attempt1/chain_2.csv",
+      "sha256": "ef6c73892581a18324598e7defa52f5a7e5155acac0dccb4b0903e94b87bf9e6"
+    },
+    {
+      "path": "estimation/full/contest_9949/attempt1/chain_3.csv",
+      "sha256": "edb539d124e6ef6490447decf59a6f5191520015564b16a319bac971b7fd2349"
+    },
+    {
+      "path": "estimation/full/contest_9949/attempt1/chain_4.csv",
+      "sha256": "5462aaa2307247e2130aafe1fefe03581ddfe81f9112a9fd1b3241dddfc47649"
+    },
+    {
+      "path": "estimation/early/contest_10200/attempt1/chain_1.csv",
+      "sha256": "c99df64fa5215006349c590a68e2c173d3f316c67760758ba2a6c6b62c9d1f70"
+    },
+    {
+      "path": "estimation/early/contest_10200/attempt1/chain_2.csv",
+      "sha256": "56b3bd009960fc99bc7d0c7321c325a5806ece40052ea80b670ff0686d55a4de"
+    },
+    {
+      "path": "estimation/early/contest_10200/attempt1/chain_3.csv",
+      "sha256": "a24b068be7d0740fbb27a9fd6be86d0e28847bb1b3cad558b15f9713069e5f3b"
+    },
+    {
+      "path": "estimation/early/contest_10200/attempt1/chain_4.csv",
+      "sha256": "f721c9e3e0f9d482cfae8b40ec557b5869e9f4d82461718f83e3bf2a338a09d5"
+    },
+    {
+      "path": "estimation/full/contest_10200/attempt1/chain_1.csv",
+      "sha256": "5c66a283fcc4b2e7369fb9dc84cfb3fa0e458831ddb57851cff7e84030dc3461"
+    },
+    {
+      "path": "estimation/full/contest_10200/attempt1/chain_2.csv",
+      "sha256": "dc7557b3fb9727c94cb25b4d10688936ca7be744b48b58a237d71a8ce1ccff2b"
+    },
+    {
+      "path": "estimation/full/contest_10200/attempt1/chain_3.csv",
+      "sha256": "cdf8be7f260f2a0495ed3efd1107bfb3d7af20782c10e080a4857e48467192e4"
+    },
+    {
+      "path": "estimation/full/contest_10200/attempt1/chain_4.csv",
+      "sha256": "56091580c62c2ed2803c7898109050da370c8f8857764c6b12b7e4734fda08d6"
+    },
+    {
+      "path": "estimation/early/contest_10684/attempt1/chain_1.csv",
+      "sha256": "300a8d2934d279105802734c6885cf7786175f81ff06fb613f7b42e667aa92c9"
+    },
+    {
+      "path": "estimation/early/contest_10684/attempt1/chain_2.csv",
+      "sha256": "e87d35dcdf7894edda3e04779b13b6396d6ab5485809f4c9c31c7baad2169973"
+    },
+    {
+      "path": "estimation/early/contest_10684/attempt1/chain_3.csv",
+      "sha256": "f70fb10a91e517cf7c08d5891e289102821a48a3722e3fab3d204d6dcc7e60ed"
+    },
+    {
+      "path": "estimation/early/contest_10684/attempt1/chain_4.csv",
+      "sha256": "66fc519ecc1fd3aa1186b2dd7a7babfd22f88e69ad259c6f1fc5c29f3a3ecb45"
+    },
+    {
+      "path": "estimation/full/contest_10684/attempt1/chain_1.csv",
+      "sha256": "5aa1b5fdfaa93787467d8d0444d2c92ba9b145e2cdcc9dfdffe72e30dfe3ea0e"
+    },
+    {
+      "path": "estimation/full/contest_10684/attempt1/chain_2.csv",
+      "sha256": "695d34b964bf060be20da8b62cb29dec201b9c9aa57e47792b61a1a499744760"
+    },
+    {
+      "path": "estimation/full/contest_10684/attempt1/chain_3.csv",
+      "sha256": "a56e35b3b5f193f4f680f6b4ca62c5e02f9a6f09b16459b5bf96ee4868dba07e"
+    },
+    {
+      "path": "estimation/full/contest_10684/attempt1/chain_4.csv",
+      "sha256": "78573231cea3bfab7c3bb76554a750d5268d8b4901477e46925eb9b54a757ea7"
+    },
+    {
+      "path": "estimation/early/contest_13333/attempt1/chain_1.csv",
+      "sha256": "2fb151abb0a59cd6496d50d90548b7c44025bb5b2120cdb3606492c2679439ad"
+    },
+    {
+      "path": "estimation/early/contest_13333/attempt1/chain_2.csv",
+      "sha256": "0db64e512cb1c4ac0d02c9327865cf67d22cd46fb3ff91f6bcb4087f55d7fe2e"
+    },
+    {
+      "path": "estimation/early/contest_13333/attempt1/chain_3.csv",
+      "sha256": "b4ff5f069c38ae7ecf7c60046c5459fed2fd469106143bd7e91c4bd63dcbc477"
+    },
+    {
+      "path": "estimation/early/contest_13333/attempt1/chain_4.csv",
+      "sha256": "951a15e015ad53b27d029f330865a7585be9f58d4b5add38562cb57bd9662e35"
+    },
+    {
+      "path": "estimation/full/contest_13333/attempt1/chain_1.csv",
+      "sha256": "c85f1f417bdb24ed36b694d713374c492f048c0a87cd02147cc4ee2ee43baa26"
+    },
+    {
+      "path": "estimation/full/contest_13333/attempt1/chain_2.csv",
+      "sha256": "38c25e6c3b67e2db6130c100ca64359d569c6a0e75dab8b1d22e9d9f09252749"
+    },
+    {
+      "path": "estimation/full/contest_13333/attempt1/chain_3.csv",
+      "sha256": "b77600b238ffb46babdb5672f714f92d1f2bd074f65acf7f657c47a4eaf9261f"
+    },
+    {
+      "path": "estimation/full/contest_13333/attempt1/chain_4.csv",
+      "sha256": "60e89a90aef80e65cbd37dd51decf4d2a591ed912790a92859ed4cc338a464c7"
+    },
+    {
+      "path": "estimation/early/contest_14242/attempt1/chain_1.csv",
+      "sha256": "15aa4e4448ceb9056336ad9edb5783856a3b579779d7545b7e14bd9e7299051e"
+    },
+    {
+      "path": "estimation/early/contest_14242/attempt1/chain_2.csv",
+      "sha256": "f25d403969d5634f3548656e23d3fda029fa86d15350e03498816fe1c4cc645f"
+    },
+    {
+      "path": "estimation/early/contest_14242/attempt1/chain_3.csv",
+      "sha256": "a80f59ebd921883d78950449cdba523bf38b6a93f30390411dd3b93eccacd419"
+    },
+    {
+      "path": "estimation/early/contest_14242/attempt1/chain_4.csv",
+      "sha256": "5827f18cbd07e679be72de254c716f7242df9d2d19743feca89e70e098cb1f07"
+    },
+    {
+      "path": "estimation/full/contest_14242/attempt1/chain_1.csv",
+      "sha256": "cac6642878feb181e3335469ae56a1afa792007e4d292c04f5f7581bbbe1e188"
+    },
+    {
+      "path": "estimation/full/contest_14242/attempt1/chain_2.csv",
+      "sha256": "1491fea308e72b93e512a907704d963863227f45d591eeb4d06a0f67e1bd5235"
+    },
+    {
+      "path": "estimation/full/contest_14242/attempt1/chain_3.csv",
+      "sha256": "7e800be482180b0430820f7a95ef9590011cd8aa56691b2b70ed263ad7965eda"
+    },
+    {
+      "path": "estimation/full/contest_14242/attempt1/chain_4.csv",
+      "sha256": "4a4d0ef1da6c708c2654be7175796a76efffdb8ed4686e52965b8c684af7d1ef"
+    },
+    {
+      "path": "estimation/early/contest_14420/attempt1/chain_1.csv",
+      "sha256": "26e849e1a5d058d54768adcde1ff056d681576e5984cbbbaacc81cb2cb03859c"
+    },
+    {
+      "path": "estimation/early/contest_14420/attempt1/chain_2.csv",
+      "sha256": "00117cb677fdff14dd14b2dad401e81d54670c360712a2b28f705d3d993e2ee1"
+    },
+    {
+      "path": "estimation/early/contest_14420/attempt1/chain_3.csv",
+      "sha256": "9b903e94a48d7f531caae3e75c7e28e319e2fb93c5b9c4b3571b64337319dbe9"
+    },
+    {
+      "path": "estimation/early/contest_14420/attempt1/chain_4.csv",
+      "sha256": "d10b19c63aeb2a9796cd5f2dd6e01ae8c0c24e6653fb7719be92b88bbdfc91bb"
+    },
+    {
+      "path": "estimation/full/contest_14420/attempt1/chain_1.csv",
+      "sha256": "154bc8daa8ad3ee985b60c00ed9c119d44bc691b085911d0f80fff584e8416cd"
+    },
+    {
+      "path": "estimation/full/contest_14420/attempt1/chain_2.csv",
+      "sha256": "eec07eb6dde8ac610c3fcec9a1344825e44bd306e76432a32c5f89eaacb1a2d9"
+    },
+    {
+      "path": "estimation/full/contest_14420/attempt1/chain_3.csv",
+      "sha256": "5b1a171b8c2b5c813699aa715dc7ea136139af28b5d6f67466c652495061aaa6"
+    },
+    {
+      "path": "estimation/full/contest_14420/attempt1/chain_4.csv",
+      "sha256": "cba0706c753b7565cf97e57fa58cd8ed4a9f184dbbce9005fa31f7909204059f"
+    },
+    {
+      "path": "estimation/early/contest_18045/attempt1/chain_1.csv",
+      "sha256": "a9415c457bf7b174a251109f0d701ed8909e4ab514629b1140488a8cae580626"
+    },
+    {
+      "path": "estimation/early/contest_18045/attempt1/chain_2.csv",
+      "sha256": "995a55a2e0dbed0cc0fea7875ab276f9692fa020f9328f80a90fecee92f89e36"
+    },
+    {
+      "path": "estimation/early/contest_18045/attempt1/chain_3.csv",
+      "sha256": "d3401fecec0fab54b5669192940e50784910537b4c458d9f86003f28c7f7eef4"
+    },
+    {
+      "path": "estimation/early/contest_18045/attempt1/chain_4.csv",
+      "sha256": "2231fefc7ccfddce8f5b096ede8c0a7474be30ef42a79072d0ea3547673ebf6e"
+    },
+    {
+      "path": "estimation/full/contest_18045/attempt1/chain_1.csv",
+      "sha256": "ad45a2e782fa12a7554051c7cffe3517727be6fe750cce13e4cf7c29b7a1f778"
+    },
+    {
+      "path": "estimation/full/contest_18045/attempt1/chain_2.csv",
+      "sha256": "921aca809f5a57b534f29a167f99c87b6f715d5416a16199189148fbdc7be5ae"
+    },
+    {
+      "path": "estimation/full/contest_18045/attempt1/chain_3.csv",
+      "sha256": "632bccf0fdb351ec57aeb05a2097775f823f56c5a0f16cd55f4f94f056a45865"
+    },
+    {
+      "path": "estimation/full/contest_18045/attempt1/chain_4.csv",
+      "sha256": "0ada6d2fb626ae6c29e5d296c2f2c2aee65b7e026f8e6c18886e2759d0e41093"
+    },
+    {
+      "path": "estimation/early/contest_19018/attempt1/chain_1.csv",
+      "sha256": "388ccb8817649c93eec57e4ad7b9cf6c2940f61fd60325a0db538b7d84f5830b"
+    },
+    {
+      "path": "estimation/early/contest_19018/attempt1/chain_2.csv",
+      "sha256": "37c9a3c4e8a7aa072b41cd566ea4e0d80cd69e216b3f14c8da16801a280cd225"
+    },
+    {
+      "path": "estimation/early/contest_19018/attempt1/chain_3.csv",
+      "sha256": "4a75cd1e1d9b97145f26868cd9cd008a4a96a1a894adca7e2c70ef17bbc4c849"
+    },
+    {
+      "path": "estimation/early/contest_19018/attempt1/chain_4.csv",
+      "sha256": "7f9e0fbbe0238322b9b12d9bb6d56ce2b1f705b61a1e91999700c6503601eac8"
+    },
+    {
+      "path": "estimation/full/contest_19018/attempt1/chain_1.csv",
+      "sha256": "c70d7b4b596b1e28718145f93d33db9158fd41cfeba45b8ff9f4def84e1756c5"
+    },
+    {
+      "path": "estimation/full/contest_19018/attempt1/chain_2.csv",
+      "sha256": "0e11399948ff3f0f183ad157c7c416d06c9b923409042850895ca4aabd1386c8"
+    },
+    {
+      "path": "estimation/full/contest_19018/attempt1/chain_3.csv",
+      "sha256": "e63d4335b39752c6ddc9c1a2ad483dad0b62b2c82797e841108270027cbe4750"
+    },
+    {
+      "path": "estimation/full/contest_19018/attempt1/chain_4.csv",
+      "sha256": "23e9d10de9ecbe6f710ac96696a629585c871224678e201120fc5d5ea704647a"
+    },
+    {
+      "path": "estimation/early/contest_19991/attempt1/chain_1.csv",
+      "sha256": "1823311ebf46c09ab05c9893c4e148f81101fbf22312070d5996e699de775af8"
+    },
+    {
+      "path": "estimation/early/contest_19991/attempt1/chain_2.csv",
+      "sha256": "acd4e6f92aeb4f120cd477e508a28f37582743aa78d79657de43940bd17f86d2"
+    },
+    {
+      "path": "estimation/early/contest_19991/attempt1/chain_3.csv",
+      "sha256": "f8a2e1a459f478b9ea14d1344344a04c428519392eec4c17697d02f37e7ecaa5"
+    },
+    {
+      "path": "estimation/early/contest_19991/attempt1/chain_4.csv",
+      "sha256": "6d3dfb6a292313916a05eaf2a64d49890e66b6796ff1b02ce6f60d02597c75c4"
+    },
+    {
+      "path": "estimation/full/contest_19991/attempt1/chain_1.csv",
+      "sha256": "c8ac96ef281f3c233bdc0c0de4c9cc1baceb7c3e18b52828e1bdfd23501fe10a"
+    },
+    {
+      "path": "estimation/full/contest_19991/attempt1/chain_2.csv",
+      "sha256": "517505b8cfaa3b4a7c03cff941a0f10144b070ed0a56ed1eefe1ff7bd169dbde"
+    },
+    {
+      "path": "estimation/full/contest_19991/attempt1/chain_3.csv",
+      "sha256": "25fc9e11a3781370fe724833d51983912b3874dcfb68f0f9d0f355cb664a2fae"
+    },
+    {
+      "path": "estimation/full/contest_19991/attempt1/chain_4.csv",
+      "sha256": "e7680eeafe780b3846bcffd0fdd63bf886ef9cf090d217656f5254d8a9035404"
+    },
+    {
+      "path": "estimation/early/contest_20270/attempt1/chain_1.csv",
+      "sha256": "9d1728b2935e6953503d76938fd9123edef0e39b3a64aa770c6295d9d2470c64"
+    },
+    {
+      "path": "estimation/early/contest_20270/attempt1/chain_2.csv",
+      "sha256": "8a8d369069af38a0a74983d36730d9eb6597943c93172d8343f5eb89a1c0ecff"
+    },
+    {
+      "path": "estimation/early/contest_20270/attempt1/chain_3.csv",
+      "sha256": "f8f99bbbd86ecc0d88afafac921ac0cb55398cf1124abdf4addab967fa3b11d8"
+    },
+    {
+      "path": "estimation/early/contest_20270/attempt1/chain_4.csv",
+      "sha256": "b998ae6f2890ffd005635bc55cce97065421a699dcec00d49c0d78911c070801"
+    },
+    {
+      "path": "estimation/full/contest_20270/attempt1/chain_1.csv",
+      "sha256": "29c875b07564044225e1b7e9819b0964156500e94d568294d0a1e44d8351467d"
+    },
+    {
+      "path": "estimation/full/contest_20270/attempt1/chain_2.csv",
+      "sha256": "ff12b17cc6a4f612065f73bff04bd8c67e22f6ce3c50d150405291c96f7f33eb"
+    },
+    {
+      "path": "estimation/full/contest_20270/attempt1/chain_3.csv",
+      "sha256": "91d8df97ad7fd4d12589e4ee3540ca2b49c2e5e2a8ec97b320f8dac7198dc729"
+    },
+    {
+      "path": "estimation/full/contest_20270/attempt1/chain_4.csv",
+      "sha256": "a9c4b8ca2bf6e72d7a962b7807b17304af43d53d7ad84f84883c05a2ed4fcee6"
+    },
+    {
+      "path": "estimation/early/contest_21669/attempt1/chain_1.csv",
+      "sha256": "5963f8bb3e731bc530eb2085f0def870e2ba89788581f8cddccd2376eeff842e"
+    },
+    {
+      "path": "estimation/early/contest_21669/attempt1/chain_2.csv",
+      "sha256": "34b61a140f763aadcc9f2fe70919dc26409713023b4b57c096af488032bec964"
+    },
+    {
+      "path": "estimation/early/contest_21669/attempt1/chain_3.csv",
+      "sha256": "29aeb2f4b14da3fc8305651cb222e47b090e112b7d8a19e1fb61210acf2b38a7"
+    },
+    {
+      "path": "estimation/early/contest_21669/attempt1/chain_4.csv",
+      "sha256": "54bbb1bccb0c70b995b43025216606833c08acfb04ca51fc421f018033809153"
+    },
+    {
+      "path": "estimation/full/contest_21669/attempt1/chain_1.csv",
+      "sha256": "3f85a3cc53bf35217da12ed063a8d7c223f10c36e3af9cbe57d9489f62f90764"
+    },
+    {
+      "path": "estimation/full/contest_21669/attempt1/chain_2.csv",
+      "sha256": "0820ec0308331692999fbb1ecc07a6ae61a410ee07eac8e8ad00889c8511348b"
+    },
+    {
+      "path": "estimation/full/contest_21669/attempt1/chain_3.csv",
+      "sha256": "535d17a1f782fb8c48acaf1b04f54ea6e4f5eb9dd7785a922aa52a7bb43be84a"
+    },
+    {
+      "path": "estimation/full/contest_21669/attempt1/chain_4.csv",
+      "sha256": "b5af104cbb73db52471e16ccb448f5db4e32d0ba6590f1703d29ee0d84eae727"
+    },
+    {
+      "path": "estimation/early/contest_22962/attempt1/chain_1.csv",
+      "sha256": "90b47430dad1419de68433a3ed3bf32483686785c50db8feb07bef1bffc395d0"
+    },
+    {
+      "path": "estimation/early/contest_22962/attempt1/chain_2.csv",
+      "sha256": "3605123d667e811b393d5725bf0a5dcfba2cf17d75e2d4a4a98d2604934b0abb"
+    },
+    {
+      "path": "estimation/early/contest_22962/attempt1/chain_3.csv",
+      "sha256": "5c06b554c58ea9fe5d48f985b397e4fd1bf0a711013766be406c47f54647e4ec"
+    },
+    {
+      "path": "estimation/early/contest_22962/attempt1/chain_4.csv",
+      "sha256": "f72804e25f7affdd32784274ce9679e159e17788a9eb5bc8666fa009759e07a5"
+    },
+    {
+      "path": "estimation/full/contest_22962/attempt1/chain_1.csv",
+      "sha256": "7d3f9c38a073454fd3feb9850a9a164912cae60404f8736d76f5e746bb991bfb"
+    },
+    {
+      "path": "estimation/full/contest_22962/attempt1/chain_2.csv",
+      "sha256": "9429512d9e8af241a9ad03f7b476292468266338e48e92a519586464f684d7df"
+    },
+    {
+      "path": "estimation/full/contest_22962/attempt1/chain_3.csv",
+      "sha256": "9f482198caab089101b2fdd98686d7ee48cf6d52a22fba9380c11a59f903c24d"
+    },
+    {
+      "path": "estimation/full/contest_22962/attempt1/chain_4.csv",
+      "sha256": "27ff4c37d97f64bf689a74b9edaf574eaf90a8c64dc45831b1acd2f168cca7d9"
+    },
+    {
+      "path": "estimation/early/contest_23249/attempt1/chain_1.csv",
+      "sha256": "2fb0518efa494c8462b75862a4ec115692dd980f16700f660c9f93d1bca363ba"
+    },
+    {
+      "path": "estimation/early/contest_23249/attempt1/chain_2.csv",
+      "sha256": "57e6e70c82fcc69a8c3689f738cc2f4cbe8427c14070b9e06a604bc40f54624b"
+    },
+    {
+      "path": "estimation/early/contest_23249/attempt1/chain_3.csv",
+      "sha256": "3689aa0c909f60482eb40a91e6a8911e4bd0cbcd4586a188e03c8eef9ca6b249"
+    },
+    {
+      "path": "estimation/early/contest_23249/attempt1/chain_4.csv",
+      "sha256": "7ec28c6c9abb995577774f70d6a97a4aabc1d12d16fe6bb4056d9ed7eb2508e5"
+    },
+    {
+      "path": "estimation/full/contest_23249/attempt1/chain_1.csv",
+      "sha256": "eb23134f9c843c5b30c27965b6682c66701217c457130609641138e0f91da040"
+    },
+    {
+      "path": "estimation/full/contest_23249/attempt1/chain_2.csv",
+      "sha256": "eb9490e279ed796eee4b7dd42eaadf784cdea07b490b02691db510f0553dea9c"
+    },
+    {
+      "path": "estimation/full/contest_23249/attempt1/chain_3.csv",
+      "sha256": "ada769c9ceed01a5cae4de8efbf6d7789f12904b133e383df67fdcbe2635f363"
+    },
+    {
+      "path": "estimation/full/contest_23249/attempt1/chain_4.csv",
+      "sha256": "a3a99677daf4540d86270bb21e2a3aaea957399e131c5255c43913b773adb2e1"
+    },
+    {
+      "path": "estimation/early/contest_23652/attempt1/chain_1.csv",
+      "sha256": "c4346853c8570afa6a3aa07196fbfa951aa469210bf082140d0e08785c06d3ed"
+    },
+    {
+      "path": "estimation/early/contest_23652/attempt1/chain_2.csv",
+      "sha256": "b54d83c5e051ae4b43cc3d9e253d39c816ddf61f5f5ba76876aeabb992c56d04"
+    },
+    {
+      "path": "estimation/early/contest_23652/attempt1/chain_3.csv",
+      "sha256": "a1642fbdc9878b8efab427057a0665d90a436fbad970bc7aaf0ad4b818819994"
+    },
+    {
+      "path": "estimation/early/contest_23652/attempt1/chain_4.csv",
+      "sha256": "2e7439f45edb8ebdb73f88c79cd64da6b451c7e060b6355f18c845bfd81be60d"
+    },
+    {
+      "path": "estimation/full/contest_23652/attempt1/chain_1.csv",
+      "sha256": "aae5121ab4e27a524a2bac66e1866de7f09757d62c70074971fa128800c20c4a"
+    },
+    {
+      "path": "estimation/full/contest_23652/attempt1/chain_2.csv",
+      "sha256": "d4cf4e44d3aebfa8bdf31dcc715c125fcac99f03e7ae92df18bad66d607289a6"
+    },
+    {
+      "path": "estimation/full/contest_23652/attempt1/chain_3.csv",
+      "sha256": "46d8543df9e1cb487d402114920b8c22ec15fb75ff2df656ec2f428e2acde441"
+    },
+    {
+      "path": "estimation/full/contest_23652/attempt1/chain_4.csv",
+      "sha256": "c47cd60c936bf1ce4439444b89ab066e6c45f195180d0e095eca5dac381806c4"
+    },
+    {
+      "path": "estimation/early/contest_37077/attempt1/chain_1.csv",
+      "sha256": "57f4ef62a9f836c31bd44f120ccaecfe91d87eb6d2f1d288332e6b2e768ab986"
+    },
+    {
+      "path": "estimation/early/contest_37077/attempt1/chain_2.csv",
+      "sha256": "e56ff6cd30effb027a0b4028456346ec8fc271e98bcfb51ada4e673e5359023d"
+    },
+    {
+      "path": "estimation/early/contest_37077/attempt1/chain_3.csv",
+      "sha256": "e3e669d29397b5a9eeb3ad075e959fb4c5170a6ae5866b2d60ab86e43f676f6e"
+    },
+    {
+      "path": "estimation/early/contest_37077/attempt1/chain_4.csv",
+      "sha256": "89c6ccf59c1de4cd21aa2bb7be3a1604929f99301e48157de3b8b108cca4c731"
+    },
+    {
+      "path": "estimation/full/contest_37077/attempt1/chain_1.csv",
+      "sha256": "92f071dc121f121aff1c662fd5462581dc8bc5b156f4cac7964bb93927a88d88"
+    },
+    {
+      "path": "estimation/full/contest_37077/attempt1/chain_2.csv",
+      "sha256": "0134642f6a66f87af2b9c886cbe27fd4fbeacd6962d5de65e0e23b93c8fec766"
+    },
+    {
+      "path": "estimation/full/contest_37077/attempt1/chain_3.csv",
+      "sha256": "c5b9e5a90cab1f70e662c16058e347844061cf19ceabf24a40982ca013512446"
+    },
+    {
+      "path": "estimation/full/contest_37077/attempt1/chain_4.csv",
+      "sha256": "7721983d9786339f3bab395720109f307b597ffb91457f7a75a60b2574a9a851"
+    },
+    {
+      "path": "estimation/early/contest_38128/attempt1/chain_1.csv",
+      "sha256": "cdf22b8941a8ce6cbf381cddaa407f9155776f67fd5aac68b64a5aa92283f215"
+    },
+    {
+      "path": "estimation/early/contest_38128/attempt1/chain_2.csv",
+      "sha256": "3d81e841d74aef54f5e38acd13c863fda03f54c408f268f4d67577edcb218d6b"
+    },
+    {
+      "path": "estimation/early/contest_38128/attempt1/chain_3.csv",
+      "sha256": "8820af801ad935851fe259dfd974981cb80cd73b9492d4602ad8e0245d0bd989"
+    },
+    {
+      "path": "estimation/early/contest_38128/attempt1/chain_4.csv",
+      "sha256": "c2ee03952d05308dc809125ac413a2605b0537bef00aef77bb5bd9a4d4a0a115"
+    },
+    {
+      "path": "estimation/full/contest_38128/attempt1/chain_1.csv",
+      "sha256": "b8bff4e60ea10634c84d92d0658460e7a55e338a3cf36b832d601173a6c2a53b"
+    },
+    {
+      "path": "estimation/full/contest_38128/attempt1/chain_2.csv",
+      "sha256": "c93a9a639e2598218d8514ba7f8af67424ba6b2a91b293b8f32ea33faf9f5152"
+    },
+    {
+      "path": "estimation/full/contest_38128/attempt1/chain_3.csv",
+      "sha256": "0df168b3787e64b5e8f0a4e99b990f5ff508e78ec900f49191e136ab7fdfa706"
+    },
+    {
+      "path": "estimation/full/contest_38128/attempt1/chain_4.csv",
+      "sha256": "6a7d647390910a5a9218296ba18d058caecbf3b7959abc9ac6d0983cffef1dc2"
+    },
+    {
+      "path": "estimation/early/contest_38760/attempt1/chain_1.csv",
+      "sha256": "05337aee1dbaaf4ec70f7db5d5e3ec76400a776e6ce35f25bfa2db7a14b86b69"
+    },
+    {
+      "path": "estimation/early/contest_38760/attempt1/chain_2.csv",
+      "sha256": "73f95e3f395077c08a43e105038d14dd7a4fa2de37f8271d2569420647231185"
+    },
+    {
+      "path": "estimation/early/contest_38760/attempt1/chain_3.csv",
+      "sha256": "ea01e17185108af950b4033bd70f937ecf02031bac6399ba49d5e33a91ec88fe"
+    },
+    {
+      "path": "estimation/early/contest_38760/attempt1/chain_4.csv",
+      "sha256": "38a343d335e21939adb9845ed88ea3b0373158e3daf033112a74f864d8cbe4e7"
+    },
+    {
+      "path": "estimation/full/contest_38760/attempt1/chain_1.csv",
+      "sha256": "d330706950bc70fe24891c38460159e998acd1810917ad187273e9345bf94145"
+    },
+    {
+      "path": "estimation/full/contest_38760/attempt1/chain_2.csv",
+      "sha256": "660b7903586dfd6dae8740cac56f8757a4cff25311b10c0d2adceb6ab4106cae"
+    },
+    {
+      "path": "estimation/full/contest_38760/attempt1/chain_3.csv",
+      "sha256": "543dcd86e08133d92772f2dc736e21fc8dd5465d6f9c33a03dd3bf32b7393390"
+    },
+    {
+      "path": "estimation/full/contest_38760/attempt1/chain_4.csv",
+      "sha256": "361a9d6342efb1cbf50b2cd3804310827ad1bb0bf8740d6749519acf2094b324"
+    }
+  ]
+}

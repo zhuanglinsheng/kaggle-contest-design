@@ -1,0 +1,1113 @@
+--- PaperJK7.tex.before
++++ PaperJK7.tex.after
+@@ -409,7 +409,7 @@
+ 
+ % Bayesian Player
+ {
+-The model parameters are common knowledge. Public submission activity provides a proxy for effort; the theoretical model idealizes this indirect observation by treating past efforts as observable to both players. Neither player has additional private information about $y_t$. We study public Markov equilibria. Let $I_t$ denote the common history of public signals and past efforts, and define the posterior mean and variance by $\tilde y_t:=E(y_t\mid I_t)$ and $S_t:=E[(y_t-\tilde y_t)^2\mid I_t]$. Initially, $y_0\mid I_0\sim\mathcal N(\tilde y_0,S_0)$, where $\tilde y_0$ is publicly known and $S_0>0$ is fixed independently of $\lambda$. The initial filtering error is independent of future increments of $W$ and $B$.
++The model parameters are common knowledge. Public submission activity provides a proxy for effort; the theoretical model idealizes this indirect observation by treating past efforts as observable to both players. Neither player has additional private information about $y_t$. We study public Markov equilibria. Let $I_t$ denote the common history of public signals and past efforts, and define the posterior mean and variance by $\tilde y_t:=\mathbb E(y_t\mid I_t)$ and $S_t:=\mathbb E[(y_t-\tilde y_t)^2\mid I_t]$. Initially, $y_0\mid I_0\sim\mathcal N(\tilde y_0,S_0)$, where $\tilde y_0$ is publicly known and $S_0>0$ is fixed independently of $\lambda$. The initial filtering error is independent of future increments of $W$ and $B$.
+ }
+ Under standard linear-Gaussian assumptions, the Kalman-Bucy filter (Chapter 1.2 of \citealt{Bensoussan1992Control}; see also \citealt{frogerais2012various,barrau2017invariant}) implies
+ \begin{align}
+@@ -439,14 +439,14 @@
+ 
+ % Terminal Payoffs
+ {
+-The sign of $y_T$ determines the winner. Let $I_T$ denote the common information just before the terminal private scores are revealed. Since $y_T\mid I_T\sim\mathcal N(\tilde y_T,S_T)$, the expected terminal prizes are $G_i(\tilde y_T)=\theta\Phi(\tilde y_T/\sqrt{S_T})$ and $G_j(\tilde y_T)=\theta\Phi(-\tilde y_T/\sqrt{S_T})$, where $\Phi$ is the standard normal cumulative distribution function.
++The sign of $y_T$ determines the winner. Let $I_T$ denote the common information just before the terminal private scores are revealed. Since $y_T\mid I_T\sim\mathcal N(\tilde y_T,S_T)$, the expected terminal prizes are $\Pi_i(\tilde y_T)=\theta\Phi(\tilde y_T/\sqrt{S_T})$ and $\Pi_j(\tilde y_T)=\theta\Phi(-\tilde y_T/\sqrt{S_T})$, where $\Phi$ is the standard normal cumulative distribution function.
+ }
+ {Let $m_k(\tilde y,t)$ denote player $k$'s equilibrium Markov effort strategy. Taking player $j$'s strategy $q_{j,\tau}=m_j(\tilde y_\tau,\tau)$ as given, player $i$'s value is}
+ \begin{equation*}
+ 	{\color{black}V^i(\tilde y,t)
+ 	=\sup_{\{q_{i,\tau}\geq0\}_{\tau\in[t,T)}}
+ 	\mathbb{E}\left[
+-	G_i(\tilde y_T)-\int_t^T C_i(q_{i,\tau})d\tau
++	\Pi_i(\tilde y_T)-\int_t^T C_i(q_{i,\tau})d\tau
+ 	\,\middle|\,\tilde y_t=\tilde y
+ 	\right],}
+ \end{equation*}
+@@ -468,7 +468,7 @@
+ $V^i(+\infty,t)=\theta$,
+ $V^j(-\infty,t)=\theta$,
+ $V^j(+\infty,t)=0$,
+-and terminal conditions {$V^i(\tilde y,T)=G_i(\tilde y)$ and $V^j(\tilde y,T)=G_j(\tilde y)$ for all $\tilde y\in\mathbb R$.}
++and terminal conditions {$V^i(\tilde y,T)=\Pi_i(\tilde y)$ and $V^j(\tilde y,T)=\Pi_j(\tilde y)$ for all $\tilde y\in\mathbb R$.}
+ The following theorem establishes equilibrium existence and gives a leading-order effort formula for small incentive indices.
+ 
+ \begin{theorem}[{Equilibrium Existence and Leading-Order Effort}]\label{thm-equilibrium-effort}
+@@ -663,16 +663,16 @@
+ \[
+ {\hat y_{t_k}\mid\mathcal F_{k-1},t_k,\Theta}
+ \sim
+-\mathcal N\!\left(\mu_{k\mid k-1},V_{k\mid k-1}\right),
++\mathcal N\!\left(\mu_{k\mid k-1},\Omega_{k\mid k-1}\right),
+ \]
+ {Here $\mathcal F_{k-1}$ denotes the submission and public-leaderboard history strictly before $t_k$. The one-step-ahead predictive moments incorporate initial-state uncertainty, accumulated innovation, and preceding readouts. Appendix~\ref{app-leaderboard-recursion} gives their explicit sequential recursion. The leaderboard likelihood is therefore}
+ \begin{equation}\label{eq-obs_gap-prob}
+ {\mathcal L_{\mathrm{pub}}(\Theta)}
+ =
+ \prod_{k=1}^N
+-\phi\left(\hat y_{t_k}\mid\mu_{k\mid k-1},V_{k\mid k-1}\right).
+-\end{equation}
+-{After evaluating each predictive density, we use the readout in the latent-state update and, separately, in the perceived-state recursion in equation~\eqref{eq-filtered-y-update}. The moments $(\mu_{k\mid k},P_{k\mid k})$ belong to the auxiliary filter used for the leaderboard likelihood; the strategic belief pair $(\tilde y_t,S_t)$ continues to follow equations~\eqref{eq-filtered-y-update} and~\eqref{filtered-S}. The joint likelihood is proportional to $\mathcal L_i(\Theta)\mathcal L_j(\Theta)\mathcal L_{\mathrm{pub}}(\Theta)$, with all contributions evaluated using the same evolving public history.}
++\phi\left(\hat y_{t_k}\mid\mu_{k\mid k-1},\Omega_{k\mid k-1}\right).
++\end{equation}
++{After evaluating each predictive density, we use the readout in the latent-state update and, separately, in the perceived-state recursion in equation~\eqref{eq-filtered-y-update}. The moments $(\mu_{k\mid k},\mathsf P_{k\mid k})$ belong to the auxiliary filter used for the leaderboard likelihood; the strategic belief pair $(\tilde y_t,S_t)$ continues to follow equations~\eqref{eq-filtered-y-update} and~\eqref{filtered-S}. The joint likelihood is proportional to $\mathcal L_i(\Theta)\mathcal L_j(\Theta)\mathcal L_{\mathrm{pub}}(\Theta)$, with all contributions evaluated using the same evolving public history.}
+ 
+ %% Approximation
+ {We evaluate the likelihood using the leading-order policy from equation~\eqref{eq-equilibrium-effort}:}
+@@ -1076,17 +1076,17 @@
+ \subsubsection{Public-Private Leaderboard Disagreement Diagnostics.}
+ {Whereas the preceding diagnostic compares two precision measures, we now examine whether higher estimated precision is associated with less public--private disagreement. For contest $\ell$, we measure disagreement by the mean absolute gap between the two leaderboard paths:}
+ \[
+-D_\ell^{path}
++\mathcal D_\ell^{path}
+ =
+ \frac{1}{|\mathcal H_\ell|}
+ \sum_{h\in\mathcal H_\ell}
+ \left|y_{\ell h}-\hat y_{\ell h}\right|,
+ \]
+-{where $\mathcal H_\ell$ contains the hourly observation points in the contest-phase path, excluding the backfilled initialization window. Higher $\lambda$ reduces signal noise at a given readout interval, motivating a negative association with $D_\ell^{path}$; update frequency and score characteristics also affect observed disagreement.}
+-
+-{Because $\hat\lambda_\ell$ and $D_\ell^{path}$ use public data from the same period, their association may partly reflect shared path variation. We therefore also relate the early estimate $\hat\lambda_\ell^{early}$ to disagreement in the final quarter. Let $\mathcal H_\ell^{late}$ contain the hours in the final 25\% of the contest-phase window and define $D_\ell^{late}=|\mathcal H_\ell^{late}|^{-1}\sum_{h\in\mathcal H_\ell^{late}}|y_{\ell h}-\hat y_{\ell h}|$. Initialization hours are excluded when locating the cutoff.}
+-
+-{We regress $\log(1+D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$ for the full-path comparison and $\log(1+D_\ell^{late})$ on $\log(1+\hat\lambda_\ell^{early})$ for the time-split comparison.}
++{where $\mathcal H_\ell$ contains the hourly observation points in the contest-phase path, excluding the backfilled initialization window. Higher $\lambda$ reduces signal noise at a given readout interval, motivating a negative association with $\mathcal D_\ell^{path}$; update frequency and score characteristics also affect observed disagreement.}
++
++{Because $\hat\lambda_\ell$ and $\mathcal D_\ell^{path}$ use public data from the same period, their association may partly reflect shared path variation. We therefore also relate the early estimate $\hat\lambda_\ell^{early}$ to disagreement in the final quarter. Let $\mathcal H_\ell^{late}$ contain the hours in the final 25\% of the contest-phase window and define $\mathcal D_\ell^{late}=|\mathcal H_\ell^{late}|^{-1}\sum_{h\in\mathcal H_\ell^{late}}|y_{\ell h}-\hat y_{\ell h}|$. Initialization hours are excluded when locating the cutoff.}
++
++{We regress $\log(1+\mathcal D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$ for the full-path comparison and $\log(1+\mathcal D_\ell^{late})$ on $\log(1+\hat\lambda_\ell^{early})$ for the time-split comparison.}
+ Table~\ref{tab-signal-disagreement-validation} reports slopes of $-0.013$ ($p=0.006$) for the full path and $-0.015$ ($p=0.025$) for the time split. Higher early precision is associated with less disagreement in the final quarter, with $R^2=0.029$.
+ 
+ 
+@@ -1111,7 +1111,7 @@
+ \begin{minipage}{\textwidth}
+ {\footnotesize
+ \textit{Note:}
+-{The full-path row regresses $\log(1+D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$, where $D_\ell^{path}$ is mean absolute public--private gap disagreement. The time-split row relates the same measure in the final 25\% to precision estimated from the first 75\% of contest-phase data, retaining the full-sample horizon. Initialization hours are excluded from the discrepancy measures. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association.}
++{The full-path row regresses $\log(1+\mathcal D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$, where $\mathcal D_\ell^{path}$ is mean absolute public--private gap disagreement. The time-split row relates the same measure in the final 25\% to precision estimated from the first 75\% of contest-phase data, retaining the full-sample horizon. Initialization hours are excluded from the discrepancy measures. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association.}
+ {(1) Significance markers: \textbf{***} $p<0.001$, \textbf{**} $p<0.01$, \textbf{*} $p<0.05$.}
+ (2) OLS residual diagnostics (Full path; Time split): Omnibus = 66.882; 90.471, Jarque--Bera = 364.820; 1131.650, Skewness = 2.872; 3.831, Kurtosis = 12.324; 20.701.
+ (3) Condition Number (Full path; Time split): 15.726; 15.742.
+@@ -1187,11 +1187,11 @@
+ 
+ 
+ \subsubsection{Private-Leaderboard Volatility Diagnostics.}
+-{We examine whether contests with higher estimated innovation risk exhibit greater private-path volatility. Unlike the preceding benchmark, this diagnostic does not use an estimated effort-drift adjustment. For contest $\ell$, let $\Delta y_{\ell h}=y_{\ell h}-y_{\ell,h-1}$ denote the hourly private-gap increment and define $V_\ell^{path}=\operatorname{sd}\{\Delta y_{\ell h}:h\in\mathcal H_\ell,\ h>1\}$. Hours are indexed within the contest-phase path, excluding artificial initialization increments.}
+-
+-{Carrying scores forward produces zero increments between updates and jumps when new scores arrive. Thus, $V_\ell^{path}$ reflects both submitted-score changes and update frequency. It provides a less model-dependent check on $\hat\sigma_\ell$, rather than a direct measure of latent diffusion volatility.}
+-
+-{We also apply the same time split used for signal precision. For the final-quarter hours $\mathcal H_\ell^{late}$, define $V_\ell^{late}=\operatorname{sd}\{\Delta y_{\ell h}:h\in\mathcal H_\ell^{late}\}$. The full-path regression relates $\log(1+V_\ell^{path})$ to $\log(1+\hat\sigma_\ell)$; the time-split regression relates $\log(1+V_\ell^{late})$ to $\log(1+\hat\sigma_\ell^{early})$.}
++{We examine whether contests with higher estimated innovation risk exhibit greater private-path volatility. Unlike the preceding benchmark, this diagnostic does not use an estimated effort-drift adjustment. For contest $\ell$, let $\Delta y_{\ell h}=y_{\ell h}-y_{\ell,h-1}$ denote the hourly private-gap increment and define $\mathcal V_\ell^{path}=\operatorname{sd}\{\Delta y_{\ell h}:h\in\mathcal H_\ell,\ h>1\}$. Hours are indexed within the contest-phase path, excluding artificial initialization increments.}
++
++{Carrying scores forward produces zero increments between updates and jumps when new scores arrive. Thus, $\mathcal V_\ell^{path}$ reflects both submitted-score changes and update frequency. It provides a less model-dependent check on $\hat\sigma_\ell$, rather than a direct measure of latent diffusion volatility.}
++
++{We also apply the same time split used for signal precision. For the final-quarter hours $\mathcal H_\ell^{late}$, define $\mathcal V_\ell^{late}=\operatorname{sd}\{\Delta y_{\ell h}:h\in\mathcal H_\ell^{late}\}$. The full-path regression relates $\log(1+\mathcal V_\ell^{path})$ to $\log(1+\hat\sigma_\ell)$; the time-split regression relates $\log(1+\mathcal V_\ell^{late})$ to $\log(1+\hat\sigma_\ell^{early})$.}
+ 
+ Table~\ref{tab-private-volatility-diagnostics} reports slopes of $0.243$ ($p<0.001$) for the full path and $0.265$ ($p=0.006$) for the time split. The positive time-split association also appears without the benchmark's drift adjustment.
+ 
+@@ -1216,7 +1216,7 @@
+ \begin{minipage}{\textwidth}
+ {\footnotesize
+ \textit{Note:}
+-{The full-path row regresses $\log(1+V_\ell^{path})$ on $\log(1+\hat\sigma_\ell)$, where $V_\ell^{path}$ is the sample standard deviation of hourly private-gap increments within the contest-phase path. The time-split row uses increments ending in the final 25\% and innovation risk estimated from the first 75\%, retaining the full-sample horizon. Artificial initialization increments are excluded. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association.}
++{The full-path row regresses $\log(1+\mathcal V_\ell^{path})$ on $\log(1+\hat\sigma_\ell)$, where $\mathcal V_\ell^{path}$ is the sample standard deviation of hourly private-gap increments within the contest-phase path. The time-split row uses increments ending in the final 25\% and innovation risk estimated from the first 75\%, retaining the full-sample horizon. Artificial initialization increments are excluded. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association.}
+ {(1) Significance levels: \textbf{***} $p<0.001$, \textbf{**} $p<0.01$, \textbf{*} $p<0.05$.
+ (2) OLS residual diagnostics (Full path; Time split): Omnibus = 50.904; 13.440, Jarque--Bera = 180.803; 15.401, Skewness = 2.220; 0.879, Kurtosis = 9.304; 4.405.
+ (3) Condition Number (Full path; Time split): 3.585; 3.502.}
+@@ -1312,15 +1312,15 @@
+ \proof{Proof of Theorem~\ref{thm-equilibrium-effort}}
+ Fix a finite $\lambda>0$. Put $a_t=\lambda S_t^2$,
+ $\alpha_k=\sigma^2w_k$, and $\alpha_*=\max_k\alpha_k$.
+-Write $U^k=V^k/\theta$, $p=U_y^i$, and $n=-U_y^j$.
++Write $U^k=V^k/\theta$, ${\mathfrak p}=U_y^i$, and ${\mathfrak n}=-U_y^j$.
+ In reverse time $\tau=T-t$, the differentiated HJB equations are
+ \[
+-p_\tau=\tfrac{a_{T-\tau}}2p_{yy}
+-+\partial_y(\alpha_ip^2/2-\alpha_jpn),\qquad
+-n_\tau=\tfrac{a_{T-\tau}}2n_{yy}
+-+\partial_y(\alpha_ipn-\alpha_jn^2/2),
+-\]
+-with $p(y,0)=n(y,0)=G_{S_T}(y)$, where $G_q$ is the centered
++{\mathfrak p}_\tau=\tfrac{a_{T-\tau}}2{\mathfrak p}_{yy}
+++\partial_y(\alpha_i{\mathfrak p}^2/2-\alpha_j{\mathfrak p}{\mathfrak n}),\qquad
++{\mathfrak n}_\tau=\tfrac{a_{T-\tau}}2{\mathfrak n}_{yy}
+++\partial_y(\alpha_i{\mathfrak p}{\mathfrak n}-\alpha_j{\mathfrak n}^2/2),
++\]
++with ${\mathfrak p}(y,0)={\mathfrak n}(y,0)=G_{S_T}(y)$, where $G_q$ is the centered
+ Gaussian density of variance $q$.
+ 
+ \emph{Existence.}
+@@ -1328,57 +1328,57 @@
+ Cauchy--Kowalevski theorem in \citet[][Chapter III, Remark 2.3]{Nishida1978}.
+ Use the analytic norms
+ \[
+-\|f\|_\rho=(2\pi)^{-1}\int_{\mathbb R}
+-e^{\rho|\xi|}|\widehat f(\xi)|\,d\xi,
++\|f\|_\varpi=(2\pi)^{-1}\int_{\mathbb R}
++e^{\varpi|\xi|}|\widehat f(\xi)|\,d\xi,
+ \qquad \widehat f(\xi)=\int_{\mathbb R}e^{-i\xi y}f(y)\,dy.
+ \]
+-For $0<\rho'<\rho$, these satisfy
+-$\|fg\|_\rho\leq\|f\|_\rho\|g\|_\rho$ and
+-$\|f_y\|_{\rho'}\leq\|f\|_\rho/(\rho-\rho')$.
++For $0<\varpi'<\varpi$, these satisfy
++$\|fg\|_\varpi\leq\|f\|_\varpi\|g\|_\varpi$ and
++$\|f_y\|_{\varpi'}\leq\|f\|_\varpi/(\varpi-\varpi')$.
+ Let $P_{t,s}$ be Gaussian convolution of variance $\int_t^sa_u\,du$.
+ It is a contraction in every such norm.
+-For $h=(p,n)$, let $\mathcal N(h)$ denote the two nonlinear terms
++For ${\mathbf h}=({\mathfrak p},{\mathfrak n})$, let $\mathscr N({\mathbf h})$ denote the two nonlinear terms
+ above and use the sum norm for pairs. The gradient equations have
+ the integral form
+ \begin{equation}\label{eq-equilibrium-gradient-mild}
+-h(\tau)=P_{T-\tau,T}h(0)
+-+\int_0^\tau P_{T-\tau,T-s}\mathcal N(h(s))\,ds.
++{\mathbf h}(\tau)=P_{T-\tau,T}{\mathbf h}(0)
+++\int_0^\tau P_{T-\tau,T-s}\mathscr N({\mathbf h}(s))\,ds.
+ \end{equation}
+ On a radius-$R$ ball,
+ \[
+-\|\mathcal N(h)-\mathcal N(\widehat h)\|_{\rho'}
+-\leq\frac{C\alpha_*R}{\rho-\rho'}\|h-\widehat h\|_\rho,
++\|\mathscr N({\mathbf h})-\mathscr N(\widehat {\mathbf h})\|_{\varpi'}
++\leq\frac{C\alpha_*R}{\varpi-\varpi'}\|{\mathbf h}-\widehat {\mathbf h}\|_\varpi,
+ \qquad
+-\|\mathcal N(h)\|_{\rho'}\leq
+-\frac{C\alpha_*R^2}{\rho-\rho'}.
+-\]
+-Fix $\rho_0>\rho_1>0$ and $R>2\|h(0)\|_{\rho_0}$;
++\|\mathscr N({\mathbf h})\|_{\varpi'}\leq
++\frac{C\alpha_*R^2}{\varpi-\varpi'}.
++\]
++Fix $\varpi_0>\varpi_1>0$ and $R>2\|{\mathbf h}(0)\|_{\varpi_0}$;
+ the Gaussian data make this choice independent of $\alpha_*$.
+-After rescaling time by $r=\alpha_*\tau$, the estimates above have
++After rescaling time by ${\upsilon}=\alpha_*\tau$, the estimates above have
+ constants independent of $\alpha_*$, since $\alpha_k/\alpha_*\leq1$
+ and the propagators remain contractions.
+-The cited theorem thus gives an existence interval $0\leq r<r_0$
+-and a bound in the $\rho_1$ norm, both independent of $\alpha_*$.
++The cited theorem thus gives an existence interval $0\leq {\upsilon}<{\upsilon}_0$
++and a bound in the $\varpi_1$ norm, both independent of $\alpha_*$.
+ Because $\alpha_*\leq\sigma^2(w_i+w_j)$, taking $w_i+w_j$ sufficiently
+-small ensures $\alpha_*T<r_0$. The solution then exists on $[0,T]$ with
++small ensures $\alpha_*T<{\upsilon}_0$. The solution then exists on $[0,T]$ with
+ a fixed positive analytic radius. Cauchy's estimate on any smaller strip
+ gives uniform bounds on all spatial derivatives used below.
+ 
+ \emph{Equilibrium verification.}
+-Returning to $t=T-\tau$, with $b=\alpha_ip-\alpha_jn$,
++Returning to $t=T-\tau$, with $\mathfrak b=\alpha_i{\mathfrak p}-\alpha_j{\mathfrak n}$,
+ the gradients satisfy
+ \[
+-p_t+\tfrac{a_t}2p_{yy}+bp_y-\alpha_jn_yp=0,\qquad
+-n_t+\tfrac{a_t}2n_{yy}+bn_y+\alpha_ip_yn=0.
++{\mathfrak p}_t+\tfrac{a_t}2{\mathfrak p}_{yy}+\mathfrak b{\mathfrak p}_y-\alpha_j{\mathfrak n}_y{\mathfrak p}=0,\qquad
++{\mathfrak n}_t+\tfrac{a_t}2{\mathfrak n}_{yy}+\mathfrak b{\mathfrak n}_y+\alpha_i{\mathfrak p}_y{\mathfrak n}=0.
+ \]
+ Their bounded coefficients and strictly positive Gaussian terminal data
+-give $p,n>0$ by Feynman--Kac. Bounded drift and reaction
++give ${\mathfrak p},{\mathfrak n}>0$ by Feynman--Kac. Bounded drift and reaction
+ coefficients also preserve Gaussian tail bounds. Integrating the
+ reverse-time conservative equations over $\mathbb R$ therefore produces
+-no boundary terms and preserves $\int p\,dy=\int n\,dy=1$.
++no boundary terms and preserves $\int {\mathfrak p}\,dy=\int {\mathfrak n}\,dy=1$.
+ Consequently,
+-$U^i(y,t)=\int_{-\infty}^yp(z,t)\,dz$ and
+-$U^j(y,t)=\int_y^\infty n(z,t)\,dz$
++$U^i(y,t)=\int_{-\infty}^y{\mathfrak p}(z,t)\,dz$ and
++$U^j(y,t)=\int_y^\infty {\mathfrak n}(z,t)\,dz$
+ are bounded values with the required terminal and spatial limits.
+ Integrating the gradient equations fixes the possible constants of
+ integration by these spatial limits and gives the normalized HJB system
+@@ -1387,11 +1387,11 @@
+ F_i(U)=\alpha_i(U_y^i)^2/2+\alpha_jU_y^iU_y^j,\qquad
+ F_j(U)=\alpha_j(U_y^j)^2/2+\alpha_iU_y^iU_y^j.
+ \]
+-The positive policies $m_i=\alpha_ip$ and $m_j=\alpha_jn$ attain
++The positive policies $m_i=\alpha_i{\mathfrak p}$ and $m_j=\alpha_j{\mathfrak n}$ attain
+ the constrained HJB maxima. For any admissible deviation $q_k$,
+ It\^o's formula and completion of the square give
+ \begin{equation}\label{eq-equilibrium-verification}
+-\mathbb E_{y,t}\!\left[G_k(\tilde y_T)-\int_t^T
++\mathbb E_{y,t}\!\left[\Pi_k(\tilde y_T)-\int_t^T
+ \frac{c_kq_{k,s}^2}{2}\,ds\right]
+ =V^k(y,t)-\frac{c_k}{2}\mathbb E_{y,t}\!\int_t^T
+ [q_{k,s}-m_k(\tilde y_s,s)]^2\,ds.
+@@ -1411,14 +1411,14 @@
+ \end{equation}
+ Indeed, $Q_t-Q_s=\int_t^sa_u\,du$, so propagating the terminal density
+ $G_{S_T}$ from $T$ to $t$ gives $G_{Q_t}$. On a smaller fixed analytic
+-strip, the uniform existence bound controls $\mathcal N(h)$ by
++strip, the uniform existence bound controls $\mathscr N({\mathbf h})$ by
+ $C\alpha_*$. Heat contraction and integration over an interval of length
+ at most $T$ therefore give
+ \[
+-\sup_{y,t}\{|p(y,t)-G_{Q_t}(y)|+|n(y,t)-G_{Q_t}(y)|\}
++\sup_{y,t}\{|{\mathfrak p}(y,t)-G_{Q_t}(y)|+|{\mathfrak n}(y,t)-G_{Q_t}(y)|\}
+ \leq CT\alpha_*=O(w_i+w_j).
+ \]
+-Since $m_k=\alpha_kp_k=\sigma^2w_kp_k$, multiplying by
++Since $m_k=\alpha_k{\mathfrak p}_k=\sigma^2w_k{\mathfrak p}_k$, multiplying by
+ $\sigma^2w_k$ gives the stated expansion. Finally,
+ $Q_t'=-a_t<0$, $Q_T=S_T$, and $Q_0=S_0+\sigma^2T$, so
+ $S_T\leq Q_t\leq S_0+\sigma^2T$; the Gaussian factor is therefore
+@@ -1529,15 +1529,15 @@
+ $-\theta$, gives, for every full-disclosure prize and deadline,
+ \[
+ u(\mathcal B)-\theta-D(T)
+-\leq u(b_0)+a\sigma^2T-D(T),\qquad
+-a=\frac{(C+1/2)u'(b_0)}{\sqrt{2\pi S_0}}.
++\leq u(b_0)+\mathsf a_{\mathrm{out}}\sigma^2T-D(T),\qquad
++\mathsf a_{\mathrm{out}}=\frac{(C+1/2)u'(b_0)}{\sqrt{2\pi S_0}}.
+ \]
+ Since $D'(T)/T$ is nondecreasing and converges to $D''(0)$ as
+ $T\downarrow0$, $D'(T)\geq D''(0)T$. Integrating from zero gives
+ $D(T)\geq D''(0)T^2/2$, so completing the square yields
+ \[
+-\sup_{T\geq0}\{a\sigma^2T-D(T)\}
+-\leq\frac{a^2\sigma^4}{2D''(0)}.
++\sup_{T\geq0}\{\mathsf a_{\mathrm{out}}\sigma^2T-D(T)\}
++\leq\frac{\mathsf a_{\mathrm{out}}^2\sigma^4}{2D''(0)}.
+ \]
+ Choose $\sigma_F\leq\min\{\bar\sigma,1\}$ so that the last bound is
+ strictly below $\varepsilon_0/2$. Every full-disclosure payoff is then below
+@@ -1658,15 +1658,15 @@
+ 
+ Along this history, define the cumulative intensity difference
+ \begin{equation}\label{eq-local-id-A}
+-A(s_\ell):=\Delta_{\mathrm{num}}\sum_{q=1}^{\ell}
++{\mathscr I}(s_\ell):=\Delta_{\mathrm{num}}\sum_{q=1}^{\ell}
+ \left[\tau_i^{(1)}(s_{q-1})-\tau_j^{(1)}(s_{q-1})\right].
+ \end{equation}
+-The identified intensity sequences make $A(s_\ell)$ identical under $\Theta$ and $\Theta'$.
+-On $E_\ell$, the accumulated drift is $A(s_\ell)/r$. The independent Gaussian initial uncertainty and innovation give latent variance $S_0+\sigma^2s_\ell$. Since $h_1=s_\ell$, the fresh independent measurement error adds variance $1/(\lambda s_\ell)$. Thus
++The identified intensity sequences make ${\mathscr I}(s_\ell)$ identical under $\Theta$ and $\Theta'$.
++On $E_\ell$, the accumulated drift is ${\mathscr I}(s_\ell)/r$. The independent Gaussian initial uncertainty and innovation give latent variance $S_0+\sigma^2s_\ell$. Since $h_1=s_\ell$, the fresh independent measurement error adds variance $1/(\lambda s_\ell)$. Thus
+ \begin{equation}\label{eq-local-id-conditional-law}
+ \hat y_{s_\ell}\mid E_\ell,\Theta
+ \sim\mathcal N\!\left(
+-\mu_0+\frac{A(s_\ell)}r,
++\mu_0+\frac{{\mathscr I}(s_\ell)}r,
+ S_0+\sigma^2s_\ell+\frac{1}{\lambda s_\ell}
+ \right).
+ \end{equation}
+@@ -1687,19 +1687,19 @@
+ 
+ Equality of the first-readout means gives
+ \[
+-\mu_0+\frac{A(s_\ell)}r
+-=\mu_0'+\frac{A(s_\ell)}{r'}.
++\mu_0+\frac{{\mathscr I}(s_\ell)}r
++=\mu_0'+\frac{{\mathscr I}(s_\ell)}{r'}.
+ \]
+ At $s_1$, equation~\eqref{eq-empirical-leading-effort} has a common
+ strictly positive kernel for the two contestants and differs only through
+ $1/c_k$. Since $r,\theta>0$ and $c_i\ne c_j$, this implies
+ \[
+-A(s_2)-A(s_1)
++{\mathscr I}(s_2)-{\mathscr I}(s_1)
+ =\Delta_{\mathrm{num}}\left[\tau_i^{(1)}(s_1)-\tau_j^{(1)}(s_1)\right]\ne0.
+ \]
+ Subtracting the mean equalities at these two times gives
+ \[
+-\left[A(s_2)-A(s_1)\right]\left(r^{-1}-r'^{-1}\right)=0,
++\left[{\mathscr I}(s_2)-{\mathscr I}(s_1)\right]\left(r^{-1}-r'^{-1}\right)=0,
+ \]
+ so positivity of $r,r'$ gives $r=r'$. Substitution into either mean
+ equality then gives $\mu_0=\mu_0'$. Finally, the identified initial
+@@ -1711,7 +1711,7 @@
+ \]
+ Thus $\Theta=\Theta'$, establishing local identification. At $c_i=c_j$,
+ the two leading-order efforts coincide, so their difference and hence
+-$A(s_\ell)$ are zero along every public history. A common rescaling of
++${\mathscr I}(s_\ell)$ are zero along every public history. A common rescaling of
+ $(r,c_i,c_j)$ leaves each ratio $r/c_k$, and therefore both count
+ intensities, unchanged; because the effort difference remains zero, it
+ also leaves every readout prediction unchanged. The full vector is
+@@ -1752,7 +1752,7 @@
+ K(d(y,t))=K(1)
+ \left[2\Phi\!\left(\frac{y}{\sigma\sqrt{T-t}}\right)-1\right].
+ \end{equation}
+-The change of variables is $\rho_s=\tanh(wd/2)$ in Ryvkin's notation.
++Ryvkin's change of variables can be written as $\mathsf r_{\mathrm R}=\tanh(wd/2)$.
+ Since the total prize is $\theta$, summing the cited value functions gives
+ \begin{equation}\label{eq-design-full-energy}
+ \mathbb E_{y,t}\int_t^T(m_i^2+m_j^2)\,ds
+@@ -1807,13 +1807,13 @@
+ -\frac{\alpha_k}{2}z_k^2,\qquad k\in\{i,j\}.
+ \]
+ Thus the common-drift term in the theorem's decomposition is
+-$b_0(z)=\alpha_i z_i+\alpha_j z_j$, while
+-$b^k(z)=-\alpha_kz_k^2/2$. The driver is smooth and satisfies
++$\mathfrak b_0(z)=\alpha_i z_i+\alpha_j z_j$, while
++$\mathfrak b^k(z)=-\alpha_kz_k^2/2$. The driver is smooth and satisfies
+ $|F_k(z)|\leq C|z_k||z|$, which verifies the quadratic-growth and local
+ Lipschitz conditions. For the a-priori boundedness condition, take the
+ coordinate vectors $\{\pm L e_i,\pm L e_j\}$ with
+ $L\geq\max\{\alpha_i,\alpha_j\}$. They positively span $\mathbb R^2$.
+-For $+Le_k$ the required upper bound is immediate because $b^k\leq0$;
++For $+Le_k$ the required upper bound is immediate because $\mathfrak b^k\leq0$;
+ for $-Le_k$ it follows from
+ \[
+ (-Le_k)^Tb(z)=\frac{L\alpha_k}{2}z_k^2
+@@ -1822,7 +1822,7 @@
+ \]
+ The scalar diffusion coefficient is uniformly elliptic and smooth in
+ time, while $F$ is time independent and the Gaussian terminal functions
+-are $C^{2,\beta}$ for every $\beta\in(0,1)$. These observations verify the
++are $C^{2,\beta_{\mathrm H}}$ for every $\beta_{\mathrm H}\in(0,1)$. These observations verify the
+ remaining regularity hypotheses of the cited classical-solution theorem.
+ The cited theorem therefore gives a unique bounded classical solution with
+ bounded spatial gradients.
+@@ -1852,9 +1852,9 @@
+ \proof{Proof of Lemma~\ref{lem-design-weak-precision}}
+ Measure time in units of $T$ and scores in units of $\sigma\sqrt T$.
+ Write $w=\theta/(c\sigma^2)$, $s=S_0/(\sigma^2T)$,
+-$\ell=\lambda\sigma^2T^2$, and $q=1+s$. In these units,
+-$S_t'=1-\ell S_t^2$ and $Q_t=S_t+1-t$.
+-Denote output by $\widehat{\mathcal B}(w,s,\ell)$.
++$\Lambda=\lambda\sigma^2T^2$, and $q=1+s$. In these units,
++$S_t'=1-\Lambda S_t^2$ and $Q_t=S_t+1-t$.
++Denote output by $\widehat{\mathcal B}(w,s,\Lambda)$.
+ All estimates below are uniform for $s\in[99/2,198]$.
+ Equation~\eqref{eq-best-output-drift-identity} gives the common
+ first variation $G_q(0)$ at zero prize. For full disclosure, the
+@@ -1865,166 +1865,166 @@
+ \end{equation}
+ 
+ \emph{Bounded precisions.}
+-For every finite $L$, the positive lower bound on $S_T$ makes
++For every finite ${\Lambda_{\max}}$, the positive lower bound on $S_T$ makes
+ the analytic construction in Theorem~\ref{thm-equilibrium-effort}
+-uniform on $[99/2,198]\times(0,L]$. The coefficients and expansion
+-extend continuously to the limiting endpoint $\ell=0$, which is used only
++uniform on $[99/2,198]\times(0,{\Lambda_{\max}}]$. The coefficients and expansion
++extend continuously to the limiting endpoint $\Lambda=0$, which is used only
+ to obtain a uniform comparison for arbitrarily small positive precision.
+ Indeed, the analytic-norm proof uses only contraction of the Gaussian
+ propagators and a uniform analytic bound on the terminal density; it does
+ not divide by the diffusion coefficient. Its contraction radius and
+-remainder constant are therefore uniform for $\ell\in[0,L]$. The Riccati
++remainder constant are therefore uniform for $\Lambda\in[0,{\Lambda_{\max}}]$. The Riccati
+ solution and every coefficient in the expansion depend continuously on
+-$(s,\ell)$ on this compact set.
++$(s,\Lambda)$ on this compact set.
+ The gradient mild equations and the output identity give, uniformly,
+ \[
+-\widehat{\mathcal B}(w,s,\infty)-\widehat{\mathcal B}(w,s,\ell)
+-=w^2\Delta_2(s,\ell)+O(w^3).
++\widehat{\mathcal B}(w,s,\infty)-\widehat{\mathcal B}(w,s,\Lambda)
++=w^2\Delta_2(s,\Lambda)+O(w^3).
+ \]
+ The full-disclosure formulas \eqref{eq-design-full-values}--\eqref{eq-design-full-gap}
+ are analytic in $w$ at zero.
+-With $A_t=s+t-S_t$, Gaussian integration gives
+-$\Delta_2(s,\ell)=b_2(s,\infty)-b_2(s,\ell)$, where
+-\[
+-b_2(s,\ell)=\int_0^1\int_t^1 K_q(A_t,A_r)\,dr\,dt,\qquad
+-K_q(A,B)=\frac{A}{\pi\sqrt{2\pi}\sqrt{q-B}(q+B)
++With $\mathsf V_t=s+t-S_t$, Gaussian integration gives
++$\Delta_2(s,\Lambda)=b_2(s,\infty)-b_2(s,\Lambda)$, where
++\[
++b_2(s,\Lambda)=\int_0^1\int_t^1 \mathscr K_q(\mathsf V_t,\mathsf V_r)\,dr\,dt,\qquad
++\mathscr K_q(A,B)=\frac{A}{\pi\sqrt{2\pi}\sqrt{q-B}(q+B)
+ \sqrt{q^2+qB-2A^2}}.
+ \]
+-For $\ell>0$, $\rho_t=A_t/(s+t)$ increases strictly from zero
++For $\Lambda>0$, $\varrho_t=\mathsf V_t/(s+t)$ increases strictly from zero
+ and stays below one: its derivative has the opposite sign to
+ $E_t=(s+t)S_t'-S_t<0$, since either $S_t'\leq0$ or
+-$E_0=-\ell s^3<0$ and $E_t'=-2\ell(s+t)S_tS_t'<0$.
++$E_0=-\Lambda s^3<0$ and $E_t'=-2\Lambda(s+t)S_tS_t'<0$.
+ The kernel is strictly increasing in its first argument because
+ \[
+-\partial_A\log K_q(A,B)
++\partial_A\log \mathscr K_q(A,B)
+ =\frac1A+\frac{2A}{q^2+qB-2A^2}>0.
+ \]
+ It also increases along radial rays: for
+ $x=B/q$ and $z=A/q$,
+ \[
+-\frac{AK_A+BK_B}{K_q}
++\frac{A\mathscr K_A+B\mathscr K_B}{\mathscr K_q}
+ =\frac{1+x^3+xz^2-3x^2z^2}
+ {(1-x^2)(1+x-2z^2)}>0,\qquad 0\leq z\leq x<1.
+ \]
+ The numerator is affine in $z^2$, so its minimum is either
+ $1+x^3$ or $(1-x)(3x^3+x^2+x+1)$, both positive.
+-Since $0<\rho_t<\rho_r<1$ for $0<t<r<1$, first increasing the
++Since $0<\varrho_t<\varrho_r<1$ for $0<t<r<1$, first increasing the
+ first argument and then moving along the radial ray gives
+ \[
+-K_q(A_t,A_r)
+-<K_q\!\left(\rho_r(s+t),\rho_r(s+r)\right)
+-<K_q(s+t,s+r).
+-\]
+-At $\ell=0$, the Riccati equation gives $S_t=s+t$, hence $A_t=0$ and
++\mathscr K_q(\mathsf V_t,\mathsf V_r)
++<\mathscr K_q\!\left(\varrho_r(s+t),\varrho_r(s+r)\right)
++<\mathscr K_q(s+t,s+r).
++\]
++At $\Lambda=0$, the Riccati equation gives $S_t=s+t$, hence $\mathsf V_t=0$ and
+ $b_2=0$. The endpoint bound
+ $C[(1-t)(1-r)]^{-1/2}$ gives continuity by dominated convergence.
+-For $\ell>0$ the strict kernel inequality above gives
+-$b_2(s,\ell)<b_2(s,\infty)$, while the same conclusion at $\ell=0$
++For $\Lambda>0$ the strict kernel inequality above gives
++$b_2(s,\Lambda)<b_2(s,\infty)$, while the same conclusion at $\Lambda=0$
+ follows from positivity of the full-disclosure integral. Thus
+ $\Delta_2$ is positive and continuous on
+-$[99/2,198]\times[0,L]$, so it has a strictly positive minimum. Choosing
++$[99/2,198]\times[0,{\Lambda_{\max}}]$, so it has a strictly positive minimum. Choosing
+ $w$ small enough for the uniform $O(w^3)$ remainder proves the comparison
+-for $0<\ell\leq L$.
++for $0<\Lambda\leq {\Lambda_{\max}}$.
+ 
+ \emph{Unbounded precisions.}
+-Put $\eta=\ell^{-1/2}<1/4$.
++Put $\eta=\Lambda^{-1/2}<1/4$.
+ Use an auxiliary contest with constant posterior variance $\eta$
+ and initially disclosed mean variance $s-\eta$; total initial
+ uncertainty remains $s$. We first identify a positive leading term
+ in the full-disclosure output advantage. With $\tau=1-t$, set
+ $h=\tau+\eta$, $v=\log(h/\eta)$, and $z=y/\sqrt h$.
+-The full-disclosure profiles $R_w,D_w,b_w$ satisfy
+-\[
+-\mathcal L_0R_w+w\{3(R_w')^2-(D_w')^2\}/4=0,\qquad
+-\mathcal L_0D_w+(w/2)R_w'D_w'=0,
+-\]
+-\[
+-(\mathcal L_0-1/2)b_w+wR_w'b_w'+(w/2)D_w'=0,
+-\qquad \mathcal L_0=(\partial_{zz}+z\partial_z)/2.
+-\]
+-Here $R_0=1$, $D_0=2\Phi-1$, $b_0=\beta=G_1+z(\Phi-1/2)$,
++The full-disclosure profiles $R_w,\mathsf D_w,\mathsf b_w$ satisfy
++\[
++\mathscr L_0R_w+w\{3(R_w')^2-(\mathsf D_w')^2\}/4=0,\qquad
++\mathscr L_0\mathsf D_w+(w/2)R_w'\mathsf D_w'=0,
++\]
++\[
++(\mathscr L_0-1/2)\mathsf b_w+wR_w'\mathsf b_w'+(w/2)\mathsf D_w'=0,
++\qquad \mathscr L_0=(\partial_{zz}+z\partial_z)/2.
++\]
++Here $R_0=1$, $\mathsf D_0=2\Phi-1$, $\mathsf b_0=\beta=G_1+z(\Phi-1/2)$,
+ and $R_w=1-w\Phi(1-\Phi)+O(w^2)$ by the explicit equilibrium.
+ 
+-The profile error $E=(\phi,\psi,\chi)$ satisfies
+-$E_v=\mathcal A_wE+\mathcal N_w(E)$, where $\mathcal A_w$ is the
+-linearization, $\mathcal N_w$ the quadratic remainder, and
+-$E(0)=(1-R_w,2\Phi-1-D_w,\beta-b_w)$.
++The profile error $E=(\varphi,\psi,\chi)$ satisfies
++$E_v=\mathcal A_wE+\mathscr N_w(E)$, where $\mathcal A_w$ is the
++linearization, $\mathscr N_w$ the quadratic remainder, and
++$E(0)=(1-R_w,2\Phi-1-\mathsf D_w,\beta-\mathsf b_w)$.
+ Explicitly,
+ \[
+-\mathcal N_w(E)=w\left(
+-\frac{3\phi'^2-\psi'^2}{4},\frac{\phi'\psi'}2,\phi'\chi'
++\mathscr N_w(E)=w\left(
++\frac{3\varphi'^2-\psi'^2}{4},\frac{\varphi'\psi'}2,\varphi'\chi'
+ \right),
+ \]
+ while the player block of $\mathcal A_w$ is
+ \[
+-\binom{\mathcal L_0\phi+
+-w(3R_w'\phi'-D_w'\psi')/2}
+-{\mathcal L_0\psi+w(D_w'\phi'+R_w'\psi')/2},
++\binom{\mathscr L_0\varphi+
++w(3R_w'\varphi'-\mathsf D_w'\psi')/2}
++{\mathscr L_0\psi+w(\mathsf D_w'\varphi'+R_w'\psi')/2},
+ \]
+ and its organizer block is
+ \[
+-(\mathcal L_0-1/2+wR_w'\partial_z)\chi
+-+w(\phi'b_w'+\psi'/2).
++(\mathscr L_0-1/2+wR_w'\partial_z)\chi
+++w(\varphi'\mathsf b_w'+\psi'/2).
+ \]
+ The weighted-space statement concerns the perturbations, not the
+-linearly growing background profiles $\beta$ and $b_w$ separately.
++linearly growing background profiles $\beta$ and $\mathsf b_w$ separately.
+ After subtracting the $w=0$ profile, the stationary profile equations
+-show that $1-R_w$, $2\Phi-1-D_w$, and $\beta-b_w$, together with their
++show that $1-R_w$, $2\Phi-1-\mathsf D_w$, and $\beta-\mathsf b_w$, together with their
+ required derivatives, have Gaussian decay. Consequently $E(0)$ belongs
+ to the fractional-domain space used below, even though neither $\beta$
+-nor $b_w$ belongs to the weighted space by itself.
++nor $\mathsf b_w$ belongs to the weighted space by itself.
+ On the even--odd--even subspace of
+-$\mathcal H=L^2(e^{z^2/2}dz)^3$, put $X=D((-\mathcal A_0)^{7/8})$.
++$\mathscr H=L^2(e^{z^2/2}dz)^3$, put $\mathscr X=\operatorname{Dom}((-\mathcal A_0)^{7/8})$.
+ At $w=0$ these blocks are Ornstein--Uhlenbeck operators. Their Hermite
+ spectrum has the simple leading eigenpair
+ $(-1/2,(G_1,0,0))$; parity places every other eigenvalue at or below
+ $-1$. Moreover,
+ \[
+-\|(\mathcal A_w-\mathcal A_0)f\|_{\mathcal H}
+-\leq C|w|\|(-\mathcal A_0)^{1/2}f\|_{\mathcal H}.
++\|(\mathcal A_w-\mathcal A_0)f\|_{\mathscr H}
++\leq C|w|\|(-\mathcal A_0)^{1/2}f\|_{\mathscr H}.
+ \]
+ Spectral perturbation \citep[][Chapter~VII, Sections~1--2]{Kato1980}
+ and sectorial estimates \citep[][Proposition~3.2.2 and Chapter~5]{LorenziEtAl2005}
+ therefore preserve one simple eigenvalue $\nu(w)$ with
+ $|\nu(w)+1/2|<1/20$ and give decay rate $7/10$ on the complementary
+-subspace. If $\Pi_w$ is its spectral projection, the corresponding
++subspace. If $\mathscr P_w$ is its spectral projection, the corresponding
+ uniform semigroup estimates are
+ \[
+-\|e^{v\mathcal A_w}\|_{\mathcal H\to X}
++\|e^{v\mathcal A_w}\|_{\mathscr H\to\mathscr X}
+ \leq C(1+v^{-7/8})e^{-9v/20},\qquad
+-\|e^{v\mathcal A_w}(I-\Pi_w)\|_{\mathcal H\to X}
++\|e^{v\mathcal A_w}(I-\mathscr P_w)\|_{\mathscr H\to\mathscr X}
+ \leq C(1+v^{-7/8})e^{-7v/10}.
+ \]
+-Sobolev embedding gives $\|\mathcal N_w(E)\|_{\mathcal H}\leq C|w|\|E\|_X^2$;
++Sobolev embedding gives $\|\mathscr N_w(E)\|_{\mathscr H}\leq C|w|\|E\|_{\mathscr X}^2$;
+ since $7/8<1$, the singular factor is integrable in Duhamel's formula.
+ The resulting map is a contraction in
+-$\sup_{v\geq0}e^{2v/5}\|E(v)\|_X$ when $w$ is small. Thus
++$\sup_{v\geq0}e^{2v/5}\|E(v)\|_{\mathscr X}$ when $w$ is small. Thus
+ linearized stability \citep[][Theorem~7.1.3]{LorenziEtAl2005} gives
+-$\|E(v)\|_X\leq C|w|e^{-2v/5}$, uniformly on a small complex prize disc.
++$\|E(v)\|_{\mathscr X}\leq C|w|e^{-2v/5}$, uniformly on a small complex prize disc.
+ 
+ Normalize the slow right eigenvector $e_w$ and its left functional
+-$\ell_w$ by $\ell_w(e_w)=1$. Projection of Duhamel's formula gives the
++$\mathfrak l_w$ by $\mathfrak l_w(e_w)=1$. Projection of Duhamel's formula gives the
+ exact amplitude
+ \[
+-a(w)=\ell_wE(0)+\int_0^\infty e^{-\nu(w)r}
+-\ell_w\mathcal N_w(E(r))\,dr.
++\mathfrak a(w)=\mathfrak l_wE(0)+\int_0^\infty e^{-\nu(w)r}
++\mathfrak l_w\mathscr N_w(E(r))\,dr.
+ \]
+ The integral is $O(w^3)$ because
+ $C|w|^3e^{-(4/5+\operatorname{Re}\nu(w))r}$ is integrable, whereas
+ $R_w=1-w\Phi(1-\Phi)+O(w^2)$ and
+ $\int\Phi(1-\Phi)dz=1/\sqrt\pi$ give
+-$\ell_wE(0)=w/\sqrt\pi+O(w^2)$. Hence
+-$a(w)=w/\sqrt\pi+O(w^2)>0$ for small real $w>0$.
++$\mathfrak l_wE(0)=w/\sqrt\pi+O(w^2)$. Hence
++$\mathfrak a(w)=w/\sqrt\pi+O(w^2)>0$ for small real $w>0$.
+ The designer component $\xi_w$ of the eigenvector, normalized to
+ $(G_1,0,0)$ at $w=0$, is
+ $-wG_1\beta+O(w^2)$: its first-order equation is
+-$-\mathcal L_0\xi_1=G_1'(\Phi-1/2)$, verified directly by
+-$\mathcal L_0(G_1\beta)=G_1'(\Phi-1/2)$.
++$-\mathscr L_0\xi_1=G_1'(\Phi-1/2)$, verified directly by
++$\mathscr L_0(G_1\beta)=G_1'(\Phi-1/2)$.
+ The fast designer component at order $w$ is exactly $-we^{-v}G_1$.
+ Spectral decay and Cauchy's estimate therefore give
+ \[
+-\chi(v)=a(w)e^{\nu(w)v}\xi_w-we^{-v}G_1
+-+O_X(w^2e^{-7v/10}).
++\chi(v)=\mathfrak a(w)e^{\nu(w)v}\xi_w-we^{-v}G_1
+++O_{\mathscr X}(w^2e^{-7v/10}).
+ \]
+ 
+ At the initial date, $e^v=(1+\eta)/\eta$. Since
+@@ -2033,7 +2033,7 @@
+ for sufficiently small $w$. More precisely, at the initial date
+ $h=1+\eta$ and
+ $Y_h\sim\mathcal N(0,(s-\eta)/h)$.
+-The auxiliary output is $\sqrt h\,\mathbb E[b_w(Y_h)+\chi(v,Y_h)]$.
++The auxiliary output is $\sqrt h\,\mathbb E[\mathsf b_w(Y_h)+\chi(v,Y_h)]$.
+ Its background difference from full disclosure is
+ $w\eta G_q(0)+O(w^2\eta)$, which cancels
+ $-\sqrt h\,we^{-v}\mathbb E G_1(Y_h)=-w\eta G_q(0)$.
+@@ -2050,29 +2050,29 @@
+ and $\gamma_a=\mathbf1_{[\eta,1+\eta]}$.
+ Both lie in $[0,1]$, have integral one, and the Riccati solution gives
+ $\int|\gamma_o-\gamma_a|\,dQ<2\eta$.
+-More precisely, $S_t=\eta(1+r e^{-2t/\eta})/(1-r e^{-2t/\eta})$,
+-where $r=(s-\eta)/(s+\eta)\in(0,1)$.
++More precisely, $S_t=\eta(1+{\chi_S} e^{-2t/\eta})/(1-{\chi_S} e^{-2t/\eta})$,
++where ${\chi_S}=(s-\eta)/(s+\eta)\in(0,1)$.
+ Thus $\varepsilon_\eta:=S_1-\eta\leq C\eta e^{-2/\eta}$, and
+ $|\gamma_o-\gamma_a|\leq4e^{-1/\eta}$ below $Q=1/2$
+ except on $[\eta,S_1]$.
+ 
+ Extend both systems below their terminal variances by zero incentive
+-weight. Their gradients start from the common heat profile $p=n=G_Q$;
++weight. Their gradients start from the common heat profile ${\mathfrak p}={\mathfrak n}=G_Q$;
+ in the mild equations, $w$ is replaced by $w\gamma(Q)$.
+ The Gaussian bilinear bound in
+ \eqref{eq-design-gaussian-bilinear} makes these equations contractions
+ for sufficiently small $w>0$, uniformly in $\eta$.
+-For conditional output $J$, set $Z=\partial_y(J-\beta)$, where
++For conditional output $J$, set ${\mathscr Z}=\partial_y(J-\beta)$, where
+ $\beta(y,Q)=\mathbb E|\mathcal N(y,Q)|/2$.
+ Its mild equation is obtained from
+ \[
+-J_Q=\tfrac12J_{yy}+w\gamma\{(p-n)J_y+(p+n)/2\}.
++J_Q=\tfrac12J_{yy}+w\gamma\{({\mathfrak p}-{\mathfrak n})J_y+({\mathfrak p}+{\mathfrak n})/2\}.
+ \]
+ The same bound and Gaussian smoothing give
+-$|p-G_Q|+|n-G_Q|\leq CwG_Q$, $\|Z\|_\infty\leq Cw$,
++$|{\mathfrak p}-G_Q|+|{\mathfrak n}-G_Q|\leq CwG_Q$, $\|{\mathscr Z}\|_\infty\leq Cw$,
+ and bounded spatial derivatives on $1/2\leq Q\leq q$.
+ Let $\mathfrak d$ be the sum of the two gradient differences in the norm
+-$\sup_{Q,y}|f(Q,y)|/G_Q(y)$ and the difference of $Z$ in the supremum norm.
++$\sup_{Q,y}|f(Q,y)|/G_Q(y)$ and the difference of ${\mathscr Z}$ in the supremum norm.
+ Subtract the three mild equations. Above $Q=1/2$, differentiation of
+ the bounded source profiles bounds the weight-error terms by $C|w|\eta$.
+ Below that level, the bilinear bound controls the uniform weight error.
+@@ -2084,7 +2084,7 @@
+ Integration over an interval of length $\varepsilon_\eta$ with $v\geq\eta$
+ bounds its contribution by $C|w|\sqrt{\varepsilon_\eta/\eta}$.
+ The same bound for the output gradient follows from
+-$\|\partial_yP_v\|_{L^\infty\to L^\infty}\leq Cv^{-1/2}$.
++$\|\partial_yP_v\|_{{\Lambda_{\max}}^\infty\to {\Lambda_{\max}}^\infty}\leq Cv^{-1/2}$.
+ The remaining terms are Lipschitz in the three unknowns, so
+ \[
+ \mathfrak d\leq C|w|\{\eta+e^{-1/\eta}+\sqrt{\varepsilon_\eta/\eta}\}
+@@ -2092,7 +2092,7 @@
+ \]
+ Take $Cw<1/2$, so $\mathfrak d\leq Cw\eta$.
+ To compare output, remove the common first-order source $G_Q$:
+-$\mathcal R_\gamma=(p+n)/2-G_Q+(p-n)(\beta_y+Z)$ satisfies
++$\mathcal R_\gamma=({\mathfrak p}+{\mathfrak n})/2-G_Q+({\mathfrak p}-{\mathfrak n})(\beta_y+{\mathscr Z})$ satisfies
+ $|\mathcal R_\gamma|\leq CwG_Q$ and
+ $|\mathcal R_o-\mathcal R_a|\leq C\mathfrak dG_Q$.
+ With $P_v$ the heat semigroup, $P_{q-Q}G_Q=G_q$ and
+@@ -2112,7 +2112,7 @@
+ error terms. Choose $\eta_*>0$ so that
+ $d\eta^{11/20}>C(\eta^{7/10}+\eta)$ for $0<\eta<\eta_*$.
+ Combine this tail bound with the compact comparison for
+-$L=\eta_*^{-2}$ and take the smaller prize threshold.
++${\Lambda_{\max}}=\eta_*^{-2}$ and take the smaller prize threshold.
+ Rescaling proves \eqref{eq-design-uniform-weak-ranking}.
+ \Halmos
+ \endproof
+@@ -2138,25 +2138,25 @@
+ We construct a parameter point at which only weak incentives can compete
+ with the zero-prize design, then apply Lemma~\ref{lem-design-weak-precision}.
+ 
+-Put $k=1/100$, $b=\sqrt{S_0/\{2\pi(1-k)\}}$, and $M=bu'(b)$.
++Put ${\epsilon_*}=1/100$, $b=\sqrt{S_0/\{2\pi(1-{\epsilon_*})\}}$, and ${\mathfrak m}=bu'(b)$.
+ Choose
+ \[
+-T_0D'(T_0)=Mk/2,\qquad \sigma^2T_0=kS_0/(1-k).
++T_0D'(T_0)={\mathfrak m}{\epsilon_*}/2,\qquad \sigma^2T_0={\epsilon_*}S_0/(1-{\epsilon_*}).
+ \]
+ The second equality makes $b(T_0)=b$. It also gives
+ \[
+-T_0u'(b)b'(T_0)=\frac{Mk}{2}=T_0D'(T_0),
++T_0u'(b)b'(T_0)=\frac{{\mathfrak m}{\epsilon_*}}{2}=T_0D'(T_0),
+ \]
+ so $T_0$ satisfies the zero-prize first-order condition. Because
+ $u(b(T))-D(T)$ is strictly concave, this condition makes $T_0$ its unique
+-maximizer. As $S_0\to\infty$, $M\to0$ by the utility-tail assumption.
++maximizer. As $S_0\to\infty$, ${\mathfrak m}\to0$ by the utility-tail assumption.
+ The first equality and $D''(0)>0$ then imply $T_0\to0$, while the second
+-implies $\sigma^2=kS_0/\{(1-k)T_0\}\to\infty$.
++implies $\sigma^2={\epsilon_*}S_0/\{(1-{\epsilon_*})T_0\}\to\infty$.
+ Write $V_0=u(b)-D(T_0)$, $\alpha=\theta/c$,
+-$w=\alpha/\sigma^2$, and $x=T/T_0$. Then $c_e\sigma^2=Mk$.
++$w=\alpha/\sigma^2$, and ${\vartheta}=T/T_0$. Then $c_e\sigma^2={\mathfrak m}{\epsilon_*}$.
+ Monotonicity of $D'(T)/T$ gives
+ \[
+-D(T)-D(T_0)\geq Mk(x^2-1)/4,\qquad D(T_0)\leq Mk/4.
++D(T)-D(T_0)\geq {\mathfrak m}{\epsilon_*}({\vartheta}^2-1)/4,\qquad D(T_0)\leq {\mathfrak m}{\epsilon_*}/4.
+ \]
+ Indeed, $D'(s)\geq(s/T_0)D'(T_0)$ for $s\geq T_0$ and the reverse
+ inequality holds for $s\leq T_0$; integrating on the appropriate interval
+@@ -2167,18 +2167,18 @@
+ so that $-Bu''(B)\geq(\gamma+1)u'(B)$ for $B\geq.99b$ and
+ $D'(T_0)/\{D''(0)T_0\}<1+10^{-5}$.
+ At $c=c_e$, any design with payoff at least $V_0$ satisfies
+-the budget $\theta+D(T)\leq u_\infty-V_0\leq M/\gamma+Mk/4$,
++the budget $\theta+D(T)\leq u_\infty-V_0\leq {\mathfrak m}/\gamma+{\mathfrak m}{\epsilon_*}/4$,
+ where $u_\infty=\lim_{B\to\infty}u(B)$ and the tail bound follows
+ by integrating the curvature inequality above $b$: it gives
+ $u'(B)\leq u'(b)(B/b)^{-(\gamma+1)}$ and hence
+-$u_\infty-u(b)\leq bu'(b)/\gamma=M/\gamma$. Since
++$u_\infty-u(b)\leq bu'(b)/\gamma={\mathfrak m}/\gamma$. Since
+ $D(T)\geq D''(0)T^2/2$, this gives
+ \[
+-w+\frac{D''(0)T_0}{D'(T_0)}\frac{x^2}{4}
+-\leq\frac14+\frac1{\gamma k}.
+-\]
+-Take $\gamma\geq10^6$; this implies $w+x^2/4<.252$, hence $x<2$.
+-Moreover, concavity gives $u(b)-u(.99b)\geq.01M>D(T_0)$,
++w+\frac{D''(0)T_0}{D'(T_0)}\frac{{\vartheta}^2}{4}
++\leq\frac14+\frac1{\gamma {\epsilon_*}}.
++\]
++Take $\gamma\geq10^6$; this implies $w+{\vartheta}^2/4<.252$, hence ${\vartheta}<2$.
++Moreover, concavity gives $u(b)-u(.99b)\geq.01{\mathfrak m}>D(T_0)$,
+ so a design with $\mathcal B\leq.99b$ has payoff strictly below
+ $u(b)-D(T_0)=V_0$. Competitiveness therefore requires
+ $\mathcal B>.99b$.
+@@ -2190,16 +2190,16 @@
+ \qquad b(T)=\sqrt{(S_0+\sigma^2T)/(2\pi)}.
+ \end{equation}
+ Put $Q_t=S_t+\sigma^2(T-t)$, $a_t=\lambda S_t^2$,
+-$U_i=V_i/\theta$, $U_j=V_j/\theta$, $p=\partial_yU_i$, $n=-\partial_yU_j$,
+-$H=p+n$, and $A=p-n$.
++$U_i=V_i/\theta$, $U_j=V_j/\theta$, ${\mathfrak p}=\partial_yU_i$, ${\mathfrak n}=-\partial_yU_j$,
++${\mathfrak H}={\mathfrak p}+{\mathfrak n}$, and ${\mathfrak A}={\mathfrak p}-{\mathfrak n}$.
+ 
+ If $\lambda S_0^2<.72\sigma^2$, the Riccati path increases and
+ $S_T\geq S_0$. Thus
+ \[
+-e:=\alpha T/S_T\leq2w/99<.01,\qquad Q_0/S_T\leq101/99.
+-\]
+-Here we used $x<2$ and
+-$S_0/(\sigma^2T_0)=(1-k)/k=99$, so
++\varepsilon_{\mathrm{loc}}:=\alpha T/S_T\leq2w/99<.01,\qquad Q_0/S_T\leq101/99.
++\]
++Here we used ${\vartheta}<2$ and
++$S_0/(\sigma^2T_0)=(1-{\epsilon_*})/{\epsilon_*}=99$, so
+ $\sigma^2T/S_0<2/99$; the two displayed bounds then follow from
+ $S_T\geq S_0$.
+ Normalize scores by $\sqrt{S_T}$ and reverse time by
+@@ -2207,11 +2207,11 @@
+ Theorem~\ref{thm-equilibrium-effort}, the normalized terminal Gaussian
+ has the coefficientwise majorant
+ \[
+-G_1(0)e^{r^2/2}+\frac1\pi\sum_{j\geq0}
+-\frac{r^{2j+1}}{(2j+1)!!}
+-\leq\Psi(r):=.4e^{r^2/2}+.32r/(1-r^2/3),\qquad 0\leq r<\sqrt3.
+-\]
+-Put $\kappa=7/4$. For nonnegative moment majorants $X,Y$ of $H,A$,
++G_1(0)e^{{\omega}^2/2}+\frac1\pi\sum_{j\geq0}
++\frac{{\omega}^{2j+1}}{(2j+1)!!}
++\leq\Psi({\omega}):=.4e^{{\omega}^2/2}+.32{\omega}/(1-{\omega}^2/3),\qquad 0\leq {\omega}<\sqrt3.
++\]
++Put $\kappa=7/4$. For nonnegative moment majorants $X,Y$ of ${\mathfrak H},{\mathfrak A}$,
+ respectively, the weighted sum of their quadratic fluxes satisfies
+ \[
+ \frac{XY}{4}+\frac\kappa8(3Y^2+X^2)
+@@ -2220,34 +2220,34 @@
+ because $\kappa^2>3$.
+ Heat contraction and Picard iteration therefore majorize
+ the weighted moment sum $(X+\kappa Y)/2$ by the scalar equation
+-$h_v=\kappa h h_r$, $h(0,r)=\Psi(r)$, whose analytic branch satisfies
+-$h(v,r)=\Psi(r+\kappa vh(v,r))$.
++${\mathfrak h}_v=\kappa {\mathfrak h} {\mathfrak h}_{\omega}$, ${\mathfrak h}(0,{\omega})=\Psi({\omega})$, whose analytic branch satisfies
++${\mathfrak h}(v,{\omega})=\Psi({\omega}+\kappa v{\mathfrak h}(v,{\omega}))$.
+ In the Picard expansion, subtracting the propagated Gaussian removes
+ the order-zero term. Each individual gradient correction is bounded
+-by half the sum of the moment majorants of $H-2G_Q$ and $A$,
++by half the sum of the moment majorants of ${\mathfrak H}-2G_Q$ and ${\mathfrak A}$,
+ so its Fourier norm is at most
+-$S_T^{-1/2}\{h(v,0)-.4\}$.
+-Direct substitution gives $h(v,0)-.4\leq v/4$ for $v\leq.01$:
+-at the largest argument $r=(7/4)(.01)(.4025)$,
+-\[
+-\frac{.4(r^2/2)e^{r^2/2}+.32r/(1-r^2/3)}{.01}<\frac14.
++$S_T^{-1/2}\{{\mathfrak h}(v,0)-.4\}$.
++Direct substitution gives ${\mathfrak h}(v,0)-.4\leq v/4$ for $v\leq.01$:
++at the largest argument ${\omega}=(7/4)(.01)(.4025)$,
++\[
++\frac{.4({\omega}^2/2)e^{{\omega}^2/2}+.32{\omega}/(1-{\omega}^2/3)}{.01}<\frac14.
+ \]
+ Thus $d(t)=\alpha(T-t)/(4S_T^{3/2})$ bounds each correction.
+ Since the Fourier-moment norm dominates the pointwise norm, this means
+ \[
+-|p-G_{Q_t}|\leq d(t),\qquad |n-G_{Q_t}|\leq d(t),
+-\]
+-and hence, with $E=H-2G_{Q_t}$, $|E|\leq2d(t)$ and
+-$|A|\leq2d(t)$. These are pointwise bounds; the Gaussian-weighted
++|{\mathfrak p}-G_{Q_t}|\leq d(t),\qquad |{\mathfrak n}-G_{Q_t}|\leq d(t),
++\]
++and hence, with ${\mathfrak E}={\mathfrak H}-2G_{Q_t}$, $|{\mathfrak E}|\leq2d(t)$ and
++$|{\mathfrak A}|\leq2d(t)$. These are pointwise bounds; the Gaussian-weighted
+ supremum norm used in the next, high-diffusion case is a different norm.
+ 
+ Let $J(t,y)$ be the conditional continuation contribution to
+ $\mathcal B-b(T)$. It has terminal value zero and solves
+ \[
+ J_t+\mathscr L_tJ+
+-\frac\alpha2\{H+[2\Phi(y/\sqrt{Q_t})-1]A\}=0,
++\frac\alpha2\{{\mathfrak H}+[2\Phi(y/\sqrt{Q_t})-1]{\mathfrak A}\}=0,
+ \qquad
+-\mathscr L_t=\frac{a_t}{2}\partial_{yy}+\alpha A\partial_y.
++\mathscr L_t=\frac{a_t}{2}\partial_{yy}+\alpha {\mathfrak A}\partial_y.
+ \]
+ Consider the unnormalized barrier
+ \[
+@@ -2259,13 +2259,13 @@
+ $\partial_tG_{Q_t}+(a_t/2)\partial_{yy}G_{Q_t}=0$,
+ \[
+ (\partial_t+\mathscr L_t)\overline J
+-=-\alpha G_{Q_t}+\alpha^2A(T-t)G'_{Q_t}
++=-\alpha G_{Q_t}+\alpha^2{\mathfrak A}(T-t)G'_{Q_t}
+ -2\alpha d(t)\left\{1+.486\frac{\alpha(T-t)}{Q_t}\right\}.
+ \]
+ The source in the equation for $J$ is
+-$\alpha G_{Q_t}+\alpha E/2+
+-\alpha[2\Phi(y/\sqrt{Q_t})-1]A/2$.
+-Using $|E|,|A|\leq2d$, $|2\Phi-1|\leq1$, and
++$\alpha G_{Q_t}+\alpha {\mathfrak E}/2+
++\alpha[2\Phi(y/\sqrt{Q_t})-1]{\mathfrak A}/2$.
++Using $|{\mathfrak E}|,|{\mathfrak A}|\leq2d$, $|2\Phi-1|\leq1$, and
+ $|G'_Q|<.243/Q$, the supersolution residual is at most
+ \[
+ .486\alpha^2d(t)\frac{T-t}{Q_t}+2\alpha d(t)
+@@ -2281,7 +2281,7 @@
+ This bound requires only $\lambda S_0^2<.72\sigma^2$ and
+ $\alpha T/S_T\leq.01$.
+ On the present competitive set, the excess output coefficient is
+-$\sqrt{2\pi Q_0/S_T}(e/w)(.5+.243e)/2<.02$, proving
++$\sqrt{2\pi Q_0/S_T}(\varepsilon_{\mathrm{loc}}/w)(.5+.243\varepsilon_{\mathrm{loc}})/2<.02$, proving
+ \eqref{eq-design-competitive-output-screen} in this case.
+ 
+ If $\lambda S_0^2\geq.72\sigma^2$, the whole Riccati path has
+@@ -2290,23 +2290,23 @@
+ $\sigma^2$ and never falls below
+ $\min\{a_0,\sigma^2\}\geq.72\sigma^2$. In the norm
+ $\|f\|=\sup|f|/G_{Q_t}$,
+-write $E=H-2G_Q$ and
++write ${\mathfrak E}={\mathfrak H}-2G_Q$ and
+ $\mathcal T(f,g)=\int_t^T\partial_yP_{Q_t-Q_s}(f_sg_s)\,ds$.
+ The centered gradient equations are
+ \[
+-E=\tfrac\alpha2\mathcal T(A,2G_Q+E),\qquad
+-A=A_1+\tfrac\alpha4\{3\mathcal T(A,A)-\mathcal T(E,4G_Q+E)\}.
++{\mathfrak E}=\tfrac\alpha2\mathcal T({\mathfrak A},2G_Q+{\mathfrak E}),\qquad
++{\mathfrak A}={\mathfrak A}_1+\tfrac\alpha4\{3\mathcal T({\mathfrak A},{\mathfrak A})-\mathcal T({\mathfrak E},4G_Q+{\mathfrak E})\}.
+ \]
+ Changing variables from time to $Q_s$ gives
+-$\alpha\|\mathcal T(f,g)\|\leq K\|f\|\|g\|$,
+-where $K=\alpha/\min a_t\leq w/.72$.
++$\alpha\|\mathcal T(f,g)\|\leq {K_{\mathrm b}}\|f\|\|g\|$,
++where ${K_{\mathrm b}}=\alpha/\min a_t\leq w/.72$.
+ Indeed, \eqref{eq-design-gaussian-bilinear} bounds the convolution
+ integral after this variance substitution.
+ The explicit source
+-$A_1=-\alpha(2\sqrt\pi)^{-1}\int_t^TQ_s^{-1/2}G'_{Q_t-Q_s/2}\,ds$
+-has norm at most $K$: the same variance substitution evaluates its
+-upper bound as $K|2\Phi(y/\sqrt{Q_t})-1|G_{Q_t}$.
+-The centered map contracts on $\|E\|\leq6w^2$, $\|A\|\leq3w$.
++${\mathfrak A}_1=-\alpha(2\sqrt\pi)^{-1}\int_t^TQ_s^{-1/2}G'_{Q_t-Q_s/2}\,ds$
++has norm at most ${K_{\mathrm b}}$: the same variance substitution evaluates its
++upper bound as ${K_{\mathrm b}}|2\Phi(y/\sqrt{Q_t})-1|G_{Q_t}$.
++The centered map contracts on $\|{\mathfrak E}\|\leq6w^2$, $\|{\mathfrak A}\|\leq3w$.
+ Indeed, for $0<w\leq.252$, its map-to-radius ratios satisfy
+ \[
+ \max\left\{\frac{2+6w^2}{4\cdot.72},
+@@ -2328,27 +2328,27 @@
+ so $U_i,U_j\geq0$, while summing their equilibrium payoffs gives the
+ unit total prize minus nonnegative effort costs and hence
+ $R:=U_i+U_j\leq1$. Applying It\^o's formula shows that
+-$e^{-KU_i}$ and $e^{-KU_j}$ are submartingales. Their terminal values are
++$e^{-{K_{\mathrm b}}U_i}$ and $e^{-{K_{\mathrm b}}U_j}$ are submartingales. Their terminal values are
+ exponentials of complementary probabilities in $[0,1]$, which gives
+-$0\leq1-R\leq2\log\cosh(K/2)/K$.
++$0\leq1-R\leq2\log\cosh({K_{\mathrm b}}/2)/{K_{\mathrm b}}$.
+ With $\kappa_t=\alpha/a_t$, Girsanov's log likelihood is
+ \[
+ \kappa_s(R_s-1)-\kappa_t(R_t-1)
+ -\int_t^s\kappa_r'(R_r-1)\,dr
+--\frac14\int_t^s\alpha\kappa_r(H_r^2-A_r^2)\,dr,
++-\frac14\int_t^s\alpha\kappa_r({\mathfrak H}_r^2-{\mathfrak A}_r^2)\,dr,
+ \qquad R=U_i+U_j.
+ \]
+ Monotonicity of $\kappa$, in either direction, bounds this by
+-$2\log\cosh(K/2)$; $H^2-A^2=4pn\geq0$ makes the last term nonpositive.
++$2\log\cosh({K_{\mathrm b}}/2)$; ${\mathfrak H}^2-{\mathfrak A}^2=4{\mathfrak p}{\mathfrak n}\geq0$ makes the last term nonpositive.
+ Exponentiating and applying the heat semigroup gives the stated
+-$\cosh^2(K/2)$ domination. Since $K\leq w/.72\leq.35$, the displayed
++$\cosh^2({K_{\mathrm b}}/2)$ domination. Since ${K_{\mathrm b}}\leq w/.72\leq.35$, the displayed
+ constant follows. Bounded gradients and positive diffusion justify the
+ change of measure.
+ 
+ Let $\beta(y,Q)=\mathbb E|\mathcal N(y,Q)|/2$.
+ Subtracting $\beta+\alpha(T-t)G_{Q_t}$ from conditional best output
+ gives a zero-terminal linear equation with source
+-$\alpha E/2+\alpha A\beta_y+\alpha^2(T-t)AG'_{Q_t}$.
++$\alpha {\mathfrak E}/2+\alpha {\mathfrak A}\beta_y+\alpha^2(T-t){\mathfrak A}G'_{Q_t}$.
+ Using $|\beta_y|\leq1/2$, $(T-t)/Q_t\leq1/\sigma^2$, and
+ $|G'_Q|<.243/Q$, its absolute value is at most
+ $\alpha wG_{Q_t}\{3w+3/2+.729w\}$.
+@@ -2359,59 +2359,59 @@
+ % Exact constants: verify_prior_dominated_comparison.py.
+ 
+ \emph{Exclude prizes outside the weak-incentive range.}
+-Put $h=1+k(x-1)$ and
+-$r=\sqrt h+kx(w+2.9w^2)/\sqrt h$.
++Put $h=1+{\epsilon_*}({\vartheta}-1)$ and
++${\varrho}=\sqrt h+{\epsilon_*}{\vartheta}(w+2.9w^2)/\sqrt h$.
+ Integrating the utility-curvature inequality gives
+-$u(\mathcal B)-u(b)\leq(M/\gamma)\{1-(b/\mathcal B)^\gamma\}$.
++$u(\mathcal B)-u(b)\leq({\mathfrak m}/\gamma)\{1-(b/\mathcal B)^\gamma\}$.
+ The construction gives $b(T)/b=\sqrt h$, while
+ \[
+ \frac{\alpha T G_{S_0+\sigma^2T}(0)}b
+-=\frac{kxw}{\sqrt h}.
++=\frac{{\epsilon_*}{\vartheta}w}{\sqrt h}.
+ \]
+ Thus \eqref{eq-design-competitive-output-screen} implies
+-$\mathcal B/b\leq r$. Since the curvature bound is increasing in
+-$\mathcal B$, and since $\theta=c_e\alpha=Mkw$, substitution together
++$\mathcal B/b\leq {\varrho}$. Since the curvature bound is increasing in
++$\mathcal B$, and since $\theta=c_e\alpha={\mathfrak m}{\epsilon_*}w$, substitution together
+ with the delay bound yields
+ \begin{equation}\label{eq-design-joint-exit-screen}
+-\frac{u(\mathcal B)-\theta-D(T)-V_0}{Mk}
+-\leq F_\gamma(x,w):=\frac{1-r^{-\gamma}}{\gamma k}
+--w-\frac{x^2-1}{4}.
++\frac{u(\mathcal B)-\theta-D(T)-V_0}{{\mathfrak m}{\epsilon_*}}
++\leq \mathscr F_\gamma({\vartheta},w):=\frac{1-{\varrho}^{-\gamma}}{\gamma {\epsilon_*}}
++-w-\frac{{\vartheta}^2-1}{4}.
+ \end{equation}
+ Let $w_*>0$ be the threshold in Lemma~\ref{lem-design-weak-precision}
+ and put $w_0=\min\{w_*/2,.252\}$.
+-We need $F_\gamma<0$ only on the compact set
+-\[
+-\{(x,w)\in[0,2]\times[0,.252]:x\leq1/2\ \text{or}\ w\geq w_0\},
++We need $\mathscr F_\gamma<0$ only on the compact set
++\[
++\{({\vartheta},w)\in[0,2]\times[0,.252]:{\vartheta}\leq1/2\ \text{or}\ w\geq w_0\},
+ \]
+ which excludes $(1,0)$.
+ 
+-On $w+(x^2-1)/4\leq0$, we have $x\leq1$ and
+-$w\leq(1-x^2)/4$. Since $r$ increases in $w$, $r<1$
++On $w+({\vartheta}^2-1)/4\leq0$, we have ${\vartheta}\leq1$ and
++$w\leq(1-{\vartheta}^2)/4$. Since ${\varrho}$ increases in $w$, ${\varrho}<1$
+ reduces to
+ \[
+-x\left\{\frac{1+x}{4}+\frac{29(1-x)(1+x)^2}{160}\right\}
+-<\frac{\sqrt{1-k(1-x)}}{1+\sqrt{1-k(1-x)}},\qquad x<1.
+-\]
+-The left side is at most $.5-(1-x)/40$, because the difference is
+-$(1-x)^2(29x^2+87x+76)/160$.
++{\vartheta}\left\{\frac{1+{\vartheta}}{4}+\frac{29(1-{\vartheta})(1+{\vartheta})^2}{160}\right\}
++<\frac{\sqrt{1-{\epsilon_*}(1-{\vartheta})}}{1+\sqrt{1-{\epsilon_*}(1-{\vartheta})}},\qquad {\vartheta}<1.
++\]
++The left side is at most $.5-(1-{\vartheta})/40$, because the difference is
++$(1-{\vartheta})^2(29{\vartheta}^2+87{\vartheta}+76)/160$.
+ The right side exceeds this bound: its difference from $1/2$ is
+-$k(1-x)/\{2(1+\sqrt{1-k(1-x)})^2\}<(1-x)/40$.
++${\epsilon_*}(1-{\vartheta})/\{2(1+\sqrt{1-{\epsilon_*}(1-{\vartheta})})^2\}<(1-{\vartheta})/40$.
+ Equality occurs only at $(1,0)$.
+-The inequality $e^z\geq1+z$ makes $F_\gamma$ nonincreasing in $\gamma$.
+-Every point of the displayed compact set eventually has $F_\gamma<0$:
+-if $w+(x^2-1)/4\leq0$, then $r<1$ and $F_\gamma\to-\infty$;
+-otherwise $\limsup_{\gamma\to\infty}F_\gamma<0$.
+-The sets $\{F_\gamma<0\}$ therefore increase with $\gamma$ and cover the
++The inequality $e^z\geq1+z$ makes $\mathscr F_\gamma$ nonincreasing in $\gamma$.
++Every point of the displayed compact set eventually has $\mathscr F_\gamma<0$:
++if $w+({\vartheta}^2-1)/4\leq0$, then ${\varrho}<1$ and $\mathscr F_\gamma\to-\infty$;
++otherwise $\limsup_{\gamma\to\infty}\mathscr F_\gamma<0$.
++The sets $\{\mathscr F_\gamma<0\}$ therefore increase with $\gamma$ and cover the
+ displayed compact set. A finite subcover gives one
+ $\gamma\geq10^6$ and a strictly negative uniform margin.
+ Fix it before increasing $S_0$.
+ 
+ Finally take $c<c_e$ sufficiently close to $c_e$.
+-The competitive budget still implies $w+x^2/4<.252$,
++The competitive budget still implies $w+{\vartheta}^2/4<.252$,
+ and replacing $c_e$ by $c$ changes the normalized prize term from
+ $-w$ to $-(c/c_e)w$. Thus the right side of
+ \eqref{eq-design-joint-exit-screen} gains only $(1-c/c_e)w$.
+-The uniform margin excludes $x\leq1/2$ or $w\geq w_0$
++The uniform margin excludes ${\vartheta}\leq1/2$ or $w\geq w_0$
+ after this small cost perturbation.
+ Every competitive finite-feedback design therefore has
+ $T_0/2<T<2T_0$ and $0<w<w_*$.
+@@ -2427,36 +2427,36 @@
+ 
+ For the retained readouts defined in Section~\ref{sect-bayes-framework}, let
+ \[
+-g_k=\int_{t_{k-1}}^{t_k}
++\mathfrak g_k=\int_{t_{k-1}}^{t_k}
+ \left[m_i^{(1)}(\tilde y_s,S_s,s)-m_j^{(1)}(\tilde y_s,S_s,s)\right]ds,
+ \]
+-which is determined by the preceding public history, $t_k$, and $\Theta$ under the maintained carried-forward path. Set $R_k=(\lambda h_k)^{-1}$ and initialize $\mu_{0\mid0}=\mu_0$ and $P_{0\mid0}=S_0$. Conditional on $\mathcal F_{k-1}$, $t_k$, and $\Theta$, prediction and measurement updating give
++which is determined by the preceding public history, $t_k$, and $\Theta$ under the maintained carried-forward path. Set $\mathsf R_k=(\lambda h_k)^{-1}$ and initialize $\mu_{0\mid0}=\mu_0$ and $\mathsf P_{0\mid0}=S_0$. Conditional on $\mathcal F_{k-1}$, $t_k$, and $\Theta$, prediction and measurement updating give
+ \[
+ \begin{gathered}
+-\mu_{k\mid k-1}=\mu_{k-1\mid k-1}+g_k,\qquad
+-P_{k\mid k-1}=P_{k-1\mid k-1}+\sigma^2h_k,\\
+-V_{k\mid k-1}=P_{k\mid k-1}+R_k,\qquad
+-K_k=P_{k\mid k-1}/V_{k\mid k-1},\\
++\mu_{k\mid k-1}=\mu_{k-1\mid k-1}+\mathfrak g_k,\qquad
++\mathsf P_{k\mid k-1}=\mathsf P_{k-1\mid k-1}+\sigma^2h_k,\\
++\Omega_{k\mid k-1}=\mathsf P_{k\mid k-1}+\mathsf R_k,\qquad
++\mathsf K_k=\mathsf P_{k\mid k-1}/\Omega_{k\mid k-1},\\
+ \mu_{k\mid k}=\mu_{k\mid k-1}
+-+K_k(\hat y_{t_k}-\mu_{k\mid k-1}),\qquad
+-P_{k\mid k}=(1-K_k)P_{k\mid k-1}.
+++\mathsf K_k(\hat y_{t_k}-\mu_{k\mid k-1}),\qquad
++\mathsf P_{k\mid k}=(1-\mathsf K_k)\mathsf P_{k\mid k-1}.
+ \end{gathered}
+ \]
+-Thus $\mu_{k\mid k-1}$ and $V_{k\mid k-1}$ are the predictive moments entering equation~\eqref{eq-obs_gap-prob}. After its density contribution is evaluated, $(\mu_{k\mid k},P_{k\mid k})$ initializes the next prediction.
++Thus $\mu_{k\mid k-1}$ and $\Omega_{k\mid k-1}$ are the predictive moments entering equation~\eqref{eq-obs_gap-prob}. After its density contribution is evaluated, $(\mu_{k\mid k},\mathsf P_{k\mid k})$ initializes the next prediction.
+ 
+ \subsection{Solve $S_t$ in Equation (\ref{filtered-S})}\label{app-S-equ}
+ 
+ For $\lambda>0$, put $\bar S=\sigma/\sqrt\lambda$ and
+-$u_t=S_t/\bar S$. Equation~\eqref{filtered-S} becomes
+-\[
+-\dot u_t=\sigma\sqrt\lambda\,(1-u_t^2).
+-\]
+-The constant solution is $u_t=1$. Otherwise, separation of variables
++$\mathsf s_t=S_t/\bar S$. Equation~\eqref{filtered-S} becomes
++\[
++\dot{\mathsf s}_t=\sigma\sqrt\lambda\,(1-\mathsf s_t^2).
++\]
++The constant solution is $\mathsf s_t=1$. Otherwise, separation of variables
+ with the initial condition imposed directly gives
+ \[
+-\int_{u_0}^{u_t}\frac{dv}{1-v^2}=\sigma\sqrt\lambda\,t.
+-\]
+-If $u_0<1$, the antiderivative is $\tanh^{-1}$; if $u_0>1$, it is
++\int_{\mathsf s_0}^{\mathsf s_t}\frac{dv}{1-v^2}=\sigma\sqrt\lambda\,t.
++\]
++If $\mathsf s_0<1$, the antiderivative is $\tanh^{-1}$; if $\mathsf s_0>1$, it is
+ $\coth^{-1}$. Inverting the corresponding identity yields
+ \begin{equation*}
+ 	S_t =
+@@ -2479,7 +2479,7 @@
+ As a working Gaussian approximation, we use $\Delta y_k-\hat\mu_k\sim\mathcal N(0,\sigma^2 h_k)$, $k=1,\ldots,n$.
+ This is not an exact conditional distribution given an endogenous effort path. Treating these increments as approximately independent and holding the plug-in drift fixed, the working log-likelihood for $\sigma^2$ is, up to constants,
+ \[
+-\ell(\sigma^2)
++\log\mathcal L_{\sigma}(\sigma^2)
+ =
+ -\frac{n}{2}\log(\sigma^2)
+ -\frac{1}{2}\sum_{k=1}^n\log h_k
+@@ -2497,7 +2497,7 @@
+ \]
+ Therefore,
+ \begin{equation}\label{normal-benchmark-sigma}
+-\hat{\sigma}^2
++(\sigma^{\mathrm{bench}})^2
+ =
+ \frac{1}{n}\sum_{k=1}^n
+ \frac{(\Delta y_k-\hat\mu_k)^2}{h_k}.
+@@ -2530,7 +2530,7 @@
+ 
+ \subsection{Precision Counterfactual Calculations}\label{app-precision-counterfactual}
+ 
+-\textcolor{blue}{For each accepted joint posterior draw $s$, retain $(c_{i,s},c_{j,s},\sigma_s,\mu_{0,s},\lambda_s^{obs})$ and set $S_{0,s}^{base}=\sigma_s/\sqrt{\lambda_s^{obs}}$. Hold this initial variance and the initial mean fixed across candidate prizes, deadlines, and precisions. In the expressions below we suppress the contest and draw indices. The Riccati equation starts at $S_0=S_0^{base}$; write $q=S_0+\sigma^2T$ and $Q_t=S_t+\sigma^2(T-t)$. With $G_q$ the centered normal density of variance $q$ and $\beta(\mu,q)=\mathbb E|N(\mu,q)|/2$, the first-order expected output is}
++\textcolor{blue}{For each accepted joint posterior draw $s$, retain $(c_{i,s},c_{j,s},\sigma_s,\mu_{0,s},\lambda_s^{obs})$ and set $S_{0,s}^{base}=\sigma_s/\sqrt{\lambda_s^{obs}}$. Hold this initial variance and the initial mean fixed across candidate prizes, deadlines, and precisions. In the expressions below we suppress the contest and draw indices. The Riccati equation starts at $S_0=S_0^{base}$; write $q=S_0+\sigma^2T$ and $Q_t=S_t+\sigma^2(T-t)$. With $G_q$ the centered normal density of variance $q$ and $\beta(\mu,q)=\mathbb E|\mathcal N(\mu,q)|/2$, the first-order expected output is}
+ \[
+ \begin{aligned}
+ \mathcal B(\theta,T,\lambda)
+@@ -2542,7 +2542,7 @@
+ &=\int_0^T\left[\Phi\!\left(\frac{\mu_0\sqrt{Q_t}}{\sqrt{q(2q-Q_t)}}\right)-\frac12\right]dt.
+ \end{aligned}
+ \]
+-\textcolor{blue}{To derive the coefficient, use the best-output drift identity in equation~\eqref{eq-best-output-drift-identity}, replacing its centered initial baseline by $\beta(\mu_0,q)$. Under zero effort the perceived gap $X_t$ has law $N(\mu_0,q-Q_t)$. Substitution of $m_k=\theta G_{Q_t}/c_k+O(\theta^2)$ gives}
++\textcolor{blue}{To derive the coefficient, use the best-output drift identity in equation~\eqref{eq-best-output-drift-identity}, replacing its centered initial baseline by $\beta(\mu_0,q)$. Under zero effort the perceived gap $X_t$ has law $\mathcal N(\mu_0,q-Q_t)$. Substitution of $m_k=\theta G_{Q_t}/c_k+O(\theta^2)$ gives}
+ \[
+ \begin{aligned}
+ \mathbb E[G_{Q_t}(X_t)]&=G_q(\mu_0),\\
+@@ -2552,7 +2552,7 @@
+ \]
+ \textcolor{blue}{These Gaussian identities yield the displayed coefficient. Changes in the state law due to first-order drift affect the effort contribution only at second order. The remainder is $O(\theta^2)$ for fixed positive finite precision and other primitives; it is not a uniform error bound for the optimized designs. The coefficient $A$ is positive. If $c_i=c_j$ or $\mu_0=0$, its precision-dependent component vanishes. Preserving the total-effort coefficient through a symmetric cost replacement would omit the asymmetric contribution to best output.}
+ 
+-\textcolor{blue}{The no-effort term $\beta(\mu_0,q)$ is the same at every precision. At the no-feedback limit, $S_t=S_0+\sigma^2t$ and $Q_t=q$. At full disclosure, contestants observe the initial gap; the organizer still averages over $N(\mu_0,S_0)$. The corresponding first-order coefficient is obtained by setting $Q_t=\sigma^2(T-t)$ for $t>0$ in the integral. Neither endpoint resets the initial score distribution.}
++\textcolor{blue}{The no-effort term $\beta(\mu_0,q)$ is the same at every precision. At the no-feedback limit, $S_t=S_0+\sigma^2t$ and $Q_t=q$. At full disclosure, contestants observe the initial gap; the organizer still averages over $\mathcal N(\mu_0,S_0)$. The corresponding first-order coefficient is obtained by setting $Q_t=\sigma^2(T-t)$ for $t>0$ in the integral. Neither endpoint resets the initial score distribution.}
+ 
+ \textcolor{blue}{For each candidate duration, maximize the posterior average $\overline A(T,\lambda)$ over precision, including both endpoint limits. Time integration uses Gauss--Legendre quadrature after $t=T(1-u^2)$, which removes the square-root behavior at the full-disclosure terminal endpoint. The precision search evaluates a logarithmic grid and refines bracketed local maxima. Both the time quadrature and the search grid are independently doubled at all 584 contest-duration combinations; all accepted posterior draws enter the calculation. A no-feedback boundary maximizer is reported as a limiting comparison, not as an attained positive-precision design.}
+ 

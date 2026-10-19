@@ -1,0 +1,141 @@
+{
+  "contests": 73,
+  "quadrature_max_relative_error": 1.0972384814583032e-15,
+  "grid_max_relative_error": 0.0,
+  "fixed_classification": {
+    "full_disclosure": 42,
+    "no_feedback_limit": 31
+  },
+  "fixed_direction": {
+    "Direction uncertain": 33,
+    "Increase precision": 24,
+    "Decrease precision": 16
+  },
+  "fixed_gain_quantiles": [
+    0.0012239728267360306,
+    0.011344069475049956,
+    0.23050980478260819
+  ],
+  "joint_summary": [
+    {
+      "delta": 0.1,
+      "full_disclosure": 30,
+      "finite_precision": 0,
+      "no_feedback_limit": 21,
+      "zero_prize": 22,
+      "observed": 0,
+      "median_time": 1.5,
+      "median_prize": 0.4453947555175276,
+      "median_saving": 23.14593131658841,
+      "median_additional_saving": 0.5586896217147364,
+      "decrease_supported": 12
+    },
+    {
+      "delta": 0.25,
+      "full_disclosure": 35,
+      "finite_precision": 0,
+      "no_feedback_limit": 22,
+      "zero_prize": 16,
+      "observed": 0,
+      "median_time": 1.25,
+      "median_prize": 0.786084221232494,
+      "median_saving": 5.863262301400485,
+      "median_additional_saving": 0.6320856806993569,
+      "decrease_supported": 13
+    },
+    {
+      "delta": 0.5,
+      "full_disclosure": 38,
+      "finite_precision": 0,
+      "no_feedback_limit": 23,
+      "zero_prize": 12,
+      "observed": 0,
+      "median_time": 1.0,
+      "median_prize": 0.9798584224343938,
+      "median_saving": 1.8004774908806476,
+      "median_additional_saving": 0.6621573369865352,
+      "decrease_supported": 13
+    },
+    {
+      "delta": 1.0,
+      "full_disclosure": 39,
+      "finite_precision": 0,
+      "no_feedback_limit": 24,
+      "zero_prize": 10,
+      "observed": 0,
+      "median_time": 0.75,
+      "median_prize": 1.20259220067184,
+      "median_saving": 9.790257074476227,
+      "median_additional_saving": 0.8440690412599594,
+      "decrease_supported": 14
+    },
+    {
+      "delta": 2.0,
+      "full_disclosure": 42,
+      "finite_precision": 0,
+      "no_feedback_limit": 31,
+      "zero_prize": 0,
+      "observed": 0,
+      "median_time": 0.75,
+      "median_prize": 1.5416193254227568,
+      "median_saving": 18.710126602177624,
+      "median_additional_saving": 0.7665952139509824,
+      "decrease_supported": 16
+    },
+    {
+      "delta": 5.0,
+      "full_disclosure": 42,
+      "finite_precision": 0,
+      "no_feedback_limit": 31,
+      "zero_prize": 0,
+      "observed": 0,
+      "median_time": 0.5,
+      "median_prize": 1.9505254655487445,
+      "median_saving": 46.57925700903246,
+      "median_additional_saving": 0.8790462202192817,
+      "decrease_supported": 16
+    },
+    {
+      "delta": 10.0,
+      "full_disclosure": 42,
+      "finite_precision": 0,
+      "no_feedback_limit": 31,
+      "zero_prize": 0,
+      "observed": 0,
+      "median_time": 0.5,
+      "median_prize": 2.7144774394437765,
+      "median_saving": 59.639409878015435,
+      "median_additional_saving": 0.9731903079585269,
+      "decrease_supported": 16
+    },
+    {
+      "delta": 25.0,
+      "full_disclosure": 42,
+      "finite_precision": 0,
+      "no_feedback_limit": 31,
+      "zero_prize": 0,
+      "observed": 0,
+      "median_time": 0.25,
+      "median_prize": 3.7213916752798646,
+      "median_saving": 78.90219705618166,
+      "median_additional_saving": 1.054903111351524,
+      "decrease_supported": 16
+    },
+    {
+      "delta": 100.0,
+      "full_disclosure": 42,
+      "finite_precision": 0,
+      "no_feedback_limit": 31,
+      "zero_prize": 0,
+      "observed": 0,
+      "median_time": 0.25,
+      "median_prize": 5.93081270217788,
+      "median_saving": 89.92779330159132,
+      "median_additional_saving": 1.3711991858478711,
+      "decrease_supported": 16
+    }
+  ],
+  "scope": "Asymmetric first-order output; initial latent distribution fixed per posterior draw; unchanged accepted posterior.",
+  "boundary": "Zero precision is the no-feedback limit, not an attained positive-feedback design. Savings at this endpoint are limiting bounds.",
+  "source_sha256": "bf433ab689ceec4ccab11199a476e4a9a802b59e1897b86b3be0e3e83a9145a3"
+}

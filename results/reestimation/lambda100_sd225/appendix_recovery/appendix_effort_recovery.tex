@@ -1,0 +1,26 @@
+\subsection{\textcolor{blue}{Parameter Recovery under Nonlinear Effort}}\label{app-effort-recovery}
+
+\textcolor{blue}{We assess the estimation consequences of the effort approximation by generating data under nonlinear equilibrium effort and estimating the parameters with the leading-order likelihood. The exercise uses ten configurations taken from joint representative points of the nonlinear posteriors for the contests with the largest incentive indices in the original empirical estimates. We generate four realizations per configuration and re-estimate all six parameters using the empirical priors reported in Section~\ref{sect-validation}. The two exploratory realizations used to develop the prior are excluded from the reported results. Table~\ref{tab-nonlinear-recovery} summarizes recovery of signal precision and innovation risk.}
+
+\begin{table}[htbp]
+\centering
+\caption{\textcolor{blue}{Parameter Recovery from Nonlinear Simulated Contests}}
+\label{tab-nonlinear-recovery}
+{\color{blue}\small
+\begin{tabularx}{\textwidth}{@{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X@{}}
+\toprule
+Parameter & \makecell{Mean absolute\\relative error (\%)} & \makecell{Coverage of 95\%\\credible intervals (\%)}\\
+\midrule
+Signal precision $\lambda$ & 17.0 & 97.5\\
+Innovation risk $\sigma$ & 12.1 & 82.5\\
+\bottomrule
+\end{tabularx}
+\begin{minipage}{\textwidth}
+\footnotesize\textit{Note:} Each row summarizes 40 simulated datasets at ten fixed parameter configurations. Point estimates are posterior medians. Absolute relative error divides the absolute estimation error by the generating value. Coverage is the fraction of datasets whose original equal-tailed 95\% posterior interval contains that value.
+\end{minipage}}
+\end{table}
+
+\textcolor{blue}{For signal precision, the generating value remains within the 95\% credible interval in 14 of the 15 realizations with point-estimation errors above 20\%; the interval misses the generating value in only one of the 40 datasets. For both parameters, the interval also contains the generating value in the realization with the largest point-estimation error. Innovation risk nevertheless has lower overall coverage, indicating that its posterior uncertainty can be understated.}
+
+\textcolor{blue}{The simulated likelihood uses interval-start feedback, matching the generator, whereas the empirical application uses interval-end readouts. The results describe recovery at these ten configurations, rather than an error bound for all empirical estimates.}
+

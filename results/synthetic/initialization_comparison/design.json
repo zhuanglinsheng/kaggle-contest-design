@@ -1,0 +1,44 @@
+{
+  "configurations": [
+    [
+      "steady",
+      0,
+      2.0,
+      9100
+    ],
+    [
+      "nonsteady",
+      1,
+      2.0,
+      9200
+    ],
+    [
+      "nonsteady_prior1",
+      1,
+      1.0,
+      9300
+    ],
+    [
+      "nonsteady_prior4",
+      1,
+      4.0,
+      9400
+    ]
+  ],
+  "common_parameters": [
+    "c_i",
+    "c_j",
+    "sigma",
+    "lambda",
+    "mu_0",
+    "r"
+  ],
+  "data": "optimal_hourly/nonsteady/baseline_paths.npz",
+  "drop_initial_data": false,
+  "main_comparison": "nonsteady / steady",
+  "primary": "normalized bridge marginal likelihood",
+  "sensitivity": "S0 prior log-median log(1), log(2), log(4); common log-SD 0.75",
+  "bic": "Auxiliary convention n=45 hourly readouts, with n=46 and 91 sensitivity; not grid size.",
+  "warmup": 1000,
+  "samples": 2000
+}

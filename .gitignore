@@ -299,3 +299,63 @@ archive/results/**/chain_[0-9]*.log
 
 # Numerical arrays are regenerated from their compact manifests and source.
 results/**/*.npz
+
+# Current publication: retain compact provenance, not bulk draws or run logs.
+!results/releases/*/manifest.json
+!results/releases/*/accepted_fits.json
+!results/reestimation/lambda100_sd225/verified_fits.json
+!results/reestimation/lambda100_sd225/release_verification.json
+!results/reestimation/lambda100_sd225/completion.json
+!results/reestimation/lambda100_sd225/report.json
+!results/reestimation/lambda100_sd225/median_protocol.json
+!results/reestimation/lambda100_sd225/auxiliary_median_protocol.json
+!results/reestimation/lambda100_sd225/target_parity*.json
+!results/reestimation/lambda100_sd225/input_snapshots/**/*.json
+!results/reestimation/lambda100_sd225/validation/*.json
+!results/reestimation/lambda100_sd225/counterfactual/*.json
+!results/reestimation/lambda100_sd225/auxiliary/reports/*.json
+!results/reestimation/lambda100_sd225/design_sensitivity/*.json
+!results/reestimation/lambda100_sd225/design_sensitivity/paper_update/*.json
+!results/reestimation/lambda100_sd225/paper_integration/current.json
+!results/manuscript_reviews/organizer_objective_20261016/update.json
+!results/validation/sigma_lambda_trials/posterior/recovery/*/lambda_external/summary.json
+!results/reestimation/lambda100_sd225/auxiliary/design.json
+
+# Retain compact evidence for unchanged Chapter 4 tables; bulk runs stay ignored.
+!results/synthetic/initialization_comparison/
+results/synthetic/initialization_comparison/*
+!results/synthetic/initialization_comparison/comparison.json
+!results/synthetic/initialization_comparison/design.json
+!results/synthetic/initialization_comparison/*/
+results/synthetic/initialization_comparison/*/*
+!results/synthetic/initialization_comparison/*/summary.json
+!results/synthetic/richer_steady/
+results/synthetic/richer_steady/*
+!results/synthetic/richer_steady/*/
+results/synthetic/richer_steady/*/*
+!results/synthetic/richer_steady/*/summary.json
+
+# Compact evidence required by the current fixed-initial design and effort figure.
+!results/reestimation/lambda100_sd225/fixed_initial_design/*.json
+!results/reestimation/lambda100_sd225/fixed_initial_design/contests/*.json
+!results/synthetic/effort_comparison/controlled_incentives/summary.json
+
+# Local manuscript snapshots, visual review renders, and transient worker files.
+results/**/backup*/
+results/**/qa/
+results/**/*.lock
+results/manuscript_reviews/**/*.tex
+results/manuscript_reviews/**/*.bib
+results/manuscript_reviews/**/*.pdf
+results/manuscript_reviews/**/*.png
+results/manuscript_reviews/**/*.py
+results/reestimation/lambda100_sd225/manuscript/
+results/reestimation/lambda100_sd225/output/
+results/reestimation/lambda100_sd225/appendix_recovery/coverage_revision_*/
+results/reestimation/lambda100_sd225/design_sensitivity/output/
+results/reestimation/lambda100_sd225/paper_integration/20*/
+results/estimation/nonlinear_top10/fast_v1/learned_proposal_pilots/
+results/validation/estimation_details/detail_model
+results/validation/estimation_details/feedback_timing/feedback_model
+# CmdStan also names raw chains after the model and run timestamp.
+results/**/feedback_model-*.csv

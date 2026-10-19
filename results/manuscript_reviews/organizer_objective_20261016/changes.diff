@@ -1,0 +1,23 @@
+--- before/PaperJK7.tex
++++ after/PaperJK7.tex
+@@ -504,7 +504,8 @@
+ \mathcal B(\tilde y_0,\theta,T,\lambda;S_0)
+ :=\mathbb E[\max\{x_T^i,x_T^j\}\mid I_0].
+ \]
+-The organizer chooses the prize, deadline, and public-signal precision simultaneously.
++\textcolor{blue}{The organizer values effort through its contribution to the best terminal solution. Prize expenditure must therefore be justified by the value of the resulting quality improvement. Even without effort, zero-mean innovation shocks can raise expected best quality because the organizer selects the better of the two solutions.}
++
+ Hence $\mathcal B(0,0,T,\lambda;S_0)
+ =\sqrt{\frac{S_0+\sigma^2T}{2\pi}}$ and
+ $\mathcal B(0,\theta,0,\lambda;S_0)
+--- before/section_joint_design.tex
++++ after/section_joint_design.tex
+@@ -54,5 +54,7 @@
+ 
+ \textcolor{blue}{Higher delay costs favor shorter contests supported by larger prizes. Positive-prize finite precision is selected in four contests at $\delta=1$, eight at $\delta=10$, and fourteen at $\delta=25$. Shorter deadlines leave less time for innovation to overturn initial performance gaps, increasing the value of preserving uncertainty through noisy feedback. Full disclosure nevertheless remains preferred in most contests in every reported scenario. Among contests selecting finite precision, its additional median cost saving relative to reoptimized full disclosure is 3.81\%, 2.99\%, and 3.98\% at these three delay-cost levels.}
+ 
+-\textcolor{blue}{These comparisons extend the steady-state, leading-order calibration by imposing a quality requirement. They do not estimate organizers' preferences or solve the utility-maximization problem in Proposition~\ref{prop-joint-design}, which holds initial filtering uncertainty fixed.}
++\begin{samepage}
++\textcolor{blue}{All three design instruments vary here, subject to meeting a fixed requirement for expected best quality. The theoretical organizer's problem instead maximizes quality benefits net of prize and delay costs. The empirical exercise uses a steady-state, leading-order calibration, whereas the theoretical analysis holds initial filtering uncertainty fixed.}
+ 
++\end{samepage}

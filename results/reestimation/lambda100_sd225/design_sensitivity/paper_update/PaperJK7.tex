@@ -1,0 +1,2698 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author template for Management Science (mnsc) for articles with no e-companion (EC)
+%% Mirko Janc, Ph.D., INFORMS, mirko.janc@informs.org
+%% ver. 0.95, December 2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[mnsc]{informs3}
+%\documentclass[mnsc,blindrev]{informs3}
+%\documentclass[mnsc,nonblindrev]{informs3} % current default for manuscript submission
+
+\OneAndAHalfSpacedXI
+%%\OneAndAHalfSpacedXII % Current default line spacing
+%%\DoubleSpacedXII
+%%\DoubleSpacedXI
+
+% If hyperref is used, dvi-to-ps driver of choice must be declared as
+%   an additional option to the \documentclass. For example
+%\documentclass[dvips,mnsc]{informs3}      % if dvips is used
+%\documentclass[dvipsone,mnsc]{informs3}   % if dvipsone is used, etc.
+
+% Private macros here (check that there is no clash with the style)
+\usepackage{mathrsfs}
+%%%%%%%% Linkage
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,citecolor=blue,urlcolor=blue}
+
+%%%%%%%% Colored underline
+\usepackage{ulem}
+\usepackage{soul}
+\makeatletter
+    \newcommand{\coloruline}[2]{%
+        \newcommand\temp@reduline{\bgroup\markoverwith
+            {\textcolor{#1}{\rule[-0.5ex]{2pt}{0.4pt}}}\ULon}%
+        \temp@reduline{#2}%
+    }
+    \newcommand{\coloruwave}[2]{%
+        \UL@protected\def\temp@uwave{\leavevmode \bgroup
+        \ifdim \ULdepth=\maxdimen \ULdepth 3.5\p@
+        \else \advance\ULdepth2\p@
+        \fi \markoverwith{\textcolor{#1}{\lower\ULdepth\hbox{\sixly \char58}}}\ULon}
+        \font\sixly=lasy6 % does not re-load if already loaded, so no memory drain.
+        \temp@uwave{#2}%
+    }
+\makeatother
+
+%%%%%%%% Algorithm
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%%%%%%%% Table, Figure and Diagram
+%%%%%%%%%% Table
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+%%%%%%%%%% Figure
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{caption}
+\usepackage{subcaption}
+%%%%%%%%%% Diagram Figure
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{varwidth}
+%%%%%%%%%% Comments
+\usepackage{comment}
+
+
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
+
+%% Setup of theorem styles. Outcomment only one.
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+\ECRepeatTheorems
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+
+% For new submissions, leave this number blank.
+% For revisions, input the manuscript number assigned by the on-line
+% system along with a suffix ".Rx" where x is the revision number.
+\MANUSCRIPTNO{}
+
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+% Outcomment only when entries are known. Otherwise leave as is and
+%   default values will be used.
+%\setcounter{page}{1}
+%\VOLUME{00}%
+%\NO{0}%
+%\MONTH{Xxxxx}% (month or a similar seasonal id)
+%\YEAR{0000}% e.g., 2005
+%\FIRSTPAGE{000}%
+%\LASTPAGE{000}%
+%\SHORTYEAR{00}% shortened year (two-digit)
+%\ISSUE{0000} %
+%\LONGFIRSTPAGE{0001} %
+%\DOI{10.1287/xxxx.0000.0000}%
+
+% Author's names for the running heads
+% Sample depending on the number of authors;
+% \RUNAUTHOR{Jones}
+% \RUNAUTHOR{Jones and Wilson}
+% \RUNAUTHOR{Jones, Miller, and Wilson}
+% \RUNAUTHOR{Jones et al.} % for four or more authors
+% Enter authors following the given pattern:
+\RUNAUTHOR{Zhuang et al.}
+
+% Title or shortened title suitable for running heads. Sample:
+% \RUNTITLE{Bundling Information Goods of Decreasing Value}
+% Enter the (shortened) title:
+\RUNTITLE{Bayesian Structural Inference for Dynamic Crowdsourcing Contests}
+\RRHFirstLine{}
+\LRHFirstLine{}
+\RRHSecondLine{\bf\theRUNAUTHOR:\enskip {\it\theRUNTITLE}}
+\LRHSecondLine{\bf\theRUNAUTHOR:\enskip {\it\theRUNTITLE}}
+
+% Full title. Sample:
+% \TITLE{Bundling Information Goods of Decreasing Value}
+% Enter the full title:
+\TITLE{Bayesian Structural Inference for Dynamic Crowdsourcing Contests}
+
+% Block of authors and their affiliations starts here:
+% NOTE: Authors with same affiliation, if the order of authors allows,
+%   should be entered in ONE field, separated by a comma.
+%   \EMAIL field can be repeated if more than one author
+\ARTICLEAUTHORS{%
+\AUTHOR{Linsheng Zhuang}
+\AFF{Institute of Operations Research and Analytics\\
+	National University of Singapore, Singapore\\
+	Center for Intelligent Computing\\
+	Great Bay University, China\\
+	\EMAIL{zhuangls@gbu.edu.cn}}
+\AUTHOR{Jussi Keppo}
+\AFF{NUS Business School \& Institute of Operations Research and Analytics\\
+	National University of Singapore, Singapore\\
+	\EMAIL{keppo@nus.edu.sg}} %, \URL{}}
+\AUTHOR{Zhi Chen}
+\AFF{NUS Business School\\
+	National University of Singapore, Singapore\\
+	\EMAIL{bizczhi@nus.edu.sg}}
+% Enter all authors
+} % end of the block
+
+\ABSTRACT{%
+Online crowdsourcing contests generate rich dynamic behavior, but their core strategic state is latent: contestants react to noisy public leaderboard feedback rather than true relative performance.
+We develop a tractable dynamic game with Bayesian filtering and a corresponding structural estimation framework to recover effort costs, innovation risk, and feedback precision.
+We prove that a finite-precision design can strictly outperform every full-disclosure design when the prize, deadline, and feedback precision are jointly chosen, even without a direct precision cost.
+Moreover, the model admits a closed-form leading-order effort policy in which signal precision determines how widely prize incentives extend across public performance gaps, enabling tractable Bayesian estimation.
+For validation, we use a path-wise holdout design: private-leaderboard path values are excluded from the estimation likelihood and subsequently used for diagnostic tests, although final private ranks are used to define the focal rivalry.
+In 73 Kaggle contests, higher estimated innovation risk is associated with greater private-leaderboard volatility, whereas higher estimated feedback precision is associated with less public--private disagreement.
+Both relationships are also supported by time-split tests that compare parameters estimated from early public contest data with subsequent private-leaderboard outcomes.
+% Enter your abstract
+}%
+
+% Sample
+%\KEYWORDS{deterministic inventory theory; infinite linear programming duality;
+%  existence of optimal policies; semi-Markov decision process; cyclic schedule}
+
+% Fill in data. If unknown, outcomment the field
+\KEYWORDS{Bayesian Statistics, Structural Estimation, Crowdsourcing Contest, Dynamic Contest}
+%\HISTORY{......}
+
+\makeatletter
+\def\theARTICLETOP{}
+\makeatother
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Samples of sectioning (and labeling) in MNSC
+% NOTE: (1) \section and \subsection do NOT end with a period
+%       (2) \subsubsection and lower need end punctuation
+%       (3) capitalization is as shown (title style).
+%
+%\section{Introduction.}\label{intro} %%1.
+%\subsection{Duality and the Classical EOQ Problem.}\label{class-EOQ} %% 1.1.
+%\subsection{Outline.}\label{outline1} %% 1.2.
+%\subsubsection{Cyclic Schedules for the General Deterministic SMDP.}
+%  \label{cyclic-schedules} %% 1.2.1
+%\section{Problem Description.}\label{problemdescription} %% 2.
+
+% Text of your paper here
+
+\newpage
+\section{Introduction}
+
+% Crowdsourcing contests
+Crowdsourcing contests are widely used by firms to source solutions to complex problems from external contributors.
+% platforms
+Platforms such as Kaggle\footnote{Kaggle: \url{https://www.kaggle.com}}, Topcoder\footnote{Topcoder: \url{https://www.topcoder.com}}, DrivenData\footnote{DrivenData: \url{https://www.drivendata.org}}, and AIcrowd\footnote{AIcrowd: \url{https://www.aicrowd.com}} host thousands of these contests, attracting data scientists, engineers, and developers to compete by submitting solutions to real-world problems.
+% how kaggle runs
+On Kaggle, for instance, a typical contest spans several weeks, during which participants compete for monetary prizes by repeatedly submitting solutions, observing their relative ranking on a public leaderboard, and adjusting their strategies in response to evolving feedback and the observed actions of competitors.
+
+% Contest structure
+The central empirical challenge in these online crowdsourcing contests is that the true competitive state is unobserved during the contest.
+Participants observe noisy public leaderboard updates rather than true relative performance, and they choose effort based on filtered beliefs rather than on the latent state itself.
+The econometrician faces an analogous partial-observability problem during estimation, making it difficult to recover strategic behavior and incentives from contest-phase data alone.
+
+Motivated by this identification problem, we develop a dynamic contest model and structural Bayesian estimation framework tailored to settings such as Kaggle, where contestants choose continuous effort while learning from noisy public leaderboard signals. 
+Applying the framework to the Meta-Kaggle dataset \citep{megan_risdal_timo_bozsolik_2022}, we recover latent competition states and structural primitives from contest-phase public information and evaluate them using post-contest private-leaderboard paths excluded from the likelihood.
+
+
+\begin{figure}[tbp]
+	\center
+	\noindent\includegraphics[scale=1.2]{kaggledata_diagram_simplified.pdf}
+	\caption{Structure of a Typical Kaggle Contest}
+	\label{kaggledata-diagram-simplified}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:}
+This figure illustrates the structure of a typical Kaggle contest and the information flow available to contestants.
+Rectangles and rounded rectangles represent observed data and latent states, respectively.
+The private leaderboard is visible only to the contest organizer during the contest and is revealed to all participants only after it ends.
+During the contest period, contestants can observe only the submission times of each player and the public leaderboard.
+}
+\end{minipage}
+\end{figure}
+
+
+% Framework
+To illustrate the framework in greater detail, Figure~\ref{kaggledata-diagram-simplified} depicts the key components and their interactions in a typical Kaggle contest.
+% leaderboard
+One notable feature is the existence of two leaderboards: a \textit{private} leaderboard, which is hidden until the contest ends and ultimately determines the final ranking and prize allocation, and a \textit{public} leaderboard, which is visible to all participants during the contest.\footnote{
+This design serves two purposes.
+First, the public leaderboard provides participants with real-time feedback.
+Second, by keeping the private leaderboard concealed, the platform discourages overfitting to the public metric and preserves uncertainty, thereby sustaining competitive tension throughout the contest.
+}
+% submission
+Leaderboard displays are contestant-specific and update asynchronously.
+% bayesian update
+After observing the public leaderboard, contestants update their beliefs and form a perceived state of the competition.
+% effort
+Based on these beliefs, contestants choose effort according to the model’s Markov perfect equilibrium (MPE) strategies.
+% submission
+These effort levels shape submission intensity. 
+Each submission generates a new score for the submitting contestant, while the displayed score of the opponent remains at its most recent submitted value.
+% uncertainty
+In the model, latent performance evolves according to the real-time effort level and an innovation shock.
+
+
+% Structural estimation
+\textcolor{blue}{We use a Bayesian framework to recover latent contest states, effort dynamics, effort costs, innovation risk, and feedback precision from submission times and public leaderboard trajectories. The model allows uncertainty about the true performance gap to vary over time. In the Kaggle estimation, we use a parsimonious steady-state specification: contestants continue to update their assessment of the gap, while the uncertainty surrounding that assessment remains constant.}
+
+
+% Diagnostic validation
+To assess whether the estimated model captures meaningful contest primitives, we use private-leaderboard paths to evaluate two predictions illustrated in Figure~\ref{kaggledata-diagram-simplified}: 
+higher estimated innovation risk should be associated with greater private-path volatility, 
+whereas higher estimated signal precision should be associated with smaller public-private leaderboard gaps. 
+Although private-leaderboard path values are excluded from estimation, final private ranks are used to select the focal pair. We therefore interpret the validation exercises as path-wise holdout diagnostics conditional on ex post pair selection.
+To strengthen the credibility of these diagnostics, we also conduct time-split exercises that relate primitives estimated from early public contest data to private-path outcomes in the later contest period, thereby reducing the concern that the full-path relationships merely reflect common path-level variation.
+
+
+% Results
+Empirically, we carefully select 73 high-quality contests from the Meta-Kaggle database and preprocess the data to ensure consistency across estimation methods.
+Conditional on the focal-pair selection rule, we estimate contest-specific innovation risk and signal precision using only public contest-phase information.
+The validation results show that structurally estimated innovation risk is positively associated with private-leaderboard volatility, including in a time-split diagnostic.
+\textcolor{blue}{Higher estimated signal precision is associated with smaller public-private leaderboard disagreement, including in the time-split diagnostic. The alternative focal-pair specification provides weaker evidence for the precision benchmark relationship.}
+\textcolor{blue}{Using the estimated primitives, we compare joint changes in prizes, deadlines, and feedback precision that maintain current expected solution quality under alternative delay costs, using a steady-state, leading-order calibration.}
+
+
+% Contributions
+This paper makes three main contributions.
+% 1. model
+First, we develop a dynamic game-theoretic model and a Bayesian structural framework for contests with noisy public feedback and latent performance dynamics.
+Relative to contest models centered on discrete submit-or-stop decisions, our approach models continuous effort accumulation and makes belief updating from noisy signals structurally central.
+Building on the equilibrium structure of \citet{Ryvkin2022Fight}, we model the winner as determined by the private leaderboard, hidden until the contest ends, so that the informativeness of public feedback shapes equilibrium effort incentives, while retaining a closed-form leading-order effort policy for structural estimation.
+% 2. joint design
+Second, we establish \textcolor{blue}{a region of low innovation risk and low effort costs in which a finite-precision design yields a higher organizer payoff than every full-disclosure design, even when prizes and deadlines are jointly optimized and precision carries no direct cost. When innovation risk is low, revealing a substantial lead can discourage further effort; finite precision sustains competition by preserving uncertainty about the winner, and low effort costs make this competition inexpensive to support.}
+% 3. estimation
+Third, we use private-leaderboard path values, which are excluded from the likelihood, to construct post-estimation validation targets.
+This approach allows us to assess whether the estimated structure captures innovation uncertainty and signal precision rather than merely fitting observed contest-phase behavior.
+
+
+
+\subsection{Related Literature}
+
+This study is most closely related to the following strands of literature.
+
+\textbf{Contest Design.}
+%% Static Contest Design
+% definition
+A rich literature on \textit{static} contest design \citep{ales2017optimal_award} investigates how to structure competitive environments to elicit performance, typically through a contest success function mapping effort to winning probabilities \citep{skaperdas1996contest}.\footnote{There are exceptions, such as beauty or barrier contests.}
+Because our setting is dynamic with repeated feedback, this static branch serves mainly as background for the mechanism-design questions we build on, including prize allocation, participation rules, and information disclosure \citep{moldovanu2001optimal, ales2021number_of_players, bergemann2022optimal}.
+
+
+%% Dynamic Contest Design
+% Transition
+While these studies offer valuable insights into incentive design, they largely overlook how participants dynamically adjust their efforts in response to evolving competition.
+% Dynamic Contest
+In contrast, this paper focuses on \textit{dynamic} contests, where strategic decisions unfold over time.
+Two main modeling approaches have been used to capture such dynamic strategic interactions:
+
+% One Way: Poisson Arrival of Innovation Success
+One strand of the literature models dynamic contests as multistage processes, where participants exert effort over time while facing uncertainty about intermediate progress.
+This structure facilitates the analysis of the mid-contest policy instruments available to the contest designer, such as feedback disclosure and screening mechanisms.
+Specifically, in a typical two-stage setting \citep{aoyagi2010information, mihm2019feedback}, the initial stage captures either feasibility uncertainty or foundational experimentation, with progress revealed through milestone feedback provided by the contest organizer.
+Participants exert effort in both stages, and the final output reflects the cumulative impact of early performance and subsequent improvement.
+Similarly, \citet{bimpikis2019designing} study a two-stage model in which agents exert continuous effort to complete Stage A (potentially infeasible) and Stage B (feasible), with breakthroughs governed by Poisson processes.
+In all these models, the contest designer may strategically disclose interim feedback.
+Another example is \citet{Khorasani2023screening}, who analyze a two-stage contest in which solvers invest exploratory effort to generate viable ideas, with only those passing an imperfect screening mechanism proceeding to execution.
+
+% Another Way of Modelling
+The second approach, more closely related to our work, treats output as a stochastic process whose drift depends on the participant’s effort.
+This line of research originates from the tug-of-war framework, first formalized by \citet{Harris1987Race} as a one-dimensional simplification of a multi-stage R\&D race.
+Subsequent studies build on this foundation by modeling each player’s progress as a Brownian motion.
+\citet{budd1993Duopoly}, for example, analyze a duopoly innovation race where the state evolves as a Brownian motion driven by the difference in effort, and characterize an approximate equilibrium.
+\citet{Moscarini2007Contest} advance this approach by modeling the game state as the output gap between players and derive closed-form equilibrium strategies under pure-strategy play.
+\citet{Ryvkin2022Fight} adapt their framework to a dynamic contest with a fixed deadline, providing a closed-form solution for the Markov perfect equilibrium.
+
+The precision of public feedback is itself a design instrument in data-science contests. 
+\citet{huang_2024_designing} study the training–test split, showing that more informative interim feedback makes the ranking statistically more reliable but also gives contestants the strongest incentive to submit high-variance, suboptimal models; 
+evidence from recent Kaggle contests is consistent with this incentive effect. 
+In contrast, our model features a different channel: more precise signals improve belief filtering and make the public ranking a more reliable predictor of the private winner.
+
+
+%% Online Crowdsourcing
+% this paper
+This paper studies online crowdsourcing contests, which typically feature fixed deadlines, repeated submissions, and public real-time feedback, all governed by platform-specific rules and evaluation metrics.
+% our foundation
+Hence, our analysis builds on the model by \citet{Ryvkin2022Fight}, whose simplifications yield a closed-form equilibrium that makes structural estimation in a dynamic setting analytically and computationally tractable.
+We depart from their full-information setting by introducing a noisy public signal and Bayesian filtering, thereby bringing partial observability into a tractable dynamic contest model.
+
+
+
+\textbf{Structural Estimation of Contests.}
+Beyond theoretical modeling, a growing body of research employs structural estimation techniques to recover key parameters of contest environments using observed data.
+
+% Static contests
+In the structural estimation of static contests, when a contest success function (CSF) is explicitly specified, the primary goal is to estimate its functional form or key parameters \citep{hwang2012technology, kang2016policy, huang2021structural}.
+In contrast, for contests without a well-defined or smooth CSF, such as beauty contests, researchers typically rely on equilibrium conditions, most notably the first-order condition.
+For example, \citet{yoganarasimhan2016estimation} proposes a two-step semiparametric estimator, resembling the EM algorithm, to recover both unobserved auction heterogeneity and bidder cost distributions.
+Similarly, in auction-like models \citep{guerre2000optimal, shakhgildyan2022nonparametric}, nonparametric estimation of the underlying valuation structure often serves as a first step, providing the foundation for subsequent structural estimation.
+
+% Dynamic contests
+Most dynamic structural estimation exercises rely on the Markov Perfect Equilibrium (MPE) of a dynamic game.
+However, when the model is calibrated to closely fit real-world data, the MPE typically lacks a closed-form solution.
+For example, \citet{jiang2022feedback} develop a finite-horizon dynamic game with discrete time, state, and action spaces to model creators’ strategic behavior in response to feedback during online logo design contests.
+Using data from 810 contests, they implement a two-step maximum likelihood estimation (MLE) procedure under the assumption of ex-ante homogeneous contests and players: the first step estimates action-specific state transition probabilities, while the second recovers utility parameters.
+
+Specific to online crowdsourcing environments,
+\citet{zhang2019structural} build a dynamic structural model to study how participants in crowdsourcing contests learn and choose contests over time.
+Their model shows that competing against superstars accelerates learning by providing more informative feedback.
+Using Bayesian updating and a hierarchical model, they estimate how individuals trade off monetary rewards, learning opportunities, and participation costs, based on data from Topcoder.
+
+Most closely related to our work, \citet{lemus2021dynamic} structurally estimate contest behavior using Kaggle data.
+They propose a finite-horizon dynamic game in which, after each submission, players decide whether to continue or exit, essentially solving an optimal stopping problem.
+Players can only make this decision immediately after completing a submission, which arrives at random intervals and incurs a privately drawn cost.
+Their estimation proceeds in two stages: the first uses maximum likelihood and the EM algorithm to estimate primitive parameters such as the distribution of player types and scores; the second applies a conditional choice probability (CCP)-based estimator to identify the cost distribution.
+Our model differs in two key respects:
+(1) we link submission intensity to current effort rather than model submissions as discrete costly actions; and
+(2) we explicitly model belief updating from noisy signals as a structural channel that shapes both behavior and identification, whereas their CCP-based approach relies on a coarser behavioral approximation.
+
+
+
+
+
+
+
+The structure of the paper is as follows:
+Section~\ref{contest-theory} introduces our theoretical model of online crowdsourcing contests.
+Section~\ref{sect-bayes-framework} presents the Bayesian estimation framework.
+In Section~\ref{sect-synthetic}, we describe the data-generating process and apply the Bayesian framework to synthetic data.
+Section~\ref{sec-kaggle-application} applies the framework to real-world Kaggle data and evaluates the estimated primitives using private-leaderboard path values excluded from the likelihood.
+A replication package (code and implementation details) will be provided with the paper.
+
+
+
+\section{The Model}\label{contest-theory}
+
+% Effort, Output and Gap
+Two players, $i$ and $j$, compete for a prize {$\theta>0$} in a contest.
+The winner receives the prize and the loser receives zero.
+{Following \cite{Ryvkin2022Fight}, the contest starts at time zero and ends at a fixed deadline $T>0$.}
+{At each $t\in[0,T)$, each player $k\in\{i,j\}$ chooses effort $q_{k,t}\geq0$ and incurs an instantaneous quadratic cost $C_k(q_{k,t})=c_kq_{k,t}^2/2$, where $c_k>0$ and a lower $c_k$ corresponds to higher ability.}
+Let $y_t$ denote the {\color{black}\textit{latent private-score gap}} between players $i$ and $j$ at time $t$, evolving as
+\begin{equation}\label{eq-state-dynamics}
+	dy_t = (q_{i,t}-q_{j,t})dt + \sigma dW_t
+\end{equation}
+where $W_t$ is a Brownian motion and $\sigma>0$ measures the innovation risk.
+{For given efforts, a larger $\sigma$ increases the uncertainty in performance changes.}
+
+The actual contest is equipped with a submission system in which contestants submit solutions asynchronously over time. Each submission generates new public and private scores for the submitting contestant, while the opponent's most recently submitted scores are carried forward when constructing the corresponding leaderboard gaps.
+% Signal
+For tractability, we approximate this irregular sequence of submission-triggered updates by a continuous-time public signal of the {\color{black}latent private-score gap} $y_t$.
+The feasible precision parameter satisfies $\lambda>0$, and the signal evolves by
+\begin{equation}\label{signal}
+	dZ_{t} = y_{t}dt + \frac{dB_{t}}{\sqrt{\lambda}}
+\end{equation}
+where $B_{t}$ is a standard Brownian motion independent of $W_t$.
+A larger $\lambda$ implies less noise and more informative feedback; in the empirical mapping, this corresponds to a more informative public leaderboard signal about latent relative performance.
+This continuous-time signal is an idealized analogue of the stream of public leaderboard updates observed after submissions.
+
+% Bayesian Player
+{
+The model parameters are common knowledge. Public submission activity provides a proxy for effort; the theoretical model idealizes this indirect observation by treating past efforts as observable to both players. Neither player has additional private information about $y_t$. We study public Markov equilibria. Let $I_t$ denote the common history of public signals and past efforts, and define the posterior mean and variance by $\tilde y_t:=E(y_t\mid I_t)$ and $S_t:=E[(y_t-\tilde y_t)^2\mid I_t]$. Initially, $y_0\mid I_0\sim\mathcal N(\tilde y_0,S_0)$, where $\tilde y_0$ is publicly known and $S_0>0$ is fixed independently of $\lambda$. The initial filtering error is independent of future increments of $W$ and $B$.
+}
+Under standard linear-Gaussian assumptions, the Kalman-Bucy filter (Chapter 1.2 of \citealt{Bensoussan1992Control}; see also \citealt{frogerais2012various,barrau2017invariant}) implies
+\begin{align}
+	{d\tilde{y}_{t}} &{= (q_{i,t}-q_{j,t})dt + \sqrt{\lambda}S_{t}\,d\widehat B_t}
+	\label{filtered-x}\\
+	\frac{dS_{t}}{dt} &= \sigma^2 - \lambda S_{t}^2
+	\label{filtered-S}
+\end{align}
+{$d\widehat B_t:=\sqrt{\lambda}(dZ_t-\tilde y_tdt)$ is the innovation Brownian motion, so equation~\eqref{filtered-x} is equivalent to the usual Kalman--Bucy representation.}
+Hence, the conditional distribution satisfies $y_t \mid I_t \sim \mathcal{N}(\tilde{y}_t,S_t)$, so the posterior state is fully characterized by $(\tilde y_t,S_t)$.
+{The steady-state value associated with equation~\eqref{filtered-S} is $\bar S \equiv \sigma/\sqrt{\lambda}$.}
+{Given $S_0$, equation~\eqref{filtered-S} determines a deterministic path $S_t$, so $(\tilde y_t,t)$ remains a sufficient strategic state. Appendix~\ref{app-S-equ} reports the solution.}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[scale=0.6]{figure_S_evolve.pdf}
+	\caption{{Convergence of the posterior variance $S_t$ to steady state.}} \label{fig-S-evol}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+{\textit{Note:} With $\lambda=\sigma=1$, the solid curve starts below the steady state ($S_0<1$) and the dashed curve starts above it ($S_0>1$). Both converge to $\bar S=1$. The horizontal axis is time $t$; the vertical axis is posterior variance $S_t$.}
+}
+\end{minipage}
+\end{figure}
+
+
+
+% Terminal Payoffs
+{
+The sign of $y_T$ determines the winner. Let $I_T$ denote the common information just before the terminal private scores are revealed. Since $y_T\mid I_T\sim\mathcal N(\tilde y_T,S_T)$, the expected terminal prizes are $G_i(\tilde y_T)=\theta\Phi(\tilde y_T/\sqrt{S_T})$ and $G_j(\tilde y_T)=\theta\Phi(-\tilde y_T/\sqrt{S_T})$, where $\Phi$ is the standard normal cumulative distribution function.
+}
+{Let $m_k(\tilde y,t)$ denote player $k$'s equilibrium Markov effort strategy. Taking player $j$'s strategy $q_{j,\tau}=m_j(\tilde y_\tau,\tau)$ as given, player $i$'s value is}
+\begin{equation*}
+	{\color{black}V^i(\tilde y,t)
+	=\sup_{\{q_{i,\tau}\geq0\}_{\tau\in[t,T)}}
+	\mathbb{E}\left[
+	G_i(\tilde y_T)-\int_t^T C_i(q_{i,\tau})d\tau
+	\,\middle|\,\tilde y_t=\tilde y
+	\right],}
+\end{equation*}
+{The supremum is over nonnegative effort processes predictable with respect to $I_\tau$ and satisfying $\mathbb E\int_t^Tq_{i,\tau}^2d\tau<\infty$.} The optimization is subject to equations~\eqref{filtered-x}--\eqref{filtered-S}. Player $j$'s problem is obtained by replacing $\tilde y$ with $-\tilde y$ and exchanging the player labels and cost parameters.
+The corresponding Hamilton-Jacobi-Bellman (HJB) equation for player $i$ is
+\begin{equation*}
+{0 = \max_{q_{i,t}\ge0}\left[-\frac{c_iq_{i,t}^2}{2} + V^i_{y}\cdot\left(q_{i,t}-m_j(\tilde y,t)\right)+V^i_t + \frac{V^i_{yy}}{2}\lambda S_t^2\right].}
+\end{equation*}
+{Here, subscripts $y$ denote derivatives with respect to the posterior mean $\tilde y$.}
+{For an interior equilibrium, substituting the first-order conditions $q_{i,t} = V^i_y/c_i$ and $q_{j,t} = -V^j_y/c_j$ yields the system}
+\begin{equation*}
+\begin{aligned}
+{\frac{1}{2c_i}(V^i_y)^2 + \frac{1}{c_j}V^i_yV^j_y + V^i_t + V^i_{yy}\frac{\lambda S_t^2}{2} = 0}\\
+{\frac{1}{2c_j}(V^j_y)^2 + \frac{1}{c_i}V^j_yV^i_y + V^j_t + V^j_{yy}\frac{\lambda S_t^2}{2} = 0}
+\end{aligned}
+\end{equation*}
+subject to boundary conditions
+$V^i(-\infty,t)=0$,
+$V^i(+\infty,t)=\theta$,
+$V^j(-\infty,t)=\theta$,
+$V^j(+\infty,t)=0$,
+and terminal conditions {$V^i(\tilde y,T)=G_i(\tilde y)$ and $V^j(\tilde y,T)=G_j(\tilde y)$ for all $\tilde y\in\mathbb R$.}
+The following theorem establishes equilibrium existence and gives a leading-order effort formula for small incentive indices.
+
+\begin{theorem}[{Equilibrium Existence and Leading-Order Effort}]\label{thm-equilibrium-effort}
+{For every finite $\lambda>0$ and sufficiently small $w_i+w_j$, the game admits an interior Markov-perfect equilibrium with bounded, smooth effort policies. As $(w_i,w_j)\to(0,0)$, the effort policies of this equilibrium satisfy}
+\begin{equation}\label{eq-equilibrium-effort}
+m_k(\tilde y_t,t)
+=\frac{\sigma^2w_k}{\sqrt{Q_t}}
+\left\{
+\frac{1}{\sqrt{2\pi}}
+\exp\!\left[-\frac{\tilde y_t^2}{2Q_t}\right]
++O(w_i+w_j)
+\right\},
+\end{equation}
+for $k\in\{i,j\}$, where $w_k:=\theta/(\sigma^2c_k)$ and $Q_t:=S_t+\sigma^2(T-t)$. The remainder is uniform over $(\tilde y_t,t)\in\mathbb R\times[0,T)$, holding $T,\sigma,\lambda$, and $S_0$ fixed.
+\end{theorem}
+
+{The quantity $Q_t$ combines current uncertainty about the true gap, $S_t$, with innovation risk over the remaining horizon, $\sigma^2(T-t)$. To leading order, effort is proportional to $\theta/c_k$ and is highest when the common posterior gap is zero, where a marginal improvement most strongly affects the probability of winning. A larger $Q_t$ lowers this peak but sustains effort over a wider range of gaps.}
+The organizer's design problem therefore depends on how this tradeoff affects the expected quality of the best terminal solution.
+
+\subsection{{Joint Design of Prize, Deadline, and Feedback Precision}}\label{sect-design}
+
+
+The performance gap is sufficient for the contestants' strategic problem, but the organizer values the best terminal performance. We therefore recover individual private performance scores. Let $x_t^k$ denote contestant $k$'s score, normalized so that $(x_0^i+x_0^j)/2=0$. The initial gap is $y_0:=x_0^i-x_0^j$, with $y_0\mid I_0\sim\mathcal N(\tilde y_0,S_0)$.
+Individual scores evolve according to
+\begin{equation}\label{eq-individual-output-dynamics}
+dx_t^k=q_{k,t}dt+\frac{\sigma}{\sqrt2}dW_t^k,
+\qquad k\in\{i,j\},
+\end{equation}
+where $W^i$ and $W^j$ are independent and $q_{k,t}=m_k(\tilde y_t,t)$ in equilibrium. With $W_t=(W_t^i-W_t^j)/\sqrt2$, the gap obeys equation~\eqref{eq-state-dynamics}. The organizer values the best terminal score,
+\[
+\mathcal B(\tilde y_0,\theta,T,\lambda;S_0)
+:=\mathbb E[\max\{x_T^i,x_T^j\}\mid I_0].
+\]
+The organizer chooses the prize, deadline, and public-signal precision simultaneously.
+Hence $\mathcal B(0,0,T,\lambda;S_0)
+=\sqrt{\frac{S_0+\sigma^2T}{2\pi}}$ and
+$\mathcal B(0,\theta,0,\lambda;S_0)
+=\sqrt{\frac{S_0}{2\pi}}$.
+
+
+
+With the symmetric initial belief $\tilde y_0=0$, the organizer jointly chooses
+\begin{equation}\label{eq-designer-best-output-objective}
+\sup_{\theta,T\geq0,\ \lambda\in(0,\infty]}
+\left\{u\!\left(\mathcal B(0,\theta,T,\lambda;S_0)\right)
+-\theta-D(T)\right\}.
+\end{equation}
+Here $u:[0,\infty)\to\mathbb R$ is twice continuously differentiable, strictly increasing, and concave. The delay cost $D:[0,\infty)\to[0,\infty)$ is continuously differentiable, strictly increasing, and convex, with $D(0)=D'(0)=0$ and $D'(T)/T$ nondecreasing for $T>0$. It is twice continuously differentiable near zero, with $0<D''(0)<\infty$. Short delays therefore have a locally quadratic cost.
+The design set requires a positive amount of public feedback. The endpoint $\lambda=\infty$ denotes the full-disclosure game: contestants observe the initial gap and its subsequent path, and expected output averages over the initial prior. For this benchmark, we use the symmetric Markov equilibrium constructed in the appendix.
+
+\begin{proposition}[Feedback Precision in Joint Design]\label{prop-joint-design}
+{Suppose $c_i=c_j=c>0$, $-u''(B)\geq\zeta u'(B)$ for all sufficiently large $B$ and some $\zeta>0$, and $S_0$ is sufficiently large. There exist thresholds $c_F,\sigma_F>0$ with the following properties:}
+
+{\emph{(i) Finite feedback strictly dominates full disclosure.}
+For $0<c<c_F$ and $0<\sigma<\sigma_F$, some positive-prize,
+positive-deadline, finite-precision design strictly outperforms every
+full-disclosure design. Every joint optimizer satisfies $\theta^*>0$,
+$T^*>0$, and $\lambda^*<\infty$.}
+
+\emph{(ii) Positive-prize full disclosure.}
+There exist $c>0$ and $\sigma>\sigma_F$ for which joint optima exist and satisfy $\theta^*>0$, $T^*>0$, and $\lambda^*=\infty$.
+
+\emph{(iii) Prize exit at high cost.}
+For every $\sigma>0$ and sufficiently large $c$, joint optima exist and satisfy $\theta^*=0$ and $T^*>0$. Precision is then payoff-irrelevant.
+\end{proposition}
+
+\textcolor{blue}{More precise feedback can strengthen incentives by revealing that a contest is close, but revealing a substantial lead can discourage the trailing contestant from catching up and reduce the leader's pressure to improve. Finite precision can sustain competition by preserving uncertainty about the winner, at the cost of blurring the information that sharpens incentives in close contests.}
+
+\textcolor{blue}{Part~(i) of Proposition~\ref{prop-joint-design} identifies conditions under which this tradeoff favors finite precision. Low innovation risk makes disclosed initial gaps difficult to overturn, while low effort costs make continued competition inexpensive to support through the prize. A short positive deadline allows effort to improve solution quality while limiting delay costs. The proof shows that such a finite-precision design yields a higher organizer payoff than every full-disclosure design, even when the latter reoptimizes its prize and deadline.}\footnote{\textcolor{blue}{Part~(i) does not assert that a joint optimum is attained; any attained joint optimum must use finite precision.}} \textcolor{blue}{With greater innovation risk, future shocks can preserve competitive uncertainty even under full disclosure; part~(ii) establishes its joint optimality at some such parameter points. In part~(iii), effort costs are sufficiently high that inducing effort no longer justifies prize expenditure. The optimal prize is therefore zero and precision is irrelevant, although a positive deadline remains worthwhile because innovation can improve expected best output without effort. Figure~\ref{fig-joint-design-regions} illustrates the numerical arrangement of these regimes; the proposition gives sufficient conditions rather than a complete partition.}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\linewidth]{numerical_regions_bw.pdf}
+\caption{Numerical joint-design regions in the $(c,\sigma)$ plane}
+\label{fig-joint-design-regions}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:}
+The nonlinear-equilibrium search jointly varies the prize, deadline,
+and precision, with $S_0=1$, $u(B)=3(1-e^{-2B})$, and $D(T)=T^2/2$.
+Medium gray denotes positive prize with finite precision, white positive
+prize with full disclosure, and light gray zero prize. Solid and dashed lines outline the
+finite-precision and zero-prize regions, using smoothing-spline fits for display.
+Both axes use linear scales and start at $0.03$.}
+\end{minipage}
+\end{figure}
+
+
+
+
+
+
+
+\section{Estimation Framework}\label{sect-bayes-framework}
+
+This section links equilibrium effort to observed submission timing and public leaderboard updates to estimate the model's structural parameters. We specify the observation process and modeling assumptions, then construct an approximate Bayesian likelihood using the leading-order effort policy in Theorem~\ref{thm-equilibrium-effort}.
+
+\subsection{Data-Generating Process}
+
+For each Kaggle contest, the observable data from Meta-Kaggle can be grouped into three components.
+
+%% Data: Contest setting
+The first component contains contest-level institutional features: contest duration, prize structure, and information disclosure rules.
+To match the two-player winner-take-all structure of the model, we restrict the empirical application to contests where a dominant top rivalry is plausible and monetary prize incentives can be mapped to an effective top-two winner-gain structure.
+The effective prize $\theta$ is observed rather than estimated. We express monetary payoffs in units of one hundred thousand U.S. dollars and use this unit for every contest.
+
+%% Data: Submissions
+The second component records submission events of player $i$, denoted by $\{\hat{t}^i_k\}_{k=1}^{N_i}$, where $N_i$ is the total number of submissions.
+We model submissions as counting processes whose intensities depend on equilibrium effort and the preceding public history. The two contestants' submissions are generated using independent Poisson randomness. To link observed submission timing to effort, we assume
+\begin{equation}\label{eq-model-intensity}
+{\tau_i(t) = r \cdot m_i(\tilde{y}_t,t)}
+\end{equation}
+where \(r>0\) converts model effort into submission intensity; the same relationship applies to player \(j\). This proportional relationship is an empirical measurement assumption rather than a result derived from the theoretical game. In estimation, \(r\) is treated as an auxiliary scale parameter rather than a contest primitive.
+
+
+%% Data: Leaderboard
+The third component contains \textit{public} and \textit{private} leaderboard series, denoted by $\hat{x}^{i(j)}_t$ and $x^{i(j)}_t$.
+In Kaggle contests, public and private scores are computed from different subsets of the test data. Public scores are displayed during the contest, whereas private scores are revealed only after it ends.
+We define the latent contemporaneous gap as $y_t:=x_t^i-x_t^j$ and the displayed public gap as $\hat y_t:=\hat x_t^i-\hat x_t^j$, where each displayed score equals the contestant's most recently submitted public score. Because submissions are asynchronous, $\hat y_t$ need not compare contemporaneous submissions by the two contestants.
+
+{The public gap provides a noisy empirical measure of the latent performance gap. {At retained readout time $t_k$, let $h_k=t_k-t_{k-1}$, with $t_0=0$, denote the elapsed time since the preceding retained readout.} In the empirical observation model, we assume a fresh Gaussian measurement error $\varepsilon_k\sim\mathcal N(0,1/(\lambda h_k))$. Conditional on the preceding public history and the current update time, this error is independent of the latent state.\footnote{{\color{black}For a fixed interval of length $h$, equation~\eqref{signal} gives the average readout $(Z_t-Z_{t-h})/h=h^{-1}\int_{t-h}^t y_s\,ds+(B_t-B_{t-h})/(\sqrt\lambda h)$. The noise term has variance $1/(\lambda h)$. Replacing the interval-average latent gap by its endpoint value motivates the empirical observation model; it is not an exact consequence of sampling the continuous signal at endogenous submission times.}} Substituting the latent state dynamics in equation~\eqref{eq-state-dynamics} gives the approximate observation equation}
+\begin{equation}\label{eq-leaderboard-gap}
+\hat y_{t_k}
+\approx
+{y_0+\int_0^{t_k}\left[m_i(\tilde{y}_s,s)-m_j(\tilde{y}_s,s)\right]ds}
++\sigma W_{t_k}
++\varepsilon_k.
+\end{equation}
+Here, $\sigma W_{t_k}$ captures accumulated innovation noise, while $\varepsilon_k$ captures the public-signal noise associated with the leaderboard update.
+Thus, larger $\lambda$ implies more precise public feedback.
+
+{The realized initial gap is not observed during the contest. Following the initial belief in Section~\ref{contest-theory}, we assume}
+\begin{equation}\label{eq-empirical-initial-state}
+{y_0\sim\mathcal N\!\left(\mu_0,S_0\right),
+\qquad S_0>0.}
+\end{equation}
+{We integrate over $y_0$ in the likelihood. The parameter $\mu_0$ is the initial perceived gap, while $S_0$ measures uncertainty about the initial gap. Given $(S_0,\sigma,\lambda)$, equation~\eqref{filtered-S} determines the deterministic variance path $S_t$.}
+{The precision parameter $\lambda$ enters both the observation system and the deterministic filtering-variance path.}
+
+% tilde{y}_t
+The theoretical model uses a continuous public signal and therefore admits the continuous-time filtering equation in \eqref{filtered-x}. The empirical leaderboard, however, is observed only at asynchronous submission times. An exact empirical implementation would therefore require a hybrid filter with continuous prediction between submissions and discrete measurement updates.
+
+{To retain the continuous-update representation, we carry forward the most recently observed public gap. The structural DGP uses the equilibrium policy $m$, whereas estimation uses its leading-order approximation $m^{(1)}$, defined in equation~\eqref{eq-empirical-leading-effort}. Together with the deterministic variance path from equation~\eqref{filtered-S}, this gives the empirical state recursion}
+\begin{equation}\label{eq-filtered-y-update}
+{d\tilde{y}_{t} = \left[m_i^{(1)}(\tilde{y}_t,S_t,t) - m_j^{(1)}(\tilde{y}_t,S_t,t)\right]dt + \lambda S_t(\hat{y}_t-\tilde{y}_{t}) dt}
+\end{equation}
+with initial condition $\tilde{y}_0 = \mu_0$.
+The displayed gap $\hat y_t$ is a piecewise-constant empirical path, not a pointwise observation of the theoretical continuous signal $Z_t$. Between retained updates it is carried forward without a new measurement, so its continuous use may overstate learning. The estimates are therefore conditional on this approximation.
+
+\subsection{Modeling Considerations}\label{sect-concerns}
+
+This subsection discusses three practical modeling concerns that are important for interpretation: strategic submission timing, the two-player approximation, and the normality assumption.
+The goal is to clarify the scope of the baseline framework and connect each concern to the robustness analyses that follow.
+
+\textbf{Strategic submission timing.}
+Submission-triggered leaderboard updates create delays in public feedback: no new leaderboard readout arrives during periods without submissions. Strategic timing or withholding can therefore affect the information available to contestants and complicate inference.
+
+
+Our submission-intensity specification links submissions to effort but does not explicitly model strategic withholding.
+Strategic submission timing is an important concern in the literature.
+For example, \citet{lemus2021dynamic} adopt a similar simplification by excluding such behavior from their model.
+Our estimates should therefore be interpreted for contests where active updating behavior dominates withholding behavior.
+As a partial mitigation, we require a minimum number of submissions when selecting representative contestants (Section~\ref{sec-data-clean}), which reduces cases where sparse strategic timing dominates observed dynamics.
+
+
+\textbf{Selection of Two Players.}
+Another concern is the two-player approximation.
+Real contests involve many participants, so reducing the environment to two players changes strategic externalities and information structure.
+Our interpretation is that the model isolates the dominant top rivalry in contests where competition is concentrated near the frontier.
+In Section~\ref{sect-robust-2players}, we conduct a series of robustness checks.
+By varying the focal-pair definition, we assess whether the validation results depend on a particular choice of representative rivalry.
+
+\textbf{Gaussian approximation.}
+The model relies on Gaussian signal and innovation shocks. Mapping bounded leaderboard scores into the model's real-valued state space therefore requires both a transformation and a maintained distributional approximation. The empirical transformation is defined in Section~\ref{sec-data-clean}. Rescaling the transformed scores changes their units but does not determine whether their distribution is Gaussian. We therefore treat Gaussianity as a modeling assumption rather than an empirically established property of every contest.
+
+
+
+\subsection{Bayesian Estimation Framework}
+
+{We construct an approximate Bayesian posterior for the general parameter vector $\Theta:=(c_i,c_j,\sigma,\lambda,\mu_0,r,S_0)$ using the data introduced above. Specific estimation exercises may fix individual parameters or impose restrictions, such as the steady-state initialization $S_0=\sigma/\sqrt\lambda$, and estimate only the remaining free parameters.}
+
+{Final private ranks are used to select the focal pair. Conditional on this selection, estimation uses the pair's contest-phase submission counts and public leaderboard readouts. The private leaderboard trajectory $y_t$, observed ex post in Meta-Kaggle, is reserved for post-estimation path validation.}
+
+{We discretize time into $M$ intervals of length $\Delta_{\mathrm{num}}$, with endpoints $s_\ell=\ell\Delta_{\mathrm{num}}$. Let $n^i_\ell$ denote contestant $i$'s submission count in $(s_{\ell-1},s_\ell]$, so that $\sum_{\ell=1}^M n^i_\ell=N_i$. Holding the submission intensity at its interval-start value gives the submission likelihood contribution (and analogously for $j$)}
+\begin{equation}\label{eq-ihpp-prob}
+{\mathcal L_i(\Theta)
+\propto
+\exp\!\left\{-\Delta_{\mathrm{num}}\sum_{\ell=1}^M\tau_i^{(1)}(s_{\ell-1})\right\}
+\prod_{\ell=1}^M
+\left[\tau_i^{(1)}(s_{\ell-1})\Delta_{\mathrm{num}}\right]^{n^i_\ell}.}
+\end{equation}
+{Here $\tau_i^{(1)}(t)=r m_i^{(1)}(\tilde y_t,S_t,t)$ is the leading-order approximation to the submission intensity in equation~\eqref{eq-model-intensity}; the omitted count-factorial terms do not depend on $\Theta$. Given the preceding public history, submission counts are generated by independent Poisson draws, independent of the latent initial gap and innovation shocks. The likelihood includes all submissions, including multiple submissions within an interval; intervals with no submissions contribute through the exponential term.}
+
+For the leaderboard likelihood, we retain one public-gap readout at the end of each grid interval containing at least one submission by either contestant. Denote the retained times and gaps by $t_1<\cdots<t_N$ and $\hat y_{t_k}$, respectively, and let $h_k=t_k-t_{k-1}$, with $t_0=0$. Conditional on the preceding history, the readout time $t_k$, and $\Theta$, the empirical state and observation equations imply
+\[
+{\hat y_{t_k}\mid\mathcal F_{k-1},t_k,\Theta}
+\sim
+\mathcal N\!\left(\mu_{k\mid k-1},V_{k\mid k-1}\right),
+\]
+{Here $\mathcal F_{k-1}$ denotes the submission and public-leaderboard history strictly before $t_k$. The one-step-ahead predictive moments incorporate initial-state uncertainty, accumulated innovation, and preceding readouts. Appendix~\ref{app-leaderboard-recursion} gives their explicit sequential recursion. The leaderboard likelihood is therefore}
+\begin{equation}\label{eq-obs_gap-prob}
+{\mathcal L_{\mathrm{pub}}(\Theta)}
+=
+\prod_{k=1}^N
+\phi\left(\hat y_{t_k}\mid\mu_{k\mid k-1},V_{k\mid k-1}\right).
+\end{equation}
+{After evaluating each predictive density, we use the readout in the latent-state update and, separately, in the perceived-state recursion in equation~\eqref{eq-filtered-y-update}. The moments $(\mu_{k\mid k},P_{k\mid k})$ belong to the auxiliary filter used for the leaderboard likelihood; the strategic belief pair $(\tilde y_t,S_t)$ continues to follow equations~\eqref{eq-filtered-y-update} and~\eqref{filtered-S}. The joint likelihood is proportional to $\mathcal L_i(\Theta)\mathcal L_j(\Theta)\mathcal L_{\mathrm{pub}}(\Theta)$, with all contributions evaluated using the same evolving public history.}
+
+%% Approximation
+{We evaluate the likelihood using the leading-order policy from equation~\eqref{eq-equilibrium-effort}:}
+\begin{equation}\label{eq-empirical-leading-effort}
+{m_k^{(1)}(\tilde y_t,S_t,t)
+=\frac{\theta}{c_k\sqrt{2\pi Q_t}}
+\exp\!\left(-\frac{\tilde y_t^2}{2Q_t}\right),
+\qquad Q_t=S_t+\sigma^2(T-t).}
+\end{equation}
+{For each parameter vector $\Theta$, equation~\eqref{filtered-S} determines $S_t$, and equation~\eqref{eq-filtered-y-update} advances the perceived state and the associated effort paths. The posterior is conditional on both the leading-order policy approximation and the continuous-update approximation.}
+
+We combine the joint likelihood with priors on the remaining free parameters to obtain the approximate posterior. Prior distributions, hyperparameters, and numerical parameter bounds are reported with each estimation exercise.
+We sample the resulting approximate posterior \textcolor{blue}{primarily} using the No-U-Turn Sampler, an adaptive Hamiltonian Monte Carlo method \citep{hoffman2014NUTS}.
+
+Cost asymmetry is necessary for identifying all parameters, as established below.\footnote{Proposition~\ref{prop-local-identification} establishes identification for the fixed-input model, not for the sampling law induced by the data-dependent initialization used in the empirical application; see Section~\ref{sec-data-clean}.}
+
+\begin{proposition}[Local Identification]\label{prop-local-identification}
+{Fix the initial public input before generating observations, with $y_0\sim\mathcal N(\mu_0,S_0)$ as in equation~\eqref{eq-empirical-initial-state}. Suppose $\theta>0$, the observation grid contains at least three intervals, and $c_i\ne c_j$. Under the maintained leading-order empirical model, the interior parameter vector $\Theta=(c_i,c_j,\sigma,\lambda,\mu_0,r,S_0)$ is locally identified from equations~\eqref{eq-ihpp-prob} and~\eqref{eq-obs_gap-prob}.}
+\end{proposition}
+
+
+\section{Synthetic Experiments}\label{sect-synthetic}
+
+{We examine the finite-sample performance of the estimation framework using synthetic contests. Data are generated from the numerically computed equilibrium policy $m$, while estimation uses its leading-order approximation $m^{(1)}$ in equation~\eqref{eq-empirical-leading-effort}.}
+
+\begin{algorithm}[htbp]
+\caption{Synthetic Data Simulation}
+\label{algo-dgp}
+\begin{algorithmic}
+	\STATE \textbf{Input:}
+		{$\Delta>0$, $T$, $\theta$, $c_i$, $c_j$, $\sigma$, $\lambda>0$, $r$, $\tau^\star$, $\mu_0$, $S_0$, with $T/\Delta\in\mathbb N$}
+	\STATE {Solve equation~\eqref{filtered-S} for $(S_t)_{t\in[0,T]}$ and the nonlinear HJB system for $m_i$ and $m_j$.}
+	\STATE {Draw $y_0\sim\mathcal N(\mu_0,S_0)$.}
+	\STATE {Sample rate-$\tau^\star$ Poisson candidate sets $\mathcal C_i,\mathcal C_j$ on $[0,T)$.}
+	\STATE {Sample $u_s^k\sim\mathcal U[0,1]$ for $s\in\mathcal C_k$, $k\in\{i,j\}$.}
+	\STATE {Sample $\Delta W_t\sim\mathcal N(0,\Delta)$ and $z_t\sim\mathcal N(0,1)$ on the grid; all draws are independent.}
+\STATE {Initialize $\ell^i=\ell^j=1$, $\hat y_0=\tilde y_0=\mu_0$, and $t_{\mathrm{obs}}=0$.}
+\FOR{$t = 0, \Delta, \ldots, T-\Delta$}
+    \STATE {For $k\in\{i,j\}$, evaluate $m_k=m_k(\tilde y_t,t)$ and set $\tau_k(t)=r m_k$.}
+    \STATE {$y_{t+\Delta}\gets y_t+(m_i-m_j)\Delta+\sigma\Delta W_t$ \hfill \COMMENT{Discretize~\eqref{eq-state-dynamics}}}
+    \STATE {$\tilde y_{t+\Delta}\gets\tilde y_t+(m_i-m_j)\Delta+(1-e^{-\lambda S_t\Delta})(\hat y_t-\tilde y_t)$ \hfill \COMMENT{\eqref{eq-filtered-y-update}, using $m$}}
+    \STATE $\hat y_{t+\Delta}\gets\hat y_t$
+	\FOR{{each player $k\in\{i,j\}$ and candidate $s\in\mathcal C_k\cap[t,t+\Delta)$, chronologically}}
+		\IF {{$u_s^k < \tau_k(t) / \tau^\star$}}
+		\STATE {$\hat{t}^{k}_{\ell^k} \gets s$; $\ell^k \gets \ell^k+1$}
+        \ENDIF
+    \ENDFOR
+    \IF {{at least one submission was accepted in this step}}
+        \STATE {$\hat y_{t+\Delta}\gets y_{t+\Delta}+z_t/\sqrt{\lambda(t+\Delta-t_{\mathrm{obs}})}$; $t_{\mathrm{obs}}\gets t+\Delta$ \hfill \COMMENT{Readout~\eqref{eq-leaderboard-gap}}}
+    \ENDIF
+\ENDFOR
+\STATE \textbf{Output:} {$(S_t)$, $(y_t)$, $(\tilde y_t)$, $(\hat y_t)$, $(m_i,m_j)$, and accepted submission times $\{\hat t_k^{i(j)}\}$}
+\end{algorithmic}
+\end{algorithm}
+
+{The first step of Algorithm~\ref{algo-dgp} computes the variance path $S_t$ and the effort policies $m_i,m_j$ needed to simulate the contest. We obtain $S_t$ from equation~\eqref{filtered-S} and use this path to solve the nonlinear HJB system numerically, with state spacing $0.2$ and time step $1/48$ day. To check sensitivity to the grid, we halve both spacings; the maximum difference between the resulting effort policies is below $0.43\%$ of peak effort on a common evaluation grid. We then simulate the contest on an hourly grid, $\Delta=1/24$ day, using thinning \citep{lewis1979simulation} with $\tau^\star$ bounding both submission intensities. Accepted submissions retain their event times, whereas the public gap is refreshed only at the end of hours containing submissions and carried forward otherwise. Readout-noise variance depends on the elapsed time between public updates, not individual submissions.}
+
+{Our baseline simulation is a 90-day contest with $c_i=1.2$, $c_j=1.5$, $\theta=1$, $\sigma=2$, $\lambda=1$, $\mu_0=0$, $r=15$, and $S_0=4$, with time measured in days. The initial variance is twice its steady-state value, $\sigma/\sqrt\lambda=2$, and the incentive indices are $w_i\approx0.208$ and $w_j\approx0.167$. The baseline sample contains 28 submissions by player $i$ and 18 by player $j$. Figure~\ref{fig-synthetic_90} displays this sample, which we also use for the estimation comparison below. A paired steady-state simulation with $S_0=2$, holding all other parameters, random-number streams, and simulation rules unchanged, produces 30 and 19 submissions, respectively.}
+
+\begin{figure}[htbp]
+	{\includegraphics[width=0.95\textwidth]{figure3.png}}
+	\caption{Synthetic Contest Data over a Three-Month Horizon}
+	\label{fig-synthetic_90}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+{\textit{Note:} The upper panel shows the latent gap, the carried-forward public gap, and the perceived gap. The lower panel records submission times for both players. Paths use the numerically computed equilibrium policy $m$ and $S_0=4$.}
+}
+\end{minipage}
+\end{figure}
+
+{Table~\ref{tbl-contest90} compares two initializations using the same complete baseline sample and jointly estimating $r$. Panel A imposes $S_0=\sigma/\sqrt\lambda$, so the filtering variance is at its steady state from the outset. Panel B estimates $S_0$ separately as a nuisance parameter; its posterior is integrated out of the reported parameter summaries. The estimates are similar across initializations, and all reported 95\% credible intervals contain the generating values. These results concern a single sample and do not establish the absence of systematic bias.}
+
+{We compare the models primarily by their marginal likelihoods, computed by bridge sampling \citep{gronau2020bridgesampling} under common priors for the shared parameters. The Bayes factor for the non-steady-state model relative to the steady-state model is approximately one. Changing the median of the lognormal prior for $S_0$ from 2 to 1 or 4, holding its log-scale standard deviation at 0.75, gives Bayes factors between 0.97 and 1.01. Thus, this sample provides little evidence for estimating a separate initial variance, even though it was generated with $S_0=4$. The auxiliary BIC favors the steady-state restriction, but boundary likelihood optima make its usual asymptotic interpretation unreliable.}
+
+\begin{table}[tbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcommand{\celltext}[1]{\leavevmode#1}
+\centering
+\caption{Bayesian Estimates under Alternative Initializations}\label{tbl-contest90}
+\small
+\textbf{Panel A. Steady-State Initialization: $S_0=\sigma/\sqrt\lambda$}\par
+\smallskip
+\begin{tabularx}{\textwidth}{lYYYYYY}
+\toprule
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} & \textbf{$r$} \\
+\addlinespace[0.25ex]
+\cline{2-7}
+\addlinespace[0.25ex]
+(true val.) & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 & 15.0 \\
+\midrule
+\celltext{Posterior Mean} & 1.168 & 1.763 & 2.170 & 1.562 & -0.466 & 13.878 \\
+\celltext{Posterior SD}   & 0.399 & 0.631 & 0.249 & 0.596 & 0.900 & 4.159 \\
+\celltext{Post. RMSD}     & 0.400 & 0.684 & 0.302 & 0.820 & 1.014 & 4.307 \\
+95\% Interval & [0.58, 2.14] & [0.83, 3.34] & [1.74, 2.71] & [0.69, 2.99] & [-2.24, 1.25] & [7.53, 23.61] \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\vspace{0.8em}
+
+\textbf{Panel B. Non-Steady-State Initialization: $S_0$ Estimated}\par
+\smallskip
+\begin{tabularx}{\textwidth}{lYYYYYY}
+\toprule
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} & \textbf{$r$} \\
+\addlinespace[0.25ex]
+\cline{2-7}
+\addlinespace[0.25ex]
+(true val.) & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 & 15.0 \\
+\midrule
+\celltext{Posterior Mean} & 1.149 & 1.727 & 2.169 & 1.560 & -0.427 & 13.677 \\
+\celltext{Posterior SD}   & 0.399 & 0.622 & 0.253 & 0.599 & 0.940 & 4.101 \\
+\celltext{Post. RMSD}     & 0.402 & 0.662 & 0.304 & 0.820 & 1.032 & 4.309 \\
+95\% Interval & [0.57, 2.13] & [0.82, 3.21] & [1.74, 2.72] & [0.67, 3.02] & [-2.22, 1.42] & [7.41, 23.46] \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\vspace{0.8em}
+
+\textbf{Panel C. Model Comparison}\par
+\smallskip
+\begin{tabularx}{\textwidth}{lYY}
+\toprule
+ & Steady State & Non-Steady State \\
+\midrule
+Estimated parameters & 6 & 7 \\
+Log marginal likelihood & -359.124 & -359.127 \\
+Maximized log likelihood & -352.922 & -352.717 \\
+BIC ($n=45$) & 728.684 & 732.080 \\
+\bottomrule
+\end{tabularx}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:} Both models use the same 46 submissions and 45 hourly public readouts, with no initial observations discarded. Both use $c_i,c_j\sim\operatorname{LogNormal}(\log1,0.75^2)$, $\sigma\sim\operatorname{LogNormal}(\log2,0.5^2)$, $\lambda\sim\operatorname{LogNormal}(\log1,0.75^2)$, $\mu_0\sim\mathcal N(0,1)$, and $\log r\sim\mathcal N(\log15,0.35^2)$. Panel B additionally uses $S_0\sim\operatorname{LogNormal}(\log2,0.75^2)$. Priors are normalized on the retained synthetic supports: $c_i,c_j\in(0.1,5)$, $\sigma\in(0.5,10)$, $\lambda\in(10^{-6},100)$, $\mu_0\in(-20,20)$, and $S_0>0.01$ when free. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; neither has divergences, maximum $\widehat R<1.002$, and minimum bulk and tail effective sample sizes exceed 4,100 and 3,800. Post. RMSD is the square root of the posterior mean squared distance from the generating parameter, not an RMSE across datasets. Intervals are equal-tailed 95\% credible intervals. BIC is $-2\hat\ell+k\log n$, using likelihood-only optimization on the same supports and the 45-readout convention for $n$, not the computational grid size. The likelihood optima approach $c_j=5$ in both models and $S_0=0.01$ in Panel B; BIC is therefore reported only as a heuristic comparison.
+}
+\end{minipage}
+\end{table}
+
+
+\subsection{Parameter Recovery Under Richer Data}\label{sect-synthetic-richer}
+
+{Given the limited evidence for estimating a separate $S_0$ in Table~\ref{tbl-contest90}, we use the more parsimonious steady-state specification to assess recovery from pooled contests and longer horizons. Data are generated using the nonlinear equilibrium policy $m$ and $S_0=4$, while estimation imposes $S_0=\sigma/\sqrt\lambda$ and jointly estimates $(c_i,c_j,\sigma,\lambda,\mu_0,r)$. No initial observations are discarded.}
+
+
+{\textbf{Pooled Contests.}}
+We form nested pools of 10 and 20 independent contests under common generating parameters. Each contest draws its own initial gap, innovations, signal noise, and submission events. Estimation initializes a separate latent state for each contest and combines their likelihoods under one shared parameter vector.
+
+In Table~\ref{tbl-pool-synthetic-data}, expanding the pool from 10 to 20 contests reduces the posterior standard deviations of $\sigma$, $\lambda$, and $\mu_0$. Uncertainty about $c_i$, $c_j$, and $r$ changes little. Strong positive posterior correlations between $r$ and each cost parameter indicate that these samples provide limited separation of effort costs from the submission scale.
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcommand{\celltext}[1]{\leavevmode#1}
+\centering
+\caption{Bayesian Estimates from Pooled Synthetic Data}\label{tbl-pool-synthetic-data}
+\small
+\begin{tabularx}{\textwidth}{lYYYYYY}
+\toprule
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} & \textbf{$r$} \\
+\addlinespace[0.25ex]
+\cline{2-7}
+\addlinespace[0.25ex]
+(true val.) & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 & 15.0 \\
+\midrule
+\addlinespace
+\multicolumn{7}{l}{\textbf{Pool of 10 Contests}} \\
+\celltext{Posterior Mean} & 1.168 & 1.326 & 1.994 & 0.889 & -0.195 & 14.477 \\
+\celltext{Posterior SD}   & 0.355 & 0.405 & 0.074 & 0.118 & 0.666 & 4.314 \\
+\celltext{Post. RMSD}     & 0.357 & 0.441 & 0.075 & 0.162 & 0.694 & 4.346 \\
+\addlinespace
+\multicolumn{7}{l}{\textbf{Pool of 20 Contests}} \\
+\celltext{Posterior Mean} & 1.174 & 1.325 & 2.031 & 1.039 & 0.090 & 14.492 \\
+\celltext{Posterior SD}   & 0.354 & 0.402 & 0.054 & 0.108 & 0.542 & 4.334 \\
+\celltext{Post. RMSD}     & 0.355 & 0.438 & 0.062 & 0.115 & 0.549 & 4.364 \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:}
+The nested pools contain 426 submissions (227 by $i$, 199 by $j$) and 848 submissions (450 by $i$, 398 by $j$), with 418 and 836 distinct hourly readouts. The first 10 contests form the smaller pool. The generating scale is $r=15$, but $r$ is estimated jointly in both pools. Priors and supports match the steady-state specification in Table~\ref{tbl-contest90}. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; all $\widehat R<1.002$, bulk and tail effective sample sizes exceed 2,600, and no divergences or tree-depth-limit hits occur. Post. RMSD is defined as in Table~\ref{tbl-contest90}.
+}
+\end{minipage}
+\end{table}
+
+
+
+
+
+
+\textbf{Longer Contests.}
+We next use single contests with 180- and 360-day horizons, holding $(\theta,c_i,c_j,\sigma,\lambda,\mu_0,S_0)$ at their baseline values. We adjust the submission scale $r$ to target comparable submission frequencies across horizons. Using equation~\eqref{eq-model-intensity}, we calibrate $r$ to match the time-averaged total submission intensity of a 90-day pilot contest with $r=15$. Calibration uses leading-order effort policies and steady-state initialization.\footnote{On the hourly grid, calibration uses $\frac{r_T\Delta}{T}\sum_{n=0}^{T/\Delta-1}\sum_{k\in\{i,j\}}m_k^{(1)}(\tilde y_{n\Delta},\sigma/\sqrt\lambda,n\Delta)\approx0.6184661122$, with $\Delta=1/24$ day. The target is computed from a 90-day pilot with $r=15$, and each pilot perceived-state path uses the candidate $r_T$. Pilot seeds are $1000$ for 90 days and $5000+T$ for longer horizons, with offsets $0,1,2,3$ for Gaussian shocks, Poisson candidates, uniform marks, and the initial gap, respectively. The absolute tolerance is $5\times10^{-5}$ submissions per day.} The resulting scales, $r_{180}=18.6484375$ and $r_{360}=47.4375$, are used in the simulations with $m$ and $S_0=4$; the resulting submission frequencies need not be identical.
+
+In Table~\ref{tbl-longterm-synthetic-data}, the 360-day realization yields smaller posterior standard deviations for $\sigma$ and $\lambda$ than the 180-day realization. However, the posterior standard deviation of $\mu_0$ remains close to its prior value of one, whereas pooling independent contests reduces this uncertainty more substantially. These comparisons reflect the realized samples and their different submission scales, not an isolated effect of contest duration.
+
+\begin{table}[htbp]
+{
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcommand{\celltext}[1]{\leavevmode#1}
+\centering
+\caption{Bayesian Estimates from Longer-Horizon Synthetic Data}\label{tbl-longterm-synthetic-data}
+\small
+\begin{tabularx}{\textwidth}{lYYYYYY}
+\toprule
+\textbf{Parameters} & \textbf{$c_i$} & \textbf{$c_j$} & \textbf{$\sigma$} & \textbf{$\lambda$} & \textbf{$\mu_0$} & \textbf{$r$} \\
+\midrule
+\multicolumn{7}{l}{\textbf{Contest of 6 Months}} \\
+(true val.) & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 & 18.648 \\
+\celltext{Posterior Mean} & 1.165 & 1.249 & 2.190 & 1.444 & -0.362 & 18.230 \\
+\celltext{Posterior SD}   & 0.374 & 0.404 & 0.177 & 0.367 & 0.959 & 5.450 \\
+\celltext{Post. RMSD}     & 0.376 & 0.476 & 0.260 & 0.576 & 1.025 & 5.466 \\
+\addlinespace
+\multicolumn{7}{l}{\textbf{Contest of 12 Months}} \\
+(true val.) & 1.2 & 1.5 & 2.0 & 1.0 & 0.0 & 47.438 \\
+\celltext{Posterior Mean} & 1.074 & 1.445 & 2.085 & 1.033 & -0.596 & 45.969 \\
+\celltext{Posterior SD}   & 0.327 & 0.442 & 0.096 & 0.189 & 0.921 & 13.654 \\
+\celltext{Post. RMSD}     & 0.350 & 0.446 & 0.128 & 0.191 & 1.097 & 13.732 \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:}
+The 180-day contest contains 114 submissions (59 by $i$, 55 by $j$) and 109 distinct hourly readouts; the 360-day contest contains 235 submissions (135 by $i$, 100 by $j$) and 231 readouts. Both specifications estimate $r$, with $\log r\sim\mathcal N(\log r_T,0.35^2)$ centered at the respective generating scale. Other priors and supports match Table~\ref{tbl-contest90}. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; all $\widehat R<1.002$, bulk and tail effective sample sizes exceed 3,100, and no divergences or tree-depth-limit hits occur. Post. RMSD is defined as in Table~\ref{tbl-contest90}.
+}
+\end{minipage}
+}
+\end{table}
+
+
+
+\section{Empirical Application}
+\label{sec-kaggle-application}
+
+In this section, we apply the estimation framework to real Kaggle contest data. We estimate innovation risk and public-feedback precision from submission behavior and public-leaderboard histories, and assess their empirical interpretations using private-leaderboard diagnostics. \textcolor{blue}{We then compare joint changes in prizes, deadlines, and feedback precision that reduce costs while maintaining expected solution quality.}
+
+{Following the parsimonious specification examined in Section~\ref{sect-synthetic}, we impose the steady-state initialization $S_0=\sigma/\sqrt\lambda$ and jointly estimate $(c_i,c_j,\sigma,\lambda,\mu_0,r)$ for each contest.\footnote{The empirical priors are $c_i,c_j\sim\operatorname{LogNormal}(\log1,0.75^2)$, $\sigma\sim\operatorname{LogNormal}(\log2,0.5^2)$, \textcolor{blue}{$\lambda\sim\operatorname{LogNormal}(\log100,2.25^2)$}, $r\sim\operatorname{LogNormal}(\log10,0.5^2)$, and $\mu_0\sim\mathcal N(\hat y_{t_1},1)$. Free positive parameters have a numerical lower bound of $0.01$ and no upper bound. Centering the prior for $\mu_0$ on the first observed public gap is an empirical-Bayes initialization, on which the posterior is conditional.} Estimation uses the leading-order policy in equation~\eqref{eq-empirical-leading-effort}, so precision affects both observation noise and effort incentives through $Q_t(\lambda)$.}
+{Private-leaderboard paths, reconstructed from the private scores of historical submissions after the contest ends, are excluded from the likelihood and used to assess the estimates of $\lambda$ and $\sigma$. Because final private ranks enter focal-pair selection, we interpret the evidence as diagnostic validation conditional on the selected pair, rather than as validation on a fully independent sample.}
+Figure~\ref{kaggledata-diagram} summarizes the data-model structure and validation design.
+
+\begin{figure}[htbp]
+	\centering
+	\noindent\includegraphics[scale=1.2]{kaggledata_diagram.pdf}
+	\caption{Meta-Kaggle Dataset and the Model Structure}
+	\label{kaggledata-diagram}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+\medskip
+\textit{Note:}
+This figure shows the structure of a typical Kaggle contest and the information flow available to contestants.
+Rectangles represent observed data, rounded rectangles represent latent states, and ellipses represent contest parameters.
+Solid lines depict temporal relationships among time series variables and state variables, while dashed arrows show the influence of contest parameters on the data-generating process.
+{The private gap $y_t$ is unavailable to contestants during the contest and is used for post-estimation diagnostics.}
+}
+\end{minipage}
+\end{figure}
+
+
+\subsection{Preparing Data for Structural Estimation}
+\label{sec-data-clean}
+
+Kaggle contests differ in prize structures, participation patterns, and scoring metrics. Our contest selection follows three criteria.
+The resulting sample contains 73 contests concluded before April 15, 2025 that satisfy the eligibility filters on leaderboard availability, public-private score information, and focal-player activity.\footnote{
+The Meta-Kaggle database is updated daily, with new competition data added after the contests conclude.
+}
+
+% Reward
+We {first} restrict attention to Kaggle competitions offering one, two, or three monetary prizes denominated in U.S. dollars.
+Competitions with a single prize naturally conform to the winner-take-all incentive structure.
+For competitions with two or three prize tiers, we use the difference between the first- and second-place cash prizes as the effective prize $\theta$ in the two-player approximation. This proxies the incentive for top rivalry, rather than the exact payoff difference for the selected focal pair.\footnote{Noncash awards and separately conditioned supplementary awards, such as travel reimbursements and software-specific prizes, are excluded. Contest-specific prize conventions are reported in Appendix~\ref{appendix-statistics}.}
+
+% Players
+{The second criterion requires an active focal pair with substantially overlapping participation. We select candidate focal contestants beginning from the top of the reconstructed final private standings.}
+In the source records, each contestant must submit at least five times over an activity span of at least ten days, and the pair's activity windows must overlap for more than ten days.
+We interpret the two-player model as an approximation of rivalry among active, high-performing contestants, rather than a representation of the full participant population.
+
+% Leaderboard Display
+The third criterion restricts the sample to bounded, higher-is-better scoring metrics, including accuracy, AUC, average precision, Kappa, and correlation measures. To place these scores on a common transformed scale, we first map scores with range $[-1,1]$ to $[0,1]$ by $(s+1)/2$ and then apply a logit transformation:\footnote{Preprocessing clips the rescaled scores to $[10^{-4},0.9999]$, affecting 54 of 26,830 public/private score entries (about $0.2\%$).}
+\begin{equation}\label{eq-leaderboard-transform}
+x_t = a \cdot \log\left(\frac{p_t}{1-p_t}\right), \quad 0<p_t<1
+\end{equation}
+where $p_t$ is the clipped individual leaderboard score, $x_t$ is the corresponding transformed score, and the scale parameter is fixed at $a=1$ across contests.
+Within the clipping bounds, the transformation preserves score ordering and magnifies score differences near the endpoints of the unit interval.
+For the focal pair $(i,j)$, we then construct the model variables as transformed-score gaps: $\hat y_t=\hat x_t^i-\hat x_t^j$ for the public leaderboard and $y_t=x_t^i-x_t^j$ for the private leaderboard.
+
+Submission records provide calendar dates rather than within-day times. Preprocessing retains all submissions within the observation window and assigns reproducible random times within each date before constructing hourly submission counts and carried-forward score paths. These times are imputed, not observed; the estimates condition on this reconstruction. Appendix~\ref{appendix-statistics} reports implementation details and time-imputation sensitivity results.
+
+The empirical horizon $T$ is the length of the constructed hourly data window, including the initialization window, rather than the exact interval between the official contest opening and deadline. On this grid, we record each contestant's submission count and carry forward their latest transformed score between submissions.\footnote{The earliest joint public gap is backfilled into the initialization hours, which supply recursion inputs but contribute neither submission-count exposure nor validation outcomes.} For each hour containing at least one submission by either focal contestant, we retain one public-gap readout at the interval endpoint, following Section~\ref{sect-bayes-framework}.
+Because submissions are asynchronous, only the submitting contestant’s score is updated, while the opponent’s most recent score is carried forward. 
+The observed public gap may therefore compare scores submitted at different times and only approximates the contemporaneous latent performance gap.
+Our observation equation treats this gap as an approximate readout of the latent competitive state; this approximation is most credible for focal pairs with frequent submissions and substantial overlap in active periods.
+
+
+
+\subsection{Private-Leaderboard Primitive Validation}\label{sect-validation}
+
+{This subsection assesses whether the estimated feedback precision $\lambda$ and innovation risk $\sigma$ are consistent with private-leaderboard outcomes. As background, Table~\ref{tab-leaderboard-agreement} summarizes public--private rank agreement across the 73 contests without using structural estimates. Although overall rank correlations are high, overlap among top-ranked teams is incomplete, indicating that public standings do not fully reveal private rankings.}
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\centering
+\caption{Public--Private Leaderboard Agreement}
+\label{tab-leaderboard-agreement}
+\small
+\begin{tabularx}{\textwidth}{lYYY}
+\toprule
+\textbf{Statistic} & \textbf{Mean} & \textbf{Median} & \textbf{95\% CI for Mean} \\
+\addlinespace[0.25ex]
+\cline{2-4}
+\addlinespace[0.25ex]
+Public--private rank correlation & $0.937$ & $0.984$ & {$[0.902,\ 0.963]$} \\
+Top-2 overlap rate & $65.1\%$ & $50.0\%$ & {$[56.8\%,\ 73.3\%]$} \\
+Top-5 overlap rate & $66.6\%$ & $80.0\%$ & $[59.7\%,\ 73.2\%]$ \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\par\vspace{1.2ex}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:}
+The sample consists of the same 73 Kaggle contests used in the structural analysis. For each contest, we use the official public and private leaderboard ranks in Meta-Kaggle, excluding benchmark teams and teams missing either rank. Public--private rank correlation is the Spearman correlation across all retained teams within a contest. The top-$k$ overlap rate is $|\mathcal T^{pub}_{k}\cap\mathcal T^{pri}_{k}|/k$, where $\mathcal T^{pub}_{k}$ and $\mathcal T^{pri}_{k}$ are the sets of teams ranked in the public and private top $k$, respectively; the ordering of teams within the top-$k$ sets need not coincide. Each statistic is first calculated separately by contest, and the table reports the equally weighted mean and median across the 73 contests. The 95\% confidence intervals pertain to the across-contest means and are percentile intervals obtained from 10,000 nonparametric bootstrap resamples at the contest level.
+}
+\end{minipage}
+\end{table}
+
+\textcolor{blue}{For each of the 73 contests, we estimate the model using the full observation window and again using only the first 75\% of the contest-phase window for the time-split diagnostics, retaining the full-sample horizon in both estimations. We report posterior medians for parameter estimates and use joint posterior draws for credible intervals and precision counterfactuals. All 146 fits have no divergent transitions or tree-depth saturations, rank-normalized $\widehat R<1.01$, and bulk and tail effective sample sizes above 400. Appendix~\ref{appendix-statistics} reports the full-sample parameter estimates.}
+
+{We next examine whether contests with higher estimated $\lambda$ exhibit less public--private disagreement and those with higher estimated $\sigma$ exhibit greater private-gap volatility. Appendix~\ref{appendix-statistics} provides the regression details.}
+
+\subsubsection{Private-Leaderboard Diagnostic for Signal Precision $\lambda$.}
+{We assess the estimated feedback precision $\hat\lambda_\ell$ by comparing it with a benchmark constructed from public--private leaderboard discrepancies.}
+Let $\ell\in\{1,\ldots,L\}$ index contests.
+Let $\mathcal E_\ell$ denote the ordered set of submission-triggered leaderboard readouts for the focal pair, and let $N^\ell=|\mathcal E_\ell|$.
+Let $h_k^\ell=t_k^\ell-t_{k-1}^\ell$ denote the elapsed time associated with readout $t_k^\ell$.
+{Using the Gaussian discrepancy approximation $\hat y_{t_k}^\ell-y_{t_k}^\ell\sim\mathcal N\!\left(0,1/(\lambda_\ell h_k^\ell)\right)$ for $t_k^\ell\in\mathcal E_\ell$, we construct}
+\begin{equation*}
+\lambda^{\text{bench}}_\ell =
+\frac{N^\ell}
+{\sum_{t_k^\ell\in\mathcal E_\ell}
+h_k^\ell (y_{t_k}^\ell - \hat{y}_{t_k}^\ell)^2}.
+\end{equation*}
+The benchmark therefore uses only submission-triggered leaderboard readouts rather than repeated hourly carry-forward observations.\footnote{
+As a robustness comparison to the irregular-interval estimator above, we also consider the fixed-grid approximation $\lambda_{\ell,\Delta}^{\mathrm{bench}}=N^\ell/\left\{\Delta\sum_{t_k^\ell\in\mathcal E_\ell}(y_{t_k}^\ell-\hat y_{t_k}^\ell)^2\right\}$. 
+Despite this difference, both constructions yield the same qualitative conclusion of a positive but modest cross-contest association.
+}
+{This working Gaussian law does not follow from the score transformation, and asynchronous updates may induce dependence across readouts. The benchmark therefore checks the observation-precision interpretation of $\lambda$, not its behavioral effect through $Q_t(\lambda)$ and effort.}
+
+\textcolor{blue}{Figure~\ref{fig-validate-lambda} reports a slope of $0.386$ and Spearman $\rho=0.364$ ($p=0.002$). Because the two measures share public-data inputs, their association is a directional consistency check rather than an independent holdout validation.}
+
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	{\includegraphics[width=\linewidth]{validate_lamb_revised_100k.pdf}}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+		\centering
+		\newcolumntype{Y}{>{\centering\arraybackslash}X}
+		\newcommand{\bluecell}[1]{\leavevmode{#1}}
+			\begin{tabularx}{\textwidth}{llYY}
+				\toprule
+				& coef. & stderr & 95\% CI \\
+				\midrule
+				\bluecell{const.}
+ & \textcolor{blue}{4.365\textbf{***}} & \textcolor{blue}{0.809} & \textcolor{blue}{[2.780, 5.950]} \\
+				\bluecell{$\log(1 + \hat{\lambda})$}
+ & \textcolor{blue}{0.386\textbf{***}} & \textcolor{blue}{0.112} & \textcolor{blue}{[0.167, 0.606]} \\
+				\midrule
+				Obs. & \multicolumn{3}{c}{73} \\
+\bluecell{R$^2$} & \multicolumn{3}{c}{\textcolor{blue}{0.121}} \\
+\bluecell{Adj. R$^2$} & \multicolumn{3}{c}{\textcolor{blue}{0.109}} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+	{\footnotesize
+	{(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
+\textcolor{blue}{(2) OLS residual diagnostics: Omnibus = 0.601, Jarque--Bera = 0.374, Skewness = 0.175, Kurtosis = 3.024.}
+\textcolor{blue}{(3) Condition Number = 15.726.}}
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+\caption{{$\lambda_\ell^{\text{bench}}$ vs. Bayesian Estimate $\hat\lambda_\ell$}}
+\label{fig-validate-lambda}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textbf{Note.} {Each point represents one of 73 contests. The approximate benchmark $\lambda_\ell^{\mathrm{bench}}$ uses elapsed-time-weighted squared public--private discrepancies at submission-triggered readouts; $\hat\lambda_\ell$ is the posterior \textcolor{blue}{median} structural estimate. The dashed line regresses $\log(1+\lambda_\ell^{\mathrm{bench}})$ on $\log(1+\hat\lambda_\ell)$.}
+}
+\end{minipage}
+\end{figure}
+
+
+
+
+
+\subsubsection{Public-Private Leaderboard Disagreement Diagnostics.}
+{Whereas the preceding diagnostic compares two precision measures, we now examine whether higher estimated precision is associated with less public--private disagreement. For contest $\ell$, we measure disagreement by the mean absolute gap between the two leaderboard paths:}
+\[
+D_\ell^{path}
+=
+\frac{1}{|\mathcal H_\ell|}
+\sum_{h\in\mathcal H_\ell}
+\left|y_{\ell h}-\hat y_{\ell h}\right|,
+\]
+{where $\mathcal H_\ell$ contains the hourly observation points in the contest-phase path, excluding the backfilled initialization window. Higher $\lambda$ reduces signal noise at a given readout interval, motivating a negative association with $D_\ell^{path}$; update frequency and score characteristics also affect observed disagreement.}
+
+{Because $\hat\lambda_\ell$ and $D_\ell^{path}$ use public data from the same period, their association may partly reflect shared path variation. We therefore also relate the early estimate $\hat\lambda_\ell^{early}$ to disagreement in the final quarter. Let $\mathcal H_\ell^{late}$ contain the hours in the final 25\% of the contest-phase window and define $D_\ell^{late}=|\mathcal H_\ell^{late}|^{-1}\sum_{h\in\mathcal H_\ell^{late}}|y_{\ell h}-\hat y_{\ell h}|$. Initialization hours are excluded when locating the cutoff.}
+
+{We regress $\log(1+D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$ for the full-path comparison and $\log(1+D_\ell^{late})$ on $\log(1+\hat\lambda_\ell^{early})$ for the time-split comparison.}
+\textcolor{blue}{Table~\ref{tab-signal-disagreement-validation} reports slopes of $-0.013$ ($p=0.006$) for the full path and $-0.015$ ($p=0.025$) for the time split. Higher early precision is associated with less disagreement in the final quarter, with $R^2=0.029$.}
+
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcommand{\bluecell}[1]{\leavevmode{#1}}
+\centering
+\caption{Signal Precision and Public-Private Path Disagreement}
+\label{tab-signal-disagreement-validation}
+\small
+\begin{tabularx}{\textwidth}{lYYYYY}
+\toprule
+Specification & coef. & stderr & 95\% CI & R$^2$ & Spearman $\rho$ \\
+\midrule
+Full path & \textcolor{blue}{-0.013\textbf{**}} & \textcolor{blue}{0.005} & \textcolor{blue}{[-0.022, -0.004]} & \textcolor{blue}{0.064} & \textcolor{blue}{-0.346\textbf{**}} \\
+Time split & \textcolor{blue}{-0.015\textbf{*}} & \textcolor{blue}{0.007} & \textcolor{blue}{[-0.028, -0.002]} & \textcolor{blue}{0.029} & \textcolor{blue}{-0.343\textbf{**}} \\
+\midrule
+Obs. & \multicolumn{5}{c}{73} \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:}
+{The full-path row regresses $\log(1+D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$, where $D_\ell^{path}$ is mean absolute public--private gap disagreement. The time-split row relates the same measure in the final 25\% to precision estimated from the first 75\% of contest-phase data, retaining the full-sample horizon. Initialization hours are excluded from the discrepancy measures. Both regressions include an intercept and use 73 contests and posterior \textcolor{blue}{median} estimates. Spearman $\rho$ reports the corresponding rank association.}
+{(1) Significance markers: \textbf{***} $p<0.001$, \textbf{**} $p<0.01$, \textbf{*} $p<0.05$.}
+\textcolor{blue}{(2) OLS residual diagnostics (Full path; Time split): Omnibus = 66.882; 90.471, Jarque--Bera = 364.820; 1131.650, Skewness = 2.872; 3.831, Kurtosis = 12.324; 20.701.}
+\textcolor{blue}{(3) Condition Number (Full path; Time split): 15.726; 15.742.}
+}
+\end{minipage}
+\end{table}
+
+
+
+
+
+\subsubsection{Private-Leaderboard Consistency Benchmark for Innovation Risk $\sigma$.}
+{We assess the estimated innovation risk $\hat\sigma_\ell$ using private-gap increments adjusted for estimated effort drift.}
+Let $(t^\ell_k,y^\ell_k)_{k=0}^{n_\ell}$ denote the private-leaderboard gap evaluated at the ordered update times used for this benchmark, {with the first retained readout serving as the initial observation. No increment is constructed from the artificial backfill.}
+Motivated by a Gaussian increment approximation to equation~\eqref{eq-state-dynamics}, we subtract the posterior-estimated effort drift $\hat\mu_k^\ell=\int_{t^\ell_{k-1}}^{t^\ell_k}[\hat m_i^\ell(s)-\hat m_j^\ell(s)]\,ds$ from each increment and scale the squared residual by the elapsed time. {The resulting benchmark is}
+\begin{equation*}
+\sigma^{\text{bench}}_\ell = \left(\frac{1}{n_\ell}\sum_{k=1}^{n_\ell}\frac{\left[y^\ell_k-y^\ell_{k-1}-\hat\mu^\ell_k\right]^2}{t^\ell_k-t^\ell_{k-1}}\right)^{1/2}
+\end{equation*}
+{Appendix~\ref{appexidx-normal-benchmark} derives this expression. The drift adjustment $\hat\mu_k^\ell$ is evaluated at the posterior \textcolor{blue}{median} parameters. Together with asynchronous score updates, this makes $\sigma_\ell^{\mathrm{bench}}$ a model-assisted consistency benchmark, rather than an exact maximum likelihood estimator of latent diffusion volatility.}
+
+{As for $\lambda$, we examine the cross-contest relationship between $\log(1+\sigma_\ell^{\mathrm{bench}})$ and $\log(1+\hat\sigma_\ell)$.}
+\textcolor{blue}{Figure~\ref{fig-validation-sigma} reports a slope of $0.912$ and Spearman $\rho=0.597$ ($p<0.001$). This model-assisted comparison provides a consistency diagnostic for the innovation-risk interpretation of $\hat\sigma_\ell$.}
+
+%%%%%%%%%% Figure & Table %%%%%%%%%%%
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.43\textwidth}
+	\vspace*{\fill}
+	\centering
+	{\includegraphics[width=\linewidth]{validate_sigma_revised_100k.pdf}}
+	\vspace*{\fill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.53\textwidth}
+	\vspace*{\fill}
+		\centering
+		\newcolumntype{Y}{>{\centering\arraybackslash}X}
+		\newcommand{\bluecell}[1]{\leavevmode{#1}}
+		\begin{tabularx}{\textwidth}{llYY}
+			\toprule
+			& coef. & stderr & 95\% CI \\
+			\midrule
+			\bluecell{const.}
+ & \textcolor{blue}{0.402\textbf{***}} & \textcolor{blue}{0.094} & \textcolor{blue}{[0.218, 0.586]} \\
+			\bluecell{$\log(1 + \hat{\sigma})$}
+ & \textcolor{blue}{0.912\textbf{***}} & \textcolor{blue}{0.173} & \textcolor{blue}{[0.573, 1.250]} \\
+			\midrule
+			Obs. & \multicolumn{3}{c}{73} \\
+\bluecell{R$^2$} & \multicolumn{3}{c}{\textcolor{blue}{0.320}} \\
+\bluecell{Adj. R$^2$} & \multicolumn{3}{c}{\textcolor{blue}{0.310}} \\
+		\bottomrule
+		\addlinespace[0.5ex]
+	\end{tabularx}
+	\begin{minipage}{\textwidth}
+{\footnotesize
+{(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
+\textcolor{blue}{(2) OLS residual diagnostics: Omnibus = 21.321, Jarque--Bera = 28.003, Skewness = 1.302, Kurtosis = 4.557.}
+\textcolor{blue}{(3) Condition Number = 3.585.}}
+}
+	\end{minipage}
+	\vspace*{\fill}
+\end{minipage}
+\caption{{$\sigma^{\text{bench}}$ vs. Bayesian Estimate $\hat\sigma$}}
+\label{fig-validation-sigma}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textbf{Note.} {Each point represents one of 73 contests. The model-assisted benchmark $\sigma_\ell^{\mathrm{bench}}$ uses private-gap increments between readouts, adjusted for elapsed time and effort drift evaluated at posterior \textcolor{blue}{median} parameters; $\hat\sigma_\ell$ is the posterior \textcolor{blue}{median} structural estimate. The dashed line regresses $\log(1+\sigma_\ell^{\mathrm{bench}})$ on $\log(1+\hat\sigma_\ell)$.}
+}
+\end{minipage}
+\end{figure}
+
+
+
+
+\subsubsection{Private-Leaderboard Volatility Diagnostics.}
+{We examine whether contests with higher estimated innovation risk exhibit greater private-path volatility. Unlike the preceding benchmark, this diagnostic does not use an estimated effort-drift adjustment. For contest $\ell$, let $\Delta y_{\ell h}=y_{\ell h}-y_{\ell,h-1}$ denote the hourly private-gap increment and define $V_\ell^{path}=\operatorname{sd}\{\Delta y_{\ell h}:h\in\mathcal H_\ell,\ h>1\}$. Hours are indexed within the contest-phase path, excluding artificial initialization increments.}
+
+{Carrying scores forward produces zero increments between updates and jumps when new scores arrive. Thus, $V_\ell^{path}$ reflects both submitted-score changes and update frequency. It provides a less model-dependent check on $\hat\sigma_\ell$, rather than a direct measure of latent diffusion volatility.}
+
+{We also apply the same time split used for signal precision. For the final-quarter hours $\mathcal H_\ell^{late}$, define $V_\ell^{late}=\operatorname{sd}\{\Delta y_{\ell h}:h\in\mathcal H_\ell^{late}\}$. The full-path regression relates $\log(1+V_\ell^{path})$ to $\log(1+\hat\sigma_\ell)$; the time-split regression relates $\log(1+V_\ell^{late})$ to $\log(1+\hat\sigma_\ell^{early})$.}
+
+\textcolor{blue}{Table~\ref{tab-private-volatility-diagnostics} reports slopes of $0.243$ ($p<0.001$) for the full path and $0.265$ ($p=0.006$) for the time split. The positive time-split association also appears without the benchmark's drift adjustment.}
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcommand{\bluecell}[1]{\leavevmode{#1}}
+\centering
+\caption{Private-Leaderboard Volatility Diagnostics}
+\label{tab-private-volatility-diagnostics}
+\small
+\begin{tabularx}{\textwidth}{lYYYYY}
+\toprule
+Specification & coef. & stderr & 95\% CI & R$^2$ & Spearman $\rho$ \\
+\midrule
+Full path & \textcolor{blue}{0.243\textbf{***}} & \textcolor{blue}{0.049} & \textcolor{blue}{[0.147, 0.339]} & \textcolor{blue}{0.309} & \textcolor{blue}{0.674\textbf{***}} \\
+Time split & \textcolor{blue}{0.265\textbf{**}} & \textcolor{blue}{0.095} & \textcolor{blue}{[0.078, 0.452]} & \textcolor{blue}{0.275} & \textcolor{blue}{0.386\textbf{***}} \\
+\midrule
+Obs. & \multicolumn{5}{c}{73} \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:}
+{The full-path row regresses $\log(1+V_\ell^{path})$ on $\log(1+\hat\sigma_\ell)$, where $V_\ell^{path}$ is the sample standard deviation of hourly private-gap increments within the contest-phase path. The time-split row uses increments ending in the final 25\% and innovation risk estimated from the first 75\%, retaining the full-sample horizon. Artificial initialization increments are excluded. Both regressions include an intercept and use 73 contests and posterior \textcolor{blue}{median} estimates. Spearman $\rho$ reports the corresponding rank association.}
+{(1) Significance levels: \textbf{***} $p<0.001$, \textbf{**} $p<0.01$, \textbf{*} $p<0.05$.
+\textcolor{blue}{(2) OLS residual diagnostics (Full path; Time split): Omnibus = 50.904; 13.440, Jarque--Bera = 180.803; 15.401, Skewness = 2.220; 0.879, Kurtosis = 9.304; 4.405.}
+\textcolor{blue}{(3) Condition Number (Full path; Time split): 3.585; 3.502.}}
+}
+\end{minipage}
+\end{table}
+
+
+
+{The preceding diagnostics support the empirical interpretations of $\lambda$ and $\sigma$, but do not establish the accuracy of the leading-order effort approximation. The incentive indices $w_k=\theta/(\sigma^2c_k)$ are not uniformly small across the sample, so Theorem~\ref{thm-equilibrium-effort} alone cannot establish this accuracy. \textcolor{blue}{Appendix~\ref{app-effort-recovery} reports a targeted parameter-recovery check using data generated under nonlinear effort.} We therefore interpret the following counterfactuals as implications of the leading-order specification, rather than predictions from the exact nonlinear equilibrium.}
+
+
+\FloatBarrier
+\input{section_joint_design.tex}
+
+\section{Robustness}
+
+{This section addresses the focal-pair selection and Gaussian-approximation concerns raised in Section~\ref{sect-concerns}. We examine alternative rivalries and, as an indirect check within the maintained Gaussian framework, alternative score calibrations.}
+
+\subsection{Selection of Two Contestants}\label{sect-robust-2players}
+
+{We exclude the baseline contestant $i$ to assess whether the validation patterns depend on this contestant. Contestants are ranked by their last recorded private score, and we search the remaining candidates within the top 20 for an alternative pair satisfying the activity and overlap requirements in Section~\ref{sec-data-clean}. All 73 contests admit an alternative pair, with the baseline prize, horizon, and preprocessing rules retained.}
+
+\textcolor{blue}{Figure~\ref{fig-robust-pair-validation} repeats the benchmark comparisons using alternative focal pairs. The slope for innovation risk is $1.246$ ($p<0.001$); the slope for signal precision is $0.189$ ($p=0.115$). The innovation-risk association remains positive and statistically significant, whereas the signal-precision association is less precisely estimated. Appendix~\ref{app-robustness-statistics} reports the detailed statistics and changes in effective observation windows.}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{validate_lambda_pair.pdf}\\
+{\small (a) Signal precision}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{validate_sigma_pair.pdf}\\
+{\small (b) Innovation risk}
+\end{minipage}
+\par\vspace{1.2ex}
+\caption{{Private-Leaderboard Validation with Alternative Focal Pairs}}
+\label{fig-robust-pair-validation}
+\par\vspace{0.8ex}
+\begin{minipage}{\textwidth}
+{\footnotesize
+{\textit{Note:} Each panel contains 73 contests. Benchmarks are constructed as in Section~\ref{sect-validation}, using the actual intervals between retained readouts. Dashed lines are fitted regressions of the log-transformed benchmarks on the corresponding log-transformed posterior \textcolor{blue}{median} estimates. Reported $p$-values use HC1 heteroskedasticity-robust standard errors.}
+}
+\end{minipage}
+\end{figure}
+
+\subsection{Normal Approximation}\label{sect-robust-normality}
+
+{The Gaussian assumption in Section~\ref{sect-concerns} makes posterior beliefs tractable through their mean and variance and supports the effort policy, likelihood, and validation benchmarks. Replacing it generally changes belief updating and hence contestants' effort choices. A meaningful non-Gaussian assessment would therefore require rederiving these components and re-estimating the model jointly, an extension we do not undertake here.}
+
+\textcolor{blue}{As an indirect check, we calibrate the score-scale parameter $a$ in equation~\eqref{eq-leaderboard-transform} to a standard normal reference under $L_1$ and $L_2$ losses and re-estimate all 73 contests, retaining the baseline numerical prior specifications in transformed units. Rank correlations with the baseline range from 0.945 to 0.999; full-disclosure versus finite-precision classifications agree in 72 and 72 of 73 contests, respectively. This checks sensitivity to score calibration, not Gaussianity itself: changing $a$ does not alter standardized distributional shape. Appendix~\ref{app-robustness-statistics} provides the details.}
+
+
+
+\section{Conclusion}
+
+This paper develops a dynamic game-theoretic model and Bayesian structural estimation framework for online crowdsourcing contests under noisy public feedback, with the final private leaderboard determining the realized winner. Contestants evaluate the prize using their full posterior winning probabilities, yielding a closed-form leading-order effort policy in which signal precision determines how broadly incentives extend across public performance gaps. We prove that a finite-precision design can strictly outperform every full-disclosure design even without a direct precision cost.
+
+Conditional on focal pairs selected using final private ranks, we recover latent competition states, effort dynamics, and contest-specific primitives from contest-phase submission timing and public leaderboard trajectories, and assess the estimated primitives using private-leaderboard path values excluded from the likelihood. Across 73 Kaggle contests, higher estimated innovation risk is associated with greater private-leaderboard volatility, while higher estimated feedback precision is associated with less public--private disagreement. Both relationships are supported by time-split tests using later private-leaderboard outcomes. \textcolor{blue}{Quality-preserving design comparisons under the steady-state, leading-order calibration show how higher delay costs favor shorter contests and larger prizes, making finite precision more common. Full disclosure remains preferred in most contests across the reported scenarios.}
+
+Several limitations deserve mention. The incentive indices are not uniformly small across the empirical sample, so the leading-order effort approximation lacks a uniform accuracy guarantee. The two-player framework simplifies multi-tier prizes and asynchronous feedback, while empirical estimation maintains Gaussian updating and fixes the filtering variance at its parameter-dependent steady state. \textcolor{blue}{The quality-constrained design comparisons are therefore calibrated benchmarks rather than exact joint-design predictions.} Proposition~\ref{prop-joint-design} concerns symmetric contestants and a zero initial perceived gap. Its sufficient results do not constitute a complete partition of the parameter plane; the broader regime patterns and plotted boundaries are numerical findings. These limitations suggest natural extensions involving nonlinear structural estimation, richer prize structures, nonstationary filtering, and multi-agent dynamics.
+
+
+
+
+% Appendix here
+% Options are (1) APPENDIX (with or without general title) or
+%             (2) APPENDICES (if it has more than one unrelated sections)
+% Outcomment the appropriate case if necessary
+%
+% \begin{APPENDIX}{<Title of the Appendix>}
+% \end{APPENDIX}
+%
+%   or
+%
+% \begin{APPENDICES}
+% \section{<Title of Section A>}
+% \section{<Title of Section B>}
+% etc
+% \end{APPENDICES}
+
+
+\newpage
+\begin{APPENDICES}
+
+
+\section{Proofs}
+
+{{
+\proof{Proof of Theorem~\ref{thm-equilibrium-effort}}
+Fix a finite $\lambda>0$. Put $a_t=\lambda S_t^2$,
+$\alpha_k=\sigma^2w_k$, and $\alpha_*=\max_k\alpha_k$.
+Write $U^k=V^k/\theta$, $p=U_y^i$, and $n=-U_y^j$.
+In reverse time $\tau=T-t$, the differentiated HJB equations are
+\[
+p_\tau=\tfrac{a_{T-\tau}}2p_{yy}
++\partial_y(\alpha_ip^2/2-\alpha_jpn),\qquad
+n_\tau=\tfrac{a_{T-\tau}}2n_{yy}
++\partial_y(\alpha_ipn-\alpha_jn^2/2),
+\]
+with $p(y,0)=n(y,0)=G_{S_T}(y)$, where $G_q$ is the centered
+Gaussian density of variance $q$.
+
+\emph{Existence.}
+We apply the integral-equation version of the abstract
+Cauchy--Kowalevski theorem in \citet[][Chapter III, Remark 2.3]{Nishida1978}.
+Use the analytic norms
+\[
+\|f\|_\rho=(2\pi)^{-1}\int_{\mathbb R}
+e^{\rho|\xi|}|\widehat f(\xi)|\,d\xi,
+\qquad \widehat f(\xi)=\int_{\mathbb R}e^{-i\xi y}f(y)\,dy.
+\]
+For $0<\rho'<\rho$, these satisfy
+$\|fg\|_\rho\leq\|f\|_\rho\|g\|_\rho$ and
+$\|f_y\|_{\rho'}\leq\|f\|_\rho/(\rho-\rho')$.
+Let $P_{t,s}$ be Gaussian convolution of variance $\int_t^sa_u\,du$.
+It is a contraction in every such norm.
+For $h=(p,n)$, let $\mathcal N(h)$ denote the two nonlinear terms
+above and use the sum norm for pairs. The gradient equations have
+the integral form
+\begin{equation}\label{eq-equilibrium-gradient-mild}
+h(\tau)=P_{T-\tau,T}h(0)
++\int_0^\tau P_{T-\tau,T-s}\mathcal N(h(s))\,ds.
+\end{equation}
+On a radius-$R$ ball,
+\[
+\|\mathcal N(h)-\mathcal N(\widehat h)\|_{\rho'}
+\leq\frac{C\alpha_*R}{\rho-\rho'}\|h-\widehat h\|_\rho,
+\qquad
+\|\mathcal N(h)\|_{\rho'}\leq
+\frac{C\alpha_*R^2}{\rho-\rho'}.
+\]
+Fix $\rho_0>\rho_1>0$ and $R>2\|h(0)\|_{\rho_0}$;
+the Gaussian data make this choice independent of $\alpha_*$.
+After rescaling time by $r=\alpha_*\tau$, the estimates above have
+constants independent of $\alpha_*$, since $\alpha_k/\alpha_*\leq1$
+and the propagators remain contractions.
+The cited theorem thus gives an existence interval $0\leq r<r_0$
+and a bound in the $\rho_1$ norm, both independent of $\alpha_*$.
+Because $\alpha_*\leq\sigma^2(w_i+w_j)$, taking $w_i+w_j$ sufficiently
+small ensures $\alpha_*T<r_0$. The solution then exists on $[0,T]$ with
+a fixed positive analytic radius. Cauchy's estimate on any smaller strip
+gives uniform bounds on all spatial derivatives used below.
+
+\emph{Equilibrium verification.}
+Returning to $t=T-\tau$, with $b=\alpha_ip-\alpha_jn$,
+the gradients satisfy
+\[
+p_t+\tfrac{a_t}2p_{yy}+bp_y-\alpha_jn_yp=0,\qquad
+n_t+\tfrac{a_t}2n_{yy}+bn_y+\alpha_ip_yn=0.
+\]
+Their bounded coefficients and strictly positive Gaussian terminal data
+give $p,n>0$ by Feynman--Kac. Bounded drift and reaction
+coefficients also preserve Gaussian tail bounds. Integrating the
+reverse-time conservative equations over $\mathbb R$ therefore produces
+no boundary terms and preserves $\int p\,dy=\int n\,dy=1$.
+Consequently,
+$U^i(y,t)=\int_{-\infty}^yp(z,t)\,dz$ and
+$U^j(y,t)=\int_y^\infty n(z,t)\,dz$
+are bounded values with the required terminal and spatial limits.
+Integrating the gradient equations fixes the possible constants of
+integration by these spatial limits and gives the normalized HJB system
+$U_t^k+(a_t/2)U_{yy}^k+F_k(U)=0$, where
+\[
+F_i(U)=\alpha_i(U_y^i)^2/2+\alpha_jU_y^iU_y^j,\qquad
+F_j(U)=\alpha_j(U_y^j)^2/2+\alpha_iU_y^iU_y^j.
+\]
+The positive policies $m_i=\alpha_ip$ and $m_j=\alpha_jn$ attain
+the constrained HJB maxima. For any admissible deviation $q_k$,
+It\^o's formula and completion of the square give
+\begin{equation}\label{eq-equilibrium-verification}
+\mathbb E_{y,t}\!\left[G_k(\tilde y_T)-\int_t^T
+\frac{c_kq_{k,s}^2}{2}\,ds\right]
+=V^k(y,t)-\frac{c_k}{2}\mathbb E_{y,t}\!\int_t^T
+[q_{k,s}-m_k(\tilde y_s,s)]^2\,ds.
+\end{equation}
+The stochastic integral has zero expectation by bounded derivatives
+and admissibility.
+The last term in \eqref{eq-equilibrium-verification} is nonpositive and
+vanishes for $q_k=m_k$. Hence the policies are mutual best responses and
+form an interior Markov-perfect equilibrium.
+
+\emph{Leading-order effort.}
+Direct differentiation, using $Q_t'=-a_t$ and $Q_T=S_T$, verifies
+$U_i^{(0)}=\Phi(y/\sqrt{Q_t})$, $U_j^{(0)}=1-U_i^{(0)}$
+as the zero-incentive HJB solution. The exact values satisfy
+\begin{equation}\label{eq-equilibrium-fixed-point}
+U^k(t)=U_k^{(0)}(t)+\int_t^T P_{t,s}F_k(U(s))\,ds.
+\end{equation}
+Indeed, $Q_t-Q_s=\int_t^sa_u\,du$, so propagating the terminal density
+$G_{S_T}$ from $T$ to $t$ gives $G_{Q_t}$. On a smaller fixed analytic
+strip, the uniform existence bound controls $\mathcal N(h)$ by
+$C\alpha_*$. Heat contraction and integration over an interval of length
+at most $T$ therefore give
+\[
+\sup_{y,t}\{|p(y,t)-G_{Q_t}(y)|+|n(y,t)-G_{Q_t}(y)|\}
+\leq CT\alpha_*=O(w_i+w_j).
+\]
+Since $m_k=\alpha_kp_k=\sigma^2w_kp_k$, multiplying by
+$\sigma^2w_k$ gives the stated expansion. Finally,
+$Q_t'=-a_t<0$, $Q_T=S_T$, and $Q_0=S_0+\sigma^2T$, so
+$S_T\leq Q_t\leq S_0+\sigma^2T$; the Gaussian factor is therefore
+uniformly bounded. This proves \eqref{eq-equilibrium-effort} uniformly
+in state and time.
+\Halmos
+\endproof
+}
+}
+
+{
+\proof{Proof of Proposition~\ref{prop-joint-design}}
+The utility assumption implies $u'(B)\leq C e^{-\zeta B}$ for all sufficiently
+large $B$, so $u$ is bounded above and $Bu'(B)\to0$.
+Write $\alpha=\theta/c$, $b_0=\sqrt{S_0/(2\pi)}$, and
+$b(T)=\sqrt{(S_0+\sigma^2T)/(2\pi)}$; put
+$Q_t=S_t+\sigma^2(T-t)$.
+
+\emph{Part (i): finite feedback strictly dominates full disclosure.}
+Fix $\bar\lambda,\bar\alpha>0$. The analytic existence argument in the
+proof of Theorem~\ref{thm-equilibrium-effort} is uniform for
+$0<\sigma\leq\bar\sigma$ and sufficiently small $T$.
+Indeed, $S_t\geq S_0/(1+\bar\lambda S_0t)$ keeps the Gaussian terminal
+data bounded on a common analytic strip. With $\alpha_i=\alpha_j=\bar\alpha$,
+the gradient integral equation gives
+$m_k(y,t)=\bar\alpha G_{Q_t}(y)+O(T)$ uniformly in state and time.
+
+Under zero effort, $\tilde y_t$ is centered Gaussian with variance
+$Q_0-Q_t$. Gaussian convolution therefore gives
+$\mathbb E[G_{Q_t}(\tilde y_t)]=G_{Q_0}(0)$. Moreover, the leading terms
+of $m_i$ and $m_j$ coincide, so $m_i-m_j=O(T)$; integrating this drift
+over a horizon of length $T$ changes the perceived-gap path by $O(T^2)$.
+The Lipschitz Gaussian kernels give the same order of error after taking
+expectations. Substitution in \eqref{eq-best-output-drift-identity} first
+gives
+\[
+\mathcal B(0,c\bar\alpha,T,\bar\lambda;S_0)
+=b(T)+\bar\alpha G_{Q_0}(0)T+o(T).
+\]
+Since $G_{Q_0}(0)=1/\sqrt{2\pi(S_0+\sigma^2T)}$,
+$b'(0)=\sigma^2/\sqrt{8\pi S_0}$, and $D'(0)=0$, Taylor expansion gives,
+uniformly in $0<\sigma\leq\bar\sigma$,
+\[
+u(\mathcal B)-D(T)
+=u(b_0)+
+\frac{u'(b_0)(\bar\alpha+\sigma^2/2)}{\sqrt{2\pi S_0}}T+o(T).
+\]
+The displayed coefficient is bounded below by
+$u'(b_0)\bar\alpha/\sqrt{2\pi S_0}>0$. Uniformity of the remainder lets
+us choose a single short $\bar T>0$ and $\delta>0$, independent of
+$\sigma\in(0,\bar\sigma]$, such that the payoff before deducting the prize
+is at least $u(b_0)+\delta$. The prize equals
+$\bar\theta=c\bar\alpha$. Hence, for
+$c<c_F:=\delta/(4\bar\alpha)$, this finite-precision candidate has net
+payoff greater than $u(b_0)+3\delta/4$.
+
+Use the full-disclosure benchmark in Appendix~\ref{app-joint-design-lemmas},
+with $w=\alpha/\sigma^2$.
+
+Couple the equilibrium scores with their zero-effort counterparts using
+the same Brownian paths. The maximum function is one-Lipschitz in the
+Euclidean norm, and
+$(\int_0^Tm_kdt)^2\leq T\int_0^Tm_k^2dt$. Conditional
+Cauchy--Schwarz and \eqref{eq-design-full-energy} therefore give, for
+$Y_0\sim\mathcal N(0,S_0)$,
+\[
+\mathcal B(0,\theta,T,\infty;S_0)-b(T)
+\leq\sqrt{2\alpha T}\,
+\mathbb E\sqrt{1-f(d(Y_0,0))}.
+\]
+For $d>0$ and $x=wd/2$,
+\[
+\frac{wf'(d)K(d)}{K'(d)}
+=1+(x\tanh x-1)\operatorname{sech}^2x\leq2,
+\]
+using $\cosh^2x\geq1+x^2\geq2x$.
+Because $f(1)=1$ and $K,K'>0$ on $(0,1]$, the ratio bound implies
+\[
+1-f(d)=\int_d^1f'(s)ds
+\leq\frac2w\int_d^1\frac{K'(s)}{K(s)}ds
+=\frac2w\log\frac{K(1)}{K(d)}.
+\]
+Equation~\eqref{eq-design-full-gap} and symmetry in $y$ therefore yield
+\[
+1-f(d(y,0))\leq-\frac2w
+\log\left|2\Phi\!\left(\frac{y}{\sigma\sqrt T}\right)-1\right|.
+\]
+The constant $C:=2\int_{\mathbb R}\sqrt{-\log|2\Phi(z)-1|}\,dz$
+is finite: its integrand is $O(\sqrt{|\log|z||})$ near zero and
+has Gaussian decay in the tails. Since $w=\alpha/\sigma^2$, the preceding
+bounds imply
+\[
+\mathcal B-b(T)
+\leq2\sigma\sqrt T\,
+\mathbb E\sqrt{-\log|2\Phi(Y_0/(\sigma\sqrt T))-1|}.
+\]
+Changing variables $Y_0=\sigma\sqrt Tz$ and bounding its Gaussian
+density by $1/\sqrt{2\pi S_0}$ gives
+\begin{equation}\label{eq-design-exact-upper}
+\mathcal B(0,\theta,T,\infty;S_0)
+\leq b(T)+\frac{C\sigma^2T}{\sqrt{2\pi S_0}}.
+\end{equation}
+This also holds at $\theta=0$ or $T=0$.
+
+Concavity of the square root gives
+$b(T)\leq b_0+\sigma^2T/(2\sqrt{2\pi S_0})$. Concavity of $u$, followed
+by \eqref{eq-design-exact-upper} and omission of the nonpositive term
+$-\theta$, gives, for every full-disclosure prize and deadline,
+\[
+u(\mathcal B)-\theta-D(T)
+\leq u(b_0)+a\sigma^2T-D(T),\qquad
+a=\frac{(C+1/2)u'(b_0)}{\sqrt{2\pi S_0}}.
+\]
+Since $D'(T)/T$ is nondecreasing and converges to $D''(0)$ as
+$T\downarrow0$, $D'(T)\geq D''(0)T$. Integrating from zero gives
+$D(T)\geq D''(0)T^2/2$, so completing the square yields
+\[
+\sup_{T\geq0}\{a\sigma^2T-D(T)\}
+\leq\frac{a^2\sigma^4}{2D''(0)}.
+\]
+Choose $\sigma_F\leq\min\{\bar\sigma,1\}$ so that the last bound is
+strictly below $\delta/2$. Every full-disclosure payoff is then below
+$u(b_0)+\delta/2$, whereas the constructed candidate is above
+$u(b_0)+3\delta/4$. Thus the candidate strictly beats every
+full-disclosure design for $0<c<c_F$ and $0<\sigma<\sigma_F$.
+
+When $\theta=0$ or $T=0$, the payoff is precision-independent, so the
+same payoff is attained by setting $\lambda=\infty$; these boundary
+designs are already included in the full-disclosure comparison. Hence no
+joint optimizer can have zero prize, zero deadline, or full disclosure.
+Every joint optimizer therefore lies in $(0,\infty)^3$. This proves
+part~(i) without asserting that a joint optimizer exists.
+
+
+{
+\emph{Part (ii): positive-prize full disclosure.}
+Take $(c,\sigma,T_0,b,V_0)$ from Lemma~\ref{lem-design-output-bound};
+$c<c_e$ and $\sigma>1\geq\sigma_F$.
+Let $u_\infty:=\lim_{B\to\infty}u(B)<\infty$. Any full-disclosure
+design with payoff at least $V_0$ satisfies
+$\theta+D(T)\leq u_\infty-V_0$. Since $D$ is strictly increasing and
+unbounded, such designs lie in a compact prize--deadline rectangle.
+The explicit policies are continuous before $T-\varepsilon$, and
+\eqref{eq-design-full-energy} controls the remaining score change by $O(\sqrt\varepsilon)$,
+uniformly on bounded $\alpha$, including zero prize and zero deadline.
+It follows by first taking parameter limits on $[0,T-\varepsilon]$ and
+then sending $\varepsilon\downarrow0$ that the objective extends
+continuously to this rectangle. It therefore attains its maximum
+\citep[][Chapter~6]{Berge1963}.
+
+Rescaling \eqref{eq-design-full-first-variation} at $T=T_0$ gives
+\begin{equation}\label{eq-design-full-entry-variation}
+\left.\partial_\theta\{u(\mathcal B)-\theta-D(T_0)\}\right|_{0+}
+=\frac{T_0u'(b)}{c\sqrt{2\pi(S_0+\sigma^2T_0)}}-1
+=\frac{c_e}{c}-1>0.
+\end{equation}
+The positive right derivative means that a sufficiently small prize at
+$T_0$ yields payoff strictly above $V_0$; hence the attained
+full-disclosure maximum exceeds $V_0$.
+Lemma~\ref{lem-design-output-bound} excludes every positive-prize
+finite-feedback design; zero-prize and zero-deadline designs yield
+at most $V_0$ and $u(b_0)$.
+Consequently this is a joint maximum, and every joint maximizer satisfies
+$\theta^*>0$, $T^*>0$, and $\lambda^*=\infty$.
+}
+
+\emph{Part (iii): high-cost prize exit.}
+Fix $\sigma>0$. Let $T_0$ maximize $u(b(T))-D(T)$ and write
+$V_0=u(b(T_0))-D(T_0)$,
+$\Gamma=\lim_{B\to\infty}u(B)-u(b_0)>0$.
+Choose $\bar T$ from $D(\bar T)=\Gamma$.
+Every design with payoff at least $V_0$ has
+$\theta+D(T)\le\Gamma$: indeed,
+$u(\mathcal B)-\theta-D(T)\geq V_0\geq u(b_0)$ and
+$u(\mathcal B)\leq\lim_{B\to\infty}u(B)$. Hence $T\le\bar T$ and
+$\alpha\le\Gamma/c\to0$ uniformly. We bound the output gain directly,
+without ranking feedback precision.
+
+For $\lambda S_0^2<.72\sigma^2$, $S_T\geq S_0$ and
+$\alpha T/S_T\leq\alpha\bar T/S_0\to0$.
+Thus \eqref{eq-design-low-diffusion-output} applies uniformly for arbitrarily
+small positive precision.
+For $\lambda S_0^2\geq.72\sigma^2$, use
+\eqref{eq-design-competitive-output-screen} with $w=\alpha/\sigma^2\to0$.
+For full disclosure, \eqref{eq-design-full-energy} and
+$\log\cosh z\leq z^2/2$ give
+\[
+1-f(d)\leq\frac2w\log\cosh(w/2)\leq\frac w4,
+\qquad
+\mathbb E\int_0^T(m_i^2+m_j^2)\,dt\leq\frac{\alpha^2}{2\sigma^2}.
+\]
+Coupling with the zero-effort scores and applying Cauchy--Schwarz yields
+$\mathcal B-b(T)\leq\alpha\sqrt{T}/(\sqrt2\sigma)$.
+In the first precision region, \eqref{eq-design-low-diffusion-output}
+and $S_T\geq S_0$ bound both its linear and quadratic terms by a constant
+times $\alpha$, uniformly for $T\leq\bar T$. In the other region the
+competitive-output bound does the same, while the displayed
+full-disclosure estimate covers the endpoint $\lambda=\infty$.
+Consequently there is $C_\sigma<\infty$, independent of $c,T,\lambda$,
+such that, for all sufficiently small $\alpha>0$,
+\[
+\mathcal B-b(T)\leq C_\sigma\alpha,
+\qquad 0\leq T\leq\bar T,\quad 0<\lambda\leq\infty.
+\]
+Because $T_0$ maximizes $u(b(T))-D(T)$, concavity and
+$u'(b(T))\leq u'(b_0)$ give, for sufficiently large $c$,
+\[
+u(\mathcal B)-c\alpha-D(T)
+\leq V_0+\alpha\left[u'(b_0)C_\sigma-c\right]<V_0.
+\]
+No positive-prize design can therefore compete. The feasible design
+$(\theta,T)=(0,T_0)$ attains $V_0$. Moreover, the right derivative of
+$u(b(T))-D(T)$ at zero equals
+$u'(b_0)\sigma^2/(2\sqrt{2\pi S_0})>0$, so $T_0>0$;
+all precision choices give this same payoff. {This proves part (iii).}
+\Halmos
+\endproof
+}
+
+
+{
+\proof{Proof of Proposition~\ref{prop-local-identification}}
+Hold the prescribed initial public input fixed under both parameter vectors, with the initial latent law in equation~\eqref{eq-empirical-initial-state}. Suppose two interior vectors $\Theta$ and $\Theta'$ induce the same joint distribution of submission counts and public readouts. Identification compares all possible data histories, not different observations along a single realized history.
+
+Let $E_\ell$ be the event that all earlier counts are zero and $n^i_\ell+n^j_\ell>0$, so the first readout occurs at $s_\ell$. Before this readout, the recursion carries forward the fixed initial public input and the intensities are deterministic conditional on the parameters. Finite, positive intensities make each preceding zero-count probability and the current nonzero-total-count probability strictly positive. Their finite product gives $\Pr_\Theta(E_\ell)>0$ and $\Pr_{\Theta'}(E_\ell)>0$.
+
+Conditional on all earlier counts being zero, contestant $k\in\{i,j\}$ has zero-count probability $\exp\{-\Delta_{\mathrm{num}}\tau_k^{(1)}(s_{\ell-1})\}$ in interval $\ell$. Equality of the joint laws implies equality of these conditional probabilities, so both intensity sequences coincide along the no-previous-submission history. Count draws along this history are independent of the initial latent uncertainty and innovation shocks; conditioning on $E_\ell$ therefore leaves their joint distribution unchanged.
+
+To see the first implication explicitly, equality of the conditional
+zero-count probabilities and injectivity of the exponential map give
+$\tau_k^{(1)}(s_{\ell-1};\Theta)
+=\tau_k^{(1)}(s_{\ell-1};\Theta')$ recursively for each $k$ and $\ell$.
+The additional condition that the total count in interval $\ell$ is
+positive depends only on the Poisson draws at that interval. Because its
+intensity is already fixed along this history, it does not tilt the
+independent Gaussian state and measurement shocks.
+
+Along this history, define the cumulative intensity difference
+\begin{equation}\label{eq-local-id-A}
+A(s_\ell):=\Delta_{\mathrm{num}}\sum_{q=1}^{\ell}
+\left[\tau_i^{(1)}(s_{q-1})-\tau_j^{(1)}(s_{q-1})\right].
+\end{equation}
+The identified intensity sequences make $A(s_\ell)$ identical under $\Theta$ and $\Theta'$.
+On $E_\ell$, the accumulated drift is $A(s_\ell)/r$. The independent Gaussian initial uncertainty and innovation give latent variance $S_0+\sigma^2s_\ell$. Since $h_1=s_\ell$, the fresh independent measurement error adds variance $1/(\lambda s_\ell)$. Thus
+\begin{equation}\label{eq-local-id-conditional-law}
+\hat y_{s_\ell}\mid E_\ell,\Theta
+\sim\mathcal N\!\left(
+\mu_0+\frac{A(s_\ell)}r,
+S_0+\sigma^2s_\ell+\frac{1}{\lambda s_\ell}
+\right).
+\end{equation}
+Since $E_\ell$ has positive probability under both vectors, equality of the joint laws implies equality of these conditional Gaussian distributions. No future submission times are conditioned on.
+
+Equality of the first-readout variances under $\Theta$ and $\Theta'$, multiplied by $s_\ell$, gives
+\[
+(\sigma^2-\sigma'^2)s_\ell^2
++(S_0-S_0')s_\ell
++\left(\lambda^{-1}-\lambda'^{-1}\right)=0.
+\]
+For $\ell=1,2,3$, the three distinct positive times $s_\ell$ are roots
+of the same polynomial of degree at most two. The polynomial is therefore
+identically zero. Its constant, linear, and quadratic coefficients give
+$\lambda^{-1}=\lambda'^{-1}$, $S_0=S_0'$, and
+$\sigma^2=\sigma'^2$, respectively. Interior positivity then yields
+$\lambda=\lambda'$ and $\sigma=\sigma'$.
+
+Equality of the first-readout means gives
+\[
+\mu_0+\frac{A(s_\ell)}r
+=\mu_0'+\frac{A(s_\ell)}{r'}.
+\]
+At $s_1$, equation~\eqref{eq-empirical-leading-effort} has a common
+strictly positive kernel for the two contestants and differs only through
+$1/c_k$. Since $r,\theta>0$ and $c_i\ne c_j$, this implies
+\[
+A(s_2)-A(s_1)
+=\Delta_{\mathrm{num}}\left[\tau_i^{(1)}(s_1)-\tau_j^{(1)}(s_1)\right]\ne0.
+\]
+Subtracting the mean equalities at these two times gives
+\[
+\left[A(s_2)-A(s_1)\right]\left(r^{-1}-r'^{-1}\right)=0,
+\]
+so positivity of $r,r'$ gives $r=r'$. Substitution into either mean
+equality then gives $\mu_0=\mu_0'$. Finally, the identified initial
+intensities and $\tilde y_0=\mu_0$ recover both costs directly:
+\[
+c_k=\frac{r\theta}{\tau_k^{(1)}(0)\sqrt{2\pi(S_0+\sigma^2T)}}
+\exp\!\left\{-\frac{\mu_0^2}{2(S_0+\sigma^2T)}\right\},
+\qquad k\in\{i,j\}.
+\]
+Thus $\Theta=\Theta'$, establishing local identification. At $c_i=c_j$,
+the two leading-order efforts coincide, so their difference and hence
+$A(s_\ell)$ are zero along every public history. A common rescaling of
+$(r,c_i,c_j)$ leaves each ratio $r/c_k$, and therefore both count
+intensities, unchanged; because the effort difference remains zero, it
+also leaves every readout prediction unchanged. The full vector is
+therefore not identified at equality.
+\Halmos
+\endproof
+}
+
+
+
+
+
+
+\section{Auxiliary Results}
+
+\subsection{{Lemmas for Joint Design}}\label{app-joint-design-lemmas}
+{
+This section establishes the equilibrium and output comparisons used in
+Proposition~\ref{prop-joint-design}. We first record the full-disclosure
+benchmark and the output identities, then establish positive-precision
+equilibrium existence and compare precision at weak incentives. Finally,
+we bound competing prize--deadline choices to obtain the global payoff
+comparison supporting part~(ii).
+
+\emph{Full-disclosure benchmark.}
+For full disclosure, specialize the strategies and values in
+\citet[Propositions~1 and 3, equations~(18) and (23)]{Ryvkin2022Fight}
+to $c_i=c_j=c$ and $V=\theta>0$.
+Put $\alpha=\theta/c$ and $w=\alpha/\sigma^2$. The normalized values
+$U_k=V^k/\theta$ satisfy
+$U_i+U_j=f(d)$ and $U_i-U_j=d$, where
+\begin{equation}\label{eq-design-full-values}
+f(d)=1+\frac2w\log\frac{\cosh(wd/2)}{\cosh(w/2)},\qquad
+K(d)=\frac{d+\sinh(wd)/w}{2},
+\end{equation}
+and $d(y,t)$ is determined by
+\begin{equation}\label{eq-design-full-gap}
+K(d(y,t))=K(1)
+\left[2\Phi\!\left(\frac{y}{\sigma\sqrt{T-t}}\right)-1\right].
+\end{equation}
+The change of variables is $\rho_s=\tanh(wd/2)$ in Ryvkin's notation.
+Since the total prize is $\theta$, summing the cited value functions gives
+\begin{equation}\label{eq-design-full-energy}
+\mathbb E_{y,t}\int_t^T(m_i^2+m_j^2)\,ds
+=2\alpha[1-f(d(y,t))].
+\end{equation}
+
+For finite precision, put $Q_t=S_t+\sigma^2(T-t)$ and
+$\beta(y,q)=\mathbb E|\mathcal N(y,q)|/2$.
+Since $\beta_y=\Phi(y/\sqrt q)-1/2$, $\beta_q=\beta_{yy}/2$,
+and $Q_t'=-\lambda S_t^2$, the drift from $\beta_qQ_t'$ cancels the
+quadratic-variation term from
+$d\tilde y_t=(m_i-m_j)dt+\sqrt\lambda S_t\,d\widehat B_t$.
+Also,
+$\max\{x_T^i,x_T^j\}=(x_T^i+x_T^j)/2+|y_T|/2$ and
+$\mathbb E[|y_T|/2\mid I_T]=\beta(\tilde y_T,S_T)$. Applying It\^o's
+formula to the mean score and to $\beta(\tilde y_t,Q_t)$, then using
+$\beta(0,Q_0)=\sqrt{(S_0+\sigma^2T)/(2\pi)}$, gives
+\begin{equation}\label{eq-best-output-drift-identity}
+\mathcal B=b(T)+\mathbb E\int_0^T
+\left\{\frac{m_i+m_j}{2}
++(m_i-m_j)\left[\Phi(\tilde y_t/\sqrt{Q_t})-\frac12\right]\right\}dt,
+\qquad b(T)=\sqrt{\frac{S_0+\sigma^2T}{2\pi}}.
+\end{equation}
+
+The Gaussian flux estimate used below is
+\begin{equation}\label{eq-design-gaussian-bilinear}
+G_q(y)-\int_0^q(|G'_{q-v}|*G_v^2)(y)\,dv
+=\frac2\pi\int_0^\infty
+\frac{G_q(\sqrt2|y|\cosh h)}{2\cosh^2h-1}\,dh\geq0.
+\end{equation}
+The identity follows by taking the Laplace transform in $q$.
+
+\begin{lemma}[Positive-precision equilibrium]\label{lem-design-positive-equilibrium}
+For $\theta,T,\sigma,S_0,c_i,c_j>0$ and $0<\lambda<\infty$, the normalized
+HJB system has a unique bounded classical solution with bounded spatial
+gradients. Its feedback policies form an interior Markov-perfect equilibrium.
+\end{lemma}
+
+\proof{Proof of Lemma~\ref{lem-design-positive-equilibrium}}
+Use $U^k=V^k/\theta$, $a_t=\lambda S_t^2$, and
+$\alpha_k=\theta/c_k$ as in the proof of
+Theorem~\ref{thm-equilibrium-effort}. For fixed positive finite precision,
+$a_t$ is smooth and bounded above and away from zero on $[0,T]$.
+The terminal functions $g_i(y)=\Phi(y/\sqrt{S_T})$ and $g_j=1-g_i$
+are smooth and bounded, with bounded derivatives.
+
+We apply Theorem~2.7 of \citet{Jackson2024Quadratic} to
+$U_t^k+(a_t/2)U_{yy}^k+F_k(U_y)=0$ on $[0,T]\times\mathbb R$.
+For $z=(z_i,z_j)$, the required structure follows from
+\[
+F_k(z)=z_k(\alpha_i z_i+\alpha_j z_j)
+-\frac{\alpha_k}{2}z_k^2,\qquad k\in\{i,j\}.
+\]
+Thus the common-drift term in the theorem's decomposition is
+$b_0(z)=\alpha_i z_i+\alpha_j z_j$, while
+$b^k(z)=-\alpha_kz_k^2/2$. The driver is smooth and satisfies
+$|F_k(z)|\leq C|z_k||z|$, which verifies the quadratic-growth and local
+Lipschitz conditions. For the a-priori boundedness condition, take the
+coordinate vectors $\{\pm L e_i,\pm L e_j\}$ with
+$L\geq\max\{\alpha_i,\alpha_j\}$. They positively span $\mathbb R^2$.
+For $+Le_k$ the required upper bound is immediate because $b^k\leq0$;
+for $-Le_k$ it follows from
+\[
+(-Le_k)^Tb(z)=\frac{L\alpha_k}{2}z_k^2
+\leq\frac{L^2}{2}z_k^2
+=\frac12|(-Le_k)^Tz|^2.
+\]
+The scalar diffusion coefficient is uniformly elliptic and smooth in
+time, while $F$ is time independent and the Gaussian terminal functions
+are $C^{2,\beta}$ for every $\beta\in(0,1)$. These observations verify the
+remaining regularity hypotheses of the cited classical-solution theorem.
+The cited theorem therefore gives a unique bounded classical solution with
+bounded spatial gradients.
+
+Parabolic regularity gives bounded second spatial derivatives.
+As in the proof of Theorem~\ref{thm-equilibrium-effort},
+Feynman--Kac with terminal data $U_y^i=-U_y^j=G_{S_T}>0$ gives
+$U_y^i>0$ and $U_y^j<0$. The policies $m_i=\alpha_iU_y^i$ and
+$m_j=-\alpha_jU_y^j$ therefore form an interior Markov-perfect
+equilibrium by \eqref{eq-equilibrium-verification}.
+\Halmos
+\endproof
+}
+
+{
+\begin{lemma}[Full disclosure at weak incentives]\label{lem-design-weak-precision}
+Suppose $c_i=c_j=c>0$. There is $w_*>0$ such that, whenever
+$S_0/(\sigma^2T)\in[99/2,198]$ and $0<\theta/(c\sigma^2)<w_*$,
+the selected symmetric equilibria satisfy
+\begin{equation}\label{eq-design-uniform-weak-ranking}
+\mathcal B(0,\theta,T,\infty;S_0)>
+\mathcal B(0,\theta,T,\lambda;S_0)
+\qquad\text{for every }0<\lambda<\infty.
+\end{equation}
+\end{lemma}
+
+\proof{Proof of Lemma~\ref{lem-design-weak-precision}}
+Measure time in units of $T$ and scores in units of $\sigma\sqrt T$.
+Write $w=\theta/(c\sigma^2)$, $s=S_0/(\sigma^2T)$,
+$\ell=\lambda\sigma^2T^2$, and $q=1+s$. In these units,
+$S_t'=1-\ell S_t^2$ and $Q_t=S_t+1-t$.
+Denote output by $\widehat{\mathcal B}(w,s,\ell)$.
+All estimates below are uniform for $s\in[99/2,198]$.
+Equation~\eqref{eq-best-output-drift-identity} gives the common
+first variation $G_q(0)$ at zero prize. For full disclosure, the
+explicit equilibrium gives the same coefficient:
+\begin{equation}\label{eq-design-full-first-variation}
+\widehat{\mathcal B}(w,s,\infty)
+=\sqrt{q/(2\pi)}+wG_q(0)+O(w^2).
+\end{equation}
+
+\emph{Bounded precisions.}
+For every finite $L$, the positive lower bound on $S_T$ makes
+the analytic construction in Theorem~\ref{thm-equilibrium-effort}
+uniform on $[99/2,198]\times(0,L]$. The coefficients and expansion
+extend continuously to the limiting endpoint $\ell=0$, which is used only
+to obtain a uniform comparison for arbitrarily small positive precision.
+Indeed, the analytic-norm proof uses only contraction of the Gaussian
+propagators and a uniform analytic bound on the terminal density; it does
+not divide by the diffusion coefficient. Its contraction radius and
+remainder constant are therefore uniform for $\ell\in[0,L]$. The Riccati
+solution and every coefficient in the expansion depend continuously on
+$(s,\ell)$ on this compact set.
+The gradient mild equations and the output identity give, uniformly,
+\[
+\widehat{\mathcal B}(w,s,\infty)-\widehat{\mathcal B}(w,s,\ell)
+=w^2\Delta_2(s,\ell)+O(w^3).
+\]
+The full-disclosure formulas \eqref{eq-design-full-values}--\eqref{eq-design-full-gap}
+are analytic in $w$ at zero.
+With $A_t=s+t-S_t$, Gaussian integration gives
+$\Delta_2(s,\ell)=b_2(s,\infty)-b_2(s,\ell)$, where
+\[
+b_2(s,\ell)=\int_0^1\int_t^1 K_q(A_t,A_r)\,dr\,dt,\qquad
+K_q(A,B)=\frac{A}{\pi\sqrt{2\pi}\sqrt{q-B}(q+B)
+\sqrt{q^2+qB-2A^2}}.
+\]
+For $\ell>0$, $\rho_t=A_t/(s+t)$ increases strictly from zero
+and stays below one: its derivative has the opposite sign to
+$E_t=(s+t)S_t'-S_t<0$, since either $S_t'\leq0$ or
+$E_0=-\ell s^3<0$ and $E_t'=-2\ell(s+t)S_tS_t'<0$.
+The kernel is strictly increasing in its first argument because
+\[
+\partial_A\log K_q(A,B)
+=\frac1A+\frac{2A}{q^2+qB-2A^2}>0.
+\]
+It also increases along radial rays: for
+$x=B/q$ and $z=A/q$,
+\[
+\frac{AK_A+BK_B}{K_q}
+=\frac{1+x^3+xz^2-3x^2z^2}
+{(1-x^2)(1+x-2z^2)}>0,\qquad 0\leq z\leq x<1.
+\]
+The numerator is affine in $z^2$, so its minimum is either
+$1+x^3$ or $(1-x)(3x^3+x^2+x+1)$, both positive.
+Since $0<\rho_t<\rho_r<1$ for $0<t<r<1$, first increasing the
+first argument and then moving along the radial ray gives
+\[
+K_q(A_t,A_r)
+<K_q\!\left(\rho_r(s+t),\rho_r(s+r)\right)
+<K_q(s+t,s+r).
+\]
+At $\ell=0$, the Riccati equation gives $S_t=s+t$, hence $A_t=0$ and
+$b_2=0$. The endpoint bound
+$C[(1-t)(1-r)]^{-1/2}$ gives continuity by dominated convergence.
+For $\ell>0$ the strict kernel inequality above gives
+$b_2(s,\ell)<b_2(s,\infty)$, while the same conclusion at $\ell=0$
+follows from positivity of the full-disclosure integral. Thus
+$\Delta_2$ is positive and continuous on
+$[99/2,198]\times[0,L]$, so it has a strictly positive minimum. Choosing
+$w$ small enough for the uniform $O(w^3)$ remainder proves the comparison
+for $0<\ell\leq L$.
+
+\emph{Unbounded precisions.}
+Put $\eta=\ell^{-1/2}<1/4$.
+Use an auxiliary contest with constant posterior variance $\eta$
+and initially disclosed mean variance $s-\eta$; total initial
+uncertainty remains $s$. We first identify a positive leading term
+in the full-disclosure output advantage. With $\tau=1-t$, set
+$h=\tau+\eta$, $v=\log(h/\eta)$, and $z=y/\sqrt h$.
+The full-disclosure profiles $R_w,D_w,b_w$ satisfy
+\[
+\mathcal L_0R_w+w\{3(R_w')^2-(D_w')^2\}/4=0,\qquad
+\mathcal L_0D_w+(w/2)R_w'D_w'=0,
+\]
+\[
+(\mathcal L_0-1/2)b_w+wR_w'b_w'+(w/2)D_w'=0,
+\qquad \mathcal L_0=(\partial_{zz}+z\partial_z)/2.
+\]
+Here $R_0=1$, $D_0=2\Phi-1$, $b_0=\beta=G_1+z(\Phi-1/2)$,
+and $R_w=1-w\Phi(1-\Phi)+O(w^2)$ by the explicit equilibrium.
+
+The profile error $E=(\phi,\psi,\chi)$ satisfies
+$E_v=\mathcal A_wE+\mathcal N_w(E)$, where $\mathcal A_w$ is the
+linearization, $\mathcal N_w$ the quadratic remainder, and
+$E(0)=(1-R_w,2\Phi-1-D_w,\beta-b_w)$.
+Explicitly,
+\[
+\mathcal N_w(E)=w\left(
+\frac{3\phi'^2-\psi'^2}{4},\frac{\phi'\psi'}2,\phi'\chi'
+\right),
+\]
+while the player block of $\mathcal A_w$ is
+\[
+\binom{\mathcal L_0\phi+
+w(3R_w'\phi'-D_w'\psi')/2}
+{\mathcal L_0\psi+w(D_w'\phi'+R_w'\psi')/2},
+\]
+and its organizer block is
+\[
+(\mathcal L_0-1/2+wR_w'\partial_z)\chi
++w(\phi'b_w'+\psi'/2).
+\]
+The weighted-space statement concerns the perturbations, not the
+linearly growing background profiles $\beta$ and $b_w$ separately.
+After subtracting the $w=0$ profile, the stationary profile equations
+show that $1-R_w$, $2\Phi-1-D_w$, and $\beta-b_w$, together with their
+required derivatives, have Gaussian decay. Consequently $E(0)$ belongs
+to the fractional-domain space used below, even though neither $\beta$
+nor $b_w$ belongs to the weighted space by itself.
+On the even--odd--even subspace of
+$\mathcal H=L^2(e^{z^2/2}dz)^3$, put $X=D((-\mathcal A_0)^{7/8})$.
+At $w=0$ these blocks are Ornstein--Uhlenbeck operators. Their Hermite
+spectrum has the simple leading eigenpair
+$(-1/2,(G_1,0,0))$; parity places every other eigenvalue at or below
+$-1$. Moreover,
+\[
+\|(\mathcal A_w-\mathcal A_0)f\|_{\mathcal H}
+\leq C|w|\|(-\mathcal A_0)^{1/2}f\|_{\mathcal H}.
+\]
+Spectral perturbation \citep[][Chapter~VII, Sections~1--2]{Kato1980}
+and sectorial estimates \citep[][Proposition~3.2.2 and Chapter~5]{LorenziEtAl2005}
+therefore preserve one simple eigenvalue $\nu(w)$ with
+$|\nu(w)+1/2|<1/20$ and give decay rate $7/10$ on the complementary
+subspace. If $\Pi_w$ is its spectral projection, the corresponding
+uniform semigroup estimates are
+\[
+\|e^{v\mathcal A_w}\|_{\mathcal H\to X}
+\leq C(1+v^{-7/8})e^{-9v/20},\qquad
+\|e^{v\mathcal A_w}(I-\Pi_w)\|_{\mathcal H\to X}
+\leq C(1+v^{-7/8})e^{-7v/10}.
+\]
+Sobolev embedding gives $\|\mathcal N_w(E)\|_{\mathcal H}\leq C|w|\|E\|_X^2$;
+since $7/8<1$, the singular factor is integrable in Duhamel's formula.
+The resulting map is a contraction in
+$\sup_{v\geq0}e^{2v/5}\|E(v)\|_X$ when $w$ is small. Thus
+linearized stability \citep[][Theorem~7.1.3]{LorenziEtAl2005} gives
+$\|E(v)\|_X\leq C|w|e^{-2v/5}$, uniformly on a small complex prize disc.
+
+Normalize the slow right eigenvector $e_w$ and its left functional
+$\ell_w$ by $\ell_w(e_w)=1$. Projection of Duhamel's formula gives the
+exact amplitude
+\[
+a(w)=\ell_wE(0)+\int_0^\infty e^{-\nu(w)r}
+\ell_w\mathcal N_w(E(r))\,dr.
+\]
+The integral is $O(w^3)$ because
+$C|w|^3e^{-(4/5+\operatorname{Re}\nu(w))r}$ is integrable, whereas
+$R_w=1-w\Phi(1-\Phi)+O(w^2)$ and
+$\int\Phi(1-\Phi)dz=1/\sqrt\pi$ give
+$\ell_wE(0)=w/\sqrt\pi+O(w^2)$. Hence
+$a(w)=w/\sqrt\pi+O(w^2)>0$ for small real $w>0$.
+The designer component $\xi_w$ of the eigenvector, normalized to
+$(G_1,0,0)$ at $w=0$, is
+$-wG_1\beta+O(w^2)$: its first-order equation is
+$-\mathcal L_0\xi_1=G_1'(\Phi-1/2)$, verified directly by
+$\mathcal L_0(G_1\beta)=G_1'(\Phi-1/2)$.
+The fast designer component at order $w$ is exactly $-we^{-v}G_1$.
+Spectral decay and Cauchy's estimate therefore give
+\[
+\chi(v)=a(w)e^{\nu(w)v}\xi_w-we^{-v}G_1
++O_X(w^2e^{-7v/10}).
+\]
+
+At the initial date, $e^v=(1+\eta)/\eta$. Since
+$\nu(w)=-1/2+O(w)$, the slow mode is of order
+$w^2\eta^{1/2+O(w)}$; the exponent $11/20$ below leaves a uniform slack
+for sufficiently small $w$. More precisely, at the initial date
+$h=1+\eta$ and
+$Y_h\sim\mathcal N(0,(s-\eta)/h)$.
+The auxiliary output is $\sqrt h\,\mathbb E[b_w(Y_h)+\chi(v,Y_h)]$.
+Its background difference from full disclosure is
+$w\eta G_q(0)+O(w^2\eta)$, which cancels
+$-\sqrt h\,we^{-v}\mathbb E G_1(Y_h)=-w\eta G_q(0)$.
+Since $\mathbb E[G_1(Y_h)\beta(Y_h)]$ has a positive uniform
+lower bound, constants $d,C>0$ give
+\[
+\widehat{\mathcal B}(w,s,\infty)-\widehat{\mathcal B}_{\rm aux}(w,s,\eta)
+\geq w^2\{d\eta^{11/20}-C(\eta^{7/10}+\eta)\}.
+\]
+
+It remains to compare the auxiliary contest with the original path.
+In the common variance clock $Q$, their incentive weights are
+$\gamma_o=\eta^2/S_{t(Q)}^2$ on $[S_1,q]$, zero below $S_1$,
+and $\gamma_a=\mathbf1_{[\eta,1+\eta]}$.
+Both lie in $[0,1]$, have integral one, and the Riccati solution gives
+$\int|\gamma_o-\gamma_a|\,dQ<2\eta$.
+More precisely, $S_t=\eta(1+r e^{-2t/\eta})/(1-r e^{-2t/\eta})$,
+where $r=(s-\eta)/(s+\eta)\in(0,1)$.
+Thus $\varepsilon_\eta:=S_1-\eta\leq C\eta e^{-2/\eta}$, and
+$|\gamma_o-\gamma_a|\leq4e^{-1/\eta}$ below $Q=1/2$
+except on $[\eta,S_1]$.
+
+Extend both systems below their terminal variances by zero incentive
+weight. Their gradients start from the common heat profile $p=n=G_Q$;
+in the mild equations, $w$ is replaced by $w\gamma(Q)$.
+The Gaussian bilinear bound in
+\eqref{eq-design-gaussian-bilinear} makes these equations contractions
+for sufficiently small $w>0$, uniformly in $\eta$.
+For conditional output $J$, set $Z=\partial_y(J-\beta)$, where
+$\beta(y,Q)=\mathbb E|\mathcal N(y,Q)|/2$.
+Its mild equation is obtained from
+\[
+J_Q=\tfrac12J_{yy}+w\gamma\{(p-n)J_y+(p+n)/2\}.
+\]
+The same bound and Gaussian smoothing give
+$|p-G_Q|+|n-G_Q|\leq CwG_Q$, $\|Z\|_\infty\leq Cw$,
+and bounded spatial derivatives on $1/2\leq Q\leq q$.
+Let $\mathfrak d$ be the sum of the two gradient differences in the norm
+$\sup_{Q,y}|f(Q,y)|/G_Q(y)$ and the difference of $Z$ in the supremum norm.
+Subtract the three mild equations. Above $Q=1/2$, differentiation of
+the bounded source profiles bounds the weight-error terms by $C|w|\eta$.
+Below that level, the bilinear bound controls the uniform weight error.
+On the exceptional interval, Gaussian multiplication gives
+\[
+\frac{(|G'_{Q-v}|*G_v^2)(y)}{G_Q(y)}
+\leq C\left\{\frac1v+\frac1{\sqrt{v(Q-v)}}\right\},\qquad 0<v<Q.
+\]
+Integration over an interval of length $\varepsilon_\eta$ with $v\geq\eta$
+bounds its contribution by $C|w|\sqrt{\varepsilon_\eta/\eta}$.
+The same bound for the output gradient follows from
+$\|\partial_yP_v\|_{L^\infty\to L^\infty}\leq Cv^{-1/2}$.
+The remaining terms are Lipschitz in the three unknowns, so
+\[
+\mathfrak d\leq C|w|\{\eta+e^{-1/\eta}+\sqrt{\varepsilon_\eta/\eta}\}
++C|w|\mathfrak d\leq C|w|\eta+C|w|\mathfrak d.
+\]
+Take $Cw<1/2$, so $\mathfrak d\leq Cw\eta$.
+To compare output, remove the common first-order source $G_Q$:
+$\mathcal R_\gamma=(p+n)/2-G_Q+(p-n)(\beta_y+Z)$ satisfies
+$|\mathcal R_\gamma|\leq CwG_Q$ and
+$|\mathcal R_o-\mathcal R_a|\leq C\mathfrak dG_Q$.
+With $P_v$ the heat semigroup, $P_{q-Q}G_Q=G_q$ and
+$\int_0^q\gamma\,dQ=1$ give the exact root identity
+\[
+J_\gamma(q,0)=\beta(0,q)+wG_q(0)
++w\int_0^q\gamma(Q)[P_{q-Q}\mathcal R_\gamma(Q)](0)\,dQ.
+\]
+The common first-order term cancels, hence
+\[
+|J_o(q,0)-J_a(q,0)|
+\leq Cw\left(w\int_0^q|\gamma_o-\gamma_a|\,dQ+\mathfrak d\right)
+\leq Cw^2\eta.
+\]
+
+Because $11/20<7/10<1$, the positive term decays more slowly than both
+error terms. Choose $\eta_*>0$ so that
+$d\eta^{11/20}>C(\eta^{7/10}+\eta)$ for $0<\eta<\eta_*$.
+Combine this tail bound with the compact comparison for
+$L=\eta_*^{-2}$ and take the smaller prize threshold.
+Rescaling proves \eqref{eq-design-uniform-weak-ranking}.
+\Halmos
+\endproof
+
+\begin{lemma}[A full-disclosure payoff comparison]\label{lem-design-output-bound}
+Suppose $c_i=c_j=c$, $u$ satisfies the curvature condition in
+Proposition~\ref{prop-joint-design}, and $S_0$ is sufficiently large.
+There exist $\sigma>1$ and $0<c<c_e$, where $T_0>0$ maximizes
+$u(\sqrt{(S_0+\sigma^2T)/(2\pi)})-D(T)$ and
+\[
+c_e=\frac{T_0u'(\sqrt{(S_0+\sigma^2T_0)/(2\pi)})}
+{\sqrt{2\pi(S_0+\sigma^2T_0)}}.
+\]
+Let $V_\infty$ be the supremum of the organizer's payoff over
+full-disclosure designs at these parameters.
+Every positive-prize, positive-deadline finite-feedback design has
+payoff strictly below $V_\infty$.
+\end{lemma}
+
+\proof{Proof of Lemma~\ref{lem-design-output-bound}}
+The utility condition gives $-Bu''(B)/u'(B)\geq\zeta B\to\infty$
+and $Bu'(B)\to0$.
+We construct a parameter point at which only weak incentives can compete
+with the zero-prize design, then apply Lemma~\ref{lem-design-weak-precision}.
+
+Put $k=1/100$, $b=\sqrt{S_0/\{2\pi(1-k)\}}$, and $M=bu'(b)$.
+Choose
+\[
+T_0D'(T_0)=Mk/2,\qquad \sigma^2T_0=kS_0/(1-k).
+\]
+The second equality makes $b(T_0)=b$. It also gives
+\[
+T_0u'(b)b'(T_0)=\frac{Mk}{2}=T_0D'(T_0),
+\]
+so $T_0$ satisfies the zero-prize first-order condition. Because
+$u(b(T))-D(T)$ is strictly concave, this condition makes $T_0$ its unique
+maximizer. As $S_0\to\infty$, $M\to0$ by the utility-tail assumption.
+The first equality and $D''(0)>0$ then imply $T_0\to0$, while the second
+implies $\sigma^2=kS_0/\{(1-k)T_0\}\to\infty$.
+Write $V_0=u(b)-D(T_0)$, $\alpha=\theta/c$,
+$w=\alpha/\sigma^2$, and $x=T/T_0$. Then $c_e\sigma^2=Mk$.
+Monotonicity of $D'(T)/T$ gives
+\[
+D(T)-D(T_0)\geq Mk(x^2-1)/4,\qquad D(T_0)\leq Mk/4.
+\]
+Indeed, $D'(s)\geq(s/T_0)D'(T_0)$ for $s\geq T_0$ and the reverse
+inequality holds for $s\leq T_0$; integrating on the appropriate interval
+gives the first bound. Integrating
+$D'(s)\leq(s/T_0)D'(T_0)$ on $[0,T_0]$ gives the second.
+
+We choose a sufficiently large fixed $\gamma$ below, then increase $S_0$
+so that $-Bu''(B)\geq(\gamma+1)u'(B)$ for $B\geq.99b$ and
+$D'(T_0)/\{D''(0)T_0\}<1+10^{-5}$.
+At $c=c_e$, any design with payoff at least $V_0$ satisfies
+the budget $\theta+D(T)\leq u_\infty-V_0\leq M/\gamma+Mk/4$,
+where $u_\infty=\lim_{B\to\infty}u(B)$ and the tail bound follows
+by integrating the curvature inequality above $b$: it gives
+$u'(B)\leq u'(b)(B/b)^{-(\gamma+1)}$ and hence
+$u_\infty-u(b)\leq bu'(b)/\gamma=M/\gamma$. Since
+$D(T)\geq D''(0)T^2/2$, this gives
+\[
+w+\frac{D''(0)T_0}{D'(T_0)}\frac{x^2}{4}
+\leq\frac14+\frac1{\gamma k}.
+\]
+Take $\gamma\geq10^6$; this implies $w+x^2/4<.252$, hence $x<2$.
+Moreover, concavity gives $u(b)-u(.99b)\geq.01M>D(T_0)$,
+so a design with $\mathcal B\leq.99b$ has payoff strictly below
+$u(b)-D(T_0)=V_0$. Competitiveness therefore requires
+$\mathcal B>.99b$.
+
+\emph{A coarse output bound.}
+We verify, for this entire competitive set,
+\begin{equation}\label{eq-design-competitive-output-screen}
+\mathcal B\leq b(T)+\alpha T G_{S_0+\sigma^2T}(0)(1+2.9w),
+\qquad b(T)=\sqrt{(S_0+\sigma^2T)/(2\pi)}.
+\end{equation}
+Put $Q_t=S_t+\sigma^2(T-t)$, $a_t=\lambda S_t^2$,
+$U_i=V_i/\theta$, $U_j=V_j/\theta$, $p=\partial_yU_i$, $n=-\partial_yU_j$,
+$H=p+n$, and $A=p-n$.
+
+If $\lambda S_0^2<.72\sigma^2$, the Riccati path increases and
+$S_T\geq S_0$. Thus
+\[
+e:=\alpha T/S_T\leq2w/99<.01,\qquad Q_0/S_T\leq101/99.
+\]
+Here we used $x<2$ and
+$S_0/(\sigma^2T_0)=(1-k)/k=99$, so
+$\sigma^2T/S_0<2/99$; the two displayed bounds then follow from
+$S_T\geq S_0$.
+Normalize scores by $\sqrt{S_T}$ and reverse time by
+$v=\alpha(T-t)/S_T$. In the Fourier-moment scale of
+Theorem~\ref{thm-equilibrium-effort}, the normalized terminal Gaussian
+has the coefficientwise majorant
+\[
+G_1(0)e^{r^2/2}+\frac1\pi\sum_{j\geq0}
+\frac{r^{2j+1}}{(2j+1)!!}
+\leq\Psi(r):=.4e^{r^2/2}+.32r/(1-r^2/3),\qquad 0\leq r<\sqrt3.
+\]
+Put $\kappa=7/4$. For nonnegative moment majorants $X,Y$ of $H,A$,
+respectively, the weighted sum of their quadratic fluxes satisfies
+\[
+\frac{XY}{4}+\frac\kappa8(3Y^2+X^2)
+\leq\frac\kappa8(X+\kappa Y)^2,
+\]
+because $\kappa^2>3$.
+Heat contraction and Picard iteration therefore majorize
+the weighted moment sum $(X+\kappa Y)/2$ by the scalar equation
+$h_v=\kappa h h_r$, $h(0,r)=\Psi(r)$, whose analytic branch satisfies
+$h(v,r)=\Psi(r+\kappa vh(v,r))$.
+In the Picard expansion, subtracting the propagated Gaussian removes
+the order-zero term. Each individual gradient correction is bounded
+by half the sum of the moment majorants of $H-2G_Q$ and $A$,
+so its Fourier norm is at most
+$S_T^{-1/2}\{h(v,0)-.4\}$.
+Direct substitution gives $h(v,0)-.4\leq v/4$ for $v\leq.01$:
+at the largest argument $r=(7/4)(.01)(.4025)$,
+\[
+\frac{.4(r^2/2)e^{r^2/2}+.32r/(1-r^2/3)}{.01}<\frac14.
+\]
+Thus $d(t)=\alpha(T-t)/(4S_T^{3/2})$ bounds each correction.
+Since the Fourier-moment norm dominates the pointwise norm, this means
+\[
+|p-G_{Q_t}|\leq d(t),\qquad |n-G_{Q_t}|\leq d(t),
+\]
+and hence, with $E=H-2G_{Q_t}$, $|E|\leq2d(t)$ and
+$|A|\leq2d(t)$. These are pointwise bounds; the Gaussian-weighted
+supremum norm used in the next, high-diffusion case is a different norm.
+
+Let $J(t,y)$ be the conditional continuation contribution to
+$\mathcal B-b(T)$. It has terminal value zero and solves
+\[
+J_t+\mathscr L_tJ+
+\frac\alpha2\{H+[2\Phi(y/\sqrt{Q_t})-1]A\}=0,
+\qquad
+\mathscr L_t=\frac{a_t}{2}\partial_{yy}+\alpha A\partial_y.
+\]
+Consider the unnormalized barrier
+\[
+\overline J(t,y)=\alpha(T-t)G_{Q_t}(y)
++\int_t^T2\alpha d(s)
+\left\{1+.486\frac{\alpha(T-s)}{Q_s}\right\}\,ds .
+\]
+It has zero terminal value. Since
+$\partial_tG_{Q_t}+(a_t/2)\partial_{yy}G_{Q_t}=0$,
+\[
+(\partial_t+\mathscr L_t)\overline J
+=-\alpha G_{Q_t}+\alpha^2A(T-t)G'_{Q_t}
+-2\alpha d(t)\left\{1+.486\frac{\alpha(T-t)}{Q_t}\right\}.
+\]
+The source in the equation for $J$ is
+$\alpha G_{Q_t}+\alpha E/2+
+\alpha[2\Phi(y/\sqrt{Q_t})-1]A/2$.
+Using $|E|,|A|\leq2d$, $|2\Phi-1|\leq1$, and
+$|G'_Q|<.243/Q$, the supersolution residual is at most
+\[
+.486\alpha^2d(t)\frac{T-t}{Q_t}+2\alpha d(t)
+-2\alpha d(t)\left\{1+.486\frac{\alpha(T-t)}{Q_t}\right\}
+=-.486\alpha^2d(t)\frac{T-t}{Q_t}\leq0.
+\]
+It\^o verification gives the shared low-diffusion bound
+\begin{equation}\label{eq-design-low-diffusion-output}
+\mathcal B-b(T)\leq\alpha T G_{S_0+\sigma^2T}(0)
++\frac{\alpha^2T^2}{4S_T^{3/2}}
+\left(1+.486\frac{\alpha T}{S_T}\right).
+\end{equation}
+This bound requires only $\lambda S_0^2<.72\sigma^2$ and
+$\alpha T/S_T\leq.01$.
+On the present competitive set, the excess output coefficient is
+$\sqrt{2\pi Q_0/S_T}(e/w)(.5+.243e)/2<.02$, proving
+\eqref{eq-design-competitive-output-screen} in this case.
+
+If $\lambda S_0^2\geq.72\sigma^2$, the whole Riccati path has
+$a_t\geq.72\sigma^2$. Indeed,
+$a_t'=2\lambda S_t(\sigma^2-a_t)$, so $a_t$ moves monotonically toward
+$\sigma^2$ and never falls below
+$\min\{a_0,\sigma^2\}\geq.72\sigma^2$. In the norm
+$\|f\|=\sup|f|/G_{Q_t}$,
+write $E=H-2G_Q$ and
+$\mathcal T(f,g)=\int_t^T\partial_yP_{Q_t-Q_s}(f_sg_s)\,ds$.
+The centered gradient equations are
+\[
+E=\tfrac\alpha2\mathcal T(A,2G_Q+E),\qquad
+A=A_1+\tfrac\alpha4\{3\mathcal T(A,A)-\mathcal T(E,4G_Q+E)\}.
+\]
+Changing variables from time to $Q_s$ gives
+$\alpha\|\mathcal T(f,g)\|\leq K\|f\|\|g\|$,
+where $K=\alpha/\min a_t\leq w/.72$.
+Indeed, \eqref{eq-design-gaussian-bilinear} bounds the convolution
+integral after this variance substitution.
+The explicit source
+$A_1=-\alpha(2\sqrt\pi)^{-1}\int_t^TQ_s^{-1/2}G'_{Q_t-Q_s/2}\,ds$
+has norm at most $K$: the same variance substitution evaluates its
+upper bound as $K|2\Phi(y/\sqrt{Q_t})-1|G_{Q_t}$.
+The centered map contracts on $\|E\|\leq6w^2$, $\|A\|\leq3w$.
+Indeed, for $0<w\leq.252$, its map-to-radius ratios satisfy
+\[
+\max\left\{\frac{2+6w^2}{4\cdot.72},
+\frac{1+w^2(51+36w^2)/4}{3\cdot.72}\right\}<1,
+\]
+and its Lipschitz row sums are bounded by
+\[
+\frac{w}{.72}\max\left\{\frac{2+3w+6w^2}{2},
+\frac{4+18w+12w^2}{4}\right\}<1.
+\]
+Lemma~\ref{lem-design-positive-equilibrium} identifies the fixed point
+with the equilibrium.
+
+For its transition operator $\mathcal K_{t,s}$,
+\[
+\mathcal K_{t,s}g\leq\cosh^2(.35/2)P_{Q_t-Q_s}g,\qquad g\geq0.
+\]
+To justify the factor, note first that each player can choose zero effort,
+so $U_i,U_j\geq0$, while summing their equilibrium payoffs gives the
+unit total prize minus nonnegative effort costs and hence
+$R:=U_i+U_j\leq1$. Applying It\^o's formula shows that
+$e^{-KU_i}$ and $e^{-KU_j}$ are submartingales. Their terminal values are
+exponentials of complementary probabilities in $[0,1]$, which gives
+$0\leq1-R\leq2\log\cosh(K/2)/K$.
+With $\kappa_t=\alpha/a_t$, Girsanov's log likelihood is
+\[
+\kappa_s(R_s-1)-\kappa_t(R_t-1)
+-\int_t^s\kappa_r'(R_r-1)\,dr
+-\frac14\int_t^s\alpha\kappa_r(H_r^2-A_r^2)\,dr,
+\qquad R=U_i+U_j.
+\]
+Monotonicity of $\kappa$, in either direction, bounds this by
+$2\log\cosh(K/2)$; $H^2-A^2=4pn\geq0$ makes the last term nonpositive.
+Exponentiating and applying the heat semigroup gives the stated
+$\cosh^2(K/2)$ domination. Since $K\leq w/.72\leq.35$, the displayed
+constant follows. Bounded gradients and positive diffusion justify the
+change of measure.
+
+Let $\beta(y,Q)=\mathbb E|\mathcal N(y,Q)|/2$.
+Subtracting $\beta+\alpha(T-t)G_{Q_t}$ from conditional best output
+gives a zero-terminal linear equation with source
+$\alpha E/2+\alpha A\beta_y+\alpha^2(T-t)AG'_{Q_t}$.
+Using $|\beta_y|\leq1/2$, $(T-t)/Q_t\leq1/\sigma^2$, and
+$|G'_Q|<.243/Q$, its absolute value is at most
+$\alpha wG_{Q_t}\{3w+3/2+.729w\}$.
+Since $\cosh^2(.35/2)\{3w+3/2+.729w\}<2.9$ for $w\leq.252$,
+the transition bound proves \eqref{eq-design-competitive-output-screen}.
+This high-diffusion bound requires only
+$\lambda S_0^2\geq.72\sigma^2$ and $w\leq.252$, not the prior ratio.
+% Exact constants: verify_prior_dominated_comparison.py.
+
+\emph{Exclude prizes outside the weak-incentive range.}
+Put $h=1+k(x-1)$ and
+$r=\sqrt h+kx(w+2.9w^2)/\sqrt h$.
+Integrating the utility-curvature inequality gives
+$u(\mathcal B)-u(b)\leq(M/\gamma)\{1-(b/\mathcal B)^\gamma\}$.
+The construction gives $b(T)/b=\sqrt h$, while
+\[
+\frac{\alpha T G_{S_0+\sigma^2T}(0)}b
+=\frac{kxw}{\sqrt h}.
+\]
+Thus \eqref{eq-design-competitive-output-screen} implies
+$\mathcal B/b\leq r$. Since the curvature bound is increasing in
+$\mathcal B$, and since $\theta=c_e\alpha=Mkw$, substitution together
+with the delay bound yields
+\begin{equation}\label{eq-design-joint-exit-screen}
+\frac{u(\mathcal B)-\theta-D(T)-V_0}{Mk}
+\leq F_\gamma(x,w):=\frac{1-r^{-\gamma}}{\gamma k}
+-w-\frac{x^2-1}{4}.
+\end{equation}
+Let $w_*>0$ be the threshold in Lemma~\ref{lem-design-weak-precision}
+and put $w_0=\min\{w_*/2,.252\}$.
+We need $F_\gamma<0$ only on the compact set
+\[
+\{(x,w)\in[0,2]\times[0,.252]:x\leq1/2\ \text{or}\ w\geq w_0\},
+\]
+which excludes $(1,0)$.
+
+On $w+(x^2-1)/4\leq0$, we have $x\leq1$ and
+$w\leq(1-x^2)/4$. Since $r$ increases in $w$, $r<1$
+reduces to
+\[
+x\left\{\frac{1+x}{4}+\frac{29(1-x)(1+x)^2}{160}\right\}
+<\frac{\sqrt{1-k(1-x)}}{1+\sqrt{1-k(1-x)}},\qquad x<1.
+\]
+The left side is at most $.5-(1-x)/40$, because the difference is
+$(1-x)^2(29x^2+87x+76)/160$.
+The right side exceeds this bound: its difference from $1/2$ is
+$k(1-x)/\{2(1+\sqrt{1-k(1-x)})^2\}<(1-x)/40$.
+Equality occurs only at $(1,0)$.
+The inequality $e^z\geq1+z$ makes $F_\gamma$ nonincreasing in $\gamma$.
+Every point of the displayed compact set eventually has $F_\gamma<0$:
+if $w+(x^2-1)/4\leq0$, then $r<1$ and $F_\gamma\to-\infty$;
+otherwise $\limsup_{\gamma\to\infty}F_\gamma<0$.
+The sets $\{F_\gamma<0\}$ therefore increase with $\gamma$ and cover the
+displayed compact set. A finite subcover gives one
+$\gamma\geq10^6$ and a strictly negative uniform margin.
+Fix it before increasing $S_0$.
+
+Finally take $c<c_e$ sufficiently close to $c_e$.
+The competitive budget still implies $w+x^2/4<.252$,
+and replacing $c_e$ by $c$ changes the normalized prize term from
+$-w$ to $-(c/c_e)w$. Thus the right side of
+\eqref{eq-design-joint-exit-screen} gains only $(1-c/c_e)w$.
+The uniform margin excludes $x\leq1/2$ or $w\geq w_0$
+after this small cost perturbation.
+Every competitive finite-feedback design therefore has
+$T_0/2<T<2T_0$ and $0<w<w_*$.
+Lemma~\ref{lem-design-weak-precision} strictly improves its payoff
+by full disclosure. All other designs have payoff below
+$V_0\leq V_\infty$.
+\Halmos
+\endproof
+
+}
+
+\subsection{Sequential Leaderboard Likelihood}\label{app-leaderboard-recursion}
+
+For the retained readouts defined in Section~\ref{sect-bayes-framework}, let
+\[
+g_k=\int_{t_{k-1}}^{t_k}
+\left[m_i^{(1)}(\tilde y_s,S_s,s)-m_j^{(1)}(\tilde y_s,S_s,s)\right]ds,
+\]
+which is determined by the preceding public history, $t_k$, and $\Theta$ under the maintained carried-forward path. Set $R_k=(\lambda h_k)^{-1}$ and initialize $\mu_{0\mid0}=\mu_0$ and $P_{0\mid0}=S_0$. Conditional on $\mathcal F_{k-1}$, $t_k$, and $\Theta$, prediction and measurement updating give
+\[
+\begin{gathered}
+\mu_{k\mid k-1}=\mu_{k-1\mid k-1}+g_k,\qquad
+P_{k\mid k-1}=P_{k-1\mid k-1}+\sigma^2h_k,\\
+V_{k\mid k-1}=P_{k\mid k-1}+R_k,\qquad
+K_k=P_{k\mid k-1}/V_{k\mid k-1},\\
+\mu_{k\mid k}=\mu_{k\mid k-1}
++K_k(\hat y_{t_k}-\mu_{k\mid k-1}),\qquad
+P_{k\mid k}=(1-K_k)P_{k\mid k-1}.
+\end{gathered}
+\]
+Thus $\mu_{k\mid k-1}$ and $V_{k\mid k-1}$ are the predictive moments entering equation~\eqref{eq-obs_gap-prob}. After its density contribution is evaluated, $(\mu_{k\mid k},P_{k\mid k})$ initializes the next prediction.
+
+\subsection{Solve $S_t$ in Equation (\ref{filtered-S})}\label{app-S-equ}
+
+For $\lambda>0$, put $\bar S=\sigma/\sqrt\lambda$ and
+$u_t=S_t/\bar S$. Equation~\eqref{filtered-S} becomes
+\[
+\dot u_t=\sigma\sqrt\lambda\,(1-u_t^2).
+\]
+The constant solution is $u_t=1$. Otherwise, separation of variables
+with the initial condition imposed directly gives
+\[
+\int_{u_0}^{u_t}\frac{dv}{1-v^2}=\sigma\sqrt\lambda\,t.
+\]
+If $u_0<1$, the antiderivative is $\tanh^{-1}$; if $u_0>1$, it is
+$\coth^{-1}$. Inverting the corresponding identity yields
+\begin{equation*}
+	S_t =
+	\begin{cases}
+        \bar{S} \cdot \tanh\left\{t\cdot\sigma\sqrt{\lambda} +  \tanh^{-1}\left(S_0\big/\bar{S}\right)\right\} & \text{if } S_0 < \bar{S} \\
+        \bar{S} & \text{if } S_0 = \bar{S} \\
+        \bar{S} \cdot \coth\left\{t\cdot\sigma\sqrt{\lambda} +  \coth^{-1}\left(S_0\big/\bar{S}\right)\right\} & \text{if } S_0 > \bar{S}
+	\end{cases}
+\end{equation*}
+The vector field points toward $\bar S$, so the solution remains in the
+branch determined by $S_0$ and converges monotonically to $\bar S$.
+The steady-state variance diverges as $\lambda\downarrow0$.
+
+
+\subsection{Consistency Benchmark for $\sigma^2$}\label{appexidx-normal-benchmark}
+
+This appendix derives the private-leaderboard benchmark for $\sigma$ used in Section~\ref{sect-validation}.
+For a given contest, let $\Delta y_k=y_k-y_{k-1}$ denote the private-leaderboard gap increment between two adjacent update times, and let $h_k=t_k-t_{k-1}$ be the corresponding elapsed time.
+Effort paths evaluated at the posterior \textcolor{blue}{median} parameters provide the plug-in drift adjustment $\hat\mu_k=\int_{t_{k-1}}^{t_k}\left[\hat m_i(s)-\hat m_j(s)\right]ds$.
+As a working Gaussian approximation, we use $\Delta y_k-\hat\mu_k\sim\mathcal N(0,\sigma^2 h_k)$, $k=1,\ldots,n$.
+This is not an exact conditional distribution given an endogenous effort path. Treating these increments as approximately independent and holding the plug-in drift fixed, the working log-likelihood for $\sigma^2$ is, up to constants,
+\[
+\ell(\sigma^2)
+=
+-\frac{n}{2}\log(\sigma^2)
+-\frac{1}{2}\sum_{k=1}^n\log h_k
+-\frac{1}{2\sigma^2}\sum_{k=1}^n
+\frac{(\Delta y_k-\hat\mu_k)^2}{h_k}.
+\]
+Differentiating with respect to $\sigma^2$ and setting the derivative equal to zero gives
+\[
+-\frac{n}{2\sigma^2}
++
+\frac{1}{2(\sigma^2)^2}
+\sum_{k=1}^n
+\frac{(\Delta y_k-\hat\mu_k)^2}{h_k}
+=0.
+\]
+Therefore,
+\begin{equation}\label{normal-benchmark-sigma}
+\hat{\sigma}^2
+=
+\frac{1}{n}\sum_{k=1}^n
+\frac{(\Delta y_k-\hat\mu_k)^2}{h_k}.
+\end{equation}
+In the empirical application, {$\hat\mu_k$ is computed from effort paths evaluated at the posterior \textcolor{blue}{median} parameters}, so this benchmark is a plug-in private-leaderboard consistency check rather than a fully model-free estimator. Moreover, asynchronous update timing means that adjacent displayed gaps may combine a new score for one contestant with a carried-forward score for the other. The expression in \eqref{normal-benchmark-sigma} is therefore an approximate benchmark for the carried-forward gap process, not an exact maximum likelihood estimator for synchronously observed latent diffusion increments.
+
+
+
+
+
+
+
+
+\section{Statistics}\label{appendix-statistics}
+
+Table~\ref{tab-appendix-full-results} reports {contest-level estimates and diagnostic benchmarks; large $\lambda^{\mathrm{bench}}$ values can result from very small public--private score discrepancies}.
+{``Public Data \%'' reproduces Meta-Kaggle's reported public-leaderboard test-data share; it is not used in estimation or sample selection, and the recorded zero for contest 3288 does not indicate missing public-score observations.}
+
+{\textit{Data construction.}} Focal-pair selection searches the top 20 contestants in the reconstructed final private standings. Contestants are ordered by their final carried-forward private scores; ties are broken by the order of the tied contestants' final score updates, with the later update ranked first. It first selects the highest-ranked contestant satisfying the individual activity criterion, then searches lower ranks for the first eligible opponent whose activity window overlaps by more than ten days. A pair is retained only if both contestants have at least five submissions in the constructed observation window. For Don't Overfit! (contest 2489), $\theta$ is the \$250 prize for the prediction task; the separate variable-identification prize is excluded. The common score transformation in Section~\ref{sec-data-clean} does not make the different scoring metrics equivalent probabilities; each retains its substantive interpretation.
+
+Within each submission date, preprocessing draws distinct second offsets with seed 1234 and assigns them in submission-ID order, retaining multiple submissions by the same contestant on the same date. Backfilling the earliest joint public gap supplies a data-dependent initial public input, not additional leaderboard observations. {The fixed-input identification result in Proposition~\ref{prop-local-identification} does not cover the sampling law induced by this initialization.} \textcolor{blue}{For eight contests preselected at evenly spaced ranks of submission counts, two alternative seeds give median absolute changes in the posterior median of $\lambda$ of 18.5\% (full sample) and 38.0\% (early sample). The corresponding 95\% posterior intervals overlap in 32 of 32 comparisons.}
+
+\textcolor{blue}{We summarize empirical parameters by posterior medians to limit sensitivity to long right tails. The replication outputs also retain posterior means and their Monte Carlo errors. Equal-tailed credible intervals and precision counterfactuals use the original joint posterior draws.}
+
+\textcolor{blue}{Across the 397 full, early, and auxiliary fits, 2 multimodal posteriors are sampled using fixed-mixture Metropolis--Hastings refinement under the same likelihood and priors. Both sampling methods use four chains and the same rank-normalized convergence and effective-sample-size criteria; HMC-specific diagnostics apply to NUTS runs.}
+
+{\textit{Regression inference.}} All cross-contest regressions in Section~\ref{sect-validation} use posterior \textcolor{blue}{median} parameter estimates, {with HC1 heteroskedasticity-robust standard errors and confidence intervals. Reported inference does not propagate uncertainty from parameter estimation, focal-pair selection, or intraday time imputation.}
+
+{\textit{Approximation diagnostics.}} \textcolor{blue}{In the full-sample fits, posterior medians of $w_k=\theta/(\sigma^2c_k)$ are below one for 76 of the 146 player--contest pairs, with a cross-pair median of $0.909$. The posterior median of $\max\{w_i,w_j\}$ is below one in 34 of 73 contests. These are descriptive summaries, not theoretical criteria for approximation accuracy.}
+
+\subsection{Precision Counterfactual Calculations}\label{app-precision-counterfactual}
+
+{For each accepted full-sample posterior draw $s$, the calibration uses the initial gap $\mu_{0,\ell s}$, innovation risk $\sigma_{\ell s}$, and symmetric cost $c_{\ell s}=2/(c_{i,\ell s}^{-1}+c_{j,\ell s}^{-1})$. The latter preserves the leading-order coefficient on total effort. \textcolor{blue}{At a candidate prize and duration, calibrated output is}
+\[
+\mathcal B_{\ell s}^{\mathrm{cal}}(\theta,T,\lambda)
+=\beta(\mu_{0,\ell s},\sigma_{\ell s}^2T)
++\frac{\theta T}{c_{\ell s}\sqrt{2\pi Q_{\ell s}(\lambda)}}
+\exp\!\left[-\frac{\mu_{0,\ell s}^2}{2Q_{\ell s}(\lambda)}\right],
+\qquad Q_{\ell s}(\lambda)=\sigma_{\ell s}^2T+\frac{\sigma_{\ell s}}{\sqrt\lambda},
+\]
+where $\beta(\mu,q)=\mathbb E|Y|/2$ for $Y\sim\mathcal N(\mu,q)$. The no-effort term is held fixed across precisions; the incentive term uses steady-state uncertainty. Endpoint values are defined by limits. This symmetric calibration is not an exact asymmetric-equilibrium calculation.
+
+\textcolor{blue}{For the fixed-prize, fixed-duration benchmark in Table~\ref{tab-fixed-precision}, we maximize the average output over all accepted draws to select one precision} $\lambda_\ell^*$ per contest. Computation uses $x=1/\sqrt\lambda$, so full disclosure is the endpoint $x=0$. For each draw, the incentive derivative is negative once $x>(\mu_{0,\ell s}^2-\sigma_{\ell s}^2T)/\sigma_{\ell s}$, giving a finite search interval. We compare the endpoint with stationary maxima located on a logarithmic search grid and check stability after doubling grid resolution.
+
+\textcolor{blue}{In Table~\ref{tab-fixed-precision}, Panel A} separately quantifies directional uncertainty by comparing each draw's optimal precision with its current precision $\lambda_{\ell s}$. Panel B uses the single policy $\lambda_\ell^*$ and reports
+\[
+100\left[
+\frac{\sum_s\mathcal B_{\ell s}^{\mathrm{cal}}(\theta_\ell^{obs},T_\ell^{obs},\lambda_\ell^*)}
+{\sum_s\mathcal B_{\ell s}^{\mathrm{cal}}(\theta_\ell^{obs},T_\ell^{obs},\lambda_{\ell s})}
+-1\right].
+\]
+The numerator evaluates an implementable fixed precision, not a draw-specific optimal policy. The denominator integrates the joint posterior for the current regime.}
+
+\input{appendix_joint_design.tex}
+
+{
+\small
+\setlength{\tabcolsep}{1.2pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{cccccccccccrc}
+\caption{Contest-Level Structural Estimates and Benchmarks}\label{tab-appendix-full-results}\\
+\toprule
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Contest\\Id}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N_i$}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N_j$}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Prize\\($100{,}000$ USD)}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Public\\Data \%}} &
+\multicolumn{6}{c}{Bayesian Posterior \textcolor{blue}{Median}} &
+\multicolumn{2}{c}{Diagnostic Benchmarks} \\
+\cmidrule(lr){6-11}
+\cmidrule(lr){12-13}
+ &  &  &  &  & $\lambda$ & $\sigma$ & $\mu_0$ & $c_i$ & $c_j$ & $r$ & \makecell{$\lambda^\text{bench}$} & $\sigma^\text{bench}$ \\
+\midrule
+\endfirsthead
+\multicolumn{13}{c}{Table~\thetable\ (continued)} \\
+\toprule
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Contest\\Id}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N_i$}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}$N_j$}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Prize\\($100{,}000$ USD)}} &
+\multirow{2}{*}{\makecell{\rule{0pt}{2.5ex}Public\\Data \%}} &
+\multicolumn{6}{c}{Bayesian Posterior \textcolor{blue}{Median}} &
+\multicolumn{2}{c}{Diagnostic Benchmarks} \\
+\cmidrule(lr){6-11}
+\cmidrule(lr){12-13}
+ &  &  &  &  & $\lambda$ & $\sigma$ & $\mu_0$ & $c_i$ & $c_j$ & $r$ & \makecell{$\lambda^\text{bench}$} & $\sigma^\text{bench}$ \\
+\midrule
+\endhead
+\endfoot
+\bottomrule
+\endlastfoot
+\input{appendix_100k_rows.tex}
+\end{longtable}
+}
+
+
+\input{appendix_effort_recovery.tex}
+
+\subsection{Focal-Pair and Score-Scale Robustness}\label{app-robustness-statistics}
+
+{The alternative-pair exercise ranks contestants by their last recorded private score, using submission-ID order to resolve records on the same date and contestant ID to break score ties. It excludes the baseline contestant $i$ and searches the remaining candidates within the top 20 in rank order. This ranking need not coincide with the final leaderboard based on contestants' best scores. Each contestant must have an activity span of at least ten days, the pair must overlap for more than ten days, and each must contribute at least five submissions to the retained count window. Prize conventions, the model horizon, and the within-day time-imputation rule are retained from the baseline. The initialization prefix is recomputed from the alternative pair's first jointly available scores, changing the count-window start in 43 of 73 contests. Thus, the exercise compares alternative pairs with their corresponding usable data, rather than holding the effective observation window fixed.}
+
+{Score-scale calibration uses submitted public scores from the baseline focal pairs, without private scores or repeated carried-forward values. We center their logit-transformed levels by each contest's median for calibration only, assign equal total weight to each contest, and compute pooled weighted quantiles $q_j$ at $p_j=(j-\tfrac12)/999$, $j=1,\ldots,999$. The $L_1$ choice minimizes $\sum_j|a q_j-\Phi^{-1}(p_j)|$ over $a>0$; the $L_2$ choice minimizes $\sum_j[a q_j-\Phi^{-1}(p_j)]^2$. They give $a=1.444$ and $a=0.781$, respectively. Public gaps are multiplied by the selected $a$ for estimation, and private gaps by the same $a$ for diagnostics; the calibration centering does not enter those gaps.}
+
+\textcolor{blue}{All 219 robustness posteriors (73 alternative-pair fits and 73 fits at each score scale) have maximum rank-normalized $\widehat R=1.0095$ and bulk and tail effective sample sizes above 400. The NUTS runs have no divergent transitions or tree-depth saturations. 2 multimodal posteriors use the global refinement described above. Re-estimation retains the baseline numerical priors and parameter bounds in the transformed units, so this exercise includes sensitivity to their scale-dependent regularization. Table~\ref{tab-robustness-benchmarks} reports the benchmark regressions.}
+
+\begin{table}[htbp]
+\centering
+\caption{{Private-Leaderboard Benchmark Regressions under Robustness Specifications}}
+\label{tab-robustness-benchmarks}
+{\small
+\begin{tabularx}{\textwidth}{lcc>{\centering\arraybackslash}Xc}
+\toprule
+Specification & Slope & Standard error & 95\% confidence interval & $R^2$\\
+\midrule
+\multicolumn{5}{l}{Signal precision $\lambda$}\\
+\midrule
+Baseline ($a=1$) & \textcolor{blue}{0.386} & \textcolor{blue}{0.112} & \textcolor{blue}{[0.167, 0.606]} & \textcolor{blue}{0.121}\\
+Alternative pair & \textcolor{blue}{0.189} & \textcolor{blue}{0.120} & \textcolor{blue}{[-0.046, 0.423]} & \textcolor{blue}{0.026}\\
+$L_1$ scale & \textcolor{blue}{0.342} & \textcolor{blue}{0.114} & \textcolor{blue}{[0.118, 0.565]} & \textcolor{blue}{0.102}\\
+$L_2$ scale & \textcolor{blue}{0.400} & \textcolor{blue}{0.113} & \textcolor{blue}{[0.178, 0.621]} & \textcolor{blue}{0.126}\\
+\midrule
+\multicolumn{5}{l}{Innovation risk $\sigma$}\\
+\midrule
+Baseline ($a=1$) & \textcolor{blue}{0.912} & \textcolor{blue}{0.173} & \textcolor{blue}{[0.573, 1.250]} & \textcolor{blue}{0.320}\\
+Alternative pair & \textcolor{blue}{1.246} & \textcolor{blue}{0.168} & \textcolor{blue}{[0.916, 1.575]} & \textcolor{blue}{0.582}\\
+$L_1$ scale & \textcolor{blue}{0.821} & \textcolor{blue}{0.176} & \textcolor{blue}{[0.476, 1.165]} & \textcolor{blue}{0.268}\\
+$L_2$ scale & \textcolor{blue}{0.953} & \textcolor{blue}{0.179} & \textcolor{blue}{[0.603, 1.303]} & \textcolor{blue}{0.324}\\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}}
+\begin{minipage}{\textwidth}
+{\footnotesize\textit{Note:} Each regression uses 73 contests and an intercept. The dependent variable is $\log(1+\lambda^{\mathrm{bench}})$ or $\log(1+\sigma^{\mathrm{bench}})$; the regressor is the corresponding log-transformed posterior \textcolor{blue}{median} estimate. Estimates and benchmarks use each specification's score units. \textcolor{blue}{The largest slope $p$-value is 0.115.} Standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
+\end{minipage}
+\end{table}
+
+\textcolor{blue}{For comparisons in common score units, signal precision is $a^2\hat\lambda_a$ and innovation risk is $\hat\sigma_a/a$, where the subscript $a$ denotes the re-estimated scale. Table~\ref{tab-score-scale-robustness} compares their rankings with the baseline and repeats the \textcolor{blue}{fixed-prize, fixed-duration precision optimization in Table~\ref{tab-fixed-precision}}. Classifications agree with the baseline in 72 of 73 contests under $L_1$ and 72 under $L_2$. At the 75\% support threshold, the counts supporting increased precision, reduced precision, or neither direction are $(68,2,3)$ in the baseline, $(67,3,3)$ under $L_1$, and $(68,1,4)$ under $L_2$.}
+
+\begin{table}[htbp]
+\centering
+\caption{{Score-Scale Sensitivity of Parameter Rankings and Precision Design}}
+\label{tab-score-scale-robustness}
+{\small
+\begin{tabularx}{\textwidth}{lcccc>{\centering\arraybackslash}X}
+\toprule
+Specification & $a$ & \makecell{Rank correlation\\$\lambda$; $\sigma$}
+& \makecell{Full\\disclosure} & \makecell{Finite\\precision}
+& \makecell{Median relative\\output gain (\%)}\\
+\midrule
+Baseline & 1.000 & --- & \textcolor{blue}{70} & \textcolor{blue}{3} & \textcolor{blue}{0.058}\\
+$L_1$ & 1.444 & \textcolor{blue}{0.992; 0.945} & \textcolor{blue}{69} & \textcolor{blue}{4} & \textcolor{blue}{0.050}\\
+$L_2$ & 0.781 & \textcolor{blue}{0.999; 0.996} & \textcolor{blue}{71} & \textcolor{blue}{2} & \textcolor{blue}{0.075}\\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}}
+\begin{minipage}{\textwidth}
+{\footnotesize\textit{Note:} Each specification covers the same 73 contests. Rank correlations are Spearman correlations between common-unit posterior \textcolor{blue}{medians} and baseline posterior \textcolor{blue}{medians}. Precision recommendations maximize posterior mean calibrated output at the observed prize and horizon. Output gains compare one recommended precision per contest with its current regime, integrating the joint posterior as in \textcolor{blue}{Table~\ref{tab-fixed-precision}}. The median summarizes variation across contests, not posterior uncertainty.}
+\end{minipage}
+\end{table}
+\FloatBarrier
+
+
+\end{APPENDICES}
+
+
+
+% Acknowledgments here
+\ACKNOWLEDGMENT{The authors gratefully acknowledge the valuable research assistance provided by Simian Zhang during the course of this study.
+}
+
+
+% References here (outcomment the appropriate case)
+
+% CASE 1: BiBTeX used to constantly update the references
+%   (while the paper is being written).
+%\bibliographystyle{informs2014} % outcomment this and next line in Case 1
+%\bibliography{<your bib file(s)>} % if more than one, comma separated
+
+% CASE 2: BiBTeX used to generate mypaper.bbl (to be further fine tuned)
+%\input{mypaper.bbl} % outcomment this line in Case 2
+
+%If you don't use BiBTex, you can manually itemize references as shown below.
+
+
+%\bibliographystyle{nonumber}
+\bibliographystyle{informs2014}
+\bibliography{_Literatures.bib}
+
+%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%

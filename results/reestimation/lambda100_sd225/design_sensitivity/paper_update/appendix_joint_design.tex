@@ -1,0 +1,51 @@
+\textcolor{blue}{\textit{Fixed-prize, fixed-duration benchmark.} Table~\ref{tab-fixed-precision} reports precision choices at the observed prize and duration. Full disclosure is recommended in 70 contests and finite precision in three; the median relative output gain is 0.058\%. This provides a reference for the joint changes in Table~\ref{tab-counterfactual-precision}.}
+
+\begin{table}[htbp]
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcommand{\bluecell}[1]{\leavevmode{#1}}
+\centering
+\caption{\textcolor{blue}{Precision Adjustments at the Observed Prize and Duration}}
+\label{tab-fixed-precision}
+\small
+{
+\begin{tabularx}{\textwidth}{Xrr}
+\multicolumn{3}{l}{\textit{Panel A: Posterior support for precision adjustment}} \\
+\midrule
+Adjustment direction & Contests & Share (\%) \\
+\midrule
+Increase precision & \textcolor{blue}{68} & \textcolor{blue}{93.2} \\
+Decrease precision & \textcolor{blue}{2} & \textcolor{blue}{2.7} \\
+Direction uncertain & 3 & 4.1 \\
+\bottomrule
+\end{tabularx}
+
+\vspace{2.5ex}
+\begin{tabularx}{\textwidth}{Xrrr}
+\multicolumn{4}{l}{\textit{Panel B: Expected output gains (\%)}} \\
+\midrule
+Contest group & 25th percentile & Median & 75th percentile \\
+\midrule
+All contests & \textcolor{blue}{0.014} & \textcolor{blue}{0.058} & \textcolor{blue}{0.171} \\
+Increase precision & \textcolor{blue}{0.016} & \textcolor{blue}{0.057} & \textcolor{blue}{0.162} \\
+Decrease precision & \textcolor{blue}{0.584} & \textcolor{blue}{0.899} & \textcolor{blue}{1.213} \\
+Direction uncertain & \textcolor{blue}{0.006} & \textcolor{blue}{0.013} & \textcolor{blue}{1.330} \\
+\bottomrule
+\addlinespace[0.5ex]
+\end{tabularx}}
+\begin{minipage}{\textwidth}
+{\footnotesize
+\textit{Note:} {The sample contains 73 contests. Panel A compares draw-specific optimal precision with current precision from the same posterior draw; a direction is reported when its probability exceeds 75\%. Panel B reports cross-contest percentiles of the percentage change in posterior mean output from current precision to the recommended precision $\lambda_\ell^*$. Prize and duration remain fixed. Percentiles describe variation across contests, not credible intervals.}
+}
+\end{minipage}
+\end{table}
+
+\textcolor{blue}{\textit{Quality-constrained joint design.} Posterior averaging gives $\overline{\mathcal B}_\ell(\theta,T,\lambda)=B_{0\ell}(T)+\theta A_\ell(T,\lambda)$, where $B_{0\ell}$ is mean output without effort and $A_\ell$ is the posterior mean quality contribution per unit of prize. At each candidate duration, we choose $\lambda_\ell^*(T)\in\arg\max_\lambda A_\ell(T,\lambda)$ and calculate the least prize that meets the observed quality target:}
+\[
+\textcolor{blue}{\theta_\ell^{req}(T)=\max\left\{0,\frac{\overline{\mathcal B}_\ell^{obs}-B_{0\ell}(T)}{A_\ell(T,\lambda_\ell^*(T))}\right\}.}
+\]
+\textcolor{blue}{A positive prize scales the quality contribution without changing the optimal precision at a fixed duration. When no prize is needed, precision is payoff-irrelevant. The duration grid is $T/T_\ell^{obs}\in\{0.1,0.25,0.5,0.75,1,1.25,1.5,2\}$. We minimize $\theta_\ell^{req}(T)+\delta\theta_\ell^{obs}(T/T_\ell^{obs})^2$ over this grid and compare it with the observed regime's cost. An improvement smaller than $10^{-10}\theta_\ell^{obs}$ is treated as retention of the observed regime. We repeat the precision search on a doubled grid at all 584 contest-duration combinations; the observed-duration solutions also reproduce the fixed-design benchmark. The joint parameter posterior is held fixed throughout.}
+
+\textcolor{blue}{For the last column of Panel B in Table~\ref{tab-counterfactual-precision}, we impose full disclosure and reoptimize the prize and duration on the same grid at the same quality target. The reported additional saving is the percentage reduction from this full-disclosure cost, among contests whose joint choice uses a positive prize and finite precision. It separates the benefit of allowing finite precision from savings achievable by adjusting only the prize and deadline. Total savings in the preceding column include all design changes.}
+
+\textcolor{blue}{The quality target is met or exceeded in every selected design. The quadratic delay costs are calibrated scenarios; they are not identified from submission behavior. The exercise compares steady-state feedback regimes and differs from the fixed initial uncertainty in Proposition~\ref{prop-joint-design}. Deadline choices at the edges of the grid need not be unconstrained optima, and large proposed prizes extend beyond the incentive scales covered by the parameter-recovery check.}
+

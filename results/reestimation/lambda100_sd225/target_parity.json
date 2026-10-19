@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "precision": 0.1,
+      "stan_log_target": -360.4764463498112,
+      "fast_log_target": -361.16359512641355,
+      "difference": -0.6871487766023279
+    },
+    {
+      "precision": 100.0,
+      "stan_log_target": -287.02145934418166,
+      "fast_log_target": -287.70860812078365,
+      "difference": -0.6871487766019868
+    },
+    {
+      "precision": 100000.0,
+      "stan_log_target": -289.66449427670335,
+      "fast_log_target": -290.35164305330557,
+      "difference": -0.6871487766022142
+    },
+    {
+      "precision": 10000000000.0,
+      "stan_log_target": -318.4521925504337,
+      "fast_log_target": -319.13934132703594,
+      "difference": -0.6871487766022142
+    }
+  ],
+  "passed": true,
+  "model_sha256": "af7598ca75254ebce8c1d8bda6ee93cd92485c3d71aeeac2ae7a223b3d380faa"
+}

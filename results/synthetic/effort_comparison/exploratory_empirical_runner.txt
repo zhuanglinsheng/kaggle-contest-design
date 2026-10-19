@@ -1,0 +1,228 @@
+"""Direct player-i effort comparison for the current PaperJK7 revision.
+
+Run ``python -m pipeline.synthetic.effort_comparison``. No estimation is run.
+The synthetic baseline is retained; empirical cases are selected before solving
+by posterior median of w_i+w_j, nearest the 50th and 90th sample percentiles.
+"""
+from __future__ import annotations
+
+import ctypes
+from dataclasses import asdict
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import subprocess
+import time
+
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / "results/synthetic/effort_comparison"
+EMPIRICAL = ROOT / "results/reestimation/lambda100_sd225/estimation/full"
+SOURCE = ROOT / "pipeline/empirical/nonlinear_fast_kernel.cpp"
+os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".cache/matplotlib"))
+
+from pipeline.synthetic.nonlinear import Primitives, variance
+from pipeline.theory.joint_design_exact import solve_equilibrium_adaptive
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def save(path, value):
+    path.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
+
+
+def select():
+    rows = []
+    for path in sorted(EMPIRICAL.glob("*/accepted.json")):
+        accepted = json.loads(path.read_text())
+        config_path = path.parent / "configuration.json"
+        config = json.loads(config_path.read_text())["inputs"]
+        values = []
+        for chain, sha in zip(accepted["chain_paths"], accepted["chain_sha256"]):
+            if digest(chain) != sha:
+                raise RuntimeError(f"Changed accepted chain: {chain}")
+            values.append(pd.read_csv(chain, comment="#", usecols=["c_i", "c_j", "sigma"]))
+        values = pd.concat(values, ignore_index=True)
+        w = config["theta"] / values.sigma**2 * (1 / values.c_i + 1 / values.c_j)
+        rows.append(dict(contest_id=accepted["summary"]["contest_id"],
+                         median_sum_w=float(np.median(w)),
+                         accepted_path=str(path.relative_to(ROOT)),
+                         accepted_sha256=digest(path), configuration_sha256=digest(config_path)))
+    if len(rows) != 73:
+        raise RuntimeError(f"Expected 73 accepted full-sample fits; found {len(rows)}")
+    rows.sort(key=lambda row: (row["median_sum_w"], row["contest_id"]))
+    cases = [dict(key="baseline", label="Synthetic baseline", primitives=asdict(Primitives()))]
+    for quantile, label in ((.5, "Empirical median"), (.9, "Empirical upper decile")):
+        target = float(np.quantile([r["median_sum_w"] for r in rows], quantile))
+        row = min(rows, key=lambda r: (abs(r["median_sum_w"] - target), r["contest_id"]))
+        path = ROOT / row["accepted_path"]
+        summary = json.loads(path.read_text())["summary"]
+        inputs = json.loads((path.parent / "configuration.json").read_text())["inputs"]
+        sigma, lamb = summary["sigma_median"], summary["lambda_median"]
+        p = Primitives(T=inputs["T_contest"], theta=inputs["theta"],
+                       c_i=summary["c_i_median"], c_j=summary["c_j_median"],
+                       sigma=sigma, lamb=lamb, S0=sigma / math.sqrt(lamb),
+                       mu0=summary["mu_0_median"])
+        cases.append(dict(key=f"contest_{row['contest_id']}", label=label,
+                          quantile=quantile, target_median_sum_w=target,
+                          **row, primitives=asdict(p)))
+    selection = dict(rule="Nearest to linear-interpolated sample quantiles .5 and .9 of posterior median(w_i+w_j); ties by contest ID. Full-sample accepted joint draws; marginal posterior medians used as fixed parameter configurations.",
+                     ranked_contests=rows, cases=cases)
+    save(OUT / "selection.json", selection)
+    return cases
+
+
+def implicit_library():
+    library = OUT / f"nonlinear_{digest(SOURCE)[:16]}.so"
+    if not library.exists():
+        subprocess.run(["c++", "-O3", "-std=c++17", "-shared", "-fPIC",
+                        str(SOURCE), "-o", str(library)], check=True)
+    lib = ctypes.CDLL(str(library))
+    lib.solve_hjb.argtypes = [ctypes.c_double] * 4 + [ctypes.c_int, ctypes.c_double,
+        np.ctypeslib.ndpointer(dtype=np.float64, flags="C_CONTIGUOUS"), ctypes.POINTER(ctypes.c_int)]
+    lib.solve_hjb.restype = ctypes.c_int
+    return lib
+
+
+def solve(case, level):
+    p = Primitives(**case["primitives"])
+    wi, wj = (p.theta / (p.sigma**2 * c) for c in (p.c_i, p.c_j))
+    # Dimensionless x=y/(sigma*sqrt(T)), tau=t/T; effort unit sigma/sqrt(T).
+    h = p.S0 / (p.sigma**2 * p.T)
+    terminal_h = float(variance(p.T, p)) / (p.sigma**2 * p.T)
+    dx = min(.0125, .2 * math.sqrt(terminal_h)) / 2**level
+    nt = 1024 * 2**level
+    extent = 7.0
+    signature = dict(primitives=case["primitives"], dx=dx, nt=nt, extent=extent,
+                     solver_sha256=digest(SOURCE if case["key"] != "baseline" else
+                                          ROOT / "pipeline/theory/joint_design_exact.py"))
+    filename = OUT / f"{case['key']}_level{level}.npz"
+    if filename.exists():
+        data = np.load(filename)
+        if json.loads(str(data["signature"])) != signature:
+            raise RuntimeError(f"Stale policy cache: {filename}")
+        return {key: data[key] for key in ("time", "state", "effort")}
+    start = time.time()
+    if case["key"] == "baseline":
+        scaled = Primitives(T=1, theta=1, c_i=1 / wi, c_j=1 / wj, sigma=1,
+                            lamb=p.lamb * p.sigma**2 * p.T**2, S0=h)
+        eq = solve_equilibrium_adaptive(scaled, dy=dx, base_steps=nt, extent=extent)
+        result = dict(time=eq.t, state=eq.y, effort=eq.effort[:, :, 0].astype(float))
+        work = len(eq.t)
+    else:
+        half = math.ceil(extent * math.sqrt(1 + h) / dx)
+        ny = 2 * half + 1
+        policies = np.empty((nt + 1, ny, 2), dtype=np.float64)
+        work_count = ctypes.c_int()
+        status = implicit_library().solve_hjb(wi, wj, h, dx, nt, extent, policies,
+                                             ctypes.byref(work_count))
+        if status != ny:
+            raise RuntimeError(f"Nonlinear solve failed for {case['key']}, level {level}: {status}")
+        result = dict(time=np.linspace(0, 1, nt + 1), state=np.arange(-half, half + 1) * dx,
+                      effort=policies[:, :, 0])
+        work = work_count.value
+    if not np.all(np.isfinite(result["effort"])) or np.min(result["effort"]) < -1e-9:
+        raise RuntimeError("Invalid nonlinear effort")
+    np.savez_compressed(filename, **result, signature=json.dumps(signature))
+    print(f"{case['key']} level={level} solved in {time.time()-start:.1f}s, work={work}", flush=True)
+    return result
+
+
+def evaluate(solution, case, times, z):
+    p = Primitives(**case["primitives"])
+    scale = p.sigma / math.sqrt(p.T)
+    q = variance(times * p.T, p) / (p.sigma**2 * p.T) + 1 - times
+    states = np.sqrt(q[:, None]) * z[None, :]
+    effort = np.empty_like(states)
+    for j, tau in enumerate(times):
+        index = int(np.clip(np.searchsorted(solution["time"], tau, side="right") - 1,
+                            0, len(solution["time"]) - 2))
+        weight = (tau - solution["time"][index]) / (solution["time"][index+1] - solution["time"][index])
+        profile = ((1-weight) * solution["effort"][index]
+                   + weight * solution["effort"][index+1])
+        effort[j] = np.interp(states[j], solution["state"], profile) * scale
+    wi = p.theta / (p.sigma**2 * p.c_i)
+    leading = scale * wi / np.sqrt(2 * np.pi * q[:, None]) * np.exp(-z[None, :]**2 / 2)
+    return effort, leading
+
+
+def main():
+    OUT.mkdir(parents=True, exist_ok=True)
+    cases = select()
+    print("Selected", [(c["key"], c.get("median_sum_w")) for c in cases], flush=True)
+    z = np.linspace(-3, 3, 601)
+    # Whole-horizon audit with extra observations near the terminal layer.
+    times = np.unique(np.r_[np.linspace(0, 1, 257), 1-np.geomspace(1e-5, .1, 121)])
+    metrics, curves = [], []
+    for case in cases:
+        coarse, fine = solve(case, 0), solve(case, 1)
+        nonlinear, leading = evaluate(fine, case, times, z)
+        previous, _ = evaluate(coarse, case, times, z)
+        peak = float(nonlinear.max())
+        discrepancy = float(np.max(np.abs(nonlinear-leading)) / peak)
+        grid_error = float(np.max(np.abs(nonlinear-previous)) / peak)
+        # Refine again if the numerical uncertainty is material.
+        if grid_error > .005:
+            extra = solve(case, 2)
+            nonlinear_extra, _ = evaluate(extra, case, times, z)
+            grid_error = float(np.max(np.abs(nonlinear_extra-nonlinear)) / nonlinear_extra.max())
+            fine, nonlinear = extra, nonlinear_extra
+            peak = float(nonlinear.max())
+            discrepancy = float(np.max(np.abs(nonlinear-leading)) / peak)
+        if grid_error > .005:
+            save(OUT / f"{case['key']}_unresolved.json", dict(
+                case=case, maximum_grid_difference=grid_error,
+                status="Not accepted for manuscript: refinement difference exceeds 0.5% of peak effort."))
+            raise RuntimeError(f"Unresolved nonlinear policy for {case['key']}: grid difference {grid_error:.1%}")
+        display, display_leading = evaluate(fine, case, np.array([.5]), z)
+        p = Primitives(**case["primitives"])
+        row = dict(key=case["key"], w_i=p.theta/(p.sigma**2*p.c_i),
+                   w_j=p.theta/(p.sigma**2*p.c_j), peak_effort=peak,
+                   maximum_normalized_error=discrepancy,
+                   maximum_grid_difference=grid_error,
+                   displayed_slice_error=float(np.max(abs(display-display_leading))/display.max()))
+        metrics.append(row)
+        curves.append((display[0], display_leading[0]))
+        print(json.dumps(row), flush=True)
+    save(OUT / "summary.json", dict(cases=cases, metrics=metrics,
+        evaluation=dict(player="i", standardized_gap=[-3, 3], state_points=len(z),
+                        time_points=len(times), time_fraction_range=[0, 1], displayed_time_fraction=.5,
+                        normalization="Maximum absolute effort difference divided by maximum nonlinear effort over the same time-state evaluation grid."),
+        producer_sha256=digest(__file__), empirical_solver_sha256=digest(SOURCE)))
+    np.savez_compressed(OUT / "curves.npz", z=z, nonlinear=np.array([c[0] for c in curves]),
+                        leading=np.array([c[1] for c in curves]))
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.lines import Line2D
+    plt.rcParams.update({"font.family": "serif", "font.size": 10,
+                         "mathtext.fontset": "stix", "axes.spines.top": False,
+                         "axes.spines.right": False, "pdf.fonttype": 42})
+    fig, axes = plt.subplots(1, 3, figsize=(10.6, 3.3), sharex=True)
+    for ax, case, row, (nonlinear, leading) in zip(axes, cases, metrics, curves):
+        ax.plot(z, nonlinear, color="#1e4f79", linewidth=1.9)
+        ax.plot(z, leading, color="#b04b32", linewidth=1.8, linestyle="--")
+        ax.set_title(case["label"] + "\n" + rf"$w_i={row['w_i']:.2f},\;w_j={row['w_j']:.2f}$", fontsize=10)
+        ax.set_xlabel(r"Perceived gap $\tilde y/\sqrt{Q_t}$")
+        ax.set_ylabel(r"Player $i$ effort")
+        ax.set_xticks([-3, -1.5, 0, 1.5, 3])
+        ax.set_ylim(bottom=0)
+        ax.grid(axis="y", color=".9", linewidth=.6)
+        ax.ticklabel_format(axis="y", style="sci", scilimits=(-2, 3), useMathText=True)
+    fig.legend(handles=[Line2D([], [], color="#1e4f79", lw=1.9, label="Nonlinear equilibrium"),
+                        Line2D([], [], color="#b04b32", lw=1.8, linestyle="--", label="First-order approximation")],
+               loc="lower center", ncol=2, frameon=False, bbox_to_anchor=(.5, .0))
+    fig.tight_layout(rect=(0, .12, 1, 1), w_pad=1.4)
+    fig.savefig(OUT / "effort_policy_comparison.pdf", bbox_inches="tight")
+    fig.savefig(OUT / "effort_policy_comparison.png", dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+
+if __name__ == "__main__":
+    main()

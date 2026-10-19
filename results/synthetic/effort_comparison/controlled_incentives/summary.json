@@ -1,0 +1,254 @@
+{
+  "cases": [
+    {
+      "key": "theta_1",
+      "label": "$\\theta=1$",
+      "primitives": {
+        "T": 90.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      }
+    },
+    {
+      "key": "theta_2",
+      "label": "$\\theta=2$",
+      "primitives": {
+        "T": 90.0,
+        "theta": 2.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      }
+    },
+    {
+      "key": "theta_4",
+      "label": "$\\theta=4$",
+      "primitives": {
+        "T": 90.0,
+        "theta": 4.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      }
+    },
+    {
+      "key": "lambda_low",
+      "label": "Low precision: $\\lambda=0.1$",
+      "primitives": {
+        "T": 90.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 0.1,
+        "S0": 4.0,
+        "mu0": 0.0
+      }
+    },
+    {
+      "key": "lambda_high",
+      "label": "High precision: $\\lambda=10$",
+      "primitives": {
+        "T": 90.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 1.5,
+        "sigma": 2.0,
+        "lamb": 10.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      }
+    },
+    {
+      "key": "opponent_cost",
+      "label": "Lower opponent cost: $c_j=0.6$",
+      "primitives": {
+        "T": 90.0,
+        "theta": 1.0,
+        "c_i": 1.2,
+        "c_j": 0.6,
+        "sigma": 2.0,
+        "lamb": 1.0,
+        "S0": 4.0,
+        "mu0": 0.0
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "key": "theta_1",
+      "w_i": 0.20833333333333334,
+      "w_j": 0.16666666666666666,
+      "peak_effort": 0.23501014166086642,
+      "maximum_normalized_error": 0.007922416151368777,
+      "maximum_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_error": 0.02514033535167824,
+      "solver_diagnostics": {
+        "dy": 0.003125,
+        "base_steps": 4096,
+        "extent": 7.0,
+        "nodes_y": 4507,
+        "nodes_t": 4337,
+        "min_raw_policy": -9.473903143468002e-15,
+        "max_policy": 1.1147509813308716,
+        "value_min": 0.0,
+        "value_max": 1.0,
+        "scheme": "adaptive-time Crank--Nicolson/Heun",
+        "level": 2
+      },
+      "displayed_slice_error": 0.02450287443195277
+    },
+    {
+      "key": "theta_2",
+      "w_i": 0.4166666666666667,
+      "w_j": 0.3333333333333333,
+      "peak_effort": 0.47002028332173285,
+      "maximum_normalized_error": 0.016126204286909265,
+      "maximum_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_error": 0.05081465361884162,
+      "solver_diagnostics": {
+        "dy": 0.003125,
+        "base_steps": 4096,
+        "extent": 7.0,
+        "nodes_y": 4507,
+        "nodes_t": 4337,
+        "min_raw_policy": -1.8947806286936004e-14,
+        "max_policy": 2.229501962661743,
+        "value_min": 0.0,
+        "value_max": 1.0,
+        "scheme": "adaptive-time Crank--Nicolson/Heun",
+        "level": 2
+      },
+      "displayed_slice_error": 0.04956400778272556
+    },
+    {
+      "key": "theta_4",
+      "w_i": 0.8333333333333334,
+      "w_j": 0.6666666666666666,
+      "peak_effort": 0.9400405666434657,
+      "maximum_normalized_error": 0.03375890050015423,
+      "maximum_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_error": 0.10178224478061601,
+      "solver_diagnostics": {
+        "dy": 0.003125,
+        "base_steps": 4096,
+        "extent": 7.0,
+        "nodes_y": 4507,
+        "nodes_t": 4337,
+        "min_raw_policy": -3.789561257387201e-14,
+        "max_policy": 4.459003925323486,
+        "value_min": 0.0,
+        "value_max": 1.0,
+        "scheme": "adaptive-time Crank--Nicolson/Heun",
+        "level": 2
+      },
+      "displayed_slice_error": 0.09965104039553413
+    },
+    {
+      "key": "lambda_low",
+      "w_i": 0.20833333333333334,
+      "w_j": 0.16666666666666666,
+      "peak_effort": 0.1321823839920655,
+      "maximum_normalized_error": 0.007912037891468066,
+      "maximum_grid_difference": 0.0005428191162465502,
+      "maximum_time_specific_grid_difference": 0.0005428191162465502,
+      "maximum_time_specific_error": 0.02406417252607952,
+      "solver_diagnostics": {
+        "dy": 0.003125,
+        "base_steps": 4096,
+        "extent": 7.0,
+        "nodes_y": 4507,
+        "nodes_t": 4337,
+        "min_raw_policy": -1.4802973661668755e-14,
+        "max_policy": 0.6269960999488831,
+        "value_min": 0.0,
+        "value_max": 1.0,
+        "scheme": "adaptive-time Crank--Nicolson/Heun",
+        "level": 2
+      },
+      "displayed_slice_error": 0.022797439474075355
+    },
+    {
+      "key": "lambda_high",
+      "w_i": 0.20833333333333334,
+      "w_j": 0.16666666666666666,
+      "peak_effort": 0.4178620150032261,
+      "maximum_normalized_error": 0.007901753746310828,
+      "maximum_grid_difference": 0.0036509184159934567,
+      "maximum_time_specific_grid_difference": 0.0039032635861813766,
+      "maximum_time_specific_error": 0.025834694109881144,
+      "solver_diagnostics": {
+        "dy": 0.0020957223828048928,
+        "base_steps": 4096,
+        "extent": 7.0,
+        "nodes_y": 6719,
+        "nodes_t": 4337,
+        "min_raw_policy": -3.789561257387201e-14,
+        "max_policy": 1.9820935726165771,
+        "value_min": 0.0,
+        "value_max": 1.0,
+        "scheme": "adaptive-time Crank--Nicolson/Heun",
+        "level": 2
+      },
+      "displayed_slice_error": 0.02547149674211345
+    },
+    {
+      "key": "opponent_cost",
+      "w_i": 0.20833333333333334,
+      "w_j": 0.4166666666666667,
+      "peak_effort": 0.23501014166086642,
+      "maximum_normalized_error": 0.03926523067044622,
+      "maximum_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_grid_difference": 0.0017091067604155775,
+      "maximum_time_specific_error": 0.12318079637194251,
+      "solver_diagnostics": {
+        "dy": 0.003125,
+        "base_steps": 4096,
+        "extent": 7.0,
+        "nodes_y": 4507,
+        "nodes_t": 4337,
+        "min_raw_policy": -2.3684757858670007e-14,
+        "max_policy": 2.229501962661743,
+        "value_min": 0.0,
+        "value_max": 1.0,
+        "scheme": "adaptive-time Crank--Nicolson/Heun",
+        "level": 2
+      },
+      "displayed_slice_error": 0.12012516110415049
+    }
+  ],
+  "evaluation": {
+    "player": "i",
+    "standardized_gap": [
+      -3,
+      3
+    ],
+    "state_points": 601,
+    "time_points": 378,
+    "time_fraction_range": [
+      0,
+      1
+    ],
+    "displayed_time_fraction": 0.5,
+    "normalization": "Primary manuscript metric: maximum over time of maximum absolute effort difference divided by the contemporaneous peak nonlinear effort, on z in [-3,3]. Also retain the whole-grid peak-normalized metric and the plotted midpoint slice metric."
+  },
+  "producer_sha256": "71108781039a19121cd056981627d67b6e323a95c70845f288ef2da39862dcc6",
+  "solver_sha256": "9c09c46c17a50596bfef3f6a6a761ad7da523fcb73cf055b332d3712b002f300",
+  "primitives_source_sha256": "77cd3efaa2c3bc32a0fae33263d2107213e50b7d76fcd283d112ec914318cbc7",
+  "render_source_sha256": "41a28be5bf37fca80534f1fe1f7fe0a9355ead4d883dc2c162e8c5362243c437",
+  "render_only": "Saved curves redrawn; numerical metrics and calculation-producer hash retained unchanged."
+}

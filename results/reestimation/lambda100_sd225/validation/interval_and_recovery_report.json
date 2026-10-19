@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "lambda": {
+      "configurations": 10,
+      "realizations": 40,
+      "median_point_mean_absolute_relative_error": 0.17041029519926337,
+      "median_point_worst_absolute_relative_error": 0.712792097438388,
+      "mean_point_mean_absolute_relative_error": 0.20766602906145754,
+      "original_95_credible_interval_covered": 39,
+      "simulation_calibrated_interval_covered": 40,
+      "multiplier": 1.4146088000522072,
+      "calibration_source_sha256": "3b55d06a03705a31192a7a634e0318c9f1fc7505cda35408d9202fa6c7dd9098"
+    },
+    "sigma": {
+      "configurations": 10,
+      "realizations": 40,
+      "median_point_mean_absolute_relative_error": 0.12107242685914943,
+      "median_point_worst_absolute_relative_error": 0.5361699874114765,
+      "mean_point_mean_absolute_relative_error": 0.12574493443751816,
+      "original_95_credible_interval_covered": 33,
+      "simulation_calibrated_interval_covered": 40,
+      "multiplier": 2.2753494690249494,
+      "calibration_source_sha256": "6b1b67a62d7173e452d56aa41676299cab8111b9cb5b2f3ad456d9c70f845c03"
+    }
+  },
+  "scope": "Previously retained simulations at ten targeted parameter configurations, not a representative validation sample of all73 contests. Average error is not a per-contest error bound.",
+  "feedback_alignment": "Recovery exercises retain their documented simulator-aligned interval-start feedback. Empirical re-estimation retains the existing interval-endpoint convention. The reference recovery rates are not an end-to-end validation of empirical timing and preprocessing.",
+  "intervals": "Original Bayesian equal-tailed credible intervals and separately labeled simulation-calibrated intervals both retained.40/40 observed coverage does not establish a population95% guarantee. Marginal interval expansion does not alter the joint posterior or counterfactuals.",
+  "source_sha256": "98812e42237d318e043adb049ee2e98b5edb77a0e9981d8db53d8c26924d7d2a"
+}

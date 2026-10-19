@@ -1,0 +1,58 @@
+\subsection{\textcolor{blue}{Joint Design at a Fixed Quality Target}}\label{sect-precision-design}
+
+\textcolor{blue}{We compare joint changes in the prize, deadline, and feedback precision that reduce the organizer's costs while maintaining at least the current expected quality of the best solution. A quality requirement makes these comparisons possible without assigning a monetary value to solution quality. Let $\overline{\mathcal B}_\ell$ denote posterior mean calibrated output and $\overline{\mathcal B}_\ell^{obs}$ its value under the observed regime. For alternative delay-cost levels $\delta>0$, we solve}
+\begin{equation}\label{eq-empirical-joint-design}
+\textcolor{blue}{\min_{\theta,T,\lambda}\left\{\theta+\delta\theta_\ell^{obs}\left(\frac{T}{T_\ell^{obs}}\right)^2\right\}
+\quad\text{subject to}\quad
+\overline{\mathcal B}_\ell(\theta,T,\lambda)\geq\overline{\mathcal B}_\ell^{obs}.}
+\end{equation}
+\textcolor{blue}{Here $\delta$ is the delay cost at the observed deadline relative to the observed prize. Prizes are nonnegative, precision ranges over $(0,\infty]$, and deadlines lie on a prespecified grid from 0.1 to 2 times the observed duration. The observed regime remains available as an alternative. Appendix~\ref{app-precision-counterfactual} provides the calculation details and the fixed-prize, fixed-duration benchmark.}
+
+\begin{table}[htbp]
+\centering
+\caption{\textcolor{blue}{Quality-Preserving Joint Design under Alternative Delay Costs}}
+\label{tab-counterfactual-precision}
+{\color{blue}\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}r*{5}{>{\centering\arraybackslash}X}@{}}
+\multicolumn{6}{l}{\textit{Panel A: Design choices (number of contests)}}\\
+\midrule
+$\delta$ & \makecell{Positive prize,\\full disclosure} & \makecell{Positive prize,\\finite precision} & \makecell{Zero\\prize} & \makecell{Observed\\regime retained} & \makecell{Support for\\lower precision}\\
+\midrule
+0.1 & 49 & 1 & 23 & 0 & 0 \\
+0.25 & 55 & 2 & 16 & 0 & 1 \\
+0.5 & 58 & 2 & 12 & 1 & 1 \\
+1 & 59 & 4 & 10 & 0 & 2 \\
+2 & 68 & 5 & 0 & 0 & 3 \\
+5 & 67 & 6 & 0 & 0 & 4 \\
+10 & 65 & 8 & 0 & 0 & 5 \\
+25 & 59 & 14 & 0 & 0 & 10 \\
+100 & 55 & 18 & 0 & 0 & 12 \\
+\bottomrule
+\end{tabularx}
+\vspace{2ex}
+\begin{tabularx}{\textwidth}{@{}r*{4}{>{\centering\arraybackslash}X}@{}}
+\multicolumn{5}{l}{\textit{Panel B: Design changes and cost savings (medians)}}\\
+\midrule
+$\delta$ & \makecell{Duration /\\observed duration} & \makecell{Prize /\\observed prize} & \makecell{Total cost\\saving (\%)} & \makecell{Additional saving\\from finite precision\\(\%)}\\
+\midrule
+0.1 & 1.50 & 0.44 & 23.28 & 0.51 \\
+0.25 & 1.25 & 0.79 & 5.19 & 1.20 \\
+0.5 & 1.00 & 1.00 & 1.87 & 3.24 \\
+1 & 0.75 & 1.20 & 8.88 & 3.81 \\
+2 & 0.50 & 1.54 & 19.52 & 1.30 \\
+5 & 0.50 & 2.01 & 47.06 & 4.55 \\
+10 & 0.50 & 2.78 & 60.21 & 2.99 \\
+25 & 0.25 & 3.74 & 79.51 & 3.98 \\
+100 & 0.10 & 6.00 & 90.11 & 3.16 \\
+\bottomrule
+\end{tabularx}
+\begin{minipage}{\textwidth}
+\footnotesize\textit{Note:} Each scenario covers 73 contests. The first four design categories in Panel A sum to 73; precision is irrelevant when the prize is zero. The last column counts contests with more than 75\% draw-wise support for reducing precision, conditional on the selected duration; zero-prize and retained regimes are excluded. Total cost is the prize plus calibrated delay cost. Its saving is relative to the observed regime, whose cost is $(1+\delta)\theta_\ell^{obs}$. All Panel B medians use 73 contests except the last column, which uses contests selecting positive prizes and finite precision. That column compares their costs with full disclosure after reoptimizing both prize and duration under the same quality requirement. The quality constraint integrates the joint parameter posterior. The delay-cost levels are scenarios, not estimated preferences.
+\end{minipage}}
+\end{table}
+
+\textcolor{blue}{Higher delay costs favor shorter contests supported by larger prizes. Positive-prize finite precision is selected in four contests at $\delta=1$, eight at $\delta=10$, and fourteen at $\delta=25$. Shorter deadlines leave less time for innovation to overturn initial performance gaps, increasing the value of preserving uncertainty through noisy feedback. Full disclosure nevertheless remains preferred in most contests in every reported scenario. Among contests selecting finite precision, its additional median cost saving relative to reoptimized full disclosure is 3.81\%, 2.99\%, and 3.98\% at these three delay-cost levels.}
+
+\textcolor{blue}{These comparisons extend the steady-state, leading-order calibration by imposing a quality requirement. They do not estimate organizers' preferences or solve the utility-maximization problem in Proposition~\ref{prop-joint-design}, which holds initial filtering uncertainty fixed.}
+
