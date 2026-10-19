@@ -1,0 +1,45 @@
+\textit{Fixed-prize, fixed-duration benchmark.} Holding prize and duration at their observed values, Table~\ref{tab-fixed-precision} selects full disclosure in 42 contests and the no-feedback limit in 31, with no interior solution. The median quality gain, including limiting gains, is 0.011\%. Using the 75\% posterior-support threshold, 24 contests favor increased precision, 16 favor reduced precision, and 33 have no clear direction.
+
+\begin{table}[!htbp]
+\centering
+\caption{First-Order Precision Comparisons at the Observed Prize and Duration}
+\label{tab-fixed-precision}
+{\small
+\begin{tabularx}{\textwidth}{Xrr}
+\multicolumn{3}{l}{\textit{Panel A: Selected regime or boundary limit}}\\
+\midrule
+Regime & Contests & Share (\%)\\
+\midrule
+Full disclosure & 42 & 57.5 \\
+Interior precision & 0 & 0.0 \\
+No-feedback limit & 31 & 42.5 \\
+\bottomrule
+\end{tabularx}
+\vspace{2ex}
+\begin{tabularx}{\textwidth}{Xrrr}
+\multicolumn{4}{l}{\textit{Panel B: Output increases or limiting increases (\%)}}\\
+\midrule
+Posterior direction group & 25th percentile & Median & 75th percentile\\
+\midrule
+All contests & 0.001 & 0.011 & 0.231\\
+Increase precision & 0.001 & 0.007 & 0.038\\
+Decrease precision & 0.373 & 1.049 & 1.518\\
+Direction uncertain & 0.001 & 0.004 & 0.013\\
+\bottomrule
+\end{tabularx}}
+\begin{minipage}{\textwidth}
+\footnotesize\textit{Note:} Each contest uses the same precision across posterior draws, selected to maximize expected quality under the first-order approximation. No-feedback entries and their gains are limiting comparisons under the positive-feedback restriction. Direction groups require more than 75\% posterior support. Percentiles describe variation across contests, not credible intervals. The initial distribution is fixed across designs within each draw.
+\end{minipage}
+\end{table}
+
+\textit{Quality-constrained joint design.} Write $\mathcal B_{0\ell}(T)=N_s^{-1}\sum_s\beta(\mu_{0,\ell s},S_{0,\ell s}^{base}+\sigma_{\ell s}^2T)$. At each candidate duration, select the precision maximizing $\overline A_\ell(T,\lambda)$, including endpoint limits, and calculate
+\[
+\theta_\ell^{req}(T)=\max\left\{0,\frac{\mathcal B_\ell^{obs}-\mathcal B_{0\ell}(T)}{\overline A_\ell(T,\lambda_\ell^*(T))}\right\}.
+\]
+A positive prize scales the first-order contribution, so the preferred precision at a fixed duration is independent of prize size; at zero prize, precision is irrelevant. We compare $\theta_\ell^{req}(T)+D_\ell(T)$ over $T/T_\ell^{obs}\in\{0.1,0.25,0.5,0.75,1,1.25,1.5,2\}$ and with the observed regime, treating improvements below $10^{-10}\theta_\ell^{obs}$ as retention.
+
+For the full-disclosure benchmark, we reoptimize prize and duration on the same grid, using identical initial distributions and the same quality target. The last column of Table~\ref{tab-counterfactual-precision} reports the additional saving for positive-prize designs with less disclosure, including no-feedback limits.
+
+All selected designs and boundary limits satisfy the quality constraint under the first-order approximation. Costs at zero precision are infima under the positive-feedback restriction. Delay costs are assumed scenarios; durations at the grid edges need not be unconstrained optima, and large prize changes remain extrapolations. Holding the initial distribution fixed ensures comparable designs but does not eliminate approximation error in estimation, feedback updating, or expected quality.
+
+The precision-dependent term in $A$ captures an asymmetric incentive channel. The symmetric finite-precision mechanism in Proposition~\ref{prop-joint-design} requires higher-order or nonlinear analysis and is not tested by these calculations.

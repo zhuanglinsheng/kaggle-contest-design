@@ -1,0 +1,61 @@
+\subsection{Counterfactual Analysis of Contest Design}\label{sect-precision-design}
+
+We examine whether joint adjustments to prizes, deadlines, and feedback precision can preserve expected solution quality at lower cost. Following the definition of expected best-solution quality in Section~\ref{sect-design}, let $\mathcal B_\ell(\theta,T,\lambda)$ denote its value for contest $\ell$ under a candidate design and $\mathcal B_\ell^{obs}$ its value under the observed design. Both are evaluated using the same first-order approximation and averaged over joint posterior draws. To avoid specifying the organizer's monetary valuation of quality, we minimize prize and delay costs subject to maintaining baseline quality:
+\begin{equation}\label{eq-empirical-joint-design}
+\inf_{\theta,T,\lambda}\left\{\theta+D_\ell(T)\right\}
+\quad\text{subject to}\quad
+\mathcal B_\ell(\theta,T,\lambda)\geq \mathcal B_\ell^{obs}.
+\end{equation}
+Within each posterior draw, both contestants' costs and the initial gap distribution remain fixed across designs, with $S_0=\sigma/\sqrt{\lambda^{obs}}$. Feedback adjustments therefore affect subsequent learning without changing the initial distribution. Appendix~\ref{app-precision-counterfactual} details the calculation and reports a benchmark that varies precision alone.
+
+Following the numerical analysis in Section~\ref{sect-design}, we retain quadratic delay costs, $D_\ell(T)=\delta\theta_\ell^{obs}(T/T_\ell^{obs})^2$, and vary $\delta>0$ across scenarios. This parameter measures delay cost at the observed deadline relative to the observed prize. Prizes are nonnegative, precision lies in $(0,\infty]$, and deadlines range from 0.1 to 2 times the observed duration on a prespecified grid; the observed regime remains available. We also evaluate the no-feedback limit $\lambda\downarrow0$ as a cost bound. Table~\ref{tab-counterfactual-precision} reports the results across the 73 contests.
+
+\begin{table}[!htbp]
+\centering
+\caption{Quality-Constrained First-Order Design Comparisons}
+\label{tab-counterfactual-precision}
+{\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}r*{3}{>{\centering\arraybackslash}X}@{}}
+\multicolumn{4}{l}{\textit{Panel A: Feedback choice (number of contests)}}\\
+\midrule
+$\delta$ & \makecell{Full disclosure\\$\lambda=\infty$} & \makecell{Less disclosure\\$\lambda<\infty$} & \makecell{Precision irrelevant\\(zero prize)}\\
+\midrule
+0.1 & 30 & 21 & 22 \\
+0.25 & 35 & 22 & 16 \\
+0.5 & 38 & 23 & 12 \\
+1 & 39 & 24 & 10 \\
+2 & 42 & 31 & 0 \\
+5 & 42 & 31 & 0 \\
+10 & 42 & 31 & 0 \\
+25 & 42 & 31 & 0 \\
+100 & 42 & 31 & 0 \\
+\bottomrule
+\end{tabularx}
+\par\vspace{2ex}\noindent
+\begin{tabularx}{\textwidth}{@{}r*{4}{>{\centering\arraybackslash}X}@{}}
+\multicolumn{5}{l}{\textit{Panel B: Design changes and cost reductions (medians)}}\\
+\midrule
+$\delta$ & $\Delta T$ (\%) & $\Delta\theta$ (\%) & \makecell{Total cost\\reduction (\%)} & \makecell{Additional reduction\\from allowing\\less disclosure (\%)}\\
+\midrule
+0.1 & 50.00 & -55.46 & 23.15 & 0.56 \\
+0.25 & 25.00 & -21.39 & 5.86 & 0.63 \\
+0.5 & 0.00 & -2.01 & 1.80 & 0.66 \\
+1 & -25.00 & 20.26 & 9.79 & 0.84 \\
+2 & -25.00 & 54.16 & 18.71 & 0.77 \\
+5 & -50.00 & 95.05 & 46.58 & 0.88 \\
+10 & -50.00 & 171.45 & 59.64 & 0.97 \\
+25 & -75.00 & 272.14 & 78.90 & 1.05 \\
+100 & -75.00 & 493.08 & 89.93 & 1.37 \\
+\bottomrule
+\end{tabularx}
+\par\vspace{1ex}\noindent
+\begin{minipage}{\textwidth}
+\footnotesize\textit{Note:} Each scenario covers 73 contests; the three categories in Panel A sum to 73. {\color{blue}The less-disclosure column reports no-feedback limits, with costs and cost reductions interpreted as limiting lower and upper bounds, respectively.} Total cost is prize plus calibrated delay cost; reductions are relative to $(1+\delta)\theta_\ell^{obs}$. $\Delta T$ and $\Delta\theta$ are percentage changes from the observed deadline and prize. All Panel B medians use 73 contests except the last column, which uses positive-prize choices with less disclosure and compares their costs with reoptimized full disclosure. Quality constraints use the first-order approximation and do not guarantee realized quality or exact nonlinear output.
+\end{minipage}}
+\end{table}
+
+Table~\ref{tab-counterfactual-precision} shows that full disclosure is preferred in more contests, but less disclosure can reduce costs while preserving expected solution quality. {\color{blue}At $\delta=1$, 39 contests favor full disclosure and 24 favor the no-feedback limit; for the reported scenarios with $\delta\geq2$, the counts are 42 and 31. All positive-prize choices with less disclosure in the reported scenarios occur at the no-feedback limit, with no interior precision choice selected.} Among positive-prize designs using less disclosure, the median additional saving relative to reoptimized full disclosure is 0.84\% at $\delta=1$ and 1.05\% at $\delta=25$. These choices accompany joint prize and deadline adjustments, with higher delay costs generally favoring shorter contests and larger prizes.
+
+{\color{blue}These findings are consistent with the broad intuition that preserving uncertainty about relative performance can improve contest design, but they do not directly validate the symmetric finite-precision mechanism in Proposition~\ref{prop-joint-design}. As explained in Appendix~\ref{app-precision-counterfactual}, precision affects the first-order quality approximation through an asymmetric incentive channel; this dependence vanishes under the proposition's symmetric conditions. Assessing that mechanism requires higher-order or nonlinear analysis. Moreover, Proposition~\ref{prop-joint-design} establishes that a positive finite-precision design can strictly outperform every full-disclosure design, without asserting that an interior joint optimum is attained. The no-feedback limits reported here therefore do not contradict the proposition.}
+

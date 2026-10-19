@@ -1,0 +1,27 @@
+\subsection{Parameter Recovery under Nonlinear Effort}\label{app-effort-recovery}
+
+To assess the effort approximation, we generate data under nonlinear equilibrium policies and estimate the parameters with the leading-order likelihood. The exercise uses ten joint parameter configurations representative of the nonlinear posteriors for contests with the largest incentive indices in the original estimates. We generate four realizations per configuration and re-estimate all six parameters using the empirical priors reported at the start of Section~\ref{sec-kaggle-application}. The two exploratory realizations used in prior development are excluded. Table~\ref{tab-nonlinear-recovery} reports recovery of feedback precision and innovation risk.
+
+\begin{table}[!htbp]
+\centering
+\caption{Parameter Recovery from Nonlinear Simulated Contests}
+\label{tab-nonlinear-recovery}
+{\small
+\begin{tabularx}{\textwidth}{@{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X@{}}
+\toprule
+Parameter & \makecell{Mean absolute\\relative error (\%)} & \makecell{Coverage of 95\%\\credible intervals (\%)}\\
+\midrule
+Signal precision $\lambda$ & 17.0 & 97.5\\
+Innovation risk $\sigma$ & 12.1 & 82.5\\
+\bottomrule
+\end{tabularx}
+\par\vspace{1ex}\noindent
+\begin{minipage}{\textwidth}
+\footnotesize\textit{Note:} Each row summarizes 40 simulated datasets at ten fixed parameter configurations. Point estimates are posterior medians. Absolute relative error divides the absolute estimation error by the generating value. Coverage is the fraction of datasets whose equal-tailed 95\% posterior interval contains that value.
+\end{minipage}}
+\end{table}
+
+For feedback precision, the 95\% credible interval contains the generating value in 14 of the 15 realizations with point-estimation errors above 20\%; only one of the 40 datasets has an interval that misses the generating value. Coverage is lower for innovation risk, indicating that its posterior uncertainty can be understated.
+
+Both the simulation and its likelihood use interval-start feedback, whereas the empirical application uses interval-end readouts. The recovery results apply to these ten configurations and do not provide an error bound for all empirical estimates.
+
