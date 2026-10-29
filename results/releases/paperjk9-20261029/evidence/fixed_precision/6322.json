@@ -1,0 +1,150 @@
+{
+  "contest_id": 6322,
+  "status": "completed",
+  "observed": {
+    "prize": 0.1,
+    "horizon": 28.166666666666664,
+    "precision": "observed"
+  },
+  "selected": {
+    "prize": 0.1,
+    "horizon": 28.166666666666664,
+    "precision": "observed"
+  },
+  "regime": "interior_precision",
+  "direction_group": "uncertain",
+  "direction_draw_counts": {
+    "increase": 3,
+    "decrease": 80,
+    "uncertain": 45
+  },
+  "comparisons": [
+    {
+      "design": {
+        "prize": 0.1,
+        "horizon": 28.166666666666664,
+        "precision": "observed"
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 1.0814631651017224,
+      "mean_gain": 0.0,
+      "numerical_radius": 0.0,
+      "mcse": 0.0,
+      "supported": true
+    },
+    {
+      "design": {
+        "prize": 0.1,
+        "horizon": 28.166666666666664,
+        "precision": "full"
+      },
+      "complete": false,
+      "failed_draws": [
+        65,
+        71
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.1,
+        "horizon": 28.166666666666664,
+        "precision": 0.007010137905984232
+      },
+      "complete": false,
+      "failed_draws": [
+        0,
+        10,
+        18,
+        24,
+        27,
+        40,
+        45,
+        55,
+        58,
+        61,
+        63,
+        70,
+        73,
+        88,
+        92,
+        94,
+        102,
+        103,
+        116,
+        124
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.1,
+        "horizon": 28.166666666666664,
+        "precision": 0.21030413717952695
+      },
+      "complete": false,
+      "failed_draws": [
+        4,
+        5,
+        39,
+        45,
+        62,
+        76,
+        100,
+        103,
+        122
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.1,
+        "horizon": 28.166666666666664,
+        "precision": 2.1030413717952694
+      },
+      "complete": false,
+      "failed_draws": [
+        73,
+        78,
+        80
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.1,
+        "horizon": 28.166666666666664,
+        "precision": 21.030413717952698
+      },
+      "complete": false,
+      "failed_draws": [
+        68
+      ]
+    }
+  ],
+  "quality_gain_pct": 0.0,
+  "posterior_draws": 128,
+  "precision_reference": 7.010137905984232,
+  "accepted_sha256": "2626559d034a5348f9db4e34fcfd0e8b3e8c814b8f67056c81a105968b53bec8",
+  "raw_input_sha256": "0b41c3a6a92c6c73ee2feca668cc476186aecd2ce6785a47ddb209f74dfe8237",
+  "script_source_sha256": "5228d891bb4191a754c1d874db9ca69ad35a33d7a5edf19ef9a6bf220d3ad2d3",
+  "scope": "Original nonlinear game; best numerically supported searched precision; original approximate Bayesian posterior and initial distribution fixed; unresolved candidates retained and not called infeasible",
+  "required_baseline_repairs": [
+    {
+      "evidence": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/required_baseline_repairs/6322_fixed_chain0_index576_staged.json",
+      "evidence_sha256": "f19a31c8891635aaa7aab842ce9c65b97cde8b512544edef9da2a7b8c0965d50",
+      "active_cache": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/6322/point_cache/cd4f7e2c01a75fba21d978f85f9bc5584db7a6eb767e0b6532d9470debc7d6a5.json",
+      "active_cache_sha256": "f19a31c8891635aaa7aab842ce9c65b97cde8b512544edef9da2a7b8c0965d50"
+    },
+    {
+      "evidence": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/required_baseline_repairs/6322_fixed_chain3_index1802_staged.json",
+      "evidence_sha256": "c9b75bbeab89b5544c2ff2acc369a3c1d500ac9707ded389293728883ee16880",
+      "active_cache": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/6322/point_cache/29901f1c0e5a1079fe262f09f2efa0e44c6b9292148c6befb689f51ffc8ee066.json",
+      "active_cache_sha256": "c9b75bbeab89b5544c2ff2acc369a3c1d500ac9707ded389293728883ee16880"
+    },
+    {
+      "evidence": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/required_baseline_repairs/6322_fixed_chain3_index594_staged.json",
+      "evidence_sha256": "48fd902602893ca774758c602291b408e8b075c7f80ebd9e0d7a998bca1d6e21",
+      "active_cache": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/6322/point_cache/c6699ebeeee5d112fe3c99c3590cb367d1b944729b3a56a217e1077a31d86a5f.json",
+      "active_cache_sha256": "48fd902602893ca774758c602291b408e8b075c7f80ebd9e0d7a998bca1d6e21"
+    }
+  ],
+  "retry_scope": "All128 original baseline draws and all6 previously computed precision columns; no new numerical solves"
+}

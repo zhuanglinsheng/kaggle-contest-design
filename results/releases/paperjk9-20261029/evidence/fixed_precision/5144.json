@@ -1,0 +1,114 @@
+{
+  "contest_id": 5144,
+  "status": "completed",
+  "observed": {
+    "prize": 0.2,
+    "horizon": 29.041666666666664,
+    "precision": "observed"
+  },
+  "selected": {
+    "prize": 0.2,
+    "horizon": 29.041666666666664,
+    "precision": 0.005999821675962238
+  },
+  "regime": "lowest_searched_precision",
+  "direction_group": "decrease",
+  "direction_draw_counts": {
+    "increase": 0,
+    "decrease": 128,
+    "uncertain": 0
+  },
+  "comparisons": [
+    {
+      "design": {
+        "prize": 0.2,
+        "horizon": 29.041666666666664,
+        "precision": "observed"
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 5.963607219457533,
+      "mean_gain": 0.0,
+      "numerical_radius": 0.0,
+      "mcse": 0.0,
+      "supported": true
+    },
+    {
+      "design": {
+        "prize": 0.2,
+        "horizon": 29.041666666666664,
+        "precision": "full"
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 5.958482228438726,
+      "mean_gain": -0.005124991018806459,
+      "numerical_radius": 8.343727085219149e-05,
+      "mcse": 0.00048127870909479647,
+      "supported": false
+    },
+    {
+      "design": {
+        "prize": 0.2,
+        "horizon": 29.041666666666664,
+        "precision": 0.005999821675962238
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 6.000778574355304,
+      "mean_gain": 0.0371713548977713,
+      "numerical_radius": 0.0001687818718791173,
+      "mcse": 0.0022555171789701636,
+      "supported": true
+    },
+    {
+      "design": {
+        "prize": 0.2,
+        "horizon": 29.041666666666664,
+        "precision": 0.17999465027886713
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 5.973548387685012,
+      "mean_gain": 0.009941168227479626,
+      "numerical_radius": 0.00011043078433282255,
+      "mcse": 0.0007548943644869201,
+      "supported": true
+    },
+    {
+      "design": {
+        "prize": 0.2,
+        "horizon": 29.041666666666664,
+        "precision": 1.7999465027886714
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 5.965862757504009,
+      "mean_gain": 0.0022555380464769,
+      "numerical_radius": 0.00011599889278684355,
+      "mcse": 0.00021675801124236435,
+      "supported": true
+    },
+    {
+      "design": {
+        "prize": 0.2,
+        "horizon": 29.041666666666664,
+        "precision": 17.999465027886714
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 5.9622390162604555,
+      "mean_gain": -0.001368203197077339,
+      "numerical_radius": 0.00011540949528876521,
+      "mcse": 0.00010472832573782103,
+      "supported": false
+    }
+  ],
+  "quality_gain_pct": 0.6233032044178207,
+  "posterior_draws": 128,
+  "precision_reference": 5.999821675962238,
+  "accepted_sha256": "ad3d2b800a1c40d7d5bbdf91af360dbfeade3b44d9de2d1b8d4426dff6c86460",
+  "raw_input_sha256": "e49bb25b7b52e16c43d6c1e1430cdf3587e3682a4183fa554ff7ef3887a74ab7",
+  "script_source_sha256": "5228d891bb4191a754c1d874db9ca69ad35a33d7a5edf19ef9a6bf220d3ad2d3",
+  "scope": "Original nonlinear game; best numerically supported searched precision; original approximate Bayesian posterior and initial distribution fixed; unresolved candidates retained and not called infeasible"
+}

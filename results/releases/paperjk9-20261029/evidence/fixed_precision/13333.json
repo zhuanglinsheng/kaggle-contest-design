@@ -1,0 +1,120 @@
+{
+  "contest_id": 13333,
+  "status": "completed",
+  "observed": {
+    "prize": 0.02,
+    "horizon": 20.291666666666664,
+    "precision": "observed"
+  },
+  "selected": {
+    "prize": 0.02,
+    "horizon": 20.291666666666664,
+    "precision": "observed"
+  },
+  "regime": "interior_precision",
+  "direction_group": "decrease",
+  "direction_draw_counts": {
+    "increase": 0,
+    "decrease": 101,
+    "uncertain": 27
+  },
+  "comparisons": [
+    {
+      "design": {
+        "prize": 0.02,
+        "horizon": 20.291666666666664,
+        "precision": "observed"
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 0.272781383056835,
+      "mean_gain": 0.0,
+      "numerical_radius": 0.0,
+      "mcse": 0.0,
+      "supported": true
+    },
+    {
+      "design": {
+        "prize": 0.02,
+        "horizon": 20.291666666666664,
+        "precision": "full"
+      },
+      "complete": false,
+      "failed_draws": [
+        68
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.02,
+        "horizon": 20.291666666666664,
+        "precision": 117.54502358658536
+      },
+      "complete": false,
+      "failed_draws": [
+        96,
+        106
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.02,
+        "horizon": 20.291666666666664,
+        "precision": 3526.350707597561
+      },
+      "complete": false,
+      "failed_draws": [
+        0,
+        24,
+        105
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.02,
+        "horizon": 20.291666666666664,
+        "precision": 35263.507075975605
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 0.2776951754060453,
+      "mean_gain": 0.0049137923492102945,
+      "numerical_radius": 0.02983739157516981,
+      "mcse": 0.0003439389535310692,
+      "supported": false
+    },
+    {
+      "design": {
+        "prize": 0.02,
+        "horizon": 20.291666666666664,
+        "precision": 352635.0707597561
+      },
+      "complete": false,
+      "failed_draws": [
+        22
+      ]
+    }
+  ],
+  "quality_gain_pct": 0.0,
+  "posterior_draws": 128,
+  "precision_reference": 117545.02358658536,
+  "accepted_sha256": "1464fa3cdf4010ed71fe0b6ed0f486d0f5ac2a1fbdcb7d5bf61e9499a976e89e",
+  "raw_input_sha256": "0692449637e6fbf90d3d39fe04f53ab19463e64f4a2b2a78e4f58b5b2cc95262",
+  "script_source_sha256": "5228d891bb4191a754c1d874db9ca69ad35a33d7a5edf19ef9a6bf220d3ad2d3",
+  "scope": "Original nonlinear game; best numerically supported searched precision; original approximate Bayesian posterior and initial distribution fixed; unresolved candidates retained and not called infeasible",
+  "required_baseline_repairs": [
+    {
+      "evidence": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/required_baseline_repairs/13333_fixed_chain0_index115_staged.json",
+      "evidence_sha256": "2a109a9401ea7e8009aaeb9a934783c780e193a559319d68273986fffa29004a",
+      "active_cache": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/13333/point_cache/f96de1eb153a091e11bd965ac68998cc329d7eb8f30e91000957034ee13c7a27.json",
+      "active_cache_sha256": "2a109a9401ea7e8009aaeb9a934783c780e193a559319d68273986fffa29004a"
+    },
+    {
+      "evidence": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/required_baseline_repairs/13333_fixed_chain0_index1590_staged.json",
+      "evidence_sha256": "830ea1971f0df12f705af1139357e765388e1b5cc8a78aa14006460ff5e830bd",
+      "active_cache": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/13333/point_cache/da5d241fac5e5fe2e5e14eddd3487cd9a65b21fa00ffebb37407994f540a929b.json",
+      "active_cache_sha256": "830ea1971f0df12f705af1139357e765388e1b5cc8a78aa14006460ff5e830bd"
+    }
+  ],
+  "retry_scope": "All128 original baseline draws and all6 previously computed precision columns;no new numerical solves"
+}

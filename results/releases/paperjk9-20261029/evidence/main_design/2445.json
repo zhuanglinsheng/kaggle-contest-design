@@ -1,0 +1,7082 @@
+{
+  "contest_id": 2445,
+  "status": "completed_verified_incumbents",
+  "publication_ready": true,
+  "provenance": {
+    "accepted": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/posterior/contest_2445/accepted.json",
+    "accepted_sha256": "3f9c1e45dabffdd4006405ab6a7e564c277f909db17053a6488e5e74ffda2226",
+    "original_chain_sha256": [
+      "cf22c379736991e3d02058865b66651579031bdc05346eebc49a28f4c7980c3f",
+      "a0c0ee0fa0ba827b5634f74f7ac06e0f2977397818260d3e063c01c7c4d8bdef",
+      "c95931722789f0d27c9c905c84ae739376ddbb43238a036b429d995c726ab730",
+      "6f0a2e3184482a670b290cc2e17aa274420223a893cf161d4393e03585f9f5a7"
+    ],
+    "seed": 202610252445,
+    "screen_per_chain": 1,
+    "coarse_per_chain": 32,
+    "fine_per_chain": 4,
+    "method": "multilevel original-game nonlinear HJB, original posterior unchanged",
+    "source_sha256": "7e0de6064b7f4e88bcd847700d1cf17312b36b498de620c678959d878dffae60",
+    "native_source_sha256": "240a1305a3fc604002de57b6ebc63366d443561174d99844da7cb5794e5982f9",
+    "validation_protocol_sha256": "5e6b81a6c0ce9280e31190e5f60eade8eb156aed3b364c0de8746e443cfa8340"
+  },
+  "observed": {
+    "prize": 0.05,
+    "horizon": 30.5,
+    "precision": "observed"
+  },
+  "selections": [
+    {
+      "contest_id": 2445,
+      "delta": 0.1,
+      "choice": "less_disclosure",
+      "prize_ratio": 0.4284456144400022,
+      "time_multiplier": 2.0,
+      "cost_saving_pct": 24.68676232363617,
+      "additional_reduction_pct": 0.27894607821038475,
+      "selected": {
+        "prize": 0.02142228072200011,
+        "horizon": 61.0,
+        "precision": 15.686314212073201
+      },
+      "full_comparator": {
+        "prize": 0.021538149761721588,
+        "horizon": 61.0,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 2445,
+      "delta": 0.25,
+      "choice": "less_disclosure",
+      "prize_ratio": 0.7737992207657276,
+      "time_multiplier": 1.25,
+      "cost_saving_pct": 6.846062338741787,
+      "additional_reduction_pct": 1.2189944196797753,
+      "selected": {
+        "prize": 0.03868996103828638,
+        "horizon": 38.125,
+        "precision": 47058.9426362196
+      },
+      "full_comparator": {
+        "prize": 0.03940843247867845,
+        "horizon": 38.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 2445,
+      "delta": 0.5,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.0,
+      "time_multiplier": 1.0,
+      "cost_saving_pct": 0.0,
+      "additional_reduction_pct": 4.423207892453096,
+      "selected": {
+        "prize": 0.05,
+        "horizon": 30.5,
+        "precision": "observed"
+      },
+      "full_comparator": {
+        "prize": 0.03940843247867845,
+        "horizon": 38.125,
+        "precision": "full"
+      },
+      "retained_observed": true
+    },
+    {
+      "contest_id": 2445,
+      "delta": 1.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.4018682988808797,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 1.7815850559560142,
+      "additional_reduction_pct": 6.2447751396558004,
+      "selected": {
+        "prize": 0.07009341494404399,
+        "horizon": 22.875,
+        "precision": 15.686314212073201
+      },
+      "full_comparator": {
+        "prize": 0.05476047077946649,
+        "horizon": 30.5,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 2445,
+      "delta": 2.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.4018682988808797,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 15.771056703970688,
+      "additional_reduction_pct": 18.36196006144023,
+      "selected": {
+        "prize": 0.07009341494404399,
+        "horizon": 22.875,
+        "precision": 15.686314212073201
+      },
+      "full_comparator": {
+        "prize": 0.05476047077946649,
+        "horizon": 30.5,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 2445,
+      "delta": 5.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.4018682988808797,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 29.76052835198534,
+      "additional_reduction_pct": 30.857694764316747,
+      "selected": {
+        "prize": 0.07009341494404399,
+        "horizon": 22.875,
+        "precision": 15.686314212073201
+      },
+      "full_comparator": {
+        "prize": 0.05476047077946649,
+        "horizon": 30.5,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 2445,
+      "delta": 10.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.4018682988808797,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 36.11937910108291,
+      "additional_reduction_pct": 36.667546905353824,
+      "selected": {
+        "prize": 0.07009341494404399,
+        "horizon": 22.875,
+        "precision": 15.686314212073201
+      },
+      "full_comparator": {
+        "prize": 0.05476047077946649,
+        "horizon": 30.5,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 2445,
+      "delta": 25.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.4018682988808797,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 40.52166038891969,
+      "additional_reduction_pct": 40.738669490644384,
+      "selected": {
+        "prize": 0.07009341494404399,
+        "horizon": 22.875,
+        "precision": 15.686314212073201
+      },
+      "full_comparator": {
+        "prize": 0.05476047077946649,
+        "horizon": 30.5,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 2445,
+      "delta": 100.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.4018682988808797,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 42.91894227833577,
+      "additional_reduction_pct": 42.97270005952358,
+      "selected": {
+        "prize": 0.07009341494404399,
+        "horizon": 22.875,
+        "precision": 15.686314212073201
+      },
+      "full_comparator": {
+        "prize": 0.05476047077946649,
+        "horizon": 30.5,
+        "precision": "full"
+      },
+      "retained_observed": false
+    }
+  ],
+  "validation": {
+    "{\"horizon\": 61.0, \"precision\": \"full\", \"prize\": 0.02109375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.032968515524670616,
+      "mcse": 0.017667078968743633,
+      "degrees_freedom": 11.234397332352298,
+      "critical_value": 2.19539534887069,
+      "numerical_radius": 0.0035444049172121475,
+      "lower_diagnostic_margin": -0.009362112388652491,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": \"full\", \"prize\": 0.022148437500000003}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.055128617440613065,
+      "mcse": 0.017563015917612338,
+      "degrees_freedom": 10.980012226838637,
+      "critical_value": 2.2014740918098212,
+      "numerical_radius": 0.00354456654662643,
+      "lower_diagnostic_margin": 0.012919526377319579,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 470.58942636219604, \"prize\": 0.02109375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.03216808652271835,
+      "mcse": 0.016771970885915498,
+      "degrees_freedom": 15.082148137042076,
+      "critical_value": 2.130438847167886,
+      "numerical_radius": 0.003582591418221072,
+      "lower_diagnostic_margin": -0.007146163214425877,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 15.686314212073201, \"prize\": 0.02109375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.033683660922992166,
+      "mcse": 0.017529441075852047,
+      "degrees_freedom": 14.875658362473798,
+      "critical_value": 2.133002334432132,
+      "numerical_radius": 0.0035667399309474296,
+      "lower_diagnostic_margin": -0.0072734177440381825,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 47058.9426362196, \"prize\": 0.02109375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.03140072735602345,
+      "mcse": 0.01641995255191141,
+      "degrees_freedom": 15.09634094459839,
+      "critical_value": 2.1302654318063907,
+      "numerical_radius": 0.0035817645714797466,
+      "lower_diagnostic_margin": -0.007159894528694304,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": \"observed\", \"prize\": 0.02109375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.03180151042092359,
+      "mcse": 0.016568636791419584,
+      "degrees_freedom": 15.068177346303981,
+      "critical_value": 2.1306098945536944,
+      "numerical_radius": 0.0035681948927444723,
+      "lower_diagnostic_margin": -0.007067985958885824,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 4705.89426362196, \"prize\": 0.02109375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.031676635279785835,
+      "mcse": 0.01654316393099163,
+      "degrees_freedom": 15.097556955690052,
+      "critical_value": 2.1302505903110207,
+      "numerical_radius": 0.0035546994148216507,
+      "lower_diagnostic_margin": -0.007119148864642724,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 15.686314212073201, \"prize\": 0.022148437500000003}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.05581525921511005,
+      "mcse": 0.017048068992291932,
+      "degrees_freedom": 16.345983957800705,
+      "critical_value": 2.1162643888018753,
+      "numerical_radius": 0.0035713030806775875,
+      "lower_diagnostic_margin": 0.016165734828207573,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": \"full\", \"prize\": 0.0390625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.036375347322659415,
+      "mcse": 0.015166723868422455,
+      "degrees_freedom": 6.156441967168856,
+      "critical_value": 2.4319183074990103,
+      "numerical_radius": 0.003545783766779027,
+      "lower_diagnostic_margin": -0.004054669884518394,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.03125}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.041346193805933365,
+      "mcse": 0.015970322477020744,
+      "degrees_freedom": 7.561516035480917,
+      "critical_value": 2.3294890487269893,
+      "numerical_radius": 0.0035452383152290816,
+      "lower_diagnostic_margin": 0.0005982641758459743,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.0390625}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02369064577149433,
+      "mcse": 0.005810087827698633,
+      "degrees_freedom": 27.253096573815327,
+      "critical_value": 2.0509392773335984,
+      "numerical_radius": 0.007188771562078838,
+      "lower_diagnostic_margin": 0.0045857368788305205,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"full\", \"prize\": 0.053125000000000006}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.03023119277432278,
+      "mcse": 0.01569366554601354,
+      "degrees_freedom": 7.052670086041046,
+      "critical_value": 2.3610491062691428,
+      "numerical_radius": 0.00354663732735365,
+      "lower_diagnostic_margin": -0.010368959564532976,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": \"full\", \"prize\": 0.041015625}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.05901693306910788,
+      "mcse": 0.01509432051555402,
+      "degrees_freedom": 6.03990253834115,
+      "critical_value": 2.4429986307818643,
+      "numerical_radius": 0.0035460042258825698,
+      "lower_diagnostic_margin": 0.01859552449114424,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"full\", \"prize\": 0.05578125000000001}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.04689639433517815,
+      "mcse": 0.01608797610256564,
+      "degrees_freedom": 7.782738568422462,
+      "critical_value": 2.317257491318971,
+      "numerical_radius": 0.003546872641594345,
+      "lower_diagnostic_margin": 0.006069538549752994,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 47058.9426362196, \"prize\": 0.09375}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        }
+      ]
+    },
+    "{\"horizon\": 7.625, \"precision\": 15.686314212073201, \"prize\": 2.0}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1077
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1682
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 267
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 895
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1602
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 7.625, \"precision\": 15.686314212073201, \"prize\": 2.1}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1077
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1682
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 267
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 895
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1602
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 7.625, \"precision\": 15.686314212073201, \"prize\": 2.4}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1077
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1682
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 267
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 895
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1602
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.06875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.01455376157881152,
+      "mcse": 0.007083934436669316,
+      "degrees_freedom": 8.875130408304157,
+      "critical_value": 2.2670181370774327,
+      "numerical_radius": 0.004930741801078033,
+      "lower_diagnostic_margin": -0.006436388072063258,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 470.58942636219604, \"prize\": 0.07187500000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.027848351762182467,
+      "mcse": 0.009589280805165275,
+      "degrees_freedom": 27.246861557437246,
+      "critical_value": 2.050961025240296,
+      "numerical_radius": 0.005122972422983894,
+      "lower_diagnostic_margin": -0.05263856537664523,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.07218750000000002}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.032470495801766155,
+      "mcse": 0.008276459880372766,
+      "degrees_freedom": 11.178112862367948,
+      "critical_value": 2.19671387703856,
+      "numerical_radius": 0.00494605516484032,
+      "lower_diagnostic_margin": 0.009343426364958083,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"observed\", \"prize\": 0.07500000000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.04497212765664574,
+      "mcse": 0.011769610257113733,
+      "degrees_freedom": 40.806398393836005,
+      "critical_value": 2.0198319936058446,
+      "numerical_radius": 0.006674528859494891,
+      "lower_diagnostic_margin": -0.07541929186573046,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 4705.89426362196, \"prize\": 0.07500000000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.04043683163972796,
+      "mcse": 0.01164262463703472,
+      "degrees_freedom": 41.68385388768639,
+      "critical_value": 2.018535258272301,
+      "numerical_radius": 0.006749571398534444,
+      "lower_diagnostic_margin": -0.07068745136694674,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 470.58942636219604, \"prize\": 0.07546875000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.016480910864987347,
+      "mcse": 0.011121824068266992,
+      "degrees_freedom": 30.372177727198142,
+      "critical_value": 2.041223548241755,
+      "numerical_radius": 0.005093900317803365,
+      "lower_diagnostic_margin": -0.04427694037033922,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 47058.9426362196, \"prize\": 0.078125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.047083206101889305,
+      "mcse": 0.013505531512793368,
+      "degrees_freedom": 48.37732975141808,
+      "critical_value": 2.010229695889586,
+      "numerical_radius": 0.005622713639801075,
+      "lower_diagnostic_margin": -0.07985514024748022,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"observed\", \"prize\": 0.07875000000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.03730469495077395,
+      "mcse": 0.01330332884136763,
+      "degrees_freedom": 42.92237082577824,
+      "critical_value": 2.0167976825554157,
+      "numerical_radius": 0.006538120322570687,
+      "lower_diagnostic_margin": -0.0706729380508875,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 4705.89426362196, \"prize\": 0.07875000000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.032183280387313176,
+      "mcse": 0.013218197788757453,
+      "degrees_freedom": 43.14836094175435,
+      "critical_value": 2.016491690023725,
+      "numerical_radius": 0.0066370533280283375,
+      "lower_diagnostic_margin": -0.06547471971346089,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 47058.9426362196, \"prize\": 0.08203125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.04112030259848227,
+      "mcse": 0.015100628789928948,
+      "degrees_freedom": 50.041998147364986,
+      "critical_value": 2.0085173466001405,
+      "numerical_radius": 0.005597137081654088,
+      "lower_diagnostic_margin": -0.07704731454927814,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.0825}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.07567943214814579,
+      "mcse": 0.01192674614042603,
+      "degrees_freedom": 18.592104738803613,
+      "critical_value": 2.0961363369407544,
+      "numerical_radius": 0.005186510412546301,
+      "lower_diagnostic_margin": 0.04549283576918459,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 470.58942636219604, \"prize\": 0.08625000000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.007619143339540266,
+      "mcse": 0.015251005615185035,
+      "degrees_freedom": 37.75640440143576,
+      "critical_value": 2.0248231668363137,
+      "numerical_radius": 0.004858730340730741,
+      "lower_diagnostic_margin": -0.02812017648836784,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"observed\", \"prize\": 0.09000000000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.02309164841904841,
+      "mcse": 0.01748116399634441,
+      "degrees_freedom": 48.057833802131775,
+      "critical_value": 2.0105722502725416,
+      "numerical_radius": 0.004920355201891803,
+      "lower_diagnostic_margin": -0.06315914685445373,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 4705.89426362196, \"prize\": 0.09000000000000001}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.01650603928442118,
+      "mcse": 0.01740499514876084,
+      "degrees_freedom": 48.36173868639349,
+      "critical_value": 2.0102463045352468,
+      "numerical_radius": 0.005128128308461141,
+      "lower_diagnostic_margin": -0.0566224947711327,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": 15.686314212073201, \"prize\": 0.1375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.0516230134422805,
+      "mcse": 0.017381131736468422,
+      "degrees_freedom": 44.483394541611226,
+      "critical_value": 2.0147491858639643,
+      "numerical_radius": 0.005307922600884106,
+      "lower_diagnostic_margin": -0.09194955705860869,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": 15.686314212073201, \"prize\": 0.14437500000000003}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.06535413458299788,
+      "mcse": 0.017920130768867924,
+      "degrees_freedom": 47.367872736802305,
+      "critical_value": 2.0113281704452115,
+      "numerical_radius": 0.00548824993883075,
+      "lower_diagnostic_margin": -0.1068856483553147,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": 15.686314212073201, \"prize\": 0.165}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.06218984018116547,
+      "mcse": 0.018639531472070217,
+      "degrees_freedom": 65.59011909617193,
+      "critical_value": 1.9967973278947855,
+      "numerical_radius": 0.005613213877987133,
+      "lower_diagnostic_margin": -0.10502242069579316,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"observed\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5577472646250408,
+      "mcse": 0.019639864052307783,
+      "degrees_freedom": 16.591351023009516,
+      "critical_value": 2.1137810481809396,
+      "numerical_radius": 0.0035433754620143657,
+      "lower_diagnostic_margin": -0.6028050125096734,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"observed\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4580745417003395,
+      "mcse": 0.018814088529057183,
+      "degrees_freedom": 13.695497953528236,
+      "critical_value": 2.149269114672714,
+      "numerical_radius": 0.003545924878199193,
+      "lower_diagnostic_margin": -0.5020570059747594,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"observed\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.2696748803777402,
+      "mcse": 0.014888175233606596,
+      "degrees_freedom": 16.74719325379888,
+      "critical_value": 2.1122442983552525,
+      "numerical_radius": 0.0035692082221816038,
+      "lower_diagnostic_margin": -0.30469155185002117,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"observed\", \"prize\": 0.037500000000000006}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.11762787187993691,
+      "mcse": 0.007155820982882489,
+      "degrees_freedom": 19.060632386883906,
+      "critical_value": 2.09257351582724,
+      "numerical_radius": 0.003779395451119147,
+      "lower_diagnostic_margin": -0.1363813488038368,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"observed\", \"prize\": 0.045000000000000005}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.04276753873421241,
+      "mcse": 0.0028260028950370542,
+      "degrees_freedom": 42.13082959811561,
+      "critical_value": 2.0178960575501232,
+      "numerical_radius": 0.004199771046983519,
+      "lower_diagnostic_margin": -0.052669889881716433,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.3380173000928052,
+      "mcse": 0.01587412571250776,
+      "degrees_freedom": 7.3809179931981586,
+      "critical_value": 2.3401090794894923,
+      "numerical_radius": 0.0035447118487460386,
+      "lower_diagnostic_margin": -0.3787091976503482,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8046409111946107,
+      "mcse": 0.021046827952142143,
+      "degrees_freedom": 21.812942449928585,
+      "critical_value": 2.0749046893965426,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.8518518713678139,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7379446092074189,
+      "mcse": 0.020121336777377766,
+      "degrees_freedom": 18.480327436057657,
+      "critical_value": 2.097014762480816,
+      "numerical_radius": 0.0035415408493425097,
+      "lower_diagnostic_margin": -0.7836808903197708,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6690105850778134,
+      "mcse": 0.01937326567761358,
+      "degrees_freedom": 16.03151144694995,
+      "critical_value": 2.1195666965761153,
+      "numerical_radius": 0.003541975913769079,
+      "lower_diagnostic_margin": -0.7136154897257733,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5353229024650937,
+      "mcse": 0.01806242047179886,
+      "degrees_freedom": 12.259526018470845,
+      "critical_value": 2.173708225305973,
+      "numerical_radius": 0.0035429043074418584,
+      "lower_diagnostic_margin": -0.5781282387210198,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.1}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.2512447929662165,
+      "mcse": 0.022243914694935835,
+      "degrees_freedom": 26.629825398478022,
+      "critical_value": 2.0531659155621376,
+      "numerical_radius": 0.003547453343846703,
+      "lower_diagnostic_margin": -0.3004626937903772,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.2}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.3477520045691831,
+      "mcse": 0.0242968352849121,
+      "degrees_freedom": 35.7427599914354,
+      "critical_value": 2.0286009364181736,
+      "numerical_radius": 0.003550524792315014,
+      "lower_diagnostic_margin": -0.4005911121724689,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.4}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        }
+      ]
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 0.8}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        }
+      ]
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 1.6}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 3.2}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1656
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 464
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 803
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 488
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1228
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 104
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 490
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1818
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1948
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 412
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 7
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 892
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1007
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1550
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1807
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1939
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1407
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 579
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 89
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1989
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 75
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1259
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 172
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 482
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1314
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 275
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 287
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 44
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 144
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 729
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1587
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1767
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 22
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1542
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1264
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1350
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 503
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1485
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 263
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1441
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1247
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1360
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1381
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1444
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 460
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 241
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 752
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 523
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1357
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1552
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1712
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 59
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1596
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1828
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 944
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1626
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 942
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1685
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1077
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1682
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 267
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 895
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1602
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 3.80578125}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1656
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 464
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 803
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 488
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 114
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1228
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 104
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 490
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1818
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1948
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 412
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 7
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 892
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1007
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1550
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1905
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1807
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1939
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1407
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 579
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 89
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1989
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 75
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1259
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 172
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 482
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1314
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 275
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 287
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 44
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 144
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 351
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 729
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1587
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1767
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 22
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1542
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1264
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1350
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 503
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1485
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 263
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1441
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1247
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1360
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1381
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1544
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1444
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1304
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 460
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 241
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 752
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 523
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1357
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1552
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1712
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 59
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1596
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1828
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 944
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1626
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 942
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1685
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1077
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1682
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 267
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 895
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1602
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.1501306031210312,
+      "mcse": 0.01541499646367404,
+      "degrees_freedom": 6.567358752156824,
+      "critical_value": 2.3965722866752697,
+      "numerical_radius": 0.0035455843509444506,
+      "lower_diagnostic_margin": -0.19061934079601414,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7237402819684604,
+      "mcse": 0.02098236675482816,
+      "degrees_freedom": 21.56661831820546,
+      "critical_value": 2.076291992591394,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.7708466002055072,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6405274372092027,
+      "mcse": 0.019807751440768056,
+      "degrees_freedom": 17.42352061381017,
+      "critical_value": 2.105915700545998,
+      "numerical_radius": 0.0035417066240868186,
+      "lower_diagnostic_margin": -0.6857825985849155,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5548700933679477,
+      "mcse": 0.018943342138829193,
+      "degrees_freedom": 14.719859059874054,
+      "critical_value": 2.13498805246297,
+      "numerical_radius": 0.0035422349784341527,
+      "lower_diagnostic_margin": -0.5988561374865006,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.38997869467535123,
+      "mcse": 0.0175369064299858,
+      "degrees_freedom": 10.929414267755911,
+      "critical_value": 2.2027206822106815,
+      "numerical_radius": 0.0035433832138696895,
+      "lower_diagnostic_margin": -0.43215098438454413,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.1}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.05029974777132782,
+      "mcse": 0.024152724238524558,
+      "degrees_freedom": 35.288166802508485,
+      "critical_value": 2.029515476190193,
+      "numerical_radius": 0.003548993494565944,
+      "lower_diagnostic_margin": -0.10286706890013335,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.2}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.1672581803935456,
+      "mcse": 0.026183688914567144,
+      "degrees_freedom": 45.29175865942804,
+      "critical_value": 2.0137453495822544,
+      "numerical_radius": 0.003552779176216235,
+      "lower_diagnostic_margin": -0.22353824135637984,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.4}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        }
+      ]
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 0.8}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        }
+      ]
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 1.6}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 2.24328125}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 464
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 803
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1228
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 104
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1818
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1948
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 412
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1550
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1807
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 579
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 89
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 75
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1259
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 172
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 482
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1314
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 287
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 144
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 729
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1587
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 22
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1264
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 503
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 263
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1247
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1381
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 752
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1357
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1552
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1828
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 944
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1626
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 942
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1685
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7237402819684604,
+      "mcse": 0.02098236675482816,
+      "degrees_freedom": 21.56661831820546,
+      "critical_value": 2.076291992591394,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.7708466002055072,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.07015336306577911}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.022069596307388306,
+      "mcse": 0.007543947947353957,
+      "degrees_freedom": 9.825827006030964,
+      "critical_value": 2.2335041071403463,
+      "numerical_radius": 0.004939192505142388,
+      "lower_diagnostic_margin": 0.00028096507777786855,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.07009341494404399}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02175336828431465,
+      "mcse": 0.007522725198429919,
+      "degrees_freedom": 9.788334159280819,
+      "critical_value": 2.234687141871032,
+      "numerical_radius": 0.004938807002371821,
+      "lower_diagnostic_margin": 3.6240091822806186e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.069421707472022}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.01818773279261424,
+      "mcse": 0.007300891068433997,
+      "degrees_freedom": 9.325551781220677,
+      "critical_value": 2.2501761911380656,
+      "numerical_radius": 0.004934818441328419,
+      "lower_diagnostic_margin": -0.0031753769049969113,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 22.875, \"precision\": 15.686314212073201, \"prize\": 0.07009139920848363}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.021742173316379454,
+      "mcse": 0.007522077912415262,
+      "degrees_freedom": 9.78704902588372,
+      "critical_value": 2.2347278732248514,
+      "numerical_radius": 0.004938767772275178,
+      "lower_diagnostic_margin": -6.391631339110887e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8027273351213072,
+      "mcse": 0.018762856944889463,
+      "degrees_freedom": 14.190837417774679,
+      "critical_value": 2.1420839023958376,
+      "numerical_radius": 0.0035429410599160205,
+      "lower_diagnostic_margin": -0.846461890005827,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.9917727122398494,
+      "mcse": 0.02138788716359577,
+      "degrees_freedom": 23.13178232085251,
+      "critical_value": 2.0680056849876145,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -1.0395437826424203,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.9666774099702429,
+      "mcse": 0.021060401134343952,
+      "degrees_freedom": 21.872823701887942,
+      "critical_value": 2.0745724184952787,
+      "numerical_radius": 0.0035411342296499354,
+      "lower_diagnostic_margin": -1.0139098715156494,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.9402485810836935,
+      "mcse": 0.02073450448630559,
+      "degrees_freedom": 20.660546819764654,
+      "critical_value": 2.0816963003255964,
+      "numerical_radius": 0.0035413325647915793,
+      "lower_diagnostic_margin": -0.9869528549267119,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8874007488087754,
+      "mcse": 0.020064943772434434,
+      "degrees_freedom": 18.29753903108085,
+      "critical_value": 2.098475898441956,
+      "numerical_radius": 0.0035417573124073365,
+      "lower_diagnostic_margin": -0.9330483070312294,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.1}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7494848614822482,
+      "mcse": 0.020101722306162494,
+      "degrees_freedom": 18.41395420655628,
+      "critical_value": 2.09754174845757,
+      "numerical_radius": 0.0035437437640719574,
+      "lower_diagnostic_margin": -0.7951928069993968,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.2}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7859766650485966,
+      "mcse": 0.02151824932621598,
+      "degrees_freedom": 23.576029892181257,
+      "critical_value": 2.0658644376580595,
+      "numerical_radius": 0.00354502147653312,
+      "lower_diagnostic_margin": -0.8339754725688189,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.4}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        }
+      ]
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 0.8}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        }
+      ]
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 1.6}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 3.2}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1656
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 464
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 803
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 488
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1228
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 104
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 490
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1818
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1948
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 412
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 7
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 892
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1007
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1550
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1807
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1939
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1407
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 579
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 89
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1989
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 75
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1259
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 172
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 482
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1314
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 275
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 287
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 44
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 144
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 729
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1587
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1767
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 22
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1542
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1264
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1350
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 503
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1485
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 263
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1441
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1247
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1360
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1381
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1444
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 460
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 241
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 752
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 523
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1357
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1552
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1712
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 59
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1596
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1828
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 944
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1626
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 942
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1685
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1077
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1682
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 267
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 895
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1602
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 5.00578125}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1656
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 464
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 803
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 488
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1016
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 114
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1228
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 104
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1518
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 147
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 490
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1818
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 609
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 128
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 801
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1244
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1793
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1948
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 412
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 7
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 892
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 934
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 601
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1007
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1280
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1550
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1322
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1905
+        },
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 278
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1807
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1507
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1939
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1407
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1331
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 579
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1168
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 89
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1989
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1398
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1207
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1505
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1773
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1461
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1202
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1039
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 75
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1536
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1259
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 172
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 482
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1314
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 275
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 965
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 1749
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 287
+        },
+        {
+          "stage": "coarse",
+          "chain": 1,
+          "index": 377
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 962
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 44
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 144
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1778
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 351
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 729
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1587
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1625
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1646
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1895
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1767
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 844
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 22
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 774
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1313
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1542
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1264
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 916
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1350
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1419
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 503
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1485
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 373
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 263
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1441
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1247
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 123
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 85
+        },
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1360
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 180
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1381
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1544
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1346
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1444
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1304
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 460
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 800
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 2
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 241
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 752
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 523
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1357
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1552
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1712
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1256
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 267
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 59
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1993
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1596
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 465
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1716
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1828
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1849
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 944
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1707
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 70
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1626
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 942
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 108
+        },
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 1685
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 510
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1077
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 921
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 54
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 145
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 820
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1682
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1828
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1813
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 853
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 267
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 58
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 895
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1602
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 126
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1061
+        }
+      ]
+    },
+    "{\"horizon\": 30.5, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.654739019299458,
+      "mcse": 0.02096262413360452,
+      "degrees_freedom": 21.48990779193035,
+      "critical_value": 2.0767308871701133,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.7018135464722334,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"full\", \"prize\": 0.05480174058629358}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.04098147849885699,
+      "mcse": 0.015931754166104598,
+      "degrees_freedom": 7.487407330876781,
+      "critical_value": 2.3337748269732543,
+      "numerical_radius": 0.003546818047541402,
+      "lower_diagnostic_margin": 0.00025353362893440435,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"full\", \"prize\": 0.05476047077946649}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.040726403728981536,
+      "mcse": 0.015925443320206862,
+      "degrees_freedom": 7.475646844134478,
+      "critical_value": 2.3344640468121796,
+      "numerical_radius": 0.003546813300139075,
+      "lower_diagnostic_margin": 2.215568274359283e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"full\", \"prize\": 0.05394273538973325}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.03557346499336313,
+      "mcse": 0.015805047455132167,
+      "degrees_freedom": 7.253766778589514,
+      "critical_value": 2.347957433769134,
+      "numerical_radius": 0.003546718780482088,
+      "lower_diagnostic_margin": -0.005082832450470464,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"full\", \"prize\": 0.054758864490090334}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.04071646619547971,
+      "mcse": 0.015925198139979994,
+      "degrees_freedom": 7.475190204202254,
+      "critical_value": 2.334490859001029,
+      "numerical_radius": 0.003546813045760121,
+      "lower_diagnostic_margin": -7.576335843903926e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"observed\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.654739019299458,
+      "mcse": 0.02096262413360452,
+      "degrees_freedom": 21.48990779193035,
+      "critical_value": 2.0767308871701133,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.7018135464722334,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 30.5, \"precision\": \"observed\", \"prize\": 0.04999875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -6.407192783003043e-06,
+      "mcse": 3.8351584491704185e-06,
+      "degrees_freedom": 3.75679051191605,
+      "critical_value": 2.8487893989081567,
+      "numerical_radius": 0.007081536410877505,
+      "lower_diagnostic_margin": -0.0070988691623936374,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5935538142342847,
+      "mcse": 0.02097283769055071,
+      "degrees_freedom": 21.52615355483477,
+      "critical_value": 2.0765230975747224,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.6406451942787802,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": \"full\", \"prize\": 0.039413383958404755}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.040530119765305454,
+      "mcse": 0.015149402851538952,
+      "degrees_freedom": 6.1284122772242275,
+      "critical_value": 2.4345370549447827,
+      "numerical_radius": 0.003545818997697142,
+      "lower_diagnostic_margin": 0.00010251816525057734,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": \"full\", \"prize\": 0.03940348099895215}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.04041337695871915,
+      "mcse": 0.01514986602610919,
+      "degrees_freedom": 6.129160609017654,
+      "critical_value": 2.4344667660406154,
+      "numerical_radius": 0.0035458182004712586,
+      "lower_diagnostic_margin": -1.428659228274072e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": \"full\", \"prize\": 0.03940843247867845}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.0404717521324274,
+      "mcse": 0.015149634250765754,
+      "degrees_freedom": 6.128786133810248,
+      "critical_value": 2.4345019369666785,
+      "numerical_radius": 0.003545818665592009,
+      "lower_diagnostic_margin": 4.411953900943172e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5935538142342847,
+      "mcse": 0.02097283769055071,
+      "degrees_freedom": 21.52615355483477,
+      "critical_value": 2.0765230975747224,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.6406451942787802,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.0048828125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5086263523458411,
+      "mcse": 0.019747189375047616,
+      "degrees_freedom": 17.022958999273754,
+      "critical_value": 2.1095988373443126,
+      "numerical_radius": 0.003543000839798388,
+      "lower_diagnostic_margin": -0.5538280009320579,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.009765625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4215046537679496,
+      "mcse": 0.0189093147296102,
+      "degrees_freedom": 14.08085338499356,
+      "critical_value": 2.1436318645778933,
+      "numerical_radius": 0.00354590824187017,
+      "lower_diagnostic_margin": -0.46558517160154433,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.01953125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.24950899911241298,
+      "mcse": 0.017300842249453403,
+      "degrees_freedom": 13.27388979064662,
+      "critical_value": 2.1558460602908682,
+      "numerical_radius": 0.0035539703082169763,
+      "lower_diagnostic_margin": -0.29036092202382785,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 15.25, \"precision\": \"full\", \"prize\": 3.8047604707794664}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 22.875, \"precision\": \"full\", \"prize\": 2.2422604707794664}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 3.0500000000000003, \"precision\": \"full\", \"prize\": 5.004760470779466}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.038760084334662805}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.020231575128822885,
+      "mcse": 0.005944708734889589,
+      "degrees_freedom": 27.035422019733563,
+      "critical_value": 2.051704734502317,
+      "numerical_radius": 0.007151927842510619,
+      "lower_diagnostic_margin": 0.0008828602297020153,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.03870054511397542}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.019545162998612402,
+      "mcse": 0.005972242324204017,
+      "degrees_freedom": 26.95022196634884,
+      "critical_value": 2.052007859772724,
+      "numerical_radius": 0.007143340847680653,
+      "lower_diagnostic_margin": 0.00014673396119778762,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.02911589755698771}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.1033082855479677,
+      "mcse": 0.011355125768487044,
+      "degrees_freedom": 14.599752801296638,
+      "critical_value": 2.1365501852787556,
+      "numerical_radius": 0.003580619142779441,
+      "lower_diagnostic_margin": -0.1311497007552717,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.03868858352606552}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.019407335039550402,
+      "mcse": 0.005978007220868182,
+      "degrees_freedom": 26.92905522146182,
+      "critical_value": 2.0520834776978836,
+      "numerical_radius": 0.007141546251165906,
+      "lower_diagnostic_margin": -1.5810591177424504e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 38.125, \"precision\": 47058.9426362196, \"prize\": 0.03868996103828638}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.019425193244407498,
+      "mcse": 0.005977852695163855,
+      "degrees_freedom": 26.919632308805653,
+      "critical_value": 2.0521171808957464,
+      "numerical_radius": 0.007141750549210929,
+      "lower_diagnostic_margin": 1.618847458687879e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5380099781473997,
+      "mcse": 0.021005057758666602,
+      "degrees_freedom": 21.64563437531361,
+      "critical_value": 2.0758433408178756,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.5851539855776039,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.00390625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4635110882933169,
+      "mcse": 0.019849116271767244,
+      "degrees_freedom": 17.554585741179064,
+      "critical_value": 2.104749576476625,
+      "numerical_radius": 0.003541774360249843,
+      "lower_diagnostic_margin": -0.5088302817200041,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.0078125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.38731293791843313,
+      "mcse": 0.018947627637905366,
+      "degrees_freedom": 14.727060937679397,
+      "critical_value": 2.1348952594318376,
+      "numerical_radius": 0.003542275999151234,
+      "lower_diagnostic_margin": -0.43130641433922823,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.015625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.2339866398397454,
+      "mcse": 0.01801702394567091,
+      "degrees_freedom": 12.136094938882309,
+      "critical_value": 2.1761060280375246,
+      "numerical_radius": 0.003543217994092041,
+      "lower_diagnostic_margin": -0.2767368122493083,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.031217543921893735}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.04084527302960378,
+      "mcse": 0.01597528977136396,
+      "degrees_freedom": 7.5708525827528605,
+      "critical_value": 2.328956025178573,
+      "numerical_radius": 0.0035452342788785496,
+      "lower_diagnostic_margin": 9.42913837335105e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.031210982948802105}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.04074397432640419,
+      "mcse": 0.01597629540672459,
+      "degrees_freedom": 7.572743775680764,
+      "critical_value": 2.328848243053438,
+      "numerical_radius": 0.003545233403406005,
+      "lower_diagnostic_margin": -7.626565455089163e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 45.75, \"precision\": \"full\", \"prize\": 0.03121426343534792}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.040794625273281135,
+      "mcse": 0.015975792526950677,
+      "degrees_freedom": 7.571798018998225,
+      "critical_value": 2.3289021354231108,
+      "numerical_radius": 0.0035452338257971065,
+      "lower_diagnostic_margin": 4.333411639201963e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.43900781035598035,
+      "mcse": 0.021117262538608163,
+      "degrees_freedom": 22.06820242736199,
+      "critical_value": 2.0735015203522114,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.4863352844938425,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": \"full\", \"prize\": 0.021538149761721588}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.042346969793221625,
+      "mcse": 0.017625920532589705,
+      "degrees_freedom": 11.133257316003398,
+      "critical_value": 2.1977752619343316,
+      "numerical_radius": 0.0035445028087157868,
+      "lower_diagnostic_margin": 6.465486915979007e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": \"full\", \"prize\": 0.021533851780620224}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.042256551385600125,
+      "mcse": 0.017626337367845624,
+      "degrees_freedom": 11.134277976079378,
+      "critical_value": 2.1977510052802387,
+      "numerical_radius": 0.003544501986780584,
+      "lower_diagnostic_margin": -2.6251270771817433e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 15.686314212073201, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.43900781035598035,
+      "mcse": 0.021117262538608163,
+      "degrees_freedom": 22.06820242736199,
+      "critical_value": 2.0735015203522114,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.4863352844938425,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 15.686314212073201, \"prize\": 0.02142228072200011}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.040623989278205194,
+      "mcse": 0.017391785226924403,
+      "degrees_freedom": 15.292843433728208,
+      "critical_value": 2.127900159696072,
+      "numerical_radius": 0.0035680852870902946,
+      "lower_diagnostic_margin": 4.7921429342678845e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 61.0, \"precision\": 15.686314212073201, \"prize\": 0.021418880341938704}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.04055241146486921,
+      "mcse": 0.017393363853294787,
+      "degrees_freedom": 15.288109528625336,
+      "critical_value": 2.127956369586769,
+      "numerical_radius": 0.0035680699359397564,
+      "lower_diagnostic_margin": -2.797787122945511e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5837257507900907,
+      "mcse": 0.01708777356428528,
+      "degrees_freedom": 9.873554599563013,
+      "critical_value": 2.232012736952757,
+      "numerical_radius": 0.0035435528266458687,
+      "lower_diagnostic_margin": -0.6254094318583859,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.907178668348956,
+      "mcse": 0.021193615285155405,
+      "degrees_freedom": 22.376503374471007,
+      "critical_value": 2.071851766187282,
+      "numerical_radius": 0.003540798158381313,
+      "lower_diagnostic_margin": -0.9546294957677802,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8623213333473374,
+      "mcse": 0.020589434047627413,
+      "degrees_freedom": 20.129222858710317,
+      "critical_value": 2.085105307555796,
+      "numerical_radius": 0.003541325494996305,
+      "lower_diagnostic_margin": -0.9087937970546116,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8155891297677098,
+      "mcse": 0.020041889393852513,
+      "degrees_freedom": 18.215025899704454,
+      "critical_value": 2.0991457196098957,
+      "numerical_radius": 0.003541636535524403,
+      "lower_diagnostic_margin": -0.8612016126372347,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7236572062242926,
+      "mcse": 0.018997257810056057,
+      "degrees_freedom": 14.88490721254964,
+      "critical_value": 2.132885868128745,
+      "numerical_radius": 0.0035422950649766968,
+      "lower_diagnostic_margin": -0.7677184840055363,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.1}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5140952072740874,
+      "mcse": 0.020578311747623985,
+      "degrees_freedom": 20.093401634800642,
+      "critical_value": 2.085342015957329,
+      "numerical_radius": 0.0035454667048099345,
+      "lower_diagnostic_margin": -0.560553492083686,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.2}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5815106190680029,
+      "mcse": 0.022455180587697597,
+      "degrees_freedom": 27.354410793185565,
+      "critical_value": 2.0505873411108735,
+      "numerical_radius": 0.0035475821068998007,
+      "lower_diagnostic_margin": -0.631104510230394,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.4}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 3,
+          "index": 429
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 0.8}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1882
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 1.6}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 3.2}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 7.625, \"precision\": \"full\", \"prize\": 4.742260470779466}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1952
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    }
+  },
+  "required_further_prize_refinement": [],
+  "uncertainty": [
+    {
+      "delta": 0.1,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.02109375,
+            "horizon": 61.0,
+            "precision": "full"
+          },
+          "cost": 0.821875,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02109375,
+            "horizon": 61.0,
+            "precision": 470.58942636219604
+          },
+          "cost": 0.821875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02109375,
+            "horizon": 61.0,
+            "precision": 15.686314212073201
+          },
+          "cost": 0.821875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02109375,
+            "horizon": 61.0,
+            "precision": 47058.9426362196
+          },
+          "cost": 0.821875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02109375,
+            "horizon": 61.0,
+            "precision": "observed"
+          },
+          "cost": 0.821875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02109375,
+            "horizon": 61.0,
+            "precision": 4705.89426362196
+          },
+          "cost": 0.821875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.021533851780620224,
+            "horizon": 61.0,
+            "precision": "full"
+          },
+          "cost": 0.8306770356124045,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.021418880341938704,
+            "horizon": 61.0,
+            "precision": 15.686314212073201
+          },
+          "cost": 0.828377606838774,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 0.25,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.0390625,
+            "horizon": 38.125,
+            "precision": "full"
+          },
+          "cost": 1.171875,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.03940348099895215,
+            "horizon": 38.125,
+            "precision": "full"
+          },
+          "cost": 1.178694619979043,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.03868858352606552,
+            "horizon": 38.125,
+            "precision": 47058.9426362196
+          },
+          "cost": 1.1643966705213105,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 0.5,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.0390625,
+            "horizon": 38.125,
+            "precision": "full"
+          },
+          "cost": 1.5625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.053125000000000006,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 1.5625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.04999875,
+            "horizon": 30.5,
+            "precision": "observed"
+          },
+          "cost": 1.499975,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.03940348099895215,
+            "horizon": 38.125,
+            "precision": "full"
+          },
+          "cost": 1.569319619979043,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 1.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.053125000000000006,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 2.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 1.9375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.069421707472022,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 1.95093414944044,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07009139920848363,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 1.9643279841696726,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.05394273538973325,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 2.078854707794665,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.054758864490090334,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 2.0951772898018066,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 2.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.053125000000000006,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 3.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 2.5,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.069421707472022,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 2.5134341494404397,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07009139920848363,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 2.526827984169673,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.05394273538973325,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 3.078854707794665,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.054758864490090334,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 3.0951772898018066,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 5.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.053125000000000006,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 6.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 4.1875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.1,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 4.8125,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.069421707472022,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 4.20093414944044,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07009139920848363,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 4.214327984169673,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.05394273538973325,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 6.078854707794665,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.054758864490090334,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 6.095177289801807,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 10.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.053125000000000006,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 11.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 7.0,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 15.25,
+            "precision": "full"
+          },
+          "cost": 10.5,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.1,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 7.625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.069421707472022,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 7.01343414944044,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07009139920848363,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 7.026827984169673,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 3.0500000000000003,
+            "precision": "full"
+          },
+          "cost": 8.1,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.05394273538973325,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 11.078854707794665,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.054758864490090334,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 11.095177289801807,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 8.625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 25.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.053125000000000006,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 26.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 15.4375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 15.25,
+            "precision": "full"
+          },
+          "cost": 14.25,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 15.25,
+            "precision": "full"
+          },
+          "cost": 22.25,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.1,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 16.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 22.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.069421707472022,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 15.45093414944044,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07009139920848363,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 15.464327984169673,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 3.0500000000000003,
+            "precision": "full"
+          },
+          "cost": 8.25,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 3.0500000000000003,
+            "precision": "full"
+          },
+          "cost": 16.25,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.05394273538973325,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 26.078854707794665,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.054758864490090334,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 26.095177289801807,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 9.5625,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 17.5625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 100.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.053125000000000006,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 101.0625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 2.0,
+            "horizon": 7.625,
+            "precision": 15.686314212073201
+          },
+          "cost": 46.25,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 2.1,
+            "horizon": 7.625,
+            "precision": 15.686314212073201
+          },
+          "cost": 48.25,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 2.4,
+            "horizon": 7.625,
+            "precision": 15.686314212073201
+          },
+          "cost": 54.24999999999999,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 57.625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 15.25,
+            "precision": "full"
+          },
+          "cost": 33.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 15.25,
+            "precision": "full"
+          },
+          "cost": 41.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 1.6,
+            "horizon": 15.25,
+            "precision": "full"
+          },
+          "cost": 57.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 3.2,
+            "horizon": 15.25,
+            "precision": "full"
+          },
+          "cost": 89.0,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.1,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 58.25,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 64.25,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 72.25,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 1.6,
+            "horizon": 22.875,
+            "precision": "full"
+          },
+          "cost": 88.25,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.069421707472022,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 57.63843414944044,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07009139920848363,
+            "horizon": 22.875,
+            "precision": 15.686314212073201
+          },
+          "cost": 57.65182798416967,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 3.0500000000000003,
+            "precision": "full"
+          },
+          "cost": 9.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 3.0500000000000003,
+            "precision": "full"
+          },
+          "cost": 17.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 1.6,
+            "horizon": 3.0500000000000003,
+            "precision": "full"
+          },
+          "cost": 33.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 3.2,
+            "horizon": 3.0500000000000003,
+            "precision": "full"
+          },
+          "cost": 65.0,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.05394273538973325,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 101.07885470779466,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.054758864490090334,
+            "horizon": 30.5,
+            "precision": "full"
+          },
+          "cost": 101.09517728980181,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.4,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 14.25,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 22.25,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 1.6,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 38.25,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 3.2,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 70.25,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 4.742260470779466,
+            "horizon": 7.625,
+            "precision": "full"
+          },
+          "cost": 101.09520941558931,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    }
+  ],
+  "independent_checks": [],
+  "required_baseline_repairs": [],
+  "input_files_sha256": {
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/2445/result.json": "55efb26a80a337e5fb659ab1633c8ee3b0a9213fc6fe52732088f4d4d389a5a7",
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/2445/prize_refinement.json": "188be344b37e158bfd25847375b557a2f5c68ae4071f0685ad30eb3a2b35873a",
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/2445/validation_progress.json": "ecf1e37f969c60802bdd3ef8f8095bd4864d4f4934112f47a231ebd30ccd787c"
+  },
+  "assembly_source_sha256": "f2b9db24aff0a23a7808c93ad30747fee46d72acbf9461ff5ad02f89387aaa42",
+  "selection_source_sha256": "ac7ca4bdf8877a8a9992d3673d779596d280d4e94bd73c32424888cc5f448f9d",
+  "scope": "Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified",
+  "missing_full_comparators": [],
+  "unresolved_full_comparator_delimitation": null,
+  "remaining_checks": [
+    "Full73 coverage and table arithmetic",
+    "Manuscript notes delimit the finite search and unresolved competitors"
+  ]
+}

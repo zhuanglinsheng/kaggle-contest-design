@@ -1,0 +1,4316 @@
+{
+  "contest_id": 3526,
+  "status": "completed_verified_incumbents",
+  "publication_ready": true,
+  "provenance": {
+    "accepted": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/posterior/contest_3526/accepted.json",
+    "accepted_sha256": "72f9cf2a4b2b7878dcb65bd89f1a16986d3d237433120c297754905731a3e1fa",
+    "original_chain_sha256": [
+      "4f13bb0141309f297b4149a1a12ddd14e5979de3a2b94708423cbf927d73bd71",
+      "17f9c5cac3c18cd3cdf3bf2e0750c7a7834f362b94ed00cef217982064fb35e5",
+      "5818fa2839e8f821c1d13fa5ec46751bb29e0068f870dc569ad9132ea233814c",
+      "0584aa932b0b12f5b889c8050a7f3049023968171c0ad72d0156e0de996ef49c"
+    ],
+    "seed": 202610253526,
+    "screen_per_chain": 1,
+    "coarse_per_chain": 32,
+    "fine_per_chain": 4,
+    "method": "multilevel original-game nonlinear HJB, original posterior unchanged",
+    "source_sha256": "b74ffafd4bf2d5ae91b1c548f1066cc2ef4a5738794dc9897db000458a7aecb9",
+    "native_source_sha256": "240a1305a3fc604002de57b6ebc63366d443561174d99844da7cb5794e5982f9",
+    "validation_protocol_sha256": "5e6b81a6c0ce9280e31190e5f60eade8eb156aed3b364c0de8746e443cfa8340"
+  },
+  "observed": {
+    "prize": 0.05,
+    "horizon": 53.5,
+    "precision": "observed"
+  },
+  "selections": [
+    {
+      "contest_id": 3526,
+      "delta": 0.1,
+      "choice": "full_disclosure",
+      "prize_ratio": 0.43275821500672734,
+      "time_multiplier": 2.0,
+      "cost_saving_pct": 24.294707726661148,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.02163791075033637,
+        "horizon": 107.0,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.02163791075033637,
+        "horizon": 107.0,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3526,
+      "delta": 0.25,
+      "choice": "full_disclosure",
+      "prize_ratio": 0.78408946681102,
+      "time_multiplier": 1.25,
+      "cost_saving_pct": 6.02284265511841,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.039204473340551,
+        "horizon": 66.875,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.039204473340551,
+        "horizon": 66.875,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3526,
+      "delta": 0.5,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.0,
+      "time_multiplier": 1.0,
+      "cost_saving_pct": 0.0,
+      "additional_reduction_pct": 0.7927805230375395,
+      "selected": {
+        "prize": 0.05,
+        "horizon": 53.5,
+        "precision": "observed"
+      },
+      "full_comparator": {
+        "prize": 0.05059933681783736,
+        "horizon": 53.5,
+        "precision": "full"
+      },
+      "retained_observed": true
+    },
+    {
+      "contest_id": 3526,
+      "delta": 1.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.409078740599954,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 1.4210629700022959,
+      "additional_reduction_pct": 2.008362929368168,
+      "selected": {
+        "prize": 0.0704539370299977,
+        "horizon": 40.125,
+        "precision": 14.779906783469427
+      },
+      "full_comparator": {
+        "prize": 0.05059933681783736,
+        "horizon": 53.5,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3526,
+      "delta": 2.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.409078740599954,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 15.5307086466682,
+      "additional_reduction_pct": 1.892541196597497,
+      "selected": {
+        "prize": 0.0704539370299977,
+        "horizon": 40.125,
+        "precision": 14.779906783469427
+      },
+      "full_comparator": {
+        "prize": 0.07289811837487266,
+        "horizon": 40.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3526,
+      "delta": 5.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.409078740599954,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 29.640354323334105,
+      "additional_reduction_pct": 1.1446916678051866,
+      "selected": {
+        "prize": 0.0704539370299977,
+        "horizon": 40.125,
+        "precision": 14.779906783469427
+      },
+      "full_comparator": {
+        "prize": 0.07289811837487266,
+        "horizon": 40.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3526,
+      "delta": 10.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.409078740599954,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 36.053829630909505,
+      "additional_reduction_pct": 0.690157936202207,
+      "selected": {
+        "prize": 0.0704539370299977,
+        "horizon": 40.125,
+        "precision": 14.779906783469427
+      },
+      "full_comparator": {
+        "prize": 0.07289811837487266,
+        "horizon": 40.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3526,
+      "delta": 25.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.409078740599954,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 40.493927920769416,
+      "additional_reduction_pct": 0.31496243952029435,
+      "selected": {
+        "prize": 0.0704539370299977,
+        "horizon": 40.125,
+        "precision": 14.779906783469427
+      },
+      "full_comparator": {
+        "prize": 0.07289811837487266,
+        "horizon": 40.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3526,
+      "delta": 100.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 1.409078740599954,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 42.911803227128765,
+      "additional_reduction_pct": 0.08470863446226051,
+      "selected": {
+        "prize": 0.0704539370299977,
+        "horizon": 40.125,
+        "precision": 14.779906783469427
+      },
+      "full_comparator": {
+        "prize": 0.07289811837487266,
+        "horizon": 40.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    }
+  ],
+  "validation": {
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.09691384697396833,
+      "mcse": 0.007756213521571802,
+      "degrees_freedom": 120.50623910914939,
+      "critical_value": 1.9798456950107555,
+      "numerical_radius": 7.867202542989046e-05,
+      "lower_diagnostic_margin": 0.0814790689982703,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.09439797511539562,
+      "mcse": 0.008099115802670035,
+      "degrees_freedom": 120.05666082088827,
+      "critical_value": 1.9799208880490715,
+      "numerical_radius": 9.550387477806621e-05,
+      "lower_diagnostic_margin": 0.07826686268818282,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.040625}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02931404014858917,
+      "mcse": 0.002232807739950002,
+      "degrees_freedom": 65.24296599832078,
+      "critical_value": 1.9969969235385157,
+      "numerical_radius": 7.948825570504143e-05,
+      "lower_diagnostic_margin": 0.024775641705350987,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.040625}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.030603997598915862,
+      "mcse": 0.0033655519185331368,
+      "degrees_freedom": 67.5075101288009,
+      "critical_value": 1.9957325590357318,
+      "numerical_radius": 9.910997376669228e-05,
+      "lower_diagnostic_margin": 0.023788146082207418,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.0029805686833228977,
+      "mcse": 0.0023758439566876617,
+      "degrees_freedom": 57.10374010020896,
+      "critical_value": 2.0023866208763264,
+      "numerical_radius": 8.002158781594085e-05,
+      "lower_diagnostic_margin": -0.007817948423300086,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"full\", \"prize\": 0.052500000000000005}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.030523584712992435,
+      "mcse": 0.003090591512849428,
+      "degrees_freedom": 71.73460306551038,
+      "critical_value": 1.9935895786876392,
+      "numerical_radius": 8.028053218382187e-05,
+      "lower_diagnostic_margin": 0.024281933148811528,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.06875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.01555948397402404,
+      "mcse": 0.00878244466578497,
+      "degrees_freedom": 81.51339354902244,
+      "critical_value": 1.9894963709595406,
+      "numerical_radius": 8.10598057672337e-05,
+      "lower_diagnostic_margin": -0.033113185570523444,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.07218750000000002}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.014402718444827201,
+      "mcse": 0.009954114576808516,
+      "degrees_freedom": 84.6396508644508,
+      "critical_value": 1.988390116375789,
+      "numerical_radius": 8.139945303555865e-05,
+      "lower_diagnostic_margin": -0.005471344050006581,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.065625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.02786908264128735,
+      "mcse": 0.005245521062216222,
+      "degrees_freedom": 12.55060595699613,
+      "critical_value": 2.1682584727753866,
+      "numerical_radius": 0.0001566880267881987,
+      "lower_diagnostic_margin": -0.039399416155347616,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 0.4926635594489809, \"prize\": 0.065625}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        }
+      ]
+    },
+    "{\"horizon\": 40.125, \"precision\": \"observed\", \"prize\": 0.06875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.012601447922507534,
+      "mcse": 0.008165987170096884,
+      "degrees_freedom": 12.70983662654136,
+      "critical_value": 2.1653929955473203,
+      "numerical_radius": 0.00020269915457778176,
+      "lower_diagnostic_margin": -0.030486718496942393,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 147.79906783469426, \"prize\": 0.06875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.009569808890417168,
+      "mcse": 0.007952812342908584,
+      "degrees_freedom": 12.0554898615221,
+      "critical_value": 2.1777010632468383,
+      "numerical_radius": 0.00018701328683071172,
+      "lower_diagnostic_margin": -0.027075670072202483,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 1477.9906783469428, \"prize\": 0.06875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.016097717026651227,
+      "mcse": 0.00865544417922029,
+      "degrees_freedom": 12.764898769937956,
+      "critical_value": 2.164420329661548,
+      "numerical_radius": 0.00022117230916156305,
+      "lower_diagnostic_margin": -0.035052908679567896,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.06890625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.004052161973648771,
+      "mcse": 0.007230770330726317,
+      "degrees_freedom": 10.246377549902377,
+      "critical_value": 2.220897966383674,
+      "numerical_radius": 0.00016214409282179487,
+      "lower_diagnostic_margin": -0.012168785242070507,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 0.4926635594489809, \"prize\": 0.06890625}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        }
+      ]
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.0825}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.09323775050474918,
+      "mcse": 0.013518288824219894,
+      "degrees_freedom": 95.01707985411628,
+      "critical_value": 1.985246400732644,
+      "numerical_radius": 8.229309626982609e-05,
+      "lower_diagnostic_margin": 0.0663183231761325,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": 0.4926635594489809, \"prize\": 0.09062500000000001}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 0.4926635594489809, \"prize\": 0.09515625000000001}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 40.125, \"precision\": \"observed\", \"prize\": 0.07218750000000002}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.016707210054599908,
+      "mcse": 0.010179656489479284,
+      "degrees_freedom": 11.59962694737123,
+      "critical_value": 2.187182944176151,
+      "numerical_radius": 0.00020454880667018782,
+      "lower_diagnostic_margin": -0.005762109803431441,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 147.79906783469426, \"prize\": 0.07218750000000002}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.020308052812729162,
+      "mcse": 0.009982450809165391,
+      "degrees_freedom": 11.067401086427747,
+      "critical_value": 2.199350878813655,
+      "numerical_radius": 0.00018835332366383406,
+      "lower_diagnostic_margin": -0.001835212470786659,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 1477.9906783469428, \"prize\": 0.07218750000000002}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.012776419556116941,
+      "mcse": 0.010633454527771605,
+      "degrees_freedom": 11.872003671918309,
+      "critical_value": 2.181421003850639,
+      "numerical_radius": 0.00024153254266184865,
+      "lower_diagnostic_margin": -0.010661154036916566,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": 14.779906783469427, \"prize\": 0.10625000000000001}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 0.4926635594489809, \"prize\": 0.10875000000000001}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.07875}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.09104764661126753,
+      "mcse": 0.013226347484395832,
+      "degrees_freedom": 9.116298643513282,
+      "critical_value": 2.2577656835043105,
+      "numerical_radius": 0.00016320885389160822,
+      "lower_diagnostic_margin": 0.061022444289003455,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": 14.779906783469427, \"prize\": 0.11156250000000002}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 14.779906783469427, \"prize\": 0.1275}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 13.375, \"precision\": 0.4926635594489809, \"prize\": 0.375}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 13.375, \"precision\": 0.4926635594489809, \"prize\": 0.39375000000000004}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 13.375, \"precision\": 0.4926635594489809, \"prize\": 0.44999999999999996}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 489
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 147.79906783469426, \"prize\": 0.375}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 147.79906783469426, \"prize\": 0.39375000000000004}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 1477.9906783469428, \"prize\": 0.42500000000000004}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": \"observed\", \"prize\": 0.42500000000000004}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": \"observed\", \"prize\": 0.4462500000000001}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 1477.9906783469428, \"prize\": 0.4462500000000001}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 147.79906783469426, \"prize\": 0.44999999999999996}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": 1477.9906783469428, \"prize\": 0.51}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 26.75, \"precision\": \"observed\", \"prize\": 0.51}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1700
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1020
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1578
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1360
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 745
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 188
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 182
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1731
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 803
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1477
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1967
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 599
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 1925
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 540
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 26
+        }
+      ]
+    },
+    "{\"horizon\": 53.5, \"precision\": \"observed\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6843233046335945,
+      "mcse": 0.02105929154844208,
+      "degrees_freedom": 113.90465415341383,
+      "critical_value": 1.9810100849503964,
+      "numerical_radius": 7.92151212675174e-05,
+      "lower_diagnostic_margin": -0.7261211886942364,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"observed\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.584213255450659,
+      "mcse": 0.017689307162185593,
+      "degrees_freedom": 114.91603450870309,
+      "critical_value": 1.98082292936047,
+      "numerical_radius": 8.478514348518595e-05,
+      "lower_diagnostic_margin": -0.6193374258255019,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"observed\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.38151865098407084,
+      "mcse": 0.011133302401679927,
+      "degrees_freedom": 117.01804509951201,
+      "critical_value": 1.9804444076627903,
+      "numerical_radius": 9.228597098472069e-05,
+      "lower_diagnostic_margin": -0.4036598234352813,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"observed\", \"prize\": 0.037500000000000006}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.18325545702851448,
+      "mcse": 0.005290103734055668,
+      "degrees_freedom": 116.58984162895119,
+      "critical_value": 1.9805203985020905,
+      "numerical_radius": 0.00010027654940165942,
+      "lower_diagnostic_margin": -0.19383289193340547,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"observed\", \"prize\": 0.045000000000000005}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.07080067837248324,
+      "mcse": 0.0021155427972617165,
+      "degrees_freedom": 97.2295641485037,
+      "critical_value": 1.984664008331023,
+      "numerical_radius": 0.000126068377382757,
+      "lower_diagnostic_margin": -0.07512538839767527,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4767958823740072,
+      "mcse": 0.02521587491674433,
+      "degrees_freedom": 114.56872329651812,
+      "critical_value": 1.9808868227780243,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.5268206286044698,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.003125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.40714331672397597,
+      "mcse": 0.022882956716106923,
+      "degrees_freedom": 115.30921582344202,
+      "critical_value": 1.9807510667161954,
+      "numerical_radius": 7.599099987313772e-05,
+      "lower_diagnostic_margin": -0.45254474864889843,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.3365395408917724,
+      "mcse": 0.020519637685423295,
+      "degrees_freedom": 116.15895620147067,
+      "critical_value": 1.980597436635781,
+      "numerical_radius": 7.647039907629734e-05,
+      "lower_diagnostic_margin": -0.3772571530912931,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.1931260970868047,
+      "mcse": 0.01581618017782984,
+      "degrees_freedom": 118.1153053981768,
+      "critical_value": 1.9802522233835154,
+      "numerical_radius": 7.724517262870019e-05,
+      "lower_diagnostic_margin": -0.2245233682220152,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.02167288316825092}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.01988452957716684,
+      "mcse": 0.009557939174399075,
+      "degrees_freedom": 120.82867470609409,
+      "critical_value": 1.9797921148565636,
+      "numerical_radius": 7.830659358604133e-05,
+      "lower_diagnostic_margin": 0.0008834903718268585,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.021635679719400256}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.019020953004178158,
+      "mcse": 0.00958008326718953,
+      "degrees_freedom": 120.82330166212589,
+      "critical_value": 1.979793005346307,
+      "numerical_radius": 7.829996428839091e-05,
+      "lower_diagnostic_margin": -2.3928803127263822e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.02165428144382559}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.019452745842840263,
+      "mcse": 0.009569006460631949,
+      "degrees_freedom": 120.8260035242871,
+      "critical_value": 1.9797925575490671,
+      "numerical_radius": 7.83031563161845e-05,
+      "lower_diagnostic_margin": 0.00042979491262600623,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": \"full\", \"prize\": 0.02163791075033637}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.019072741328455184,
+      "mcse": 0.009578754249234473,
+      "degrees_freedom": 120.82362733408182,
+      "critical_value": 1.979792951369498,
+      "numerical_radius": 7.830034804361236e-05,
+      "lower_diagnostic_margin": 3.0490834876532397e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4767958823740072,
+      "mcse": 0.02521587491674433,
+      "degrees_freedom": 114.56872329651812,
+      "critical_value": 1.9808868227780243,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.5268206286044698,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.003125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.40724718691533535,
+      "mcse": 0.022896069833216303,
+      "degrees_freedom": 115.32548372486819,
+      "critical_value": 1.9807481040604447,
+      "numerical_radius": 7.72253659247768e-05,
+      "lower_diagnostic_margin": -0.45267575919383884,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.336920820389379,
+      "mcse": 0.020560218926329803,
+      "degrees_freedom": 116.194373595001,
+      "critical_value": 1.9805910825761832,
+      "numerical_radius": 7.997062441678776e-05,
+      "lower_diagnostic_margin": -0.37772217727509866,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.19438077436552997,
+      "mcse": 0.015935977578702375,
+      "degrees_freedom": 118.26471708084416,
+      "critical_value": 1.9802263326882863,
+      "numerical_radius": 8.622981405777275e-05,
+      "lower_diagnostic_margin": -0.2260238466180643,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.021786114757018728}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.020091936154612765,
+      "mcse": 0.009754546751893087,
+      "degrees_freedom": 121.37465967535685,
+      "critical_value": 1.9797020423169036,
+      "numerical_radius": 9.426267892871654e-05,
+      "lower_diagnostic_margin": 0.0006865773490855841,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.021756742379839888}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.019412172438057068,
+      "mcse": 0.00977135697636542,
+      "degrees_freedom": 121.37276270507344,
+      "critical_value": 1.9797023538482852,
+      "numerical_radius": 9.424600043267395e-05,
+      "lower_diagnostic_margin": -2.6451968778089252e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.021771428568429306}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.01975189827207554,
+      "mcse": 0.009762933507998221,
+      "degrees_freedom": 121.37341441322775,
+      "critical_value": 1.9797022468199112,
+      "numerical_radius": 9.425434688857537e-05,
+      "lower_diagnostic_margin": 0.00032994252384948783,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 107.0, \"precision\": 14.779906783469427, \"prize\": 0.021759082403984685}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.01946631753503174,
+      "mcse": 0.009770019047411871,
+      "degrees_freedom": 121.37288780653222,
+      "critical_value": 1.9797023333031003,
+      "numerical_radius": 9.424736916105458e-05,
+      "lower_diagnostic_margin": 3.0340661293672827e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.77461626488707,
+      "mcse": 0.0142323347746987,
+      "degrees_freedom": 112.69740344906373,
+      "critical_value": 1.9812379308704682,
+      "numerical_radius": 7.753916604510597e-05,
+      "lower_diagnostic_margin": -0.802891445553595,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.1439082445145075,
+      "mcse": 0.02456182292669527,
+      "degrees_freedom": 110.3625122050362,
+      "critical_value": 1.9816928941730447,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -1.192657186359341,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.0972400276387844,
+      "mcse": 0.02302259534380848,
+      "degrees_freedom": 110.78316471894071,
+      "critical_value": 1.981609496717636,
+      "numerical_radius": 7.549618997730987e-05,
+      "lower_diagnostic_margin": -1.14293731740114,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.0494683989681215,
+      "mcse": 0.021439308550542692,
+      "degrees_freedom": 111.35413870523888,
+      "critical_value": 1.9814973157893316,
+      "numerical_radius": 7.578264589679323e-05,
+      "lower_diagnostic_margin": -1.092026113959298,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.9529544096362632,
+      "mcse": 0.01834619734913023,
+      "degrees_freedom": 112.81342797195222,
+      "critical_value": 1.981215819367613,
+      "numerical_radius": 7.63137456524307e-05,
+      "lower_diagnostic_margin": -0.9893784997952526,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.1}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5553528401510818,
+      "mcse": 0.019206361058093504,
+      "degrees_freedom": 109.67141383681972,
+      "critical_value": 1.9818313135620134,
+      "numerical_radius": 8.005552873348025e-05,
+      "lower_diagnostic_margin": -0.593496663444323,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.2}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5154129859222251,
+      "mcse": 0.030805556041073514,
+      "degrees_freedom": 120.33204737821559,
+      "critical_value": 1.9798747616563837,
+      "numerical_radius": 8.269904920687153e-05,
+      "lower_diagnostic_margin": -0.5764868278959447,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.4}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6242909154756492,
+      "mcse": 0.03050393477928592,
+      "degrees_freedom": 122.41425212864353,
+      "critical_value": 1.979532781151816,
+      "numerical_radius": 0.0001414523683044755,
+      "lower_diagnostic_margin": -0.6848159066936671,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 0.8}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1376
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 1.6}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1676
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 13.375, \"precision\": \"full\", \"prize\": 2.5825}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 538
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4553985962668029,
+      "mcse": 0.00874876102789399,
+      "degrees_freedom": 111.95648388572634,
+      "critical_value": 1.981380224756475,
+      "numerical_radius": 7.855350577241886e-05,
+      "lower_diagnostic_margin": -0.47281177186436457,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.9960861934337115,
+      "mcse": 0.02431901289785436,
+      "degrees_freedom": 111.58416961873468,
+      "critical_value": 1.9814524488431233,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -1.0443481129766774,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.9278372529054888,
+      "mcse": 0.02203805522164701,
+      "degrees_freedom": 112.08231319068746,
+      "critical_value": 1.9813559251614452,
+      "numerical_radius": 7.571737751105084e-05,
+      "lower_diagnostic_margin": -0.9715782015754453,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8580239330792458,
+      "mcse": 0.019695191301810067,
+      "degrees_freedom": 112.71294656635743,
+      "critical_value": 1.981234966054901,
+      "numerical_radius": 7.61090371678329e-05,
+      "lower_diagnostic_margin": -0.8971208437867001,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7169391401062516,
+      "mcse": 0.015100419644766376,
+      "degrees_freedom": 114.34080253866253,
+      "critical_value": 1.9809289655672855,
+      "numerical_radius": 7.684979100694843e-05,
+      "lower_diagnostic_margin": -0.7469288485637975,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.1}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.13308929416917686,
+      "mcse": 0.01850572401544562,
+      "degrees_freedom": 107.40115194281856,
+      "critical_value": 1.9822986989705351,
+      "numerical_radius": 8.211535277070738e-05,
+      "lower_diagnostic_margin": -0.1698552821612732,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.2}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.08842480879119774,
+      "mcse": 0.03598947520169421,
+      "degrees_freedom": 120.4390815424402,
+      "critical_value": 1.9798568912553527,
+      "numerical_radius": 8.595632854418365e-05,
+      "lower_diagnostic_margin": -0.15976477561047983,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.4}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.2485717732457683,
+      "mcse": 0.03565075239067168,
+      "degrees_freedom": 120.58502470678492,
+      "critical_value": 1.9798325762409756,
+      "numerical_radius": 0.0001735493767112133,
+      "lower_diagnostic_margin": -0.3193278435730321,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 0.8}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1376
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 1.6}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1676
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 26.75, \"precision\": \"full\", \"prize\": 1.645}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1676
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8805560677973394,
+      "mcse": 0.02428936750097417,
+      "degrees_freedom": 112.40828867697289,
+      "critical_value": 1.9812932299330057,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.9287553790694392,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.0729747020415098}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.021005853698683005,
+      "mcse": 0.010225095794885772,
+      "degrees_freedom": 85.39714090981003,
+      "critical_value": 1.9881344324117267,
+      "numerical_radius": 8.146055469347434e-05,
+      "lower_diagnostic_margin": 0.0005955281194687724,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.07289617977693483}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.02035151611768797,
+      "mcse": 0.010198038150105943,
+      "degrees_freedom": 85.32108377469875,
+      "critical_value": 1.9881598969071783,
+      "numerical_radius": 8.145643436119031e-05,
+      "lower_diagnostic_margin": -5.270793843322954e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.07293544090922231}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02067880445607633,
+      "mcse": 0.010211566266409832,
+      "degrees_freedom": 85.35909906892782,
+      "critical_value": 1.9881471633517127,
+      "numerical_radius": 8.145891524994603e-05,
+      "lower_diagnostic_margin": 0.0002952490348856392,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": \"full\", \"prize\": 0.07289811837487266}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02036768225684743,
+      "mcse": 0.010198706095005661,
+      "degrees_freedom": 85.32296023545649,
+      "critical_value": 1.9881592681002813,
+      "numerical_radius": 8.145640883337992e-05,
+      "lower_diagnostic_margin": 9.573802597717288e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8805560677973394,
+      "mcse": 0.02428936750097417,
+      "degrees_freedom": 112.40828867697289,
+      "critical_value": 1.9812932299330057,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.9287553790694392,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.0705441234109481}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.01938286138261877,
+      "mcse": 0.00827310978693753,
+      "degrees_freedom": 9.66314016916265,
+      "critical_value": 2.2387124017102096,
+      "numerical_radius": 0.00016304440456869906,
+      "lower_diagnostic_margin": 0.0006987034973229139,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.0704539370299977}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.018549137849930862,
+      "mcse": 0.008215410539666427,
+      "degrees_freedom": 9.68973209247269,
+      "critical_value": 2.2378476141643873,
+      "numerical_radius": 0.000163026072299996,
+      "lower_diagnostic_margin": 1.2749020573896153e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.06968009351499885}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.011346446804706173,
+      "mcse": 0.00772027553636443,
+      "degrees_freedom": 9.943152388429448,
+      "critical_value": 2.2298667921438353,
+      "numerical_radius": 0.00016272091276764433,
+      "lower_diagnostic_margin": -0.006031460152800951,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 40.125, \"precision\": 14.779906783469427, \"prize\": 0.07045252349311429}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.018536249259393664,
+      "mcse": 0.008214557535974524,
+      "degrees_freedom": 9.690669405960284,
+      "critical_value": 2.2378172296140604,
+      "numerical_radius": 0.00016302576995305684,
+      "lower_diagnostic_margin": -9.454898219206365e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.0547413217324255,
+      "mcse": 0.019058214872613485,
+      "degrees_freedom": 111.90496874746816,
+      "critical_value": 1.9813901890646464,
+      "numerical_radius": 7.662769469088607e-05,
+      "lower_diagnostic_margin": -1.0925797093967986,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.268738931137308,
+      "mcse": 0.024987692465085126,
+      "degrees_freedom": 108.99500997947474,
+      "critical_value": 1.981968508162131,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -1.318338702577812,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.2416899653116131,
+      "mcse": 0.024080471274183616,
+      "degrees_freedom": 109.39659334909244,
+      "critical_value": 1.9818868483873409,
+      "numerical_radius": 7.530302670452193e-05,
+      "lower_diagnostic_margin": -1.2894900376595912,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.2139485555196927,
+      "mcse": 0.02314862940238617,
+      "degrees_freedom": 109.91537324172383,
+      "critical_value": 1.981782250249306,
+      "numerical_radius": 7.548935754227119e-05,
+      "lower_diagnostic_margin": -1.2598995877444832,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.1578838971594392,
+      "mcse": 0.02134927668545324,
+      "degrees_freedom": 111.09922373156651,
+      "critical_value": 1.9815472556686125,
+      "numerical_radius": 7.58359370353249e-05,
+      "lower_diagnostic_margin": -1.2002643337230443,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.1}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.92949942743246,
+      "mcse": 0.021277744188463368,
+      "degrees_freedom": 112.96311466324227,
+      "critical_value": 1.9811873604686376,
+      "numerical_radius": 7.815356109863603e-05,
+      "lower_diagnostic_margin": -0.9717327788390272,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.2}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.8986507063835631,
+      "mcse": 0.0273194108489465,
+      "degrees_freedom": 118.81789952705755,
+      "critical_value": 1.9801310473868874,
+      "numerical_radius": 8.822166690639169e-05,
+      "lower_diagnostic_margin": -0.9528349416687867,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.4}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.954438936097575,
+      "mcse": 0.02750335062754676,
+      "degrees_freedom": 120.591277489674,
+      "critical_value": 1.9798315358172893,
+      "numerical_radius": 0.0002421224912573764,
+      "lower_diagnostic_margin": -1.0091330595018897,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 0.8}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 2,
+          "index": 1376
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 1.6}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 1676
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 5.3500000000000005, \"precision\": \"full\", \"prize\": 2.8353981183748727}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "coarse",
+          "chain": 0,
+          "index": 538
+        }
+      ],
+      "remaining_draws_not_evaluated": true
+    },
+    "{\"horizon\": 53.5, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7824175145864675,
+      "mcse": 0.024369648519823112,
+      "degrees_freedom": 113.04298838213413,
+      "critical_value": 1.9811722057929033,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.830772936781948,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"full\", \"prize\": 0.05061012673415066}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.005283362263178257,
+      "mcse": 0.0025239543759293546,
+      "degrees_freedom": 61.06122766741955,
+      "critical_value": 1.9995830345577519,
+      "numerical_radius": 8.008526295522093e-05,
+      "lower_diagnostic_margin": 0.00015642065011690014,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"full\", \"prize\": 0.05059690883806623}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.005104921837206415,
+      "mcse": 0.002520525537825912,
+      "degrees_freedom": 60.97552478764952,
+      "critical_value": 1.9996398178995805,
+      "numerical_radius": 8.008382486922861e-05,
+      "lower_diagnostic_margin": -1.5305215132261387e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"full\", \"prize\": 0.05060351778610844}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.00519414533378572,
+      "mcse": 0.002522238818338363,
+      "degrees_freedom": 61.01838288833268,
+      "critical_value": 1.999611401485978,
+      "numerical_radius": 8.008453724936047e-05,
+      "lower_diagnostic_margin": 7.056329811644846e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"full\", \"prize\": 0.05059933681783736}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.005137701318791646,
+      "mcse": 0.002521154693908309,
+      "degrees_freedom": 60.991271415254985,
+      "critical_value": 1.9996293726049912,
+      "numerical_radius": 8.008400080668725e-05,
+      "lower_diagnostic_margin": 1.6242339164957212e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"observed\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.7824175145864675,
+      "mcse": 0.024369648519823112,
+      "degrees_freedom": 113.04298838213413,
+      "critical_value": 1.9811722057929033,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.830772936781948,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 53.5, \"precision\": \"observed\", \"prize\": 0.04999875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -1.7007589606503684e-05,
+      "mcse": 6.399844492441248e-07,
+      "degrees_freedom": 28.51242032132109,
+      "critical_value": 2.046749908252938,
+      "numerical_radius": 0.00014989708249450728,
+      "lower_diagnostic_margin": -0.00016821456021378468,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6955928162552444,
+      "mcse": 0.02451980370981287,
+      "degrees_freedom": 113.55128371844019,
+      "critical_value": 1.9810762702107791,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.7442433694180457,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.005078125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6062258371051245,
+      "mcse": 0.021488542505011626,
+      "degrees_freedom": 114.41041525647354,
+      "critical_value": 1.980916076106305,
+      "numerical_radius": 7.602298027111062e-05,
+      "lower_diagnostic_margin": -0.6488688593856667,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.01015625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5150825388037684,
+      "mcse": 0.0183917637403229,
+      "degrees_freedom": 115.41526000984712,
+      "critical_value": 1.9807317694815016,
+      "numerical_radius": 7.654869887399082e-05,
+      "lower_diagnostic_margin": -0.5515882382398979,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.0203125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.32997533460600226,
+      "mcse": 0.012282461459329168,
+      "degrees_freedom": 117.49175639285136,
+      "critical_value": 1.9803609926932833,
+      "numerical_radius": 7.748154505516867e-05,
+      "lower_diagnostic_margin": -0.3543765237193715,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.03929893271677626}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.007066839298585344,
+      "mcse": 0.0026700445582626886,
+      "degrees_freedom": 89.76904500353388,
+      "critical_value": 1.986744177892596,
+      "numerical_radius": 7.935715958508354e-05,
+      "lower_diagnostic_margin": 0.001682786658158055,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.03920795015051382}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.005532061068431101,
+      "mcse": 0.0027032840740558147,
+      "degrees_freedom": 91.23866854656737,
+      "critical_value": 1.9863071538665544,
+      "numerical_radius": 7.935338644332299e-05,
+      "lower_diagnostic_margin": 8.315518675718881e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.029760225075256913}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.15889658854306465,
+      "mcse": 0.00707255723013694,
+      "degrees_freedom": 119.07397479928846,
+      "critical_value": 1.980087241373274,
+      "numerical_radius": 7.836298818238799e-05,
+      "lower_diagnostic_margin": -0.1729792318665235,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.03920216058905023}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.005434361501148319,
+      "mcse": 0.0027054109807793272,
+      "degrees_freedom": 91.33073092551196,
+      "critical_value": 1.9862802513881057,
+      "numerical_radius": 7.935328017554736e-05,
+      "lower_diagnostic_margin": -1.8696182037731364e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": \"full\", \"prize\": 0.039204473340551}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.005473389983367853,
+      "mcse": 0.002704561180115826,
+      "degrees_freedom": 91.2939760818134,
+      "critical_value": 1.986290985300656,
+      "numerical_radius": 7.935332770462304e-05,
+      "lower_diagnostic_margin": 2.1991164405060434e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6955928162552444,
+      "mcse": 0.02451980370981287,
+      "degrees_freedom": 113.55128371844019,
+      "critical_value": 1.9810762702107791,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.7442433694180457,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.005078125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6064733020362076,
+      "mcse": 0.02151530745243677,
+      "degrees_freedom": 114.4066226342378,
+      "critical_value": 1.9809167779383872,
+      "numerical_radius": 7.734681891390094e-05,
+      "lower_diagnostic_margin": -0.6491706823701564,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.01015625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5159485991569677,
+      "mcse": 0.018472750415327296,
+      "degrees_freedom": 115.40648706064083,
+      "critical_value": 1.9807333645665297,
+      "numerical_radius": 8.035628554863006e-05,
+      "lower_diagnostic_margin": -0.5526185485254652,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.0203125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.3322270710012365,
+      "mcse": 0.012490163320017043,
+      "degrees_freedom": 117.50024117411377,
+      "critical_value": 1.9803595048170184,
+      "numerical_radius": 8.621235084154549e-05,
+      "lower_diagnostic_margin": -0.3570482969995907,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.03935747248127117}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.008748372327723943,
+      "mcse": 0.0036623394679771385,
+      "degrees_freedom": 74.86739781755655,
+      "critical_value": 1.992159987950845,
+      "numerical_radius": 9.626223463726769e-05,
+      "lower_diagnostic_margin": 0.001356143942689435,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.039284159411959695}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.0074789950720218195,
+      "mcse": 0.00368166459662259,
+      "degrees_freedom": 75.35661086560971,
+      "critical_value": 1.9919476452365779,
+      "numerical_radius": 9.610487939784584e-05,
+      "lower_diagnostic_margin": 4.9207068830730075e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.02979832970597985}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.1603524230008682,
+      "mcse": 0.00743870294895726,
+      "degrees_freedom": 116.11147190465371,
+      "critical_value": 1.9806059617037575,
+      "numerical_radius": 8.774975192991918e-05,
+      "lower_diagnostic_margin": -0.1751733121608462,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 66.875, \"precision\": 14.779906783469427, \"prize\": 0.039280245542741794}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.007411419261398952,
+      "mcse": 0.0036827305353209355,
+      "degrees_freedom": 75.38262400983041,
+      "critical_value": 1.9919364326375952,
+      "numerical_radius": 9.609650444598883e-05,
+      "lower_diagnostic_margin": -2.0442367939762715e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.04125}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.1907246455354336,
+      "mcse": 0.00332811409688131,
+      "degrees_freedom": 107.1294226675567,
+      "critical_value": 1.9823559828514135,
+      "numerical_radius": 8.000808761453012e-05,
+      "lower_diagnostic_margin": 0.1840471305562543,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6168880447744873,
+      "mcse": 0.024718757858602745,
+      "degrees_freedom": 113.96325255453763,
+      "critical_value": 1.9809991497297135,
+      "numerical_radius": 7.495188306484712e-05,
+      "lower_diagnostic_margin": -0.6659308349578189,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.00515625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5172213909604166,
+      "mcse": 0.021344879542033034,
+      "degrees_freedom": 114.99739154423958,
+      "critical_value": 1.980808018810807,
+      "numerical_radius": 7.613393290432218e-05,
+      "lower_diagnostic_margin": -0.5595776334507307,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.0103125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4155568991811594,
+      "mcse": 0.017909065990058187,
+      "degrees_freedom": 116.22903909205378,
+      "critical_value": 1.9805848671990987,
+      "numerical_radius": 7.671932397652651e-05,
+      "lower_diagnostic_margin": -0.4511040435907152,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.020625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.20911008260331304,
+      "mcse": 0.011228923422140585,
+      "degrees_freedom": 118.76582770832442,
+      "critical_value": 1.9801399784977247,
+      "numerical_radius": 7.775053854950593e-05,
+      "lower_diagnostic_margin": -0.2314226733255326,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.03211467248640817}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.018443607943515766,
+      "mcse": 0.005029453387720932,
+      "degrees_freedom": 116.35358938126927,
+      "critical_value": 1.980562566729831,
+      "numerical_radius": 7.893920145772585e-05,
+      "lower_diagnostic_margin": 0.008403521631225427,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.031710823799085304}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.01060345651421708,
+      "mcse": 0.0052046454760448215,
+      "degrees_freedom": 116.87922281788659,
+      "critical_value": 1.9804689820461707,
+      "numerical_radius": 7.887305482326462e-05,
+      "lower_diagnostic_margin": 0.0002169445315401189,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.02616791189954265}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.09838705541349471,
+      "mcse": 0.00798371691635341,
+      "degrees_freedom": 119.41351835617945,
+      "critical_value": 1.9800294493087773,
+      "numerical_radius": 7.832281112674643e-05,
+      "lower_diagnostic_margin": -0.11427337283394587,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.031699070688839086}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.010375052402833353,
+      "mcse": 0.0052098151598736825,
+      "degrees_freedom": 116.89341908641693,
+      "critical_value": 1.9804664663096474,
+      "numerical_radius": 7.887195797335594e-05,
+      "lower_diagnostic_margin": -2.1683774941466265e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 80.25, \"precision\": \"full\", \"prize\": 0.03170138867528713}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.010420100029734378,
+      "mcse": 0.005208795265998724,
+      "degrees_freedom": 116.89062401431899,
+      "critical_value": 1.980466961578675,
+      "numerical_radius": 7.887210652584339e-05,
+      "lower_diagnostic_margin": 2.5380989270654413e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    }
+  },
+  "required_further_prize_refinement": [],
+  "uncertainty": [
+    {
+      "delta": 0.1,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.021635679719400256,
+            "horizon": 107.0,
+            "precision": "full"
+          },
+          "cost": 0.8327135943880051,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 0.25,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.03920216058905023,
+            "horizon": 66.875,
+            "precision": "full"
+          },
+          "cost": 1.1746682117810046,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 0.5,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.05,
+            "horizon": 53.5,
+            "precision": "full"
+          },
+          "cost": 1.5,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.05059690883806623,
+            "horizon": 53.5,
+            "precision": "full"
+          },
+          "cost": 1.5119381767613245,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.04999875,
+            "horizon": 53.5,
+            "precision": "observed"
+          },
+          "cost": 1.499975,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 1.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.05,
+            "horizon": 53.5,
+            "precision": "full"
+          },
+          "cost": 2.0,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 1.9375,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07218750000000002,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 2.0062500000000005,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.065625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 1.875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "observed"
+          },
+          "cost": 1.9375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 147.79906783469426
+          },
+          "cost": 1.9375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 1477.9906783469428
+          },
+          "cost": 1.9375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 1.940625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 1.940625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06968009351499885,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 1.9561018702999768,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07045252349311429,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 1.9715504698622857,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.05059690883806623,
+            "horizon": 53.5,
+            "precision": "full"
+          },
+          "cost": 2.0119381767613245,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 2.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 2.5,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07218750000000002,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 2.5687500000000005,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.065625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 2.4375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "observed"
+          },
+          "cost": 2.5,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 147.79906783469426
+          },
+          "cost": 2.5,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 1477.9906783469428
+          },
+          "cost": 2.5,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 2.503125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 2.503125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09062500000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 2.3125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09515625000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 2.403125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.07289617977693483,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 2.5829235955386967,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06968009351499885,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 2.518601870299977,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07045252349311429,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 2.5340504698622857,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 5.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 4.1875,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07218750000000002,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 4.2562500000000005,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.065625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 4.125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "observed"
+          },
+          "cost": 4.1875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 147.79906783469426
+          },
+          "cost": 4.1875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 1477.9906783469428
+          },
+          "cost": 4.1875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 4.190625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 4.190625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09062500000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 3.0625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09515625000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 3.153125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10625000000000001,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 3.375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10875000000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 3.4250000000000003,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.11156250000000002,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 3.48125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.1275,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 3.8,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.07289617977693483,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 4.270423595538697,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06968009351499885,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 4.206101870299976,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07045252349311429,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 4.221550469862286,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 10.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 7.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07218750000000002,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 7.0687500000000005,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.065625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 6.9375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "observed"
+          },
+          "cost": 7.0,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 147.79906783469426
+          },
+          "cost": 7.0,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 1477.9906783469428
+          },
+          "cost": 7.0,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 7.003125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 7.003125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09062500000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 4.3125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09515625000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 4.403125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10625000000000001,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 4.625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10875000000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 4.675000000000001,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.11156250000000002,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 4.73125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.1275,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 5.05,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.07289617977693483,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 7.082923595538697,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06968009351499885,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 7.018601870299976,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07045252349311429,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 7.034050469862286,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 25.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 15.4375,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07218750000000002,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 15.50625,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.065625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 15.375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "observed"
+          },
+          "cost": 15.4375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 147.79906783469426
+          },
+          "cost": 15.4375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 1477.9906783469428
+          },
+          "cost": 15.4375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 15.440625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 15.440625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09062500000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 8.0625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09515625000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 8.153125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10625000000000001,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 8.375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10875000000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 8.425,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.11156250000000002,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 8.48125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.1275,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 8.8,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.375,
+            "horizon": 13.375,
+            "precision": 0.4926635594489809
+          },
+          "cost": 9.0625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.39375000000000004,
+            "horizon": 13.375,
+            "precision": 0.4926635594489809
+          },
+          "cost": 9.4375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.44999999999999996,
+            "horizon": 13.375,
+            "precision": 0.4926635594489809
+          },
+          "cost": 10.562499999999998,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.375,
+            "horizon": 26.75,
+            "precision": 147.79906783469426
+          },
+          "cost": 13.75,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.39375000000000004,
+            "horizon": 26.75,
+            "precision": 147.79906783469426
+          },
+          "cost": 14.125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.42500000000000004,
+            "horizon": 26.75,
+            "precision": 1477.9906783469428
+          },
+          "cost": 14.75,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.42500000000000004,
+            "horizon": 26.75,
+            "precision": "observed"
+          },
+          "cost": 14.75,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.4462500000000001,
+            "horizon": 26.75,
+            "precision": "observed"
+          },
+          "cost": 15.175,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.4462500000000001,
+            "horizon": 26.75,
+            "precision": 1477.9906783469428
+          },
+          "cost": 15.175,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.44999999999999996,
+            "horizon": 26.75,
+            "precision": 147.79906783469426
+          },
+          "cost": 15.249999999999998,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.07289617977693483,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 15.520423595538697,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06968009351499885,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 15.456101870299976,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07045252349311429,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 15.471550469862287,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 100.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 57.625,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07218750000000002,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 57.69375,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.065625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 57.5625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": "observed"
+          },
+          "cost": 57.625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 147.79906783469426
+          },
+          "cost": 57.625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06875,
+            "horizon": 40.125,
+            "precision": 1477.9906783469428
+          },
+          "cost": 57.625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 57.628125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06890625,
+            "horizon": 40.125,
+            "precision": 0.4926635594489809
+          },
+          "cost": 57.628125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09062500000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 26.8125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.09515625000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 26.903125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10625000000000001,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 27.125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.10875000000000001,
+            "horizon": 26.75,
+            "precision": 0.4926635594489809
+          },
+          "cost": 27.175,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.11156250000000002,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 27.23125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.1275,
+            "horizon": 26.75,
+            "precision": 14.779906783469427
+          },
+          "cost": 27.55,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.375,
+            "horizon": 13.375,
+            "precision": 0.4926635594489809
+          },
+          "cost": 13.75,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.39375000000000004,
+            "horizon": 13.375,
+            "precision": 0.4926635594489809
+          },
+          "cost": 14.125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.44999999999999996,
+            "horizon": 13.375,
+            "precision": 0.4926635594489809
+          },
+          "cost": 15.249999999999998,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.375,
+            "horizon": 26.75,
+            "precision": 147.79906783469426
+          },
+          "cost": 32.5,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.39375000000000004,
+            "horizon": 26.75,
+            "precision": 147.79906783469426
+          },
+          "cost": 32.875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.42500000000000004,
+            "horizon": 26.75,
+            "precision": 1477.9906783469428
+          },
+          "cost": 33.5,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.42500000000000004,
+            "horizon": 26.75,
+            "precision": "observed"
+          },
+          "cost": 33.5,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.4462500000000001,
+            "horizon": 26.75,
+            "precision": "observed"
+          },
+          "cost": 33.925,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.4462500000000001,
+            "horizon": 26.75,
+            "precision": 1477.9906783469428
+          },
+          "cost": 33.925,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.44999999999999996,
+            "horizon": 26.75,
+            "precision": 147.79906783469426
+          },
+          "cost": 34.0,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.51,
+            "horizon": 26.75,
+            "precision": 1477.9906783469428
+          },
+          "cost": 35.2,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.51,
+            "horizon": 26.75,
+            "precision": "observed"
+          },
+          "cost": 35.2,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 13.375,
+            "precision": "full"
+          },
+          "cost": 22.25,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 1.6,
+            "horizon": 13.375,
+            "precision": "full"
+          },
+          "cost": 38.25,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 26.75,
+            "precision": "full"
+          },
+          "cost": 41.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 1.6,
+            "horizon": 26.75,
+            "precision": "full"
+          },
+          "cost": 57.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.07289617977693483,
+            "horizon": 40.125,
+            "precision": "full"
+          },
+          "cost": 57.707923595538695,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06968009351499885,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 57.643601870299975,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.07045252349311429,
+            "horizon": 40.125,
+            "precision": 14.779906783469427
+          },
+          "cost": 57.65905046986229,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.8,
+            "horizon": 5.3500000000000005,
+            "precision": "full"
+          },
+          "cost": 17.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 1.6,
+            "horizon": 5.3500000000000005,
+            "precision": "full"
+          },
+          "cost": 33.0,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "unresolved"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    }
+  ],
+  "independent_checks": [],
+  "required_baseline_repairs": [],
+  "input_files_sha256": {
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/3526/result.json": "9486cbdc47d0e8046ef66d779ad4c4968119535138576fe9a3e5643803fc3471",
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/3526/prize_refinement.json": "07fbec1b40e32688a3246f113051e28d009f003ec321222d24b451328fb33a85",
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/3526/validation_progress.json": "005793502f0227dc7cd16e9f371c0a58de8173a369e94baa6852e76973293526"
+  },
+  "assembly_source_sha256": "f2b9db24aff0a23a7808c93ad30747fee46d72acbf9461ff5ad02f89387aaa42",
+  "selection_source_sha256": "ac7ca4bdf8877a8a9992d3673d779596d280d4e94bd73c32424888cc5f448f9d",
+  "scope": "Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified",
+  "missing_full_comparators": [],
+  "unresolved_full_comparator_delimitation": null,
+  "remaining_checks": [
+    "Full73 coverage and table arithmetic",
+    "Manuscript notes delimit the finite search and unresolved competitors"
+  ]
+}

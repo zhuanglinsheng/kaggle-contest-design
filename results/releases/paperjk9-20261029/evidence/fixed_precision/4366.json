@@ -1,0 +1,110 @@
+{
+  "contest_id": 4366,
+  "status": "completed",
+  "observed": {
+    "prize": 0.08,
+    "horizon": 31.791666666666664,
+    "precision": "observed"
+  },
+  "selected": {
+    "prize": 0.08,
+    "horizon": 31.791666666666664,
+    "precision": "observed"
+  },
+  "regime": "interior_precision",
+  "direction_group": "decrease",
+  "direction_draw_counts": {
+    "increase": 0,
+    "decrease": 116,
+    "uncertain": 12
+  },
+  "comparisons": [
+    {
+      "design": {
+        "prize": 0.08,
+        "horizon": 31.791666666666664,
+        "precision": "observed"
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 1.2471141310334652,
+      "mean_gain": 0.0,
+      "numerical_radius": 0.0,
+      "mcse": 0.0,
+      "supported": true
+    },
+    {
+      "design": {
+        "prize": 0.08,
+        "horizon": 31.791666666666664,
+        "precision": "full"
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 1.1121021460074638,
+      "mean_gain": -0.1350119850260013,
+      "numerical_radius": 0.04831725368575221,
+      "mcse": 0.003999787016055467,
+      "supported": false
+    },
+    {
+      "design": {
+        "prize": 0.08,
+        "horizon": 31.791666666666664,
+        "precision": 0.3606626109828552
+      },
+      "complete": false,
+      "failed_draws": [
+        67,
+        84,
+        104,
+        109
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.08,
+        "horizon": 31.791666666666664,
+        "precision": 10.819878329485656
+      },
+      "complete": false,
+      "failed_draws": [
+        95,
+        106,
+        126
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.08,
+        "horizon": 31.791666666666664,
+        "precision": 108.19878329485655
+      },
+      "complete": false,
+      "failed_draws": [
+        76
+      ]
+    },
+    {
+      "design": {
+        "prize": 0.08,
+        "horizon": 31.791666666666664,
+        "precision": 1081.9878329485655
+      },
+      "complete": true,
+      "failed_draws": [],
+      "mean_quality": 1.21718319616479,
+      "mean_gain": -0.02993093486867509,
+      "numerical_radius": 0.09714188070675428,
+      "mcse": 0.0013078978027220105,
+      "supported": false
+    }
+  ],
+  "quality_gain_pct": 0.0,
+  "posterior_draws": 128,
+  "precision_reference": 360.6626109828552,
+  "accepted_sha256": "169293f957cf239aa0a4545505850b0a0b52820a52361b1af571a1dc9b0cf4b6",
+  "raw_input_sha256": "56fe1e2a4f26f5d5a2ff0a37c056b4161b816cc7f00847fe94809ea0f4c91e79",
+  "script_source_sha256": "5228d891bb4191a754c1d874db9ca69ad35a33d7a5edf19ef9a6bf220d3ad2d3",
+  "scope": "Original nonlinear game; best numerically supported searched precision; original approximate Bayesian posterior and initial distribution fixed; unresolved candidates retained and not called infeasible"
+}

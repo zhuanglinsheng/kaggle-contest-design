@@ -1,0 +1,2162 @@
+{
+  "contest_id": 3507,
+  "status": "completed_verified_incumbents",
+  "publication_ready": true,
+  "provenance": {
+    "accepted": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/posterior/contest_3507/accepted.json",
+    "accepted_sha256": "5e4614145eb5078c44025fade35f1a703428c9a6939ab544b71de4ae66ff6703",
+    "original_chain_sha256": [
+      "59a4e2f36f1bd0db0f191b6b60bdf127f4377b66a5a84ff9a6b932fc575c9cc4",
+      "75f3e2e24accd4f2733cda4c36cdc2b1ab8d69c916455a94f9a4b839a11820c3",
+      "7c9c9678c1e4c8949a69dbd7b70c32957a40e278c44ec1bae8e76d1c9754f7d9",
+      "39390066c3fb59f600318f5fd2e95abc9fe17510bda9f1ea715aa02b324f0725"
+    ],
+    "seed": 202610253507,
+    "screen_per_chain": 1,
+    "coarse_per_chain": 32,
+    "fine_per_chain": 4,
+    "method": "multilevel original-game nonlinear HJB, original posterior unchanged",
+    "source_sha256": "b74ffafd4bf2d5ae91b1c548f1066cc2ef4a5738794dc9897db000458a7aecb9",
+    "native_source_sha256": "240a1305a3fc604002de57b6ebc63366d443561174d99844da7cb5794e5982f9",
+    "validation_protocol_sha256": "5e6b81a6c0ce9280e31190e5f60eade8eb156aed3b364c0de8746e443cfa8340"
+  },
+  "observed": {
+    "prize": 0.005,
+    "horizon": 18.75,
+    "precision": "observed"
+  },
+  "selections": [
+    {
+      "contest_id": 3507,
+      "delta": 0.1,
+      "choice": "zero_prize",
+      "prize_ratio": 0.0,
+      "time_multiplier": 1.5,
+      "cost_saving_pct": 79.54545454545455,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.0,
+        "horizon": 28.125,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.0,
+        "horizon": 28.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 0.25,
+      "choice": "zero_prize",
+      "prize_ratio": 0.0,
+      "time_multiplier": 1.5,
+      "cost_saving_pct": 55.00000000000001,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.0,
+        "horizon": 28.125,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.0,
+        "horizon": 28.125,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 0.5,
+      "choice": "full_disclosure",
+      "prize_ratio": 0.34017905511098073,
+      "time_multiplier": 1.25,
+      "cost_saving_pct": 25.238062992601286,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.0017008952755549038,
+        "horizon": 23.4375,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.0017008952755549038,
+        "horizon": 23.4375,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 1.0,
+      "choice": "full_disclosure",
+      "prize_ratio": 0.34017905511098073,
+      "time_multiplier": 1.25,
+      "cost_saving_pct": 4.866047244450966,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.0017008952755549038,
+        "horizon": 23.4375,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.0017008952755549038,
+        "horizon": 23.4375,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 2.0,
+      "choice": "full_disclosure",
+      "prize_ratio": 0.9950623264409008,
+      "time_multiplier": 1.0,
+      "cost_saving_pct": 0.16458911863663772,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.004975311632204504,
+        "horizon": 18.75,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.004975311632204504,
+        "horizon": 18.75,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 5.0,
+      "choice": "full_disclosure",
+      "prize_ratio": 2.152563193524414,
+      "time_multiplier": 0.75,
+      "cost_saving_pct": 17.2489467745931,
+      "additional_reduction_pct": null,
+      "selected": {
+        "prize": 0.01076281596762207,
+        "horizon": 14.0625,
+        "precision": "full"
+      },
+      "full_comparator": {
+        "prize": 0.01076281596762207,
+        "horizon": 14.0625,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 10.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 4.207077870426375,
+      "time_multiplier": 0.5,
+      "cost_saving_pct": 39.02656481430567,
+      "additional_reduction_pct": 0.6236657942331303,
+      "selected": {
+        "prize": 0.021035389352131877,
+        "horizon": 9.375,
+        "precision": "observed"
+      },
+      "full_comparator": {
+        "prize": 0.02124585067979475,
+        "horizon": 9.375,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 25.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 4.207077870426375,
+      "time_multiplier": 0.5,
+      "cost_saving_pct": 59.78046972912933,
+      "additional_reduction_pct": 0.40091040517965526,
+      "selected": {
+        "prize": 0.021035389352131877,
+        "horizon": 9.375,
+        "precision": "observed"
+      },
+      "full_comparator": {
+        "prize": 0.02124585067979475,
+        "horizon": 9.375,
+        "precision": "full"
+      },
+      "retained_observed": false
+    },
+    {
+      "contest_id": 3507,
+      "delta": 100.0,
+      "choice": "less_disclosure",
+      "prize_ratio": 9.858808372345642,
+      "time_multiplier": 0.25,
+      "cost_saving_pct": 84.0506847798558,
+      "additional_reduction_pct": 14.89388752712718,
+      "selected": {
+        "prize": 0.04929404186172821,
+        "horizon": 4.6875,
+        "precision": 7.2037881272159705
+      },
+      "full_comparator": {
+        "prize": 0.0633895499940163,
+        "horizon": 4.6875,
+        "precision": "full"
+      },
+      "retained_observed": false
+    }
+  ],
+  "validation": {
+    "{\"horizon\": 28.125, \"precision\": \"full\", \"prize\": 0.0003515625}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.060459025195069085,
+      "mcse": 0.008940724954613006,
+      "degrees_freedom": 118.12421918942418,
+      "critical_value": 1.9802506769079145,
+      "numerical_radius": 4.935441557446938e-06,
+      "lower_diagnostic_margin": 0.04274921311009175,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 28.125, \"precision\": 7.2037881272159705, \"prize\": 0.0003515625}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.06044871932639906,
+      "mcse": 0.008942807385338676,
+      "degrees_freedom": 118.12146558960522,
+      "critical_value": 1.9802511546115644,
+      "numerical_radius": 4.8605608586119176e-06,
+      "lower_diagnostic_margin": 0.042734854115254704,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.005}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.0009449419445950024,
+      "mcse": 0.00011389080440727425,
+      "degrees_freedom": 125.76437183224424,
+      "critical_value": 1.9790065507421495,
+      "numerical_radius": 5.961480874157477e-06,
+      "lower_diagnostic_margin": 0.0007135898157295562,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.0096875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.014235904444800012,
+      "mcse": 0.005949383941620533,
+      "degrees_freedom": 121.88633584316393,
+      "critical_value": 1.9796183694419907,
+      "numerical_radius": 6.428637132867251e-06,
+      "lower_diagnostic_margin": -0.026019842819628082,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.010171875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.0016734698113225954,
+      "mcse": 0.006364170699012219,
+      "degrees_freedom": 122.15960016110103,
+      "critical_value": 1.9795739732806126,
+      "numerical_radius": 6.4949687581614445e-06,
+      "lower_diagnostic_margin": -0.014278311457360431,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.011625}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03579635989632251,
+      "mcse": 0.007598910806103165,
+      "degrees_freedom": 122.79315519133041,
+      "critical_value": 1.9794718096521684,
+      "numerical_radius": 6.689379483684607e-06,
+      "lower_diagnostic_margin": 0.020747840792096375,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 7.2037881272159705, \"prize\": 0.009375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.024667003673904002,
+      "mcse": 0.005616209643311871,
+      "degrees_freedom": 119.68880631147067,
+      "critical_value": 1.9799828369707588,
+      "numerical_radius": 1.2098832018872518e-05,
+      "lower_diagnostic_margin": -0.03579910120851005,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"observed\", \"prize\": 0.009375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.024166391022515672,
+      "mcse": 0.005620640452903635,
+      "degrees_freedom": 119.95344539635661,
+      "critical_value": 1.979938231420626,
+      "numerical_radius": 1.2333788669237344e-05,
+      "lower_diagnostic_margin": -0.03530724572895816,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 72.03788127215971, \"prize\": 0.009375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.023716881962049602,
+      "mcse": 0.0056377153100945435,
+      "degrees_freedom": 120.46149465885249,
+      "critical_value": 1.979853153227314,
+      "numerical_radius": 1.259959411216427e-05,
+      "lower_diagnostic_margin": -0.03489132998985035,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.7203788127215971, \"prize\": 0.009375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.02620560820592981,
+      "mcse": 0.005548624458724005,
+      "degrees_freedom": 118.97671425117157,
+      "critical_value": 1.9801038570059224,
+      "numerical_radius": 1.220317512369562e-05,
+      "lower_diagnostic_margin": -0.03720466407285031,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.024012627090719902, \"prize\": 0.009375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.028281564437440884,
+      "mcse": 0.005372913150578066,
+      "degrees_freedom": 119.20756721106719,
+      "critical_value": 1.9800644635787157,
+      "numerical_radius": 1.4615994325922754e-05,
+      "lower_diagnostic_margin": -0.03893489482712119,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"observed\", \"prize\": 0.00984375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.01200989373293148,
+      "mcse": 0.006040620960432309,
+      "degrees_freedom": 120.09717186877202,
+      "critical_value": 1.9799140891721563,
+      "numerical_radius": 1.2734385395091197e-05,
+      "lower_diagnostic_margin": -0.023982538665235142,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 72.03788127215971, \"prize\": 0.00984375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.011558036536459294,
+      "mcse": 0.006052147702544536,
+      "degrees_freedom": 120.65769464335436,
+      "critical_value": 1.979820491143144,
+      "numerical_radius": 1.3009817496092979e-05,
+      "lower_diagnostic_margin": -0.023553212390877962,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.7203788127215971, \"prize\": 0.00984375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.014140011263611633,
+      "mcse": 0.0059772966466668225,
+      "degrees_freedom": 118.95413307117711,
+      "critical_value": 1.9801077186167229,
+      "numerical_radius": 1.260112022202775e-05,
+      "lower_diagnostic_margin": -0.02598830361036049,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.024012627090719902, \"prize\": 0.00984375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.016356650288976537,
+      "mcse": 0.005787436230605347,
+      "degrees_freedom": 119.13230157438402,
+      "critical_value": 1.980077290186332,
+      "numerical_radius": 1.5133783606791074e-05,
+      "lower_diagnostic_margin": -0.027831355121206564,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 7.2037881272159705, \"prize\": 0.00984375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.012532176442686758,
+      "mcse": 0.006039756503714193,
+      "degrees_freedom": 119.79347369357566,
+      "critical_value": 1.97996517123979,
+      "numerical_radius": 1.2487720368666022e-05,
+      "lower_diagnostic_margin": -0.024503171683178532,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": 0.7203788127215971, \"prize\": 0.018125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.03163093242413194,
+      "mcse": 0.012613162836574668,
+      "degrees_freedom": 121.80516666599785,
+      "critical_value": 1.979631595422312,
+      "numerical_radius": 1.4973889439613697e-05,
+      "lower_diagnostic_margin": -0.056615321983061274,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": 0.024012627090719902, \"prize\": 0.018125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.035194562238538875,
+      "mcse": 0.012365818641313827,
+      "degrees_freedom": 122.80078142547518,
+      "critical_value": 1.9794705863706132,
+      "numerical_radius": 1.8270243144255516e-05,
+      "lower_diagnostic_margin": -0.05969060675855727,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": 0.024012627090719902, \"prize\": 0.01903125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.016909961376095187,
+      "mcse": 0.012971731028028401,
+      "degrees_freedom": 123.12977947377891,
+      "critical_value": 1.9794179593073653,
+      "numerical_radius": 1.8825030354885364e-05,
+      "lower_diagnostic_margin": -0.04260526376663408,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": 0.7203788127215971, \"prize\": 0.01903125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.013246552332109002,
+      "mcse": 0.013214980894685684,
+      "degrees_freedom": 122.02782177389544,
+      "critical_value": 1.9795953577223275,
+      "numerical_radius": 1.5422320205592255e-05,
+      "lower_diagnostic_margin": -0.039422289483823626,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.7203788127215971, \"prize\": 0.01125}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.022090037264059056,
+      "mcse": 0.0073050466123999735,
+      "degrees_freedom": 119.22051751639981,
+      "critical_value": 1.9800622582649485,
+      "numerical_radius": 1.3790477630878928e-05,
+      "lower_diagnostic_margin": 0.007611799694348774,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.0904358619988477,
+      "mcse": 0.014144531220943519,
+      "degrees_freedom": 120.87758682288705,
+      "critical_value": 1.979784012189804,
+      "numerical_radius": 7.85740100541508e-06,
+      "lower_diagnostic_margin": 0.062424887826698784,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": 7.2037881272159705, \"prize\": 0.019375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.005235613796415708,
+      "mcse": 0.013165573527399384,
+      "degrees_freedom": 122.7699648734521,
+      "critical_value": 1.9794755304241134,
+      "numerical_radius": 1.4670762190541198e-05,
+      "lower_diagnostic_margin": -0.03131121520009281,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": 7.2037881272159705, \"prize\": 0.02034375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.013979304995923925,
+      "mcse": 0.013728693631298992,
+      "degrees_freedom": 122.86221792776786,
+      "critical_value": 1.9794607372782378,
+      "numerical_radius": 1.5154711376558216e-05,
+      "lower_diagnostic_margin": -0.013211259732730785,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.02125}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03174826371795119,
+      "mcse": 0.014033800099950353,
+      "degrees_freedom": 123.00014660695847,
+      "critical_value": 1.9794386616552528,
+      "numerical_radius": 1.5757823483272815e-05,
+      "lower_diagnostic_margin": 0.003953459406684838,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.07}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.05364156253838149,
+      "mcse": 0.015287145226536372,
+      "degrees_freedom": 122.76886945176668,
+      "critical_value": 1.9794757062142165,
+      "numerical_radius": 1.059012043598618e-05,
+      "lower_diagnostic_margin": 0.02337043982464813,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 0.024012627090719902, \"prize\": 0.045}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 565
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 837
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1872
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 701
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 90
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1089
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1383
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 287
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 755
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 438
+        }
+      ]
+    },
+    "{\"horizon\": 4.6875, \"precision\": 0.024012627090719902, \"prize\": 0.04725}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 565
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 837
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 1872
+        },
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 701
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 90
+        },
+        {
+          "stage": "fine",
+          "chain": 1,
+          "index": 1089
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1383
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 287
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1586
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 755
+        },
+        {
+          "stage": "fine",
+          "chain": 3,
+          "index": 438
+        }
+      ]
+    },
+    "{\"horizon\": 4.6875, \"precision\": 0.7203788127215971, \"prize\": 0.0475}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 701
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1383
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 755
+        }
+      ]
+    },
+    "{\"horizon\": 4.6875, \"precision\": 0.7203788127215971, \"prize\": 0.049875}": {
+      "status": "unresolved",
+      "passed": false,
+      "failed_draws": [
+        {
+          "stage": "fine",
+          "chain": 0,
+          "index": 701
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 1383
+        },
+        {
+          "stage": "fine",
+          "chain": 2,
+          "index": 755
+        }
+      ]
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.05}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.044215479355931786,
+      "mcse": 0.019106676396696845,
+      "degrees_freedom": 123.49501118213459,
+      "critical_value": 1.979359867847909,
+      "numerical_radius": 2.5250635977178137e-05,
+      "lower_diagnostic_margin": 0.0063712402523759815,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"observed\", \"prize\": 0.000625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.13024788987294944,
+      "mcse": 0.005427935918287437,
+      "degrees_freedom": 118.03138729578299,
+      "critical_value": 1.9802667941083723,
+      "numerical_radius": 4.9903578099239065e-06,
+      "lower_diagnostic_margin": -0.14100164149029212,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"observed\", \"prize\": 0.00125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.11187479081150868,
+      "mcse": 0.004670087448032704,
+      "degrees_freedom": 118.04593843579012,
+      "critical_value": 1.9802642660899874,
+      "numerical_radius": 5.5045886808505196e-06,
+      "lower_diagnostic_margin": -0.12112830269304409,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"observed\", \"prize\": 0.0025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.07487138068147581,
+      "mcse": 0.0031327316238030285,
+      "degrees_freedom": 118.14124885099137,
+      "critical_value": 1.9802477230453355,
+      "numerical_radius": 6.601566755186361e-06,
+      "lower_diagnostic_margin": -0.08108156691317905,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"observed\", \"prize\": 0.00375}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.03756347908739043,
+      "mcse": 0.0015731107862268427,
+      "degrees_freedom": 118.3353679357215,
+      "critical_value": 1.9802141130027335,
+      "numerical_radius": 7.774483733520576e-06,
+      "lower_diagnostic_margin": -0.04068634975132717,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"observed\", \"prize\": 0.0045000000000000005}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.015052758360460324,
+      "mcse": 0.0006302551619573881,
+      "degrees_freedom": 118.50551508624483,
+      "critical_value": 1.98018474495877,
+      "numerical_radius": 8.506627321588911e-06,
+      "lower_diagnostic_margin": -0.016309286644921452,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.005}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6637704827222901,
+      "mcse": 0.015976920212961022,
+      "degrees_freedom": 112.0628858081034,
+      "critical_value": 1.9813596732909164,
+      "numerical_radius": 4.977338794888974e-06,
+      "lower_diagnostic_margin": -0.6954314854744325,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6990452167415918,
+      "mcse": 0.01644419054853072,
+      "degrees_freedom": 111.0514398011772,
+      "critical_value": 1.9815566427128846,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.7316348136922062,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.000625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6947466305933392,
+      "mcse": 0.016376310739288958,
+      "degrees_freedom": 111.15499259285723,
+      "critical_value": 1.9815363103188046,
+      "numerical_radius": 4.6537896856208065e-06,
+      "lower_diagnostic_margin": -0.7272015387419897,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.00125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.690410785751729,
+      "mcse": 0.016310920406056112,
+      "degrees_freedom": 111.26502531758896,
+      "critical_value": 1.9815147475196073,
+      "numerical_radius": 4.720553165160519e-06,
+      "lower_diagnostic_margin": -0.7227358356351128,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.0025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6816380847607407,
+      "mcse": 0.016188133914343896,
+      "degrees_freedom": 111.50472284939654,
+      "critical_value": 1.9814679235832238,
+      "numerical_radius": 4.82045852786539e-06,
+      "lower_diagnostic_margin": -0.7137191733132108,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.01}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.6274618077819503,
+      "mcse": 0.015688731070627494,
+      "degrees_freedom": 113.47460910782429,
+      "critical_value": 1.9810906861408282,
+      "numerical_radius": 5.24177126984851e-06,
+      "lower_diagnostic_margin": -0.6585478485546085,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.02}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5577199177952904,
+      "mcse": 0.015409482421277368,
+      "degrees_freedom": 116.67356784156777,
+      "critical_value": 1.980505495768473,
+      "numerical_radius": 5.7365343111845885e-06,
+      "lower_diagnostic_margin": -0.588244218951889,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.04}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.45102225944411256,
+      "mcse": 0.014214461396984712,
+      "degrees_freedom": 121.37980688818301,
+      "critical_value": 1.9797011970615197,
+      "numerical_radius": 6.77807000491823e-06,
+      "lower_diagnostic_margin": -0.47916942375731286,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.08}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.34939084762967887,
+      "mcse": 0.01152379956495712,
+      "degrees_freedom": 122.72493628238257,
+      "critical_value": 1.979482759094086,
+      "numerical_radius": 1.203161326887077e-05,
+      "lower_diagnostic_margin": -0.3722140418010363,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 1.875, \"precision\": \"full\", \"prize\": 0.09625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.33297350950136684,
+      "mcse": 0.010943498787731777,
+      "degrees_freedom": 122.52792389600778,
+      "critical_value": 1.9795144495847865,
+      "numerical_radius": 4.79274190349397e-05,
+      "lower_diagnostic_margin": -0.3546842508997304,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.26382322857320356,
+      "mcse": 0.006006975277880151,
+      "degrees_freedom": 119.19107563309362,
+      "critical_value": 1.9800672726381647,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.27572194566361746,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.010764362278011814}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.01364783762995472,
+      "mcse": 0.006870813876215922,
+      "degrees_freedom": 122.45916191976728,
+      "critical_value": 1.979525534553641,
+      "numerical_radius": 6.564945115187325e-06,
+      "lower_diagnostic_margin": 4.032117370463417e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.010762568837800374}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.013601544301225663,
+      "mcse": 0.006869284889593444,
+      "degrees_freedom": 122.45832904931544,
+      "critical_value": 1.9795256688959264,
+      "numerical_radius": 6.564978959753197e-06,
+      "lower_diagnostic_margin": -2.946443643232548e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.010763465557906094}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.013624691033131645,
+      "mcse": 0.006870049387633688,
+      "degrees_freedom": 122.4587455471756,
+      "critical_value": 1.97952560171445,
+      "numerical_radius": 6.565003375496656e-06,
+      "lower_diagnostic_margin": 1.868738189258285e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": \"full\", \"prize\": 0.01076281596762207}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.013607923392912688,
+      "mcse": 0.006869495580878105,
+      "degrees_freedom": 122.45844384573145,
+      "critical_value": 1.9795256503791159,
+      "numerical_radius": 6.564808751108282e-06,
+      "lower_diagnostic_margin": 3.0158766473869745e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.7203788127215971, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.26382322857320356,
+      "mcse": 0.006006975277880151,
+      "degrees_freedom": 119.19107563309362,
+      "critical_value": 1.9800672726381647,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.27572194566361746,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.7203788127215971, \"prize\": 0.010931551773510018}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.013882999408019972,
+      "mcse": 0.007000785361664991,
+      "degrees_freedom": 119.12231142997732,
+      "critical_value": 1.980078993915896,
+      "numerical_radius": 1.3521983524993064e-05,
+      "lower_diagnostic_margin": 7.369388948231387e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 14.0625, \"precision\": 0.7203788127215971, \"prize\": 0.01093111839779042}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.013871832384232712,
+      "mcse": 0.007000372213796454,
+      "degrees_freedom": 119.1221984413751,
+      "critical_value": 1.9800790131867392,
+      "numerical_radius": 1.3521616412714987e-05,
+      "lower_diagnostic_margin": -2.9793372139548524e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.1485277642050904,
+      "mcse": 0.006177317620617371,
+      "degrees_freedom": 118.03726970512179,
+      "critical_value": 1.9802657720618446,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.16076499678749037,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.000625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.13021808624158743,
+      "mcse": 0.005423840002642996,
+      "degrees_freedom": 118.03584405087402,
+      "critical_value": 1.980266019754468,
+      "numerical_radius": 4.9777445096080504e-06,
+      "lower_diagnostic_margin": -0.14096371003991595,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.00125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.11178163290985142,
+      "mcse": 0.004658327885448978,
+      "degrees_freedom": 118.0651848799786,
+      "critical_value": 1.9802609233075117,
+      "numerical_radius": 5.182593117296493e-06,
+      "lower_diagnostic_margin": -0.12101152018247704,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.0025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.07456604511674461,
+      "mcse": 0.0030979236509148167,
+      "degrees_freedom": 118.20101814120315,
+      "critical_value": 1.980237362627962,
+      "numerical_radius": 5.488049737686552e-06,
+      "lower_diagnostic_margin": -0.08070615732659264,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.00497821416630255}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.00028225738259234686,
+      "mcse": 9.384794054835941e-05,
+      "degrees_freedom": 124.47134105863793,
+      "critical_value": 1.9792062687115997,
+      "numerical_radius": 5.957570756672206e-06,
+      "lower_diagnostic_margin": 9.055537959668819e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.004975311632204504}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.00019397237191009966,
+      "mcse": 9.148614946805677e-05,
+      "degrees_freedom": 123.90141828057132,
+      "critical_value": 1.9792956337371599,
+      "numerical_radius": 5.957123495928814e-06,
+      "lower_diagnostic_margin": 6.9371122246208755e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.003737655816102252}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.03733394443520021,
+      "mcse": 0.001526850696975301,
+      "degrees_freedom": 118.26882084550427,
+      "critical_value": 1.9802256225027566,
+      "numerical_radius": 5.7385123670101575e-06,
+      "lower_diagnostic_margin": -0.0403631918194539,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"full\", \"prize\": 0.004974973956210669}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.0001837015122293697,
+      "mcse": 9.121720574832072e-05,
+      "degrees_freedom": 123.82570276706245,
+      "critical_value": 1.9793075685801915,
+      "numerical_radius": 5.956915332570705e-06,
+      "lower_diagnostic_margin": -2.8023088255887755e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"observed\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.1485277642050904,
+      "mcse": 0.006177317620617371,
+      "degrees_freedom": 118.03726970512179,
+      "critical_value": 1.9802657720618446,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.16076499678749037,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 18.75, \"precision\": \"observed\", \"prize\": 0.004999875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -3.767394099258442e-06,
+      "mcse": 1.5766631018564664e-07,
+      "degrees_freedom": 118.64220753043566,
+      "critical_value": 1.980161212956997,
+      "numerical_radius": 9.003745641680827e-06,
+      "lower_diagnostic_margin": -1.3083344452958933e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0028125}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.04824294166112523,
+      "mcse": 0.004112048081114871,
+      "degrees_freedom": 118.71094421317224,
+      "critical_value": 1.980149400420354,
+      "numerical_radius": 5.6746327596291005e-06,
+      "lower_diagnostic_margin": 0.04009479748604632,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.045841051015244216,
+      "mcse": 0.007562346055420361,
+      "degrees_freedom": 117.4163701269518,
+      "critical_value": 1.980374221834571,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.06082182813512792,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0003515625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.034227465003659634,
+      "mcse": 0.007118203001716414,
+      "degrees_freedom": 117.4560022359471,
+      "critical_value": 1.980367264864579,
+      "numerical_radius": 4.897974765986924e-06,
+      "lower_diagnostic_margin": -0.04832901918768559,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.000703125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.022568212891166062,
+      "mcse": 0.0066739944100456285,
+      "degrees_freedom": 117.52172422660166,
+      "critical_value": 1.9803557385572477,
+      "numerical_radius": 5.065552513524512e-06,
+      "lower_diagnostic_margin": -0.03579016157271244,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.00140625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.0008800901494608049,
+      "mcse": 0.005790988010258342,
+      "degrees_freedom": 117.75082534274071,
+      "critical_value": 1.980315660477955,
+      "numerical_radius": 5.310940648695555e-06,
+      "lower_diagnostic_margin": -0.010593205037542559,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0017002649511203205}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.01073361385245667,
+      "mcse": 0.005426684773115059,
+      "degrees_freedom": 117.89374514296814,
+      "critical_value": 1.9802907383241075,
+      "numerical_radius": 5.3972253631928274e-06,
+      "lower_diagnostic_margin": -1.8196968910734912e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0017006445084808692}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.010746351899554845,
+      "mcse": 0.005426217343705217,
+      "degrees_freedom": 117.89394998125934,
+      "critical_value": 1.9802907026484973,
+      "numerical_radius": 5.39730329531937e-06,
+      "lower_diagnostic_margin": -4.533160029940917e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0022565722542404344}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.029450383438973736,
+      "mcse": 0.004752633865498058,
+      "degrees_freedom": 118.25305798019902,
+      "critical_value": 1.9802283506498664,
+      "numerical_radius": 5.542666966202657e-06,
+      "lower_diagnostic_margin": 0.020033540451289616,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0017006452745343082}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.010746377608541004,
+      "mcse": 0.005426216400309696,
+      "degrees_freedom": 117.89395039473273,
+      "critical_value": 1.9802907025764847,
+      "numerical_radius": 5.397305739673962e-06,
+      "lower_diagnostic_margin": -4.505584900001895e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 23.4375, \"precision\": \"full\", \"prize\": 0.0017008952755549038}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.010754767734634685,
+      "mcse": 0.005425908525617684,
+      "degrees_freedom": 117.89408534398784,
+      "critical_value": 1.9802906790731492,
+      "numerical_radius": 5.397535091791117e-06,
+      "lower_diagnostic_margin": 4.494120758660675e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 28.125, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.04764844917871218,
+      "mcse": 0.00938094478188274,
+      "degrees_freedom": 118.00991460136972,
+      "critical_value": 1.9802705257819295,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": 0.02906713878802513,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5653477478226466,
+      "mcse": 0.011993329518647957,
+      "degrees_freedom": 111.08410399350072,
+      "critical_value": 1.9815502250239336,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.5891176345642466,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.00875}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.4481552932948585,
+      "mcse": 0.011435062665224366,
+      "degrees_freedom": 115.49407556271919,
+      "critical_value": 1.9807174503308205,
+      "numerical_radius": 5.5658208167953684e-06,
+      "lower_diagnostic_margin": -0.4708104872823116,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.0175}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.3323774294524023,
+      "mcse": 0.012529440631786515,
+      "degrees_freedom": 121.42838098541219,
+      "critical_value": 1.9796932239747564,
+      "numerical_radius": 6.257618370762706e-06,
+      "lower_diagnostic_margin": -0.3571881357897148,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.035}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.14559729254952516,
+      "mcse": 0.013632486850377342,
+      "degrees_freedom": 123.02118335804965,
+      "critical_value": 1.9794352990951094,
+      "numerical_radius": 7.785010910306466e-06,
+      "lower_diagnostic_margin": -0.17258970324652229,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.06582598335546361}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03880204896318496,
+      "mcse": 0.014914898666181819,
+      "degrees_freedom": 122.77370328149978,
+      "critical_value": 1.979474930519054,
+      "numerical_radius": 1.0324901177714293e-05,
+      "lower_diagnostic_margin": 0.009268056061068258,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.06425486714253013}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03264478457233578,
+      "mcse": 0.014779825255705002,
+      "degrees_freedom": 122.72482318490808,
+      "critical_value": 1.9794827772569445,
+      "numerical_radius": 1.0230916544711294e-05,
+      "lower_diagnostic_margin": 0.0033781441112557997,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.04962743357126507}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.0400119801052244,
+      "mcse": 0.013759806950234448,
+      "degrees_freedom": 121.910391593788,
+      "critical_value": 1.9796144531329587,
+      "numerical_radius": 9.091962471765123e-06,
+      "lower_diagnostic_margin": -0.06726018477869962,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.06355521287339165}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02980421238712715,
+      "mcse": 0.014720620628485134,
+      "degrees_freedom": 122.69435241744398,
+      "critical_value": 1.9794876719334689,
+      "numerical_radius": 1.0178255253097586e-05,
+      "lower_diagnostic_margin": 0.0006547470745782177,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.0634210644153377}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02925263353486359,
+      "mcse": 0.014709340184445276,
+      "degrees_freedom": 122.68791924243241,
+      "critical_value": 1.9794887056414112,
+      "numerical_radius": 1.0167945400715183e-05,
+      "lower_diagnostic_margin": 0.00012549282691609874,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.056524248993301385}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.002149226977616943,
+      "mcse": 0.014168697501092882,
+      "degrees_freedom": 122.19621081995139,
+      "critical_value": 1.9795680405238627,
+      "numerical_radius": 9.656477853720662e-06,
+      "lower_diagnostic_margin": -0.03020678420448445,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.06339265542617711}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.029135532891771405,
+      "mcse": 0.014706954462194671,
+      "degrees_freedom": 122.68653275222819,
+      "critical_value": 1.979488928442465,
+      "numerical_radius": 1.0165934521182659e-05,
+      "lower_diagnostic_margin": 1.311342822836407e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.0633895499940163}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.029122726253333585,
+      "mcse": 0.014706693743984058,
+      "degrees_freedom": 122.68638068000539,
+      "critical_value": 1.9794889528799118,
+      "numerical_radius": 1.0165737302256075e-05,
+      "lower_diagnostic_margin": 8.227164267774067e-07,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.059956899493658844}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.014229075269694014,
+      "mcse": 0.014427198671697289,
+      "degrees_freedom": 122.46652125745224,
+      "critical_value": 1.9795243475701685,
+      "numerical_radius": 9.917035658013805e-06,
+      "lower_diagnostic_margin": -0.014339832803820776,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": \"full\", \"prize\": 0.06338922806452796}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.02912139856354295,
+      "mcse": 0.014706666716984906,
+      "degrees_freedom": 122.68636490943689,
+      "critical_value": 1.9794889554141875,
+      "numerical_radius": 1.0165650421857947e-05,
+      "lower_diagnostic_margin": -4.514241079553565e-07,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.5653477478226466,
+      "mcse": 0.011993329518647957,
+      "degrees_freedom": 111.08410399350072,
+      "critical_value": 1.9815502250239336,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.5891176345642466,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.483654965677912,
+      "mcse": 0.011324871413045393,
+      "degrees_freedom": 113.68194805297624,
+      "critical_value": 1.9810517487122283,
+      "numerical_radius": 6.365475357442141e-06,
+      "lower_diagnostic_margin": -0.5060964874700242,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.39999584445666475,
+      "mcse": 0.011798257724835918,
+      "degrees_freedom": 117.95415434836713,
+      "critical_value": 1.9802802225940714,
+      "numerical_radius": 8.321434999632171e-06,
+      "lower_diagnostic_margin": -0.4233680223252247,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.025}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.2340414326067347,
+      "mcse": 0.014942888565510409,
+      "degrees_freedom": 122.21579818349382,
+      "critical_value": 1.9795648678656739,
+      "numerical_radius": 1.2151700459997472e-05,
+      "lower_diagnostic_margin": -0.2636340015359108,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.049410206799692276}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03883538886538682,
+      "mcse": 0.01907463370258333,
+      "degrees_freedom": 123.41127529402502,
+      "critical_value": 1.9793731556792553,
+      "numerical_radius": 2.463531450273837e-05,
+      "lower_diagnostic_margin": 0.0010549356455758427,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.049312793270964626}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03794103077727922,
+      "mcse": 0.019069157289007245,
+      "degrees_freedom": 123.39813378827657,
+      "critical_value": 1.9793752427238152,
+      "numerical_radius": 2.4532420626569018e-05,
+      "lower_diagnostic_margin": 0.0001714805191853283,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.037156396635482314}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.08613392384392786,
+      "mcse": 0.017871090619319935,
+      "degrees_freedom": 122.63147436530055,
+      "critical_value": 1.9794977801226488,
+      "numerical_radius": 1.7779037972114053e-05,
+      "lower_diagnostic_margin": -0.12152748709121447,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.04929553924146334}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03778252469769308,
+      "mcse": 0.019068213342006438,
+      "degrees_freedom": 123.39586663338116,
+      "critical_value": 1.9793756028233305,
+      "numerical_radius": 2.451418517462889e-05,
+      "lower_diagnostic_margin": 1.4854233920585935e-05,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.04929418066247433}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03777002523794914,
+      "mcse": 0.019068130504008563,
+      "degrees_freedom": 123.39564271198687,
+      "critical_value": 1.9793756383902117,
+      "numerical_radius": 2.451276519551543e-05,
+      "lower_diagnostic_margin": 2.5194834738020977e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.04322528864897832}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.02104432232266049,
+      "mcse": 0.018638707468229942,
+      "degrees_freedom": 122.80482936261846,
+      "critical_value": 1.9794699371259867,
+      "numerical_radius": 2.0602878016286186e-05,
+      "lower_diagnostic_margin": -0.05795968630092355,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.04929404186172821}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.03776879665115816,
+      "mcse": 0.019068128060785217,
+      "degrees_freedom": 123.39565715776526,
+      "critical_value": 1.9793756360956913,
+      "numerical_radius": 2.4512594909542607e-05,
+      "lower_diagnostic_margin": 1.2959467777795552e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 4.6875, \"precision\": 7.2037881272159705, \"prize\": 0.04929378117077085}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.0377663655592299,
+      "mcse": 0.019068114697224116,
+      "degrees_freedom": 123.39561640455926,
+      "critical_value": 1.979375642568799,
+      "numerical_radius": 2.4512323211149656e-05,
+      "lower_diagnostic_margin": -1.1085453747936014e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.39798915533891327,
+      "mcse": 0.0078434299801361,
+      "degrees_freedom": 113.80474836276711,
+      "critical_value": 1.9810287549037497,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.4135317176017739,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.003125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.335324064920024,
+      "mcse": 0.006762025784170907,
+      "degrees_freedom": 112.40923112525891,
+      "critical_value": 1.9812930492036347,
+      "numerical_radius": 5.298957720575971e-06,
+      "lower_diagnostic_margin": -0.34872691856245813,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.00625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.2710806092431598,
+      "mcse": 0.0066795540086316664,
+      "degrees_freedom": 115.50689649900077,
+      "critical_value": 1.9807151228997282,
+      "numerical_radius": 5.698705177384201e-06,
+      "lower_diagnostic_margin": -0.2843166015874594,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.0125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.14230422306519547,
+      "mcse": 0.009017696520244181,
+      "degrees_freedom": 122.50870236256299,
+      "critical_value": 1.9795175469811999,
+      "numerical_radius": 6.3987655952351426e-06,
+      "lower_diagnostic_margin": -0.16016131032596537,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.021494466947929104}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.030041427608146633,
+      "mcse": 0.013016902393277735,
+      "degrees_freedom": 121.73988733709767,
+      "critical_value": 1.9796422451781102,
+      "numerical_radius": 7.419634810595227e-06,
+      "lower_diagnostic_margin": 0.004265198094243384,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.02126102687207162}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.025869461651145693,
+      "mcse": 0.012931284346228077,
+      "degrees_freedom": 121.81925124953842,
+      "critical_value": 1.979629299156418,
+      "numerical_radius": 7.390347465330861e-06,
+      "lower_diagnostic_margin": 0.0002629219361645162,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.01688051343603581}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.05561135537594496,
+      "mcse": 0.011108165958053834,
+      "degrees_freedom": 123.17141579883561,
+      "critical_value": 1.979411319328368,
+      "numerical_radius": 6.876859613175959e-06,
+      "lower_diagnostic_margin": -0.07760586166990793,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.021246111181622108}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02560227583307982,
+      "mcse": 0.012925770252447073,
+      "degrees_freedom": 121.82437286891708,
+      "critical_value": 1.9796284642912907,
+      "numerical_radius": 7.387861970700707e-06,
+      "lower_diagnostic_margin": 6.665256475271056e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.021245861270125285}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.025597798520250226,
+      "mcse": 0.012925677819870843,
+      "degrees_freedom": 121.82445872860548,
+      "critical_value": 1.9796284502960755,
+      "numerical_radius": 7.3878224464497916e-06,
+      "lower_diagnostic_margin": 2.3711462265031586e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.019063187353080546}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.014278056964773545,
+      "mcse": 0.01206469181042657,
+      "degrees_freedom": 122.58848399978098,
+      "critical_value": 1.979504697221223,
+      "numerical_radius": 7.134051368710305e-06,
+      "lower_diagnostic_margin": -0.03816730512540807,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.02124585067979475}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.025597608787725365,
+      "mcse": 0.012925673902886252,
+      "degrees_freedom": 121.82446236705687,
+      "critical_value": 1.9796284497030048,
+      "numerical_radius": 7.387849166224355e-06,
+      "lower_diagnostic_margin": 2.189148821843554e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"full\", \"prize\": 0.021245600496714884}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.025593126587717292,
+      "mcse": 0.012925581368336613,
+      "degrees_freedom": 121.82454832168666,
+      "critical_value": 1.9796284356923344,
+      "numerical_radius": 7.387849747466272e-06,
+      "lower_diagnostic_margin": -2.109686644364881e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.0}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.39798915533891327,
+      "mcse": 0.0078434299801361,
+      "degrees_freedom": 113.80474836276711,
+      "critical_value": 1.9810287549037497,
+      "numerical_radius": 4.501935136867752e-06,
+      "lower_diagnostic_margin": -0.4135317176017739,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.00265625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.3451643913087956,
+      "mcse": 0.006871857793090603,
+      "degrees_freedom": 112.41281312391547,
+      "critical_value": 1.9812923623266556,
+      "numerical_radius": 5.883175832811782e-06,
+      "lower_diagnostic_margin": -0.3587854338450738,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.0053125}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.29142725568130157,
+      "mcse": 0.006554224950393336,
+      "degrees_freedom": 114.14822071153702,
+      "critical_value": 1.9809647066980753,
+      "numerical_radius": 7.413603808639757e-06,
+      "lower_diagnostic_margin": -0.30441835759159935,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.010625}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.18240918403448797,
+      "mcse": 0.008104185146979557,
+      "degrees_freedom": 120.15635992857167,
+      "critical_value": 1.9799041640988857,
+      "numerical_radius": 1.0545174585770145e-05,
+      "lower_diagnostic_margin": -0.1984652391282069,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.021042607085399904}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.02771141919629326,
+      "mcse": 0.01392341537086729,
+      "degrees_freedom": 123.00718683551845,
+      "critical_value": 1.9794375362004875,
+      "numerical_radius": 1.56728615253246e-05,
+      "lower_diagnostic_margin": 0.0001352153175623906,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.021035389352131877}": {
+      "status": "evaluated",
+      "passed": true,
+      "mean_gap": 0.0275708274986743,
+      "mcse": 0.01391956340205307,
+      "degrees_freedom": 123.00741512569059,
+      "critical_value": 1.9794374997080737,
+      "numerical_radius": 1.566983182460513e-05,
+      "lower_diagnostic_margin": 2.2518892617562347e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.015830194676065938}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": -0.07596466664629252,
+      "mcse": 0.010986380067488118,
+      "degrees_freedom": 122.28795033968781,
+      "critical_value": 1.9795531898915717,
+      "numerical_radius": 1.3225321019307013e-05,
+      "lower_diagnostic_margin": -0.09772601567526912,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    },
+    "{\"horizon\": 9.375, \"precision\": \"observed\", \"prize\": 0.02103514441219752}": {
+      "status": "evaluated",
+      "passed": false,
+      "mean_gap": 0.02756604937829803,
+      "mcse": 0.013919434945262812,
+      "degrees_freedom": 123.00744106052932,
+      "critical_value": 1.9794374955623726,
+      "numerical_radius": 1.5669741619636635e-05,
+      "lower_diagnostic_margin": -2.27181101599902e-06,
+      "scope": "conditional original empirical posterior quadrature; numerical radius not a strict continuous bound"
+    }
+  },
+  "required_further_prize_refinement": [],
+  "uncertainty": [
+    {
+      "delta": 0.1,
+      "cheaper_ambiguous_evaluated_candidates": [],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 0.25,
+      "cheaper_ambiguous_evaluated_candidates": [],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 0.5,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.00140625,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.0625,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.0017002649511203205,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.121302990224064,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.0017006445084808692,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.1213789016961737,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.0017006452745343082,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.1213790549068616,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 1.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.00140625,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.84375,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.0017002649511203205,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.902552990224064,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.0017006445084808692,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.9026289016961737,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.0017006452745343082,
+            "horizon": 23.4375,
+            "precision": "full"
+          },
+          "cost": 1.9026290549068616,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 2.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.004974973956210669,
+            "horizon": 18.75,
+            "precision": "full"
+          },
+          "cost": 2.9949947912421337,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 5.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.010171875,
+            "horizon": 14.0625,
+            "precision": "full"
+          },
+          "cost": 4.846875,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.00984375,
+            "horizon": 14.0625,
+            "precision": 72.03788127215971
+          },
+          "cost": 4.78125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.010762568837800374,
+            "horizon": 14.0625,
+            "precision": "full"
+          },
+          "cost": 4.965013767560075,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 10.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.01903125,
+            "horizon": 9.375,
+            "precision": 0.024012627090719902
+          },
+          "cost": 6.30625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.01903125,
+            "horizon": 9.375,
+            "precision": 0.7203788127215971
+          },
+          "cost": 6.30625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.019375,
+            "horizon": 9.375,
+            "precision": 7.2037881272159705
+          },
+          "cost": 6.375,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02034375,
+            "horizon": 9.375,
+            "precision": 7.2037881272159705
+          },
+          "cost": 6.56875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.019063187353080546,
+            "horizon": 9.375,
+            "precision": "full"
+          },
+          "cost": 6.312637470616109,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.021245600496714884,
+            "horizon": 9.375,
+            "precision": "full"
+          },
+          "cost": 6.749120099342977,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02103514441219752,
+            "horizon": 9.375,
+            "precision": "observed"
+          },
+          "cost": 6.707028882439504,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 25.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.01903125,
+            "horizon": 9.375,
+            "precision": 0.024012627090719902
+          },
+          "cost": 10.05625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.01903125,
+            "horizon": 9.375,
+            "precision": 0.7203788127215971
+          },
+          "cost": 10.05625,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.019375,
+            "horizon": 9.375,
+            "precision": 7.2037881272159705
+          },
+          "cost": 10.125,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02034375,
+            "horizon": 9.375,
+            "precision": 7.2037881272159705
+          },
+          "cost": 10.31875,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.04322528864897832,
+            "horizon": 4.6875,
+            "precision": 7.2037881272159705
+          },
+          "cost": 10.207557729795665,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.019063187353080546,
+            "horizon": 9.375,
+            "precision": "full"
+          },
+          "cost": 10.06263747061611,
+          "affects": [
+            "selected_design",
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.021245600496714884,
+            "horizon": 9.375,
+            "precision": "full"
+          },
+          "cost": 10.499120099342978,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.02103514441219752,
+            "horizon": 9.375,
+            "precision": "observed"
+          },
+          "cost": 10.457028882439504,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    },
+    {
+      "delta": 100.0,
+      "cheaper_ambiguous_evaluated_candidates": [
+        {
+          "design": {
+            "prize": 0.045,
+            "horizon": 4.6875,
+            "precision": 0.024012627090719902
+          },
+          "cost": 15.25,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.04725,
+            "horizon": 4.6875,
+            "precision": 0.024012627090719902
+          },
+          "cost": 15.7,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.0475,
+            "horizon": 4.6875,
+            "precision": 0.7203788127215971
+          },
+          "cost": 15.75,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "unresolved"
+        },
+        {
+          "design": {
+            "prize": 0.056524248993301385,
+            "horizon": 4.6875,
+            "precision": "full"
+          },
+          "cost": 17.55484979866028,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.059956899493658844,
+            "horizon": 4.6875,
+            "precision": "full"
+          },
+          "cost": 18.24137989873177,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.06338922806452796,
+            "horizon": 4.6875,
+            "precision": "full"
+          },
+          "cost": 18.927845612905593,
+          "affects": [
+            "full_disclosure_comparator"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.04322528864897832,
+            "horizon": 4.6875,
+            "precision": 7.2037881272159705
+          },
+          "cost": 14.895057729795665,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        },
+        {
+          "design": {
+            "prize": 0.04929378117077085,
+            "horizon": 4.6875,
+            "precision": 7.2037881272159705
+          },
+          "cost": 16.10875623415417,
+          "affects": [
+            "selected_design"
+          ],
+          "reason": "quality_diagnostic_includes_zero"
+        }
+      ],
+      "unsampled_designs_excluded": false
+    }
+  ],
+  "independent_checks": [],
+  "required_baseline_repairs": [],
+  "input_files_sha256": {
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/3507/result.json": "10f92686c266d5e7cbf9c51a4a56c767a63bdad4bf1c90d921fad2177b6ad84a",
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/3507/prize_refinement.json": "603be94ef4c31d8fd4cedeb9bda7e660d5f202cd7556de35df947b54bc18302e",
+    "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/nonlinear_table_rebuild_20261025/contests/3507/validation_progress.json": "a471e3a887e2b0a091fb42b9a51bac2afef4ed41af1f542aead6bf628381ab87"
+  },
+  "assembly_source_sha256": "f2b9db24aff0a23a7808c93ad30747fee46d72acbf9461ff5ad02f89387aaa42",
+  "selection_source_sha256": "ac7ca4bdf8877a8a9992d3673d779596d280d4e94bd73c32424888cc5f448f9d",
+  "scope": "Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified",
+  "missing_full_comparators": [],
+  "unresolved_full_comparator_delimitation": null,
+  "remaining_checks": [
+    "Full73 coverage and table arithmetic",
+    "Manuscript notes delimit the finite search and unresolved competitors"
+  ]
+}

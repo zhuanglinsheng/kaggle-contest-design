@@ -1,0 +1,144 @@
+{
+  "contest_id": 2551,
+  "delta": 0.1,
+  "scenario": "common_sd_100",
+  "selection_reason": "longer_duration_lower_prize_higher_precision",
+  "provenance": {
+    "accepted": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/prior_reconstruction_20261025/common_sd_100/contest_2551/accepted.json",
+    "accepted_sha256": "313520c0af3c33d63585f313a2d21295e8aaa214cc7ff8744e6234dba0ba4ab8",
+    "chain_sha256": [
+      "e4cca002039abe4ede673f291d093db58b1f04792548dd88ac5683100584a133",
+      "99402f885deaa393a09a7369401e5b51f0c1f675a9bf4e57096109a5001f84d3",
+      "76fbdd8ab68bd4210e91a27636077e113c0f04697cb8d21bbd86a518f0fdf22d",
+      "ceeb6f9f725db2398a67ef918f608ee6b631a3a97304a20f67e25f6b0cedcab9"
+    ],
+    "raw_input_sha256": "8b46afec55962cf2e338113dc3b0de35f0cae0a2ca6ed4454d69f50274932e51",
+    "seed": 202610262551,
+    "script_sha256": "8ff4f7a111233739e0ac2fecd3832022df35d9e5eb18a61fec890ba756f2e164",
+    "refiner_sha256": "d27330ddc44e2ed402d7843e9048a872a0e5929a831fddb824df43bc864c2fc4",
+    "batch_sha256": "b74ffafd4bf2d5ae91b1c548f1066cc2ef4a5738794dc9897db000458a7aecb9"
+  },
+  "original_selection": {
+    "contest_id": 2551,
+    "delta": 0.1,
+    "choice": "less_disclosure",
+    "prize_ratio": 0.43948070306048836,
+    "time_multiplier": 1.5,
+    "cost_saving_pct": 39.59266335813743,
+    "additional_reduction_pct": 2.5458658934389367,
+    "selected": {
+      "prize": 0.006592210545907325,
+      "horizon": 124.8125,
+      "precision": 109.56843415553051
+    },
+    "full_comparator": {
+      "prize": 0.006852591304652807,
+      "horizon": 124.8125,
+      "precision": "full"
+    },
+    "retained_observed": false
+  },
+  "original_selection_sha256": "15567977efb7ff79274f61f970e20b4f7c98ccd2581ee6e6d8b50eed5e952105",
+  "trials": [
+    {
+      "design": {
+        "prize": 0.006592210545907325,
+        "horizon": 124.8125,
+        "precision": 109.56843415553051
+      },
+      "prize_ratio": 0.43948070306048836,
+      "cost_saving_pct": 39.592663358137415,
+      "comparison": {
+        "identity": {
+          "candidate": {
+            "prize": 0.006592210545907325,
+            "horizon": 124.8125,
+            "precision": 109.56843415553051
+          },
+          "reference": {
+            "prize": 0.015,
+            "horizon": 83.20833333333333,
+            "precision": "observed"
+          },
+          "provenance": {
+            "accepted": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/prior_reconstruction_20261025/common_sd_100/contest_2551/accepted.json",
+            "accepted_sha256": "313520c0af3c33d63585f313a2d21295e8aaa214cc7ff8744e6234dba0ba4ab8",
+            "chain_sha256": [
+              "e4cca002039abe4ede673f291d093db58b1f04792548dd88ac5683100584a133",
+              "99402f885deaa393a09a7369401e5b51f0c1f675a9bf4e57096109a5001f84d3",
+              "76fbdd8ab68bd4210e91a27636077e113c0f04697cb8d21bbd86a518f0fdf22d",
+              "ceeb6f9f725db2398a67ef918f608ee6b631a3a97304a20f67e25f6b0cedcab9"
+            ],
+            "raw_input_sha256": "8b46afec55962cf2e338113dc3b0de35f0cae0a2ca6ed4454d69f50274932e51",
+            "seed": 202610262551,
+            "script_sha256": "8ff4f7a111233739e0ac2fecd3832022df35d9e5eb18a61fec890ba756f2e164",
+            "refiner_sha256": "d27330ddc44e2ed402d7843e9048a872a0e5929a831fddb824df43bc864c2fc4",
+            "batch_sha256": "b74ffafd4bf2d5ae91b1c548f1066cc2ef4a5738794dc9897db000458a7aecb9"
+          }
+        },
+        "resolved": true,
+        "failed_draws": [],
+        "posterior_draws_coarse": 128,
+        "posterior_draws_fine": 16,
+        "mean_gap": 0.08612680344674628,
+        "mcse": 0.019956068513720924,
+        "numerical_radius": 0.0006266881125663315,
+        "lower_diagnostic": 0.0458940608093794,
+        "upper_diagnostic": 0.12635954608411315,
+        "direction": "positive",
+        "scope": "Conditional posterior integration and grid diagnostics, not a posterior credible interval or rigorous continuous PDE bound"
+      }
+    }
+  ],
+  "fixed_published_design_direction": "positive",
+  "same_direction_cost_saving_supported": true,
+  "supported_design": {
+    "prize": 0.006592210545907325,
+    "horizon": 124.8125,
+    "precision": 109.56843415553051
+  },
+  "supported_saving_pct": 39.592663358137415,
+  "matched_observed_feedback_contrast": {
+    "identity": {
+      "candidate": {
+        "prize": 0.006592210545907325,
+        "horizon": 124.8125,
+        "precision": 109.56843415553051
+      },
+      "reference": {
+        "prize": 0.006592210545907325,
+        "horizon": 124.8125,
+        "precision": "observed"
+      },
+      "provenance": {
+        "accepted": "/Users/zhuanglinsheng/Documents/Github/kaggle-contest-design/docs/review/PaperJK9/prior_reconstruction_20261025/common_sd_100/contest_2551/accepted.json",
+        "accepted_sha256": "313520c0af3c33d63585f313a2d21295e8aaa214cc7ff8744e6234dba0ba4ab8",
+        "chain_sha256": [
+          "e4cca002039abe4ede673f291d093db58b1f04792548dd88ac5683100584a133",
+          "99402f885deaa393a09a7369401e5b51f0c1f675a9bf4e57096109a5001f84d3",
+          "76fbdd8ab68bd4210e91a27636077e113c0f04697cb8d21bbd86a518f0fdf22d",
+          "ceeb6f9f725db2398a67ef918f608ee6b631a3a97304a20f67e25f6b0cedcab9"
+        ],
+        "raw_input_sha256": "8b46afec55962cf2e338113dc3b0de35f0cae0a2ca6ed4454d69f50274932e51",
+        "seed": 202610262551,
+        "script_sha256": "8ff4f7a111233739e0ac2fecd3832022df35d9e5eb18a61fec890ba756f2e164",
+        "refiner_sha256": "d27330ddc44e2ed402d7843e9048a872a0e5929a831fddb824df43bc864c2fc4",
+        "batch_sha256": "b74ffafd4bf2d5ae91b1c548f1066cc2ef4a5738794dc9897db000458a7aecb9"
+      }
+    },
+    "resolved": true,
+    "failed_draws": [],
+    "posterior_draws_coarse": 128,
+    "posterior_draws_fine": 16,
+    "mean_gap": -0.006150308381663994,
+    "mcse": 0.0006160946147710202,
+    "numerical_radius": 0.00024790853917400907,
+    "lower_diagnostic": -0.0076210613024880434,
+    "upper_diagnostic": -0.0046795554608399445,
+    "direction": "negative",
+    "scope": "Conditional posterior integration and grid diagnostics, not a posterior credible interval or rigorous continuous PDE bound"
+  },
+  "precision_higher_than_observed_fraction": 1.0,
+  "status": "completed",
+  "scope": "Four selected cases; two direct-refit prior/support changes; fixed absolute feedback and duration; finite prize adjustment menu; directional existence test, not a new optimum or whole-sample robustness test"
+}
