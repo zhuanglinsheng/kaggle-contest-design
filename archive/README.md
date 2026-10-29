@@ -1,16 +1,10 @@
-# Archive
+# Retained research archive
 
-This directory preserves superseded material for provenance. Nothing here is
-used by the current PaperJK7 pipeline.
+After the user-authorized cleanup on 27 October 2026, this directory retains
+only `research/precision_conditions/`, which contains theoretical and
+numerical-audit material relevant to Task2.
 
-- `paper_versions/`: PaperJK3--PaperJK6 sources and PDFs;
-- `paper_assets/` and `paper_build_artifacts/`: figures and build files used only by earlier drafts;
-- `notebooks/`: notebook implementations from earlier empirical and synthetic workflows;
-- `legacy_code/`: scripts tied to superseded output layouts or prize-unit experiments;
-- `experiments/`: exploratory design calculations.
-- `research/`: self-contained proof and numerical-audit workspaces retained for
-  research provenance;
-- `results/`: outputs produced by superseded estimators and sensitivity runs.
-
-Archived scripts may depend on their original working directories and are not
-maintained as executable entry points.
+Unrelated superseded result trees, old notebooks, experimental scripts,
+draft archives and obsolete build artifacts were deleted rather than moved
+to another location. The exact list is in the
+[cleanup manifest](../docs/review/PaperJK9/cleanup_20261027/manifest.json).
