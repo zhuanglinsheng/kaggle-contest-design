@@ -1,29 +1,20 @@
-# Results map
+# Retained publication results
 
-The active version is selected by `../current_release.toml`. Its file hashes
-and portable fit index are under `releases/paperjk7-review-20261016/`.
+This tree contains retained formal results and the frozen scientific input
+snapshots used by the current release. Regenerable work products live in `tmp/`.
 
-| Path | Role |
-| --- | --- |
-| `reestimation/lambda100_sd225/estimation/` | Current 146 full/early posterior summaries |
-| `reestimation/lambda100_sd225/auxiliary/` | Current 251 robustness and time-imputation fits |
-| `reestimation/lambda100_sd225/validation/` | Empirical diagnostics and nonlinear-generated recovery results |
-| `reestimation/lambda100_sd225/counterfactual/` | Precision-only benchmark, with observed prize and duration |
-| `reestimation/lambda100_sd225/fixed_initial_design/` | Current fixed-initial-distribution, asymmetric first-order design tables; no-feedback limits distinguished |
-| `reestimation/lambda100_sd225/design_sensitivity/` | Historical steady-state joint-design scenarios, superseded for the current manuscript |
-| `synthetic/optimal_hourly/`, `synthetic/initialization_comparison/`, `synthetic/richer_steady/` | Retained Chapter 4 evidence |
-| `theory/numerical_joint_plane_moderate_dense/three_class_comparison/` | Retained theoretical regime illustration |
-| `validation/sigma_lambda_trials/` | Recovery development and source simulations; includes active dependencies |
-| `validation/main/chapter5_rank_agreement.*` | Retained data-only leaderboard agreement |
-| `estimation/main/`, `counterfactual/main/`, `robustness/chapter6/` | Previous empirical baseline and retained dependencies |
-| `release_manifest.json` | Historical publication lock; unchanged by current release commands |
-| `manuscript_reviews/` | Dated manuscript checks and snapshots; records describe their own revision |
+- `releases/paperjk9-20261029/`: current per-contest results, tables, sensitivity
+  checks, uncertainty records, provenance and the finite publication file lock.
+- `releases/paperjk7-review-20261016/`: historical release and frozen-input index.
+- `reestimation/lambda100_sd225/input_snapshots/`: immutable, hash-addressed inputs.
+- Other retained compact CSV/JSON/PDF files: current manuscript evidence selected
+  by the publication lock; they are not scratch output directories.
 
-A directory's age or name does not establish whether it can be deleted. Check
-`../docs/PAPER_EVIDENCE.csv` and the accepted-fit index first. Original accepted
-run records remain immutable, including absolute paths recorded at run time;
-the new fit index provides relative paths without rewriting those records.
+New fits, nonlinear searches and predictions write to `tmp/runs/`;
+other experiments write to `tmp/work/results/`. Historical work products moved
+to `tmp/history/`. Generated code snapshots that are useful provenance are kept
+with the source records under `docs/review/source_snapshots/`, not in this tree.
 
-Compact publication metadata is eligible for Git. Large chains, posterior
-arrays, logs and executables remain local or in a separate artifact bundle.
-See `../docs/REPRODUCIBILITY.md` for verification scope and reproduction limits.
+Use `make reproduce-derived` and `make verify-release` for compact publication
+checks. `docs/STORAGE_LAYOUT.md` and `docs/storage_layout.json` describe all roles
+and old-to-new paths. No full scientific rerun is required for this organization.

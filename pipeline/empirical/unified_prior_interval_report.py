@@ -1,4 +1,6 @@
 """Carry forward frozen simulation calibration without relabeling credible CIs."""
+
+from pipeline.storage import historical_path
 import json
 import math
 import numpy as np
@@ -13,7 +15,7 @@ def expand(q,k):
 
 
 def main():
-    research=ROOT/'results/validation/sigma_lambda_trials'
+    research=historical_path(ROOT/'results/validation/sigma_lambda_trials')
     paths={'sigma':research/'sigma_interval_calibration/frozen_multiplier.json',
            'lambda':research/'lambda_refinement/lambda_interval_frozen.json'}
     multipliers={p:json.loads(path.read_text())['multiplier'] for p,path in paths.items()}

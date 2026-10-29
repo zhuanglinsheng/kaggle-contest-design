@@ -4,6 +4,8 @@ Run only when another batch driver is not active. Child processes retain the
 individual estimator's immutable settings, provenance and checkpoints.
 """
 from __future__ import annotations
+
+from pipeline.storage import work_path
 import argparse,json,os,subprocess,sys,time
 from pathlib import Path
 import numpy as np
@@ -23,7 +25,7 @@ def sampling_diagnostics(cid):
 
 
 def run(stage,workers):
-    n.OUT=n.ROOT/'results/estimation/nonlinear_top10/fast_v1'
+    n.OUT=work_path(n.ROOT/'results/estimation/nonlinear_top10/fast_v1')
     n.SOURCE=Path(n.__file__).with_name('nonlinear_fast_kernel.cpp')
     ids=[a['contest_id'] for a in json.loads((n.OUT/'selection.json').read_text())['selected']]
     waiting=set(ids);running={};finished=[];failed=[]

@@ -1,5 +1,7 @@
 """Recover competitive failed designs without relaxing plane classification."""
 from __future__ import annotations
+
+from pipeline.storage import work_path
 import csv
 import json
 import math
@@ -42,7 +44,7 @@ def main():
     args=parser.parse_args()
     old=list(csv.DictReader((OUT/"regions.csv").open()))
     sigmas=sorted({float(r["sigma"]) for r in old})
-    cache=load_cache(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv")
+    cache=load_cache(work_path(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv"))
     cache.update(load_cache(OUT/"output_samples.csv"))
     cache.update(load_cache(OUT/"stable_audit_samples.csv"))
     designs={s:{(k[1],k[2],k[3]) for k in cache if k[0]==s and .00005<=k[1]<=12

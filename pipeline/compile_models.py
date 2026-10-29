@@ -4,6 +4,7 @@ import subprocess
 from pathlib import Path
 
 from pipeline.config import METAKAGGLE_DIR, SYNTHETIC_DIR
+from pipeline.storage import stage_stan
 
 
 MODEL_FILES = (
@@ -30,14 +31,14 @@ def main() -> None:
         for stan_file in MODEL_FILES:
             print(f"Compiling {stan_file.relative_to(stan_file.parents[1])}")
             subprocess.run(
-                ["make", str(stan_file.with_suffix(""))],
+                ["make", str(stage_stan(stan_file).with_suffix(""))],
                 cwd=cmdstan_dir,
                 check=True,
             )
     else:
         for stan_file in MODEL_FILES:
             print(f"Compiling {stan_file.relative_to(stan_file.parents[1])}")
-            CmdStanModel(stan_file=str(stan_file))
+            CmdStanModel(stan_file=str(stage_stan(stan_file)), cpp_options={'PRECOMPILED_HEADERS':'false'})
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ from pipeline.config import ROOT, MATPLOTLIB_CACHE_DIR
 from pipeline.synthetic.chapter4 import OUT, NAMES, PARAMS, STAN
 
 os.environ.setdefault('MPLCONFIGDIR',str(MATPLOTLIB_CACHE_DIR))
-os.environ.setdefault('XDG_CACHE_HOME',str(ROOT/'.cache'))
+os.environ.setdefault('XDG_CACHE_HOME',str(ROOT/'tmp/cache'))
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt

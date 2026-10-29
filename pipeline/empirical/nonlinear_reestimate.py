@@ -6,6 +6,8 @@ separately; a finite grid is not advertised as an analytic exact equilibrium.
 """
 from __future__ import annotations
 
+from pipeline.storage import work_path, compile_stan
+
 import argparse
 import csv
 import ctypes
@@ -26,7 +28,7 @@ from scipy.stats import rankdata
 from pipeline.config import MAIN_DATA_DIR, MAIN_ESTIMATION_DIR, ROOT, resolve_manifest_path
 from pipeline.empirical.estimate import stan_data
 
-OUT = ROOT / "results" / "estimation" / "nonlinear_top10" / "implicit_v1"
+OUT = work_path(ROOT / "results" / "estimation" / "nonlinear_top10" / "implicit_v1")
 NAMES = ("c_i", "c_j", "sigma", "lambda", "mu_0", "r")
 SOURCE = Path(__file__).with_name("nonlinear_implicit_kernel.cpp")
 PRIOR_SD = np.array([.75, .75, .5, .75, 1., .5])
@@ -103,7 +105,7 @@ def prepare():
 
 
 def kernel():
-    cache = ROOT / ".cache" / "nonlinear_reestimate"
+    cache = ROOT / "tmp/cache" / "nonlinear_reestimate"
     cache.mkdir(parents=True, exist_ok=True)
     library = cache / (digest(SOURCE)[:16] + ".so")
     if not library.exists():
@@ -189,8 +191,7 @@ def audit(cid):
         if candidate['status']=='exploratory_only' and candidate['kernel_sha256']==digest(SOURCE):
             center=np.array(candidate['best']['z'])
             center_source='exploratory nonlinear mode; posterior-region audit still required'
-    model=cmdstanpy.CmdStanModel(stan_file=str(ROOT/"metakaggle"/"real_data.stan"),
-                               exe_file=str(ROOT/"metakaggle"/"real_data"))
+    model=compile_stan(ROOT/"metakaggle/real_data.stan")
     L=Likelihood(data)
     paired=[]
     for shift in (np.zeros(6),np.array([.05,-.05,.03,.08,.01,-.04])):
@@ -1077,7 +1078,7 @@ def main():
     parser.add_argument('--extra-samples',type=int,default=2000)
     args=parser.parse_args()
     if args.backend=='fast':
-        OUT=ROOT/'results'/'estimation'/'nonlinear_top10'/'fast_v1'
+        OUT=work_path(ROOT/'results'/'estimation'/'nonlinear_top10'/'fast_v1')
         SOURCE=Path(__file__).with_name('nonlinear_fast_kernel.cpp')
     if args.mode=='prepare':prepare()
     elif args.mode=='baseline-target':baseline_target_consistency()

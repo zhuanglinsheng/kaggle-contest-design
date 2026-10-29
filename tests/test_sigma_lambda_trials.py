@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from pipeline.empirical import nonlinear_reestimate as n
 from pipeline.empirical import sigma_lambda_trials as s
+from tests.fixtures import count_data, parameter_point
 
 
 class SigmaLambdaTests(unittest.TestCase):
@@ -9,8 +10,8 @@ class SigmaLambdaTests(unittest.TestCase):
   original_source=n.SOURCE
   try:
    n.SOURCE=n.ROOT/'pipeline/empirical/nonlinear_fast_kernel.cpp'
-   data,_,z,_=n.load_baseline(4657);old=n.Likelihood(data)
-   point=n.representative_point(z)
+   data=count_data();old=n.Likelihood(data)
+   point=parameter_point()
    for point in (point,point+np.array([.1,-.1,.05,.1,.02,.1])):
     full,parts=s.Target(data,'baseline').components(point)
     self.assertAlmostEqual(full,old.loglik(point,False),places=8)

@@ -4,6 +4,8 @@ Keeps the original domain, failed-design guards and payoff tolerance.
 Physical-policy value verification independently checks fine weak-signal solves.
 """
 from __future__ import annotations
+
+from pipeline.storage import work_path
 import csv
 import json
 import math
@@ -49,7 +51,7 @@ def main():
     before=list(csv.DictReader((DENSE/"regions.csv").open()))
     backup=DENSE/"regions_before_left_audit.csv"
     if not backup.exists():shutil.copyfile(DENSE/"regions.csv",backup)
-    cache=load_cache(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv")
+    cache=load_cache(work_path(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv"))
     for p in (OUT/"output_samples.csv",OUT/"stable_audit_samples.csv",
               DENSE/"output_samples.csv",DENSE/"stable_audit_samples.csv",
               DENSE/"verified_policy_samples.csv"):

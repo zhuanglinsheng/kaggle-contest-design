@@ -13,7 +13,7 @@ import numpy as np
 from scipy.linalg import solve_banded
 from scipy.special import ndtr
 
-from archive.experiments.exact_joint_design import filtering_variance
+from pipeline.theory.dimensionless import filtering_variance
 
 NO_SIGNAL_VERIFICATION_TOL=2e-3
 

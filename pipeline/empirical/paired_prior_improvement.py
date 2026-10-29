@@ -4,6 +4,8 @@ Only priors change. Numerical nonlinear estimates require fresh four-chain
 sampling AND posterior grid validation before being reported as usable.
 """
 from __future__ import annotations
+
+from pipeline.storage import work_path
 import argparse
 import json
 import math
@@ -17,7 +19,7 @@ from cmdstanpy import CmdStanModel, from_csv
 from pipeline.empirical import estimation_detail_audit as a
 from pipeline.empirical import nonlinear_reestimate as n
 
-OUT=n.ROOT/'results/validation/paired_prior_improvement'
+OUT=work_path(n.ROOT/'results/validation/paired_prior_improvement')
 PROFILES=('r_weak','scale_weak')
 BASE_GRID_WORKER=n._grid_worker
 

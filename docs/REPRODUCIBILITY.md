@@ -1,110 +1,219 @@
-# PaperJK7 reproducibility guide
+# PaperJK9 reproducibility
 
-## Active release
+The active release is `results/releases/paperjk9-20261029/`, selected by
+`current_release.toml`. The JK7 release is historical provenance.
 
-`current_release.toml` is the version entry point. The current empirical root
-is `results/reestimation/lambda100_sd225/`; the manuscript is
-`paper/PaperJK7.tex` with three new appendix/section fragments and the existing
-`appendix_100k_rows.tex`. `docs/PAPER_EVIDENCE.csv` maps every figure and table
-label to an evidence file and producing module. A producer is provenance, not
-an instruction to rerun a one-shot manuscript integration script.
+All intermediate outputs now live below `tmp/`. See `STORAGE_LAYOUT.md` for the
+role classification and `storage_layout.json` for old-to-new paths. Current
+formal evidence, frozen inputs and method/source records stay outside `tmp/`.
 
-The empirical revision has 397 accepted fits: 146 main full/early, 219
-alternative-pair/score-scale, and 32 time-imputation fits. Primary summaries
-are posterior medians. The lambda prior is log(lambda) ~ N(log(100), 2.25²);
-prizes use USD 100,000. Most fits use NUTS; two accepted robustness fits use
-same-target fixed-mixture Metropolis-Hastings. Their HMC-only diagnostics are
-unavailable, not zero. Original scientific verification reports document these
-choices. This repository maintenance does not change their contents.
+## Maintenance acceptance criterion
 
-## Four different operations
+The requested deliverable is a reproducible repository, not a new full scientific
+run. Check that model/source code, frozen inputs, configurations, random seeds,
+dependencies, stage order and output contracts are available; use dependency,
+build and small regression checks to detect broken links. A full estimation,
+search or integration run is optional and is not a maintenance acceptance gate.
+"Not rerun during maintenance" records validation scope; it is not itself a
+reproducibility defect.
 
-| Operation | Command / entry point | Scope |
+Keep two purposes distinct: compact final evidence reproduces the published
+tables, while the declared input-to-estimation-to-analysis commands support
+recomputing the scientific quantities. Historical acceptance certificates help
+trace the exact old run. Their absence limits historical provenance, but does
+not require running a new fit now or make them inputs to a fresh fit. A missing
+source, indispensable input, configuration or executable stage is a real gap
+and must remain explicitly identified. Specialized recovered tail-repair source
+is preserved separately from the portable ordinary-hour integration entry point;
+preserving that source does not imply all historical repair controllers have
+already been migrated into a portable command.
+
+## Distinct verification levels
+
+| Operation | Command | What it establishes |
 | --- | --- | --- |
-| Compile current manuscript | `make paper` | LaTeX only; does not regenerate empirical results |
-| Check saved snapshot | `make verify-release` | Hashes of selected code/results, frozen inputs, recursive TeX dependencies, figure-source agreement, evidence-label coverage and 397 fit references |
-| Check original chain bundle | `make verify-chains` | Snapshot checks plus hashes of 397 accepted records and 1,588 chain files |
-| Regenerate analyses or sample again | Scientific modules below | Separate, potentially costly operations; may write reports or manuscript snapshots |
+| Check compact source/input/evidence snapshot | `make verify-release` | Selected bytes and figure-source agreement; not scientific correctness |
+| Reaggregate both design tables | `make reproduce-derived` | Complete 73-case main and appendix results reproduce manuscript numerical rows; no point caches/chains required |
+| Check local JK9 table posterior bundle | `make verify-chains` | Hashes for 73 accepted records and 292 chains, using portable paths |
+| Compile manuscript | `make paper` | LaTeX build only |
+| Check ordinary tests | `make test` | Numerical/implementation regressions with deterministic fixtures |
+| Compile independent Stan parity test | `JK9_STAN_INTEGRATION=1 python -m unittest tests.test_paired_prior_targets -v` | Optional compiler integration; no deleted empirical fixtures needed |
 
-The compact check is read-only and uses Python's standard library. It does
-not recompute posterior diagnostics, reread chain draws, compare every printed
-number with its formula, or certify approximation accuracy. It verifies that
-the reviewed files have not changed. The compiled main PDF is deliberately
-outside the byte lock because compilation can change PDF metadata; source and
-figure bytes are locked. Inspect compilation output and layout separately.
+`PYTHON` can be specified for Make, e.g. `make PYTHON=.venv/bin/python test`.
+Python 3.12+ is required by the data-source syntax. Start with `requirements.txt`;
+`requirements-lock.txt` is the older full development environment, not a
+portable operating-system lock. CmdStan 2.36.0 and TeX Live are external tools.
+For Python 3.14, use `requirements-py314.txt`: these are the versions actually
+used for the maintenance validation, separately from the historical environment.
+The older pinned NumPy/SciPy releases may lack Python 3.14 binary wheels.
 
-`make sync-paper-assets` first checks all selected source figures against the
-saved lock, then copies changed figures. It cannot silently copy the old pair
-robustness figures into the new manuscript. Original paper-local diagrams have
-no separate generating source registered and are locked as supplied assets.
+## From compact inputs to fresh estimates
 
-## Updating a writing snapshot
+All 397 historical main/auxiliary input references are in the retained portable
+JK7 input index; the frozen input bytes are retained in Git. A new runner avoids
+using deleted old chains merely to initialize a fresh fit:
 
-1. Edit the manuscript and compile with `make paper`.
-2. Check text, affected tables/figures and the PDF. Run relevant tests; use
-   `make test` for the full suite when changing computational code.
-3. Review the file differences. A failed old-snapshot hash is expected for an
-   intentional edit; investigate unrelated changes before accepting them.
-4. Run `make release-manifest`, then `make verify-release`.
+```sh
+python -m pipeline.jk9_fit --scenario main --mode full --all --dry-run
+python -m pipeline.jk9 prepare-inputs
+python -m pipeline.jk9_fit --scenario main --mode full --contest 2445
+# Explicit full sampling, potentially expensive:
+python -m pipeline.jk9_fit --scenario main --mode full --all
+python -m pipeline.jk9_fit --scenario main --mode early --all
+```
 
-The refresh command records the selected files. It does not rerun scientific
-acceptance checks or silently update accepted-fit hashes. If the accepted fit
-set changes, complete its scientific verification first, then explicitly
-export a new portable index with `make export-chain-index` and review it.
-The export currently requires the original checkout paths in accepted.json;
-verification of an existing exported index works after moving the checkout.
+Use `--scenario pair`, `L1`, `L2`, `seed_20261008` or `seed_20261009` for the
+corresponding retained inputs. Fresh fits go to `tmp/runs/`,
+never over the publication posteriors. They use the byte-preserved model source
+`pipeline/models/leading_order.stan`, the original prior and diagnostic gates,
+and fixed dispersed initializations instead of depending on historical chains.
+Failed attempts remain failures. This reproduces the statistical target; it
+cannot reproduce old chain bytes or exactly reproduce a search driven by old
+finite Monte Carlo samples. The full 397-fit rerun has not been executed by
+this repository maintenance.
 
-## Scientific workflow and limitations
+`make jk9-models` compiles retained leading-order, common-cost and recovered free-kernel Stan sources.
+Platform-specific binaries and their hashes are not portable scientific inputs.
+Historical audit records retain their original executable hashes; they must
+not be rewritten to claim a new binary is the historical one.
 
-| Stage | Module(s) | Output / caution |
-| --- | --- | --- |
-| Main and auxiliary estimation | `pipeline.empirical.unified_prior_medians`; add `--auxiliary` for auxiliary fits | Resumable; read module CLI and frozen protocols before use |
-| Same-target sampler refinements | `unified_prior_global_check`, `unified_prior_adopt_global` | Selected fits only; preserve target parity and source hashes |
-| Scientific acceptance check | `pipeline.empirical.unified_prior_verify` | Checks inputs, diagnostics and chain summaries; also writes snapshots/report, so this is not the read-only release checker |
-| Main empirical reports | `pipeline.empirical.unified_prior_outputs` | Validation, figures and precision-only benchmark |
-| Auxiliary reports | `pipeline.empirical.unified_prior_aux_summary` | Matched pair/scale/time sensitivity |
-| Recovery summary | `pipeline.empirical.unified_prior_interval_report` | Uses retained nonlinear-generated recovery experiments |
-| Current joint and precision-only design | `pipeline.empirical.fixed_initial_design` | Fixed initial distributions and asymmetric first-order output; includes quadrature/search refinement and the full-disclosure comparator |
-| Direct effort approximation comparison | `pipeline.synthetic.effort_comparison` | Player i only; six panels vary theta=1,2,4, feedback precision or opponent cost; midpoint curves and whole-horizon error/grid checks; copy the produced PDF into paper/ before compiling |
-| Update current design passages | `pipeline.empirical.fixed_initial_manuscript` | Rebuilds Section 5.3 and its calculation/benchmark appendices from verified design outputs; saves a manuscript backup |
-| Historical joint design | `pipeline.empirical.design_duration_sensitivity` | Superseded steady-state calibration; does not reproduce current design tables |
-| Historical manuscript integration | `unified_prior_manuscript`, `update_joint_design_manuscript` | One-shot revision tools; do not replay over later prose edits |
+## Nonlinear design calculations
 
-There is currently **no single command rebuilding all current paper numbers
-from chains**. The current design tables can be rebuilt separately with
-`python -m pipeline.empirical.fixed_initial_design`, followed by
-`python -m pipeline.empirical.fixed_initial_manuscript` to integrate their
-text and tables. Results are in `fixed_initial_design/` under the empirical
-root. Every posterior draw retains its observed-regime initial variance while
-candidate precision changes the Riccati path. Cost asymmetry is retained.
-The no-feedback endpoint is explicitly a limit when positive precision is
-required; it is not an attained design or an exact nonlinear prediction.
-The earlier `design_sensitivity/` outputs remain historical evidence only.
-Score-scale robustness in the manuscript now concerns parameter rankings;
-old policy classifications do not establish robustness of the revised design.
+`pipeline.empirical.nonlinear_design` is the maintained solver/search API:
 
-For that reason, `make reproduce-derived` now stops instead of running the
-previous release's pipeline against the current manuscript. Original empirical
-Make targets require `LEGACY=1` and belong in an isolated checkout. The old
-`pipeline.release` verifier and `results/release_manifest.json` are retained
-for historical use; current commands use `pipeline.publication`.
+```sh
+python -m pipeline.empirical.nonlinear_design --help
+```
 
-## Artifact storage and portability
+The precise publication search, prize refinement, fixed-precision comparison
+and sensitivity protocols are preserved in
+`docs/review/PaperJK9/nonlinear_table_rebuild_20261025/` and
+`docs/review/PaperJK9/task3_nonlinear_prior_sensitivity_20261026/`.
+Their historical README stage logs are not current process state. Use the
+portable adapter to resolve the original chain index and redirect controller
+outputs, builds and SQLite caches to an isolated working tree:
 
-The current lock and portable fit index live under `results/releases/`.
-Compact protocols, selected reports, frozen input snapshots and recovery source
-summaries are eligible for version control. Chains, arrays, executables and
-bulk logs are excluded. To regenerate derived results without resampling,
-retain a separate bundle containing all relative `chain_paths` and
-`accepted_path` entries in `accepted_fits.json`. `make verify-chains` checks
-this bundle. Original acceptance records are byte-preserved even though they
-contain machine-specific absolute paths; the portable index supplies their
-relocated paths. Full computational reruns may still require adapting legacy
-runner path handling, rather than editing historical records.
+```sh
+python -m pipeline.jk9_design plan --contest 2445
+python -m pipeline.jk9_design quadrature --contest 2445
+python -m pipeline.jk9_design all --contest 2445
+# Or run screen, refine, assemble, fixed individually; --all selects 73 contests.
+# For fresh fits: --accepted-root tmp/runs
+```
 
-Tested environment: Python 3.13.15, `requirements-lock.txt`, CmdStan 2.36.0,
-TeX Live 2025. Run `make setup` for Python dependencies. The optional Kaggle
-downloader needs separate credentials; analysis uses processed contest inputs.
-Historical instructions are preserved in
-`docs/history/REPRODUCIBILITY_PRE_UNIFIED_PRIOR.md` and describe that earlier
-release, not the current commands.
+The default consumes the separately retained 73-posterior bundle; `--accepted`
+accepts one fresh **full-window** fit. `--accepted-root` selects fresh main/full
+fits for every case. Input and chain hashes are checked before computation.
+Runtime records are ephemeral path adapters, not edits to historical accepted
+records; rebuild them after moving an output tree. Controllers retain unknown
+comparators and numerical failure flags. A finished command does not imply
+`publication_ready=true`. The old 6322 repair certificate is never transplanted
+into a new run. A full 73-case search was not run during this maintenance.
+
+For output comparison, `python -m pipeline.jk9 tables` validates complete
+coverage, reaggregates main and fixed-precision results, preserves unresolved
+6322 in median bounds, and checks the actual TeX numerical rows. It never
+executes manuscript integration patches or writes manuscript prose.
+
+## Theory figure
+
+```sh
+python -m pipeline.figures.joint_design
+```
+
+This reconstructs the four-category display from retained regime and unresolved
+CSV files; output is under `tmp/runs/theory_figure/`. It does not
+rerun the 14,553-point HJB search or resolve failed candidates. The former
+`archive.experiments.exact_joint_design` dependency is now preserved in
+`pipeline.theory.dimensionless`; active theory imports use that module.
+
+## What stays and what is disposable
+
+Required evidence: source/models, frozen inputs, configurations/seeds, accepted
+posterior index and diagnostics, final per-contest selections, failed/unresolved
+candidate summaries and paper outputs. Expensive posterior draws are generated intermediate artifacts under `tmp/`,
+with their provenance retained in the formal index. Raw Meta-Kaggle data must be retained by dated
+snapshot and checksum; a changing live download cannot replace the historical ZIP.
+
+Point evaluations are memoization. Their keys and payloads include the numerical
+signature; failed solves remain failures in every storage mode. Default storage
+is SQLite; set `JK9_CACHE_MODE=memory` for bounded in-process reuse, or `off`
+for no point persistence. Legacy JSON files remain readable. Final scientific
+records are never redirected into disposable cache storage.
+
+An initial lossless compaction was stopped after the user prioritized code and
+reproduction structure. Completed archives under `tmp/cache_archives/` have
+independent content fingerprints and checksums; the interrupted `.partial`
+archive does not authorize deletion. No further compaction is automatic.
+A completed single-case archive can be restored with
+`python -m pipeline.cache_store restore --contest 2445`.
+
+## Recovered prediction comparison
+
+Archaeology of Git tree/blob objects recovered 99 original text sources
+(693,976 bytes), including the exact free-kernel Stan model, A/B quadrature,
+C/D scoring, full-path C++ evaluator, independent importance integration and
+specialized tail-repair methods. The sources are retained under
+`docs/review/PaperJK9/recovered_prediction_sources_20261029/`; the compact
+`evidence/prediction/source_recovery_manifest.json` records original Git blobs,
+SHA-256 digests and source trees. Source verification needs no dangling Git
+objects in a new clone.
+
+The recovered hourly scores remain local artifacts. Git needs only 584
+contest/model/fold score summaries and 146 frozen split inventories. Every
+original hourly count was checked against the frozen input. The exact original
+500,000-replicate paired contest bootstrap reproduces all reported means and
+intervals, including the complete-date D-B endpoint near zero.
+
+```sh
+python -m pipeline.jk9_prediction summary
+python -m pipeline.jk9_prediction plan --contest 2445
+python -m pipeline.jk9_prediction baselines  # all 73 contests, both splits
+python -m pipeline.jk9_prediction fit --model C --contest 2445 --split primary_hour
+python -m pipeline.jk9_prediction fit --model D --contest 2445 --split complete_day
+python -m pipeline.jk9_prediction score --model C --contest 2445 --split primary_hour \
+  --accepted tmp/runs/prediction/C/primary_hour/2445/accepted.json
+python -m pipeline.jk9_prediction integrate --model C --contest 2445 --split primary_hour \
+  --accepted tmp/runs/prediction/C/primary_hour/2445/accepted.json
+```
+
+Fresh fitting uses only training observations and retains the full constructed
+deadline. Four chains and the original parameter gates apply, including a/log(b)/b
+for C. Prediction precedes that hour's readout update. Scoring averages the joint
+probability over the common posterior. Rare-hour ESS/log-probability flags,
+32-block MCSE and half-chain checks retain their original thresholds.
+Independent integration freezes the recovered 16-cluster defensive Student
+proposal using training draws and requires **two consecutive independent passing
+budgets**, denominator/moment/path checks and all ordinary-hour probability gates.
+It writes production blocks and uncertainty flags locally. A failed integration
+exits unsuccessfully; it never becomes an accepted score. Specialized historical
+tail-repair controllers are preserved as original source; their old certificates
+are not automatically reused for a new posterior. For a fresh independent retry,
+use a different `--output` and `--seed-offset`.
+
+Actual validation: all 146 A/B case-splits passed fresh quadrature plus independent
+adaptive checks, with maximum difference from original contest mean scores
+1.35e-9. Run `python -m pipeline.prediction.parity` for the independent target check.
+The recovered C/D training densities matched independent CmdStan at
+three parameter points each (difference variation below 3.2e-13); native forecast
+paths matched independent Python for both kernels. These checks do not certify
+historical C/D Monte Carlo integration. A complete fresh 292-model/fold fit and
+integration rerun has not been executed. Historical acceptance identities and integration certificates remain unverified;
+source and chain recovery do not establish numerical acceptance.
+
+
+Further recursive tree inspection recovered 1,400 unique text/data blobs
+(1,256,958,899 bytes) into the ignored local bundle
+`tmp/recovered/prediction_bundle/`. The compact
+`artifact_recovery_manifest.json` records SHA-1/SHA-256 identities and paths
+relative to that bundle. `recovered_chain_coverage.json` locates complete
+four-chain **candidate** sets for all 292 C/D model/fold/contest targets:
+five contests have identical primary/date cutoffs and reuse that training
+prefix. Candidate sets include unsuccessful attempts and are not automatically
+accepted. The old acceptance JSON and full importance production certificates
+were not found in these trees. Preserve this separate bundle before Git object
+garbage collection; the bundle has not been uploaded. `python -m
+pipeline.git_recovery` can repeat recovery while the original objects exist.
+A fresh clone can use the retained compact evidence and new fitting commands;
+recovered historical draws require the separate bundle. No Git history rewrite
+or new tracking of those 1.26 GB of blobs was performed.

@@ -5,6 +5,8 @@ realizations per ten prespecified configurations provide actual recovery tests.
 MAP screening is explicitly exploratory; retained candidates require posterior
 sampling before any publication replacement.
 """
+
+from pipeline.storage import work_path
 import argparse
 import ctypes
 import json
@@ -21,7 +23,7 @@ from pipeline.empirical import nonlinear_reestimate as n
 from pipeline.empirical import estimation_detail_audit as a
 from synthetic_data.synthetic_data import synthetic_data_simulation
 
-OUT=n.ROOT/'results/validation/sigma_lambda_trials'
+OUT=work_path(n.ROOT/'results/validation/sigma_lambda_trials')
 IDS=(4699,13333,4657,6322,8076,23249,4407,5390,4366,3929)
 BASE_SD=[.75,.75,.5,.75,1.,.5]
 VARIANTS={

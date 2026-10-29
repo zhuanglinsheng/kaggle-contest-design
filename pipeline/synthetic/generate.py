@@ -5,6 +5,8 @@ readout noise, thinning, seeds, and old long-horizon ratios are unchanged.
 """
 from __future__ import annotations
 
+from pipeline.storage import work_path
+
 import hashlib
 import json
 import os
@@ -21,7 +23,7 @@ import numpy as np
 from pipeline.synthetic.figure3 import plot_ts_events
 from synthetic_data.synthetic_data import filtering_variance, synthetic_data_simulation
 
-OUT = ROOT / "results/synthetic/variance_only"
+OUT = work_path(ROOT / "results/synthetic/variance_only")
 # Preserve the previous experiment design; do not recalibrate after changing S.
 LONG_R = {180: 18.6484375, 360: 47.4375}
 

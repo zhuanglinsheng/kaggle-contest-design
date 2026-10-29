@@ -359,3 +359,31 @@ results/validation/estimation_details/detail_model
 results/validation/estimation_details/feedback_timing/feedback_model
 # CmdStan also names raw chains after the model and run timestamp.
 results/**/feedback_model-*.csv
+
+# JK9: scientific source and compact publication evidence belong in Git;
+# local research runs, snapshots, chains and point caches do not.
+.venv*/
+.artifacts/
+docs/review/**
+!docs/review/**/
+!docs/review/**/*.md
+!docs/review/**/*.py
+!docs/review/**/*.stan
+!docs/review/**/*.cpp
+!results/releases/paperjk9-20261029/evidence/**/*.json
+!results/releases/paperjk9-20261029/evidence_sources.json
+!results/releases/paperjk9-20261029/artifact_inventory.json
+pipeline/models/leading_order
+pipeline/models/common_cost
+pipeline/models/free_kernel
+pipeline/models/*.hpp
+
+# Regenerated displays/validation exports are not publication evidence.
+/results/reproduction/
+**/cache.sqlite3*
+
+# All local intermediates share one root. Formal inputs/evidence stay outside it.
+/tmp/
+!docs/storage_layout.json
+!docs/review/PaperJK9/cleanup_20261027/manifest.json
+!docs/review/PaperJK9/cleanup_20261027/verification.json

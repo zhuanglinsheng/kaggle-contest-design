@@ -4,6 +4,9 @@ Normalized bridge sampling is primary. MLE/BIC are auxiliary diagnostics.
 Run: python -m pipeline.synthetic.model_comparison
 Recompute only evidence/optimization: append --reuse.
 """
+
+from pipeline.storage import compile_stan
+from pipeline.storage import work_path
 import argparse
 import hashlib
 import json
@@ -18,7 +21,7 @@ from pipeline.config import ROOT
 from pipeline.synthetic.table1 import DATA, TRUTH, load_data, likelihood_check, write_json
 
 STAN = ROOT / 'synthetic_data/hourly_comparison.stan'
-OUT = ROOT / 'results/synthetic/initialization_comparison'
+OUT = work_path(ROOT / 'results/synthetic/initialization_comparison')
 BOUNDS = np.array([[.1,5.],[.1,5.],[.5,10.],[1e-6,100.],[-20.,20.]])
 PARAMS = ('c_i','c_j','sigma','lambda','mu_0','r')
 # Declared before fitting; all configurations estimate r and use the same data.
@@ -272,7 +275,7 @@ def main():
         sensitivity='S0 prior log-median log(1), log(2), log(4); common log-SD 0.75',
         bic='Auxiliary convention n=45 hourly readouts, with n=46 and 91 sensitivity; not grid size.',
         warmup=args.warmup,samples=args.samples))
-    model=CmdStanModel(stan_file=str(STAN))
+    model=compile_stan(STAN)
     fits={name:fit_model(model,name,free,median,seed,args)
           for name,free,median,seed in CONFIGS}
     ss=maximize(model,*fits['steady'][:2],'steady')

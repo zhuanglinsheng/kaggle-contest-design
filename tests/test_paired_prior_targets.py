@@ -1,5 +1,9 @@
 """Target parity checks, including macOS-spawned numerical grid workers."""
 import json
+import os
+from pathlib import Path
+import shutil
+import tempfile
 import unittest
 from concurrent.futures import ProcessPoolExecutor
 from multiprocessing import get_context
@@ -7,6 +11,7 @@ import numpy as np
 from pipeline.empirical import nonlinear_reestimate as n
 from pipeline.empirical import paired_prior_improvement as p
 from pipeline.empirical import paired_prior_recovery as r
+from tests.fixtures import count_data, parameter_point
 
 
 class PriorTargetTests(unittest.TestCase):
@@ -18,9 +23,8 @@ class PriorTargetTests(unittest.TestCase):
 
     def test_spawn_grid_worker_uses_common_new_prior(self):
         p.configure('scale_weak')
-        data,_,_,_=n.load_baseline(4699)
-        proposal=json.loads((p.OUT/'scale_weak/nonlinear/proposal_4699.json').read_text())
-        z=np.array(proposal['mode_z'])
+        data=count_data()
+        z=parameter_point()
         expected=n.Likelihood(data,.025,64).posterior(z)
         old=n.PRIOR_SD.copy()
         n.PRIOR_SD=np.array([.75,.75,.5,.75,1.,.5])
@@ -33,14 +37,19 @@ class PriorTargetTests(unittest.TestCase):
         assert abs(actual-expected)<1e-9
 
 
+    @unittest.skipUnless(os.environ.get('JK9_STAN_INTEGRATION') == '1',
+                         'Set JK9_STAN_INTEGRATION=1 to compile the independent Stan reference')
     def test_simulator_feedback_target_matches_stan(self):
         from cmdstanpy import CmdStanModel
         r.configure('nonlinear','scale_weak')
-        data,_,_,_=r.load_fixture(r.CID)
-        model=CmdStanModel(stan_file=str(r.a.OUT/'feedback_timing/feedback_model.stan'),
-                           exe_file=str(r.a.OUT/'feedback_timing/feedback_model'))
-        truth=json.loads((r.FIXTURE/'nonlinear/truth.json').read_text())['truth']
-        z=np.array([np.log(truth[k]) for k in ('c_i','c_j','sigma','lambda')]+[truth['mu_0'],truth['log_r']])
+        data=count_data()
+        data['feedback_gap']=[.1]+data['hat_y'][:-1]
+        data.update(Ni=len(data['hat_t_i']),Nj=len(data['hat_t_j']))
+        folder=tempfile.TemporaryDirectory();self.addCleanup(folder.cleanup)
+        source=Path(folder.name)/'feedback_model.stan'
+        shutil.copy2(n.ROOT/'pipeline/models/references/feedback_model.stan',source)
+        model=CmdStanModel(stan_file=str(source),cpp_options={'PRECOMPILED_HEADERS':'false'})
+        z=parameter_point()
         evaluator=r.RecoveryLikelihood(data,.025,64)
         delta=[]
         for point in (z,z+np.array([.1,-.1,.05,.1,.02,.1])):

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pipeline.storage import work_path
+
 from concurrent.futures import ProcessPoolExecutor
 import csv
 from pathlib import Path
@@ -14,7 +16,7 @@ from pipeline.theory.joint_design_exact import full_disclosure_output, solve_out
 INITIAL_VARIANCES = (0.3, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0, 10.0, 20.0)
 PRIZES = (0.5, 1.0, 1.5, 2.0, 2.5, 3.0)
 PRECISIONS = tuple(float(value) for value in np.logspace(-1.5, 1.5, 13)) + (float("inf"),)
-OUTPUT = Path(__file__).resolve().parents[2] / "results" / "theory" / "precision_regimes.csv"
+OUTPUT = work_path('results/theory/precision_regimes.csv')
 
 
 def _solve(arguments: tuple[float, float, float]) -> tuple[float, float, float, float]:

@@ -1,9 +1,10 @@
-"""Fixed-initial-distribution, asymmetric first-order design comparisons.
+"""Historical first-order design comparisons, retained for diagnostics only.
 
 The posterior is unchanged.  A candidate precision changes the Riccati path,
 not the initial latent distribution.  Zero precision denotes a limiting
 benchmark; it is not an attained design when positive feedback is required.
-Run with ``python -m pipeline.empirical.fixed_initial_design``.
+For current counterfactuals use ``python -m pipeline.empirical.nonlinear_design``.
+Reproducing these historical approximations requires --legacy-first-order.
 """
 from __future__ import annotations
 
@@ -246,10 +247,14 @@ def summarize(rows):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--legacy-first-order', action='store_true')
     parser.add_argument('--contest', type=int)
     parser.add_argument('--order', type=int, default=24)
     parser.add_argument('--grid-size', type=int, default=65)
     args = parser.parse_args()
+    if not args.legacy_first_order:
+        parser.error('Current counterfactuals use pipeline.empirical.nonlinear_design. '
+                     'Use --legacy-first-order only to reproduce historical diagnostics.')
     manifest = OUT/'estimation/accepted_chain_sources.csv'
     ids = sorted(int(r['contest_id']) for r in csv.DictReader(manifest.open()) if r['mode']=='full')
     rows = []

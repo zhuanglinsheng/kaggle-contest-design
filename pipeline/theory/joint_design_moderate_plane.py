@@ -7,6 +7,8 @@ The classification is a numerical design-grid comparison, not a theorem.
 """
 from __future__ import annotations
 
+from pipeline.storage import work_path
+
 import csv
 import json
 import math
@@ -20,7 +22,7 @@ from pipeline.config import ROOT
 from pipeline.theory.joint_design_plane import run_jobs, upper_output
 from pipeline.theory.joint_design_refined_plane import load_cache
 
-OUT = ROOT / "results/theory/numerical_joint_plane_moderate"
+OUT = work_path(ROOT / "results/theory/numerical_joint_plane_moderate")
 COSTS = np.geomspace(.003, 3., 181)
 SIGMAS = np.unique(np.r_[np.geomspace(.06, 3., 17), .8, 1.])
 PRECISIONS = (0., .01, .1, 1., 10., 100., math.inf)
@@ -327,7 +329,7 @@ def draw(rows, destination=None, xlim=None, three_class_estimates=False,
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
     path=OUT/"output_samples.csv"
-    cache=load_cache(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv")
+    cache=load_cache(work_path(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv"))
     cache.update(load_cache(path))
     cache.update(load_cache(OUT/"stable_audit_samples.csv"))
     designs={}

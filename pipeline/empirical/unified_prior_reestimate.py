@@ -5,6 +5,8 @@ Run: python -m pipeline.empirical.unified_prior_reestimate --workers 2
 """
 from __future__ import annotations
 
+from pipeline.storage import work_path
+
 import argparse
 import concurrent.futures
 import csv
@@ -20,8 +22,8 @@ from pipeline.config import ROOT, MAIN_DATA_DIR, MAIN_ESTIMATION_DIR, manifest_p
 from pipeline.empirical import estimate as e
 from pipeline.empirical import nonlinear_reestimate as n
 
-OUT = ROOT / "results/reestimation/lambda100_sd225"
-MODEL = ROOT / "results/validation/estimation_details/detail_model"
+OUT = work_path(ROOT / "results/reestimation/lambda100_sd225")
+MODEL = ROOT / "tmp/build/models/pipeline/models/leading_order"
 NAMES = ("c_i", "c_j", "sigma", "lambda", "mu_0", "r")
 
 

@@ -1,4 +1,6 @@
 """Integrate verified quality-constrained design comparisons into Table 7."""
+
+from pipeline.storage import work_path
 from pathlib import Path
 import datetime
 import hashlib
@@ -13,7 +15,7 @@ def digest(path):
 
 
 def main():
-    root=Path('results/reestimation/lambda100_sd225/design_sensitivity')
+    root=work_path('results/reestimation/lambda100_sd225/design_sensitivity')
     out=root/'paper_update';out.mkdir(exist_ok=True)
     paper=Path('paper');source=(paper/'PaperJK7.tex').read_text()
     assert r'\input{section_joint_design.tex}' not in source, 'Already integrated'

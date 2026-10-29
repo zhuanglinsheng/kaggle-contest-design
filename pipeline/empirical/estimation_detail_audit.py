@@ -5,6 +5,8 @@ Publication estimates and validated nonlinear results are read-only inputs.
 """
 from __future__ import annotations
 
+from pipeline.storage import work_path, compile_stan
+
 import argparse
 import csv
 import json
@@ -18,8 +20,8 @@ from cmdstanpy import CmdStanModel, from_csv
 from pipeline.config import ROOT
 from pipeline.empirical import nonlinear_reestimate as n
 
-OUT = ROOT / "results/validation/estimation_details"
-NONLINEAR = ROOT / "results/estimation/nonlinear_top10/fast_v1"
+OUT = work_path(ROOT / "results/validation/estimation_details")
+NONLINEAR = work_path(ROOT / "results/estimation/nonlinear_top10/fast_v1")
 IDS = (4699, 4657, 5390)
 VARIANTS = ("baseline", "r_sim", "r_wide", "sigma_wide", "mu_zero", "r_weak", "scale_weak")
 
@@ -108,7 +110,7 @@ def input_audit():
 
 def fit_all(warmup, samples, requested=None, *, adapt_delta=.95, run_label=None):
     model = make_model()
-    original = CmdStanModel(stan_file=str(ROOT/"metakaggle/real_data.stan"), exe_file=str(ROOT/"metakaggle/real_data"))
+    original = compile_stan(ROOT/"metakaggle/real_data.stan")
     parity = []
     for cid in IDS:
         data, _, z, provenance = n.load_baseline(cid)

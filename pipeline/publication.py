@@ -218,6 +218,12 @@ def main():
     parser.add_argument('--check-chains', action='store_true')
     args = parser.parse_args()
     config = load()
+    if config['release_id'].startswith('paperjk9-'):
+        from pipeline import jk9
+        action = ('snapshot' if args.export_chain_index else
+                  'lock' if args.write_manifest else 'verify')
+        jk9.main([action] + (['--check-chains'] if args.check_chains else []))
+        return
     if args.export_chain_index:
         write_json(local(ROOT, config['chain_index']), create_chain_index(ROOT, config))
         print('Exported portable provenance for 397 accepted fits; original records unchanged.')

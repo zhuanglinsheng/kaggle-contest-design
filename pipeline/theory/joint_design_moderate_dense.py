@@ -5,6 +5,8 @@ endpoint designs are transferred too; they cannot be erased by continuation.
 This is a local/adaptive design search, not a continuous-domain certificate.
 """
 from __future__ import annotations
+
+from pipeline.storage import work_path
 import csv
 import json
 import math
@@ -20,7 +22,7 @@ from pipeline.theory.joint_design_moderate_plane import (
 )
 from pipeline.theory.joint_design_moderate_polish import recover_jobs
 
-DENSE=ROOT/"results/theory/numerical_joint_plane_moderate_dense"
+DENSE=work_path(ROOT/"results/theory/numerical_joint_plane_moderate_dense")
 COSTS=np.round(np.arange(.03,.500001,.0025),8)
 SEED_COSTS=np.array([.03,.05,.1,.15,.2,.25,.3,.35,.4,.45,.5])
 
@@ -98,7 +100,7 @@ def main():
                         help="Reoptimize full disclosure continuously at isolated finite cells")
     args=parser.parse_args()
     DENSE.mkdir(parents=True,exist_ok=True)
-    cache=load_cache(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv")
+    cache=load_cache(work_path(ROOT/"results/theory/numerical_joint_plane_strong64/validated_samples.csv"))
     for p in (OUT/"output_samples.csv",OUT/"stable_audit_samples.csv",
               DENSE/"output_samples.csv",DENSE/"stable_audit_samples.csv",
               DENSE/"verified_policy_samples.csv"):

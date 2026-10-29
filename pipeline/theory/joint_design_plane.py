@@ -8,6 +8,8 @@ in Proposition 1 is NOT asserted to be at most 64.
 """
 from __future__ import annotations
 
+from pipeline.storage import work_path
+
 import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import csv
@@ -25,7 +27,7 @@ from scipy.optimize import brentq
 from scipy.integrate import solve_bvp, simpson
 from scipy.special import ndtr
 
-from archive.experiments.exact_joint_design import filtering_variance, solve_exact
+from pipeline.theory.dimensionless import filtering_variance, solve_exact
 from pipeline.config import ROOT
 from pipeline.theory.zero_signal_series import coefficients
 
@@ -37,7 +39,7 @@ POWER = GAMMA
 LOG_D = (math.log(AMPLITUDE*RATE)-RATE*(math.sqrt(2/(2*math.pi))-B0)
          -math.log(2*math.sqrt(4*math.pi))-math.log(POWER))
 SIGMAS = np.array([.04, .08, .16, .32, .55, .8, 1., 1.2, 1.5, 1.8, 2.2, 2.6])
-OUT = ROOT/"results/theory/numerical_joint_plane_strong64"
+OUT = work_path(ROOT/"results/theory/numerical_joint_plane_strong64")
 FIELDS = ["sigma", "alpha", "T", "lambda", "level", "B", "error", "status"]
 
 

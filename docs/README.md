@@ -1,14 +1,11 @@
 # Documentation
 
-The repository's maintained paper and executable pipeline remain in `paper/`
-and `pipeline/`. Supporting documentation is grouped here:
+Start with `REPRODUCIBILITY.md` for maintained JK9 commands and explicit limits,
+`PAPER_EVIDENCE.csv` for figure/table provenance, and
+`REPOSITORY_MAINTENANCE.md` for submission policy, and
+`STORAGE_LAYOUT.md` for permanent files versus `tmp/` work products.
 
-- `REPRODUCIBILITY.md`: canonical release inputs, commands, and verification;
-- `notes/`: mathematical review and development notes;
-- `references/`: external papers retained with the project;
-- `review/PaperJK7/`: referee material and the corresponding working response;
-- `translations/`: the Chinese reading draft and its local image assets.
-
-Superseded numerical investigations and proof-audit workspaces are kept under
-`archive/`; generated working results that can be rebuilt are intentionally not
-versioned.
+`review/PaperJK9/INDEX.md` retains the research narrative. Earlier stage logs,
+process IDs, page counts and completion hashes describe their own dated runs,
+not the current executable release. Compact publication evidence lives under
+`results/releases/paperjk9-20261029/`; bulky caches are not documentation.

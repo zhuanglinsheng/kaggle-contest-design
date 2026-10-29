@@ -8,6 +8,8 @@ the empirical posterior or validate optimized counterfactuals.
 """
 from __future__ import annotations
 
+from pipeline.storage import work_path
+
 import argparse
 from dataclasses import asdict, replace
 import hashlib
@@ -20,9 +22,9 @@ import time
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "results/synthetic/effort_comparison/controlled_incentives"
+OUT = work_path(ROOT / "results/synthetic/effort_comparison/controlled_incentives")
 SOURCE = ROOT / "pipeline/theory/joint_design_exact.py"
-os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".cache/matplotlib"))
+os.environ.setdefault("MPLCONFIGDIR", str(ROOT / "tmp/cache/matplotlib"))
 
 from pipeline.synthetic.nonlinear import Primitives, variance
 from pipeline.theory.joint_design_exact import solve_equilibrium_adaptive

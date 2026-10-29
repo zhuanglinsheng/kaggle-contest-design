@@ -5,6 +5,7 @@ The nonlinear HJB is solved directly. Numerical failures remain recorded and
 are never treated as evidence that the corresponding designs are inferior.
 """
 from __future__ import annotations
+from pipeline.storage import work_path
 
 import json
 import math
@@ -14,7 +15,7 @@ from pathlib import Path
 import numpy as np
 from scipy.optimize import minimize, minimize_scalar
 
-from archive.experiments.exact_joint_design import solve_exact
+from pipeline.theory.dimensionless import solve_exact
 from pipeline.theory.joint_design_exact import full_disclosure_output
 
 
@@ -45,7 +46,7 @@ def main():
                 )
             s0 = 1 / (sigma*sigma*horizon)
             ell = precision*sigma*sigma*horizon*horizon
-            from archive.experiments.exact_joint_design import filtering_variance
+            from pipeline.theory.dimensionless import filtering_variance
             dx = min((0.014 if fine else 0.035)*math.sqrt(1+s0),
                      (0.10 if fine else 0.18)*math.sqrt(float(filtering_variance(1, s0, ell))))
             sol = solve_exact(w=theta/(sigma*sigma), ell=ell, s0=s0, x0=0,
@@ -94,7 +95,7 @@ def main():
             print(json.dumps(dict(sigma=sigma,kind='full' if full else 'finite',result=row)),flush=True)
         case['evaluations']=len(cache)
         results.append(case)
-    destination=Path('results/theory/precision_conditions') / args.output
+    destination=work_path('results/theory/precision_conditions') / args.output
     destination.write_text(json.dumps(dict(
         qualification='Two-start local searches, finite precision in [0.03,3000]; no global or tail certification; failed HJB points retained below.',
         primitives=dict(c=1,S0=1,utility='3*(1-exp(-5*(B-sqrt(1/(2*pi)))))',delay='T^2/2'),

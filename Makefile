@@ -3,12 +3,17 @@
 	chapter5-audit chapter5-report build-chapter6-data estimate-chapter6 report-chapter6 \
 	sync-paper-assets reproduce-derived release-manifest verify-release paper clean-paper
 
-PYTHON ?= .venv/bin/python
-SYSTEM_PYTHON ?= python3
+PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
+SYSTEM_PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
+
+# Keep language, plotting and build caches with the other intermediate files.
+export PYTHONPYCACHEPREFIX := $(CURDIR)/tmp/cache/python
+export MPLCONFIGDIR := $(CURDIR)/tmp/cache/matplotlib
+export XDG_CACHE_HOME := $(CURDIR)/tmp/cache
 
 setup:
 	$(SYSTEM_PYTHON) -m venv .venv
-	$(PYTHON) -m pip install -r requirements-lock.txt
+	.venv/bin/python -m pip install --only-binary=:all: -r requirements.txt
 
 test:
 	$(PYTHON) -m compileall -q pipeline metakaggle synthetic_data tests
@@ -72,25 +77,24 @@ report-chapter6:
 
 # Current publication commands read current_release.toml. No estimation is run.
 sync-paper-assets:
-	$(PYTHON) -m pipeline.publication --sync-assets
+	$(PYTHON) -m pipeline.jk9 verify
 
 # The historical all-in-one pipeline would overwrite current manuscript assets.
 # Derived regeneration for the current release is documented stage by stage.
 reproduce-derived:
-	@echo "No all-in-one rebuild for the current empirical revision. See docs/REPRODUCIBILITY.md."
-	@exit 2
+	$(PYTHON) -m pipeline.jk9 tables
 
 release-manifest:
-	$(PYTHON) -m pipeline.publication --write-manifest
+	$(PYTHON) -m pipeline.jk9 lock
 
 verify-release:
-	$(PYTHON) -m pipeline.publication --check
+	$(PYTHON) -m pipeline.jk9 verify
 
 verify-chains:
-	$(PYTHON) -m pipeline.publication --check --check-chains
+	$(PYTHON) -m pipeline.jk9 verify --check-chains
 
 export-chain-index:
-	$(PYTHON) -m pipeline.publication --export-chain-index
+	$(PYTHON) -m pipeline.jk9 snapshot
 
 # Historical workflows retain their original paths and scientific specification.
 # Select them deliberately, e.g. make LEGACY=1 chapter5-report.
@@ -102,7 +106,33 @@ estimate rerun-failed finalize-estimation counterfactuals precision-design valid
 .PHONY: verify-chains export-chain-index legacy-context
 
 paper:
-	cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error PaperJK7.tex
+	mkdir -p tmp/latex
+	cd paper && latexmk -pdf -outdir=../tmp/latex -interaction=nonstopmode -halt-on-error PaperJK9.tex
+	cp tmp/latex/PaperJK9.pdf paper/PaperJK9.pdf
 
 clean-paper:
-	cd paper && latexmk -c PaperJK7.tex
+	cd paper && latexmk -c -outdir=../tmp/latex PaperJK9.tex
+
+.PHONY: compact-caches restore-cache jk9-models
+compact-caches:
+	$(PYTHON) -m pipeline.cache_store pack --prune
+
+restore-cache:
+	$(PYTHON) -m pipeline.cache_store restore $(if $(CONTEST),--contest $(CONTEST),)
+
+jk9-models:
+	$(PYTHON) -m pipeline.jk9 compile-models
+
+.PHONY: prediction-summary prediction-baselines
+prediction-summary:
+	$(PYTHON) -m pipeline.jk9_prediction summary
+
+prediction-baselines:
+	$(PYTHON) -m pipeline.jk9_prediction baselines
+
+.PHONY: storage-plan storage-audit
+storage-plan:
+	$(PYTHON) -m pipeline.organize
+
+storage-audit:
+	$(PYTHON) -m pipeline.organize --audit

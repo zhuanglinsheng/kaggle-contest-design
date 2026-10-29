@@ -1,14 +1,15 @@
 """Grid-refinement and large-precision checks at the candidate regime switch."""
+from pipeline.storage import work_path
 import json
 import math
 from pathlib import Path
 
-from archive.experiments.exact_joint_design import solve_exact, filtering_variance
+from pipeline.theory.dimensionless import solve_exact, filtering_variance
 from pipeline.theory.joint_design_exact import full_disclosure_output
 
 
 def main():
-    folder = Path("results/theory/precision_conditions")
+    folder = work_path("results/theory/precision_conditions")
     source = json.loads((folder / "disclosure_region_transition_fine.json").read_text())
     case = next(row for row in source["results"] if row["sigma"] == 0.73)
     sigma = case["sigma"]

@@ -3,6 +3,9 @@
 The DGP is the accepted optimal_hourly/nonsteady data. No simulations or
 seeds are changed here. Repeated fits, when requested, use separate contests.
 """
+
+from pipeline.storage import compile_stan
+from pipeline.storage import work_path
 import argparse
 import hashlib
 import json
@@ -12,8 +15,8 @@ from scipy.stats import multivariate_normal
 from cmdstanpy import CmdStanModel
 from pipeline.config import ROOT
 
-DATA = ROOT/'results/synthetic/optimal_hourly/nonsteady'
-OUT = ROOT/'results/synthetic/table1_optimal_hourly'
+DATA = work_path(ROOT/'results/synthetic/optimal_hourly/nonsteady')
+OUT = work_path(ROOT/'results/synthetic/table1_optimal_hourly')
 STAN = ROOT/'synthetic_data/hourly_nonsteady.stan'
 TRUTH = dict(c_i=1.2,c_j=1.5,sigma=2.,lambda_=1.,mu_0=0.,S0=4.,r=15.)
 TRUTH['lambda'] = TRUTH.pop('lambda_')
@@ -116,7 +119,7 @@ def main():
     parser.add_argument('--warmup',type=int,default=1000)
     parser.add_argument('--samples',type=int,default=1000)
     args=parser.parse_args()
-    model=CmdStanModel(stan_file=str(STAN))
+    model=compile_stan(STAN)
     if args.mode=='baseline':
         for name,free,seed in [('fixed_r',False,7100),('estimated_r',True,7200)]:
             run(model,name,'baseline',free,warmup=args.warmup,samples=args.samples,seed=seed)

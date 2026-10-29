@@ -1,5 +1,7 @@
 """Produce paired-estimation reports only after all ten posterior audits pass."""
 from __future__ import annotations
+
+from pipeline.storage import work_path
 import csv,json,math
 from pathlib import Path
 import numpy as np
@@ -102,9 +104,9 @@ def write_presentation(metrics,wrows,design,effort_summaries):
         '论文含义：可以据此回应审稿人要求的非线性检查，但不能将结果写成原近似误差可忽略的稳健性验证。若要把Table 7解释为非线性模型的设计预测，需要进一步统一非线性估计与反事实计算。']
     (n.OUT/'comparison_report.txt').write_text('\n'.join(lines)+'\n')
     import os
-    cache=n.ROOT/'.cache'/'matplotlib';cache.mkdir(parents=True,exist_ok=True)
+    cache=n.ROOT/'tmp/cache'/'matplotlib';cache.mkdir(parents=True,exist_ok=True)
     os.environ.setdefault('MPLCONFIGDIR',str(cache))
-    os.environ.setdefault('XDG_CACHE_HOME',str(n.ROOT/'.cache'))
+    os.environ.setdefault('XDG_CACHE_HOME',str(n.ROOT/'tmp/cache'))
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -118,7 +120,7 @@ def write_presentation(metrics,wrows,design,effort_summaries):
 
 
 def main():
-    n.OUT=n.ROOT/'results/estimation/nonlinear_top10/fast_v1';n.SOURCE=Path(n.__file__).with_name('nonlinear_fast_kernel.cpp')
+    n.OUT=work_path(n.ROOT/'results/estimation/nonlinear_top10/fast_v1');n.SOURCE=Path(n.__file__).with_name('nonlinear_fast_kernel.cpp')
     selected=json.loads((n.OUT/'selection.json').read_text())['selected'];ids=[a['contest_id'] for a in selected]
     for cid in ids:
         p=n.OUT/f'posterior_grid_{cid}.json'

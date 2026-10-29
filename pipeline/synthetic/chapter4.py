@@ -4,6 +4,9 @@ Run: python -m pipeline.synthetic.chapter4 --prepare
      python -m pipeline.synthetic.chapter4 --fit all
 Outputs are separate from legacy experiments, with raw draws and fixed seeds.
 """
+
+from pipeline.storage import compile_stan
+from pipeline.storage import work_path
 import argparse
 from dataclasses import asdict, replace
 import hashlib
@@ -15,7 +18,7 @@ from cmdstanpy import CmdStanModel, from_csv
 from pipeline.config import ROOT
 from pipeline.synthetic.nonlinear import Primitives, Equilibrium, solve_equilibrium, simulate, likelihood_data, variance
 
-OUT = ROOT / 'results/synthetic/nonsteady_hjb'
+OUT = work_path(ROOT / 'results/synthetic/nonsteady_hjb')
 STAN = ROOT / 'synthetic_data/nonsteady_recovery.stan'
 BASE = Primitives()
 NAMES = ('baseline_fixed_r','baseline_estimated_r','pool10','pool20','days180','days360')
@@ -150,7 +153,7 @@ def summarize(fit,name):
 
 
 def fit_all(names,warmup,samples):
-    model=CmdStanModel(stan_file=str(STAN))
+    model=compile_stan(STAN)
     for name in names:
         folder=OUT/name
         folder.mkdir(exist_ok=True)

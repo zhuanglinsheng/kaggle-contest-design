@@ -4,6 +4,8 @@ Only the effort provider differs from the variance-only generator. Both the
 S0=2 and S0=4 experiments use the numerical policy of the theoretical model.
 The held-readout approximation is retained, not replaced by continuous signals.
 """
+
+from pipeline.storage import work_path
 from dataclasses import asdict
 import hashlib
 import json
@@ -13,7 +15,7 @@ from pipeline.config import ROOT
 from pipeline.synthetic.generate import LONG_R, generate_contest, save_contest, plot_baseline
 from pipeline.synthetic.nonlinear import Primitives, solve_equilibrium, variance
 
-OUT = ROOT / "results/synthetic/optimal_hourly"
+OUT = work_path(ROOT / "results/synthetic/optimal_hourly")
 
 
 def checked_policy(eq):

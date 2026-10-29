@@ -47,7 +47,11 @@ def update_figure(block,row):
         elif r'\bluecell{R$^2$}' in line:lines[i]=r'\bluecell{R$^2$} & \multicolumn{3}{c}{'+blue(number(row['r2']))+r'} \\'
         elif r'\bluecell{Adj. R$^2$}' in line:lines[i]=r'\bluecell{Adj. R$^2$} & \multicolumn{3}{c}{'+blue(number(row['adj_r2']))+r'} \\'
         elif '(2) OLS residual diagnostics:' in line:lines[i]=blue('(2) OLS residual diagnostics: '+residual(row)+'.')
-        elif '(3) Condition Number =' in line:lines[i]=blue(f"(3) Condition Number = {row['condition_number']:.3f}.")+('}' if line.endswith('}}') else '')
+        elif '(3) Condition Number =' in line:
+            # Preserve enclosing groups even when the source is no longer
+            # wrapped in a previous revision's textcolor command.
+            closing=max(0,line.count('}')-line.count('{'))
+            lines[i]=blue(f"(3) Condition Number = {row['condition_number']:.3f}.")+'}'*closing
     if irow!=2:raise RuntimeError('Unexpected coefficient rows')
     return '\n'.join(lines)
 

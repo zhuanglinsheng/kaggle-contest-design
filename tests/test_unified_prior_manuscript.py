@@ -7,9 +7,17 @@ from pipeline.empirical.unified_prior_manuscript import update_figure,environmen
 
 class ManuscriptPatchTests(unittest.TestCase):
     def test_figure_headers_are_not_coefficient_rows(self):
-        source=(PAPER_DIR/'PaperJK7.tex').read_text()
-        row=pd.read_csv(MAIN_VALIDATION_DIR/'chapter5_regressions.csv').set_index('specification').loc['lambda_benchmark'].to_dict()
-        row['coefficient']+=.1
+        source=r'''\begin{figure}
+\label{fig-validate-lambda}
+{
+ & coef. & stderr & 95\% CI \\
+ & 0 & 0 & [0, 0] \\
+ & 0 & 0 & [0, 0] \\
+(3) Condition Number = 1.}
+\end{figure}'''
+        row=dict(constant=1.,constant_se=.1,constant_ci_low=.8,constant_ci_high=1.2,
+                 constant_p=.001,coefficient=.817,std_error=.1,ci_low=.6,ci_high=1.,
+                 p_value=.001,condition_number=2.)
         transformed=environment(source,'figure','fig-validate-lambda',lambda block:update_figure(block,row))
         self.assertIn('& coef. & stderr & 95\\% CI',transformed)
         self.assertIn(r'\textcolor{blue}{0.817',transformed)

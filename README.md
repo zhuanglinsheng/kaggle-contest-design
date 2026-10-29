@@ -1,55 +1,63 @@
-# Kaggle contest design
+# Kaggle contest design — PaperJK9
 
-The current manuscript is [`paper/PaperJK7.tex`](paper/PaperJK7.tex).
-[`current_release.toml`](current_release.toml) selects its empirical results,
-figure sources, evidence index, and publication snapshot. Start there when
-checking which version a file belongs to.
+The active manuscript is [paper/PaperJK9.tex](paper/PaperJK9.tex).
+`current_release.toml`, the Makefile and the evidence index all select JK9.
 
-## Working on the paper
+## Start here
+
+Use Python 3.12 or newer (the source uses PEP 695 syntax), a virtual environment,
+and the pinned scientific dependencies in `requirements.txt` (Python 3.14 uses
+`requirements-py314.txt`). CmdStan 2.36.0,
+a C++17 compiler and LaTeX are separate prerequisites for the corresponding stages.
 
 ```sh
-make verify-release   # check the saved publication snapshot; read-only
-make paper            # compile the manuscript, including its appendix inputs
+python3 -m venv .venv
+.venv/bin/python -m pip install --only-binary=:all: -r requirements.txt
+make PYTHON=.venv/bin/python verify-release
+make PYTHON=.venv/bin/python reproduce-derived
+make paper
 ```
 
-After intentional edits, review the differences, compile and check the affected
-results, then run `make release-manifest` and `make verify-release` to record the
-new snapshot. Refreshing the manifest records bytes; it does not establish
-statistical validity. `make sync-paper-assets` copies figures only from the
-selected, hash-checked sources. `make verify-chains` additionally checks all
-397 accepted fit records and their four chains when the full artifact bundle
-is available.
+`reproduce-derived` reaggregates both nonlinear design tables from final
+per-contest evidence and compares the numerical rows with the manuscript.
+It does not rerun estimation, solve HJBs, or require point caches.
 
-[`docs/PAPER_EVIDENCE.csv`](docs/PAPER_EVIDENCE.csv) maps each figure/table label
-to its evidence and producing module. Labels remain useful when table numbers
-change. [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) distinguishes paper
-compilation, snapshot verification, derived calculations, and re-estimation.
+[Reproduction guide](docs/REPRODUCIBILITY.md) distinguishes aggregation from
+fresh fitting and numerical search. Git archaeology recovered the original
+prediction sources: the historical prediction table can now be reaggregated,
+and both nonstrategic baselines have been independently rerun for all 73 contests
+and both splits. Portable C/D fitting, scoring and importance integration are
+available. Historical candidate chains were also recovered into a separate local
+bundle; their old acceptance/integration certificates remain unverified. A
+complete fresh C/D rerun remains unexecuted.
 
-## Repository map
+## Structure
 
-| Path | Purpose |
-| --- | --- |
-| `paper/` | Current manuscript, appendix fragments, local figures and PDF |
-| `pipeline/` | Scientific runners and publication checks; see its README for roles |
-| `results/reestimation/lambda100_sd225/` | Current empirical estimates and dependent analyses |
-| `results/releases/` | Publication file hashes and portable accepted-fit indexes |
-| `results/synthetic/`, `results/theory/` | Retained synthetic and theory evidence |
-| `metakaggle/`, `synthetic_data/` | Data utilities and model sources |
-| `tests/` | Numerical, data-processing and publication checks |
-| `docs/` | Reproduction guide, evidence map and repository maintenance notes |
-| `archive/` | Previously archived materials; some other old paths remain active dependencies |
-| `ryvkin/`, `prediction/` | Reference model and separate predictive exercises |
+- `paper/`: manuscript, appendices, bibliography and publication assets.
+- `pipeline/`: maintained entry points, solvers, model sources and cache backend.
+- `tests/`: numerical and implementation checks; ordinary tests do not require
+  deleted empirical experiment directories.
+- `results/releases/paperjk9-20261029/`: compact final evidence, 73-case portable
+  posterior index, provenance and source/input byte lock. These files belong in Git.
+- `metakaggle/`: data preparation source and the immutable raw ZIP; working input
+  copies live in `tmp/inputs/`. Frozen inputs remain under
+  `results/reestimation/lambda100_sd225/input_snapshots/`.
+- `docs/review/`: retained methods, research narrative and frozen source snapshots.
+- `tmp/`: all intermediate runs, posterior chains, hourly outputs, caches, builds
+  and superseded experimental outputs; excluded from Git.
 
-## Environment and conventions
+[Storage layout](docs/STORAGE_LAYOUT.md) defines each role and the migration map.
 
-The tested environment is Python 3.13.15, the packages in
-[`requirements-lock.txt`](requirements-lock.txt), CmdStan 2.36.0 and TeX Live
-2025. `make setup` installs the Python environment; `make test` runs the tests.
-The empirical prize unit is USD 100,000; source JSON prizes are in thousands
-of dollars. Primary estimates use posterior medians.
+## Intermediate results
 
-Historical empirical Make targets require an explicit `LEGACY=1` selection
-and should be run in an isolated checkout. Their paths in `pipeline/config.py`
-are retained for scientific provenance. They do not define the current release.
-The old `reproduce-derived` shortcut stops with guidance because it would
-combine old empirical outputs with the current manuscript.
+New nonlinear evaluations use `JK9_CACHE_MODE=sqlite` by default: one database
+per cache directory instead of one JSON file per point. `memory` uses bounded
+in-process memoization; `off` writes no point cache; `files` explicitly selects
+the legacy layout. Final selections, random-draw indices, uncertainty records,
+input configurations and posterior diagnostics remain ordinary evidence files.
+
+All retained intermediate data now resides under `tmp/`; the exact relocation
+map is `docs/storage_layout.json`. Existing point data and verified archives were
+moved without deletion or further compression.
+See [maintenance decisions](docs/REPOSITORY_MAINTENANCE.md) for storage and
+submission policy. No Git history rewriting is part of this maintenance.

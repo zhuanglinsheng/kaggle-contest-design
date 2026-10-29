@@ -2,6 +2,8 @@
 
 Reuse immutable reconstructed inputs; never regenerate focal pairs or dates.
 """
+
+from pipeline.storage import historical_path
 import argparse
 import concurrent.futures
 import csv
@@ -25,8 +27,8 @@ CURRENT=None
 
 def input_directory(scenario):
     if scenario.startswith('seed_'):
-        return ROOT/'results/estimation/chapter5_score_audit'/scenario
-    return ROOT/'results/robustness/chapter6/inputs'/scenario
+        return historical_path(ROOT/'results/estimation/chapter5_score_audit'/scenario)
+    return historical_path(ROOT/'results/robustness/chapter6/inputs'/scenario)
 
 
 def baseline(cid,mode):

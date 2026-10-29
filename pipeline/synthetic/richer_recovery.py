@@ -3,6 +3,9 @@
 No simulation, recalibration, private-path fitting, or time trimming occurs.
 Independent contests have independent latent states and shared parameters.
 """
+
+from pipeline.storage import compile_stan
+from pipeline.storage import work_path
 import argparse
 import hashlib
 import json
@@ -16,7 +19,7 @@ from pipeline.synthetic.table1 import DATA, TRUTH, load_data, likelihood_check, 
 from pipeline.synthetic.model_comparison import PARAMS, log_likelihood, log_prior
 
 STAN = ROOT/'synthetic_data/hourly_steady_pooled.stan'
-OUT = ROOT/'results/synthetic/richer_steady'
+OUT = work_path(ROOT/'results/synthetic/richer_steady')
 CASES = {
     'pool10': ([f'pool_contest{i:02}' for i in range(1,11)],15.,10100),
     'pool20': ([f'pool_contest{i:02}' for i in range(1,21)],15.,10200),
@@ -146,7 +149,7 @@ def main():
     parser.add_argument('--reuse',action='store_true')
     args=parser.parse_args()
     OUT.mkdir(parents=True,exist_ok=True)
-    model=CmdStanModel(stan_file=str(STAN))
+    model=compile_stan(STAN)
     for name in args.cases: run(model,name,args)
 
 
