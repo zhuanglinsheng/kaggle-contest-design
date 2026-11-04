@@ -1,0 +1,41 @@
+\textit{Fixed-prize, fixed-duration benchmark.} Holding prize and duration at their observed values, Table~\ref{tab-fixed-precision} selects full disclosure in 21 contests, other finite precision in 25, and the lowest searched positive precision in 27. The median model-implied quality gain is 0.086\%. Using the 75\% threshold for support across draws, 17 contests favor increased precision, 33 favor reduced precision, and 23 have no clear direction.
+
+\begin{table}[!htbp]
+\centering
+\caption{Nonlinear Precision Comparisons at the Observed Prize and Duration}
+\label{tab-fixed-precision}
+{\small
+\begin{tabularx}{\textwidth}{Xrr}
+\multicolumn{3}{l}{\textit{Panel A: Selected searched regime}}\\
+\midrule
+Regime & Contests & Share (\%)\\
+\midrule
+Full disclosure & 21 & 28.8 \\
+Other finite precision & 25 & 34.2 \\
+Lowest searched precision & 27 & 37.0 \\
+\bottomrule
+\end{tabularx}
+\vspace{2ex}
+\begin{tabularx}{\textwidth}{Xrrr}
+\multicolumn{4}{l}{\textit{Panel B: Model-implied quality gains (\%)}}\\
+\midrule
+Posterior direction group & 25th percentile & Median & 75th percentile\\
+\midrule
+All contests & 0.013 & 0.086 & 4.554\\
+Increase precision & 0.020 & 0.037 & 0.056\\
+Decrease precision & 1.018 & 5.308 & 10.615\\
+Direction uncertain & 0.000 & 0.021 & 0.132\\
+\bottomrule
+\end{tabularx}}
+\begin{minipage}{\textwidth}
+\footnotesize\textit{Note:} Each contest selects the best numerically supported searched precision using 128 joint posterior draws and nonlinear equilibrium output. Other finite precision includes retaining observed feedback; the lowest searched precision is positive and is not a no-feedback limit. At least one alternative remains unresolved in 21 contests, including full disclosure in 5; these alternatives remain unranked. Direction groups compare draw-level preferred precision with observed precision; a direction is named only when more than 75\% of draws support it after allowing for numerical diagnostic intervals, and otherwise is uncertain. An unresolved candidate makes that draw's direction uncertain. Reported gains are numerical posterior mean changes; small gains and close rankings can be affected by integration error. {\color{blue}Gain is $100(\overline{\mathcal B}^{selected}-\overline{\mathcal B}^{obs})/\overline{\mathcal B}^{obs}$, relative to observed feedback at the same prize and duration. There are 73 contests in total: 17 in the increase group, 33 in the decrease group, and 23 with uncertain direction. Panel A selects a common policy by posterior mean quality; Panel B groups contests by draw-level directional support, so these classifications need not coincide.} Percentiles describe variation across contests, not credible intervals. The initial distribution is fixed across designs within each draw.
+\end{minipage}
+\end{table}
+
+{\color{blue}The small overall median gain shows that changing feedback alone often has limited value at the observed prize and duration. Gains are larger within the group supporting reduced precision, consistent with preserving competition in some settings, but that group is selected using the same model calculations. The 27 selections of the lowest searched positive precision motivate investigation below the search boundary; they do not establish that no feedback is optimal. These conditional comparisons neither identify a universally preferred disclosure rule nor directly test the symmetric mechanism in Proposition~\ref{prop-joint-design}.}
+
+\textit{Quality-constrained joint design.} We directly search the nonlinear quality constraint in equation~\eqref{eq-empirical-joint-design} over the stated precision menu and deadline grid, with nonnegative prizes. The observed design remains available. Selected changes satisfy the paired numerical quality diagnostic described above; failed alternatives remain unknown. Prize brackets required by the reported designs are locally refined to $10^{-4}\theta^{obs}$, without assuming that quality is globally monotone in prize. The results are supported searched incumbents, not certified continuous optima.
+
+The full-disclosure comparison uses the same initial distributions, baseline quality target, and deadline grid, with prize searched separately. The last column of Table~\ref{tab-counterfactual-precision} concerns positive-prize finite-feedback designs. Its bracketed medians retain the one unresolved full-disclosure comparison as an unrestricted unknown, rather than omitting that contest.
+
+Delay costs are assumed scenarios; durations at grid edges need not be unconstrained optima, and large prize changes remain extrapolations. Nonlinear output calculations remove the leading-order output approximation from the design exercise, but do not remove approximation error in parameter estimation. Appendix~\ref{app-additional-checks} reports targeted cost-prior and bound sensitivity checks. The asymmetric empirical designs do not isolate the symmetric mechanism of Proposition~\ref{prop-joint-design}.
