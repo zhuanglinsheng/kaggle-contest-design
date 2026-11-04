@@ -62,6 +62,8 @@
 \usepackage{graphics}
 \usepackage{caption}
 \usepackage{subcaption}
+% Use the same single-spaced note typography inside and outside floats.
+\newcommand{\figtabnotesize}{\TableSpaced\footnotesize}
 %%%%%%%%%% Diagram Figure
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning}
@@ -222,7 +224,7 @@ Applying the framework to the Meta-Kaggle dataset \citep{megan_risdal_timo_bozso
 	\noindent\includegraphics[scale=1.2]{kaggledata_diagram_simplified.pdf}
 	\caption{Structure of a Typical Kaggle Contest}
 	\label{kaggledata-diagram-simplified}
-	\begin{minipage}{\textwidth}
+	\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \medskip
 \textit{Note:}
@@ -422,7 +424,7 @@ Hence, the conditional distribution satisfies $y_t \mid I_t \sim \mathcal{N}(\ti
 	\centering
 	\includegraphics[scale=0.6]{figure_S_evolve.pdf}
 	\caption{{Convergence of the posterior variance $S_t$ to steady state.}} \label{fig-S-evol}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \medskip
 {\textit{Note:} With $\lambda=\sigma=1$, the solid curve starts below the steady state ($S_0<1$) and the dashed curve starts above it ($S_0>1$). Both converge to $\bar S=1$. The horizontal axis is time $t$; the vertical axis is posterior variance $S_t$. Variance falls when learning dominates new innovation ($\lambda S_t^2>\sigma^2$) and rises in the reverse case. The theoretical model allows either initial condition; steady-state initialization is a restriction used in the empirical estimation.}
@@ -480,18 +482,18 @@ m_k(\tilde y_t,t)
 for $k\in\{i,j\}$, where $w_k:=\theta/(\sigma^2c_k)$ and $Q_t:=S_t+\sigma^2(T-t)$. The remainder is uniform over $(\tilde y_t,t)\in\mathbb R\times[0,T)$, holding $T,\sigma,\lambda$, and $S_0$ fixed.
 \end{theorem}
 
-{\color{blue}The quantity $Q_t$ combines uncertainty about the current gap, $S_t$, with innovation risk over the remaining horizon, $\sigma^2(T-t)$. The theorem separates the nonlinear equilibrium from its leading-order approximation, denoted by $m_k^{(1)}$. The following comparative statics describe this approximation at a given perceived gap; they do not assert the same signs for the nonlinear equilibrium or for effort averaged over endogenous contest histories. Lemma~\ref{lem-design-positive-equilibrium} establishes equilibrium existence for arbitrary positive prizes at finite precision; the small-incentive condition here concerns the approximation. The uniform remainder does not guarantee small percentage errors where effort is close to zero.}
+Theorem~\ref{thm-equilibrium-effort} establishes equilibrium existence for sufficiently small incentive indices and provides a leading-order approximation to equilibrium effort, denoted by $m_k^{(1)}$. Appendix Lemma~\ref{lem-design-positive-equilibrium} further establishes equilibrium existence for arbitrary positive prizes at finite precision; the small-incentive condition here concerns the approximation. In the leading-order formula, $Q_t$ combines uncertainty about the current gap, $S_t$, with innovation risk over the remaining horizon, $\sigma^2(T-t)$. We next examine how prizes, costs, feedback, and time remaining affect leading-order effort at a given perceived gap. These comparative statics need not carry over to the full nonlinear equilibrium or to expected effort over endogenous contest histories.\footnote{The uniform remainder does not guarantee small relative errors when effort is close to zero.}
 
-{\color{blue}\textit{Prize, ability, and competitive position.} At a given gap and $Q_t$, doubling the prize doubles $m_k^{(1)}$, while doubling the player's effort-cost parameter halves it. Effort is highest at a perceived tie and falls with the absolute gap: a marginal improvement matters most when it can change the winner. With equal costs, the perceived leader and laggard exert the same leading-order effort at a given state. With unequal costs, their effort ratio is $m_i^{(1)}/m_j^{(1)}=c_j/c_i$, regardless of who leads. This symmetry belongs to the approximation; nonlinear strategic responses can differ. Neither policy implies a finite gap at which a contestant stops completely: at finite precision, effort remains positive at every finite gap, although the leading-order policy approaches zero as the gap grows.}
+\textit{Prize, effort costs, and competitive position.} At a given perceived gap and $Q_t$, leading-order effort is proportional to the prize and inversely proportional to the player's effort-cost parameter. It is highest at a perceived tie and decreases with the absolute gap: a marginal improvement matters most when it can change the winner. With equal costs ($c_i=c_j$), the perceived leader and laggard exert the same leading-order effort at a given state. With unequal costs ($c_i\ne c_j$), their effort ratio is $m_i^{(1)}/m_j^{(1)}=c_j/c_i$, regardless of who leads. These relationships concern the approximation; nonlinear strategic responses can differ. At finite precision, both equilibrium and leading-order effort remain positive at every finite perceived gap, although leading-order effort approaches zero as the absolute gap grows.
 
-{\color{blue}\textit{Feedback and uncertainty.} Differentiating the leading-order policy while holding the perceived gap fixed gives
+\textit{Feedback and uncertainty.} Differentiating the leading-order policy while holding the perceived gap fixed gives
 \[
 \frac{\partial\log m_k^{(1)}}{\partial Q_t}
 =\frac{\tilde y_t^2-Q_t}{2Q_t^2}.
 \]
-More uncertainty lowers effort in a close contest ($|\tilde y_t|<\sqrt{Q_t}$), because a small performance improvement is less decisive, but raises effort in a lopsided contest ($|\tilde y_t|>\sqrt{Q_t}$), because the outcome is less settled. Holding $S_0$ and other primitives fixed, higher precision lowers $S_t$ for $t>0$ and hence reverses these two effects. It concentrates effort around close perceived races. Higher initial uncertainty or innovation risk raises $Q_t$ and broadens the range of gaps over which contestants remain engaged. These effects explain why neither more disclosure nor more innovation risk has an unconditionally positive effect on effort.}
+More uncertainty lowers effort in a close contest ($|\tilde y_t|<\sqrt{Q_t}$), where a small performance improvement becomes less decisive, but raises effort in a lopsided contest ($|\tilde y_t|>\sqrt{Q_t}$), where the outcome becomes less settled. Holding $S_0$ and other primitives fixed, higher feedback precision lowers $S_t$ for $t>0$, increasing effort in close contests and reducing it in lopsided contests. It therefore concentrates effort around close perceived races. Higher initial uncertainty or innovation risk raises $Q_t$, producing the opposite effects. Thus, neither greater feedback precision nor greater innovation risk has an unconditionally positive effect on effort.
 
-{\color{blue}\textit{Time remaining.} For a fixed deadline, $dQ_t/dt=-\lambda S_t^2<0$. Thus, holding the perceived gap fixed, approaching the deadline raises leading-order effort in a close race and lowers it in a sufficiently lopsided race. A contestant's realized effort need not follow either pattern because the perceived gap also changes. Extending the deadline at a fixed date instead adds $\sigma^2$ per unit of extension to $Q_t$, weakening immediate effort near a tie but strengthening it at large gaps. An extension also provides more time to work and innovate. The organizer must weigh these distinct effects against delay cost, rather than infer total output from the instantaneous effort response.}
+\textit{Time remaining.} With the deadline fixed, $dQ_t/dt=-\lambda S_t^2<0$. Thus, holding the perceived gap fixed, approaching the deadline raises leading-order effort in a close race and lowers it in a sufficiently lopsided race. Realized effort need not follow either pattern, since the perceived gap also changes. By contrast, extending the deadline at a fixed current date and perceived gap increases $Q_t$ by $\sigma^2$ per unit of extension, reducing immediate effort near a tie but increasing it at large gaps. An extension also allows more time for effort and innovation. The organizer must weigh these effects against delay costs rather than assess total output from the immediate effort response alone.
 
 \subsection{{Joint Design of Prize, Deadline, and Feedback Precision}}\label{sect-design}
 
@@ -509,7 +511,7 @@ where $W^i$ and $W^j$ are independent and $q_{k,t}=m_k(\tilde y_t,t)$ in equilib
 \]
 Even without effort, zero-mean innovation shocks can raise expected best quality through selection of the better terminal solution, giving $\mathcal B(0,0,T,\lambda;S_0)=\sqrt{(S_0+\sigma^2T)/(2\pi)}$. At zero duration, neither effort nor innovation affects scores, so $\mathcal B(0,\theta,0,\lambda;S_0)=\sqrt{S_0/(2\pi)}$.
 
-{\color{blue}The distinction between best quality and total effort matters economically. Since $\max\{x_T^i,x_T^j\}=(x_T^i+x_T^j)/2+|y_T|/2$, the organizer benefits from both average improvement and the opportunity to select the better solution. Two designs with the same expected total effort can therefore deliver different best-solution quality. The objective concerns the two terminal scores; it does not retain the best score ever attained along either path. Innovation continues even at zero effort in this model, and participation is fixed. Consequently, the zero-prize case below is a benchmark for the value of prize-induced effort, not a prediction of participation in an unpaid contest.}
+The distinction between best quality and total effort matters economically. Since $\max\{x_T^i,x_T^j\}=(x_T^i+x_T^j)/2+|y_T|/2$, the organizer benefits from both average improvement and the opportunity to select the better solution. Two designs with the same expected total effort can therefore deliver different best-solution quality. The objective concerns the two terminal scores; it does not retain the best score ever attained along either path. Innovation continues even at zero effort in this model, and participation is fixed. Consequently, the zero-prize case below is a benchmark for the value of prize-induced effort, not a prediction of participation in an unpaid contest.
 
 
 
@@ -538,25 +540,25 @@ There exist $c>0$ and $\sigma>\sigma_F$ for which joint optima exist and satisfy
 For every $\sigma>0$ and sufficiently large $c$, joint optima exist and satisfy $\theta^*=0$ and $T^*>0$. Precision is then payoff-irrelevant.
 \end{proposition}
 
-{\color{blue}The three instruments address different margins. A larger prize strengthens the reward for winning but costs the organizer dollar for dollar. More time permits additional effort and innovation but delays delivery. Precision determines how sharply contestants distinguish close from lopsided races and has no direct resource cost here. The concavity of $u$ limits the value of additional expected quality; the stronger tail-curvature condition in the proposition ensures that this marginal value eventually falls sufficiently quickly. The restrictions on $D$ make short extensions inexpensive and prevent delay costs from growing too slowly. These assumptions help turn local incentive effects into comparisons over all prizes and deadlines.}
+The three instruments address different margins. A larger prize strengthens the reward for winning but costs the organizer dollar for dollar. More time permits additional effort and innovation but delays delivery. Precision determines how sharply contestants distinguish close from lopsided races and has no direct resource cost here. The concavity of $u$ limits the value of additional expected quality; the stronger tail-curvature condition in the proposition ensures that this marginal value eventually falls sufficiently quickly. The restrictions on $D$ make short extensions inexpensive and prevent delay costs from growing too slowly. These assumptions help turn local incentive effects into comparisons over all prizes and deadlines.
 
 More precise feedback can strengthen incentives by revealing that a contest is close, but revealing a substantial lead can discourage the trailing contestant from catching up and reduce the leader's pressure to improve. Finite precision can sustain competition by preserving uncertainty about the winner, at the cost of blurring the information that sharpens incentives in close contests.
 
-Low innovation risk makes disclosed initial gaps difficult to overturn, while low effort costs make continued competition inexpensive to support through the prize. A short positive deadline allows effort to improve solution quality while limiting delay costs. This advantage persists even when full disclosure is allowed to reoptimize the prize and deadline.\footnote{Part~(i) does not assert that a joint optimum is attained; any attained joint optimum must use finite precision.} With greater innovation risk, future shocks can preserve competitive uncertainty even under full disclosure; part~(ii) establishes its joint optimality at some such parameter points. In part~(iii), effort costs are sufficiently high that inducing effort no longer justifies prize expenditure. The optimal prize is therefore zero and precision is irrelevant, although a positive deadline remains worthwhile because innovation can improve expected best output without effort. Figure~\ref{fig-joint-design-regions} illustrates the numerical arrangement of these regimes; the proposition gives sufficient conditions rather than a complete partition.
+Low innovation risk makes disclosed initial gaps difficult to overturn, while low effort costs make continued competition inexpensive to support through the prize. A short positive deadline allows effort to improve solution quality while limiting delay costs. The advantage of finite feedback persists even when full disclosure is allowed to reoptimize the prize and deadline.\footnote{Part~(i) does not assert that a joint optimum is attained; any attained joint optimum must use finite precision.} With greater innovation risk, future shocks can preserve competitive uncertainty even under full disclosure; part~(ii) establishes its joint optimality at some such parameter points. In part~(iii), effort costs are sufficiently high that inducing effort no longer justifies prize expenditure. The optimal prize is therefore zero and precision is irrelevant, although a positive deadline remains worthwhile because innovation can improve expected best output without effort. Figure~\ref{fig-joint-design-regions} illustrates these regimes numerically; the proposition provides sufficient conditions, not a complete partition.
 
-{\color{blue}Large initial uncertainty makes the information policy consequential: full disclosure can immediately reveal a substantial lead, whereas finite feedback initially preserves uncertainty about that lead. The result does not say that increasing $S_0$ always makes less disclosure preferable. Nor does part~(ii) establish a universal innovation-risk threshold above which full disclosure is optimal. The managerial implication is conditional: when effort is inexpensive and future innovations are unlikely to overturn disclosed gaps, preserving some uncertainty can improve output even after the prize and deadline are adjusted. When innovation itself keeps the race open, disclosure can be preferable. These are joint-design comparisons, not a claim that effort, optimal precision, or optimal prizes vary monotonically with every primitive.}
+Large initial uncertainty makes the information policy consequential: full disclosure can immediately reveal a substantial lead, whereas finite feedback initially preserves uncertainty about that lead. The result does not imply that increasing $S_0$ always makes less disclosure preferable, nor does part~(ii) establish a universal innovation-risk threshold above which full disclosure is optimal. These joint-design comparisons do not imply that effort, optimal precision, or optimal prizes vary monotonically with each primitive.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{numerical_regions_four_class_bw.pdf}
 \caption{Numerical joint-design regions in the $(c,\sigma)$ plane}
 \label{fig-joint-design-regions}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \medskip
 \textit{Note:}
 Medium gray denotes positive prize with finite precision, white positive prize with full disclosure, and light gray zero prize. Dark hatching marks 1,179 numerically unresolved grid points, including 926 with potentially competitive failed candidates. The curves are smoothed for display using the unresolved-cell intervals; smoothing does not resolve classification uncertainty.
-The search jointly varies the prize, deadline, and precision, with $S_0=1$, $u(B)=3(1-e^{-2B})$, $D(T)=T^2/2$, symmetric costs $c_i=c_j=c$, and initial perceived gap $\tilde y_0=0$. Both axes are linear and start at $0.03$. Further details appear in Appendix~\ref{app-joint-design-lemmas}. {\color{blue}The horizontal axis varies innovation risk $\sigma$ and the vertical axis varies the common effort cost $c$ (higher $c$ means lower ability). The grid contains 14,553 points. Regions classify numerical design comparisons under this calibration, not empirically estimated regimes or analytically established boundary curves.}}
+The search jointly varies the prize, deadline, and precision, with $S_0=1$, $u(B)=3(1-e^{-2B})$, $D(T)=T^2/2$, symmetric costs $c_i=c_j=c$, and initial perceived gap $\tilde y_0=0$. Both axes are linear and start at $0.03$. Further details appear in Appendix~\ref{app-joint-design-lemmas}. The horizontal axis varies innovation risk $\sigma$ and the vertical axis varies the common effort cost $c$ (higher $c$ means lower ability). The grid contains 14,553 points. Regions classify numerical design comparisons under this calibration, not empirically estimated regimes or analytically established boundary curves.}
 \end{minipage}
 \end{figure}
 
@@ -719,7 +721,7 @@ We sample the resulting approximate posterior primarily using the No-U-Turn Samp
 \begingroup
 Identification here is a property of the specified family of data distributions, not a guarantee of precise estimation from one contest. The proof uses conditional laws for different possible first-readout times, including histories that may be rare in a finite sample. It therefore remains compatible with the weak cost--submission-scale separation observed below.
 
-{\color{blue}The identifying variation has an economic interpretation. At a possible first-readout time $s$, uncertainty decomposes as $S_0+\sigma^2s+1/(\lambda s)$: initial uncertainty is constant, innovation uncertainty grows with elapsed time, and measurement uncertainty falls with it. Three distinct possible times separate these components in the specified law. Unequal effort costs create a directional score drift; combining that drift with the submission-intensity difference separates effort from the conversion factor $r$, and hence identifies absolute costs. If costs are equal, the drift difference vanishes and a common rescaling of both costs and $r$ is observationally equivalent. Submission activity alone then cannot reveal how expensive it would be to induce additional effort.}
+The identifying variation has an economic interpretation. Conditional on the first readout occurring at time $s$, its variance is $S_0+\sigma^2s+1/(\lambda s)$: initial uncertainty is constant, innovation uncertainty grows with elapsed time, and measurement uncertainty falls with it. Three distinct possible times separate these components in the specified law. Unequal effort costs create a directional score drift; combining that drift with the submission-intensity difference separates effort from the conversion factor $r$, and hence identifies absolute costs. If costs are equal, the drift difference vanishes and a common rescaling of both costs and $r$ is observationally equivalent. Submission activity alone then cannot reveal how expensive it would be to induce additional effort.
 \par\endgroup
 
 \section{Synthetic Experiments}\label{sect-synthetic}
@@ -764,10 +766,10 @@ Identification here is a property of the specified family of data distributions,
 	{\includegraphics[width=0.95\textwidth]{figure3.png}}
 	\caption{Synthetic Contest Data over a Three-Month Horizon}
 	\label{fig-synthetic_90}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \medskip
-{\textit{Note:} The upper panel shows the latent gap $y_t$, carried-forward public gap $\hat y_t$, and perceived gap $\tilde y_t$; the lower panel marks submissions by players $i$ and $j$. This is one 90-day realization under the numerically computed equilibrium policy $m$ with time measured in days, $T=90$, $c_i=1.2$, $c_j=1.5$, $\theta=1$, $\sigma=2$, $\lambda=1$, $\mu_0=0$, $r=15$, and $S_0=4$. {\color{blue}Positive gaps favor player $i$; negative gaps favor $j$. Calendar dates on the horizontal axis index the 90 simulated days. Each mark is a submission, giving 28 for $i$ and 18 for $j$. Public readouts refresh at the end of submission hours and are carried forward otherwise. The perceived gap uses the interval-start public value, so it need not coincide with the new readout. This path illustrates noisy learning, not an average treatment effect of feedback.}}
+{\textit{Note:} The upper panel shows the latent gap $y_t$, carried-forward public gap $\hat y_t$, and perceived gap $\tilde y_t$; the lower panel marks submissions by players $i$ and $j$. This is one 90-day realization under the numerically computed equilibrium policy $m$ with time measured in days, $T=90$, $c_i=1.2$, $c_j=1.5$, $\theta=1$, $\sigma=2$, $\lambda=1$, $\mu_0=0$, $r=15$, and $S_0=4$. Positive gaps favor player $i$; negative gaps favor $j$. Calendar dates on the horizontal axis index the 90 simulated days. Each mark is a submission, giving 28 for $i$ and 18 for $j$. Public readouts refresh at the end of submission hours and are carried forward otherwise. The perceived gap uses the interval-start public value, so it need not coincide with the new readout. This path illustrates noisy learning, not an average treatment effect of feedback.}
 }
 \end{minipage}
 \end{figure}
@@ -779,10 +781,10 @@ Identification here is a property of the specified family of data distributions,
 \includegraphics[width=0.98\textwidth]{effort_policy_comparison.pdf}
 \caption{{Equilibrium Effort: Nonlinear Numerical Solution and First-Order Approximation}}
 \label{fig-effort-approximation}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \medskip
-\textit{Note:} Solid curves show the numerical nonlinear equilibrium and dashed curves the first-order policy at $t=T/2$. Each panel changes only the indicated parameter from the baseline. The horizontal axis is $z=\tilde y/\sqrt{Q_t}$. {\color{blue}The vertical axis is player $i$'s effort, in model score units per day; $z>0$ means that $i$ is the perceived leader. The normalized horizontal scale changes with $Q_t$, so equal $z$ across panels need not mean equal score gaps. Higher prizes increase both players' incentive indices; lowering $c_j$ increases the opponent's ability without changing $i$'s first-order policy at a fixed state.} The error $E_i$ uses 601 equally spaced values of $z\in[-3,3]$ and 378 time points spanning $[0,T]$, with additional points near the deadline. At each time, the largest absolute error is divided by the nonlinear peak over this state range; $E_i$ is its maximum over time. Halving the state and base time spacings changes effort by less than $0.40\%$ under the same time-specific peak normalization in every configuration. {The baseline is $T=90$, $c_i=1.2$, $c_j=1.5$, $\theta=1$, $\sigma=2$, $\lambda=1$, $\mu_0=0$, $r=15$, and $S_0=4$. Panels (a)--(c) set $\theta=1,2,4$; panels (d) and (e) set $\lambda=0.1,10$; panel (f) sets $c_j=0.6$, with other parameters at baseline.}
+\textit{Note:} Solid curves show the numerical nonlinear equilibrium and dashed curves the first-order policy at $t=T/2$. Each panel changes only the indicated parameter from the baseline. The horizontal axis is $z=\tilde y/\sqrt{Q_t}$. The vertical axis is player $i$'s effort, in model score units per day; $z>0$ means that $i$ is the perceived leader. The normalized horizontal scale changes with $Q_t$, so equal $z$ across panels need not mean equal score gaps. Higher prizes increase both players' incentive indices; lowering $c_j$ increases the opponent's ability without changing $i$'s first-order policy at a fixed state. The error $E_i$ uses 601 equally spaced values of $z\in[-3,3]$ and 378 time points spanning $[0,T]$, with additional points near the deadline. At each time, the largest absolute error is divided by the nonlinear peak over this state range; $E_i$ is its maximum over time. Halving the state and base time spacings changes effort by less than $0.40\%$ under the same time-specific peak normalization in every configuration. {The baseline is $T=90$, $c_i=1.2$, $c_j=1.5$, $\theta=1$, $\sigma=2$, $\lambda=1$, $\mu_0=0$, $r=15$, and $S_0=4$. Panels (a)--(c) set $\theta=1,2,4$; panels (d) and (e) set $\lambda=0.1,10$; panel (f) sets $c_j=0.6$, with other parameters at baseline.}
 }
 \end{minipage}
 \end{figure}
@@ -847,10 +849,10 @@ Maximized log likelihood & -352.922 & -352.717 \\
 BIC ($n=45$) & 728.684 & 732.080 \\
 \bottomrule
 \end{tabularx}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \medskip
-\textit{Note:} Both models use the same 46 submissions and 45 hourly public readouts, with no initial observations discarded. {\color{blue}The parameters are effort costs $c_i,c_j$ (lower means higher ability), innovation risk $\sigma$, feedback precision $\lambda$, initial mean gap $\mu_0$, and the effort-to-submission scale $r$. SD denotes posterior standard deviation. The nonlinear generating model has $T=90$ days, $\theta=1$, and $S_0=4$; both fitted likelihoods use first-order effort. Higher log marginal likelihood favors a model, whereas lower BIC favors it. The nearly equal marginal likelihoods indicate little evidence for choosing between the two initializations in this sample.} Both use $c_i,c_j\sim\operatorname{LogNormal}(\log1,0.75^2)$, $\sigma\sim\operatorname{LogNormal}(\log2,0.5^2)$, $\lambda\sim\operatorname{LogNormal}(\log1,0.75^2)$, $\mu_0\sim\mathcal N(0,1)$, and $\log r\sim\mathcal N(\log15,0.35^2)$. Panel B additionally uses $S_0\sim\operatorname{LogNormal}(\log2,0.75^2)$. Priors are normalized on the retained synthetic supports: $c_i,c_j\in(0.1,5)$, $\sigma\in(0.5,10)$, $\lambda\in(10^{-6},100)$, $\mu_0\in(-20,20)$, and $S_0>0.01$ when free. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; neither has divergences, maximum $\widehat R<1.002$, and minimum bulk and tail effective sample sizes exceed 4,100 and 3,800. Post. RMSD is the square root of the posterior mean squared distance from the generating parameter, not an RMSE across datasets. Intervals are equal-tailed 95\% credible intervals. BIC is $-2\hat\ell+k\log n$, using likelihood-only optimization on the same supports and the 45-readout convention for $n$, not the computational grid size. The likelihood optima approach $c_j=5$ in both models and $S_0=0.01$ in Panel B; BIC is therefore reported only as a heuristic comparison.
+\textit{Note:} Both models use the same 46 submissions and 45 hourly public readouts, with no initial observations discarded. The parameters are effort costs $c_i,c_j$ (lower means higher ability), innovation risk $\sigma$, feedback precision $\lambda$, initial mean gap $\mu_0$, and the effort-to-submission scale $r$. SD denotes posterior standard deviation. The nonlinear generating model has $T=90$ days, $\theta=1$, and $S_0=4$; both fitted likelihoods use first-order effort. Higher log marginal likelihood favors a model, whereas lower BIC favors it. The nearly equal marginal likelihoods indicate little evidence for choosing between the two initializations in this sample. Both use $c_i,c_j\sim\operatorname{LogNormal}(\log1,0.75^2)$, $\sigma\sim\operatorname{LogNormal}(\log2,0.5^2)$, $\lambda\sim\operatorname{LogNormal}(\log1,0.75^2)$, $\mu_0\sim\mathcal N(0,1)$, and $\log r\sim\mathcal N(\log15,0.35^2)$. Panel B additionally uses $S_0\sim\operatorname{LogNormal}(\log2,0.75^2)$. Priors are normalized on the retained synthetic supports: $c_i,c_j\in(0.1,5)$, $\sigma\in(0.5,10)$, $\lambda\in(10^{-6},100)$, $\mu_0\in(-20,20)$, and $S_0>0.01$ when free. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; neither has divergences, maximum $\widehat R<1.002$, and minimum bulk and tail effective sample sizes exceed 4,100 and 3,800. Post. RMSD is the square root of the posterior mean squared distance from the generating parameter, not an RMSE across datasets. Intervals are equal-tailed 95\% credible intervals. BIC is $-2\hat\ell+k\log n$, using likelihood-only optimization on the same supports and the 45-readout convention for $n$, not the computational grid size. The likelihood optima approach $c_j=5$ in both models and $S_0=0.01$ in Panel B; BIC is therefore reported only as a heuristic comparison.
 }
 \end{minipage}
 \end{table}
@@ -894,10 +896,10 @@ In Table~\ref{tbl-pool-synthetic-data}, expanding the pool from 10 to 20 contest
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \textit{Note:}
-The nested pools contain 426 submissions (227 by $i$, 199 by $j$) and 848 submissions (450 by $i$, 398 by $j$), with 418 and 836 distinct hourly readouts. The first 10 contests form the smaller pool. The generating scale is $r=15$, but $r$ is estimated jointly in both pools. {\color{blue}The parameters are effort costs $c_i,c_j$ (lower means higher ability), innovation risk $\sigma$, feedback precision $\lambda$, initial mean gap $\mu_0$, and the effort-to-submission scale $r$. SD denotes posterior standard deviation. Each generating contest lasts 90 days with $\theta=1$ and $S_0=4$; estimation uses first-order effort and imposes $S_0=\sigma/\sqrt\lambda$. More independent contests sharpen the risk and precision estimates here but do little to separate absolute costs from $r$. The two pools are nested, not independent replications of an estimator-comparison experiment.} Priors and supports match the steady-state specification in Table~\ref{tbl-contest90}. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; all $\widehat R<1.002$, bulk and tail effective sample sizes exceed 2,600, and no divergences or tree-depth-limit hits occur. {Post. RMSD is the square root of the posterior mean squared distance from the generating parameter vector.}
+The nested pools contain 426 submissions (227 by $i$, 199 by $j$) and 848 submissions (450 by $i$, 398 by $j$), with 418 and 836 distinct hourly readouts. The first 10 contests form the smaller pool. The generating scale is $r=15$, but $r$ is estimated jointly in both pools. The parameters are effort costs $c_i,c_j$ (lower means higher ability), innovation risk $\sigma$, feedback precision $\lambda$, initial mean gap $\mu_0$, and the effort-to-submission scale $r$. SD denotes posterior standard deviation. Each generating contest lasts 90 days with $\theta=1$ and $S_0=4$; estimation uses first-order effort and imposes $S_0=\sigma/\sqrt\lambda$. More independent contests sharpen the risk and precision estimates here but do little to separate absolute costs from $r$. The two pools are nested, not independent replications of an estimator-comparison experiment. Priors and supports match the steady-state specification in Table~\ref{tbl-contest90}. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; all $\widehat R<1.002$, bulk and tail effective sample sizes exceed 2,600, and no divergences or tree-depth-limit hits occur. {Post. RMSD is the square root of the posterior mean squared distance from the generating parameter vector.}
 }
 \end{minipage}
 \end{table}
@@ -937,10 +939,10 @@ In Table~\ref{tbl-longterm-synthetic-data}, the 360-day realization yields small
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \textit{Note:}
-The 180-day contest contains 114 submissions (59 by $i$, 55 by $j$) and 109 distinct hourly readouts; the 360-day contest contains 235 submissions (135 by $i$, 100 by $j$) and 231 readouts. {\color{blue}The parameters are effort costs $c_i,c_j$ (lower means higher ability), innovation risk $\sigma$, feedback precision $\lambda$, initial mean gap $\mu_0$, and the effort-to-submission scale $r$. SD denotes posterior standard deviation. Both datasets use nonlinear effort, $\theta=1$, and $S_0=4$; estimation uses first-order effort and steady-state initialization. Each horizon contributes one realization, and the generating $r_T$ also changes. Differences therefore describe these samples, not the causal effect of extending a contest.} Both specifications estimate $r$, with $\log r\sim\mathcal N(\log r_T,0.35^2)$ centered at the respective generating scale. Other priors and supports match Table~\ref{tbl-contest90}. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; all $\widehat R<1.002$, bulk and tail effective sample sizes exceed 3,100, and no divergences or tree-depth-limit hits occur. {Post. RMSD is the square root of the posterior mean squared distance from the generating parameter vector.}
+The 180-day contest contains 114 submissions (59 by $i$, 55 by $j$) and 109 distinct hourly readouts; the 360-day contest contains 235 submissions (135 by $i$, 100 by $j$) and 231 readouts. The parameters are effort costs $c_i,c_j$ (lower means higher ability), innovation risk $\sigma$, feedback precision $\lambda$, initial mean gap $\mu_0$, and the effort-to-submission scale $r$. SD denotes posterior standard deviation. Both datasets use nonlinear effort, $\theta=1$, and $S_0=4$; estimation uses first-order effort and steady-state initialization. Each horizon contributes one realization, and the generating $r_T$ also changes. Differences therefore describe these samples, not the causal effect of extending a contest. Both specifications estimate $r$, with $\log r\sim\mathcal N(\log r_T,0.35^2)$ centered at the respective generating scale. Other priors and supports match Table~\ref{tbl-contest90}. Each fit uses four chains with 1,000 warmup and 2,000 retained draws per chain; all $\widehat R<1.002$, bulk and tail effective sample sizes exceed 3,100, and no divergences or tree-depth-limit hits occur. {Post. RMSD is the square root of the posterior mean squared distance from the generating parameter vector.}
 }
 \end{minipage}
 }
@@ -962,15 +964,15 @@ Figure~\ref{kaggledata-diagram} summarizes the data-model structure and validati
 	\noindent\includegraphics[scale=1.2]{kaggledata_diagram.pdf}
 	\caption{Meta-Kaggle Dataset and the Model Structure}
 	\label{kaggledata-diagram}
-	\begin{minipage}{\textwidth}
+	\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \medskip
 \textit{Note:}
 This figure shows the structure of a typical Kaggle contest and the information flow available to contestants.
 Rectangles represent observed data, rounded rectangles represent latent states, and ellipses represent contest parameters.
 Solid lines depict temporal relationships among time series variables and state variables, while dashed arrows show the influence of contest parameters on the data-generating process.
-{The private gap $y_t$ is unavailable to contestants during the contest and is used for post-estimation diagnostics.}
-{Private-path values are excluded from the estimation likelihood, although reconstructed private-score rankings are used to select the focal pair.} {\color{blue}Here $y_t$, $\hat y_t$, and $\tilde y_t$ denote the latent private gap, public-gap proxy, and contestants' perceived gap. The parameters $c_i,c_j$ determine effort costs, $\sigma$ innovation risk, $\lambda$ signal precision, and $r$ the conversion from effort to submission intensity. Arrows describe the maintained model, not separately identified causal effects.}
+The private gap $y_t$ is unavailable to contestants during the contest and is used for post-estimation diagnostics.
+Private-path values are excluded from the estimation likelihood, although reconstructed private-score rankings are used to select the focal pair. Here $y_t$, $\hat y_t$, and $\tilde y_t$ denote the latent private gap, public-gap proxy, and contestants' perceived gap. The parameters $c_i,c_j$ determine effort costs, $\sigma$ innovation risk, $\lambda$ signal precision, and $r$ the conversion from effort to submission intensity. Arrows describe the maintained model, not separately identified causal effects.
 }
 \end{minipage}
 \end{figure}
@@ -1035,10 +1037,10 @@ Top-5 overlap rate & $66.6\%$ & $80.0\%$ & $[59.7\%,\ 73.2\%]$ \\
 \addlinespace[0.5ex]
 \end{tabularx}
 \par\vspace{1.2ex}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \textit{Note:}
-The sample consists of the same 73 Kaggle contests used in the structural analysis. For each contest, we use the official public and private leaderboard ranks in Meta-Kaggle, excluding benchmark teams and teams missing either rank. Public--private rank correlation is the Spearman correlation across all retained teams within a contest. The top-$k$ overlap rate is $|\mathcal T^{pub}_{k}\cap\mathcal T^{pri}_{k}|/k$, where $\mathcal T^{pub}_{k}$ and $\mathcal T^{pri}_{k}$ are the sets of teams ranked in the public and private top $k$, respectively; the ordering of teams within the top-$k$ sets need not coincide. Each statistic is first calculated separately by contest, and the table reports the equally weighted mean and median across the 73 contests. The 95\% confidence intervals pertain to the across-contest means and are percentile intervals obtained from 10,000 nonparametric bootstrap resamples at the contest level. {\color{blue}Higher values indicate greater agreement. A top-2 overlap of 50\% means that one of the public top two also belongs to the private top two. High overall rank correlation can coexist with substantial uncertainty near the prize threshold; these statistics alone do not distinguish overfitting from other sources of public--private disagreement.}
+The sample consists of the same 73 Kaggle contests used in the structural analysis. For each contest, we use the official public and private leaderboard ranks in Meta-Kaggle, excluding benchmark teams and teams missing either rank. Public--private rank correlation is the Spearman correlation across all retained teams within a contest. The top-$k$ overlap rate is $|\mathcal T^{pub}_{k}\cap\mathcal T^{pri}_{k}|/k$, where $\mathcal T^{pub}_{k}$ and $\mathcal T^{pri}_{k}$ are the sets of teams ranked in the public and private top $k$, respectively; the ordering of teams within the top-$k$ sets need not coincide. Each statistic is first calculated separately by contest, and the table reports the equally weighted mean and median across the 73 contests. The 95\% confidence intervals pertain to the across-contest means and are percentile intervals obtained from 10,000 nonparametric bootstrap resamples at the contest level. Higher values indicate greater agreement. A top-2 overlap of 50\% means that one of the public top two also belongs to the private top two. High overall rank correlation can coexist with substantial uncertainty near the prize threshold; these statistics alone do not distinguish overfitting from other sources of public--private disagreement.
 }
 \end{minipage}
 \end{table}
@@ -1096,7 +1098,7 @@ Figure~\ref{fig-validate-lambda} reports a regression slope of $0.386$ and a Spe
 		\bottomrule
 		\addlinespace[0.5ex]
 	\end{tabularx}
-	\begin{minipage}{\textwidth}
+	\begin{minipage}{\textwidth}\figtabnotesize
 	{\footnotesize
 	{(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
 (2) OLS residual diagnostics: Omnibus = 0.601, Jarque--Bera = 0.374, Skewness = 0.175, Kurtosis = 3.024.
@@ -1107,9 +1109,9 @@ Figure~\ref{fig-validate-lambda} reports a regression slope of $0.386$ and a Spe
 \end{minipage}
 \caption{{$\lambda_\ell^{\text{bench}}$ vs. Bayesian Estimate $\hat\lambda_\ell$}}
 \label{fig-validate-lambda}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
-\textbf{Note.} {Each point represents one of 73 contests. The approximate benchmark $\lambda_\ell^{\mathrm{bench}}$ uses elapsed-time-weighted squared public--private discrepancies at submission-triggered readouts; $\hat\lambda_\ell$ is the posterior median structural estimate. The dashed line regresses $\log(1+\lambda_\ell^{\mathrm{bench}})$ on $\log(1+\hat\lambda_\ell)$. {\color{blue}The horizontal axis is the log-transformed structural estimate and the vertical axis the log-transformed benchmark; larger values indicate more precise feedback. A positive slope means that the two measures tend to rank contests similarly, not that they agree in levels or identify a causal effect of disclosure.} Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
+\textbf{Note.} {Each point represents one of 73 contests. The approximate benchmark $\lambda_\ell^{\mathrm{bench}}$ uses elapsed-time-weighted squared public--private discrepancies at submission-triggered readouts; $\hat\lambda_\ell$ is the posterior median structural estimate. The dashed line regresses $\log(1+\lambda_\ell^{\mathrm{bench}})$ on $\log(1+\hat\lambda_\ell)$. The horizontal axis is the log-transformed structural estimate and the vertical axis the log-transformed benchmark; larger values indicate more precise feedback. A positive slope means that the two measures tend to rank contests similarly, not that they agree in levels or identify a causal effect of disclosure. Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
 }
 \end{minipage}
 \end{figure}
@@ -1153,10 +1155,10 @@ Obs. & \multicolumn{5}{c}{73} \\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \textit{Note:}
-{The full-path row regresses $\log(1+\mathcal D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$, where $\mathcal D_\ell^{path}$ is mean absolute public--private gap disagreement. {\color{blue}Negative coefficients mean that higher estimated precision is associated with smaller public--private discrepancies. These are cross-contest associations on a $\log(1+x)$ scale, not elasticities or the effect of changing a contest's disclosure rule. Inference treats the posterior medians as given.} The time-split row relates the same measure in the final 25\% to precision estimated from the first 75\% of contest-phase data, retaining the full-sample horizon. Initialization hours are excluded from the discrepancy measures. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association. Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
+{The full-path row regresses $\log(1+\mathcal D_\ell^{path})$ on $\log(1+\hat\lambda_\ell)$, where $\mathcal D_\ell^{path}$ is mean absolute public--private gap disagreement. Negative coefficients mean that higher estimated precision is associated with smaller public--private discrepancies. These are cross-contest associations on a $\log(1+x)$ scale, not elasticities or the effect of changing a contest's disclosure rule. Inference treats the posterior medians as given. The time-split row relates the same measure in the final 25\% to precision estimated from the first 75\% of contest-phase data, retaining the full-sample horizon. Initialization hours are excluded from the discrepancy measures. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association. Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
 {(1) Significance markers: \textbf{***} $p<0.001$, \textbf{**} $p<0.01$, \textbf{*} $p<0.05$.}
 (2) OLS residual diagnostics (Full path; Time split): Omnibus = 66.882; 90.471, Jarque--Bera = 364.820; 1131.650, Skewness = 2.872; 3.831, Kurtosis = 12.324; 20.701.
 (3) Condition Number (Full path; Time split): 15.726; 15.742.
@@ -1210,7 +1212,7 @@ Figure~\ref{fig-validation-sigma} reports a regression slope of $0.912$ and a Sp
 		\bottomrule
 		\addlinespace[0.5ex]
 	\end{tabularx}
-	\begin{minipage}{\textwidth}
+	\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 {(1) Significance levels: \textbf{***} $p < 0.001$, \textbf{**} $p < 0.01$, \textbf{*} $p < 0.05$.
 (2) OLS residual diagnostics: Omnibus = 21.321, Jarque--Bera = 28.003, Skewness = 1.302, Kurtosis = 4.557.
@@ -1221,9 +1223,9 @@ Figure~\ref{fig-validation-sigma} reports a regression slope of $0.912$ and a Sp
 \end{minipage}
 \caption{{$\sigma^{\text{bench}}$ vs. Bayesian Estimate $\hat\sigma$}}
 \label{fig-validation-sigma}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
-\textbf{Note.} {Each point represents one of 73 contests. The model-assisted benchmark $\sigma_\ell^{\mathrm{bench}}$ uses private-gap increments between readouts, adjusted for elapsed time and effort drift evaluated at posterior median parameters; $\hat\sigma_\ell$ is the posterior median structural estimate. The dashed line regresses $\log(1+\sigma_\ell^{\mathrm{bench}})$ on $\log(1+\hat\sigma_\ell)$. {\color{blue}The horizontal axis is the log-transformed structural estimate and the vertical axis the log-transformed benchmark; larger values indicate greater innovation risk. A positive slope is directional agreement. Because the benchmark uses estimated drift and asynchronous private scores, it is not an independent observation of latent volatility.} Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
+\textbf{Note.} {Each point represents one of 73 contests. The model-assisted benchmark $\sigma_\ell^{\mathrm{bench}}$ uses private-gap increments between readouts, adjusted for elapsed time and effort drift evaluated at posterior median parameters; $\hat\sigma_\ell$ is the posterior median structural estimate. The dashed line regresses $\log(1+\sigma_\ell^{\mathrm{bench}})$ on $\log(1+\hat\sigma_\ell)$. The horizontal axis is the log-transformed structural estimate and the vertical axis the log-transformed benchmark; larger values indicate greater innovation risk. A positive slope is directional agreement. Because the benchmark uses estimated drift and asynchronous private scores, it is not an independent observation of latent volatility. Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
 }
 \end{minipage}
 \end{figure}
@@ -1259,10 +1261,10 @@ Obs. & \multicolumn{5}{c}{73} \\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
 \textit{Note:}
-{The full-path row regresses $\log(1+\mathcal V_\ell^{path})$ on $\log(1+\hat\sigma_\ell)$, where $\mathcal V_\ell^{path}$ is the sample standard deviation of hourly private-gap increments within the contest-phase path. {\color{blue}Positive slopes indicate that larger estimated innovation risk accompanies greater private-path variation. Hourly increments include zeros between submissions, so the outcome also reflects update frequency. Coefficients on the $\log(1+x)$ scale are not elasticities; the confidence intervals treat posterior medians as given.} The time-split row uses increments ending in the final 25\% and innovation risk estimated from the first 75\%, retaining the full-sample horizon. Artificial initialization increments are excluded. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association. Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
+{The full-path row regresses $\log(1+\mathcal V_\ell^{path})$ on $\log(1+\hat\sigma_\ell)$, where $\mathcal V_\ell^{path}$ is the sample standard deviation of hourly private-gap increments within the contest-phase path. Positive slopes indicate that larger estimated innovation risk accompanies greater private-path variation. Hourly increments include zeros between submissions, so the outcome also reflects update frequency. Coefficients on the $\log(1+x)$ scale are not elasticities; the confidence intervals treat posterior medians as given. The time-split row uses increments ending in the final 25\% and innovation risk estimated from the first 75\%, retaining the full-sample horizon. Artificial initialization increments are excluded. Both regressions include an intercept and use 73 contests and posterior median estimates. Spearman $\rho$ reports the corresponding rank association. Regression standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
 {(1) Significance levels: \textbf{***} $p<0.001$, \textbf{**} $p<0.01$, \textbf{*} $p<0.05$.
 (2) OLS residual diagnostics (Full path; Time split): Omnibus = 50.904; 13.440, Jarque--Bera = 180.803; 15.401, Skewness = 2.220; 0.879, Kurtosis = 9.304; 4.405.
 (3) Condition Number (Full path; Time split): 3.585; 3.502.}
@@ -1283,7 +1285,7 @@ We examine whether joint adjustments to prizes, deadlines, and feedback precisio
 \quad\text{subject to}\quad
 \overline{\mathcal B}_\ell(\theta,T,\lambda)\geq \overline{\mathcal B}^{obs}_\ell.
 \end{equation}
-{\color{blue}Within each draw, costs and the initial gap distribution remain fixed, with $S_0=\sigma/\sqrt{\lambda^{obs}}$; feedback changes affect subsequent learning. The constraint preserves posterior mean expected quality, rather than quality in every draw or realization. Appendix~\ref{app-precision-counterfactual} details the calculation and a precision-only benchmark.}
+Within each posterior draw, costs and the initial gap distribution are held fixed across designs, with $S_0=\sigma/\sqrt{\lambda^{obs}}$; changing feedback alters contestants' information rather than the underlying initial distribution. The constraint maintains posterior mean expected quality, without requiring quality to be maintained in every draw or realization. Appendix~\ref{app-precision-counterfactual} details the calculation and a precision-only benchmark.
 
 Following the numerical analysis in Section~\ref{sect-design}, we retain quadratic delay costs, $D_\ell(T)=\delta\theta_\ell^{obs}(T/T_\ell^{obs})^2$, and vary $\delta>0$ across scenarios. This parameter measures delay cost at the observed deadline relative to the observed prize. Prizes are nonnegative. We search eight deadlines between 0.1 and 2 times the observed duration and a finite menu of positive precisions, together with full disclosure and retention of the observed feedback rule. The reported designs are the best numerically supported candidates found in this search; continuous global optimality is not established. Table~\ref{tab-counterfactual-precision} reports the results across the 73 contests.
 
@@ -1327,18 +1329,18 @@ $\delta$ & $\Delta T$ (\%) & $\Delta\theta$ (\%) & \makecell{Total cost\\reducti
 \bottomrule
 \end{tabularx}
 \par\vspace{1ex}\noindent
-\begin{minipage}{\textwidth}
-\footnotesize\textit{Note:} Each scenario covers 73 contests; Panel A classifies the selected numerically supported designs, with less disclosure including retention of observed feedback. {\color{blue}Total cost is prize plus delay cost. ``Total cost reduction'' is $100(1-C_\ell^*/C_\ell^{obs})$, where $C_\ell^*$ is the selected design's cost and $C_\ell^{obs}=(1+\delta)\theta_\ell^{obs}$. The last column instead reports $100(1-C_\ell^*/C_\ell^{FD})$, where $C_\ell^{FD}$ is the best supported searched full-disclosure cost at the same quality target. Thus, the two savings columns have different denominators.} $\Delta T$ and $\Delta\theta$ are percentage changes from the observed deadline and prize. {\color{blue}Negative values mean shorter duration or a smaller prize. Here $T^{obs}$ is the constructed estimation-window length, not the official contest duration. Component medians need not refer to the same contest and cannot be combined to reconstruct the median cost reduction.} All Panel B medians use 73 contests except the last column, whose subgroup is positive-prize finite-feedback designs. One contest has an unresolved full-disclosure benchmark; brackets give the range of the subgroup median when this comparison is left unrestricted, not a confidence interval. Other comparisons use the best supported full-disclosure design found on the same deadline grid. Quality calculations solve the nonlinear game conditional on the original approximate Bayesian posterior. Selected changes pass paired numerical quality diagnostics; these do not guarantee realized quality or give rigorous continuous error bounds. Unresolved alternative designs remain unexcluded. The parameter $\delta$ sets $D_\ell(T_\ell^{obs})=\delta\theta_\ell^{obs}$.
+\begin{minipage}{\textwidth}\figtabnotesize
+\footnotesize\textit{Note:} Each scenario covers 73 contests; Panel A classifies the selected numerically supported designs, with less disclosure including retention of observed feedback. Total cost is prize plus delay cost. ``Total cost reduction'' is $100(1-C_\ell^*/C_\ell^{obs})$, where $C_\ell^*$ is the selected design's cost and $C_\ell^{obs}=(1+\delta)\theta_\ell^{obs}$. The last column instead reports $100(1-C_\ell^*/C_\ell^{FD})$, where $C_\ell^{FD}$ is the best supported searched full-disclosure cost at the same quality target. Thus, the two savings columns have different denominators. $\Delta T$ and $\Delta\theta$ are percentage changes from the observed deadline and prize. Negative values mean shorter duration or a smaller prize. Here $T^{obs}$ is the constructed estimation-window length, not the official contest duration. Component medians need not refer to the same contest and cannot be combined to reconstruct the median cost reduction. All Panel B medians use 73 contests except the last column, whose subgroup is positive-prize finite-feedback designs. One contest has an unresolved full-disclosure benchmark; brackets give the range of the subgroup median when this comparison is left unrestricted, not a confidence interval. Other comparisons use the best supported full-disclosure design found on the same deadline grid. Quality calculations solve the nonlinear game conditional on the original approximate Bayesian posterior. Selected changes pass paired numerical quality diagnostics; these do not guarantee realized quality or give rigorous continuous error bounds. Unresolved alternative designs remain unexcluded. The parameter $\delta$ sets $D_\ell(T_\ell^{obs})=\delta\theta_\ell^{obs}$.
 \end{minipage}}
 \end{table}
 
-{\color{blue}Table~\ref{tab-counterfactual-precision} shows how the cost of delay changes the value of time relative to prize expenditure. When delay is inexpensive ($\delta=0.1$), the median selected duration rises by 50\% and the median prize falls by 74.39\%; the median total cost reduction is 50.39\%. More time allows effort and innovation to accumulate, making a smaller prize compatible with the quality target in the selected designs. At $\delta=100$, shortening duration saves much more delay cost: the median duration falls by 25\% while the median prize rises by 40.91\%, with a median total cost reduction of 42.75\%. Larger prizes can therefore be part of a cost-saving design when earlier delivery is sufficiently valuable. These are separate cross-contest medians, not components of a single representative design.}
+Table~\ref{tab-counterfactual-precision} shows how the cost of delay changes the value of time relative to prize expenditure. When delay is inexpensive ($\delta=0.1$), the median selected duration rises by 50\% and the median prize falls by 74.39\%; the median total cost reduction is 50.39\%. More time allows effort and innovation to accumulate, making a smaller prize compatible with the quality target in the selected designs. At $\delta=100$, shortening duration saves much more delay cost: the median duration falls by 25\% while the median prize rises by 40.91\%, with a median total cost reduction of 42.75\%. Larger prizes can therefore be part of a cost-saving design when earlier delivery is sufficiently valuable. These are separate cross-contest medians, not components of a single representative design.
 
-{\color{blue}At $\delta=1$, the selected designs use full disclosure in 16 contests, finite feedback in 48, and zero prizes in 9; the median total saving is 1.56\%. The last column isolates the extra saving from allowing finite feedback relative to the searched full-disclosure comparator, among contests selecting a positive prize and finite feedback. It does not measure the benefit of changing precision alone, because prize and duration can change in both designs. At $\delta=2$, for example, the median total saving is only 0.14\%, even though finite feedback is selected in 55 contests. Frequent selection of a feedback regime need not imply a large benefit relative to the observed design.}
+At $\delta=1$, the selected designs use full disclosure in 16 contests, finite feedback in 48, and zero prizes in 9; the median total saving is 1.56\%. Among contests selecting a positive prize and finite feedback, the last column reports additional savings relative to the searched full-disclosure comparator, with prize and duration reoptimized in both designs. At $\delta=2$, for example, the median total saving is only 0.14\%, even though finite feedback is selected in 55 contests. Frequent selection of a feedback regime need not imply a large benefit relative to the observed design.
 
-{\color{blue}The direction of the prize--duration trade-off also follows from the objective. Within a fixed feasible candidate set, a higher $\delta$ weakly lowers the cost-minimizing duration and weakly raises the associated prize.\footnote{\color{blue}Write normalized candidate cost as $p+\delta d$, where $p=\theta/\theta^{obs}$ and $d=(T/T^{obs})^2$. Optimality at $\delta_2>\delta_1>0$ gives $(\delta_2-\delta_1)(d_2-d_1)\leq0$ and $p_2-p_1\geq\delta_1(d_1-d_2)\geq0$. This comparison assumes the same quality-feasible set at both delay costs.} No analogous ordering of precision follows, because different feedback rules can support different prize--duration combinations. A short horizon leaves less time for innovation to overturn a perceived lead, which can increase the value of preserving competitive uncertainty; a long horizon can substitute for prize expenditure through effort accumulation and selection from innovation. Organizers should therefore evaluate all three instruments together.}
+The direction of the prize--duration trade-off also follows from the objective. Within a fixed feasible candidate set, a higher $\delta$ weakly lowers the cost-minimizing duration and weakly raises the associated prize.\footnote{Write normalized candidate cost as $p+\delta d$, where $p=\theta/\theta^{obs}$ and $d=(T/T^{obs})^2$. Optimality at $\delta_2>\delta_1>0$ gives $(\delta_2-\delta_1)(d_2-d_1)\leq0$ and $p_2-p_1\geq\delta_1(d_1-d_2)\geq0$. This comparison assumes the same quality-feasible set at both delay costs.} No analogous ordering of precision follows, because different feedback rules can support different prize--duration combinations. A short horizon leaves less time for innovation to overturn a perceived lead, which can increase the value of preserving competitive uncertainty. Organizers should therefore evaluate all three instruments together.
 
-{\color{blue}The calculations condition on the approximate parameter posterior, a fixed focal pair, and a finite search; unresolved alternatives remain open and large prize changes are extrapolations. Delay costs are assumed, not estimated. The precision-only comparison in Appendix~\ref{app-precision-counterfactual} separates what can be gained when prize and duration are held fixed.}
+These comparisons remain conditional on the approximate parameter posterior, a fixed focal pair, assumed delay costs, and a finite search. Unresolved alternatives remain open, and large prize changes involve extrapolation. Appendix~\ref{app-precision-counterfactual} reports a precision-only comparison holding prize and duration fixed.
 
 
 \section{Robustness}
@@ -1368,9 +1370,9 @@ Figure~\ref{fig-robust-pair-validation} shows that the innovation-risk associati
 \caption{{Private-Leaderboard Validation with Alternative Focal Pairs}}
 \label{fig-robust-pair-validation}
 \par\vspace{0.8ex}
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize
-{\textit{Note:} Each panel contains 73 contests and uses the actual intervals between retained readouts. Panel (a) uses the elapsed-time-weighted public--private discrepancy benchmark for $\lambda$; panel (b) uses the square root of the mean squared drift-corrected private-gap increment per unit elapsed time for $\sigma$. The plotted regressions relate $\log(1+\text{benchmark})$ to $\log(1+\text{posterior median estimate})$; dashed lines are OLS fits with intercepts. HC1 heteroskedasticity-robust standard errors are used for inference. Private-path values are excluded from the estimation likelihood, although reconstructed private-score rankings are used to select the focal pairs. {\color{blue}Each horizontal axis is the structural estimate and each vertical axis its benchmark, both on the stated log scale. Alternative pairs exclude baseline player $i$ and satisfy the same activity criteria. The precision slope is $0.189$ ($p=0.115$); the innovation-risk slope is $1.246$ ($p<0.001$). Thus the precision association is less conclusive under this change of rivalry.}}
+{\textit{Note:} Each panel contains 73 contests and uses the actual intervals between retained readouts. Panel (a) uses the elapsed-time-weighted public--private discrepancy benchmark for $\lambda$; panel (b) uses the square root of the mean squared drift-corrected private-gap increment per unit elapsed time for $\sigma$. The plotted regressions relate $\log(1+\text{benchmark})$ to $\log(1+\text{posterior median estimate})$; dashed lines are OLS fits with intercepts. HC1 heteroskedasticity-robust standard errors are used for inference. Private-path values are excluded from the estimation likelihood, although reconstructed private-score rankings are used to select the focal pairs. Each horizontal axis is the structural estimate and each vertical axis its benchmark, both on the stated log scale. Alternative pairs exclude baseline player $i$ and satisfy the same activity criteria. The precision slope is $0.189$ ($p=0.115$); the innovation-risk slope is $1.246$ ($p<0.001$). Thus the precision association is less conclusive under this change of rivalry.}
 }
 \end{minipage}
 \end{figure}
@@ -1386,21 +1388,21 @@ The cross-contest rankings of feedback precision and innovation risk remain stab
 
 \subsection{Additional Checks}\label{sect-additional-checks}
 
-{\color{blue}Cost-prior and bound checks support a cost-saving adjustment direction in four selected scenarios, with a smaller prize cut needed in one case. They do not establish full-sample robustness or stable optimal designs. Contest 8219's reported saving is only $0.001204\%$, so its economic significance is negligible.}
+To assess whether the cost-saving design adjustments depend on the effort-cost prior or parameter bounds, we re-estimate four selected contests under a wider cost prior or a lower cost bound. At the delay-cost values reported in Appendix~\ref{app-additional-checks}, cost-saving adjustments along the original joint design directions remain supported, although the prize cut is scaled back in one case. These checks do not establish full-sample robustness or stability of the optimal designs.\footnote{In contest 8219, the reported cost saving is only $0.001204\%$ and is economically negligible.}
 
-{\color{blue}Across both time splits, the equilibrium model has higher submission-count predictive scores than a filtered kernel with free gap and deadline coefficients, but lower scores than a constant-rate Poisson benchmark. Its advantage over a deadline-dependent Poisson benchmark is inconclusive at the reported 95\% level. These results support the equilibrium restrictions relative to one filtered extension, without establishing general predictive superiority. Tables~\ref{tab-cost-prior-direction} and~\ref{tab-submission-prediction} in Appendix~\ref{app-additional-checks} report the checks; the \href{https://github.com/zhuanglinsheng/kaggle-contest-design}{GitHub repository} contains supporting implementation materials.}
+We also examine whether the equilibrium restrictions improve out-of-sample submission prediction. Across two training--test splits, the equilibrium model has higher predictive scores for hourly submission counts than a filtered benchmark with freely estimated gap and deadline coefficients, but lower scores than a constant-rate Poisson model. Its advantage over a deadline-dependent Poisson model is inconclusive at the reported 95\% level. Table~\ref{tab-submission-prediction} in Appendix~\ref{app-additional-checks} reports the comparisons.
 
-{\color{blue}For a manager, this distinction matters: a model that connects design choices to incentives need not be the best short-run submission forecaster. The flexible filtered benchmark adds parameters and can fit noise as well as behavior; the comparison is consistent with a useful restriction, but does not identify why it helps. The constant-rate model's advantage cautions against treating every fluctuation in submission activity as evidence of strategic effort. Policy comparisons therefore draw on the maintained economic structure, rather than on demonstrated predictive dominance.}
+These results support the equilibrium restrictions relative to the flexible filtered benchmark, without establishing general predictive superiority. The constant-rate model's stronger performance cautions against interpreting every fluctuation in submissions as strategic effort. Policy comparisons therefore rely on the maintained economic structure rather than demonstrated predictive dominance.
 
 \section{Conclusion}
 
-{\color{blue}The main design lesson is that feedback changes where incentives are strongest. Precise information focuses effort on close races; noisy information can preserve incentives when contestants would otherwise regard the outcome as settled. Prize size and time remaining determine whether preserving that uncertainty is valuable to the organizer. Because the objective is the quality of the best terminal solution, both induced effort and innovation matter. The model therefore supports joint evaluation of prize, deadline, and feedback, rather than a universal recommendation for more or less disclosure.}
+{The main design lesson is that feedback changes where incentives are strongest. Precise information focuses effort on close races; noisy information can preserve incentives when contestants would otherwise regard the outcome as settled. Prize size and time remaining determine whether preserving that uncertainty is valuable to the organizer. Because the objective is the quality of the best terminal solution, both induced effort and innovation matter. The model therefore supports joint evaluation of prize, deadline, and feedback, rather than a universal recommendation for more or less disclosure.}
 
-{\color{blue}This paper develops a dynamic contest model and Bayesian structural estimation framework linking noisy feedback, latent performance, and effort. Under Proposition~\ref{prop-joint-design}'s conditions, finite precision can strictly outperform full disclosure. Across 73 Kaggle contests, innovation-risk estimates are positively associated with private-path volatility, and precision estimates with public--private agreement, including in time-split diagnostics. These descriptive associations condition on ex post pair selection. Submission predictions favor equilibrium over the flexible filtered kernel, favor the constant-rate benchmark over equilibrium, and are inconclusive against the deadline-dependent benchmark.}
+{This paper develops a dynamic contest model and Bayesian structural estimation framework linking noisy feedback, latent performance, and effort. Under Proposition~\ref{prop-joint-design}'s conditions, finite precision can strictly outperform full disclosure. Across 73 Kaggle contests, innovation-risk estimates are positively associated with private-path volatility, and precision estimates with public--private agreement, including in time-split diagnostics. These descriptive associations condition on ex post pair selection. Submission predictions favor equilibrium over the flexible filtered kernel, favor the constant-rate benchmark over equilibrium, and are inconclusive against the deadline-dependent benchmark. Within the numerical search, joint adjustments to prizes, deadlines, and feedback identify lower-cost designs that maintain posterior mean expected quality.}
 
-{\color{blue}Several limitations qualify the empirical findings. Latest-submission scores may differ from prize-relevant best-so-far scores and contestants' common information. Carry-forward gaps may reuse stale discrepancies, whereas the likelihood assumes fresh errors and inverse-elapsed-time measurement variance. Validation regressions omit controls for early public-gap volatility, submission counts, and metric effects; use hourly rather than event-time outcomes; and do not propagate posterior or timestamp-imputation uncertainty. Persistent contest-level differences may therefore contribute to the associations.}
+{Several limitations qualify the empirical findings. Latest-submission scores may differ from prize-relevant best-so-far scores and contestants' common information. Carry-forward gaps may reuse stale discrepancies, whereas the likelihood assumes fresh errors and inverse-elapsed-time measurement variance. Validation regressions omit controls for early public-gap volatility, submission counts, and metric effects; use hourly rather than event-time outcomes; and do not propagate posterior or timestamp-imputation uncertainty. Persistent contest-level differences may therefore contribute to the associations.}
 
-{\color{blue}Nonlinear design comparisons remain conditional on the approximate parameter posterior and finite numerical search. Synthetic experiments show weak cost--submission-scale separation; sensitivity checks cover only selected cases. Asymmetric empirical designs do not isolate Proposition~\ref{prop-joint-design}'s symmetric mechanism. The identification result excludes data-dependent initialization. Numerical regime boundaries remain provisional: 1,179 of 14,553 points are unresolved, including 926 with potentially competitive failed candidates. Future work should assess measurement assumptions and improve numerical coverage.}
+{Nonlinear design comparisons remain conditional on the approximate parameter posterior and finite numerical search. Synthetic experiments show weak cost--submission-scale separation; sensitivity checks cover only selected cases. Asymmetric empirical designs do not isolate Proposition~\ref{prop-joint-design}'s symmetric mechanism. The identification result excludes data-dependent initialization. Numerical regime boundaries remain provisional because some potentially competitive designs remain unresolved. Future work should assess measurement assumptions and improve numerical coverage.}
 
 
 % Appendix here
@@ -1917,7 +1919,7 @@ HJB system has a unique bounded classical solution with bounded spatial
 gradients. Its feedback policies form an interior Markov-perfect equilibrium.
 \end{lemma}
 
-{\color{blue}Here normalization divides each value function by the prize $\theta$. The lemma ensures that every fixed finite-precision design used in the analysis has a well-defined equilibrium in the stated regularity class, even when incentive indices are large. ``Interior'' means that each contestant exerts strictly positive effort at every finite perceived gap before the deadline. It neither guarantees accuracy of the first-order policy nor asserts uniqueness among equilibria outside this bounded classical Markov class.}
+{Here normalization divides each value function by the prize $\theta$. The lemma ensures that every fixed finite-precision design used in the analysis has a well-defined equilibrium in the stated regularity class, even when incentive indices are large. ``Interior'' means that each contestant exerts strictly positive effort at every finite perceived gap before the deadline. It neither guarantees accuracy of the first-order policy nor asserts uniqueness among equilibria outside this bounded classical Markov class.}
 
 \proof{Proof of Lemma~\ref{lem-design-positive-equilibrium}}
 Use $U^k=V^k/\theta$, $a_t=\lambda S_t^2$, and
@@ -1977,7 +1979,7 @@ the selected symmetric equilibria satisfy
 \end{equation}
 \end{lemma}
 
-{\color{blue}This comparison holds prize and deadline fixed and ranks expected best-solution quality. The ratio $S_0/(\sigma^2T)$ measures initial uncertainty relative to innovation variance accumulated over the whole contest; the stated interval is a sufficient condition used in the proof. The weak-incentive threshold works for every finite precision, including arbitrarily informative feedback. Thus the result is stronger than a comparison with any fixed finite menu. At zero prize, all precision choices give the same output; their first-order output gains also coincide. The strict ranking comes from higher-order equilibrium responses, so the leading-order effort formula alone cannot establish it. This weak-incentive result does not contradict Proposition~\ref{prop-joint-design}(i), where low costs and low innovation risk need not produce weak incentives.}
+This comparison holds prize and deadline fixed and ranks expected best-solution quality. The ratio $S_0/(\sigma^2T)$ measures initial uncertainty relative to innovation variance accumulated over the whole contest; the stated interval is a sufficient condition used in the proof. The weak-incentive threshold works for every finite precision, including arbitrarily informative feedback. Thus the result is stronger than a comparison with any fixed finite menu. At zero prize, all precision choices give the same output; their first-order output gains also coincide. The strict ranking comes from higher-order equilibrium responses, so the leading-order effort formula alone cannot establish it. This weak-incentive result does not contradict Proposition~\ref{prop-joint-design}(i), where low costs and low innovation risk need not produce weak incentives.
 
 \proof{Proof of Lemma~\ref{lem-design-weak-precision}}
 Measure time in units of $T$ and scores in units of $\sigma\sqrt T$.
@@ -2318,7 +2320,7 @@ Every positive-prize, positive-deadline finite-feedback design has
 payoff strictly below $V_\infty$.
 \end{lemma}
 
-{\color{blue}The deadline $T_0$ is optimal when no prize is paid. At that deadline, $c_e$ is the effort-cost threshold at which the marginal benefit of introducing a small prize equals its marginal expenditure: the payoff derivative at zero prize is $c_e/c-1$. The construction takes costs slightly below this threshold, so a positive prize is worthwhile but strong incentives are too expensive relative to their extra quality benefit. Lemma~\ref{lem-design-weak-precision} then ranks precision for the competitive designs. The present lemma extends that comparison to all competing prize--deadline choices, supplying the global comparison needed for Proposition~\ref{prop-joint-design}(ii); it does not describe every high-innovation contest.}
+The deadline $T_0$ is optimal when no prize is paid. At that deadline, $c_e$ is the effort-cost threshold at which the marginal benefit of introducing a small prize equals its marginal expenditure: the payoff derivative at zero prize is $c_e/c-1$. The construction takes costs slightly below this threshold, so a positive prize is worthwhile but strong incentives are too expensive relative to their extra quality benefit. Lemma~\ref{lem-design-weak-precision} then ranks precision for the competitive designs. The present lemma extends that comparison to all competing prize--deadline choices, supplying the global comparison needed for Proposition~\ref{prop-joint-design}(ii); it does not describe every high-innovation contest.
 
 \proof{Proof of Lemma~\ref{lem-design-output-bound}}
 The utility condition gives $-Bu''(B)/u'(B)\geq\zeta B\to\infty$
@@ -2742,6 +2744,7 @@ The design search retains all numerically supported incumbents and locally refin
 \small
 \setlength{\tabcolsep}{1.2pt}
 \renewcommand{\arraystretch}{1.12}
+\setlength{\LTpost}{0pt}
 \begin{longtable}{cccccccccccrc}
 \caption{Contest-Level Structural Estimates and Benchmarks}\label{tab-appendix-full-results}\\
 \toprule
@@ -2774,11 +2777,11 @@ The design search retains all numerically supported incumbents and locally refin
 \endfoot
 \bottomrule
 \endlastfoot
-\input{appendix_100k_rows.tex}
+\csname @@input\endcsname appendix_100k_rows.tex
 \end{longtable}
-\par\medskip\noindent
-\begin{minipage}{\textwidth}
-{\footnotesize\textit{Note:} Each row is one contest. $N_i$ and $N_j$ are the focal contestants' submission counts in the constructed estimation window. The prize column reports the effective prize $\theta$ in units of $100{,}000$ USD: the cash prize for a single-prize contest and the first-minus-second-place cash-prize gap for a multi-prize contest. ``Public Data \%'' reproduces Meta-Kaggle's public-test share and is not used in estimation or sample selection; zero does not denote missing public-score data. Posterior columns are medians estimated from contest-phase public data; $\lambda^{\mathrm{bench}}$ and $\sigma^{\mathrm{bench}}$ are post-contest private-path diagnostic benchmarks, not estimation inputs. The former uses submission-triggered public--private discrepancies and elapsed intervals; the latter is the square root of the mean squared drift-adjusted private-gap increment per unit elapsed time. Very small public--private discrepancies can produce large $\lambda^{\mathrm{bench}}$ values. Scores are on the common logit scale with $a=1$.} {\color{blue}The posterior columns report feedback precision $\lambda$, innovation risk $\sigma$, initial mean gap $\mu_0$, effort costs $c_i,c_j$, and effort-to-submission scale $r$. Time is in days. Higher $\lambda$ means more informative feedback; higher $\sigma$ means greater innovation risk; lower $c_k$ means higher ability. These medians do not display posterior uncertainty, and differences across scoring metrics need not measure differences in economic value.}
+\par\vspace{3pt}\noindent
+\begin{minipage}{\textwidth}\figtabnotesize
+{\footnotesize\textit{Note:} Each row is one contest. $N_i$ and $N_j$ are the focal contestants' submission counts in the constructed estimation window. The prize column reports the effective prize $\theta$ in units of $100{,}000$ USD: the cash prize for a single-prize contest and the first-minus-second-place cash-prize gap for a multi-prize contest. ``Public Data \%'' reproduces Meta-Kaggle's public-test share and is not used in estimation or sample selection; zero does not denote missing public-score data. Posterior columns are medians estimated from contest-phase public data; $\lambda^{\mathrm{bench}}$ and $\sigma^{\mathrm{bench}}$ are post-contest private-path diagnostic benchmarks, not estimation inputs. The former uses submission-triggered public--private discrepancies and elapsed intervals; the latter is the square root of the mean squared drift-adjusted private-gap increment per unit elapsed time. Very small public--private discrepancies can produce large $\lambda^{\mathrm{bench}}$ values. Scores are on the common logit scale with $a=1$.} {The posterior columns report feedback precision $\lambda$, innovation risk $\sigma$, initial mean gap $\mu_0$, effort costs $c_i,c_j$, and effort-to-submission scale $r$. Time is in days. Higher $\lambda$ means more informative feedback; higher $\sigma$ means greater innovation risk; lower $c_k$ means higher ability. These medians do not display posterior uncertainty, and differences across scoring metrics need not measure differences in economic value.}
 \end{minipage}
 }
 
@@ -2818,8 +2821,8 @@ $L_2$ scale & 0.953 & 0.179 & [0.603, 1.303] & 0.324\\
 \bottomrule
 \addlinespace[0.5ex]
 \end{tabularx}}
-\begin{minipage}{\textwidth}
-{\footnotesize\textit{Note:} Each regression uses 73 contests and an intercept. The dependent variable is $\log(1+\lambda^{\mathrm{bench}})$ or $\log(1+\sigma^{\mathrm{bench}})$; the regressor is the corresponding log-transformed posterior median estimate. Estimates and benchmarks use each specification's score units. The alternative-pair signal-precision regression has the largest slope $p$-value, 0.115. {\color{blue}A positive slope means that the structural estimate and private-path benchmark move together across contests; it does not require equality of their levels. The precision benchmark uses elapsed-time-weighted public--private discrepancies, while the innovation benchmark uses drift-adjusted private-gap increments. Inference treats estimated posterior medians as given and does not propagate their uncertainty.} Standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
+\begin{minipage}{\textwidth}\figtabnotesize
+{\footnotesize\textit{Note:} Each regression uses 73 contests and an intercept. The dependent variable is $\log(1+\lambda^{\mathrm{bench}})$ or $\log(1+\sigma^{\mathrm{bench}})$; the regressor is the corresponding log-transformed posterior median estimate. Estimates and benchmarks use each specification's score units. The alternative-pair signal-precision regression has the largest slope $p$-value, 0.115. {A positive slope means that the structural estimate and private-path benchmark move together across contests; it does not require equality of their levels. The precision benchmark uses elapsed-time-weighted public--private discrepancies, while the innovation benchmark uses drift-adjusted private-gap increments. Inference treats estimated posterior medians as given and does not propagate their uncertainty.} Standard errors and confidence intervals use HC1 heteroskedasticity-robust covariance estimates.}
 {Baseline rows use the original focal pair and $a=1$; alternative-pair rows use the alternative rivalry, and the $L_1$ and $L_2$ rows use the corresponding score-scale calibrations.}
 \end{minipage}
 \end{table}
@@ -2828,7 +2831,7 @@ $L_2$ scale & 0.953 & 0.179 & [0.603, 1.303] & 0.324\\
 \centering
 \caption{Score-Scale Sensitivity of Parameter Rankings}
 \label{tab-score-scale-robustness}
-\begin{tabular}{lccc}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}Xccc}
 \toprule
 Specification & $a$ & Rank correlation: $\lambda$ & Rank correlation: $\sigma$\\
 \midrule
@@ -2836,11 +2839,11 @@ Baseline & 1.000 & --- & ---\\
 $L_1$ & 1.444 & 0.992 & 0.945\\
 $L_2$ & 0.781 & 0.999 & 0.996\\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \par\vspace{0.5ex}\noindent
-\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}\figtabnotesize
 {\footnotesize\textit{Note:} Each specification covers the same 73 contests. Correlations are Spearman correlations between common-unit posterior medians and baseline posterior medians. Re-estimation retains the baseline numerical priors in transformed units.}
-{The common-unit estimates are $a^2\hat\lambda_a$ for precision and $\hat\sigma_a/a$ for innovation risk.} {\color{blue}The scale $a$ multiplies logit-transformed scores. $L_1$ and $L_2$ calibrations minimize absolute and squared quantile deviations from a standard normal reference, respectively. Correlations near one indicate stable contest rankings, not identical parameter levels, Gaussianity, or stable optimal designs. Dashes denote the baseline reference, whose self-correlation would be one.}
+{The common-unit estimates are $a^2\hat\lambda_a$ for precision and $\hat\sigma_a/a$ for innovation risk.} {The scale $a$ multiplies logit-transformed scores. $L_1$ and $L_2$ calibrations minimize absolute and squared quantile deviations from a standard normal reference, respectively. Correlations near one indicate stable contest rankings, not identical parameter levels, Gaussianity, or stable optimal designs. Dashes denote the baseline reference, whose self-correlation would be one.}
 \end{minipage}
 \end{table}
 
@@ -2864,10 +2867,9 @@ To compare estimates in common score units, convert signal precision to $a^2\hat
 
 
 
-\clearpage
 \subsection{Additional Checks}\label{app-additional-checks}
 
-\textit{Cost-prior sensitivity.} We re-estimate four selected contests under two alternative settings: {\color{blue}widening the prior standard deviation of the common log-cost component $(\log c_i+\log c_j)/2$ from $0.75/\sqrt{2}$ to $1$, retaining the original relative log-cost Gaussian factor}, or lowering the cost bound from $0.01$ to $0.001$, with other specifications unchanged. Quality comparisons use the nonlinear model. Table~\ref{tab-cost-prior-direction} reports whether a cost-reducing, quality-preserving design remains supported along the original joint adjustment direction.
+\textit{Cost-prior sensitivity.} We re-estimate four selected contests under two alternative settings: {widening the prior standard deviation of the common log-cost component $(\log c_i+\log c_j)/2$ from $0.75/\sqrt{2}$ to $1$, retaining the original relative log-cost Gaussian factor}, or lowering the cost bound from $0.01$ to $0.001$, with other specifications unchanged. Quality comparisons use the nonlinear model. Table~\ref{tab-cost-prior-direction} reports whether a cost-reducing, quality-preserving design remains supported along the original joint adjustment direction.
 
 \begin{table}[!htbp]
 \centering
@@ -2885,20 +2887,20 @@ Contest & $\delta$ & Case characteristic & Wider prior & Lower bound\\
 \bottomrule
 \end{tabularx}
 \par\vspace{0.5ex}
-\begin{minipage}{\textwidth}
-\footnotesize\textit{Note:} Case characteristics describe the counterfactual designs selected under the baseline prior. {\color{blue}Each row is one contest--delay-cost scenario, where $D(T)=\delta\theta^{obs}(T/T^{obs})^2$. ``Supported'' means that a design in the original joint adjustment direction has lower prize-plus-delay cost and passes the paired numerical diagnostic for preserving posterior mean expected quality under the alternative fit. It is not a posterior probability or a claim of global optimality.} Wider prior increases the common log-cost standard deviation to 1; lower bound reduces the minimum effort-cost parameter to 0.001. The design selected under the baseline prior remains supported in seven comparisons. $^{\dagger}$For contest 2551 under the lower bound, the prize cut is scaled back from 56.05\% to 34.28\%; the supported design still lowers total cost by 19.80\%. Support concerns the joint adjustment direction, not each variable separately or stability of the optimal design and savings. These selected cases are not a full-sample sensitivity test. Contest 8219's cost reduction is only 0.001204\%.
+\begin{minipage}{\textwidth}\figtabnotesize
+\footnotesize\textit{Note:} Case characteristics describe the counterfactual designs selected under the baseline prior. {Each row is one contest--delay-cost scenario, where $D(T)=\delta\theta^{obs}(T/T^{obs})^2$. ``Supported'' means that a design in the original joint adjustment direction has lower prize-plus-delay cost and passes the paired numerical diagnostic for preserving posterior mean expected quality under the alternative fit. It is not a posterior probability or a claim of global optimality.} Wider prior increases the common log-cost standard deviation to 1; lower bound reduces the minimum effort-cost parameter to 0.001. The design selected under the baseline prior remains supported in seven comparisons. $^{\dagger}$For contest 2551 under the lower bound, the prize cut is scaled back from 56.05\% to 34.28\%; the supported design still lowers total cost by 19.80\%. Support concerns the joint adjustment direction, not each variable separately or stability of the optimal design and savings. These selected cases are not a full-sample sensitivity test. Contest 8219's cost reduction is only 0.001204\%.
 \end{minipage}
 \end{table}
 
-\textit{Predictive comparison.} {\color{blue}We compare sequential, one-hour-ahead joint posterior predictive probabilities of the two contestants' submission counts in all 73 contests.} Models are estimated on the training prefix and predict each test hour before updating with that hour's public readout. The primary split uses approximately 75\% of the post-initialization window for training; the alternative aligns the split with complete source dates. Both evaluate hourly counts. Scores average log predictive probabilities within contests and then equally across contests.
-The unrestricted benchmark uses $m_k^{U}=\theta(c_k\sqrt{2\pi Q_0})^{-1}(Q_t/Q_0)^{-a}\exp[-b\tilde y_t^2/(2Q_t)]$, estimating $a\in\mathbb R$ and $b>0$ instead of imposing the first-order equilibrium restrictions $a=1/2$ and $b=1$, with submission intensity $rm_k^{U}$ and the resulting efforts entering the same filtering recursion. {\color{blue}This extension retains the constant submission-share restriction.}
+\textit{Predictive comparison.} {We compare sequential, one-hour-ahead joint posterior predictive probabilities of the two contestants' submission counts in all 73 contests.} Models are estimated on the training prefix and predict each test hour before updating with that hour's public readout. The primary split uses approximately 75\% of the post-initialization window for training; the alternative aligns the split with complete source dates. Both evaluate hourly counts. Scores average log predictive probabilities within contests and then equally across contests.
+The unrestricted benchmark uses $m_k^{U}=\theta(c_k\sqrt{2\pi Q_0})^{-1}(Q_t/Q_0)^{-a}\exp[-b\tilde y_t^2/(2Q_t)]$, estimating $a\in\mathbb R$ and $b>0$ instead of imposing the first-order equilibrium restrictions $a=1/2$ and $b=1$, with submission intensity $rm_k^{U}$ and the resulting efforts entering the same filtering recursion. {This extension retains the constant submission-share restriction.}
 
 \begin{table}[!htbp]
 \centering
 \caption{Out-of-Sample Submission-Count Prediction}
 \label{tab-submission-prediction}
 \small
-\begin{tabular}{lcc}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}Xcc}
 \toprule
 Benchmark & Primary split & Date-aligned split\\
 \midrule
@@ -2906,10 +2908,10 @@ Homogeneous Poisson & $-0.0604^{*}$ & $-0.0570^{*}$\\
 Nonhomogeneous Poisson & $+0.1146$ & $+0.1179$\\
 Unrestricted filtered activity kernel & $+0.0812^{*}$ & $+0.0836^{*}$\\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \par\vspace{0.5ex}
-\begin{minipage}{\textwidth}
-\footnotesize\textit{Note:} Entries are equilibrium-model minus benchmark log predictive scores, in nats per contestant-pair hour; positive values favor the equilibrium model. {\color{blue}All 73 contests receive equal weight after averaging each contest's one-hour-ahead log probabilities. The primary split trains on approximately the first 75\% of the post-initialization window; the date-aligned split keeps source dates intact. Test-hour predictions use earlier public readouts, before observing the current hour. A nat uses the natural logarithm; these differences are not percentage changes in submission counts or solution quality.} $^{*}$ indicates that a paired, contest-level 95\% bootstrap interval excludes zero, using 500,000 resamples. The homogeneous model assigns a constant intensity to each contestant; the nonhomogeneous model allows intensity to vary with time remaining. The unrestricted kernel freely estimates the deadline and gap coefficients in the same filtering framework, with its effort rule also entering filtered drift. The equilibrium model uses the first-order empirical policy. Results condition on the selected pair, imputed within-date times, and constructed observation window.
+\begin{minipage}{\textwidth}\figtabnotesize
+\footnotesize\textit{Note:} Entries are equilibrium-model minus benchmark log predictive scores, in nats per contestant-pair hour; positive values favor the equilibrium model. {All 73 contests receive equal weight after averaging each contest's one-hour-ahead log probabilities. The primary split trains on approximately the first 75\% of the post-initialization window; the date-aligned split keeps source dates intact. Test-hour predictions use earlier public readouts, before observing the current hour. A nat uses the natural logarithm; these differences are not percentage changes in submission counts or solution quality.} $^{*}$ indicates that a paired, contest-level 95\% bootstrap interval excludes zero, using 500,000 resamples. The homogeneous model assigns a constant intensity to each contestant; the nonhomogeneous model allows intensity to vary with time remaining. The unrestricted kernel freely estimates the deadline and gap coefficients in the same filtering framework, with its effort rule also entering filtered drift. The equilibrium model uses the first-order empirical policy. Results condition on the selected pair, imputed within-date times, and constructed observation window.
 \end{minipage}
 \end{table}
 
