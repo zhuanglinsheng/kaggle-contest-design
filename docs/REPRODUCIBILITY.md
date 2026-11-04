@@ -1,11 +1,40 @@
-# PaperJK9 reproducibility
+# PaperJK11 reproducibility
 
-The active release is `results/releases/paperjk9-20261029/`, selected by
-`current_release.toml`. The JK7 release is historical provenance.
+The active manuscript is `paper/PaperJK11.tex`, selected by `current_release.toml`.
+The publication lock is `results/releases/paperjk11-20261104/manifest.json`.
+Scientific evidence remains in `results/releases/paperjk9-20261029/` with its
+original provenance; switching manuscripts does not certify new scientific runs.
+The JK7 release is historical provenance.
 
 All intermediate outputs now live below `tmp/`. See `STORAGE_LAYOUT.md` for the
 role classification and `storage_layout.json` for old-to-new paths. Current
 formal evidence, frozen inputs and method/source records stay outside `tmp/`.
+
+## Current checkout and generated intermediates (4 November 2026)
+
+Use `make verify-reproducibility` for retained source/input/result completeness.
+It checks the publication lock, all frozen fit inputs, all prediction split inputs,
+recovered source identities and formal posterior records. Absent generated chains
+are reported separately and do not fail this check; present chains must match their
+recorded hashes. `make verify-chains` remains a strict, optional check of historical
+chain bytes and requires those local files.
+
+The 292 indexed main-design chains and the recovered historical prediction bundle
+are not available in this checkout. Their absence is not a missing scientific input:
+retained frozen inputs, model code, fitting protocols and final summaries support
+fresh reconstruction. Historical hash indexes are provenance, not download links
+or evidence that the local bundle is present. Exact old Monte Carlo draws and
+acceptance/integration certificates cannot be recreated by renaming or relocking.
+Historical C/D integration remains uncertified; this is a validation limitation,
+not a requirement to retain every regenerable intermediate or rerun all models
+as part of repository organization. Fresh results require fresh diagnostic gates.
+
+For design recomputation without the historical chains, run:
+
+```sh
+python -m pipeline.jk9_fit --scenario main --mode full --all
+python -m pipeline.jk9_design all --all --accepted-root tmp/runs
+```
 
 ## Maintenance acceptance criterion
 
@@ -101,7 +130,8 @@ python -m pipeline.jk9_design all --contest 2445
 # For fresh fits: --accepted-root tmp/runs
 ```
 
-The default consumes the separately retained 73-posterior bundle; `--accepted`
+The default requires the optional historical 73-posterior bundle, which is absent
+in this checkout. For regeneration use the fresh-fit commands above. `--accepted`
 accepts one fresh **full-window** fit. `--accepted-root` selects fresh main/full
 fits for every case. Input and chain hashes are checked before computation.
 Runtime records are ephemeral path adapters, not edits to historical accepted
@@ -202,7 +232,8 @@ integration rerun has not been executed. Historical acceptance identities and in
 source and chain recovery do not establish numerical acceptance.
 
 
-Further recursive tree inspection recovered 1,400 unique text/data blobs
+Historical recovery record (29 October; the bundle is absent in the current checkout):
+further recursive tree inspection recovered 1,400 unique text/data blobs
 (1,256,958,899 bytes) into the ignored local bundle
 `tmp/recovered/prediction_bundle/`. The compact
 `artifact_recovery_manifest.json` records SHA-1/SHA-256 identities and paths

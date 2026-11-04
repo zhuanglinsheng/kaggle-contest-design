@@ -10,14 +10,19 @@ from pathlib import Path
 import os
 
 from pipeline.storage import ROOT,TMP
-from pipeline.publication import write_json
+from pipeline.publication import write_json, load, local
 
 RELEASE=ROOT/'results/releases/paperjk9-20261029'
 RELOCATION_MANIFEST=ROOT/'docs/storage_layout.json'
 
 
 def protected_files():
+    # Current publication files and the historical evidence lock are both retained.
     locked=json.loads((RELEASE/'manifest.json').read_text())['files']
+    selector=ROOT/'current_release.toml'
+    if selector.exists():
+        current=local(ROOT,load(ROOT)['manifest'])
+        locked={**locked,**json.loads(current.read_text())['files']}
     keep={ROOT/p for p in locked}
     for p in (ROOT/'results/releases').rglob('*'):
         if p.is_file():keep.add(p)
@@ -53,7 +58,7 @@ def relocation_plan():
             else:add(p,TMP/'history'/p.relative_to(ROOT),'superseded_or_intermediate_work')
     for folder in ('docs/review','results','archive/research'):walk(ROOT/folder)
     for old,new,role in [
-        ('.cache','tmp/cache','cache_and_build'),
+        ('.cache','tmp/cache/legacy_dotcache','cache_and_build'),
         ('.artifacts/caches','tmp/cache_archives','legacy_cache_archive'),
         ('.artifacts/reproduction','tmp/runs','regenerated_work'),
         ('.artifacts/recovered_prediction','tmp/recovered/prediction_scores','historical_hourly_scores'),
@@ -65,7 +70,7 @@ def relocation_plan():
             if p.is_file() and (p.suffix=='.hpp' or (not p.suffix and p.name!='LICENSE')):
                 add(p,TMP/'build/legacy'/p.relative_to(ROOT),'compiled_model')
     for p in (ROOT/'paper').iterdir():
-        if p.is_file() and (p.suffix in {'.aux','.log','.out','.fls','.fdb_latexmk','.bbl','.blg','.toc'} or p.name.endswith('.synctex.gz')):
+        if p.is_file() and (p.suffix in {'.aux','.log','.out','.fls','.fdb_latexmk','.blg','.toc'} or p.name.endswith('.synctex.gz')):
             add(p,TMP/'latex/legacy'/p.name,'latex_auxiliary')
     # Bytecode is work product too. Avoid traversing cache forests or environments.
     occupied={ROOT/r['source'] for r in moves if (ROOT/r['source']).is_dir()}

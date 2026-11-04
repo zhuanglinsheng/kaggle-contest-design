@@ -1,6 +1,6 @@
 # Documentation
 
-Start with `REPRODUCIBILITY.md` for maintained JK9 commands and explicit limits,
+Start with `REPRODUCIBILITY.md` for maintained publication commands for JK11 and explicit limits,
 `PAPER_EVIDENCE.csv` for figure/table provenance, and
 `REPOSITORY_MAINTENANCE.md` for submission policy, and
 `STORAGE_LAYOUT.md` for permanent files versus `tmp/` work products.

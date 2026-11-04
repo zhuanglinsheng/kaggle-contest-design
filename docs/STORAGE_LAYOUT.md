@@ -19,7 +19,7 @@
 | 已明确保留的旧发布记录 | `results/releases/paperjk7-review-20261016/` | 输入索引与历史发布溯源 |
 
 `docs/PAPER_EVIDENCE.csv` 映射论文图表到证据和生产代码；
-`results/releases/paperjk9-20261029/manifest.json` 是当前正式文件的有限清单。
+`results/releases/paperjk11-20261104/manifest.json` 是当前正式文件的有限清单。
 正式证据中的后验接受记录、随机种子和抽样索引需要保留，不能因为文件小或由程序生成
 就一概当作缓存。
 理论推导和旧清理清单同样属于长期记录；它们与求解器日志、过程缓存分开分类。
@@ -74,3 +74,13 @@ python -m pipeline.jk9 prepare-inputs  # 从冻结输入构造 tmp/inputs/main/
 
 新拟合默认进入 `tmp/runs/`；预测进入 `tmp/runs/prediction/`；
 非线性设计进入 `tmp/runs/design/`。运行说明见 `REPRODUCIBILITY.md`。
+
+## 2026-11-04 当前副本说明
+
+本次追加迁移 499 处中间文件根目录，均为重命名，没有删除、压缩或移动 Git 已跟踪文件。
+发布保护清单同时覆盖 JK11 当前清单与历史 JK9 科学证据；正文直接使用的 `.bbl` 保留在 paper。
+历史迁移和恢复日志描述当时状态，不保证当前副本含有那些本地数据包。
+292 条主设计历史链及预测恢复材料包当前未提供，归类为可再生中间材料，
+不作为发布材料完整性失败；严格历史字节核验仍需原文件。
+使用 `make verify-reproducibility` 检查保留输入、来源、代码和正式结果。
+这不认证缺少记录的历史预测积分，也不把历史验收状态移植到新计算。

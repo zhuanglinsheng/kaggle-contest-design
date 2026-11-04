@@ -1,6 +1,8 @@
 # Maintained pipeline entry points
 
-- `python -m pipeline.jk9 verify`: JK9 compact source/input/evidence lock.
+- `make verify-reproducibility`: retained inputs/source/results; absent generated historical draws are optional.
+
+- `python -m pipeline.jk9 verify`: current compact source/input/evidence lock selected by `current_release.toml`.
 - `python -m pipeline.jk9 tables`: reaggregate current nonlinear tables and compare TeX rows.
 - `python -m pipeline.jk9_fit --help`: fresh fits from frozen inputs; no historical-chain dependency.
 - `python -m pipeline.jk9 prepare-inputs`: materialize matching main working inputs.

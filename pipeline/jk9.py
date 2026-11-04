@@ -1,4 +1,4 @@
-"""Portable JK9 publication snapshot and table checks (no sampling or HJB solve).
+"""Portable publication snapshot and table checks (no sampling or HJB solve).
 
 Frozen research controllers stay in docs/review to preserve their source hashes.
 The maintained publication depends on compact evidence, not point caches.
@@ -138,8 +138,12 @@ def rebuild_tables():
     if (counts != summary['counts'] or directions != summary['directions']
             or percentiles != summary['percentiles']):
         raise ValueError('Fixed-precision table differs')
-    source = (ROOT / 'paper/PaperJK9.tex').read_text()
-    appendix = (ROOT / 'paper/appendix_joint_design_jk9.tex').read_text()
+    config = load()
+    manuscript = local(ROOT, config['main_tex'])
+    source = manuscript.read_text()
+    appendix = manuscript.with_name(
+        'appendix_joint_design_' + manuscript.stem.lower().removeprefix('paper') + '.tex'
+    ).read_text()
     if module.replace_numbers(source, rows) != source:
         raise ValueError('Main manuscript numerical rows differ')
     if module.replace_fixed_numbers(appendix, summary) != appendix:
@@ -234,19 +238,25 @@ def main(argv=None):
     manifest = local(ROOT, config['manifest'])
     if args.action == 'lock':
         write_json(manifest, dict(schema_version=1, release_id=config['release_id'],
-                   scope='Compact JK9 byte lock, not an end-to-end scientific rerun', files=current))
-        print(f'Locked {len(current)} JK9 source/input/evidence files.')
+                   scope='Compact publication byte lock, not an end-to-end scientific rerun', files=current))
+        print(f'Locked {len(current)} source/input/evidence files for {config["release_id"]}.')
         return
     saved = json.loads(manifest.read_text())
     if saved['release_id'] != config['release_id'] or saved['files'].keys() != current.keys():
-        raise ValueError('JK9 release file set changed; review before explicitly refreshing lock')
+        raise ValueError('Release file set changed; review before explicitly refreshing lock')
     check_files(ROOT, saved['files'])
     if args.check_chains:
         index = json.loads((RELEASE / 'accepted_fits.json').read_text())
+        missing = [name for fit in index['fits'] for name in fit['chain_paths']
+                   if not local(ROOT, name).is_file()]
+        if missing:
+            raise SystemExit(f'Historical chain identity check unavailable: {len(missing)} generated chains absent. '
+                             'Use make verify-reproducibility for retained source/input/result completeness; '
+                             'see docs/REPRODUCIBILITY.md for fresh fitting.')
         for fit in index['fits']:
             check_files(ROOT, {fit['accepted_path']: fit['accepted_sha256']})
             check_files(ROOT, dict(zip(fit['chain_paths'], fit['chain_sha256'], strict=True)))
-    print(f'PASS: {len(current)} compact JK9 files' + (' and 292 main-chain hashes.' if args.check_chains else '.'))
+    print(f'PASS: {len(current)} compact publication files' + (' and 292 main-chain hashes.' if args.check_chains else '.'))
 
 
 if __name__ == '__main__':

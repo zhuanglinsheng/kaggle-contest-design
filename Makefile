@@ -107,11 +107,11 @@ estimate rerun-failed finalize-estimation counterfactuals precision-design valid
 
 paper:
 	mkdir -p tmp/latex
-	cd paper && latexmk -pdf -outdir=../tmp/latex -interaction=nonstopmode -halt-on-error PaperJK9.tex
-	cp tmp/latex/PaperJK9.pdf paper/PaperJK9.pdf
+	cd paper && latexmk -pdf -outdir=../tmp/latex -interaction=nonstopmode -halt-on-error PaperJK11.tex
+	cp tmp/latex/PaperJK11.pdf paper/PaperJK11.pdf
 
 clean-paper:
-	cd paper && latexmk -c -outdir=../tmp/latex PaperJK9.tex
+	cd paper && latexmk -c -outdir=../tmp/latex PaperJK11.tex
 
 .PHONY: compact-caches restore-cache jk9-models
 compact-caches:
@@ -136,3 +136,7 @@ storage-plan:
 
 storage-audit:
 	$(PYTHON) -m pipeline.organize --audit
+
+.PHONY: verify-reproducibility
+verify-reproducibility:
+	$(PYTHON) -m pipeline.reproducibility_audit
