@@ -202,7 +202,7 @@ def main():
         rectangle_sigma=[.06,3.],rectangle_c=[.03,.5],
         old_unresolved_fraction=unresolved_linear_area(old),
         dense_unresolved_fraction=unresolved_linear_area(rows),
-        interpretation="Midpoint-cell visualization weights, not certified boundary areas")
+        interpretation="Area weights of the displayed midpoint cells on the sampled parameter grid")
     (DENSE/"metadata.json").write_text(json.dumps(metadata,indent=2)+"\n")
     draw(rows,destination=DENSE,xlim=(0.,3.))
     print(json.dumps(metadata["counts"],indent=2),flush=True)

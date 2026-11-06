@@ -88,10 +88,10 @@ hashes. Otherwise, fresh estimates can be generated from frozen inputs and
 maintained code. New runs require their own numerical acceptance checks and need
 not reproduce historical Monte Carlo bytes.
 
-File completeness, table reaggregation, and scientific validation establish
-different things. Current validation coverage and unresolved historical
-integration records are documented in the reproduction guide; a successful file
-check does not certify every numerical integral.
+The reproduction guide connects each calculation to its input files, output
+schema, numerical checks and downstream consumers. Retained results are the
+long-term reference outputs; posterior draws, hourly arrays and caches are
+generated during reproduction and need not be distributed through Git.
 
 ## Maintaining a publication
 
@@ -101,6 +101,6 @@ provenance of reused results, and document changes to inputs or methods.
 
 After reviewing intended publication changes, run the relevant checks and
 explicitly refresh the file manifest with `make release-manifest`, then run
-`make verify-release`. Refreshing hashes records approved file contents; it does
-not rerun or validate the scientific analysis. See the
+`make verify-release`. Refreshing hashes records the selected file contents. Calculation and
+reporting commands are documented separately in the reproduction guide. See the
 [maintenance policy](docs/REPOSITORY_MAINTENANCE.md) for details.

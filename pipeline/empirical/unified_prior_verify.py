@@ -33,7 +33,7 @@ def main():
             if d.get('sampler_family')!='fixed_mixture_metropolis_hastings' or a['summary']['divergences'] is not None or d['saturated_transitions'] is not None or d['energy_bfmi']!=[]:raise RuntimeError('Non-HMC diagnostics mislabeled')
             reference=Path(d['global_reference'])
             parity=json.loads((reference/'target_parity.json').read_text())
-            if not parity['passed'] or u.digest(reference/'target_parity.json')!=d['global_target_parity_sha256'] or u.digest(global_export.__file__)!=d['mh_export_source_sha256']:raise RuntimeError('Unverified global posterior refinement')
+            if not parity['passed'] or u.digest(reference/'target_parity.json')!=d['global_target_parity_sha256'] or u.digest(global_export.__file__)!=d['mh_export_source_sha256']:raise RuntimeError('Posterior refinement target-parity or source-hash mismatch')
         if not all(v['rank_rhat']<=1.01 and min(v['bulk_ess'],v['tail_ess'])>=400 for v in d['quantities'].values()):raise RuntimeError('Rejected rank/ESS diagnostics')
         chains=[]
         for p,h in zip(a['chain_paths'],a['chain_sha256']):

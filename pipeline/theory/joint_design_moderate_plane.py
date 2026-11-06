@@ -396,7 +396,7 @@ def main():
         sigma=SIGMAS.tolist(),c=COSTS.tolist(),alpha=ALPHAS.tolist(),T=HORIZONS.tolist(),
         precision=["infinity" if math.isinf(l) else l for l in PRECISIONS],
         counts=dict(Counter(r["regime"] for r in rows)),
-        qualification="Reoptimized design-grid comparison; not certified continuous-domain boundaries. Failed competitive solves and resolution ties remain unresolved.",
+        qualification="Reoptimized comparison over the evaluated design grid; failed competitive solves and resolution ties are recorded as unresolved.",
         output_reuse="Preference-independent equilibrium output only; all utility and delay values newly evaluated.",
         horizon_bound="D(T)>=3 at T>=sqrt(6) excludes such designs relative to T=0.",
         alpha_bound="Numerical search cap 12, not an exogenous model restriction.")

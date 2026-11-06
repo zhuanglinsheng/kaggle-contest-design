@@ -65,7 +65,7 @@ def zero_effort_rent(exposure):
 
 def dual_diagnostic(rows, exposure, nonnegative=False, rent_floor=0.0):
     # A finer local golden search follows a coarse logarithmic dual grid.
-    # This remains a diagnostic: it does not certify the state supremum.
+    # This diagnostic samples the state grid; the state supremum is a separate quantity.
     def value(z):
         if nonnegative:
             inner, state = max((f+exposure*(r-rent_floor)/(2*z)-y*y/(8*z)

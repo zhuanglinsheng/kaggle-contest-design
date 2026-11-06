@@ -46,7 +46,7 @@ def recover(output,inventory_only=False):
         proc.stdin.close();proc.wait()
     for row in rows:row.update(objects[row['git_blob']])
     result=dict(files=rows,unique_blobs=len(objects),unique_bytes=sum(r['bytes'] for r in objects.values()),
-        restored=True,scope='Original text/chain/score bytes recovered; no historical fit acceptance or integration certification inferred; local bundle root supplied separately')
+        restored=True,scope='Content inventory of recovered text, chain and score files; local bundle root supplied separately; fitting and integration records are produced by their calculation stages')
     write_json(output/'manifest.json',result)
     return result
 

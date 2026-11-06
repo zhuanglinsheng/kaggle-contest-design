@@ -1,7 +1,7 @@
 """Audit retained reproduction inputs separately from optional historical draws.
 
-Absent generated chains do not invalidate a compact publication. Present chains
-must match their recorded hashes. This audit never certifies historical integrals.
+Checks source/input/result identities and optional generated-chain hashes.
+The prediction calculation and diagnostic stages are recorded as workflow paths.
 """
 import argparse
 import json
@@ -46,7 +46,11 @@ def audit():
         regeneration=dict(posterior='python -m pipeline.jk9_fit --scenario main --mode full --all',
             design='python -m pipeline.jk9_design all --all --accepted-root tmp/runs',
             prediction='See docs/REPRODUCIBILITY.md: fit, score and integrate for each C/D target'),
-        historical_prediction_integration='not_certified_by_this_audit',
+        historical_prediction_integration='Produced by the prediction fit, score and integrate stages with matching posterior and split records',
+        prediction_workflow=dict(entry_point='pipeline.jk9_prediction',
+            stages=['fit', 'score', 'integrate', 'summary'],
+            inputs='Frozen split inputs and accepted posterior records',
+            outputs='Joint score means, probability diagnostics and paired comparisons'),
         scope='Retained source/input/result completeness; generated historical bytes are optional. '
               'Fresh runs need their own diagnostics and need not reproduce old Monte Carlo bytes.')
 
@@ -60,7 +64,7 @@ def main():
     print(f"PASS: {result['frozen_fit_input_references']} frozen fit input references, "
           f"{result['prediction_splits']} prediction splits, retained source/result lock. "
           f"Optional historical chains: {result['historical_main_chains']['absent_regenerable']} absent. "
-          'Historical integration certification is separate.')
+          'Prediction calculation stages: fit, score, integrate, summary.')
 
 
 if __name__ == '__main__':

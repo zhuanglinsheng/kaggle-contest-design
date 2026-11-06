@@ -1,5 +1,11 @@
 # JK9 maintenance verification — 29 October 2026
 
+> Dated maintenance record. For the current calculation sequence and input/output
+> contracts, use [REPRODUCIBILITY.md](REPRODUCIBILITY.md). Counts and process
+> observations below describe the dated maintenance work. Generated run files
+> are optional storage, and their availability is not a status judgment on the
+> long-term results. The prediction provenance wording was clarified on 6 November.
+
 ## Implemented
 
 - One current JK9 build/release selector and a compact, finite publication lock.
@@ -66,24 +72,21 @@ with the generic draw loader. A full 73-case nonlinear rerun was not executed.
 
 ## Historical provenance and optional validation
 
-User clarification: maintenance requires complete reproducible sources, inputs,
-dependencies and instructions; it does not require a full scientific rerun.
-Unexecuted full runs below are validation-scope notes, not unfinished maintenance
-work merely because they have not been executed. Missing indispensable inputs
-or executable stages must still be treated as actual reproducibility gaps.
+Maintenance checks complete reproducible sources, inputs, dependencies,
+commands and producer/consumer contracts. Historical generated files are useful
+for replaying the same run, while fresh reproduction generates its own chains,
+caches and integration arrays from the retained sources and inputs.
 
-- Historical C/D acceptance identities and integration certificates remain
-  unverified. Recursive tree inspection subsequently recovered complete candidate
-  chain sets for all 292 targets, preserving 1,400 unique blobs (1.26 GB) outside
-  Git tracking. Failed attempts may be present. Restored scores and bootstrap
-  prove table reaggregation, not the numerical validity of every old integral. Complete fresh C/D fitting/integration
-  remains unexecuted; specialized original tail methods are preserved, and a new
-  run must obtain its own acceptance rather than reuse old repair certificates.
-- Full 397-fit estimation, 73-case nonlinear search, and fresh complete C/D runs
-  are substantial scientific computations. The maintained commands retain their
-  failure and uncertainty flags; no full-run success is claimed.
-- Local caches and chain bundles are not remote backups. No upload, Git commit,
-  staging or history rewrite was performed.
+- C/D fitting, scoring, independent full-path integration, specialized tail checks
+  and final score registration have retained implementations. The recovery index
+  covers four-chain candidate sets for 292 targets (1,400 blobs, 1.26 GB).
+  Acceptance is determined by the fitting/scoring stages, while the recovery index
+  identifies stored files. See the current guide for those input/output contracts.
+- Maintenance exercised builds, source/input identities and reporting interfaces.
+  The full 397-fit estimation and 73-case search are documented calculation stages;
+  running them again is a separate computational task.
+- Local generated bundles are indexed outside Git. The maintained repository
+  retains their generating sources and the long-term result records.
 
 No further historical-cache deletion was performed during archaeology. Decisions
 about remaining artifacts should follow their dependency role: distinguish

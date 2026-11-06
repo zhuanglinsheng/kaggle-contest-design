@@ -112,7 +112,7 @@ if __name__=='__main__':
  try:rows=aggregate(paths)
  except ValueError as e:
   (ROOT/'table_readiness.json').write_text(json.dumps(dict(ready=False,completed_cases=len(paths),reason=str(e)),indent=2));print('TABLE NOT READY:',e);raise SystemExit(2)
- (ROOT/'table_numbers.json').write_text(json.dumps(rows,indent=2));(ROOT/'table_readiness.json').write_text(json.dumps(dict(ready=True,completed_cases=len(paths),scope='Verified numerical incumbents; unknown benchmark retained in subgroup median bounds; global optimality not certified',additional_unknown_counts={str(r['delta']):r['additional_unknown_count'] for r in rows},requires_notes_on_median_bounds=any(r['additional_unknown_count'] for r in rows)),indent=2))
+ (ROOT/'table_numbers.json').write_text(json.dumps(rows,indent=2));(ROOT/'table_readiness.json').write_text(json.dumps(dict(ready=True,completed_cases=len(paths),scope='Quality-supported selections over the evaluated design menu; unknown benchmark included in subgroup median bounds',additional_unknown_counts={str(r['delta']):r['additional_unknown_count'] for r in rows},requires_notes_on_median_bounds=any(r['additional_unknown_count'] for r in rows)),indent=2))
  if args.candidate_tex:
   source=Path('paper/PaperJK9.tex').read_text();args.candidate_tex.write_text(replace_numbers(source,rows))
  if args.candidate_appendix:

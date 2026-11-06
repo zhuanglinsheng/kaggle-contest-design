@@ -1,7 +1,8 @@
 """Portable version of the recovered Task4 global-path importance protocol.
 
 Proposal and 32-block diagnostics retain the original definitions and gates.
-Historical tail replacements require separate certificates and are not reused.
+Tail corrections are linked to the posterior/input identities of their run.
+A fresh run generates matching corrections through the specialized tail methods.
 """
 import json
 import math

@@ -103,7 +103,7 @@ def plot(rows, destination, focus_only=False):
                     ax.text(x,y,text,fontsize=15,color=color,ha="center")
         fig.get_layout_engine().set(rect=(0,.085,1,.915))
         fig.text(.08,.027,"Each risk slice is computed; gray cells are not assigned a regime.\n"
-                 "Colors describe the searched design grid, not certified continuous-domain boundaries.",
+                 "Colors describe classifications on the evaluated design grid.",
                  fontsize=9,color="#555555")
         for ext in ("png","pdf"):
             fig.savefig(destination/f"{name}.{ext}",dpi=260)

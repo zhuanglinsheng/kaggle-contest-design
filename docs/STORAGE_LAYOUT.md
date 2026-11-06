@@ -84,3 +84,12 @@ python -m pipeline.jk9 prepare-inputs  # 从冻结输入构造 tmp/inputs/main/
 不作为发布材料完整性失败；严格历史字节核验仍需原文件。
 使用 `make verify-reproducibility` 检查保留输入、来源、代码和正式结果。
 这不认证缺少记录的历史预测积分，也不把历史验收状态移植到新计算。
+
+## 2026-11-06 预测恢复包复核
+
+当前本地 `tmp/recovered/prediction_bundle/` 存在；逐项核对恢复清单的
+1,400 个 blob（1,256,958,899 字节），大小、SHA-256 和 Git blob SHA-1 均匹配。
+完整性审计同时确认 292 条主设计链均在本地且哈希匹配。
+这修正上述 11 月 4 日关于本地链及预测恢复包未提供的说明。
+恢复包未纳入 Git；新克隆仍不包含它。字节身份核验不证明 C/D 历史后验接受或
+预测积分通过验证；具体证据范围见 `REPRODUCIBILITY.md`。

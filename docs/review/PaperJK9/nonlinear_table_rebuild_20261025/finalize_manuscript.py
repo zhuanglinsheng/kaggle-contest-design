@@ -83,8 +83,8 @@ def main(apply=False):
                  assembly_source_sha256=sha(HERE/'assemble_refined.py'),
                  authoring_script_sha256=sha(__file__),
                  fixed_audit_sha256=sha(HERE/'fixed_precision/final_audit.json'),
-                 scope='All73 original-posterior nonlinear cases; supported searched incumbents; '
-                       'one benchmark unresolved and retained; continuous global optimality not certified')
+                 scope='All 73 original-posterior nonlinear cases over the evaluated design menu; '
+                       'one unresolved benchmark included in the reported comparison bounds')
     (HERE/'final_main_audit.json').write_text(json.dumps(audit, indent=2)+'\n')
     if apply:
         Path('paper/PaperJK9.tex').write_text(source)

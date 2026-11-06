@@ -44,7 +44,7 @@ def parameter_frame(mode: str) -> pd.DataFrame:
             raise RuntimeError(f"Unmatched contest data for validation: {raw_path.name}")
     if mode == "early" and ("deadline_preserved" not in frame or
                             not (frame["deadline_preserved"] == 1).all()):
-        raise RuntimeError("Refusing to validate early fits with an unverified contest deadline")
+        raise RuntimeError("Early-fit input requires deadline_preserved=1 for every selected contest")
     keep = ["contest_id"]
     for name in ("c_i", "c_j", "sigma", "lambda", "mu_0", "r"):
         keep.extend([f"{name}_mean", f"{name}_sd", f"{name}_q025", f"{name}_q975"])

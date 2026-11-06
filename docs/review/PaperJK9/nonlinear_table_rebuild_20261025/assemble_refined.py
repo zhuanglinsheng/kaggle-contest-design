@@ -163,8 +163,8 @@ def assemble(folder):
                   input_files_sha256={str(p): sha(p) for p in [first_path, refined_path, progress_path]},
                   assembly_source_sha256=sha(__file__),
                   selection_source_sha256=sha(Path('pipeline/empirical/nonlinear_design_selection.py')),
-                  scope='Best quality-supported searched candidates; equal-cost full disclosure preferred; '
-                        'continuous global optimality not certified',
+                  scope='Quality-supported designs selected from the evaluated precision, deadline and prize candidates; '
+                        'equal-cost full disclosure preferred',
                   missing_full_comparators=missing_comparators,
                   unresolved_full_comparator_delimitation=delimitation,
                   remaining_checks=['Full73 coverage and table arithmetic',

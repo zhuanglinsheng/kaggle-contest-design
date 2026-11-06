@@ -5,9 +5,13 @@
 历史记录里的进程状态、清理结论、附录编号和文件位置对应其记录时点。
 当前目录约定见[文件分类](../../STORAGE_LAYOUT.md)，运行步骤见[复现指南](../../REPRODUCIBILITY.md)。
 
+当前稿为 `paper/PaperJK11.tex`（由 `current_release.toml` 选择）。
+本目录按原日期保留 JK9 的方法与审查记录；阶段性的待核查或运行状态按
+[历史记录说明](../README.md)阅读。
+
 ## 正式论文与结果
 
-- [PaperJK9.pdf](../../../paper/PaperJK9.pdf)：当前正式稿。
+- [PaperJK11.pdf](../../../paper/PaperJK11.pdf)：当前正式稿；JK9 为历史版本。
 - [正式发布目录](../../../results/releases/paperjk9-20261029/)：长期维护的精简证据与来源索引。
 - [理论图](../../../results/releases/paperjk9-20261029/assets/numerical_regions_four_class_bw.pdf)、
   [逐点不确定性](../../../results/releases/paperjk9-20261029/evidence/theory_unresolved.csv)：保留 1,179 个未确定点。

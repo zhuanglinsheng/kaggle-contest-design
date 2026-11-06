@@ -1,0 +1,1019 @@
+{
+  "date": "2026-11-06",
+  "criterion": "Check concrete producer/consumer contracts and source provenance; generated intermediates need not be retained or committed; preserve actual numerical diagnostic outcomes.",
+  "reviewed_occurrences": 173,
+  "changed_files": [
+    ".gitignore",
+    "README.md",
+    "archive/README.md",
+    "archive/research/precision_conditions/README.md",
+    "docs/JK9_MAINTENANCE_20261029.md",
+    "docs/README.md",
+    "docs/REPOSITORY_MAINTENANCE.md",
+    "docs/REPRODUCIBILITY.md",
+    "docs/RESULT_CODE_AUDIT.json",
+    "docs/WORDING_REVIEW.json",
+    "docs/review/PaperJK7/MS_writing_recheck_20261020.md",
+    "docs/review/PaperJK7/MS_writing_review_20261020.md",
+    "docs/review/PaperJK7/cited_theorem_audit_20261020.md",
+    "docs/review/PaperJK7/feedback-bayesian-structural-inference-for-dynamic-crowdsou-2026-09-13.md",
+    "docs/review/PaperJK7/math_uncertainty_resolution_20261020.md",
+    "docs/review/PaperJK7/mathematical_audit_20261020.md",
+    "docs/review/PaperJK9/INDEX.md",
+    "docs/review/PaperJK9/WORKLOG.md",
+    "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/assemble_refined.py",
+    "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/build_table.py",
+    "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/finalize_manuscript.py",
+    "docs/review/PaperJK9/task2_response_and_delimitation_20261025.md",
+    "docs/review/PaperJK9/task3_counterfactual_progress.md",
+    "docs/review/PaperJK9/task_list_response_draft_20261025.md",
+    "docs/review/README.md",
+    "paper/PaperJK11.pdf",
+    "paper/appendix_joint_design_jk11.tex",
+    "pipeline/empirical/unified_prior_verify.py",
+    "pipeline/git_recovery.py",
+    "pipeline/jk9.py",
+    "pipeline/jk9_prediction.py",
+    "pipeline/prediction/importance.py",
+    "pipeline/reproducibility_audit.py",
+    "pipeline/result_code_audit.py",
+    "pipeline/theory/joint_design_boundary_polish.py",
+    "pipeline/theory/joint_design_moderate_dense.py",
+    "pipeline/theory/joint_design_moderate_plane.py",
+    "pipeline/theory/joint_design_refined_plane.py",
+    "pipeline/theory/zero_signal_continuation_bound.py",
+    "pipeline/validation/chapter5.py",
+    "results/releases/paperjk9-20261029/evidence/final_main_audit.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/10200.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/10684.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/13333.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/14242.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/14420.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/18045.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/19018.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/19991.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/20270.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/21669.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/22962.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/23249.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/23652.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2445.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2454.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2464.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2478.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2489.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2549.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2551.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2667.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2749.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2762.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/2860.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3064.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3080.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3288.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3338.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3353.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3366.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3507.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3509.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3526.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3641.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/37077.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3774.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3800.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/38128.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/38760.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3926.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3928.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3929.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/3960.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4104.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4366.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4407.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4453.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4477.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4488.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4493.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4657.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4699.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/4986.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5056.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5144.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5174.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5229.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5261.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5357.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5390.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/5497.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/6322.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/6927.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/7115.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/7162.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/7634.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/7878.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/8076.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/8078.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/8219.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/8396.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/9120.json",
+    "results/releases/paperjk9-20261029/evidence/main_design/9949.json",
+    "results/releases/paperjk9-20261029/evidence/prediction/artifact_recovery_manifest.json",
+    "results/releases/paperjk9-20261029/evidence/prediction/historical_summary.json",
+    "results/releases/paperjk9-20261029/evidence/prediction/native_stan_parity.json",
+    "results/releases/paperjk9-20261029/evidence/prediction/recovered_chain_coverage.json",
+    "results/releases/paperjk9-20261029/evidence/prediction/recovered_scores.json",
+    "results/releases/paperjk9-20261029/evidence/prediction/source_recovery_manifest.json",
+    "results/releases/paperjk9-20261029/evidence/prediction/splits.json",
+    "results/releases/paperjk9-20261029/evidence/table_readiness.json"
+  ],
+  "historical_reviews_annotated": [
+    "docs/review/PaperJK7/MS_writing_recheck_20261020.md",
+    "docs/review/PaperJK7/MS_writing_review_20261020.md",
+    "docs/review/PaperJK7/cited_theorem_audit_20261020.md",
+    "docs/review/PaperJK7/feedback-bayesian-structural-inference-for-dynamic-crowdsou-2026-09-13.md",
+    "docs/review/PaperJK7/math_uncertainty_resolution_20261020.md",
+    "docs/review/PaperJK7/mathematical_audit_20261020.md",
+    "docs/review/PaperJK9/WORKLOG.md",
+    "docs/review/PaperJK9/task2_response_and_delimitation_20261025.md",
+    "docs/review/PaperJK9/task3_counterfactual_progress.md",
+    "docs/review/PaperJK9/task_list_response_draft_20261025.md"
+  ],
+  "numerical_changes": false,
+  "records": [
+    {
+      "original_location": "archive/research/precision_conditions/verify_early_analytic_continuation.py:4",
+      "original_text": "arguments in the note. It does not certify the missing global payoff bound.",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "README.md:94",
+      "original_text": "check does not certify every numerical integral.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/REPOSITORY_MAINTENANCE.md:43",
+      "original_text": "are not certified by source recovery or by a fresh baseline rerun. Recovered",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_closed_gaussian_constant.py:5",
+      "original_text": "It does not certify early continuation or a joint optimum.",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_configuration_bridge_shape.py:24",
+      "original_text": "print(\"Finite-prize actual gradients and global design regimes are not certified.\")",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_bridge_covariance_shape.py:27",
+      "original_text": "print(\"Actual propagation unimodality and global precision sorting are not certified.\")",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "docs/REPRODUCIBILITY.md:6",
+      "original_text": "original provenance; switching manuscripts does not certify new scientific runs.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/REPRODUCIBILITY.md:13",
+      "original_text": "the retained results \"unverified\". Reproduction uses the corresponding code and",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/REPRODUCIBILITY.md:30",
+      "original_text": "not label the existing results unverified. A source audit should identify a",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/REPRODUCIBILITY.md:449",
+      "original_text": "results were produced by the retained code or whether they are unverified.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/REPRODUCIBILITY.md:746",
+      "original_text": "Git contents, and their absence is not a reason to label the results unverified.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_early_complete_source.py:17",
+      "original_text": "print(\"The original Riccati family and global joint-design regimes are not certified.\")",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "pipeline/validation/chapter5.py:47",
+      "original_text": "raise RuntimeError(\"Refusing to validate early fits with an unverified contest deadline\")",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/JK9_MAINTENANCE_20261029.md:76",
+      "original_text": "unverified. Recursive tree inspection subsequently recovered complete candidate",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_full_output_envelope.py:13",
+      "original_text": "print('Finite precision and joint-design regime boundaries are not certified here.')",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/CASE2_AND_REGION_GAP.md:220",
+      "original_text": "其证明只需外生期限紧性和全精度的一致小奖金导数界，不依赖未核实的",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/CASE2_AND_REGION_GAP.md:231",
+      "original_text": "内置编译器仍因无法找到现有文档类 `informs3.cls` 而失败，排版未验证。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/CASE2_AND_REGION_GAP.md:298",
+      "original_text": "下一优先事项仍是替换正文 (ii) 的未验证全环境树差额论证，而非继续微调有限",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/CASE2_AND_REGION_GAP.md:374",
+      "original_text": "这避免使用未经验证的高阶系数导数或将值收敛当作努力收敛。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/CASE2_AND_REGION_GAP.md:381",
+      "original_text": "因此该范围内不再把“辅助轨迹尚未验证进入稳定域”列为未完成步骤。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/GAUSSIAN_JET_CAP.txt:48",
+      "original_text": "It does not certify the alternative short global comparison or close",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/archive/JOINT_DESIGN_BEFORE_FINITE_EXISTENCE_REDUCTION_2026-10-05.txt:93",
+      "original_text": "not certified boundaries on the continuous parameter domain.}",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/archive/2026-10-03/EXOGENOUS_UTILITY_JOINT_DESIGN.md:22",
+      "original_text": "Consequently, that argument does not certify kappa < 33/5. The new result",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_competitive_exposure.py:42",
+      "original_text": "print(\"Early-layer propagation and the global payoff comparison remain uncertified.\")",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "pipeline/theory/joint_design_moderate_plane.py:399",
+      "original_text": "qualification=\"Reoptimized design-grid comparison; not certified continuous-domain boundaries. Failed competitive solves and resolution ties remain unresolved.\",",
+      "disposition": "Rephrased as the evaluated domain or exact input mismatch; calculation and diagnostic conditions preserved"
+    },
+    {
+      "original_location": "pipeline/theory/joint_design_refined_plane.py:106",
+      "original_text": "\"Colors describe the searched design grid, not certified continuous-domain boundaries.\",",
+      "disposition": "Rephrased as the evaluated domain or exact input mismatch; calculation and diagnostic conditions preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/archive/2026-10-03/CASE2_AND_REGION_GAP.md:2435",
+      "original_text": "所用的是标量正则性而不是未经验证的系统 De Giorgi--Nash 结论。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/archive/2026-10-03/CASE2_AND_REGION_GAP.md:2927",
+      "original_text": "不把形式级数用于尚未验证的强激励延续。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "pipeline/theory/zero_signal_continuation_bound.py:68",
+      "original_text": "# This remains a diagnostic: it does not certify the state supremum.",
+      "disposition": "Rephrased as the evaluated domain or exact input mismatch; calculation and diagnostic conditions preserved"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/feedback-bayesian-structural-inference-for-dynamic-crowdsou-2026-09-13.md:140",
+      "original_text": "### 7. Effort observability is unclear in Section 2's filter and HJB",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/feedback-bayesian-structural-inference-for-dynamic-crowdsou-2026-09-13.md:342",
+      "original_text": "The score-domain filter is not operationally specified. It is unclear whether a focal-path value below $0.5$ or equal to $1$ causes removal of that observation, its submission event, the contestant, or the entire contest. These choices affect submission counts, readout intervals, likelihood contributions, and private-path diagnostics.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/feedback-bayesian-structural-inference-for-dynamic-crowdsou-2026-09-13.md:420",
+      "original_text": "The initialization convention is underspecified. It is unclear whether the observed public-gap series and $\\hat y_0$ in the prior for $\\mu_0$ are expressed relative to the same origin used to normalize $y_0=0$, and whether the first predictive mean begins from the latent origin or from $\\mu_0$. The distinction between a normalized latent state and a nonzero initial belief is coherent in principle, but without these coordinate and initialization details the early likelihood and effort path cannot be reconstructed unambiguously.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/feedback-bayesian-structural-inference-for-dynamic-crowdsou-2026-09-13.md:452",
+      "original_text": "### 27. Alternative-pair eligibility is unclear in Section 6.1",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/archive/2026-10-03/HJB_EXACT_CONDITIONS.md:195",
+      "original_text": "- 高精度有限数值代理的形状修正与该路线相容，但数值并未验证完全信息的 B、C，更没有验证所有精度的尾部收敛。不得将它们视为已认证的非空参数区间。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/MS_writing_review_20261020.md:65",
+      "original_text": "来源：`results/theory/numerical_joint_plane_moderate_dense/three_class_comparison/{metadata.json,README.md,unresolved_point_decisions.csv}`。README 关于“图含 unverified note”的描述也不符合当前实际显示的 PDF；放大检查后未见该说明。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/MS_writing_review_20261020.md:71",
+      "original_text": "> Shading identifies the best evaluated design family on the numerical search grid. Some cells remain unverified because potentially competitive candidates failed to solve. Curves are smoothed display envelopes and do not certify global regime boundaries.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/MS_writing_review_20261020.md:237",
+      "original_text": "| Tables 5—6 | HC1 正文图注不够独立，残差检验与主结论的关系不清楚 | 留 estimator、样本、区间、关键范围，补一句点估计误差未传播 |",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/math_uncertainty_resolution_20261020.md:7",
+      "original_text": "结论：此前保留的两项数学疑问——扰动初值在加权空间中的解析性及统一 O(w) 界、快余项的统一 O(w²) 界——现在均能重建出有效推导，应从“尚未核实的数学步骤”中撤下。原 Riccati 路径与辅助路径的比较也能闭合。未发现新的实质性错误。现稿是较压缩的证明表述，并非据此就需要大幅扩写。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/math_uncertainty_resolution_20261020.md:9",
+      "original_text": "本次查阅了仓库中的较完整推导记录，但以下判断依据的是重新计算，不把历史记录的自我评估当作证明。Kato 1980 的重印原文已取得并核对；Jackson 正式期刊版定理编号仍未核实，继续保留为引用版本事项。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/mathematical_audit_20261020.md:77",
+      "original_text": "此前对初值的 X 值解析性及统一 O(w) 界、扣除慢快模态后的 O_X(w²e^(−0.7v)) 余项保留疑问。后续逐行复核已通过显式背景、组织者 resolvent、固定空间中的半群界、投影后的 Duhamel 公式与 Cauchy 估计补出完整连接；应撤下“尚未核实”的状态。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/mathematical_audit_20261020.md:92",
+      "original_text": "- [Jackson arXiv v2](https://arxiv.org/html/2206.08334)：已核对 AB1、BF、Q、Reg 条件和经典解结论；正式期刊定理编号未核实。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/MS_writing_recheck_20261020.md:91",
+      "original_text": "| R03 | Huang et al. 的书目状态与内容 | 收窄 | working-paper 状态可写得更清楚，2024原始日期可保留。当前摘要支持 intermediate split ratio 的表述；全文和所引历史版本未核实完，不能指定其所有比较静态结论。 |",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/cited_theorem_audit_20261020.md:7",
+      "original_text": "已取得并核对相关原文的 Nishida、Ryvkin、Kato、Lorenzi 引用，没有发现实质性误用。Jackson 可读预印本中的经典解定理条件与本文匹配，正式期刊编号尚未核实。Bensoussan 和 Berge 的相关完整正文尚未取得，不能把它们标为已完成原文逐条核查；相应数学结论另按本文实际需要进行了检查。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK7/cited_theorem_audit_20261020.md:18",
+      "original_text": "| PaperJK7.tex:1872 | Jackson 2024，Theorem 2.7 | arXiv:2206.08334v2 全文；正式期刊下载返回访问验证页 | 预印本 2.7 是梯度估计，经典解存在唯一性是 2.8；正式版是否重编号未核实 | 预印本经典解定理的条件可以验证，不能据此直接认定正式版编号错误 |",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "pipeline/theory/joint_design_boundary_polish.py:217",
+      "original_text": "metadata = dict(qualification=\"Numerical grid search and resolution-difference diagnostics, not certified global boundaries.\",",
+      "disposition": "Rephrased as the evaluated domain or exact input mismatch; calculation and diagnostic conditions preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/POSITIVE_PRIZE_FULL_DISCLOSURE_WINDOW.md:114",
+      "original_text": "then give (E). This does not accept an unverified numerical policy as an",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/POSITIVE_PRIZE_FULL_DISCLOSURE_WINDOW.md:1395",
+      "original_text": "an envelope alone cannot certify zero prize at ce for the current class",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/POSITIVE_PRIZE_FULL_DISCLOSURE_WINDOW.md:1814",
+      "original_text": "its ratio in (33) exceeds c. No unverified large-prize zero-signal branch is",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/POSITIVE_PRIZE_FULL_DISCLOSURE_WINDOW.md:1834",
+      "original_text": "with all three numerical design types, but does not certify the figure's",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/POSITIVE_PRIZE_FULL_DISCLOSURE_WINDOW.md:2404",
+      "original_text": "margins; it does not certify the remaining precision interval.",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/POSITIVE_PRIZE_FULL_DISCLOSURE_WINDOW.md:2917",
+      "original_text": "analytic-norm margin and maturity-cutoff overlap; it does not certify any",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_root_output_scalar_certificates.py:1",
+      "original_text": "\"\"\"Exact scalar algebra only; does not certify the complex Nash-output bounds.\"\"\"",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "pipeline/theory/joint_design_moderate_dense.py:205",
+      "original_text": "interpretation=\"Midpoint-cell visualization weights, not certified boundary areas\")",
+      "disposition": "Rephrased as the evaluated domain or exact input mismatch; calculation and diagnostic conditions preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/verify_mature_root_certificate.py:49",
+      "original_text": "print(\"Scope: a_t >= .72 sigma^2; the low-diffusion initial layer is not certified.\")",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "pipeline/reproducibility_audit.py:49",
+      "original_text": "historical_prediction_integration='not_certified_by_this_audit',",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:1602",
+      "original_text": "尚未验证正文 (ii) 的全环境通用阈值，也未证明简单且非空的正奖金完全披露",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:2281",
+      "original_text": "替代整段窗口的高延迟弹性。下述结果不使用未核实的全 $s$ 树估计。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:2768",
+      "original_text": "零精度连续性，未用更大未验证范围。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:2787",
+      "original_text": "内置编译仍因无法访问项目中已有的 `informs3.cls` 而失败，未验证排版。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:4039",
+      "original_text": "而不扩张未验证的零精度均衡范围。以下只在证明中使用",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:5285",
+      "original_text": "第 51 节的局部稳定证书尚未核实用于实际初值。本节逐项控制",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:6551",
+      "original_text": "当 $\\gamma>22$，新增原一般凸延迟区域未认证的更高成本；",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:9341",
+      "original_text": "积分取一个未经验证的下界。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:10267",
+      "original_text": "经济假设。内置编译仍在 informs3.cls 载入处失败，排版未验证。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:11150",
+      "original_text": "结论。内置编译依然在 informs3.cls 载入处失败，排版未验证。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:11349",
+      "original_text": "最新排版未验证；保留原编辑器，不生成替代 PDF。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:11588",
+      "original_text": "尚未验证真实 Duhamel 传播的权重资格。本节证明这项",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:13672",
+      "original_text": "尚未验证 PDF 排版；未修改文档类或另建编译版本。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:15158",
+      "original_text": "为避免在未认证的强零精度域定义 A，证明中仅在固定域",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:15583",
+      "original_text": "条件下亦由候选预算取得。没有使用未认证零端域。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:15802",
+      "original_text": "不修改论文，直至新的边界存在性或单交叉结果闭合。优先保留统一、外生、可解释的 u 与 D 形状假设；必要加强必须明确，并检验非空性，不能在最优设计点上施加条件。数值基准的曲率 64 未认证超过未量化的通用阈值，不能自动充当现行 Proposition 全部假设的实例。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:17199",
+      "original_text": "研究路线已明确。下一步仍须在原对称均衡类内证明零端的存在及足够的产出上半连续性，或者找到至少一个参数点，使全局最大化序列避开尚未认证的强激励零端。以上新界本身尚不能给出后一结论。保持 Proposition 1 的取得性限定，暂不改正文；不能将作者的对称选择记为全局联合最优存在性已闭合。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:17327",
+      "original_text": "这排除所有未认证的强激励近零设计，不仅排除某条选定最大化序列。即使那些设计另有均衡，其收益也不能竞争；本节不必为它们构造全域零精度均衡。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:17373",
+      "original_text": "这识别出作者选定的对称解析均衡，而不是一个未验证的子列解。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:17397",
+      "original_text": "一个候选点的严格收益下界，必须同时胜过零奖金及所有重新优化奖金和期限的完全披露方案。其次，必须用全局上界排除未认证的强激励近零序列，或者直接在这一点相关的序列范围验证零端的均衡实现。完成这两步才可利用紧性和连续性取得全局最优。不要求求出 θ*、T*、λ* 的精确坐标，也不要求证明所有原设计都有同一种均衡。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:17564",
+      "original_text": "这一步解决的是竞争设计的上界，不是均衡实现或取得性。固定 Figure 3 原语的完整单点证书仍需证明一个候选严格超过整个未认证近零范围的这个上界。论文不改。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "archive/research/precision_conditions/PROOF_LEDGER.md:17667",
+      "original_text": "尚须在固定原语下找一个已验证正精度候选，使其净收益严格超过未认证零端设计的 (F17) 净收益上界。若成立，结合既有高精度闭合与正参数紧性，单点全局取得即可闭合；若这个上界仍太松，需要进一步利用 Nash 激励条件，而不是将能量包络的最大点当作可实现均衡。没有取得数值候选便是全局最优的推论。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "pipeline/empirical/unified_prior_verify.py:36",
+      "original_text": "if not parity['passed'] or u.digest(reference/'target_parity.json')!=d['global_target_parity_sha256'] or u.digest(global_export.__file__)!=d['mh_export_source_sha256']:raise RuntimeError('Unverified global posterior refinement')",
+      "disposition": "Rephrased as the evaluated domain or exact input mismatch; calculation and diagnostic conditions preserved"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/recovered_prediction_sources_20261029/task4_calibration_all_folds_method_20261025.md:66",
+      "original_text": "result['all_reported_comparisons_match_exact_hour_and_count_signatures']=True;result['paired_randomization_sensitivity']=seed_records;result['numerical_uncertainty_scope']='Within each model, residual chain MCSE plus tail-hour MCSE sums; model-difference and contest-aggregate numerical diagnostics use sums, allowing correlated numerical estimates. These are Monte Carlo diagnostics, not certified deterministic bounds.'",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "paper/informs3.cls:1880",
+      "original_text": "template does not certify that the paper has been accepted for publication",
+      "disposition": "Retained manuscript definition of evaluated numerical domain or third-party publication template"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task3_direction_consistency_20261025/check_method.md:5",
+      "original_text": "一阶采用原实现的96/192点求积；非线性采用两层网格。两层差三倍是诊断半径，不是严格误差界。符号暂不明确时预先允许再加密一层；失败明确记录。六点结果不是全后验或全部竞赛的方向认证。已有全披露奖金曲线作为另外的方向证据保留，不因改变任务范围删除反例。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task2_four_class_figure_20261025/README.md:3",
+      "original_text": "The figure shows three design regimes and a separate numerical-difficulty category on the evaluated parameter grid. Dark hatched cells denote the 1,179 points whose regime classification remains unresolved, including 926 points with potentially competitive candidates that failed numerical validation. Cell edges are display midpoints between sampled parameters; the grid comparisons do not certify global optima over the continuous design domain.",
+      "disposition": "Retained dated review description with directory context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task3_common_cost_prior_method_20261025.md:11",
+      "original_text": "同时重算每个先验下的原设计质量目标与固定所选精度、期限的所需奖金；不混用原后验目标。奖金比的 MCSE 使用分子/分母的配对影响函数。精度和期限尚未重优化，非线性稳健性也未认证；微小节省需结合配对 MCSE，不能只看一般参数 Rhat/ESS。",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "paper/appendix_joint_design_jk11.tex:37",
+      "original_text": "\\textit{Quality-constrained joint design.} We directly search the nonlinear quality constraint in equation~\\eqref{eq-empirical-joint-design} over the stated precision menu and deadline grid, with nonnegative prizes. The observed design remains available. Selected changes satisfy the paired numerical quality diagnostic described above; failed alternatives remain unknown. Prize brackets required by the reported designs are locally refined to $10^{-4}\\theta^{obs}$, without assuming that quality is globally monotone in prize. The results are supported searched incumbents, not certified continuous optima.",
+      "disposition": "Rephrased as the evaluated domain or exact input mismatch; calculation and diagnostic conditions preserved"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task_list_response_draft_20261025.md:16",
+      "original_text": "further substantive error. Additional numerical repairs do not certify the",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task_list_response_draft_20261025.md:20",
+      "original_text": "that smoothing does not certify regime boundaries.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/recovered_prediction_sources_20261029/task4_review_state_refresh_method_20261025.md:21",
+      "original_text": "state['next_steps']=['Review final findings and decide how to present nonlinear shortfalls and unverified designs','Keep manuscript and production edits frozen until user requests changes'];state['goal_status']='review_scope_complete_with_explicit_scientific_limitations';state['tasks']['3']='Six preselected designs evaluated at128 draws each, three complete paired contrasts and three explicitly unresolved zero-feedback outcomes;48 prior/bound checks complete';ix=json.loads((p/'task4_tail_probability_index_20261025.json').read_text());state['currently_challenged_tail_keys']=[k for k,v in ix['entries'].items() if v.get('precision_challenged',False)];refindex=p/'task3_weak_refinement_index_20261025.json';state['accepted_weak_refinement_keys']=sorted(json.loads(refindex.read_text())['entries']) if refindex.exists() else [];state['latest_findings']='task_list_findings_20261025.md';state['ended_sessions']=sorted(set(state['ended_sessions']));f.write_text(json.dumps(state,indent=2,ensure_ascii=False));print('REVIEW STATE',[(k,v['numerically_passed']) for k,v in state['current_forecasts'].items()],state['live_tool_sessions'],flush=True)",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task2_four_class_figure_method_20261025.md:64",
+      "original_text": "(out/'metadata.json').write_text(json.dumps(meta,indent=2)+'\\n');caption='The figure shows three design regimes and a separate numerical-difficulty category on the evaluated parameter grid. Dark hatched cells denote the 1,179 points whose regime classification remains unresolved, including 926 points with potentially competitive candidates that failed numerical validation. Cell edges are display midpoints between sampled parameters; the grid comparisons do not certify global optima over the continuous design domain.'",
+      "disposition": "Retained named historical proof/method/source record; contextualized by directory entry point; source identities preserved"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task2_response_and_delimitation_20261025.md:9",
+      "original_text": "I also carried out additional numerical repairs and independent checks of payoffs, best responses, and output convergence. These improve the evidence for particular candidates, but do not certify the complete three-region partition. Some stronger-incentive, weak-feedback candidates still fail the validation checks, and the available caches do not recover the complete original candidate set. I have therefore retained the unresolved classifications and documented their scope. The current numerical appendix already describes the 1,179 provisional grid classifications, including the 926 points affected by potentially competitive failed candidates, and does not present the smoothed boundaries as robust regime frontiers. This qualification should be retained.",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "paper/appendix_joint_design_jk9.tex:35",
+      "original_text": "\\textit{Quality-constrained joint design.} We directly search the nonlinear quality constraint in equation~\\eqref{eq-empirical-joint-design} over the stated precision menu and deadline grid, with nonnegative prizes. The observed design remains available. Selected changes satisfy the paired numerical quality diagnostic described above; failed alternatives remain unknown. Prize brackets required by the reported designs are locally refined to $10^{-4}\\theta^{obs}$, without assuming that quality is globally monotone in prize. The results are supported searched incumbents, not certified continuous optima.",
+      "disposition": "Retained manuscript definition of evaluated numerical domain or third-party publication template"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/build_table.py:115",
+      "original_text": "(ROOT/'table_numbers.json').write_text(json.dumps(rows,indent=2));(ROOT/'table_readiness.json').write_text(json.dumps(dict(ready=True,completed_cases=len(paths),scope='Verified numerical incumbents; unknown benchmark retained in subgroup median bounds; global optimality not certified',additional_unknown_counts={str(r['delta']):r['additional_unknown_count'] for r in rows},requires_notes_on_median_bounds=any(r['additional_unknown_count'] for r in rows)),indent=2))",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/task3_counterfactual_progress.md:10",
+      "original_text": "4. 共同成本尺度先验及更紧成本下界的 42 个固定设计一阶初筛，29 个通过重要性诊断，13 个已改用直接抽样，并完成六例成本下界放宽至 .001；新增19项全部完成，合并原通过项共48个场景。较大奖金变化对共同成本尺度设定明显敏感；未重优化期限/精度，也未认证非线性先验稳健性。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/finalize_manuscript.py:87",
+      "original_text": "'one benchmark unresolved and retained; continuous global optimality not certified')",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/final_main_audit.json:163",
+      "original_text": "\"scope\": \"All73 original-posterior nonlinear cases; supported searched incumbents; one benchmark unresolved and retained; continuous global optimality not certified\"",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/source_snapshots/assemble_refined_f71190aaf1c15646f17425c19b08f3c18b7662ce90a62f72a2f4caf301720e6c.py:142",
+      "original_text": "'continuous global optimality not certified',",
+      "disposition": "Retained dated review description with directory context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/WORKLOG.md:118",
+      "original_text": "- 预测方案明确保留初值来源、日期边界切分和构造期限可知性的待核查；哈希/前缀一致性不能替代这些检查。未将尚未核实的可能性写成实质问题。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/WORKLOG.md:289",
+      "original_text": "原后验已恢复67/73，设计首轮与后验控制器仍在运行。新增refine_prizes.py，在首轮案例完成后对所选有限反馈和8个期限的全披露政策作相同的原模型奖金局部精化，奖金绝对容差为原奖金1e-4；保留未通过/未知点，不把局部交叉当全局单调证明。该后处理仅记录prize_refinement.json，publication_ready保持false；反馈搜索、抽样敏感性与失败竞争候选仍待核查。已启动监听会话91094。精化逻辑检查覆盖局部交叉、零奖金、全未知和离散可行分支。表格汇总新增未验证全披露基准、重复情景及成本计算一致性护栏；18行替换检查通过，论文未改。",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/source_snapshots/build_table_008173927255c03e2af3de1fae1366025850435b1488cffbab8365733895856b.py:77",
+      "original_text": "(ROOT/'table_numbers.json').write_text(json.dumps(rows,indent=2));(ROOT/'table_readiness.json').write_text(json.dumps(dict(ready=True,completed_cases=len(paths),scope='Verified numerical incumbents; global optimality not certified'),indent=2))",
+      "disposition": "Retained dated review description with directory context"
+    },
+    {
+      "original_location": "docs/review/PaperJK9/nonlinear_table_rebuild_20261025/assemble_refined.py:167",
+      "original_text": "'continuous global optimality not certified',",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/table_readiness.json:4",
+      "original_text": "\"scope\": \"Verified numerical incumbents; unknown benchmark retained in subgroup median bounds; global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/8396.json:2023",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/23652.json:1320",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4488.json:1386",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3774.json:2155",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5174.json:2405",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5390.json:5986",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/7634.json:2330",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3926.json:5149",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3526.json:4309",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2762.json:7464",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2489.json:2611",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3509.json:1433",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/8078.json:2112",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/14420.json:1907",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/18045.json:2342",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3960.json:3267",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2667.json:4707",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/14242.json:4639",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/7162.json:2241",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/19018.json:2610",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4366.json:8415",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2454.json:1437",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/23249.json:7629",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3064.json:4846",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/10684.json:2613",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/6322.json:14131",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5261.json:6325",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/22962.json:2551",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/7115.json:7675",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/13333.json:5739",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3929.json:12574",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5357.json:3972",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3928.json:4504",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2551.json:6749",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3288.json:1039",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/9120.json:2778",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5497.json:3098",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3641.json:4746",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2478.json:2573",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5144.json:2357",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2860.json:5946",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/9949.json:2302",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4657.json:4683",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4407.json:8072",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/7878.json:1341",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/8219.json:1135",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4493.json:2605",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/8076.json:6596",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3507.json:2155",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/37077.json:2273",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2749.json:6429",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3366.json:4364",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2445.json:7075",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5056.json:4080",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/5229.json:2192",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/19991.json:3462",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3080.json:2368",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/38128.json:3616",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/6927.json:4486",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4986.json:3715",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3338.json:5208",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2549.json:1712",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4453.json:2720",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/10200.json:2492",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4104.json:10380",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3353.json:2300",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/38760.json:2552",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/20270.json:4867",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/21669.json:1819",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/3800.json:3481",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4477.json:5657",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/4699.json:9851",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    },
+    {
+      "original_location": "results/releases/paperjk9-20261029/evidence/main_design/2464.json:1784",
+      "original_text": "\"scope\": \"Best quality-supported searched candidates; equal-cost full disclosure preferred; continuous global optimality not certified\",",
+      "disposition": "Updated active description or added explicit dated-review context"
+    }
+  ],
+  "review_note": "Search found 173 keyword occurrences across retained text; each occurrence is classified. Mathematical diagnostic states, dated reviews, frozen source identities and third-party template text are preserved with explicit context.",
+  "checks": {
+    "original_prediction_sources_hash_matched": 99,
+    "result_json_files_compared_excluding_scope": 82,
+    "result_values_and_diagnostic_flags_unchanged": true,
+    "focused_interface_tests": 19,
+    "focused_interface_tests_skipped": 1,
+    "manuscript_build": "passed",
+    "full_sampling_search_or_integration_rerun": false
+  }
+}

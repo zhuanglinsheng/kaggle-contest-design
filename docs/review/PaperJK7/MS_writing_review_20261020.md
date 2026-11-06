@@ -1,3 +1,8 @@
+> Historical review / 历史审查记录：本文对应文件名或正文注明的版本与日期。
+> 原评论和阶段状态保留用于追溯；其中的问题、Pending 或未核查措辞不自动构成
+> 对当前 PaperJK11 或长期结果的状态判断。当前代码、输入输出对应与运行步骤见
+> [复现指南](../../REPRODUCIBILITY.md)及 [图表来源索引](../../PAPER_EVIDENCE.csv)。
+
 # PaperJK7 全文写作与证据一致性审查
 
 审查日期：2026 年 10 月 20 日。目标期刊按 Management Science 理解。

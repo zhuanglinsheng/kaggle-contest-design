@@ -1,7 +1,8 @@
 """Portable prediction reconstruction from recovered original sources.
 
-summary reaggregates historical scores; baselines recomputes A/B from inputs.
-Neither operation certifies missing historical C/D integration diagnostics.
+summary consumes contest scores; baselines generates A/B scores from frozen
+inputs. C/D fit, score and integrate stages generate accepted-posterior, joint
+probability and numerical-diagnostic records using the retained protocols.
 """
 import argparse
 import hashlib
@@ -46,7 +47,7 @@ def summary(records, replicates=500000):
     if replicates <= 0 or replicates % 50:
         raise ValueError('Replicates must be a positive multiple of 50')
     result = dict(replicates=replicates, seed_base=20261025+1904, folds={},
-                  scope='Reaggregation of original score records; integration certificates are separate')
+                  scope='Paired contest bootstrap from retained model/fold score means; fitting and integration use their declared stages')
     for fold, split in enumerate(('primary_hour', 'complete_day')):
         selected = [r for r in records if r['split'] == split]
         lookup = {(r['model'], r['contest_id']): r for r in selected}

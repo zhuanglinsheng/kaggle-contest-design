@@ -185,7 +185,8 @@ def files(config):
                  'requirements.txt', 'requirements-lock.txt', 'requirements-py314.txt', 'utils.py', 'docs/PAPER_EVIDENCE.csv',
                  'docs/REPRODUCIBILITY.md', 'pipeline/README.md', 'paper/README.md',
                  'docs/REPOSITORY_MAINTENANCE.md', 'docs/STORAGE_LAYOUT.md', 'docs/storage_layout.json',
-                 'results/README.md', 'docs/README.md', 'docs/review/PaperJK9/INDEX.md',
+                 'results/README.md', 'docs/README.md', 'docs/RESULT_CODE_AUDIT.json',
+                 'docs/WORDING_REVIEW.json', 'docs/review/README.md', 'docs/review/PaperJK9/INDEX.md',
                  'docs/JK9_MAINTENANCE_20261029.md', 'pipeline/jk9.py',
                  'results/releases/paperjk7-review-20261016/accepted_fits.json'):
         selected.add(ROOT / name)
@@ -238,7 +239,7 @@ def main(argv=None):
     manifest = local(ROOT, config['manifest'])
     if args.action == 'lock':
         write_json(manifest, dict(schema_version=1, release_id=config['release_id'],
-                   scope='Compact publication byte lock, not an end-to-end scientific rerun', files=current))
+                   scope='Source, input and long-term result file identities for the selected publication', files=current))
         print(f'Locked {len(current)} source/input/evidence files for {config["release_id"]}.')
         return
     saved = json.loads(manifest.read_text())

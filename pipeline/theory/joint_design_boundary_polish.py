@@ -214,7 +214,7 @@ def main():
     pooled = [r for s in sigmas for r in profiles(s,costs,designs[s],cache,branch_screen=False)]
     white = lambda rs:sum(r["regime"] not in ["zero_on_grid","finite_on_grid","full_on_grid"] for r in rs)
     paired = [r for r in rows if (r["sigma"],r["c"]) in lookup]
-    metadata = dict(qualification="Numerical grid search and resolution-difference diagnostics, not certified global boundaries.",
+    metadata = dict(qualification="Numerical grid search with resolution-difference diagnostics for each evaluated candidate.",
                     sigma=sigmas,c=costs,relative_floor=0.,roundoff_relative_floor=64*np.finfo(float).eps,old_relative_floor=.005,
                     required_resolution=2,counts=dict(Counter(r["regime"] for r in rows)),
                     white_same_old_cells_before=white(old),white_same_old_cells_after=white(paired),
