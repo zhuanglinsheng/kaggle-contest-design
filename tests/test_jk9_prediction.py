@@ -3,8 +3,9 @@ import math
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import numpy as np
-from pipeline.jk9_prediction import baseline, raw_input, splits, summary, EVIDENCE
+from pipeline.jk9_prediction import baseline, main, raw_input, splits, summary, EVIDENCE
 from pipeline.jk9_fit import training_data
 from pipeline.prediction.posterior import predictions, scalar_check
 from pipeline.prediction.native import FullPath
@@ -75,6 +76,36 @@ class PredictionTests(unittest.TestCase):
             with self.assertRaises(ValueError):summary(broken,replicates=50)
         result=summary(records,replicates=500)
         self.assertAlmostEqual(result['folds']['complete_day']['contrasts']['D-B']['mean'],.1179006392755,places=12)
+
+    def test_execution_actions_reject_empty_target_selection(self):
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder) / 'output'
+            for action in ('fit', 'baselines', 'score', 'integrate', 'check'):
+                with self.subTest(action=action), self.assertRaises(SystemExit) as error:
+                    main([action, '--contest', '99999999', '--split', 'primary_hour',
+                          '--accepted', 'missing.json', '--output', str(output)])
+                self.assertEqual(error.exception.code, 2)
+            self.assertFalse(output.exists())
+
+    def test_batch_integrates_after_failed_score_and_records_unresolved_targets(self):
+        scores = [{'mean_score_numerical_screen_passed': False},
+                  {'mean_score_numerical_screen_passed': True}]
+        with tempfile.TemporaryDirectory() as folder, \
+                patch('pipeline.jk9_prediction.posterior_score', side_effect=scores), \
+                patch('pipeline.prediction.importance.integrate',
+                      side_effect=[{'passed': False}, {'passed': True}]) as integrate:
+            output = Path(folder) / 'output'
+            with self.assertRaisesRegex(SystemExit, '1 of 2 integrations need follow-up'):
+                main(['check', '--contest', '2445', '--split', 'primary_hour',
+                      '--accepted-root', folder, '--output', str(output)])
+            self.assertEqual([call.args[2] for call in integrate.call_args_list], ['C', 'D'])
+            status = json.loads((output / 'batch_status.json').read_text())
+            self.assertEqual(status['completed'], status['expected'])
+            first, second = status['records']
+            self.assertFalse(first['score_screen_passed'])
+            self.assertFalse(first['integration_passed'])
+            self.assertTrue(second['integration_passed'])
+            self.assertTrue((output / first['score_file']).is_file())
 
     def test_importance_proposal_matches_independent_student_density(self):
         from pipeline.prediction.importance import Proposal

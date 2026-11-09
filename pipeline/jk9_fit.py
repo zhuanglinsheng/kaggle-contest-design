@@ -62,15 +62,62 @@ def diagnose_free(cid, mode, paths, data):
     return summary, diagnostics
 
 
-def fit(row, output, *, model_kind='D', cutoff=None, split=None):
+
+COST_SCENARIOS = {
+    'common_sd_100': (1., .01),
+    'cost_floor_0001': (.75/math.sqrt(2), .001),
+}
+
+
+# Position in the original 19-task direct-fit schedule.
+COST_TASK_INDEX = {
+    'common_sd_100': {2464: 3, 2551: 4, 5144: 5, 8219: 10},
+    'cost_floor_0001': {2464: 14, 2551: 15, 5144: 16, 8219: 18},
+}
+
+
+def cost_prior(scenario):
+    sd, floor = COST_SCENARIOS[scenario]
+    return dict(common_log_mean=0., common_log_sd=sd, cost_floor=floor,
+                relative_log_sd=.75*math.sqrt(2))
+
+
+def diagnose_cost(cid, mode, paths, data):
     import numpy as np
-    from cmdstanpy import CmdStanModel
+    from pipeline.empirical import estimate as e, nonlinear_reestimate as n
+    from pipeline.empirical.unified_prior_medians import diagnose
+
+    summary, diagnostics = diagnose(cid, mode, paths, data)
+    columns = [e.read_columns(p) for p in paths]
+    ci, cj = [np.log([chain[key] for chain in columns]) for key in ('c_i','c_j')]
+    relative = ci-cj
+    for name, values in dict(common_log_cost=(ci+cj)/2, relative_log_cost=relative,
+                             cost_ratio=np.exp(relative)).items():
+        bulk, tail = n.rank_ess(values)
+        rhat = float(n.rank_rhat(values))
+        mcse = float(values.std(ddof=1)/math.sqrt(max(n.effective_sample_size(values), 1)))
+        mean = float(values.mean())
+        diagnostics['quantities'][name] = dict(rank_rhat=rhat, bulk_ess=float(bulk),
+            tail_ess=float(tail), mean_mcse=mcse, relative_mean_mcse=mcse/abs(mean) if mean else None)
+        diagnostics['passed'] = bool(diagnostics['passed'] and np.isfinite(values).all()
+                                    and rhat <= 1.01 and min(bulk,tail) >= 400)
+        summary.update({name+'_median':float(np.median(values)), name+'_mean':mean,
+                        name+'_mean_mcse':mcse})
+    return summary, diagnostics
+
+
+def fit(row, output, *, model_kind='D', cutoff=None, split=None, cost_scenario=None, baseline=None):
+    import numpy as np
     from pipeline.empirical import estimate as estimator
     from pipeline.empirical import unified_prior_reestimate as original
     from pipeline.empirical.unified_prior_medians import diagnose
 
     case = (output / model_kind / split / str(row['contest_id']) if split else
             output / row['scenario'] / row['mode'] / str(row['contest_id']))
+    if cost_scenario:
+        if row['scenario']!='main' or row['mode']!='full' or cutoff is not None or split or model_kind!='D':
+            raise ValueError('Cost-prior refits require a main, full-window leading target')
+        case = output / 'fits' / cost_scenario / str(row['contest_id'])
     case.mkdir(parents=True, exist_ok=True)
     accepted = case / 'accepted.json'
     if accepted.exists():
@@ -81,6 +128,9 @@ def fit(row, output, *, model_kind='D', cutoff=None, split=None):
     data = training_data(json.loads(raw.read_text()), row['mode'], cutoff)
     data.update(original.prior(data))
     source = ROOT / 'pipeline/models' / ('free_kernel.stan' if model_kind == 'C' else 'leading_order.stan')
+    if cost_scenario:
+        data.update(cost_prior(cost_scenario))
+        source = ROOT / 'pipeline/models/common_cost.stan'
     model = compile_stan(source)
     # Deterministic prior-scale starts avoid depending on deleted old chains.
     inits = [dict(c_i=f, c_j=1/f, sigma=2., **{'lambda': 100.},
@@ -97,9 +147,32 @@ def fit(row, output, *, model_kind='D', cutoff=None, split=None):
                          model=model_kind, training_cutoff=data['N_Delta'],
                          full_constructed_deadline=data['T_contest'], split=split,
                          scope='Fresh same-target posterior; historical chain identity not claimed')
+    if cost_scenario:
+        if baseline is None:
+            raise ValueError('Supply a matching accepted full-window baseline for initialization')
+        starting = json.loads(baseline.read_text())
+        cfg = starting['configuration']
+        if (not starting['diagnostics']['passed'] or cfg['raw_input_sha256']!=digest(raw)
+                or cfg['training_cutoff']!=data['N_Delta'] or cfg['model']!='D'
+                or cfg['source_model_sha256']!=digest(ROOT/'pipeline/models/leading_order.stan')
+                or cfg['prior']!=original.prior(data)):
+            raise ValueError('Baseline fit does not match the retained full-window target')
+        center = starting['summary']
+        inits = []
+        for j, factor in enumerate((.8,1.,1.2,1.5)):
+            init = {k:max(1.01*(data['cost_floor'] if k.startswith('c_') else .01),
+                          center[k+'_median']*factor) for k in ('c_i','c_j','sigma','lambda')}
+            init.update(mu_0=center['mu_0_median']+(j-1.5)*.05,
+                        log_r=max(math.log(.01)+.001,math.log(center['r_median'])+(j-1.5)*.1))
+            inits.append(init)
+        seed = 20261025 + 700000 + row['contest_id'] + 1000000*COST_TASK_INDEX[cost_scenario][row['contest_id']]
+        configuration.update(seed=seed, initialization='Dispersed full-window baseline medians',
+            inputs=data, input_sha256=digest(raw), model_sha256=digest(source),
+            executable_sha256=digest(model.exe_file), cost_scenario=cost_scenario,
+            baseline_accepted_sha256=digest(baseline))
     write_json(case / 'configuration.json', configuration)
     schedule = [(1000,2000,.98),(2000,4000,.99),(4000,8000,.995)]
-    if split:
+    if split or cost_scenario:
         schedule += [(2000,32000,.995),(4000,64000,.9975)]
     for attempt, (warmup, samples, delta) in enumerate(schedule, 1):
         folder = case / f'attempt{attempt}'
@@ -112,7 +185,7 @@ def fit(row, output, *, model_kind='D', cutoff=None, split=None):
                               adapt_delta=delta, max_treedepth=13, metric='dense_e',
                               output_dir=str(folder), sig_figs=18, show_progress=False)
         paths = [Path(p).resolve() for p in result.runset.csv_files]
-        diagnostic = diagnose_free if model_kind == 'C' else diagnose
+        diagnostic = diagnose_cost if cost_scenario else diagnose_free if model_kind == 'C' else diagnose
         summary, diagnostics = diagnostic(row['contest_id'], row['mode'], paths, data)
         record = dict(summary=summary, diagnostics=diagnostics, configuration=configuration,
                       chain_paths=[os.path.relpath(p, accepted.parent) for p in paths],

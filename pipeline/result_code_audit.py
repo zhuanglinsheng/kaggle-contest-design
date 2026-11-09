@@ -26,13 +26,13 @@ for names,sources in [
  (['chapter5_final_audit.json','chapter5_accepted_count_floor_audit.csv'],['pipeline/validation/chapter5_final_audit.py']),
  (['regression_comparison.csv','parameter_comparison.csv'],['pipeline/empirical/unified_prior_outputs.py']),
  (['same_prior_sampler_comparison.csv','same_prior_sampler_report.json'],['pipeline/empirical/unified_prior_sampler_check.py']),
- (['empirical_calibrated_intervals.csv','interval_and_recovery_report.json','simulation_recovery_reference.csv'],['pipeline/empirical/unified_prior_interval_report.py'])]:
+ (['empirical_calibrated_intervals.csv','interval_and_recovery_report.json','simulation_recovery_reference.csv'],['pipeline/empirical/unified_prior_interval_report.py','pipeline/empirical/recovery.py'])]:
  for name in names:rule('results/reestimation/*/validation/'+name,'calculation',*sources)
 release='results/releases/paperjk9-20261029/'
 rule(release+'evidence/main_design/*','calculation',table+'design_batch.py',table+'refine_prizes.py',table+'assemble_refined.py','pipeline/empirical/nonlinear_design.py','pipeline/jk9_design.py')
 rule(release+'evidence/fixed_precision/*','calculation',table+'fixed_precision_table.py','pipeline/empirical/nonlinear_design.py','pipeline/jk9_design.py')
 rule(release+'evidence/main_posteriors/*','calculation',table+'rebuild_posterior.py',table+'audit_posteriors.py','pipeline/empirical/unified_prior_medians.py')
-rule(release+'evidence/cost_sensitivity/*','calculation_and_summary',review+'task3_nonlinear_prior_sensitivity_20261026/run.py',review+'task3_nonlinear_prior_sensitivity_20261026/refine_small.py',review+'task3_nonlinear_prior_sensitivity_20261026/baseline_feedback.py','pipeline/jk9.py')
+rule(release+'evidence/cost_sensitivity/*','calculation_and_summary',review+'task3_nonlinear_prior_sensitivity_20261026/run.py',review+'task3_nonlinear_prior_sensitivity_20261026/refine_small.py',review+'task3_nonlinear_prior_sensitivity_20261026/baseline_feedback.py','pipeline/empirical/cost_sensitivity.py','pipeline/jk9_fit.py','pipeline/jk9.py')
 rule(release+'evidence/theory_source/*','calculation','pipeline/theory/joint_design_moderate_dense.py','pipeline/theory/joint_design_three_class.py')
 for n in ['table_numbers.json','table_readiness.json','final_main_audit.json']:rule(release+'evidence/'+n,'calculation',table+'assemble_refined.py',table+'build_table.py','pipeline/jk9.py')
 rule(release+'evidence/fixed_precision_summary.json','calculation',table+'fixed_precision_table.py','pipeline/jk9.py')
@@ -66,11 +66,10 @@ figures=[]
 for r in csv.DictReader(Path('docs/PAPER_EVIDENCE.csv').open()):
  src=[r['producer']];status='implementation_located'
  if r['label'].startswith('kaggledata-diagram'):src=[r['evidence'].replace('.pdf','.drawio')];status='editable_diagram_source'
- if r['label']=='fig-S-evol':src=[];status='original_plot_script_not_located'
  if r['label']=='tab-submission-prediction':src=predmap['recovered_scores.json'][0]
  if r['label'] in ['tab-counterfactual-precision','tab-fixed-precision']:src += [table+('assemble_refined.py' if r['label']=='tab-counterfactual-precision' else 'fixed_precision_table.py'),'pipeline/empirical/nonlinear_design.py']
  assert all(Path(s).is_file() for s in src)
  figures.append(dict(label=r['label'],evidence=r['evidence'],status=status,sources=src))
-out=dict(date='2026-11-06',scope=f'{len(rows)} retained files under results/ and {len(figures)} entries in PAPER_EVIDENCE.csv.',method='Static result-family mapping of writers, controllers and executable method sources. Source lists identify generating calculations, export steps and content verifiers; metadata inventories have their own categories.',counts=dict(collections.Counter(r['category'] for r in rows)),files=rows,paper_items=figures,limitations=['Original plotting script for paper/figure_S_evolve.pdf not located; model variance equations remain in manuscript and solver code.','Recovery/export inventories have retained verifiers and upstream calculation code; exact one-off collector scripts were not located for every inventory.','Generated-run files are produced by the declared calculation stages; result/source mapping is maintained independently of cache retention.'])
+out=dict(date='2026-11-09',scope=f'{len(rows)} retained files under results/ and {len(figures)} entries in PAPER_EVIDENCE.csv.',method='Static result-family mapping of writers, controllers and executable method sources. Source lists identify generating calculations, export steps and content verifiers; metadata inventories have their own categories.',counts=dict(collections.Counter(r['category'] for r in rows)),files=rows,paper_items=figures,limitations=['Recovery/export inventories have retained verifiers and upstream calculation code; exact one-off collector scripts were not located for every inventory.','Generated-run files are produced by the declared calculation stages; result/source mapping is maintained independently of cache retention.'])
 Path('docs/RESULT_CODE_AUDIT.json').write_text(json.dumps(out,indent=2)+'\n')
 print(json.dumps(out['counts'],indent=2));print('Paper items',len(figures));print('Unmapped',[r['result'] for r in rows if r['category']=='unmapped'])

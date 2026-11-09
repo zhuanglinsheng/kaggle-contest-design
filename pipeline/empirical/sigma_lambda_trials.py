@@ -41,6 +41,7 @@ VARIANTS={
  'count_quarter_lambda_external':dict(count_weight=.25,lambda_mean=100.,lambda_sd=2.25),
 }
 LIB=None
+POLICY_LIKELIHOOD=n.Likelihood
 
 
 def kernel():
@@ -130,36 +131,39 @@ def prepare(replicates=(0,1)):
   data,_,z,provenance=n.load_baseline(cid);folder=OUT/'empirical'/str(cid);folder.mkdir(parents=True,exist_ok=True)
   n.save_json(folder/'data.json',data);n.save_json(folder/'provenance.json',provenance)
   truthz,reference=truth_point(cid);truth=a.physical(truthz);truth['r']=math.exp(truthz[5])
-  # Generate once per fixed configuration; seeds and candidates never rerolled.
-  if all((OUT/'recovery'/f'{cid}_{rep}/data.json').exists() for rep in replicates):continue
-  n.SOURCE=n.ROOT/'pipeline/empirical/nonlinear_fast_kernel.cpp'
-  evaluator=n.Likelihood(data,.00625,1024);policy,dy=evaluator.policy(truthz)
-  finer,fdy=n.Likelihood(data,.003125,2048).policy(truthz)
-  sigma=truth['sigma'];T=data['T_contest'];scale=sigma/math.sqrt(T)
-  def interpolate(t,y,pol,step):
-   pos=y/(sigma*math.sqrt(T))/step+(pol.shape[1]-1)/2
-   if pos<0 or pos>=pol.shape[1]-1:raise RuntimeError('Simulation outside policy domain')
-   j=int(pos);f=pos-j;time=min(t/T,1)*(pol.shape[0]-1);k=min(int(time),pol.shape[0]-2);tf=time-k
-   return scale*((1-tf)*((1-f)*pol[k,j]+f*pol[k,j+1])+tf*((1-f)*pol[k+1,j]+f*pol[k+1,j+1]))
-  checks=[(t*T,y*sigma*math.sqrt(T)) for t in (0,.25,.5,.75,.9) for y in (-2,-1,0,1,2)]
-  coarse=np.array([interpolate(t,y,policy,dy) for t,y in checks]);fine=np.array([interpolate(t,y,finer,fdy) for t,y in checks])
-  error=float(np.max(np.abs(coarse-fine))/max(np.max(fine),1e-20))
-  if error>.01:raise RuntimeError(f'Simulation policy grid discrepancy: {cid} {error}')
-  leading_peak=data['theta']/min(truth['c_i'],truth['c_j'])/math.sqrt(2*math.pi*sigma/math.sqrt(truth['lambda']))
-  bound=max(1.,1.01*truth['r']*max(float(policy.max())*scale,leading_peak)/24)
-  for rep in replicates:
-   target=OUT/'recovery'/f'{cid}_{rep}';target.mkdir(parents=True,exist_ok=True)
-   if (target/'data.json').exists():continue
-   seed=271000+100*cid+rep*10;start=datetime(2026,1,1)
-   result=synthetic_data_simulation(theta=data['theta'],c_i=truth['c_i'],c_j=truth['c_j'],sigma=sigma,lamb=truth['lambda'],intensity_effort_ratio=truth['r'],hour_arrival_ub=bound,
-    start_time=start,end_time=start+timedelta(hours=data['N_Delta']),mu_0=truth['mu_0'],effort_policy=lambda t,y:interpolate(t,y,policy,dy),
-    seed_brownian=seed,seed_poisson=seed+1,seed_uniform=seed+2,seed_initial=seed+3)
-   times,mi,mj,latent,perceived,public,ei,ej=result
-   sim=dict(theta=data['theta'],Delta2f=data['Delta2f'],N_Delta=len(times),count_start_idx=1,T_contest=T,Ni=len(ei),Nj=len(ej),
-    hat_t_i=[(t-start).total_seconds()/3600 for t in ei],hat_t_j=[(t-start).total_seconds()/3600 for t in ej],hat_y=public[1:].tolist(),feedback_gap=public[:-1].tolist())
-   n.save_json(target/'data.json',sim);n.save_json(target/'truth.json',dict(truth=truth,seed=seed,grid_discrepancy=error,**reference))
-   np.savez_compressed(target/'paths.npz',latent=latent,public=public,perceived=perceived,mi=mi,mj=mj)
-   print('GENERATED',cid,rep,len(ei),len(ej),error,flush=True)
+  simulate(cid,data,truthz,truth,reference,replicates,OUT)
+
+
+def simulate(cid,data,truthz,truth,reference,replicates,output):
+ if all((output/'recovery'/f'{cid}_{rep}/data.json').exists() for rep in replicates):return
+ n.SOURCE=n.ROOT/'pipeline/empirical/nonlinear_fast_kernel.cpp'
+ evaluator=POLICY_LIKELIHOOD(data,.00625,1024);policy,dy=evaluator.policy(truthz)
+ finer,fdy=POLICY_LIKELIHOOD(data,.003125,2048).policy(truthz)
+ sigma=truth['sigma'];T=data['T_contest'];scale=sigma/math.sqrt(T)
+ def interpolate(t,y,pol,step):
+  pos=y/(sigma*math.sqrt(T))/step+(pol.shape[1]-1)/2
+  if pos<0 or pos>=pol.shape[1]-1:raise RuntimeError('Simulation outside policy domain')
+  j=int(pos);f=pos-j;time=min(t/T,1)*(pol.shape[0]-1);k=min(int(time),pol.shape[0]-2);tf=time-k
+  return scale*((1-tf)*((1-f)*pol[k,j]+f*pol[k,j+1])+tf*((1-f)*pol[k+1,j]+f*pol[k+1,j+1]))
+ checks=[(t*T,y*sigma*math.sqrt(T)) for t in (0,.25,.5,.75,.9) for y in (-2,-1,0,1,2)]
+ coarse=np.array([interpolate(t,y,policy,dy) for t,y in checks]);fine=np.array([interpolate(t,y,finer,fdy) for t,y in checks])
+ error=float(np.max(np.abs(coarse-fine))/max(np.max(fine),1e-20))
+ if error>.01:raise RuntimeError(f'Simulation policy grid discrepancy: {cid} {error}')
+ leading_peak=data['theta']/min(truth['c_i'],truth['c_j'])/math.sqrt(2*math.pi*sigma/math.sqrt(truth['lambda']))
+ bound=max(1.,1.01*truth['r']*max(float(policy.max())*scale,leading_peak)/24)
+ for rep in replicates:
+  target=output/'recovery'/f'{cid}_{rep}';target.mkdir(parents=True,exist_ok=True)
+  if (target/'data.json').exists():continue
+  seed=271000+100*cid+rep*10;start=datetime(2026,1,1)
+  result=synthetic_data_simulation(theta=data['theta'],c_i=truth['c_i'],c_j=truth['c_j'],sigma=sigma,lamb=truth['lambda'],intensity_effort_ratio=truth['r'],hour_arrival_ub=bound,
+   start_time=start,end_time=start+timedelta(hours=data['N_Delta']),mu_0=truth['mu_0'],effort_policy=lambda t,y:interpolate(t,y,policy,dy),
+   seed_brownian=seed,seed_poisson=seed+1,seed_uniform=seed+2,seed_initial=seed+3)
+  times,mi,mj,latent,perceived,public,ei,ej=result
+  sim=dict(theta=data['theta'],Delta2f=data['Delta2f'],N_Delta=len(times),count_start_idx=1,T_contest=T,Ni=len(ei),Nj=len(ej),
+   hat_t_i=[(t-start).total_seconds()/3600 for t in ei],hat_t_j=[(t-start).total_seconds()/3600 for t in ej],hat_y=public[1:].tolist(),feedback_gap=public[:-1].tolist())
+  n.save_json(target/'data.json',sim);n.save_json(target/'truth.json',dict(truth=truth,seed=seed,grid_discrepancy=error,**reference))
+  np.savez_compressed(target/'paths.npz',latent=latent,public=public,perceived=perceived,mi=mi,mj=mj)
+  print('GENERATED',cid,rep,len(ei),len(ej),error,flush=True)
 
 
 def optimize(dataset,cid,variant):

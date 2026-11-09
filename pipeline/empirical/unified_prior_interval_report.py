@@ -3,7 +3,6 @@
 from pipeline.storage import historical_path
 import json
 import math
-import numpy as np
 import pandas as pd
 from pipeline.config import ROOT
 from pipeline.empirical.unified_prior_reestimate import OUT,save,digest
@@ -14,16 +13,12 @@ def expand(q,k):
     return math.exp(m+k*(math.log(q['q025'])-m)),math.exp(m+k*(math.log(q['q975'])-m))
 
 
-def main():
-    research=historical_path(ROOT/'results/validation/sigma_lambda_trials')
-    paths={'sigma':research/'sigma_interval_calibration/frozen_multiplier.json',
-           'lambda':research/'lambda_refinement/lambda_interval_frozen.json'}
-    multipliers={p:json.loads(path.read_text())['multiplier'] for p,path in paths.items()}
+def recovery_report(research, destination, multipliers, contests):
     rows=[]
     for replicate in (2,3,4,5):
-        for case in sorted((research/'posterior/recovery').glob(f'*_{replicate}')):
+        for cid in sorted(contests, key=str):
+            case=research/'posterior/recovery'/f'{cid}_{replicate}'
             path=case/'lambda_external/summary.json'
-            if not path.exists():continue
             a=json.loads(path.read_text())
             if not a['passed']:raise RuntimeError('Rejected recovery case')
             for p,k in multipliers.items():
@@ -35,7 +30,7 @@ def main():
                     source_summary_sha256=digest(path)))
     frame=pd.DataFrame(rows)
     if len(frame)!=80:raise RuntimeError('Expected four realizations of the ten fixed configurations, two parameters each')
-    destination=OUT/'validation';destination.mkdir(parents=True,exist_ok=True)
+    destination.mkdir(parents=True,exist_ok=True)
     frame.to_csv(destination/'simulation_recovery_reference.csv',index=False)
     report={}
     for p,group in frame.groupby('parameter'):
@@ -44,8 +39,12 @@ def main():
             mean_point_mean_absolute_relative_error=float(group.mean_relative_error.mean()),
             original_95_credible_interval_covered=int(group.original_credible_interval_covered.sum()),
             simulation_calibrated_interval_covered=int(group.simulation_calibrated_interval_covered.sum()),
-            multiplier=multipliers[p],calibration_source_sha256=digest(paths[p]))
-    primary=pd.read_csv(OUT/'estimation/posterior_summary_final.csv')
+            multiplier=multipliers[p])
+    return report
+
+
+def calibrated_intervals(posterior_summary, destination, multipliers):
+    primary=pd.read_csv(posterior_summary)
     application=[]
     for row in primary[primary['mode']=='full'].itertuples():
         for p,k in multipliers.items():
@@ -55,6 +54,19 @@ def main():
                 simulation_calibrated_lower=lo,simulation_calibrated_upper=hi,multiplier=k,
                 interval_label='Simulation-calibrated interval; not the original 95% credible interval',empirical_truth_coverage='unknown'))
     pd.DataFrame(application).to_csv(destination/'empirical_calibrated_intervals.csv',index=False)
+
+
+def main():
+    research=historical_path(ROOT/'results/validation/sigma_lambda_trials')
+    paths={'sigma':research/'sigma_interval_calibration/frozen_multiplier.json',
+           'lambda':research/'lambda_refinement/lambda_interval_frozen.json'}
+    multipliers={p:json.loads(path.read_text())['multiplier'] for p,path in paths.items()}
+    from pipeline.empirical.sigma_lambda_trials import IDS
+    destination=OUT/'validation'
+    report=recovery_report(research,destination,multipliers,IDS)
+    for p in report:
+        report[p]['calibration_source_sha256']=digest(paths[p])
+    calibrated_intervals(OUT/'estimation/posterior_summary_final.csv', destination, multipliers)
     save(destination/'interval_and_recovery_report.json',dict(parameters=report,
         scope='Previously retained simulations at ten targeted parameter configurations, not a representative validation sample of all73 contests. Average error is not a per-contest error bound.',
         feedback_alignment='Recovery exercises retain their documented simulator-aligned interval-start feedback. Empirical re-estimation retains the existing interval-endpoint convention. The reference recovery rates are not an end-to-end validation of empirical timing and preprocessing.',

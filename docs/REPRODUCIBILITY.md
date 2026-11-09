@@ -323,27 +323,21 @@ chain-path convention as step 5. In addition to its ordinary schedule, the
 prediction fitter can try `(2000,32000,.995)` and `(4000,64000,.9975)`.
 C also diagnoses `deadline_power`, `gap_log_scale` and `gap_scale`.
 
-Score and integrate every target with an explicit accepted record:
+Run both numerical checks for all C/D targets using their accepted records:
 
 ```sh
-python - <<'PY'
-import subprocess, sys
-from pathlib import Path
-from pipeline.jk9_prediction import splits
-for row in splits():
-    cid, split = row['contest_id'], row['split']
-    for model in ('C', 'D'):
-        accepted = Path('tmp/runs/prediction')/model/split/str(cid)/'accepted.json'
-        common = ['--model', model, '--contest', str(cid), '--split', split,
-                  '--accepted', str(accepted)]
-        subprocess.run([sys.executable, '-m', 'pipeline.jk9_prediction', 'score',
-                        *common, '--output', 'tmp/runs/prediction_scores'], check=True)
-        subprocess.run([sys.executable, '-m', 'pipeline.jk9_prediction', 'integrate',
-                        *common, '--output', 'tmp/runs/prediction_integrals',
-                        '--budgets', '32768', '65536', '131072', '262144',
-                        '524288', '1048576', '--seed-offset', '0'], check=True)
-PY
+python -m pipeline.jk9_prediction check --accepted-root tmp/runs/prediction \
+  --output tmp/runs/prediction_checks --budgets 32768 65536 131072 262144 524288 1048576 --seed-offset 0
 ```
+
+`check` writes each posterior score and runs independent integration even if
+the preliminary score screen flags a target. It records both outcomes in
+`batch_status.json` and continues through numerical screening outcomes for
+the remaining targets. If any integration needs follow-up, the command exits
+with a nonzero status after recording all targets. Invalid inputs and execution
+errors still stop the command. Use a new output directory for each batch.
+The optional `--contest`, `--split`, and `--model` filters select targets for a
+focused rerun. Execution commands require at least one matching target.
 
 `--budgets` is the sequence of total independent proposal draws at each budget;
 `--seed-offset 0` selects the declared initial integration stream. The code uses
@@ -355,25 +349,52 @@ outputs are `importance_<model>_<id>_<split>/{proposal,status}.json` and
 identities and contains `records` and `passed`; production NPZs contain joint
 hourly log scores and probability-weight diagnostics.
 
-This ordinary-hour entry point deliberately preserves rare-hour flags. A
-rare-hour case uses the specialized original methods under
-`docs/review/PaperJK9/recovered_prediction_sources_20261029/`, listed in the
-prediction implementation section below. These files include executable code
-and their own production/registration contracts. Their controllers consume
-historical index filenames; passing a newly generated posterior requires
-matching those index/input contracts, not transplanting an old correction.
-A score that stops on a gate remains a recorded computation outcome; do not
-skip its contest when building the table.
+Use the integration records to generate fresh rare-hour results:
 
-The table report is the 73-contest equal-weight paired comparison and
-500,000-replicate bootstrap implemented by `pipeline.jk9_prediction.summary`.
-For a published-result reconstruction, `python -m pipeline.jk9_prediction summary`
-reads the 584 retained contest/model/split means and writes
-`tmp/runs/prediction/historical_summary.json`. For new runs, its input records
-must have `contest_id`, `split`, `model`, `mean_joint_logscore`, complete coverage
-of A/B/C/D ×73×2, and scores produced with the matching acceptance/integration
-logic; call `summary(records, replicates=500000)` on those records. The function
-fixes `seed_base=20261025+1904`; fold 1 adds 1,000,000.
+```sh
+python -m pipeline.jk9_prediction repair --accepted-root tmp/runs/prediction \
+  --integration-root tmp/runs/prediction_checks --output tmp/runs/prediction_tail \
+  --budgets 32768 65536 131072 262144 524288 1048576 --seed-offset 100000000
+```
+
+An hour with probability-weight ESS below 400 or log probability below −20
+triggers the tailored proposal. The repair reads the previous `status.json`,
+checks its frozen split, model and accepted-record hash, and evaluates the
+same predictive integral. Half the proposal weight remains on the defensive
+training mixture. The rest goes to Student-t components centered at the rare
+numerator modes, with covariance scales .5, 1 and 2. Each numerator is the
+training density times the observed pair of hourly count probabilities.
+The counts determine the numerator and its proposal centers. The training
+density and the predictive probability being computed stay fixed.
+
+Production uses new random draws and the same 32-block full-path diagnostics.
+A tailored hour also requires numerator ESS at least 1,000, maximum normalized
+numerator weight below .01, and log-probability MCSE at most .02. The hour
+must agree across successive passing budgets within five combined MCSEs plus
+.001. A low log probability alone is expected for a rare hour and can pass
+these diagnostics. A repair that flags an additional rare hour can feed its
+output directory into a new repair, with a new output directory and seed
+offset. An unresolved record without a rare-hour trigger needs a fresh ordinary
+integration, using the `integrate` command with its accepted record, contest,
+split and model, and larger budgets if needed.
+
+Register the freshly calculated scores and reproduce the comparison:
+
+```sh
+python -m pipeline.jk9_prediction summary-fresh --baseline-root tmp/runs/prediction \
+  --accepted-root tmp/runs/prediction --integration-root tmp/runs/prediction_tail \
+  --integration-root tmp/runs/prediction_checks --output tmp/runs/prediction_report
+```
+
+The repeated integration roots are searched in the order supplied. The command
+joins passing A/B quadrature and C/D integration records against the 146 frozen
+split rows. Each C/D score must match its accepted fit and have two consecutive
+passing integration budgets. Outputs are `fresh_scores.json` with 584 records
+and source hashes, and `fresh_summary.json` with the 73-contest equal-weight
+comparison and 500,000 paired bootstrap draws. The base seed is
+`20261025+1904`, with 1,000,000 added for the complete-day split. The separate
+`python -m pipeline.jk9_prediction summary` command computes
+`tmp/runs/prediction/historical_summary.json` from the 584 published score means.
 
 ### 9. Rebuild the theory display or regenerate its numerical search
 
@@ -408,40 +429,132 @@ rendering a new search, point its `base` variable at the new
 `three_class_comparison/` directory in an isolated copy of the display script.
 Do not replace long-term evidence automatically.
 
-### 10. Map the remaining retained appendix and illustration outputs
+### 10. Reproduce appendix recovery, cost-prior sensitivity and illustrations
 
-The complete figure/table index is `PAPER_EVIDENCE.csv`; the per-result source
-inventory is `RESULT_CODE_AUDIT.json`. The following input/output distinctions
-are necessary when following historical method controllers:
-
-| Paper item | Producer and input contract | Output consumed by the paper |
-| --- | --- | --- |
-| Nonlinear-generated parameter recovery | `sigma_lambda_trials.py`, `sigma_lambda_replication.py`, `sigma_lambda_posterior.py`, then `unified_prior_interval_report.py`; ten fixed configurations, realizations 2–5, original nonlinear-policy generation followed by the leading-order estimation target | `validation/simulation_recovery_reference.csv`: 80 rows, 40 realizations × sigma/lambda; aggregate `median_relative_error` and `original_credible_interval_covered` |
-| Cost-prior sensitivity | `task3_direct_prior_training_method_20261025.md` defines direct common-cost-prior fits; `task3_nonlinear_prior_sensitivity_20261026/run.py`, `refine_small.py`, `baseline_feedback.py` consume accepted alternative fits, fixed original designs and raw full-window inputs | Eight case/scenario JSONs, four contests × `common_sd_100`/`cost_floor_0001`, then the final direction summary |
-| Official-rank agreement | `pipeline.validation.rank_agreement`: original ZIP `Teams.csv` and the 73-contest accepted-source inventory | `chapter5_rank_agreement.csv` and its bootstrap summary; seed 20261008, 10,000 resamples |
-| Two conceptual diagrams | `paper/kaggledata_diagram{,_simplified}.drawio`; export the complete page as PDF in diagrams.net | Same-basename PDF files |
-| Variance illustration | Manuscript variance equation and its lambda=sigma=1 caption; original plotting script was not located in the source inventory | `paper/figure_S_evolve.pdf`; this is an analytic illustration, not an empirical fit |
-
-For official ranks, make the selected inventory explicit rather than relying on
-a historical working directory:
+#### Nonlinear-generated parameter recovery
 
 ```sh
-python - <<'PY'
+python -m pipeline.empirical.recovery generate --output tmp/runs/nonlinear_recovery
+python -m pipeline.empirical.recovery fit --output tmp/runs/nonlinear_recovery \
+  --samples 30000 --workers 8
+python -m pipeline.empirical.recovery report --output tmp/runs/nonlinear_recovery
+```
+
+`pipeline/empirical/recovery_design.toml` fixes the ten contest IDs, six joint
+truth coordinates, activity rate, input hashes and reference calibration
+multipliers. The coordinates were originally selected as joint representative
+points from nonlinear empirical fits. Each truth vector was extracted from
+the four retained recovery summaries for that contest, with all 40 summary
+hashes checked against the published CSV. These fixed coordinates and the
+full-window contest inputs supply the simulation design.
+
+`generate` processes replicates 2–5. The seed for the Brownian path is
+`271000 + 100*contest_id + 10*replicate`. Add 1, 2 and 3 for the Poisson,
+uniform and initial-condition streams. The nonlinear policy uses gap spacing
+.00625 and 1,024 time steps, checked against .003125 and 2,048 steps with a 1%
+discrepancy tolerance. Each `recovery/<id>_<replicate>/` has `data.json`
+(constructed deadline, hourly gaps, interval-start feedback and event times),
+`truth.json`, `paths.npz` and `generation_audit.json` with the generated and
+reference input hashes. Use `--contests` or `--replicates` for a subset of
+generation or fitting.
+
+`fit` consumes each `data.json`, builds a proposal with dispersed prior-scale
+initialization, then runs four chains with 1,500 warmup and 30,000 retained
+draws per chain. The leading estimator uses interval-start feedback and the
+`lambda_external` prior (log median `log(100)`, log SD 2.25). It writes
+`posterior/recovery/<id>_<replicate>/lambda_external/` with the proposal,
+four chain NPZs, diagnostics and `summary.json`. The report requires rank
+R-hat ≤1.01 and bulk and tail ESS ≥400 for all reported quantities in all 40
+fits. It writes `validation/simulation_recovery_reference.csv` (80 rows with
+truth, posterior mean/median, relative error and interval coverage) and
+`interval_and_recovery_report.json` (aggregate error and coverage). The
+appendix reports absolute relative error of the posterior median and coverage
+of the original 95% credible intervals. The CSV also records coverage after
+the separate frozen interval expansions. To also regenerate
+`empirical_calibrated_intervals.csv`, pass
+`--posterior-summary tmp/runs/empirical_reports/estimation/posterior_summary_final.csv`
+to `report`, using the empirical summary generated in step 6.
+
+#### Cost-prior sensitivity
+
+```sh
+for id in 8219 2464 5144 2551; do
+  python -m pipeline.jk9_fit --scenario main --mode full --contest "$id" --output tmp/runs
+done
+python -m pipeline.empirical.cost_sensitivity plan --baseline-root tmp/runs
+python -m pipeline.empirical.cost_sensitivity fit --baseline-root tmp/runs \
+  --output tmp/runs/cost_sensitivity
+python -m pipeline.empirical.cost_sensitivity evaluate --baseline-root tmp/runs \
+  --output tmp/runs/cost_sensitivity
+python -m pipeline.empirical.cost_sensitivity report --output tmp/runs/cost_sensitivity
+```
+
+If step 5 has already generated the four full-window accepted fits, use that
+directory as `--baseline-root`. For each contest, both alternatives refit the
+frozen full window with `pipeline/models/common_cost.stan`. For
+`u=(log(c_i)+log(c_j))/2` and `v=log(c_i)-log(c_j)`, the mean of each is
+zero, and the SD of `v` is `.75*sqrt(2)`. `common_sd_100` sets the SD of
+`u` to 1 and the cost floor to .01. `cost_floor_0001` uses SD
+`.75/sqrt(2)` and lowers the floor to .001. All other priors are shared.
+The fitter uses dispersed starts around accepted baseline medians and the
+original case seeds. The 4-chain dense NUTS schedule uses maximum tree
+depth 13 and (warmup, retained draws, adapt delta)
+`(1000,2000,.98), (2000,4000,.99), (4000,8000,.995),
+(2000,32000,.995), (4000,64000,.9975)`. It checks the usual diagnostics plus
+rank R-hat and bulk/tail ESS for `u`, `v` and the cost ratio, and writes
+`fits/<scenario>/<id>/accepted.json` and hash-linked chains.
+
+`evaluate` consumes those fits and the fixed published redesigns (default
+`results/releases/paperjk9-20261029/evidence/main_design/<id>.json`).
+Pass `--design-root tmp/runs/design/contests` to evaluate new selections from
+step 7 instead. The four original cost weights are 2, 100, 1 and .1,
+respectively. For each alternative, the paired original-game HJB calculation
+uses seed `202610260000+contest_id` with 32 coarse and 4 independent fine
+draws per chain. The Welch interval plus the grid error radius determines the
+supported direction. The fixed published prize is evaluated first, then the
+declared fractions .5, .75, .875 and .9375 toward the appropriate prize
+boundary, with duration and feedback held at the selected levels. For 8219
+the refinement evaluates all 128 coarse draw identities directly on the fine
+grid. The pre-portability controller versions linked by the historical results are
+available at commit `c47f18a28bd16dbd37d9d4c61e0b81bf222c254b`.
+Baseline feedback controls for 2551 and 5144 use draws from their own
+accepted full-window fits, seed `202610250000+contest_id`, and compare
+feedback at the same prize and duration.
+
+The outputs are eight `results/<id>_<scenario>.json` records, two
+`small_refinement/<id>_<scenario>.json` records for 8219,
+`baseline_controls/<id>.json` and `direction_summary.json`. The report
+separates support at the published design from support after an allowed prize
+adjustment. Use `--contests` and repeated `--scenario` flags for selected
+refits or comparisons.
+
+#### Illustrations and official ranks
+
+```sh
+python -m pipeline.figures.variance --output tmp/runs/figures/figure_S_evolve.pdf
+```
+
+The variance plot solves `S'=sigma²-lambda*S²` in closed form at 1,001
+equally spaced times from 0 to 10, using sigma = lambda = 1. The two initial
+values are 0.8 and approximately 1.08331, read from the retained figure.
+For the two conceptual diagrams, export the complete page of each
+`paper/kaggledata_diagram{,_simplified}.drawio` as a same-basename PDF in
+diagrams.net.
+
+Official-rank agreement uses the original ZIP `Teams.csv` and the
+73-contest accepted-source inventory, with 10,000 bootstrap resamples and
+seed 20261008:
+
+```sh
+python - <<'PYCODE'
 from pathlib import Path
 from pipeline.validation import rank_agreement as r
 r.MAIN_ESTIMATION_DIR = Path('results/reestimation/lambda100_sd225/estimation')
 r.MAIN_VALIDATION_DIR = Path('tmp/runs/rank_agreement')
 r.MAIN_VALIDATION_DIR.mkdir(parents=True, exist_ok=True)
 r.main()
-PY
+PYCODE
 ```
-
-The recovery and cost-sensitivity controllers consume fixed truth
-configurations, proposal/reference records and accepted-posterior indexes.
-Generate or stage these inputs before invoking their consumers; the producer
-sources specify the filenames and fields. These historical controllers retain
-their original interfaces; the maintained entry points above provide adapters
-where the current workflow uses different generated output paths.
 
 ### 11. Compile the manuscript and inspect stage coverage
 
@@ -485,10 +598,8 @@ materials and generates its own working files in dependency order.
 
 `docs/PAPER_EVIDENCE.csv` connects manuscript items to result and producer files.
 `docs/RESULT_CODE_AUDIT.json` inventories the retained result/source mappings;
-`python -m pipeline.result_code_audit` regenerates it. The original plotting
-script for `paper/figure_S_evolve.pdf` was not located; its analytic equation and
-caption parameters are retained. The two conceptual diagrams have editable
-`.drawio` sources. Historical source snapshots preserve their original content
+`python -m pipeline.result_code_audit` regenerates it. The variance figure has an
+analytic generator, and the two conceptual diagrams have editable `.drawio` sources. Historical source snapshots preserve their original content
 identities. For their dated comments and review questions, consult the context
 in `docs/review/README.md`.
 
@@ -496,6 +607,12 @@ The 6 November local inventory contains all 292 indexed main-design chains,
 matching their hashes, and the recovered prediction bundle: 1,400 blobs,
 1,256,958,899 bytes, matching recorded sizes, SHA-256 and Git blob SHA-1.
 Local availability is recorded separately from the files distributed through Git.
+
+The evidence source index at `results/releases/paperjk9-20261029/evidence_sources.json`
+records `source_sha256` for the original artifact and `release_sha256` for the
+retained copy. For 75 JSON records, the retained copies have updated `scope`
+wording. The publication and reproducibility checks validate each retained copy
+against its `release_sha256`.
 The calculation commands above use fresh generated outputs when historical
 working files are absent.
 

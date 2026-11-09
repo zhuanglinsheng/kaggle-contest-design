@@ -3,6 +3,7 @@ import argparse
 import json
 import math
 import os
+from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 from pipeline.empirical import sigma_lambda_trials as s
@@ -20,19 +21,27 @@ class Target(s.Target):
 def load(cid):
  dataset=os.environ['SIGMA_LAMBDA_DATASET'];case=os.environ['SIGMA_LAMBDA_CASE']
  path=s.OUT/dataset/case/'data.json';data=json.loads(path.read_text())
- _,chains,z,provenance=BASE_LOAD(cid)
+ if os.environ.get('SIGMA_LAMBDA_FROZEN') == '1':
+  mean,sd=s.prior_config(data,os.environ['SIGMA_LAMBDA_VARIANT'])
+  chains=None;z=np.array([mean,mean-sd,mean+sd])
+  provenance=dict(simulation_design_sha256=n.digest(Path(__file__).with_name('recovery_design.toml')),
+   initialization='Dispersed prior-scale starts')
+ else:
+  _,chains,z,provenance=BASE_LOAD(cid)
  return data,chains,z,dict(**provenance,trial_dataset=dataset,trial_case=case,trial_data_sha256=n.digest(path),
   variant=os.environ['SIGMA_LAMBDA_VARIANT'],trial_script_sha256=n.digest(s.__file__),posterior_script_sha256=n.digest(__file__))
 
 
-def configure(dataset,case,variant):
+def configure(dataset,case,variant,output=None):
+ if output is not None:s.OUT=Path(output)
+ os.environ['SIGMA_LAMBDA_FROZEN']=str(int(output is not None))
  os.environ['SIGMA_LAMBDA_DATASET']=dataset;os.environ['SIGMA_LAMBDA_CASE']=str(case);os.environ['SIGMA_LAMBDA_VARIANT']=variant
  s.kernel();n.SOURCE=s.OUT/'weighted_leading_kernel.cpp';n.Likelihood=Target;n.kernel=s.kernel;n.load_baseline=load
  n.OUT=s.OUT/'posterior'/dataset/str(case)/variant;n.OUT.mkdir(parents=True,exist_ok=True)
 
 
-def prepare(dataset,case,variant):
- cid=int(str(case).split('_')[0]);configure(dataset,case,variant)
+def prepare(dataset,case,variant,output=None):
+ cid=int(str(case).split('_')[0]);configure(dataset,case,variant,output)
  path=n.OUT/f'proposal_{cid}.json'
  if path.exists() and (n.OUT/'target.json').exists():return
  ans=s.optimize(dataset,case,variant);z=np.array(ans['best']['z']);data,_,_,provenance=load(cid)
@@ -53,13 +62,13 @@ def prepare(dataset,case,variant):
 
 
 def chain(task):
- dataset,case,variant,j,samples=task;configure(dataset,case,variant)
+ dataset,case,variant,output,j,samples=task;configure(dataset,case,variant,output)
  cid=int(str(case).split('_')[0]);replicate=int(str(case).split('_')[1]) if '_' in str(case) else 0
  n.sample_mixture_gaussian(cid,j,1500,samples,.025,64,281000+cid+replicate*10000+METHODS.index(variant)*100000,pilot=True)
 
 
-def summarize(dataset,case,variant):
- configure(dataset,case,variant);cid=int(str(case).split('_')[0]);data,_,_,provenance=load(cid)
+def summarize(dataset,case,variant,output=None):
+ configure(dataset,case,variant,output);cid=int(str(case).split('_')[0]);data,_,_,provenance=load(cid)
  paths=[n.OUT/f'contest_{cid}/chain_{j}.npz' for j in range(1,5)]
  z=np.array([np.load(path)['z'] for path in paths]);flat=z.reshape(-1,6)
  physical=rep.quantities(flat,data).reshape(4,z.shape[1],-1)
@@ -88,5 +97,5 @@ if __name__=='__main__':
  jobs=[(args.dataset,case,variant) for case in cases for variant in args.variants]
  if args.stage=='run':
   for job in jobs:prepare(*job)
-  with ProcessPoolExecutor(max_workers=args.workers) as pool:list(pool.map(chain,[(*job,j,args.samples) for job in jobs for j in range(1,5)]))
+  with ProcessPoolExecutor(max_workers=args.workers) as pool:list(pool.map(chain,[(*job,None,j,args.samples) for job in jobs for j in range(1,5)]))
  for job in jobs:summarize(*job)

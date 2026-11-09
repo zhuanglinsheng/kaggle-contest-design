@@ -152,27 +152,165 @@ def posterior_score(row, accepted_path, model):
         scope='Fresh fixed-training-posterior score; failed integration stays unresolved; no historical overrides reused')
 
 
-def main():
+def score_and_integrate(rows, models, accepted_root, output, budgets, seed_offset):
+    """Run both numerical checks per target and preserve unresolved outcomes."""
+    from pipeline.prediction.importance import integrate
+
+    output.mkdir(parents=True, exist_ok=False)
+    status_path = output / 'batch_status.json'
+    records = []
+    expected = len(rows) * len(models)
+    write_json(status_path, dict(expected=expected, completed=0, records=records))
+    for row in rows:
+        cid, split = row['contest_id'], row['split']
+        for model in models:
+            accepted = accepted_root / model / split / str(cid) / 'accepted.json'
+            score = posterior_score(row, accepted, model)
+            score_file = f'score_{model}_{cid}_{split}.json'
+            write_json(output / score_file, score)
+
+            stage = output / f'importance_{model}_{cid}_{split}'
+            result = integrate(row, accepted, model, stage, budgets, seed_offset)
+            records.append(dict(contest_id=cid, split=split, model=model,
+                score_file=score_file, integration_status=str((stage / 'status.json').relative_to(output)),
+                score_screen_passed=score['mean_score_numerical_screen_passed'],
+                integration_passed=result['passed']))
+            write_json(status_path, dict(expected=expected, completed=len(records), records=records))
+    return records
+
+
+
+def fresh_records(rows, baseline_root, integration_roots, accepted_root):
+    """Register the exact frozen split and matching accepted integration per model."""
+    for row in rows:
+        cid, split = row['contest_id'], row['split']
+        def load(path):
+            result = json.loads(path.read_text())
+            if any(result.get(key) != value for key, value in row.items()):
+                raise ValueError(f'Frozen split identity differs: {path}')
+            return result
+        ab_path = baseline_root / f'baselines_AB_{cid}_{split}.json'
+        ab = load(ab_path)
+        if not ab['numerical_score_check_passed']:
+            raise ValueError(f'Baseline diagnostics failed: {ab_path}')
+        for model in 'AB':
+            value = ab[f'{model}_mean_joint_logscore']
+            if not math.isfinite(value):
+                raise ValueError(f'Invalid baseline score: {ab_path}')
+            yield dict(**row, model=model, mean_joint_logscore=value, source_sha256=digest(ab_path))
+        for model in 'CD':
+            accepted = accepted_root / model / split / str(cid) / 'accepted.json'
+            accepted_hash = digest(accepted)
+            for root in integration_roots:
+                path = root / f'importance_{model}_{cid}_{split}/status.json'
+                if not path.exists():
+                    continue
+                state = load(path)
+                if state['model'] != model or state['accepted_sha256'] != accepted_hash:
+                    raise ValueError(f'Integration identity differs: {path}')
+                if not state['passed']:
+                    continue
+                last, prior = state['records'][-1], state['records'][-2]
+                value = last['mean_joint_logscore']
+                if not (last['screen_passed'] and prior['screen_passed']
+                        and last['consistent_with_previous'] and math.isfinite(value)):
+                    raise ValueError(f'Integration diagnostics failed: {path}')
+                yield dict(**row, model=model, mean_joint_logscore=value, source_sha256=digest(path),
+                           accepted_sha256=accepted_hash)
+                break
+            else:
+                raise ValueError(f'No passed integration for {model}/{cid}/{split}')
+
+
+def repair(rows, models, accepted_root, input_root, output, budgets, seed_offset):
+    from pipeline.prediction.importance import integrate
+
+    output.mkdir(parents=True, exist_ok=False)
+    unresolved = []
+    for row in rows:
+        cid, split = row['contest_id'], row['split']
+        for model in models:
+            name = f'importance_{model}_{cid}_{split}'
+            source = input_root / name / 'status.json'
+            state = json.loads(source.read_text())
+            if state['passed']:
+                continue
+            if not state['records'][-1]['unrepaired_rare_probability_hours'] and not state.get('tail_hours'):
+                unresolved.append(name)
+                continue
+            accepted = accepted_root / model / split / str(cid) / 'accepted.json'
+            if not integrate(row, accepted, model, output/name, budgets, seed_offset,
+                             repair_status=source)['passed']:
+                unresolved.append(name)
+    write_json(output/'repair_status.json', dict(unresolved=unresolved, passed=not unresolved))
+    return unresolved
+
+
+def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('action',choices=['summary','baselines','fit','score','integrate','plan'])
+    p.add_argument('action',choices=['summary','baselines','fit','score','integrate','check','repair','summary-fresh','plan'])
     p.add_argument('--contest',type=int);p.add_argument('--split',choices=['primary_hour','complete_day'])
-    p.add_argument('--output',default='tmp/runs/prediction')
-    p.add_argument('--model',choices=['C','D'],default='D')
+    p.add_argument('--output',type=Path)
+    p.add_argument('--model',choices=['C','D'],help='Default: D, or both models for check')
     p.add_argument('--accepted',type=Path)
+    p.add_argument('--accepted-root',type=Path,default=Path('tmp/runs/prediction'),
+                   help='Root of the accepted-fit tree for check')
+    p.add_argument('--baseline-root',type=Path,default=Path('tmp/runs/prediction'))
+    p.add_argument('--integration-root',type=Path,action='append',
+                   help='Prior integration directory; repeat in priority order for summary-fresh')
     p.add_argument('--budgets',type=int,nargs='+',default=[32768,65536,131072,262144,524288,1048576])
     p.add_argument('--seed-offset',type=int,default=0)
-    args=p.parse_args(); output=ROOT/args.output; output.mkdir(parents=True,exist_ok=True)
+    args = p.parse_args(argv)
+    default_output = 'tmp/runs/prediction_checks' if args.action == 'check' else 'tmp/runs/prediction'
+    output = ROOT / (args.output or default_output)
     if args.action=='summary':
+        if args.contest is not None or args.split is not None or args.model is not None:
+            p.error('summary requires all contests, splits and models')
         verify_recovered_sources()
         recovered=json.loads((EVIDENCE/'recovered_scores.json').read_text())
         result=summary(recovered['records']); write_json(output/'historical_summary.json',result)
         print(json.dumps(result,indent=2));return
+    rows = splits(args.contest,args.split)
     if args.action=='plan':
-        print(json.dumps(splits(args.contest,args.split),indent=2));return
+        print(json.dumps(rows,indent=2));return
     if args.action in ('score','integrate') and (args.accepted is None or args.contest is None or args.split is None):
         p.error('score/integrate requires --accepted, --contest and --split')
+    if not rows:
+        p.error(f'No prediction targets match contest={args.contest}, split={args.split}')
+    if args.action in ('repair','summary-fresh'):
+        roots = [ROOT / root for root in (args.integration_root or [Path('tmp/runs/prediction_checks')])]
+        accepted_root = ROOT / args.accepted_root
+        if args.action=='repair':
+            if len(roots)!=1 or not args.seed_offset or args.output is None:
+                p.error('repair needs one integration root, a new --output and an independent --seed-offset')
+            unresolved = repair(rows, (args.model,) if args.model else ('C','D'),
+                                accepted_root, roots[0], output, args.budgets, args.seed_offset)
+            if unresolved:
+                raise SystemExit(f'{len(unresolved)} integrations still need numerical follow-up. See {output}.')
+        else:
+            if args.contest is not None or args.split is not None or args.model is not None:
+                p.error('summary-fresh requires all contests, splits and models')
+            records = list(fresh_records(rows, ROOT / args.baseline_root, roots, accepted_root))
+            result = summary(records)
+            result['scope'] = 'Paired contest bootstrap of independently generated and numerically accepted A/B/C/D scores'
+            write_json(output/'fresh_scores.json', dict(records=records))
+            write_json(output/'fresh_summary.json', result)
+        return
+    if args.action=='check':
+        if args.accepted is not None:
+            p.error('check uses --accepted-root to locate accepted fits')
+        models = (args.model,) if args.model else ('C', 'D')
+        records = score_and_integrate(rows, models, ROOT / args.accepted_root,
+                                      output, args.budgets, args.seed_offset)
+        unresolved = sum(not r['integration_passed'] for r in records)
+        if unresolved:
+            raise SystemExit(f'{unresolved} of {len(records)} integrations need follow-up. See {output / "batch_status.json"}.')
+        print(f'{len(records)} independent integrations passed. See {output / "batch_status.json"}.')
+        return
+    args.model = args.model or 'D'
+    output.mkdir(parents=True,exist_ok=True)
     results=[];baseline_records=[]
-    for row in splits(args.contest,args.split):
+    for row in rows:
         if args.action=='integrate':
             from pipeline.prediction.importance import integrate
             result=integrate(row,args.accepted,args.model,output/f"importance_{args.model}_{row['contest_id']}_{row['split']}",
@@ -202,7 +340,7 @@ def main():
                 [Path(__file__).resolve(),ROOT/'pipeline/prediction/baselines.py']},
             scope='Fresh A/B quadrature and independent adaptive checks; comparison against recovered original contest score means'))
     if not all(results):
-        raise RuntimeError('Unresolved baseline integration; retained diagnostics, no ranking acceptance')
+        raise RuntimeError(f'Prediction {args.action} has unresolved numerical checks. See {output}.')
 
 
 if __name__=='__main__':main()

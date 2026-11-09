@@ -8,6 +8,7 @@ import json
 import math
 from pathlib import Path
 import numpy as np
+from scipy.optimize import minimize
 from scipy.special import gammaln,logsumexp
 from pipeline.publication import ROOT,digest,write_json
 from pipeline.config import resolve_manifest_path
@@ -35,6 +36,11 @@ class Proposal:
         base.append((center,4*cov));self.weights=np.r_[.95*np.asarray(sizes)/sum(sizes),.05]
         self.means=np.array([m for m,c in base]);self.df=7.
         self.scales=np.array([c for m,c in base])*(self.df-2)/self.df
+        self.modes = {}
+        self.prepare_density()
+
+    def prepare_density(self):
+        dim = self.dim
         self.chols=np.linalg.cholesky(self.scales);self.inverses=np.linalg.inv(self.scales)
         self.constant=(gammaln((self.df+dim)/2)-gammaln(self.df/2)-dim/2*math.log(self.df*math.pi)
                        -.5*np.linalg.slogdet(self.scales)[1])
@@ -50,7 +56,92 @@ class Proposal:
 
     def record(self):
         return dict(df=self.df,weights=self.weights.tolist(),means=self.means.tolist(),scales=self.scales.tolist(),
-                    frozen_before_production=True,uses_no_test_counts_to_fit_proposal=True)
+                    frozen_before_production=True, numerator_modes=self.modes,
+                    uses_no_test_counts_to_fit_proposal=not self.modes)
+
+
+    def include_numerator_modes(self, points, target, hours):
+        pilot = points[np.linspace(0, len(points)-1, min(4096, len(points)), dtype=int)]
+        cov = np.cov(pilot, rowvar=False) + np.eye(self.dim)*1e-7
+        chol = np.linalg.cholesky(cov)
+        center = np.median(pilot, axis=0)
+        indices = [hour-target.cutoff-1 for hour in hours]
+        training, numerators = [], []
+        for chunk in np.array_split(pilot, 8):
+            log_training, path = target.evaluate(chunk)
+            training.append(log_training)
+            numerators.append(path[:, indices])
+        lp = np.concatenate(training)
+        ll = np.concatenate(numerators, axis=0)
+        constrained = [0, 1, 2, 3, 5]
+        lower = math.log(.01) + 1e-7
+        bounds = [(lower, None) if j in constrained else (None, None) for j in range(self.dim)]
+        means, scales, weights = [], [], []
+        for column, hour in enumerate(hours):
+            index = hour - target.cutoff - 1
+
+            def objective(z):
+                training, path = target.evaluate(z[None, :])
+                value = training[0] + path[0, index]
+                return -float(value) if np.isfinite(value) else 1e100
+
+            starts = [*pilot[np.argsort(lp+ll[:, column])[-4:]], center, target.means]
+            for factor in (2., 4.):
+                start = center.copy()
+                start[2:4] += [math.log(factor), -math.log(factor)]
+                starts.append(start)
+            results = []
+            for start in starts:
+                start = start.copy()
+                start[constrained] = np.maximum(start[constrained], lower+1e-4)
+                results.append(minimize(objective, start, method='L-BFGS-B', bounds=bounds,
+                    options=dict(maxiter=600, ftol=1e-11, gtol=1e-6, maxls=40)))
+            self.modes[str(hour)] = [dict(point=r.x.tolist(), negative_log_numerator=float(r.fun),
+                                          optimizer_converged=bool(r.success)) for r in results]
+            best = min(r.fun for r in results)
+            chosen = []
+            for r in sorted(results, key=lambda item: item.fun):
+                if r.fun >= 1e100 or r.fun > best+30:
+                    break
+                if any(np.linalg.norm(np.linalg.solve(chol, r.x-other)) < .05 for other in chosen):
+                    continue
+                chosen.append(r.x)
+                if len(chosen) == 4:
+                    break
+            if not chosen:
+                raise RuntimeError(f'No finite predictive numerator mode for hour {hour}')
+            for point in chosen:
+                steps = .001*np.maximum(1., np.abs(point))
+                steps[constrained] = np.minimum(steps[constrained],
+                    np.maximum(1e-8, .2*(point[constrained]-math.log(.01))))
+                precision = numerical_hessian(objective, point, steps)
+                if np.isfinite(precision).all():
+                    values, vectors = np.linalg.eigh(precision)
+                    local_cov = (vectors/np.clip(values, 1e-3, 1e8)) @ vectors.T
+                    local_cov += np.eye(self.dim)*1e-7
+                else:
+                    local_cov = cov
+                for scale in (.5, 1., 2.):
+                    means.append(point)
+                    scales.append(scale*local_cov*(self.df-2)/self.df)
+                    weights.append(.5/(len(hours)*len(chosen)*3))
+        self.means = np.concatenate((self.means, means))
+        self.scales = np.concatenate((self.scales, scales))
+        self.weights = np.r_[.5*self.weights, weights]
+        self.prepare_density()
+
+
+def numerical_hessian(function, point, steps):
+    directions = np.diag(steps)
+    matrix = np.empty((len(point), len(point)))
+    origin = function(point)
+    for i, di in enumerate(directions):
+        matrix[i, i] = (function(point+di)-2*origin+function(point-di))/steps[i]**2
+        for j, dj in enumerate(directions[:i]):
+            matrix[i, j] = matrix[j, i] = (
+                function(point+di+dj)-function(point+di-dj)
+                -function(point-di+dj)+function(point-di-dj))/(4*steps[i]*steps[j])
+    return matrix
 
 
 class Target:
@@ -59,6 +150,7 @@ class Target:
         self.data=training_data(raw,'early',cutoff);self.prior=prior(self.data)
         self.names=(*e.PARAMETERS,'deadline_power','gap_log_scale') if free else e.PARAMETERS
         self.dim=len(self.names)
+        self.means = np.r_[self.prior['prior_mean'], [.5, 0.]] if free else np.array(self.prior['prior_mean'])
 
     def evaluate(self,z):
         out=np.full(len(z),-np.inf);path=np.full((len(z),self.raw['N_Delta']-self.cutoff),-np.inf)
@@ -69,19 +161,19 @@ class Target:
         if not len(indices):return out,path
         x=z[good];columns={k:np.exp(x[:,j]) if j<4 else x[:,j] for j,k in enumerate(self.names)}
         likelihood,ll=self.engine.evaluate(self.raw,columns,self.cutoff,self.free)
-        means=np.r_[self.prior['prior_mean'],[.5,0.]] if self.free else np.array(self.prior['prior_mean'])
         scales=np.r_[self.prior['prior_sd'],[.5,.5]] if self.free else np.array(self.prior['prior_sd'])
         # Lognormal density and log-coordinate Jacobian cancel for first four.
-        logprior=(-.5*((x-means)/scales)**2-np.log(scales)-.5*math.log(2*math.pi)).sum(axis=1)
+        logprior=(-.5*((x-self.means)/scales)**2-np.log(scales)-.5*math.log(2*math.pi)).sum(axis=1)
         out[indices]=likelihood+logprior;path[indices]=ll
         return out,path
 
 
-def integrate(row,accepted_path,model,stage,budgets=(32768,65536,131072,262144,524288,1048576),seed_offset=0):
+def integrate(row,accepted_path,model,stage,budgets=(32768,65536,131072,262144,524288,1048576),seed_offset=0, *, repair_status=None):
     from pipeline.jk9_prediction import raw_input
     stage=Path(stage)
     if stage.exists():raise FileExistsError('Use a new integration run directory; preserve previous diagnostics')
-    if len(budgets)<2 or any(n<32 or n%32 for n in budgets):raise ValueError('At least two budgets, each divisible by 32')
+    if len(budgets)<2 or len(set(budgets))!=len(budgets) or any(n<32 or n%32 for n in budgets):
+        raise ValueError('At least two distinct budgets, each divisible by 32')
     accepted_path=Path(accepted_path).resolve();a=json.loads(accepted_path.read_text());config=a['configuration']
     raw=raw_input(row);target=Target(raw,row['cutoff_hour'],model=='C')
     source=ROOT/'pipeline/models'/('free_kernel.stan' if model=='C' else 'leading_order.stan')
@@ -99,21 +191,52 @@ def integrate(row,accepted_path,model,stage,budgets=(32768,65536,131072,262144,5
     reference_mcse=np.array([np.std(reference[:,:,j],ddof=1)/math.sqrt(max(nd.effective_sample_size(reference[:,:,j]),1)) for j in range(target.dim)])
     cid=row['contest_id'];extra=100000 if model=='C' else 0
     proposal=Proposal(points,20261025+cid+7000000+extra)
+    H = raw['N_Delta']-row['cutoff_hour']
+    hours = []
+    if repair_status is not None:
+        repair_status = Path(repair_status)
+        original = json.loads(repair_status.read_text())
+        if any(original.get(k) != v for k, v in dict(row, model=model,
+                accepted_sha256=digest(accepted_path)).items()):
+            raise ValueError('Repair status must match the frozen split, model and accepted posterior')
+        hours = sorted(set(original['records'][-1]['unrepaired_rare_probability_hours'])
+                       | set(original.get('tail_hours', [])))
+        if original['passed'] or not hours:
+            raise ValueError('Repair requires an unresolved integration with diagnosed rare hours')
+        if any(not row['cutoff_hour'] < hour <= raw['N_Delta'] for hour in hours):
+            raise ValueError('Tail hours must lie in the frozen test window')
+        old_offsets = {original['seed_offset']+j*1000000 for j in range(len(original['records']))}
+        new_offsets = {seed_offset+j*1000000 for j in range(len(budgets))}
+        if old_offsets & new_offsets:
+            raise ValueError('Use a different seed offset for independent repair production')
+        proposal.include_numerator_modes(points, target, hours)
+    tail_indices = [hour-row['cutoff_hour']-1 for hour in hours]
     stage.mkdir(parents=True);write_json(stage/'proposal.json',proposal.record())
     state=dict(model=model,**row,accepted_sha256=digest(accepted_path),proposal_sha256=digest(stage/'proposal.json'),
                prior=target.prior,source_sha256={str(p.relative_to(ROOT)):digest(p) for p in
                    [source,Path(__file__).resolve(),ROOT/'pipeline/prediction/native.py',ROOT/'pipeline/prediction/full_path.cpp']},
-               seed_offset=seed_offset,records=[],passed=False,scope='Fresh independent full-path importance integration; no historical tail overrides')
-    previous=None;H=raw['N_Delta']-row['cutoff_hour']
+               seed_offset=seed_offset,records=[],passed=False,tail_hours=hours,
+               repair_source_sha256=digest(repair_status) if repair_status is not None else None,
+               scope='Independent full-path integration of the fixed training posterior and hourly joint probabilities')
+    previous=None
     for repeat,n in enumerate(budgets):
         x=proposal.sample(n,20261025+8000000+seed_offset+cid*1009+repeat*1000000+extra)
-        g0=[];g1=[];g2=[];lweights=[];failures=[]
-        for ids in np.array_split(np.arange(n),32):
-            lp,ll=target.evaluate(x[ids]);w=lp-proposal.logq(x[ids]);lw=w[:,None]+ll
-            if np.isnan(w).any() or np.isnan(lw).any():raise RuntimeError('Nonfinite integration arithmetic; no acceptance')
-            g0.append(float(logsumexp(w)-math.log(len(ids))))
-            g1.append(logsumexp(lw,axis=0)-math.log(len(ids)));g2.append(logsumexp(2*lw,axis=0)-math.log(len(ids)))
-            lweights.append(w);failures.append(~np.isfinite(ll).all(axis=1))
+        g0=[];g1=[];g2=[];lweights=[];failures=[];tail_weights=[]
+        for block in np.array_split(x, 32):
+            block_den, block_num, block_sq = [], [], []
+            for start in range(0, len(block), 512):
+                chunk = block[start:start+512]
+                lp,ll=target.evaluate(chunk);w=lp-proposal.logq(chunk);lw=w[:,None]+ll
+                if np.isnan(w).any() or np.isnan(lw).any():
+                    raise RuntimeError('Nonfinite integration arithmetic; no acceptance')
+                block_den.append(logsumexp(w))
+                block_num.append(logsumexp(lw,axis=0))
+                block_sq.append(logsumexp(2*lw,axis=0))
+                lweights.append(w);failures.append(~np.isfinite(ll).all(axis=1))
+                if hours:tail_weights.append(lw[:,tail_indices])
+            g0.append(float(logsumexp(block_den)-math.log(len(block))))
+            g1.append(logsumexp(block_num,axis=0)-math.log(len(block)))
+            g2.append(logsumexp(block_sq,axis=0)-math.log(len(block)))
         w=np.concatenate(lweights);bad=np.concatenate(failures);den=logsumexp(w)-math.log(n)
         normw=np.exp(w-logsumexp(w));g0=np.array(g0);g1=np.array(g1);g2=np.array(g2)
         lp=logsumexp(g1,axis=0)-math.log(32)-den
@@ -125,15 +248,33 @@ def integrate(row,accepted_path,model,stage,budgets=(32768,65536,131072,262144,5
         mcse=float(np.std(influence,ddof=1)/math.sqrt(32));half=[]
         for ids in [np.arange(16),np.arange(16,32)]:
             half.append(float((logsumexp(g1[ids],axis=0)-math.log(16)-(logsumexp(g0[ids])-math.log(16))).mean()))
-        rare=[row['cutoff_hour']+j+1 for j in range(H) if essp[j]<400 or lp[j]<-20]
+        rare=[row['cutoff_hour']+j+1 for j in range(H) if j not in tail_indices and (essp[j]<400 or lp[j]<-20)]
         ess=float(1/(normw@normw));failure=float(normw[bad].sum());score=float(lp.mean());halfdiff=abs(half[0]-half[1])
         consistent=previous is None or abs(score-previous['mean_joint_logscore'])<=5*math.hypot(mcse,previous['mean_logscore_mcse'])+1e-4
-        screen=bool(ess>=1000 and normw.max()<.01 and moment and failure<1e-8 and not rare and mcse<=.001 and halfdiff<=max(.002,4*mcse))
+        tail = {}
+        if hours:
+            num = np.concatenate(tail_weights)
+            nw = np.exp(num-logsumexp(num,axis=0))
+            tail_se = np.sqrt(n/(n-1)*np.sum((nw-normw[:,None])**2,axis=0))
+            for k, (hour, index) in enumerate(zip(hours, tail_indices, strict=True)):
+                se_hour = float(tail_se[k])
+                ess_hour = float(1/np.sum(nw[:,k]**2))
+                max_weight = float(nw[:,k].max())
+                logscore = float(lp[index])
+                prev = previous['tail_diagnostics'][str(hour)] if previous else None
+                stable = prev is None or abs(logscore-prev['joint_logscore']) <= (
+                    5*math.hypot(se_hour,prev['logscore_mcse'])+.001)
+                tail[str(hour)] = dict(joint_logscore=logscore, logscore_mcse=se_hour,
+                    numerator_ess=ess_hour, maximum_numerator_weight=max_weight,
+                    screen_passed=bool(ess_hour>=1000 and max_weight<.01 and se_hour<=.02))
+                consistent = consistent and stable
+        screen=bool(ess>=1000 and normw.max()<.01 and moment and failure<1e-8 and not rare
+                    and all(t['screen_passed'] for t in tail.values()) and mcse<=.001 and halfdiff<=max(.002,4*mcse))
         rec=dict(samples=n,mean_joint_logscore=score,mean_logscore_mcse=mcse,half_score_difference=halfdiff,
             denominator_ess=ess,maximum_denominator_weight=float(normw.max()),denominator_moment_check=moment,
             denominator_moment_difference=(mu-reference_mean).tolist(),denominator_moment_tolerance=tolerance.tolist(),
             future_nonfinite_path_posterior_mass=failure,unrepaired_rare_probability_hours=rare,
-            minimum_probability_ess=float(essp.min()),screen_passed=screen,consistent_with_previous=bool(consistent))
+            minimum_probability_ess=float(essp.min()),tail_diagnostics=tail,screen_passed=screen,consistent_with_previous=bool(consistent))
         state['records'].append(rec)
         np.savez_compressed(stage/f'production_{n}.npz',z=x,log_training_importance=w,block_log_denominator=g0,
             block_log_numerators=g1,block_log_numerator_squares=g2,joint_logscores=lp,probability_weight_ess=essp)

@@ -13,11 +13,11 @@ from scipy.stats import t as student_t
 from run import HERE, SCENARIOS, Evaluator, design, save, sha
 
 
-def compute(scenario):
+def compute(scenario, *, output=HERE, evaluator=None):
     cid = 8219
-    result_path = HERE/'results'/f'{cid}_{scenario}.json'
+    result_path = output/'results'/f'{cid}_{scenario}.json'
     old = json.loads(result_path.read_text())
-    e = Evaluator(cid, scenario, Path(old['provenance']['accepted']))
+    e = evaluator or Evaluator(cid, scenario, Path(old['provenance']['accepted']))
     selected = design(old['original_selection']['selected'])
     draws = [d for group in e.groups['coarse'] for d in group]
     baselines = []
@@ -56,7 +56,7 @@ def compute(scenario):
         row = dict(prize_ratio=q, design=candidate.record(),
                    cost_saving_pct=100*(1-(q+2)/3), comparison=comparison)
         result['trials'].append(row)
-        save(HERE/'small_refinement'/f'{cid}_{scenario}.json', result)
+        save(output/'small_refinement'/f'{cid}_{scenario}.json', result)
         print('DIRECT TRIAL', scenario, q, comparison.get('direction', 'unresolved'),
               comparison.get('mean_gap'), flush=True)
         if comparison.get('direction') == 'positive' and q < 1:
@@ -65,7 +65,7 @@ def compute(scenario):
             break
     result['status'] = 'completed'
     result.setdefault('same_direction_cost_saving_supported', False)
-    save(HERE/'small_refinement'/f'{cid}_{scenario}.json', result)
+    save(output/'small_refinement'/f'{cid}_{scenario}.json', result)
     return result
 
 

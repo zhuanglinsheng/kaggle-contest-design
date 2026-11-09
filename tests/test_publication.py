@@ -4,6 +4,8 @@ import tempfile
 import unittest
 
 from pipeline.publication import assert_assets, check_files, digest, local, tex_dependencies
+from pipeline.jk9 import verify_evidence_copies
+from pipeline.publication import write_json
 
 
 class PublicationTests(unittest.TestCase):
@@ -51,6 +53,21 @@ class PublicationTests(unittest.TestCase):
         (self.root / 'main.tex').write_text('\\input{../outside}')
         with self.assertRaises(ValueError):
             tex_dependencies(self.root / 'main.tex', self.root)
+
+    def test_evidence_index_checks_release_copy_and_supports_legacy_index(self):
+        copy = self.root / 'result.json'
+        copy.write_text('original')
+        index = self.root / 'evidence_sources.json'
+        original = digest(copy)
+        write_json(index, dict(schema_version=1, files={copy.name: {'sha256': original}}))
+        self.assertEqual(verify_evidence_copies(self.root), 1)
+        copy.write_text('copy with revised wording')
+        write_json(index, dict(schema_version=2, files={copy.name: {
+            'source_sha256': original, 'release_sha256': digest(copy)}}))
+        self.assertEqual(verify_evidence_copies(self.root), 1)
+        copy.write_text('unexpected change')
+        with self.assertRaisesRegex(ValueError, 'Changed release file: result.json'):
+            verify_evidence_copies(self.root)
 
 
 if __name__ == '__main__':

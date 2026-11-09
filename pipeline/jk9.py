@@ -21,6 +21,20 @@ REVIEW = ROOT / 'docs/review/PaperJK9'
 TABLE = REVIEW / 'nonlinear_table_rebuild_20261025'
 
 
+def verify_evidence_copies(release=RELEASE):
+    """Check current copies against the source index, including legacy v1 indexes."""
+    index = json.loads((release / 'evidence_sources.json').read_text())
+    version = index['schema_version']
+    if version not in (1, 2):
+        raise ValueError(f'Unsupported evidence index schema: {version}')
+    files = index['files']
+    check_files(release, {
+        name: row['release_sha256'] if version == 2 else row['sha256']
+        for name, row in files.items()
+    })
+    return len(files)
+
+
 def relocated(value):
     """Resolve historical absolute paths without changing frozen record bytes."""
     path = Path(value)
@@ -45,8 +59,10 @@ def snapshot():
         source, target = Path(source), RELEASE / target
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
+        source_hash = digest(source)
         sources[str(target.relative_to(RELEASE))] = dict(
-            source=str(source.relative_to(ROOT)), sha256=digest(source))
+            source=str(source.relative_to(ROOT)), source_sha256=source_hash,
+            release_sha256=digest(target))
 
     working_table = HISTORY / TABLE.relative_to(ROOT)
     if not working_table.exists():
@@ -88,8 +104,8 @@ def snapshot():
                          chain_sha256=record['chain_sha256']))
     write_json(RELEASE / 'accepted_fits.json', dict(schema_version=1, fits=fits,
                scope='73 posteriors used by JK9 nonlinear tables; paths relative to checkout'))
-    write_json(RELEASE / 'evidence_sources.json', dict(schema_version=1, files=sources,
-               scope='Byte-preserving copies of completed scientific evidence; no new acceptance audit'))
+    write_json(RELEASE / 'evidence_sources.json', dict(schema_version=2, files=sources,
+               scope='Original source identities and hashes of the retained release copies'))
     print(f'Exported {len(sources)} compact evidence files and {len(fits)} portable fit records.')
 
 
@@ -187,7 +203,7 @@ def files(config):
                  'docs/REPOSITORY_MAINTENANCE.md', 'docs/STORAGE_LAYOUT.md', 'docs/storage_layout.json',
                  'results/README.md', 'docs/README.md', 'docs/RESULT_CODE_AUDIT.json',
                  'docs/WORDING_REVIEW.json', 'docs/review/README.md', 'docs/review/PaperJK9/INDEX.md',
-                 'docs/JK9_MAINTENANCE_20261029.md', 'pipeline/jk9.py',
+                 'docs/JK9_MAINTENANCE_20261029.md', 'pipeline/jk9.py', 'pipeline/empirical/recovery_design.toml',
                  'results/releases/paperjk7-review-20261016/accepted_fits.json'):
         selected.add(ROOT / name)
     selected.update((RELEASE / 'accepted_fits.json', RELEASE / 'evidence_sources.json',
@@ -235,6 +251,7 @@ def main(argv=None):
         return
     config = load()
     assert_assets(ROOT, config)
+    verify_evidence_copies()
     current = files(config)
     manifest = local(ROOT, config['manifest'])
     if args.action == 'lock':

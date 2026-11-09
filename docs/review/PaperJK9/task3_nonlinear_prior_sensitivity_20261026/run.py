@@ -17,7 +17,8 @@ import numpy as np
 import pandas as pd
 from scipy.stats import t as student_t
 
-from pipeline.config import MAIN_DATA_DIR
+from pipeline.config import MAIN_DATA_DIR, resolve_manifest_path
+from pipeline.empirical.unified_prior_reestimate import prior
 from pipeline.empirical import estimate as estimator
 from pipeline.empirical.counterfactual import PRIZE_DIVISOR
 from pipeline.empirical.nonlinear_design import Draw, Design, save
@@ -49,33 +50,53 @@ def design(record):
 class Evaluator(refiner.RefinedCase):
     # Retain the table's point solvers, recovery and paired multilevel formula;
     # initialize separately because alternative fits have different metadata.
-    def __init__(self, cid, scenario, accepted_path):
+    def __init__(self, cid, scenario, accepted_path, *, output=HERE, raw_path=None,
+                 model_source=None, baseline=False):
         self.cid = cid
-        self.folder = HERE/'calculations'/scenario/str(cid)
+        self.folder = output/'calculations'/scenario/str(cid)
         self.folder.mkdir(parents=True, exist_ok=True)
         self.source = json.loads(accepted_path.read_text())
-        assert self.source['diagnostics']['passed']
-        raw_path = MAIN_DATA_DIR/f'contest_{cid}.json'
+        if not self.source['diagnostics']['passed']:
+            raise ValueError(f'Unaccepted posterior: {accepted_path}')
+        raw_path = raw_path or MAIN_DATA_DIR/f'contest_{cid}.json'
         raw = json.loads(raw_path.read_text())
-        inputs = self.source['configuration']['inputs']
+        config = self.source['configuration']
         actual_data = estimator.stan_data(raw, 'full')
-        assert all(inputs[k] == v for k, v in actual_data.items())
-        assert self.source['configuration']['input_sha256'] == sha(raw_path)
-        snapshot = REPORT/'prior_reconstruction_20261025/model_snapshot/common_cost'
-        assert sha(snapshot.with_suffix('.stan')) == self.source['configuration']['model_sha256']
-        assert sha(snapshot) == self.source['configuration']['executable_sha256']
-        expected_sd = 1. if scenario == 'common_sd_100' else .75/math.sqrt(2)
-        expected_floor = .01 if scenario == 'common_sd_100' else .001
-        assert inputs['common_log_sd'] == expected_sd and inputs['cost_floor'] == expected_floor
-        assert inputs['common_log_mean'] == 0. and inputs['relative_log_sd'] == .75*math.sqrt(2)
+        if baseline:
+            inputs = dict(actual_data, **prior(actual_data))
+            if (config['raw_input_sha256'] != sha(raw_path) or config['training_cutoff'] != actual_data['N_Delta']
+                    or config['model'] != 'D' or config['prior'] != prior(actual_data)
+                    or config['source_model_sha256'] != sha(model_source)):
+                raise ValueError('Baseline fit does not match the frozen full-window target')
+        else:
+            inputs = config['inputs']
+            if config['input_sha256'] != sha(raw_path) or any(inputs[k]!=v for k,v in actual_data.items()):
+                raise ValueError('Alternative fit input differs from the frozen full-window data')
+            snapshot = REPORT/'prior_reconstruction_20261025/model_snapshot/common_cost'
+            if model_source is None and sha(snapshot) != config['executable_sha256']:
+                raise ValueError('Historical executable identity differs')
+            if sha(model_source or snapshot.with_suffix('.stan')) != config['model_sha256']:
+                raise ValueError('Alternative fit model identity differs')
+            expected = dict(common_log_mean=0., relative_log_sd=.75*math.sqrt(2),
+                common_log_sd=1. if scenario == 'common_sd_100' else .75/math.sqrt(2),
+                cost_floor=.01 if scenario == 'common_sd_100' else .001)
+            if any(inputs[k]!=v for k,v in {**expected, **prior(actual_data)}.items()):
+                raise ValueError('Alternative fit prior differs')
         self.observed = Design(raw['theta']/PRIZE_DIVISOR, raw['N_Delta']*raw['Delta2f'])
-        self.engine = SimilarityOutput(TABLE/'build')
+        self.engine = SimilarityOutput((TABLE if output==HERE else output)/'build')
         self.groups = dict(coarse=[], fine=[])
         self.validated = {}
-        rng = np.random.default_rng(202610260000+cid)
+        seed = (202610250000 if baseline else 202610260000)+cid
+        rng = np.random.default_rng(seed)
+        if len(self.source['chain_paths']) != 4 or len(self.source['chain_sha256']) != 4:
+            raise ValueError('Exactly four accepted chains required')
         for chain, (path, expected) in enumerate(zip(self.source['chain_paths'], self.source['chain_sha256'])):
-            assert sha(path) == expected
+            path = resolve_manifest_path(path, accepted_path)
+            if sha(path) != expected:
+                raise ValueError(f'Changed accepted chain: {path}')
             df = pd.read_csv(path, comment='#', usecols=['c_i', 'c_j', 'sigma', 'lambda', 'mu_0'])
+            if baseline:
+                rng.integers(0, len(df), size=1)
             for name, count in [('coarse', 32), ('fine', 4)]:
                 group = []
                 for index in rng.integers(0, len(df), size=count):
@@ -85,7 +106,7 @@ class Evaluator(refiner.RefinedCase):
                 self.groups[name].append(group)
         self.provenance = dict(accepted=str(accepted_path), accepted_sha256=sha(accepted_path),
                                chain_sha256=self.source['chain_sha256'],
-                               raw_input_sha256=sha(raw_path), seed=202610260000+cid,
+                               raw_input_sha256=sha(raw_path), seed=seed,
                                script_sha256=sha(__file__), refiner_sha256=sha(TABLE/'refine_prizes.py'),
                                batch_sha256=sha(TABLE/'design_batch.py'))
         save(self.folder/'quadrature.json', dict(provenance=self.provenance,
@@ -139,17 +160,25 @@ class Evaluator(refiner.RefinedCase):
         return result
 
 
-def run(cid, scenario):
-    target = HERE/'results'/f'{cid}_{scenario}.json'
-    if target.exists():
+def run(cid, scenario, *, output=HERE, original_path=None, evaluator=None):
+    target = output/'results'/f'{cid}_{scenario}.json'
+    if output==HERE and target.exists():
         return json.loads(target.read_text())
     delta, reason = CASES[cid]
-    original_path = TABLE/f'contests/{cid}/refined_selections.json'
+    original_path = original_path or TABLE/f'contests/{cid}/refined_selections.json'
     original = json.loads(original_path.read_text())
     selected = next(s for s in original['selections'] if s['delta'] == delta)
     candidate = design(selected['selected'])
     accepted_path = REPORT/f'prior_reconstruction_20261025/{scenario}/contest_{cid}/accepted.json'
-    evaluator = Evaluator(cid, scenario, accepted_path)
+    evaluator = evaluator or Evaluator(cid, scenario, accepted_path)
+    if target.exists():
+        cached = json.loads(target.read_text())
+        if (cached['provenance'] != evaluator.provenance
+                or cached['original_selection_sha256'] != sha(original_path)):
+            raise ValueError('Stored sensitivity result has different inputs; use a new output root')
+        return cached
+    if original['contest_id']!=cid or candidate.precision is None or design(original['observed']) != evaluator.observed:
+        raise ValueError('Expected a fixed-precision redesign of this exact observed contest')
     observed = evaluator.observed
     result = dict(contest_id=cid, delta=delta, scenario=scenario, selection_reason=reason,
                   provenance=evaluator.provenance, original_selection=selected,
