@@ -7,6 +7,8 @@ of prizes, deadlines, and feedback policies.
 
 ## Project entry points
 
+- [PaperJK12 PDF](paper/PaperJK12.pdf) and [LaTeX source](paper/PaperJK12.tex)
+
 - [Publication configuration](current_release.toml): selects the active manuscript,
   release manifest, empirical evidence, posterior index, and publication assets.
 - [Reproduction guide](docs/REPRODUCIBILITY.md): requirements, computation stages,

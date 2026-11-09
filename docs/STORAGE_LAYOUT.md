@@ -19,7 +19,7 @@
 | 已明确保留的旧发布记录 | `results/releases/paperjk7-review-20261016/` | 输入索引与历史发布溯源 |
 
 `docs/PAPER_EVIDENCE.csv` 映射论文图表到证据和生产代码；
-`results/releases/paperjk11-20261104/manifest.json` 是当前正式文件的有限清单。
+`results/releases/paperjk12-20261109/manifest.json` 是当前正式文件的有限清单。
 正式证据中的后验接受记录、随机种子和抽样索引需要保留，不能因为文件小或由程序生成
 就一概当作缓存。
 理论推导和旧清理清单同样属于长期记录；它们与求解器日志、过程缓存分开分类。

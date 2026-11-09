@@ -46,7 +46,7 @@ copy of the working directory. Changes to the evidence lock must be explicit.
 
 ## Current code changes
 
-- JK11 is the current default build/release entry point; scientific evidence retains JK9 provenance.
+- JK12 is the current default build/release entry point; scientific evidence retains JK9 provenance.
 - Compact final evidence is copied without changing original records.
 - Fresh posterior fits start from declared values and frozen inputs, not old chains.
 - Default point storage is SQLite; memory/off modes avoid disk point artifacts.

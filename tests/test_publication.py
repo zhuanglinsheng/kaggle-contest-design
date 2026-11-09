@@ -22,6 +22,13 @@ class PublicationTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             tex_dependencies(self.root / 'main.tex', self.root)
 
+    def test_primitive_input_collects_longtable_rows(self):
+        main = self.root / 'main.tex'
+        main.write_text(r'\csname @@input\endcsname appendix_rows.tex')
+        rows = self.root / 'appendix_rows.tex'
+        rows.write_text('Contest & Value')
+        self.assertEqual(tex_dependencies(main, self.root), {main, rows})
+
     def test_release_paths_cannot_escape_checkout(self):
         for name in ('../outside', '/tmp/outside'):
             with self.assertRaises(ValueError):

@@ -6,6 +6,8 @@
 PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 SYSTEM_PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 
+PAPER_TEX = $(shell $(PYTHON) -c 'from pipeline.publication import load; print(load()["main_tex"])')
+
 # Keep language, plotting and build caches with the other intermediate files.
 export PYTHONPYCACHEPREFIX := $(CURDIR)/tmp/cache/python
 export MPLCONFIGDIR := $(CURDIR)/tmp/cache/matplotlib
@@ -107,11 +109,11 @@ estimate rerun-failed finalize-estimation counterfactuals precision-design valid
 
 paper:
 	mkdir -p tmp/latex
-	cd paper && latexmk -pdf -outdir=../tmp/latex -interaction=nonstopmode -halt-on-error PaperJK11.tex
-	cp tmp/latex/PaperJK11.pdf paper/PaperJK11.pdf
+	cd paper && latexmk -pdf -outdir=../tmp/latex -interaction=nonstopmode -halt-on-error "$(notdir $(PAPER_TEX))"
+	cp "tmp/latex/$(notdir $(PAPER_TEX:.tex=.pdf))" "$(PAPER_TEX:.tex=.pdf)"
 
 clean-paper:
-	cd paper && latexmk -c -outdir=../tmp/latex PaperJK11.tex
+	cd paper && latexmk -c -outdir=../tmp/latex "$(notdir $(PAPER_TEX))"
 
 .PHONY: compact-caches restore-cache jk9-models
 compact-caches:

@@ -55,8 +55,12 @@ def tex_dependencies(main, root):
         if path.suffix != '.tex':
             return
         text = uncomment(path.read_text())
-        for kind, name in re.findall(
-                r'\\(input|include|includegraphics)(?:\[[^\]]*\])?\{([^}]+)\}', text):
+        dependencies = re.findall(
+            r'\\(input|include|includegraphics)(?:\[[^\]]*\])?\{([^}]+)\}', text)
+        # The longtable body uses TeX's primitive input to include its rows.
+        dependencies.extend(('input', name) for name in re.findall(
+            r'\\csname\s+@@input\\endcsname\s+([^\s{}]+)', text))
+        for kind, name in dependencies:
             base = path.parent / name
             suffixes = ['.tex'] if kind != 'includegraphics' else ['.pdf', '.png', '.jpg']
             candidates = [base] if base.suffix else [base.with_suffix(s) for s in suffixes]
@@ -218,8 +222,9 @@ def main():
     parser.add_argument('--check-chains', action='store_true')
     args = parser.parse_args()
     config = load()
-    if config['release_id'].startswith('paperjk9-'):
-        from pipeline import jk9
+    from pipeline import jk9
+    uses_compact_evidence = local(ROOT, config['chain_index']) == jk9.RELEASE / 'accepted_fits.json'
+    if uses_compact_evidence and (not args.sync_assets or config['release_id'].startswith('paperjk9-')):
         action = ('snapshot' if args.export_chain_index else
                   'lock' if args.write_manifest else 'verify')
         jk9.main([action] + (['--check-chains'] if args.check_chains else []))

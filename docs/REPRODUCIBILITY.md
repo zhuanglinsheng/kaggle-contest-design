@@ -1,7 +1,7 @@
-# PaperJK11 reproducibility
+# PaperJK12 reproducibility
 
-The active manuscript is `paper/PaperJK11.tex`, selected by `current_release.toml`.
-The publication lock is `results/releases/paperjk11-20261104/manifest.json`.
+The active manuscript is `paper/PaperJK12.tex`, selected by `current_release.toml`.
+The publication lock is `results/releases/paperjk12-20261109/manifest.json`.
 Long-term scientific results and their provenance remain in
 `results/releases/paperjk9-20261029/`.
 The JK7 release is historical provenance.
@@ -453,10 +453,10 @@ python -m pipeline.reproducibility_audit
 ```
 
 `make paper` compiles the retained manuscript and long-term figure/table assets:
-`paper/PaperJK11.tex`, `paper/appendix_joint_design_jk11.tex`,
-`paper/appendix_effort_recovery_jk11.tex`, `paper/appendix_100k_rows.tex` and the
+`paper/PaperJK12.tex`, `paper/appendix_joint_design_jk12.tex`,
+`paper/appendix_effort_recovery_jk12.tex`, `paper/appendix_100k_rows.tex` and the
 figure PDFs/PNGs. It writes auxiliary files and the built PDF to `tmp/latex/`
-and copies the final PDF to `paper/PaperJK11.pdf`. New scientific estimates are
+and copies the final PDF to `paper/PaperJK12.pdf`. New scientific estimates are
 written separately; building this manuscript does not silently substitute new
 numbers into it. Use the figure/table index to map each generated result to its
 paper location when preparing a new numerical version.

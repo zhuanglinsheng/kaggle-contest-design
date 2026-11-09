@@ -3,8 +3,10 @@
 This tree contains retained formal results and the frozen scientific input
 snapshots used by the current release. Regenerable work products live in `tmp/`.
 
-- `releases/paperjk9-20261029/`: current per-contest results, tables, sensitivity
-  checks, uncertainty records, provenance and the finite publication file lock.
+- [JK12 publication manifest](releases/paperjk12-20261109/manifest.json) lists the
+  files selected by the current release.
+- `releases/paperjk9-20261029/` holds the retained per-contest results, tables,
+  sensitivity checks, numerical diagnostics, and provenance used by JK12.
 - `releases/paperjk7-review-20261016/`: historical release and frozen-input index.
 - `reestimation/lambda100_sd225/input_snapshots/`: immutable, hash-addressed inputs.
 - Other retained compact CSV/JSON/PDF files: current manuscript evidence selected

@@ -1,12 +1,12 @@
 {
   "date": "2026-11-06",
-  "scope": "All 606 retained files under results/ plus all 23 entries in PAPER_EVIDENCE.csv; ignored historical caches are outside this inventory.",
+  "scope": "607 retained files under results/ and 23 entries in PAPER_EVIDENCE.csv.",
   "method": "Static result-family mapping of writers, controllers and executable method sources. Source lists identify generating calculations, export steps and content verifiers; metadata inventories have their own categories.",
   "counts": {
     "documentation": 1,
     "calculation": 271,
     "frozen_input": 308,
-    "publication_metadata": 4,
+    "publication_metadata": 5,
     "provenance": 3,
     "historical_storage_metadata": 1,
     "calculation_and_summary": 12,
@@ -2995,6 +2995,14 @@
     },
     {
       "result": "results/releases/paperjk11-20261104/manifest.json",
+      "category": "publication_metadata",
+      "sources": [
+        "pipeline/publication.py",
+        "pipeline/jk9.py"
+      ]
+    },
+    {
+      "result": "results/releases/paperjk12-20261109/manifest.json",
       "category": "publication_metadata",
       "sources": [
         "pipeline/publication.py",

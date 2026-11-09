@@ -1,6 +1,6 @@
 # Documentation
 
-Start with `REPRODUCIBILITY.md` for the JK11 calculation sequence, commands and input/output contracts,
+Start with `REPRODUCIBILITY.md` for the JK12 calculation sequence, commands and input/output contracts,
 `PAPER_EVIDENCE.csv` for figure/table provenance, and
 `REPOSITORY_MAINTENANCE.md` for submission policy, and
 `STORAGE_LAYOUT.md` for permanent files versus `tmp/` work products.
