@@ -123,7 +123,7 @@
 % \RUNAUTHOR{Jones, Miller, and Wilson}
 % \RUNAUTHOR{Jones et al.} % for four or more authors
 % Enter authors following the given pattern:
-\RUNAUTHOR{Zhuang et al.}
+\RUNAUTHOR{Zhuang and Keppo}
 
 % Title or shortened title suitable for running heads. Sample:
 % \RUNTITLE{Bundling Information Goods of Decreasing Value}
@@ -154,20 +154,16 @@
 \AFF{NUS Business School \& Institute of Operations Research and Analytics\\
 	National University of Singapore, Singapore\\
 	\EMAIL{keppo@nus.edu.sg}} %, \URL{}}
-\AUTHOR{Zhi Chen}
-\AFF{NUS Business School\\
-	National University of Singapore, Singapore\\
-	\EMAIL{bizczhi@nus.edu.sg}}
 % Enter all authors
 } % end of the block
 
 \ABSTRACT{%
 Online crowdsourcing contests generate rich dynamic behavior, but their core strategic state is latent: contestants react to noisy public leaderboard feedback rather than true relative performance.
 We develop a tractable dynamic game with Bayesian filtering and a corresponding structural estimation framework to recover effort costs, innovation risk, and feedback precision.
-{With symmetric effort costs, sufficiently low innovation risk and effort costs, and the stated conditions on initial uncertainty and organizer preferences, a finite-precision design strictly outperforms every full-disclosure design, even when prizes and deadlines are reoptimized and precision has no direct cost.}
-{A closed-form leading-order effort policy links feedback precision to the range of perceived performance gaps over which prize incentives sustain effort, enabling tractable Bayesian estimation.}
+With symmetric effort costs, sufficiently low innovation risk and effort costs, and the stated conditions on initial uncertainty and organizer preferences, a finite-precision design strictly outperforms every full-disclosure design, even when prizes and deadlines are reoptimized and precision has no direct cost.
+A closed-form leading-order effort policy links feedback precision to the range of perceived performance gaps over which prize incentives sustain effort, enabling tractable Bayesian estimation.
 For validation, we use a path-wise holdout design: private-leaderboard path values are excluded from the estimation likelihood and subsequently used for diagnostic tests, although ex post private-score information is used to define the focal rivalry.
-{\color{black}Across 73 Kaggle contests, higher estimated innovation risk is associated with greater private-path volatility, while higher estimated feedback precision is associated with smaller public–private gaps. These relationships also appear in time-split diagnostics and are interpreted as descriptive associations conditional on ex post focal-pair selection. Persistent differences across contests in score scale, evaluation metric, or submission frequency remain possible common drivers.}
+Across 73 Kaggle contests, higher estimated innovation risk is associated with greater private-path volatility, while higher estimated feedback precision is associated with smaller public–private gaps. These relationships also appear in time-split diagnostics and are interpreted as descriptive associations conditional on ex post focal-pair selection. Persistent differences across contests in score scale, evaluation metric, or submission frequency remain possible common drivers.
 % Enter your abstract
 }%
 
@@ -1338,7 +1334,7 @@ $\delta$ & $\Delta T$ (\%) & $\Delta\theta$ (\%) & \makecell{Total cost\\reducti
 
 Table~\ref{tab-counterfactual-precision} shows how the cost of delay changes the value of time relative to prize expenditure. When delay is inexpensive ($\delta=0.1$), the median selected duration rises by 50\% and the median prize falls by 74.39\%; the median total cost reduction is 50.39\%. More time allows effort and innovation to accumulate, making a smaller prize compatible with the quality target in the selected designs. At $\delta=100$, shortening duration saves much more delay cost: the median duration falls by 25\% while the median prize rises by 40.91\%, with a median total cost reduction of 42.75\%. Larger prizes can therefore be part of a cost-saving design when earlier delivery is sufficiently valuable. These are separate cross-contest medians, not components of a single representative design.
 
-At $\delta=1$, the selected designs use full disclosure in 16 contests, finite feedback in 48, and zero prizes in 9; the median total saving is 1.56\%. For contests in which the selected design uses a positive prize and finite feedback, the last column gives the range of median additional cost savings relative to full disclosure. At $\delta=2$, for example, the median total saving is only 0.14\%, even though finite feedback is selected in 55 contests. Frequent selection of a feedback regime need not imply a large benefit relative to the observed design.
+At $\delta=1$, the selected designs use full disclosure in 16 contests, finite feedback in 48, and zero prizes in 9; the median total saving is 1.56\%. Among those 48 contests, the last column of Panel B reports the median additional savings relative to the searched full-disclosure comparator. At $\delta=1$, this median lies between 13.58\% and 13.71\% when one unresolved full-disclosure comparison is left unrestricted. At $\delta=2$, for example, the median total saving is only 0.14\%, even though finite feedback is selected in 55 contests. Frequent selection of a feedback regime need not imply a large benefit relative to the observed design.
 
 The direction of the prize--duration trade-off also follows from the objective. Within a fixed feasible candidate set, a higher $\delta$ weakly lowers the cost-minimizing duration and weakly raises the associated prize.\footnote{Write normalized candidate cost as $p+\delta d$, where $p=\theta/\theta^{obs}$ and $d=(T/T^{obs})^2$. Optimality at $\delta_2>\delta_1>0$ gives $(\delta_2-\delta_1)(d_2-d_1)\leq0$ and $p_2-p_1\geq\delta_1(d_1-d_2)\geq0$. This comparison assumes the same quality-feasible set at both delay costs.} No analogous ordering of precision follows, because different feedback rules can support different prize--duration combinations. A short horizon leaves less time for innovation to overturn a perceived lead, which can increase the value of preserving competitive uncertainty. Organizers should therefore evaluate all three instruments together.
 
@@ -1392,7 +1388,7 @@ The cross-contest rankings of feedback precision and innovation risk remain stab
 
 To assess whether the cost-saving design adjustments depend on the effort-cost prior or parameter bounds, we re-estimate four selected contests under a wider cost prior or a lower cost bound. At the delay-cost values reported in Appendix~\ref{app-additional-checks}, cost-saving adjustments along the original joint design directions remain supported, although the prize cut is scaled back in one case. These checks do not establish full-sample robustness or stability of the optimal designs.\footnote{In contest 8219, the reported cost saving is only $0.001204\%$ and is economically negligible.}
 
-We also examine whether the equilibrium restrictions improve out-of-sample submission prediction. Across two training--test splits, the equilibrium model has higher predictive scores for hourly submission counts than a filtered benchmark with freely estimated gap and deadline coefficients, but lower scores than a constant-rate Poisson model. Its advantage over a deadline-dependent Poisson model is inconclusive at the reported 95\% level. Table~\ref{tab-submission-prediction} in Appendix~\ref{app-additional-checks} reports the comparisons.
+We also examine whether the equilibrium restrictions improve out-of-sample submission prediction. Across two training--test splits, the equilibrium model has higher predictive scores for hourly submission counts than a filtered benchmark with freely estimated gap and deadline coefficients, but lower scores than a constant-rate Poisson model. When the Poisson benchmark allows submission rates to vary with time remaining, the 95\% bootstrap confidence intervals for the predictive score difference include zero in both splits. Table~\ref{tab-submission-prediction} in Appendix~\ref{app-additional-checks} reports the comparisons.
 
 These results support the equilibrium restrictions relative to the flexible filtered benchmark, without establishing general predictive superiority. The constant-rate model's stronger performance cautions against interpreting every fluctuation in submissions as strategic effort. Policy comparisons therefore rely on the maintained economic structure rather than demonstrated predictive dominance.
 
@@ -2913,7 +2909,7 @@ Unrestricted filtered activity kernel & $+0.0812^{*}$ & $+0.0836^{*}$\\
 \end{tabularx}
 \par\vspace{0.5ex}
 \begin{minipage}{\textwidth}\figtabnotesize
-\footnotesize\textit{Note:} Entries are equilibrium-model minus benchmark log predictive scores, in nats per contestant-pair hour; positive values favor the equilibrium model. {All 73 contests receive equal weight after averaging each contest's one-hour-ahead log probabilities. The primary split trains on approximately the first 75\% of the post-initialization window; the date-aligned split keeps source dates intact. Test-hour predictions use earlier public readouts, before observing the current hour. A nat uses the natural logarithm; these differences are not percentage changes in submission counts or solution quality.} $^{*}$ indicates that a paired, contest-level 95\% bootstrap interval excludes zero, using 500,000 resamples. {Within each data split, the bootstrap holds each contest’s estimated score difference fixed across resamples.} The homogeneous model assigns a constant intensity to each contestant; the nonhomogeneous model allows intensity to vary with time remaining. The unrestricted kernel freely estimates the deadline and gap coefficients in the same filtering framework, with its effort rule also entering filtered drift. The equilibrium model uses the first-order empirical policy. Results condition on the selected pair, imputed within-date times, and constructed observation window.
+\footnotesize\textit{Note:} Entries are equilibrium-model minus benchmark log predictive scores, in nats per contestant-pair hour; positive values favor the equilibrium model. All 73 contests receive equal weight after averaging each contest's one-hour-ahead log probabilities. The primary split trains on approximately the first 75\% of the post-initialization window; the date-aligned split keeps source dates intact. Test-hour predictions use earlier public readouts, before observing the current hour. A nat uses the natural logarithm; these differences are not percentage changes in submission counts or solution quality. $^{*}$ indicates that a paired, contest-level 95\% bootstrap interval excludes zero, using 500,000 resamples. Within each data split, the bootstrap holds each contest’s estimated score difference fixed across resamples, so the intervals exclude numerical integration error in the predictive scores. The homogeneous model assigns a constant intensity to each contestant; the nonhomogeneous model allows intensity to vary with time remaining. The unrestricted kernel freely estimates the deadline and gap coefficients in the same filtering framework, with its effort rule also entering filtered drift. The equilibrium model uses the first-order empirical policy. Results condition on the selected pair, imputed within-date times, and constructed observation window.
 \end{minipage}
 \end{table}
 
